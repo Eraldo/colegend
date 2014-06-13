@@ -79,6 +79,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # [Eraldo]
+
 ADMINS = (
     ('Eraldo Helal', 'eraldo@eraldo.org'),
 )
