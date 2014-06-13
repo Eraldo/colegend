@@ -86,3 +86,7 @@ ADMINS = (
     ('Eraldo Helal', 'eraldo@eraldo.org'),
 )
 TIME_ZONE = 'Europe/Vienna'
+
+TEMPLATE_DIRS = (
+        os.path.join(BASE_DIR, 'templates'),
+)
