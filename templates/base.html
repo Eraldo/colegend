@@ -5,7 +5,9 @@
     <title>{% block title %}Base{% endblock %}</title>
 </head>
 <body>
-<b>manager</b>
+<a href="{% url 'home' %}"><b>home</b></a>
+<a href="{% url 'home' %}"><b>projects</b></a>
+</span>
 <hr>
 {% block content %}
     Base
