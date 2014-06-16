@@ -2,4 +2,6 @@
 
 {% block content %}
     <h1>{{ object }}</h1>
+    [<a href="{% url "projects:update" project.id %}">update</a>]
+    [<a href="{% url "projects:delete" project.id %}">delete</a>]
 {% endblock %}

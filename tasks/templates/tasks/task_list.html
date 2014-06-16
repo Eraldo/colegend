@@ -1,13 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Tasks</h1>
+    <h1>tasks</h1>
     <a href="{% url "tasks:create" %}">[create]</a>
     <ul>
         {% for task in object_list %}
             <li>
-                <a href="{% url "tasks:update" task.id %}">{{ task }}</a>
-                [<a href="{% url "tasks:delete" task.id %}">delete</a>]
+                <a href="{% url "tasks:detail" task.id %}">{{ task }}</a>
             </li>
         {% endfor %}
     </ul>
