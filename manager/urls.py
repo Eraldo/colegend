@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     # main urls
     url(r'', include('home.urls')),
     url(r'^projects/', include('projects.urls', namespace="projects")),
+    url(r'^tasks/', include('tasks.urls', namespace="tasks")),
 
     url(r'^admin/', include(admin.site.urls)),
 )

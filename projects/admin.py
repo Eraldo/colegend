@@ -5,6 +5,7 @@ __author__ = 'eraldo'
 
 
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ['name']
+    list_display = ['name', 'status']
     search_fields = ['name']
+    list_filter = ['status']
 admin.site.register(Project, ProjectAdmin)
