@@ -8,6 +8,7 @@
 # ignore local files
 local
 local.py
+local.json
 
 # ignore virtual environment
 env
