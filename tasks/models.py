@@ -9,7 +9,7 @@ class Task(models.Model):
     """
     A django model representing a task.
     """
-    project = models.ForeignKey(Project, blank=True, null=True)
+    project = models.ForeignKey(Project, blank=True, null=True, related_name="tasks")
     name = models.CharField(max_length=200)
 
     description = models.TextField(blank=True)

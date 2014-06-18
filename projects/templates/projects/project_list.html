@@ -6,7 +6,7 @@
     <ul>
         {% for project in object_list %}
             <li>
-                <a href="{% url "projects:detail" project.id %}">{{ project }}</a>
+                {% include 'projects/_project.html' %}
             </li>
         {% endfor %}
     </ul>
