@@ -1,10 +1,11 @@
 from django.db import models
+from lib.models import LoggableModel, TimeStampedModel, TaggableBase, TrackedBase
 from status.models import Status
 
 __author__ = 'eraldo'
 
 
-class Project(models.Model):
+class Project(TrackedBase, TaggableBase, models.Model):
     """
     A django model representing a project.
     """
@@ -12,10 +13,6 @@ class Project(models.Model):
 
     description = models.TextField(blank=True)
     status = models.ForeignKey(Status, default=Status.objects.default())
-
-    creation_date = models.DateTimeField(auto_now_add=True)
-    modification_date = models.DateTimeField(auto_now=True)
-    history = models.TextField(blank=True)
 
     def __str__(self):
         return self.name

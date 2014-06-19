@@ -1,11 +1,12 @@
 from django.db import models
+from lib.models import TrackedBase, TaggableBase
 from projects.models import Project
 from status.models import Status
 
 __author__ = 'eraldo'
 
 
-class Task(models.Model):
+class Task(TrackedBase, TaggableBase, models.Model):
     """
     A django model representing a task.
     """
@@ -16,10 +17,6 @@ class Task(models.Model):
     status = models.ForeignKey(Status, default=Status.objects.default())
     date = models.DateField(blank=True, null=True)
     deadline = models.DateField(blank=True, null=True)
-
-    creation_date = models.DateTimeField(auto_now_add=True)
-    modification_date = models.DateTimeField(auto_now=True)
-    history = models.TextField(blank=True)
 
     class Meta:
         ordering = ["project", "name"]
