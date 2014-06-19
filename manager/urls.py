@@ -18,5 +18,7 @@ urlpatterns = patterns('',
     url(r'^projects/', include('projects.urls', namespace="projects")),
     url(r'^tasks/', include('tasks.urls', namespace="tasks")),
 
+    url(r'^commands/', include('commands.urls')),
+
     url(r'^admin/', include(admin.site.urls)),
 )
