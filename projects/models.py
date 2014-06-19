@@ -1,5 +1,5 @@
 from django.db import models
-from lib.models import LoggableModel, TimeStampedModel, TaggableBase, TrackedBase
+from lib.models import TrackedBase, TaggableBase
 from status.models import Status
 
 __author__ = 'eraldo'
