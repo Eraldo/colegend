@@ -1,6 +1,7 @@
 from django.db import models
-from lib.models import TrackedBase, TaggableBase
+from lib.models import TrackedBase
 from status.models import Status
+from tags.models import TaggableBase
 
 __author__ = 'eraldo'
 

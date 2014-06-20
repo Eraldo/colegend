@@ -23,10 +23,3 @@ class TrackedBase(TimeStampedBase, LoggableBase):
 
     class Meta:
         abstract = True
-
-
-class TaggableBase(models.Model):
-    tags = TaggableManager()
-
-    class Meta:
-        abstract = True
