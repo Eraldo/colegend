@@ -35,6 +35,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # base
+    'django_extensions',
+
     # user interface
     'home',
     'commands',  # command text interface

@@ -1,3 +1,7 @@
+# general
 Django==1.6.5
-django-taggit==0.12
 South==0.8.4
+django-extensions==1.3.8
+
+# app specific
+django-taggit==0.12
