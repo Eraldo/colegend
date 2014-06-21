@@ -10,20 +10,21 @@ class TagListView(ListView):
     model = Tag
 
 
-class TagCreateView(CreateView):
+class TagNewView(CreateView):
     model = Tag
-    success_url = reverse_lazy('tags:list')
+    success_url = reverse_lazy('tags:tag_list')
 
 
-class TagDetailView(DetailView):
+class TagShowView(DetailView):
     model = Tag
+    template_name = "tags/tag_show.html"
 
 
-class TagUpdateView(UpdateView):
+class TagEditView(UpdateView):
     model = Tag
-    success_url = reverse_lazy('tags:list')
+    success_url = reverse_lazy('tags:tag_list')
 
 
 class TagDeleteView(DeleteView):
     model = Tag
-    success_url = reverse_lazy('tags:list')
+    success_url = reverse_lazy('tags:tag_list')

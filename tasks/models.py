@@ -1,5 +1,5 @@
 from django.db import models
-from lib.models import TrackedBase
+from lib.models import TrackedBase, AutoUrlMixin
 from projects.models import Project
 from status.models import Status
 from tags.models import TaggableBase
@@ -7,7 +7,7 @@ from tags.models import TaggableBase
 __author__ = 'eraldo'
 
 
-class Task(TrackedBase, TaggableBase, models.Model):
+class Task(AutoUrlMixin, TrackedBase, TaggableBase, models.Model):
     """
     A django model representing a task.
     """

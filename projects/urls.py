@@ -1,32 +1,32 @@
 from django.conf.urls import patterns, url
-from projects.views import ProjectListView, ProjectCreateView, ProjectUpdateView, ProjectDeleteView, ProjectDetailView
+from projects.views import ProjectListView, ProjectNewView, ProjectShowView, ProjectEditView, ProjectDeleteView
 
 __author__ = 'eraldo'
 
 
 urlpatterns = patterns('',
- # ex: ../
+    # ex: ../
     url(r'^$',
         ProjectListView.as_view(),
-        name='list'),
+        name='project_list'),
 
-    # ex: ../create/
-    url(r'^create/$',
-        ProjectCreateView.as_view(),
-        name='create'),
+    # ex: ../new/
+    url(r'^new/$',
+        ProjectNewView.as_view(),
+        name='project_new'),
 
         # ex: ../4/
     url(r'^(?P<pk>\d+)/$',
-        ProjectDetailView.as_view(),
-        name='detail'),
+        ProjectShowView.as_view(),
+        name='project_show'),
 
-    # ex: ../4/update/
-    url(r'^(?P<pk>\d+)/update/$',
-        ProjectUpdateView.as_view(),
-        name='update'),
+    # ex: ../4/edit/
+    url(r'^(?P<pk>\d+)/edit/$',
+        ProjectEditView.as_view(),
+        name='project_edit'),
 
     # ex: ../4/delete/
     url(r'^(?P<pk>\d+)/delete/$',
         ProjectDeleteView.as_view(),
-        name='delete'),
+        name='project_delete'),
     )

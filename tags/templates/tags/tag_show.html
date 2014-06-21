@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ object }}</h1>
+    [<a href="{{ tag.get_edit_url }}">edit</a>]
+    [<a href="{{ tag.get_delete_url }}">delete</a>]
+
+    <h2>items</h2>
+    {% include 'tags/_item_list.html' with items=object.taggit_taggeditem_items.all %}
+{% endblock %}

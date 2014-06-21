@@ -1,1 +1,1 @@
-<a href="{% url "tags:detail" tag.id %}">{{ tag }}</a>
+<a href="{{ tag.get_show_url }}">{{ tag }}</a>

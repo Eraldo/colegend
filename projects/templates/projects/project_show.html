@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ object }}</h1>
+    [<a href="{{ project.get_edit_url }}">edit</a>]
+    [<a href="{{ project.get_delete_url }}">delete</a>]
+
+    <h2>tasks</h2>
+    <a href="{% url "tasks:task_new" %}">[new]</a>
+    {% include 'tasks/_task_list.html' with tasks=project.tasks.all %}
+{% endblock %}

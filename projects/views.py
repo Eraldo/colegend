@@ -9,20 +9,21 @@ class ProjectListView(ListView):
     model = Project
 
 
-class ProjectCreateView(CreateView):
+class ProjectNewView(CreateView):
     model = Project
-    success_url = reverse_lazy('projects:list')
+    success_url = reverse_lazy('projects:project_list')
 
 
-class ProjectDetailView(DetailView):
+class ProjectShowView(DetailView):
     model = Project
+    template_name = "projects/project_show.html"
 
 
-class ProjectUpdateView(UpdateView):
+class ProjectEditView(UpdateView):
     model = Project
-    success_url = reverse_lazy('projects:list')
+    success_url = reverse_lazy('projects:project_list')
 
 
 class ProjectDeleteView(DeleteView):
     model = Project
-    success_url = reverse_lazy('projects:list')
+    success_url = reverse_lazy('projects:project_list')

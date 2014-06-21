@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ object }}</h1>
+    [<a href="{{ task.get_edit_url }}">edit</a>]
+    [<a href="{{ task.get_delete_url }}">delete</a>]
+{% endblock %}

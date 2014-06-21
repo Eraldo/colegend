@@ -1,32 +1,32 @@
 from django.conf.urls import patterns, url
-from tags.views import TagListView, TagCreateView, TagUpdateView, TagDeleteView, TagDetailView
+from tags.views import TagListView, TagNewView, TagShowView, TagEditView, TagDeleteView
 
 __author__ = 'eraldo'
 
 
 urlpatterns = patterns('',
- # ex: ../tags/
+ # ex: ../
     url(r'^$',
         TagListView.as_view(),
-        name='list'),
+        name='tag_list'),
 
-    # ex: ../create/
-    url(r'^create/$',
-        TagCreateView.as_view(),
-        name='create'),
+    # ex: ../new/
+    url(r'^new/$',
+        TagNewView.as_view(),
+        name='tag_new'),
 
         # ex: ../4/
     url(r'^(?P<pk>\d+)/$',
-        TagDetailView.as_view(),
-        name='detail'),
+        TagShowView.as_view(),
+        name='tag_show'),
 
-    # ex: ../4/update/
-    url(r'^(?P<pk>\d+)/update/$',
-        TagUpdateView.as_view(),
-        name='update'),
+    # ex: ../4/edit/
+    url(r'^(?P<pk>\d+)/edit/$',
+        TagEditView.as_view(),
+        name='tag_edit'),
 
     # ex: ../4/delete/
     url(r'^(?P<pk>\d+)/delete/$',
         TagDeleteView.as_view(),
-        name='delete'),
+        name='tag_delete'),
     )

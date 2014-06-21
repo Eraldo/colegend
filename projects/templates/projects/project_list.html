@@ -2,7 +2,7 @@
 
 {% block content %}
     <h1>projects</h1>
-    <a href="{% url "projects:create" %}">[create]</a>
+    <a href="{% url "projects:project_new" %}">[new]</a>
     <ul>
         {% for project in object_list %}
             <li>

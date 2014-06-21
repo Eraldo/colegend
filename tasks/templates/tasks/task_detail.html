@@ -1,7 +1,0 @@
-{% extends 'base.html' %}
-
-{% block content %}
-    <h1>{{ object }}</h1>
-    [<a href="{% url "tasks:update" task.id %}">update</a>]
-    [<a href="{% url "tasks:delete" task.id %}">delete</a>]
-{% endblock %}

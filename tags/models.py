@@ -1,11 +1,12 @@
 from django.db import models
 from taggit.managers import TaggableManager
 from taggit.models import Tag
+from lib.models import AutoUrlMixin
 
 __author__ = 'eraldo'
 
 
-class Tag(Tag):
+class Tag(AutoUrlMixin, Tag):
     """
     A django model representing a text-tag.
     Note:

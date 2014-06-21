@@ -2,6 +2,6 @@
 
 {% block content %}
     <h1>tasks</h1>
-    <a href="{% url "tasks:create" %}">[create]</a>
+    <a href="{% url "tasks:task_new" %}">[new]</a>
     {% include 'tasks/_task_list.html' with tasks=object_list %}
 {% endblock %}

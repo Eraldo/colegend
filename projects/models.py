@@ -1,12 +1,12 @@
 from django.db import models
-from lib.models import TrackedBase
+from lib.models import TrackedBase, AutoUrlMixin
 from status.models import Status
 from tags.models import TaggableBase
 
 __author__ = 'eraldo'
 
 
-class Project(TrackedBase, TaggableBase, models.Model):
+class Project(AutoUrlMixin, TrackedBase, TaggableBase, models.Model):
     """
     A django model representing a project.
     """

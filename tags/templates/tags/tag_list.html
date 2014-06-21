@@ -2,6 +2,6 @@
 
 {% block content %}
     <h1>tags</h1>
-    <a href="{% url "tags:create" %}">[create]</a>
+    <a href="{% url "tags:tag_new" %}">[new]</a>
     {% include 'tags/_tag_list.html' with tags=object_list %}
 {% endblock %}
