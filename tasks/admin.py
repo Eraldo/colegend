@@ -13,8 +13,17 @@ class TaskInline(InlineMixin, admin.TabularInline):
 
 
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ['name', 'status', 'project']
+    list_display = ['name', 'status', 'deadline', 'date', 'project']
     search_fields = ['name', 'description']
-    list_filter = ['status']
-    readonly_fields = ['creation_date', 'modification_date']
+    list_filter = ['status', 'tags']
+    readonly_fields = ['creation_date', 'modification_date', 'history']
+
+    fieldsets = [
+        (None, {'fields': ['project']}),
+        (None, {'fields': ['name', 'description']}),
+        (None, {'fields': ['status', 'deadline', 'date', 'tags']}),
+        ('history', {'fields': ['creation_date', 'modification_date', 'history'], 'classes': ['collapse']}),
+    ]
+
+
 admin.site.register(Task, TaskAdmin)
