@@ -14,6 +14,7 @@ class Project(AutoUrlMixin, TrackedBase, TaggableBase, models.Model):
 
     description = models.TextField(blank=True)
     status = models.ForeignKey(Status, default=Status.objects.default())
+    deadline = models.DateField(blank=True, null=True)
 
     def __str__(self):
         return self.name
