@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 
     # data-helpers
     'status',
+    'tags',
 
     # misc
     "taggit",

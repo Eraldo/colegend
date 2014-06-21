@@ -5,7 +5,7 @@ __author__ = 'eraldo'
 
 
 urlpatterns = patterns('',
- # ex: ../projects/
+ # ex: ../
     url(r'^$',
         ProjectListView.as_view(),
         name='list'),

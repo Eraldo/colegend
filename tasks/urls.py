@@ -5,7 +5,7 @@ __author__ = 'eraldo'
 
 
 urlpatterns = patterns('',
- # ex: ../tasks/
+ # ex: ../
     url(r'^$',
         TaskListView.as_view(),
         name='list'),

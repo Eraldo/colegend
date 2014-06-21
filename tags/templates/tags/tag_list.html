@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>tags</h1>
+    <a href="{% url "tags:create" %}">[create]</a>
+    {% include 'tags/_tag_list.html' with tags=object_list %}
+{% endblock %}
