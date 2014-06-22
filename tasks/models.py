@@ -7,10 +7,17 @@ from tags.models import TaggableBase
 __author__ = 'eraldo'
 
 
+class TaskManager(models.Manager):
+    def get_by_natural_key(self, project, name):
+        return self.get(project=project, name=name)
+
+
 class Task(AutoUrlMixin, TrackedBase, TaggableBase, models.Model):
     """
     A django model representing a task.
     """
+    objects = TaskManager()
+
     project = models.ForeignKey(Project, blank=True, null=True, related_name="tasks")
     name = models.CharField(max_length=200)
 
@@ -25,3 +32,7 @@ class Task(AutoUrlMixin, TrackedBase, TaggableBase, models.Model):
 
     def __str__(self):
         return self.name
+
+    def natural_key(self):
+        return [self.project.natural_key(), self.name]
+    natural_key.dependencies = ['projects.project']
