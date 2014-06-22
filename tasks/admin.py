@@ -6,8 +6,8 @@ __author__ = 'eraldo'
 
 
 class TaskInline(InlineMixin, admin.TabularInline):
-    fields = ['name', 'status', 'date', 'deadline', 'tags', 'history', 'change_link']
     model = Task
+    fields = ['name', 'status', 'date', 'deadline', 'tags', 'history', 'change_link']
     extra = 0
     readonly_fields = ('change_link',)
 
