@@ -1,0 +1,10 @@
+<img src="{{ STATIC_URL }}website/images/CoGame-logo-60.png" alt="logo" style="max-height: 60px;    "/>
+Manager
+[<a href="{% url 'home' %}"><b>home</b></a>]
+[<a href="{% url 'projects:project_list' %}"><b>projects</b></a>]
+[<a href="{% url 'tasks:task_list' %}"><b>tasks</b></a>]
+[<a href="{% url 'tags:tag_list' %}"><b>tags</b></a>]
+[<a href="{% url 'commands' %}"><b>commands</b></a>]
+[<a href="{% url 'test' %}"><b>test</b></a>]
+{% include 'commands/_quick_command_form.html' %}
+{% if offline %} [offline]{% endif %}

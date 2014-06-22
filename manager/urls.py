@@ -15,6 +15,7 @@ urlpatterns = patterns('',
 
     # main urls
     url(r'', include('home.urls')),
+    url(r'', include('website.urls')),
     url(r'^projects/', include('projects.urls', namespace="projects")),
     url(r'^tasks/', include('tasks.urls', namespace="tasks")),
     url(r'^tags/', include('tags.urls', namespace="tags")),
@@ -23,3 +24,11 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
 )
+
+from django.conf import settings
+
+if settings.DEBUG:
+    # static files (images, css, javascript, etc.)
+    urlpatterns += patterns('',
+        (r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+        'document_root': settings.MEDIA_ROOT}))

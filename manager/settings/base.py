@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django_extensions',
 
     # user interface
+    'website',
     'home',
     'commands',  # command text interface
 
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
     'tasks',
 
     # data-helpers
+    'lib',
     'status',
     'tags',
 
@@ -107,3 +109,14 @@ TIME_ZONE = 'Europe/Vienna'
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
 )
+
+# defaults
+TEMPLATE_CONTEXT_PROCESSORS = [
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+]
