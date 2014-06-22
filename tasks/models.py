@@ -21,6 +21,7 @@ class Task(AutoUrlMixin, TrackedBase, TaggableBase, models.Model):
 
     class Meta:
         ordering = ["project", "name"]
+        unique_together = (('project', 'name'),)
 
     def __str__(self):
         return self.name
