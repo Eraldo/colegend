@@ -18,3 +18,8 @@ media
 
 # ignore IDE config
 .idea
+
+# documentation
+docs/_build
+docs/_static
+docs/_templates
