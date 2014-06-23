@@ -1,7 +1,0 @@
-######
-eraldo
-######
-
-Take a look at my `website`_.
-
-.. _website: http://www.eraldo.org/

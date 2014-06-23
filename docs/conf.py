@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 #
 # CoGame documentation build configuration file, created by
-# sphinx-quickstart on Mon Jun 23 09:10:55 2014.
+# sphinx-quickstart on Mon Jun 23 18:52:10 2014.
 #
 # This file is execfile()d with the current directory set to its
 # containing dir.
@@ -21,6 +21,13 @@ import os
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #sys.path.insert(0, os.path.abspath('.'))
 
+# django setup
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+os.environ['DJANGO_SETTINGS_MODULE'] = 'manager.settings.documentation'
+from django.conf import settings
+
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -31,13 +38,15 @@ import os
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
+    'sphinx.ext.doctest',
+    'sphinx.ext.viewcode',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
 # The suffix of source filenames.
-source_suffix = '.txt'
+source_suffix = '.rst'
 
 # The encoding of source files.
 #source_encoding = 'utf-8-sig'
@@ -47,7 +56,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'CoGame'
-copyright = '2014, Eraldo'
+copyright = '2014, Eraldo Helal'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -200,7 +209,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
   ('index', 'CoGame.tex', 'CoGame Documentation',
-   'Eraldo', 'manual'),
+   'Eraldo Helal', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -230,7 +239,7 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 man_pages = [
     ('index', 'cogame', 'CoGame Documentation',
-     ['Eraldo'], 1)
+     ['Eraldo Helal'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -244,7 +253,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
   ('index', 'CoGame', 'CoGame Documentation',
-   'Eraldo', 'CoGame', 'One line description of project.',
+   'Eraldo Helal', 'CoGame', 'One line description of project.',
    'Miscellaneous'),
 ]
 

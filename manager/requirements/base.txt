@@ -6,3 +6,4 @@ Sphinx==1.2.2 # documentation
 
 # app specific
 django-taggit==0.12
+django-bootstrap3==4.7.0
