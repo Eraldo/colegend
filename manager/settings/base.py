@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'website',
     'home',
     'commands',  # command text interface
+    # styling
+    'bootstrap3',
 
     # data
     'projects',
