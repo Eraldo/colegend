@@ -23,3 +23,6 @@ media
 docs/_build
 docs/_static
 docs/_templates
+
+# bower components
+bower_components

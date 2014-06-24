@@ -1,0 +1,13 @@
+
+.navbar-brand.navbar-logo {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+img#logo {
+    display: inline-block;
+    max-height: 50px;
+}
+
+#menu .active {
+}

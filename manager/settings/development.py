@@ -16,7 +16,9 @@ FIXTURE_DIRS = (
     os.path.join(BASE_DIR, 'manager/fixtures/'),
 )
 
-# Default settings
-BOOTSTRAP3 = {
-    'include_jquery': True,
-}
+BOOTSTRAP3.update(
+    {
+        'jquery_url': '{}website/bower_components/jquery/dist/jquery.min.js'.format(STATIC_URL),
+        'base_url': '{}website/bower_components/bootstrap/dist/'.format(STATIC_URL),
+    }
+)
