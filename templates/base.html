@@ -22,13 +22,12 @@
             {% include "website/_menu.html" %}
         {% endblock %}
     </div>
-    <hr>
     <div id="messages">
         {% block messages %}
             {% include "website/_messages.html" %}
         {% endblock %}
     </div>
-    <div id="content">
+    <div id="content" class="container-fluid">
         {% block content %}
             Base
         {% endblock %}
