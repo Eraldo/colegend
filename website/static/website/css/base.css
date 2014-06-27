@@ -14,5 +14,6 @@ img#logo {
     max-height: 50px;
 }
 
-#menu .active {
+.inline {
+    display: inline-block;
 }

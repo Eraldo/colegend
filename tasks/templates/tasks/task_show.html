@@ -3,7 +3,5 @@
 
 {% block content %}
     <h1>{{ task }}</h1>
-    {% include "projects/_project_field.html" with project=task.project %}
-    [<a href="{{ task.get_edit_url }}">edit</a>]
-    [<a href="{{ task.get_delete_url }}">delete</a>]
+    {% include "tasks/_task.html" %}
 {% endblock %}

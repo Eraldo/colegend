@@ -1,1 +1,13 @@
-<a href="{{ task.get_show_url }}">{{ task }}</a>
+<div class="task well well-sm">
+    <b>{% include "tasks/_task_link.html" %}</b>
+    <br/>
+    {% include "lib/_description_field.html" with description=task.description %}
+    {% include "projects/_project_field.html" with project=task.project %}
+    {% include "status/_status_field.html" with status=task.status %}
+    {% include "lib/_date_field.html" with date=task.date %}
+    {% include "lib/_deadline_field.html" with deadline=task.deadline %}
+    {% include "tags/_tags_field.html" with tags=task.tags.all %}
+    <br/>
+    <a href="{{ task.get_edit_url }}" class="btn btn-default" role="button">edit</a>
+    <a href="{{ task.get_delete_url }}" class="btn btn-default" role="button">delete</a>
+</div>
