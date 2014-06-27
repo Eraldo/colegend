@@ -14,9 +14,8 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-
-                {% for item_name, item_url in menu_items %}
-                    {% include 'website/_menu_item.html' with item_name=item_name item_url=item_url %}
+                {% for menu_item in menu_items %}
+                    {% include 'website/_menu_item.html' %}
                 {% endfor %}
                 {#            <li>{% include 'commands/_quick_command_form.html' %}</li>#}
                 <li class="dropdown">

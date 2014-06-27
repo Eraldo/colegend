@@ -1,1 +1,8 @@
-<li><a href="{% url item_url %}">{{ item_name|safe }}</a></li>
+<li>
+    <a href="{% url menu_item.url %}">
+        {% if menu_item.icon %}
+            {{ menu_item.icon }}&nbsp;
+        {% endif %}
+        {{ menu_item }}
+    </a>
+</li>
