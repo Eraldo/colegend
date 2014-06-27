@@ -1,3 +1,5 @@
+from bootstrap3.components import render_icon
+
 __author__ = 'eraldo'
 
 
@@ -7,12 +9,12 @@ def menu(request):
     return {
         # name, url
         'menu_items': (
-            ('home', 'home'),
-            ('projects', 'projects:project_list'),
-            ('tasks', 'tasks:task_list'),
-            ('tags', 'tags:tag_list'),
-            ('test', 'test'),
-            ('commands', 'commands'),
+            (render_icon("home"), 'home'),
+            (render_icon("briefcase"), 'projects:project_list'),
+            (render_icon("check"), 'tasks:task_list'),
+            (render_icon("tags"), 'tags:tag_list'),
+            (render_icon("eye-open"), 'test'),
+            (render_icon("asterisk"), 'commands'),
         )
     }
 
