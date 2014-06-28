@@ -2,8 +2,7 @@
 
 {% block content %}
     <h1>{{ object }}</h1>
-    [<a href="{{ project.get_edit_url }}">edit</a>]
-    [<a href="{{ project.get_delete_url }}">delete</a>]
+    {% include "projects/_project.html" %}
 
     <h2>tasks</h2>
     <a href="{% url "tasks:task_new" %}">[new]</a>

@@ -8,6 +8,6 @@
     {% include "lib/_deadline_field.html" with deadline=task.deadline %}
     {% include "tags/_tags_field.html" with tags=task.tags.all %}
     <br/>
-    <a href="{{ task.get_edit_url }}" class="btn btn-default" role="button">edit</a>
-    <a href="{{ task.get_delete_url }}" class="btn btn-default" role="button">delete</a>
+    <a href="{{ task.get_edit_url }}" class="btn btn-default btn-sm" role="button">edit</a>
+    <a href="{{ task.get_delete_url }}" class="btn btn-default btn-sm" role="button">delete</a>
 </div>

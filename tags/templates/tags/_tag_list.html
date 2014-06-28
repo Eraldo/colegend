@@ -1,7 +1,3 @@
-<ul>
-    {% for tag in tags %}
-        <li>
-            {% include "tags/_tag.html" %}
-        </li>
-    {% endfor %}
-</ul>
+{% for tag in tags %}
+    <br>{% include "tags/_tag.html" %}
+{% endfor %}

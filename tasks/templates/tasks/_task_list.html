@@ -1,7 +1,3 @@
-<ul>
-    {% for task in tasks %}
-        <li>
-            {% include "tasks/_task.html" %}
-        </li>
-    {% endfor %}
-</ul>
+{% for task in tasks %}
+    {% include "tasks/_task.html" %}
+{% endfor %}
