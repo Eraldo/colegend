@@ -16,15 +16,15 @@ class Task(AutoUrlMixin, TrackedBase, TaggableBase, models.Model):
     """
     A django model representing a task.
     """
-    objects = TaskManager()
-
     project = models.ForeignKey(Project, blank=True, null=True, related_name="tasks")
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=100)
 
     description = models.TextField(blank=True)
     status = models.ForeignKey(Status, default=Status.objects.default())
     date = models.DateField(blank=True, null=True)
     deadline = models.DateField(blank=True, null=True)
+
+    objects = TaskManager()
 
     class Meta:
         ordering = ["project", "name"]

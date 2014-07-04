@@ -15,13 +15,13 @@ class Project(AutoUrlMixin, TrackedBase, TaggableBase, models.Model):
     """
     A django model representing a project.
     """
-    objects = ProjectManager()
-
-    name = models.CharField(max_length=200, unique=True)
+    name = models.CharField(max_length=100, unique=True)
 
     description = models.TextField(blank=True)
     status = models.ForeignKey(Status, default=Status.objects.default())
     deadline = models.DateField(blank=True, null=True)
+
+    objects = ProjectManager()
 
     def __str__(self):
         return self.name

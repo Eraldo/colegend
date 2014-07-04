@@ -21,9 +21,8 @@ class Status(models.Model):
     """
     Django model representing a processing state.
     """
-    objects = StatusManager()
+    name = models.CharField(max_length=50, unique=True)
 
-    name = models.CharField(max_length=20, unique=True)
     OPEN = "open"
     CLOSED = "closed"
     DEFAULT = OPEN
@@ -31,8 +30,10 @@ class Status(models.Model):
         (OPEN, "open"),
         (CLOSED, "closed"),
     )
-    type = models.CharField(default=DEFAULT, max_length=25, choices=TYPES)
+    type = models.CharField(default=DEFAULT, max_length=50, choices=TYPES)
     order = models.PositiveIntegerField()
+
+    objects = StatusManager()
 
     class Meta:
         verbose_name_plural = "Status"

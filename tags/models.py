@@ -1,7 +1,5 @@
 from django.db import models
-from taggit.managers import TaggableManager
-from taggit.models import Tag, TaggedItem
-from lib.models import AutoUrlMixin
+from lib.models import AutoUrlMixin, TimeStampedBase
 
 __author__ = 'eraldo'
 
@@ -11,35 +9,26 @@ class TagManager(models.Manager):
         return self.get(name=name)
 
 
-class Tag(AutoUrlMixin, Tag):
+class Tag(AutoUrlMixin, TimeStampedBase, models.Model):
     """
     A django model representing a text-tag.
-    Note:
-    This is a proxy class: all it's functionality is inherited by the Tag model of django-taggit.
     """
+    name = models.CharField(unique=True, max_length=100)
+
     objects = TagManager()
+
+    class Meta:
+        ordering = ["name"]
+
+    def __str__(self):
+        return self.name
 
     def natural_key(self):
         return [self.name]
 
-    class Meta:
-        proxy = True
-
-
-class TaggedItem(TaggedItem):
-    """
-    A django model representing an item that is tagged.
-    Note:
-    This is a proxy class: all it's functionality is inherited by the Tag model of django-taggit.
-    """
-    
-    class Meta:
-        proxy = True
-
-
 
 class TaggableBase(models.Model):
-    tags = TaggableManager(blank=True)
+    tags = models.ManyToManyField(Tag, blank=True, null=True, related_name="%(app_label)s")
 
     class Meta:
         abstract = True

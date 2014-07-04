@@ -53,9 +53,6 @@ INSTALLED_APPS = [
     'lib',
     'status',
     'tags',
-
-    # misc
-    "taggit",
 ]
 
 MIDDLEWARE_CLASSES = (
