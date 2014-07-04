@@ -5,6 +5,6 @@
     {% include "projects/_project.html" %}
 
     <h2>tasks</h2>
-    <a href="{% url "tasks:task_new" %}">[new]</a>
+    <a href="{% url "tasks:task_new" %}" class="btn btn-default" role="button">new</a>
     {% include 'tasks/_task_list.html' with tasks=project.tasks.all %}
 {% endblock %}
