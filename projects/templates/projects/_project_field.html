@@ -1,3 +1,3 @@
 <div class="project-field inline">
-    <u>project</u>: {{ project }}
+    <a href="{{ project.get_show_url }}">{{ project|default:"-" }}</a>
 </div>
