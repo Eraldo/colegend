@@ -18,6 +18,18 @@ img#logo {
     display: inline-block;
 }
 
+/* projects */
+
+.project.well {
+    border-left: solid thick blue;
+}
+
+/* tasks */
+
+.task.well {
+    border-left: solid thick grey;
+}
+
 /* status */
 
 .status-field .status-todo {

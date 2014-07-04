@@ -1,10 +1,12 @@
 <div class="project well well-sm">
     <b><a href="{{ project.get_show_url }}">{{ project }}</a></b>
     <br/>
-    {% include "lib/_description_field.html" with description=project.description %}
     {% include "status/_status_field.html" with status=project.status %}
-    {% include "lib/_deadline_field.html" with deadline=project.deadline %}
     {% include "tags/_tags_field.html" with tags=project.tags.all %}
+    <br/>
+    {% include "lib/_description_field.html" with description=project.description %}
+    <br/>
+    {% include "lib/_deadline_field.html" with deadline=project.deadline %}
     <br/>
     <a href="{{ project.get_edit_url }}" class="btn btn-default btn-sm" role="button">edit</a>
     <a href="{{ project.get_delete_url }}" class="btn btn-default btn-sm" role="button">delete</a>
