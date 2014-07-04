@@ -3,5 +3,6 @@
 {% block content %}
     <h1>tags</h1>
     <a href="{% url "tags:tag_new" %}" class="btn btn-default" role="button">new</a>
+    <br>
     {% include 'tags/_tag_list.html' with tags=object_list %}
 {% endblock %}

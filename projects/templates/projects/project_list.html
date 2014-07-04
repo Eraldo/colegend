@@ -3,7 +3,5 @@
 {% block content %}
     <h1>projects</h1>
     <a href="{% url "projects:project_new" %}" class="btn btn-default" role="button">new</a>
-    {% for project in object_list %}
-        {% include 'projects/_project.html' %}
-    {% endfor %}
+    {% include 'projects/_project_list.html' with projects=project_list %}
 {% endblock %}

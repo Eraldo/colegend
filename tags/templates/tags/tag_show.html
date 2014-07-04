@@ -6,5 +6,8 @@
     <a href="{{ tag.get_delete_url }}" class="btn btn-default btn-sm" role="button">delete</a>
 
     <h2>items</h2>
-    {% include 'tags/_item_list.html' with items=object.taggit_taggeditem_items.all %}
+    <h3>projects</h3>
+    {% include 'projects/_project_list.html' with projects=tag.projects.all %}
+    <h3>tasks</h3>
+    {% include 'tasks/_task_list.html' with tasks=tag.tasks.all %}
 {% endblock %}
