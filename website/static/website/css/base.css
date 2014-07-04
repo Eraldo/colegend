@@ -17,3 +17,21 @@ img#logo {
 .inline {
     display: inline-block;
 }
+
+/* status */
+
+.status-field .status-todo {
+    background-color: orange;
+}
+.status-field .status-active {
+    background-color: red;
+}
+.status-field .status-done {
+    background-color: green;
+}
+.status-field .status-waiting {
+    background-color: purple;
+}
+.status-field .status-canceled {
+    background-color: yellow;
+}
