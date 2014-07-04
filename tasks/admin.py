@@ -9,13 +9,14 @@ class TaskInline(InlineMixin, admin.TabularInline):
     model = Task
     fields = ['name', 'status', 'date', 'deadline', 'tags', 'history', 'change_link']
     extra = 0
-    readonly_fields = ('change_link',)
+    readonly_fields = ['change_link']
 
 
 class TaskAdmin(admin.ModelAdmin):
     list_display = ['name', 'status', 'deadline', 'date', 'project']
     search_fields = ['name', 'description']
     list_filter = ['status', 'tags']
+    filter_horizontal = ['tags']
     readonly_fields = ['creation_date', 'modification_date', 'history']
 
     fieldsets = [

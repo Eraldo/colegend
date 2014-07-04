@@ -9,6 +9,7 @@ class ProjectAdmin(admin.ModelAdmin):
     list_display = ['name', 'status', 'deadline']
     search_fields = ['name', 'description']
     list_filter = ['status', 'tags']
+    filter_horizontal = ['tags']
     readonly_fields = ['creation_date', 'modification_date', 'history']
 
     fieldsets = [
