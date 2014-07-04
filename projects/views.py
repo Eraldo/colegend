@@ -5,25 +5,26 @@ from projects.models import Project
 __author__ = 'eraldo'
 
 
-class ProjectListView(ListView):
+class ProjectBaseView:
     model = Project
+    fields = ['name', 'description', 'status', 'deadline', 'tags']
 
 
-class ProjectNewView(CreateView):
-    model = Project
+class ProjectListView(ProjectBaseView, ListView):
+    pass
+
+
+class ProjectNewView(ProjectBaseView, CreateView):
     success_url = reverse_lazy('projects:project_list')
 
 
-class ProjectShowView(DetailView):
-    model = Project
+class ProjectShowView(ProjectBaseView, DetailView):
     template_name = "projects/project_show.html"
 
 
-class ProjectEditView(UpdateView):
-    model = Project
+class ProjectEditView(ProjectBaseView, UpdateView):
     success_url = reverse_lazy('projects:project_list')
 
 
-class ProjectDeleteView(DeleteView):
-    model = Project
+class ProjectDeleteView(ProjectBaseView, DeleteView):
     success_url = reverse_lazy('projects:project_list')

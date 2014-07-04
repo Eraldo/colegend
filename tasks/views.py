@@ -5,25 +5,26 @@ from tasks.models import Task
 __author__ = 'eraldo'
 
 
-class TaskListView(ListView):
+class TaskBaseView:
     model = Task
+    fields = ['project', 'name', 'description', 'status', 'date', 'deadline', 'tags']
 
 
-class TaskNewView(CreateView):
-    model = Task
+class TaskListView(TaskBaseView, ListView):
+    pass
+
+
+class TaskNewView(TaskBaseView, CreateView):
     success_url = reverse_lazy('tasks:task_new')
 
 
-class TaskShowView(DetailView):
-    model = Task
+class TaskShowView(TaskBaseView, DetailView):
     template_name = "tasks/task_show.html"
 
 
-class TaskEditView(UpdateView):
-    model = Task
+class TaskEditView(TaskBaseView, UpdateView):
     success_url = reverse_lazy('tasks:task_list')
 
 
-class TaskDeleteView(DeleteView):
-    model = Task
+class TaskDeleteView(TaskBaseView, DeleteView):
     success_url = reverse_lazy('tasks:task_list')

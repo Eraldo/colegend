@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
+{% load bootstrap3 %}
 
 {% block content %}
     <legend>{% if object %}edit tag{% else %}new tag{% endif %}</legend>
     <form method="post">{% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Submit"/>
+        {% bootstrap_form form %}
+        {% bootstrap_button "save" button_type="submit" icon="floppy-saved" %}
     </form>
 {% endblock %}
