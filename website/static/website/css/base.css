@@ -1,7 +1,6 @@
-
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
-  padding-top: 50px;
+    padding-top: 50px;
 }
 
 .navbar-brand.navbar-logo {
@@ -15,7 +14,7 @@ img#logo {
 }
 
 .inline {
-    display: inline-block;
+    display: inline;
 }
 
 /* projects */
@@ -23,6 +22,7 @@ img#logo {
 .project.well {
     border-left: solid thick blue;
 }
+
 .project-field {
     color: blue;
 }
@@ -35,18 +35,18 @@ img#logo {
 
 /* status */
 
-.status-field .status-todo {
-    background-color: orange;
+.status.status-todo {
+background-color: orange;
 }
-.status-field .status-active {
-    background-color: red;
+.status.status-active {
+background-color: red;
 }
-.status-field .status-done {
-    background-color: green;
+.status.status-done {
+background-color: green;
 }
-.status-field .status-waiting {
-    background-color: purple;
+.status.status-waiting {
+background-color: purple;
 }
-.status-field .status-canceled {
-    background-color: yellow;
+.status.status-canceled {
+background-color: yellow;
 }

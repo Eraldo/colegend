@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>projects</h1>
+    <h1>projects
+        <span class="badge status">{{ project_list.count }}</span>
+    </h1>
     <a href="{% url "projects:project_new" %}" class="btn btn-default" role="button">new</a>
     {% include 'projects/_project_list.html' with projects=project_list %}
 {% endblock %}
