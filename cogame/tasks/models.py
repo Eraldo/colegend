@@ -20,7 +20,7 @@ class Task(AutoUrlMixin, TrackedBase, TaggableBase, models.Model):
     name = models.CharField(max_length=100)
 
     description = models.TextField(blank=True)
-    status = models.ForeignKey(Status, default=Status.objects.default())
+    status = models.ForeignKey(Status, default=Status.DEFAULT_PK)
     date = models.DateField(blank=True, null=True)
     deadline = models.DateField(blank=True, null=True)
 

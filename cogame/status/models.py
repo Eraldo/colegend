@@ -13,9 +13,6 @@ class StatusManager(models.Manager):
     def closed(self):
         return self.filter(type=Status.CLOSED)
 
-    def default(self):
-        return Status.DEFAULT
-
 
 class Status(models.Model):
     """
@@ -31,7 +28,8 @@ class Status(models.Model):
         (CLOSED, "closed"),
     )
     type = models.CharField(default=DEFAULT, max_length=50, choices=TYPES)
-    order = models.PositiveIntegerField()
+    order = models.PositiveIntegerField(unique=True)
+    DEFAULT_PK = 1
 
     objects = StatusManager()
 
