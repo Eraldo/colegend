@@ -175,7 +175,7 @@ TEMPLATE_DIRS = (
 
 ########## MIDDLEWARE CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#middleware-classes
-MIDDLEWARE_CLASSES = (
+DJANGO_MIDDLEWARE_CLASSES = (
     # Default Django middleware.
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -184,6 +184,9 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
+PROJECT_MIDDLEWARE_CLASSES = (
+)
+MIDDLEWARE_CLASSES = DJANGO_MIDDLEWARE_CLASSES + PROJECT_MIDDLEWARE_CLASSES
 ########## END MIDDLEWARE CONFIGURATION
 
 
@@ -293,3 +296,18 @@ BOOTSTRAP3 = {
     'include_jquery': True,
 }
 ########## END BOOTSTRAP3 CONFIGURATION
+
+
+########## DJANGOSECURE CONFIGURATION
+MIDDLEWARE_CLASSES += (
+    "djangosecure.middleware.SecurityMiddleware",
+)
+# SECURE_SSL_REDIRECT = True
+# SECURE_HSTS_SECONDS = 3600
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# SECURE_FRAME_DENY = True
+# SECURE_CONTENT_TYPE_NOSNIFF = True
+# SECURE_BROWSER_XSS_FILTER = True
+# SESSION_COOKIE_SECURE = True
+# SESSION_COOKIE_HTTPONLY = True
+########## END DJANGOSECURE CONFIGURATION

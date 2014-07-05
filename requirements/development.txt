@@ -2,3 +2,4 @@
 django-debug-toolbar==1.2.1
 Sphinx==1.2.2 # documentation
 Pygments==1.6 # coloring for Sphinx
+django-sslserver==0.12 # https
