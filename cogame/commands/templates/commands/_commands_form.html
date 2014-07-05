@@ -1,4 +1,7 @@
-<form method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="send command" />
-</form>
+{% load bootstrap3 %}
+<div class="commands-form inline">
+    <form method="post">{% csrf_token %}
+        {% bootstrap_form form %}
+        {% bootstrap_button "send command" button_type="submit" icon="bullhorn" %}
+    </form>
+</div>

@@ -27,7 +27,7 @@ def menu(request):
             MenuItem("tasks", url="tasks:task_list", icon="check"),
             MenuItem("tags", url="tags:tag_list", icon="tags"),
             MenuItem("test", url="test", icon="eye-open"),
-            MenuItem("commands", url="commands", icon="asterisk"),
+            MenuItem("commands", url="commands", icon="bullhorn"),
         ]
     }
 
