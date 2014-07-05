@@ -1,5 +1,5 @@
-__author__ = 'eraldo'
+"""Documentation settings and globals."""
 
 from .base import *
 
-SECRET_KEY = 'dummy-key-for-documentation-settings'
+__author__ = 'eraldo'

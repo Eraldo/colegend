@@ -1,16 +1,9 @@
+"""Common settings and globals."""
+
 from os.path import dirname, abspath, basename, join, normpath
 from sys import path
 
 __author__ = 'eraldo'
-"""
-Django settings for cogame project.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/1.6/topics/settings/
-
-For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.6/ref/settings/
-"""
 
 
 ########## PATH CONFIGURATION
@@ -22,6 +15,9 @@ DJANGO_ROOT = dirname(CONFIG_ROOT)
 
 # Absolute filesystem path to the top-level project folder:
 PROJECT_ROOT = dirname(DJANGO_ROOT)
+
+# project name:
+PROJECT_NAME = "CoGame"
 
 # main app name:
 MAIN_APP_NAME = basename(CONFIG_ROOT)
@@ -121,6 +117,11 @@ STATICFILES_FINDERS = (
 ########## END STATIC FILE CONFIGURATION
 
 
+########## ADMIN CONFIGURATION
+ADMIN_URL_BASE = r"^admin/"
+########## END ADMIN CONFIGURATION
+
+
 ########## SECRET CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 # Note: This key should only be used for development and testing.
@@ -145,7 +146,7 @@ FIXTURE_DIRS = (
 
 ########## TEMPLATE CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-context-processors
-TEMPLATE_CONTEXT_PROCESSORS = [
+TEMPLATE_CONTEXT_PROCESSORS = (
     # default
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.debug',
@@ -157,7 +158,7 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     'django.core.context_processors.request',
     # custom
     "website.context_processors.menu",
-]
+)
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-loaders
 TEMPLATE_LOADERS = (
@@ -193,7 +194,7 @@ ROOT_URLCONF = '%s.urls' % MAIN_APP_NAME
 
 
 ########## APP CONFIGURATION
-DJANGO_APPS = [
+DJANGO_APPS = (
     # Default Django apps:
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -208,32 +209,32 @@ DJANGO_APPS = [
     # Admin panel and documentation:
     'django.contrib.admin',
     # 'django.contrib.admindocs',
-]
+)
 
 # Apps specific for this project go here.
-LOCAL_APPS = [
-    # base
-    'django_extensions',
 
+PROJECT_APPS = (
     # user interface
     'website',
     'home',
     'commands',  # command text interface
     # styling
     'bootstrap3',
-
     # data
     'projects',
     'tasks',
-
-    # data-helpers
-    'lib',
-    'status',
     'tags',
-]
+    'status',
+    # common
+    'lib',
+)
+EXTRA_APPS = (
+    'django_extensions',
+    'djangosecure',
+)
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
-INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS
+INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + EXTRA_APPS
 ########## END APP CONFIGURATION
 
 
@@ -278,10 +279,10 @@ WSGI_APPLICATION = '%s.wsgi.application' % MAIN_APP_NAME
 
 ########## SOUTH CONFIGURATION
 # See: http://south.readthedocs.org/en/latest/installation.html#configuring-your-django-installation
-INSTALLED_APPS += [
+INSTALLED_APPS += (
     # Database migration helpers:
     'south',
-]
+)
 # Don't need to use South when setting up a test database.
 SOUTH_TESTS_MIGRATE = False
 ########## END SOUTH CONFIGURATION
