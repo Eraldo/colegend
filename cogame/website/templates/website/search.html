@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>search</h1>
+    <h2>projects</h2>
+    {% include 'projects/_project_list.html' %}
+    <h2>tasks</h2>
+    {% include 'tasks/_task_list.html' %}
+    <h2>tags</h2>
+    {% include 'tags/_tag_list.html' %}
+{% endblock %}
