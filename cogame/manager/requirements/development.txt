@@ -1,3 +1,0 @@
--r base.txt
-ipython==2.1.0
-django-debug-toolbar==1.2.1

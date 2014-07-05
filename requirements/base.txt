@@ -1,0 +1,11 @@
+# general
+Django==1.6.5 # framework
+ipython==2.1.0 # nice shell
+django-extensions==1.3.8 # useful stuff
+django-braces==1.4.0
+django-model-utils==2.0.3
+logutils==0.3.3
+South==0.8.4 # database migrations
+
+# app specific
+django-bootstrap3==4.7.0
