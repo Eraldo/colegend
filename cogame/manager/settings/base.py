@@ -1,6 +1,9 @@
+from os.path import dirname, abspath, basename, join, normpath
+from sys import path
+
 __author__ = 'eraldo'
 """
-Django settings for manager project.
+Django settings for cogame project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
@@ -9,32 +12,206 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+########## PATH CONFIGURATION
+# Absolute filesystem path to the Django project configuration directory:
+CONFIG_ROOT = dirname(dirname(abspath(__file__)))
+
+# Absolute filesystem path to the Django project directory:
+DJANGO_ROOT = dirname(CONFIG_ROOT)
+
+# Absolute filesystem path to the top-level project folder:
+PROJECT_ROOT = dirname(DJANGO_ROOT)
+
+# main app name:
+MAIN_APP_NAME = basename(CONFIG_ROOT)
+
+# Add our django project to our pythonpath, this way we don't need to type our project
+# name in our dotted import paths:
+path.append(CONFIG_ROOT)
+########## END PATH CONFIGURATION
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
+
+########## DEBUG CONFIGURATION
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#debug
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-TEMPLATE_DEBUG = True
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
+TEMPLATE_DEBUG = DEBUG
+########## END DEBUG CONFIGURATION
 
+
+########## MANAGER CONFIGURATION
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
+ADMINS = (
+    ('Eraldo Helal', 'eraldo@eraldo.org'),
+)
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#managers
+MANAGERS = ADMINS
+########## END MANAGER CONFIGURATION
+
+
+########## DATABASE CONFIGURATION
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': join(DJANGO_ROOT, 'db.sqlite3'),
+    }
+}
+########## END DATABASE CONFIGURATION
+
+
+########## GENERAL CONFIGURATION
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#time-zone
+TIME_ZONE = 'Europe/Vienna'
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#language-code
+LANGUAGE_CODE = 'en-us'
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#site-id
+SITE_ID = 1
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
+USE_I18N = True
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#use-l10n
+USE_L10N = True
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#use-tz
+USE_TZ = True
+########## END GENERAL CONFIGURATION
+
+
+########## MEDIA CONFIGURATION
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#media-root
+MEDIA_ROOT = normpath(join(DJANGO_ROOT, 'media'))
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
+MEDIA_URL = '/media/'
+########## END MEDIA CONFIGURATION
+
+
+########## STATIC FILE CONFIGURATION
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/dev/howto/static-files/
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
+STATIC_ROOT = normpath(join(DJANGO_ROOT, 'assets'))
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
+STATIC_URL = '/static/'
+
+# See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
+STATICFILES_DIRS = (
+    normpath(join(DJANGO_ROOT, 'static')),
+)
+
+# See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
+########## END STATIC FILE CONFIGURATION
+
+
+########## SECRET CONFIGURATION
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
+# Note: This key should only be used for development and testing.
+SECRET_KEY = r"{{ secret_key }}"
+########## END SECRET CONFIGURATION
+
+
+########## SITE CONFIGURATION
+# Hosts/domain names that are valid for this site
+# See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = []
+########## END SITE CONFIGURATION
 
 
-# Application definition
+########## FIXTURE CONFIGURATION
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-FIXTURE_DIRS
+FIXTURE_DIRS = (
+    normpath(join(DJANGO_ROOT, 'fixtures')),
+)
+########## END FIXTURE CONFIGURATION
 
-INSTALLED_APPS = [
-    'django.contrib.admin',
+
+########## TEMPLATE CONFIGURATION
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#template-context-processors
+TEMPLATE_CONTEXT_PROCESSORS = [
+    # default
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.contrib.messages.context_processors.messages',
+    'django.core.context_processors.request',
+    # custom
+    "website.context_processors.menu",
+]
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#template-loaders
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+)
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
+TEMPLATE_DIRS = (
+    normpath(join(DJANGO_ROOT, 'templates')),
+)
+########## END TEMPLATE CONFIGURATION
+
+
+########## MIDDLEWARE CONFIGURATION
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#middleware-classes
+MIDDLEWARE_CLASSES = (
+    # Default Django middleware.
+    'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+)
+########## END MIDDLEWARE CONFIGURATION
+
+
+########## URL CONFIGURATION
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#root-urlconf
+ROOT_URLCONF = '%s.urls' % MAIN_APP_NAME
+########## END URL CONFIGURATION
+
+
+########## APP CONFIGURATION
+DJANGO_APPS = [
+    # Default Django apps:
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Useful template tags:
+    # 'django.contrib.humanize',
+
+    # Admin panel and documentation:
+    'django.contrib.admin',
+    # 'django.contrib.admindocs',
+]
+
+# Apps specific for this project go here.
+LOCAL_APPS = [
     # base
     'django_extensions',
 
@@ -55,75 +232,63 @@ INSTALLED_APPS = [
     'tags',
 ]
 
-MIDDLEWARE_CLASSES = (
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-)
-
-ROOT_URLCONF = 'manager.urls'
-
-WSGI_APPLICATION = 'manager.wsgi.application'
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
+INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS
+########## END APP CONFIGURATION
 
 
-# Database
-# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+########## LOGGING CONFIGURATION
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#logging
+# A sample logging configuration. The only tangible logging
+# performed by this configuration is to send an email to
+# the site admins on every HTTP 500 error when DEBUG=False.
+# See http://docs.djangoproject.com/en/dev/topics/logging for
+# more details on how to customize your logging configuration.
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
     }
 }
-
-# Internationalization
-# https://docs.djangoproject.com/en/1.6/topics/i18n/
-
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_L10N = True
-
-USE_TZ = True
+########## END LOGGING CONFIGURATION
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.6/howto/static-files/
+########## WSGI CONFIGURATION
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
+WSGI_APPLICATION = '%s.wsgi.application' % MAIN_APP_NAME
+########## END WSGI CONFIGURATION
 
-STATIC_URL = '/static/'
 
-# [Eraldo]
-
-ADMINS = (
-    ('Eraldo Helal', 'eraldo@eraldo.org'),
-)
-TIME_ZONE = 'Europe/Vienna'
-
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'templates'),
-)
-
-# defaults
-TEMPLATE_CONTEXT_PROCESSORS = [
-    "django.contrib.auth.context_processors.auth",
-    "django.core.context_processors.debug",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.media",
-    "django.core.context_processors.static",
-    "django.core.context_processors.tz",
-    "django.contrib.messages.context_processors.messages",
-
-    "website.context_processors.menu",
+########## SOUTH CONFIGURATION
+# See: http://south.readthedocs.org/en/latest/installation.html#configuring-your-django-installation
+INSTALLED_APPS += [
+    # Database migration helpers:
+    'south',
 ]
+# Don't need to use South when setting up a test database.
+SOUTH_TESTS_MIGRATE = False
+########## END SOUTH CONFIGURATION
 
-# 3rd party stuff
 
+########## BOOTSTRAP3 CONFIGURATION
 BOOTSTRAP3 = {
     'include_jquery': True,
 }
+########## END BOOTSTRAP3 CONFIGURATION
