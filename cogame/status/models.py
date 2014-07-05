@@ -3,6 +3,22 @@ from django.db import models
 __author__ = 'eraldo'
 
 
+class StatusManagerMixin:
+    def open(self):
+        return self.filter(status__type=Status.OPEN)
+
+    def closed(self):
+        return self.filter(status__type=Status.CLOSED)
+
+    def status(self, status):
+        try:
+            if isinstance(status, str):
+                status = Status.objects.get(name=status)
+            return self.filter(status=status)
+        except Status.DoesNotExist:
+            return None
+
+
 class StatusManager(models.Manager):
     def get_by_natural_key(self, name):
         return self.get(name=name)

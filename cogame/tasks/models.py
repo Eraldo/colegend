@@ -1,13 +1,13 @@
 from django.db import models
 from lib.models import TrackedBase, AutoUrlMixin
 from projects.models import Project
-from status.models import Status
+from status.models import Status, StatusManagerMixin
 from tags.models import TaggableBase
 
 __author__ = 'eraldo'
 
 
-class TaskManager(models.Manager):
+class TaskManager(StatusManagerMixin, models.Manager):
     def get_by_natural_key(self, project, name):
         return self.get(project=project, name=name)
 

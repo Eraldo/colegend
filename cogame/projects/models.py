@@ -1,12 +1,12 @@
 from django.db import models
 from lib.models import TrackedBase, AutoUrlMixin
-from status.models import Status
+from status.models import Status, StatusManagerMixin
 from tags.models import TaggableBase
 
 __author__ = 'eraldo'
 
 
-class ProjectManager(models.Manager):
+class ProjectManager(StatusManagerMixin, models.Manager):
     def get_by_natural_key(self, name):
         return self.get(name=name)
 
