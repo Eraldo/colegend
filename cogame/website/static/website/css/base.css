@@ -36,17 +36,26 @@ img#logo {
 /* status */
 
 .status.status-todo {
-background-color: orange;
+    background-color: orange;
 }
+
 .status.status-active {
-background-color: red;
+    background-color: red;
 }
+
 .status.status-done {
-background-color: green;
+    background-color: green;
 }
+
 .status.status-waiting {
-background-color: purple;
+    background-color: purple;
 }
+
 .status.status-canceled {
-background-color: yellow;
+    background-color: yellow;
+}
+
+/* messages */
+#messages .alert {
+    margin-bottom: 0px;
 }
