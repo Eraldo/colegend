@@ -11,6 +11,10 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   install
+   deploy
+   tests
+
 
 
 Indices and tables
