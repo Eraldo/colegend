@@ -26,8 +26,8 @@ class TaskListView(TaskBaseView, ListView):
         context = super(TaskListView, self).get_context_data(**kwargs)
 
         # handle status (open|closed)
-        state = self.request.GET.get('state', self.status_default)
-        context['state'] = state
+        status = self.request.GET.getlist('status', self.status_default)
+        context['status'] = status
 
         return context
 
