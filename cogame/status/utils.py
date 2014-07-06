@@ -13,8 +13,8 @@ class StatusFilterMixin:
         :param queryset:
         :return:
         """
-        status_list = self.request.GET.getlist('status', self.status_default)
-        for status in status_list:
+        status_filters = self.request.GET.getlist('status', self.status_default)
+        for status in status_filters:
             queryset = queryset.status(status)
         return queryset
 
@@ -24,8 +24,8 @@ class StatusFilterMixin:
 
         :param context: context dictionary
         """
-        status = self.request.GET.getlist('status', self.status_default)
-        context['status'] = status
+        status_filters = self.request.GET.getlist('status', self.status_default)
+        context['status_filters'] = status_filters
 
     def get_context_data(self, **kwargs):
         context = super(StatusFilterMixin, self).get_context_data(**kwargs)

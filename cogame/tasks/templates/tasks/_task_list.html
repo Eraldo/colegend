@@ -6,10 +6,10 @@
         <form method="GET" class="pull-right">
             <div class="btn-group">
                 <button type="submit" name="status" value="open"
-                        class="btn btn-default{% if "open" in status %} active{% endif %}">open
+                        class="btn btn-default{% if "open" in status_filters %} active{% endif %}">open
                 </button>
                 <button type="submit" name="status" value="closed"
-                        class="btn btn-default{% if "closed" in status %} active{% endif %}">closed
+                        class="btn btn-default{% if "closed" in status_filters %} active{% endif %}">closed
                 </button>
             </div>
         </form>
