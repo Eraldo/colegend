@@ -12,8 +12,6 @@ class TaskMixin:
 
 
 class TaskListView(StatusFilterMixin, TaskMixin, ListView):
-    status_default = ['open']
-
     def get_queryset(self):
         queryset = super(TaskListView, self).get_queryset()
         return self.filter_status(queryset)

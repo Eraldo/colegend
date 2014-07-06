@@ -28,6 +28,12 @@ class StatusFilterMixin:
         context['status_filters'] = status_filters
 
     def get_context_data(self, **kwargs):
+        """
+        Add the status filters to the context.
+
+        :param kwargs:
+        :return: context with added key 'status_filters'
+        """
         context = super(StatusFilterMixin, self).get_context_data(**kwargs)
         self.add_status_to_context(context)
         return context

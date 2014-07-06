@@ -11,8 +11,10 @@ class ProjectMixin:
     fields = ['name', 'description', 'status', 'deadline', 'tags']
 
 
-class ProjectListView(ProjectMixin, ListView):
-    pass
+class ProjectListView(StatusFilterMixin, ProjectMixin, ListView):
+    def get_queryset(self):
+        queryset = super(ProjectListView, self).get_queryset()
+        return self.filter_status(queryset)
 
 
 class ProjectNewView(ProjectMixin, CreateView):
@@ -27,7 +29,6 @@ class ProjectShowView(StatusFilterMixin, ProjectMixin, DetailView):
         project = self.get_object()
         tasks = project.tasks.all()
         context["tasks"] = self.filter_status(tasks)
-        print("main: " + str(context))
         return context
 
 
