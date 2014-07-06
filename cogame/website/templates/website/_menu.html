@@ -24,11 +24,24 @@
                         {% for menu_item in menu_items.extra %}
                             {% include 'website/_menu_item.html' %}
                         {% endfor %}
+                        <li class="divider"></li>
+                        <li class="dropdown-header">admin</li>
+                        {% for menu_item in menu_items.admin %}
+                            {% include 'website/_menu_item.html' %}
+                        {% endfor %}
                     </ul>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">{% bootstrap_icon "user" %}</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% bootstrap_icon "user" %} <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        {% for menu_item in menu_items.settings %}
+                            {% include 'website/_menu_item.html' %}
+                        {% endfor %}
+                    </ul>
+                </li>
+
             </ul>
             <form action="{% url 'search' %}" method="GET" class="navbar-form navbar-right">
                 <input type="text" name="q" class="form-control" placeholder="Search...">

@@ -7,18 +7,13 @@ __author__ = 'eraldo'
 class MenuItem:
     positions = ["main", "extra", "settings"]
 
-    def __init__(self, name, url, icon=None, position=None):
+    def __init__(self, name, url, icon=None):
         self.name = name
         self.url = url
         # add icon if given
         if icon:
             icon = mark_safe(render_icon(icon))
         self.icon = icon
-        # add position if given
-        if position and position in self.positions:
-            self.position = position
-        else:
-            self.position = "main"
 
     def __str__(self):
         return self.name
@@ -29,17 +24,18 @@ def menu(request):
     menu_items = {
         'main': [
             MenuItem("home", url="home", icon="home"),
-            MenuItem("projects", url="projects:project_list", icon="briefcase"),
+            MenuItem("projects", url="projects:project_list", icon="folder-open"),
             MenuItem("tasks", url="tasks:task_list", icon="check"),
             MenuItem("tags", url="tags:tag_list", icon="tags"),
         ],
         'extra': [
-            MenuItem("test", url="test", icon="eye-open", position="extra"),
-            MenuItem("commands", url="commands", icon="bullhorn", position="extra"),
+            MenuItem("commands", url="commands", icon="bullhorn"),
         ],
         'settings': [
-            MenuItem("test", url="test", icon="eye-open", position="extra"),
-            MenuItem("commands", url="commands", icon="bullhorn", position="extra"),
+            MenuItem("settings", url="home", icon="wrench"),
+        ],
+        'admin': [
+            MenuItem("test", url="test", icon="eye-open"),
         ],
     }
     return {'menu_items': menu_items}
