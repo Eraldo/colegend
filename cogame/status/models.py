@@ -3,7 +3,7 @@ from django.db import models
 __author__ = 'eraldo'
 
 
-class StatusManagerMixin:
+class StatusFiltersMixin:
     def open(self):
         return self.filter(status__type=Status.OPEN)
 

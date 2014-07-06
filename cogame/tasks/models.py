@@ -1,13 +1,19 @@
 from django.db import models
+from django.db.models.query import QuerySet
+from model_utils.managers import PassThroughManagerMixin
 from lib.models import TrackedBase, AutoUrlMixin
 from projects.models import Project
-from status.models import Status, StatusManagerMixin
+from status.models import Status, StatusFiltersMixin
 from tags.models import TaggableBase
 
 __author__ = 'eraldo'
 
 
-class TaskManager(StatusManagerMixin, models.Manager):
+class TaskQuerySet(StatusFiltersMixin, QuerySet):
+    pass
+
+
+class TaskManager(PassThroughManagerMixin, models.Manager):
     def get_by_natural_key(self, project, name):
         return self.get(project=project, name=name)
 
@@ -24,7 +30,7 @@ class Task(AutoUrlMixin, TrackedBase, TaggableBase, models.Model):
     date = models.DateField(blank=True, null=True)
     deadline = models.DateField(blank=True, null=True)
 
-    objects = TaskManager()
+    objects = TaskManager.for_queryset_class(TaskQuerySet)()
 
     class Meta:
         ordering = ["project", "name"]

@@ -2,6 +2,18 @@
     <div class="list-controls">
         <a href="{% url "tasks:task_new" %}{% if project %}?project={{ project.pk }}{% endif %}" class="btn btn-default"
            role="button">new</a>
+
+        <form method="GET" class="pull-right">
+            <div class="btn-group">
+                <button type="submit" name="state" value="open"
+                        class="btn btn-default{% ifequal state "open" %} active{% endifequal %}">open
+                </button>
+                <button type="submit" name="state" value="closed"
+                        class="btn btn-default{% ifequal state "closed" %} active{% endifequal %}">closed
+                </button>
+            </div>
+        </form>
+
     </div>
     {% for task in tasks %}
         {% include "tasks/_task.html" %}

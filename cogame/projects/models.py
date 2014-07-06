@@ -1,12 +1,18 @@
 from django.db import models
+from django.db.models.query import QuerySet
+from model_utils.managers import PassThroughManagerMixin
 from lib.models import TrackedBase, AutoUrlMixin
-from status.models import Status, StatusManagerMixin
+from status.models import Status, StatusFiltersMixin
 from tags.models import TaggableBase
 
 __author__ = 'eraldo'
 
 
-class ProjectManager(StatusManagerMixin, models.Manager):
+class ProjectQuerySet(StatusFiltersMixin, QuerySet):
+    pass
+
+
+class ProjectManager(PassThroughManagerMixin, models.Manager):
     def get_by_natural_key(self, name):
         return self.get(name=name)
 
@@ -21,7 +27,7 @@ class Project(AutoUrlMixin, TrackedBase, TaggableBase, models.Model):
     status = models.ForeignKey(Status, default=Status.DEFAULT_PK)
     deadline = models.DateField(blank=True, null=True)
 
-    objects = ProjectManager()
+    objects = ProjectManager.for_queryset_class(ProjectQuerySet)()
 
     def __str__(self):
         return self.name
