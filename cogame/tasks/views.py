@@ -13,22 +13,34 @@ class TaskBaseView:
 class TaskListView(TaskBaseView, ListView):
     status_default = ['open']
 
-    def get_queryset(self):
-        queryset = super(TaskListView, self).get_queryset()
+    def filter_status(self, queryset):
+        """
+        Filter querysey by posted status
 
-        # filter by status
+        :param queryset:
+        :return:
+        """
         status_list = self.request.GET.getlist('status', self.status_default)
         for status in status_list:
             queryset = queryset.status(status)
         return queryset
 
-    def get_context_data(self, **kwargs):
-        context = super(TaskListView, self).get_context_data(**kwargs)
+    def add_status_to_context(self, context):
+        """
+        Add the posted status to the context dictionary
 
-        # handle status (open|closed)
+        :param context: context dictionary
+        """
         status = self.request.GET.getlist('status', self.status_default)
         context['status'] = status
 
+    def get_queryset(self):
+        queryset = super(TaskListView, self).get_queryset()
+        return self.filter_status(queryset)
+
+    def get_context_data(self, **kwargs):
+        context = super(TaskListView, self).get_context_data(**kwargs)
+        self.add_status_to_context(context)
         return context
 
 

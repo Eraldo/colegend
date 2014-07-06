@@ -3,6 +3,36 @@ from status.models import Status
 __author__ = 'eraldo'
 
 
+class StatusFilterMixin:
+    status_default = ['open']
+
+    def filter_status(self, queryset):
+        """
+        Filter querysey by posted status
+
+        :param queryset:
+        :return:
+        """
+        status_list = self.request.GET.getlist('status', self.status_default)
+        for status in status_list:
+            queryset = queryset.status(status)
+        return queryset
+
+    def add_status_to_context(self, context):
+        """
+        Add the posted status to the context dictionary
+
+        :param context: context dictionary
+        """
+        status = self.request.GET.getlist('status', self.status_default)
+        context['status'] = status
+
+    def get_context_data(self, **kwargs):
+        context = super(StatusFilterMixin, self).get_context_data(**kwargs)
+        self.add_status_to_context(context)
+        return context
+
+
 class StatusQueryMixin:
     """
     A set of methods for filtering a model with a Status field by status.

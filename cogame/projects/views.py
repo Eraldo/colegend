@@ -1,30 +1,39 @@
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from projects.models import Project
+from status.utils import StatusFilterMixin
 
 __author__ = 'eraldo'
 
 
-class ProjectBaseView:
+class ProjectMixin:
     model = Project
     fields = ['name', 'description', 'status', 'deadline', 'tags']
 
 
-class ProjectListView(ProjectBaseView, ListView):
+class ProjectListView(ProjectMixin, ListView):
     pass
 
 
-class ProjectNewView(ProjectBaseView, CreateView):
+class ProjectNewView(ProjectMixin, CreateView):
     success_url = reverse_lazy('projects:project_list')
 
 
-class ProjectShowView(ProjectBaseView, DetailView):
+class ProjectShowView(StatusFilterMixin, ProjectMixin, DetailView):
     template_name = "projects/project_show.html"
 
+    def get_context_data(self, **kwargs):
+        context = super(ProjectShowView, self).get_context_data(**kwargs)
+        project = self.get_object()
+        tasks = project.tasks.all()
+        context["tasks"] = self.filter_status(tasks)
+        print("main: " + str(context))
+        return context
 
-class ProjectEditView(ProjectBaseView, UpdateView):
+
+class ProjectEditView(ProjectMixin, UpdateView):
     success_url = reverse_lazy('projects:project_list')
 
 
-class ProjectDeleteView(ProjectBaseView, DeleteView):
+class ProjectDeleteView(ProjectMixin, DeleteView):
     success_url = reverse_lazy('projects:project_list')
