@@ -1,5 +1,8 @@
 <div class="task-list">
-        <a href="{% url "tasks:task_new" %}{% if project %}?project={{ project.pk }}{% endif %}" class="btn btn-default" role="button">new</a>
+    <div class="list-controls">
+        <a href="{% url "tasks:task_new" %}{% if project %}?project={{ project.pk }}{% endif %}" class="btn btn-default"
+           role="button">new</a>
+    </div>
     {% for task in tasks %}
         {% include "tasks/_task.html" %}
     {% endfor %}
