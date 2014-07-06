@@ -17,6 +17,12 @@ class TaskListView(TaskBaseView, ListView):
 class TaskNewView(TaskBaseView, CreateView):
     success_url = reverse_lazy('tasks:task_new')
 
+    def get_initial(self):
+        initial = super(TaskNewView, self).get_initial()
+        project = self.request.GET.get('project')
+        if project:
+            initial['project'] = project
+        return initial
 
 class TaskShowView(TaskBaseView, DetailView):
     template_name = "tasks/task_show.html"
