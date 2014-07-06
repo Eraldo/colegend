@@ -3,27 +3,6 @@ from django.db import models
 __author__ = 'eraldo'
 
 
-class StatusFiltersMixin:
-    def open(self):
-        return self.filter(status__type=Status.OPEN)
-
-    def closed(self):
-        return self.filter(status__type=Status.CLOSED)
-
-    def status(self, status):
-        """
-        Filters the QuerySet based on a given status.
-
-        :param status: status, status name or status type (open|closed) to filter on
-        :return: filtered QuerySet
-        """
-        if status == "open":
-            return self.open()
-        elif status == "closed":
-            return self.closed()
-        return self.filter(status__name=status)
-
-
 class StatusManager(models.Manager):
     def get_by_natural_key(self, name):
         return self.get(name=name)

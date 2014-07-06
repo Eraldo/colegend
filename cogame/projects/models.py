@@ -2,13 +2,14 @@ from django.db import models
 from django.db.models.query import QuerySet
 from model_utils.managers import PassThroughManagerMixin
 from lib.models import TrackedBase, AutoUrlMixin
-from status.models import Status, StatusFiltersMixin
+from status.models import Status
+from status.utils import StatusQueryMixin
 from tags.models import TaggableBase
 
 __author__ = 'eraldo'
 
 
-class ProjectQuerySet(StatusFiltersMixin, QuerySet):
+class ProjectQuerySet(StatusQueryMixin, QuerySet):
     pass
 
 
