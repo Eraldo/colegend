@@ -52,7 +52,7 @@ img#logo {
 }
 
 .status.status-canceled {
-    background-color: yellow;
+    background-color: darkgreen;
 }
 
 /* messages */
