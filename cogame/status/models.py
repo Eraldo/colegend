@@ -11,12 +11,22 @@ class StatusFiltersMixin:
         return self.filter(status__type=Status.CLOSED)
 
     def status(self, status):
+        """
+        Filters the QuerySet based on a given status.
+
+        :param status: status to filter on
+        :return: filtered QuerySet
+        """
+        if status == "open":
+            return self.open()
+        elif status == "closed":
+            return self.closed()
+        elif isinstance(status, str):
+            status = Status.objects.get(name=status)
         try:
-            if isinstance(status, str):
-                status = Status.objects.get(name=status)
             return self.filter(status=status)
         except Status.DoesNotExist:
-            return None
+            return self
 
 
 class StatusManager(models.Manager):

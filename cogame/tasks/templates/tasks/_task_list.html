@@ -5,15 +5,15 @@
 
         <form method="GET" class="pull-right">
             <div class="btn-group">
-                <button type="submit" name="state" value="open"
-                        class="btn btn-default{% ifequal state "open" %} active{% endifequal %}">open
+                <button type="submit" name="status" value="open"
+                        class="btn btn-default{% ifequal status "open" %} active{% endifequal %}">open
                 </button>
-                <button type="submit" name="state" value="closed"
-                        class="btn btn-default{% ifequal state "closed" %} active{% endifequal %}">closed
+                <button type="submit" name="status" value="closed"
+                        class="btn btn-default{% ifequal status "closed" %} active{% endifequal %}">closed
                 </button>
             </div>
+            <input type="hidden" name="status" value="foo">
         </form>
-
     </div>
     {% for task in tasks %}
         {% include "tasks/_task.html" %}

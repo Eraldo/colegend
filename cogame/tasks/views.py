@@ -11,26 +11,24 @@ class TaskBaseView:
 
 
 class TaskListView(TaskBaseView, ListView):
-    state_default = "open"
+    status_default = ['open']
 
     def get_queryset(self):
         queryset = super(TaskListView, self).get_queryset()
 
-        # handle state (open|closed)
-        state = self.request.GET.get('state', self.state_default)
-        if state == "open":
-            queryset = queryset.open()
-        elif state == "closed":
-            queryset = queryset.closed()
+        # filter by status
+        status_list = self.request.GET.getlist('status', self.status_default)
+        for status in status_list:
+            queryset = queryset.status(status)
         return queryset
-
 
     def get_context_data(self, **kwargs):
         context = super(TaskListView, self).get_context_data(**kwargs)
 
-        # handle state (open|closed)
-        state = self.request.GET.get('state', self.state_default)
+        # handle status (open|closed)
+        state = self.request.GET.get('state', self.status_default)
         context['state'] = state
+
         return context
 
 
