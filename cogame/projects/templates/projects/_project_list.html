@@ -1,4 +1,7 @@
 <div class="project-list">
+    <div class="list-controls">
+        <a href="{% url "projects:project_new" %}" class="btn btn-default" role="button">new</a>
+    </div>
     {% for project in projects %}
         {% include 'projects/_project.html' %}
     {% endfor %}
