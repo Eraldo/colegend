@@ -36,6 +36,7 @@ class StatusFilterMixin:
         """
         context = super(StatusFilterMixin, self).get_context_data(**kwargs)
         self.add_status_to_context(context)
+        context['status_options'] = Status.objects.all()
         return context
 
 
