@@ -1,5 +1,10 @@
 <div class="project-list">
-    <div class="list-controls">
+    <div class="list-controls container-fluid well well-sm">
+        <div id="project-quick-create" class="inline">
+            <form method="GET" class="pull-left">
+                <input type="text" name="project-create-string" class="form-control" placeholder="quick create...">
+            </form>
+        </div>
         <a href="{% url "projects:project_new" %}" class="btn btn-default" role="button">new</a>
         {% include 'status/_status_filter_form.html' %}
     </div>

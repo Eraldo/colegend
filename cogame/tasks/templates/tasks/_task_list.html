@@ -1,5 +1,12 @@
 <div class="task-list">
-    <div class="list-controls">
+    <div class="list-controls container-fluid well well-sm">
+
+        <div id="quick-create" class="inline">
+            <form method="POST" class="pull-left">{% csrf_token %}
+                <input type="text" name="name" class="form-control" placeholder="quick create...">
+                <input type="hidden" name="model" value="task">
+            </form>
+        </div>
         <a href="{% url "tasks:task_new" %}{% if project %}?project={{ project.pk }}{% endif %}" class="btn btn-default"
            role="button">new</a>
         {% include 'status/_status_filter_form.html' %}

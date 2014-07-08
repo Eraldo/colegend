@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.views.generic import TemplateView
 from projects.models import Project
+from status.models import Status
 from tags.models import Tag
 from tasks.models import Task
 
@@ -23,9 +24,20 @@ class SearchView(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(SearchView, self).get_context_data(*args, **kwargs)
-        q = self.request.GET.get("q")
-        if q:
-            context["projects"] = Project.objects.filter(name__icontains=q)
-            context["tasks"] = Task.objects.filter(name__icontains=q)
-            context["tags"] = Tag.objects.filter(name__icontains=q)
+        query = self.request.GET.get("q")
+        if query:
+            context["projects"] = Project.objects.filter(name__icontains=query)
+            context["tasks"] = Task.objects.filter(name__icontains=query)
+            context["tags"] = Tag.objects.filter(name__icontains=query)
+        context["status_options"] = Status.objects.all()
         return context
+
+    def post(self, request, *args, **kwargs):
+        name = request.POST.get("name")
+        model = request.POST.get("model")
+        if model and name:
+            if model == "task":
+                Task.objects.create(name=name)
+            message = "todo: create {}:{}".format(model, name)
+            messages.add_message(request, messages.INFO, message)
+        return self.get(request, *args, **kwargs)
