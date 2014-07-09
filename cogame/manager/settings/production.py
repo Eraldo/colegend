@@ -17,8 +17,14 @@ with open(local_settings_file) as file:
     settings = json.loads(file.read())
 
 
-def get_local_setting(setting, settings=settings, default=None):
+def get_setting(setting, settings=settings, default=None):
     """ Get the environment setting or return exception """
+
+    # try to get it from the environment variables
+    if setting in environ:
+        return environ.get(setting)
+
+    # try to get it from a local json settings file
     try:
         return settings[setting]
     except KeyError:
@@ -31,7 +37,7 @@ def get_local_setting(setting, settings=settings, default=None):
 ########## DEBUG CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#debug
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = get_local_setting('DEBUG', default=False)
+DEBUG = get_setting('DEBUG', default=False)
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
 TEMPLATE_DEBUG = DEBUG
@@ -40,25 +46,25 @@ TEMPLATE_DEBUG = DEBUG
 
 ########## HOST CONFIGURATION
 # See: https://docs.djangoproject.com/en/1.5/releases/1.5/#allowed-hosts-required-in-production
-ALLOWED_HOSTS = get_local_setting('ALLOWED_HOSTS', default=[])
+ALLOWED_HOSTS = get_setting('ALLOWED_HOSTS', default=[])
 ########## END HOST CONFIGURATION
 
 
 ########## EMAIL CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
-EMAIL_BACKEND = get_local_setting('EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
+EMAIL_BACKEND = get_setting('EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-host
-EMAIL_HOST = environ.get('EMAIL_HOST', 'smtp.gmail.com')
+EMAIL_HOST = get_setting('EMAIL_HOST', default='smtp.gmail.com')
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-host-password
-EMAIL_HOST_PASSWORD = environ.get('EMAIL_HOST_PASSWORD', '')
+EMAIL_HOST_PASSWORD = get_setting('EMAIL_HOST_PASSWORD', default='')
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-host-user
-EMAIL_HOST_USER = environ.get('EMAIL_HOST_USER', 'your_email@example.com')
+EMAIL_HOST_USER = get_setting('EMAIL_HOST_USER', default='your_email@example.com')
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-port
-EMAIL_PORT = environ.get('EMAIL_PORT', 587)
+EMAIL_PORT = get_setting('EMAIL_PORT', default=587)
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-subject-prefix
 EMAIL_SUBJECT_PREFIX = '[%s] ' % PROJECT_NAME
@@ -83,5 +89,5 @@ SERVER_EMAIL = EMAIL_HOST_USER
 
 ########## SECRET CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
-SECRET_KEY = get_local_setting('SECRET_KEY')
+SECRET_KEY = get_setting('SECRET_KEY')
 ########## END SECRET CONFIGURATION
