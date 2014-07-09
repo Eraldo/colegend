@@ -58,7 +58,7 @@ EMAIL_BACKEND = get_setting('EMAIL_BACKEND', default='django.core.mail.backends.
 EMAIL_HOST = get_setting('EMAIL_HOST', default='smtp.gmail.com')
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-host-password
-EMAIL_HOST_PASSWORD = get_setting('EMAIL_HOST_PASSWORD', default='')
+EMAIL_HOST_PASSWORD = get_setting('EMAIL_HOST_PASSWORD', default='-')
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-host-user
 EMAIL_HOST_USER = get_setting('EMAIL_HOST_USER', default='your_email@example.com')
@@ -91,3 +91,40 @@ SERVER_EMAIL = EMAIL_HOST_USER
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 SECRET_KEY = get_setting('SECRET_KEY')
 ########## END SECRET CONFIGURATION
+
+
+########## MEDIA CONFIGURATION
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#media-root
+MEDIA_ROOT = get_setting('MEDIA_ROOT')
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
+MEDIA_URL = '/media/'
+########## END MEDIA CONFIGURATION
+
+
+########## STATIC FILE CONFIGURATION
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/dev/howto/static-files/
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
+STATIC_ROOT = get_setting('STATIC_ROOT')
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
+STATIC_URL = '/static/'
+
+# See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
+STATICFILES_DIRS = (
+    normpath(join(DJANGO_ROOT, 'static')),
+)
+
+# See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
+########## END STATIC FILE CONFIGURATION
+
+
+########## ADMIN CONFIGURATION
+ADMIN_URL_BASE = r"^admin/"
+########## END ADMIN CONFIGURATION
