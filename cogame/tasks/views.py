@@ -18,7 +18,7 @@ class TaskListView(StatusFilterMixin, TaskMixin, ListView):
 
 
 class TaskNewView(TaskMixin, CreateView):
-    success_url = reverse_lazy('tasks:task_new')
+    success_url = reverse_lazy('tasks:task_list')
 
     def get_initial(self):
         initial = super(TaskNewView, self).get_initial()
