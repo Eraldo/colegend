@@ -33,6 +33,7 @@ def menu(request):
         ],
         'settings': [
             MenuItem("settings", url="home", icon="wrench"),
+            MenuItem("contact", url="home", icon="envelope"),
         ],
         'admin': [
             MenuItem("test", url="test", icon="eye-open"),
