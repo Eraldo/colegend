@@ -1,6 +1,15 @@
 /* Move down content because we have a fixed navbar that is 50px tall */
-body {
+
+@font-face {
+    font-family: 'ubuntu';
+    src: url('../fonts/ubuntu.ttf');
+    src: local('ubuntu'), url('../fonts/ubuntu.ttf') format('truetype');
+}
+
+
+body.body {
     padding-top: 50px;
+    font-family: 'ubuntu', Georgia, serif;
 }
 
 .navbar-brand.navbar-logo {
