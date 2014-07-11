@@ -1,6 +1,6 @@
 from django.contrib import admin
-from lib.admin import InlineMixin
 from tasks.models import Task
+from lib.admin import InlineMixin
 
 __author__ = 'eraldo'
 
