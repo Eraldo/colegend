@@ -1,0 +1,10 @@
+<div class="habit well well-sm">
+    <b>{% include "habits/_habit_link.html" %}</b>
+    <br/>
+    {% include "tags/_tags_field.html" with tags=habit.tags.all %}
+    <br/>
+    {% include "lib/_description_field.html" with description=habit.description %}
+    <br/>
+    <a href="{{ habit.get_edit_url }}" class="btn btn-default btn-sm" role="button">edit</a>
+    <a href="{{ habit.get_delete_url }}" class="btn btn-default btn-sm" role="button">delete</a>
+</div>

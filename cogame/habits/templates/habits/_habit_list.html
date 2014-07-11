@@ -1,0 +1,9 @@
+<div class="habit-list">
+    <div class="list-controls container-fluid well well-sm">
+        <a href="{% url "habits:habit_new" %}" class="btn btn-default"
+           role="button">new</a>
+    </div>
+    {% for habit in habits %}
+        {% include "habits/_habit.html" %}
+    {% endfor %}
+</div>
