@@ -7,7 +7,7 @@ __author__ = 'eraldo'
 
 class HabitMixin:
     model = Habit
-    fields = ['name']
+    fields = ['name', 'tags']
 
 
 class HabitListView(HabitMixin, ListView):

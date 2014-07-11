@@ -225,6 +225,7 @@ PROJECT_APPS = (
     # data
     'projects',
     'tasks',
+    'habits',
     'tags',
     'status',
     # common
