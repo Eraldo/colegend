@@ -8,20 +8,20 @@ class RoutineMixin:
 
 
 class RoutineCheckView(RoutineMixin, TemplateView):
-    template_name = "routines/routine_check.html"
+    pass
 
 
 class RoutineDailyView(RoutineMixin, TemplateView):
-    template_name = "routines/routine_daily.html"
+    template_name = "routines/routine.html"
 
 
 class RoutineWeeklyView(RoutineMixin, TemplateView):
-    template_name = "routines/routine_weekly.html"
+    template_name = "routines/routine.html"
 
 
 class RoutineMonthlyView(RoutineMixin, TemplateView):
-    template_name = "routines/routine_monthly.html"
+    template_name = "routines/routine.html"
 
 
 class RoutineYearlyView(RoutineMixin, TemplateView):
-    template_name = "routines/routine_yearly.html"
+    template_name = "routines/routine.html"
