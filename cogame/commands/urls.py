@@ -3,9 +3,9 @@ from commands.views import CommandsView
 
 __author__ = 'eraldo'
 
-
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     url(r'^$',
         CommandsView.as_view(),
         name='commands'),
-    )
+)

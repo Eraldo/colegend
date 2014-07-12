@@ -3,8 +3,8 @@ from routines.views import RoutineCheckView, RoutineDailyView, RoutineWeeklyView
 
 __author__ = 'eraldo'
 
-
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     url(r'^$',
         RoutineCheckView.as_view(),
         name='routine_check'),

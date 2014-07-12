@@ -3,9 +3,9 @@ from tasks.views import TaskListView, TaskNewView, TaskShowView, TaskEditView, T
 
 __author__ = 'eraldo'
 
-
-urlpatterns = patterns('',
- # ex: ../
+urlpatterns = patterns(
+    '',
+    # ex: ../
     url(r'^$',
         TaskListView.as_view(),
         name='task_list'),
@@ -15,7 +15,7 @@ urlpatterns = patterns('',
         TaskNewView.as_view(),
         name='task_new'),
 
-        # ex: ../4/
+    # ex: ../4/
     url(r'^(?P<pk>\d+)/$',
         TaskShowView.as_view(),
         name='task_show'),
@@ -29,4 +29,4 @@ urlpatterns = patterns('',
     url(r'^(?P<pk>\d+)/delete/$',
         TaskDeleteView.as_view(),
         name='task_delete'),
-    )
+)

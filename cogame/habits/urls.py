@@ -3,9 +3,9 @@ from habits.views import HabitListView, HabitNewView, HabitShowView, HabitEditVi
 
 __author__ = 'eraldo'
 
-
-urlpatterns = patterns('',
- # ex: ../
+urlpatterns = patterns(
+    '',
+    # ex: ../
     url(r'^$',
         HabitListView.as_view(),
         name='habit_list'),
@@ -15,7 +15,7 @@ urlpatterns = patterns('',
         HabitNewView.as_view(),
         name='habit_new'),
 
-        # ex: ../4/
+    # ex: ../4/
     url(r'^(?P<pk>\d+)/$',
         HabitShowView.as_view(),
         name='habit_show'),
@@ -29,4 +29,4 @@ urlpatterns = patterns('',
     url(r'^(?P<pk>\d+)/delete/$',
         HabitDeleteView.as_view(),
         name='habit_delete'),
-    )
+)

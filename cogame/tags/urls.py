@@ -3,9 +3,9 @@ from tags.views import TagListView, TagNewView, TagShowView, TagEditView, TagDel
 
 __author__ = 'eraldo'
 
-
-urlpatterns = patterns('',
- # ex: ../
+urlpatterns = patterns(
+    '',
+    # ex: ../
     url(r'^$',
         TagListView.as_view(),
         name='tag_list'),
@@ -15,7 +15,7 @@ urlpatterns = patterns('',
         TagNewView.as_view(),
         name='tag_new'),
 
-        # ex: ../4/
+    # ex: ../4/
     url(r'^(?P<pk>\d+)/$',
         TagShowView.as_view(),
         name='tag_show'),
@@ -29,4 +29,4 @@ urlpatterns = patterns('',
     url(r'^(?P<pk>\d+)/delete/$',
         TagDeleteView.as_view(),
         name='tag_delete'),
-    )
+)

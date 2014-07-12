@@ -3,8 +3,8 @@ from projects.views import ProjectListView, ProjectNewView, ProjectShowView, Pro
 
 __author__ = 'eraldo'
 
-
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     # ex: ../
     url(r'^$',
         ProjectListView.as_view(),
@@ -15,7 +15,7 @@ urlpatterns = patterns('',
         ProjectNewView.as_view(),
         name='project_new'),
 
-        # ex: ../4/
+    # ex: ../4/
     url(r'^(?P<pk>\d+)/$',
         ProjectShowView.as_view(),
         name='project_show'),
@@ -29,4 +29,4 @@ urlpatterns = patterns('',
     url(r'^(?P<pk>\d+)/delete/$',
         ProjectDeleteView.as_view(),
         name='project_delete'),
-    )
+)
