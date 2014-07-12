@@ -37,7 +37,7 @@ def get_setting(setting, settings=settings, default=None):
 ########## DEBUG CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#debug
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = get_setting('DEBUG', default=False)
+DEBUG = True if get_setting('DEBUG') == "True" else False
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
 TEMPLATE_DEBUG = DEBUG
