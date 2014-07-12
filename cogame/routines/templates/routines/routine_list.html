@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>routines
+        <span class="badge status">{{ routine_list.count }}</span>
+    </h1>
+    {% include 'routines/_routine_list.html' with routines=routine_list %}
+{% endblock %}

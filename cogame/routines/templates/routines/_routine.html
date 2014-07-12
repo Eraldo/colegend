@@ -1,0 +1,10 @@
+<div class="routine well well-sm">
+    <b><a href="{{ routine.get_show_url }}">{{ routine }}</a></b>
+    <br/>
+    {% include "tags/_tags_field.html" with tags=routine.tags.all %}
+    <br/>
+    {% include "lib/_description_field.html" with description=routine.description %}
+    <br/>
+    <a href="{{ routine.get_edit_url }}" class="btn btn-default btn-sm" role="button">edit</a>
+    <a href="{{ routine.get_delete_url }}" class="btn btn-default btn-sm" role="button">delete</a>
+</div>

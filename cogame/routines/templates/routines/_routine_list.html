@@ -1,0 +1,9 @@
+<div class="routine-list">
+    <div class="list-controls container-fluid well well-sm">
+        <a href="{% url "routines:routine_new" %}" class="btn btn-default" role="button">new</a>
+        {% include 'status/_status_filter_form.html' %}
+    </div>
+    {% for routine in routines %}
+        {% include 'routines/_routine.html' %}
+    {% endfor %}
+</div>

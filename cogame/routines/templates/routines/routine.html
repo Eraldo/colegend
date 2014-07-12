@@ -1,7 +1,0 @@
-{% extends 'base.html' %}
-
-{% block content %}
-    <h1>{{ routine }}</h1>
-    {% include "habits/_habit_list.html" with habits=routine.habits.all %}
-
-{% endblock %}
