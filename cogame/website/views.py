@@ -30,9 +30,9 @@ class SearchView(TemplateView):
         if query:
             context["projects"] = Project.objects.filter(name__icontains=query)
             context["tasks"] = Task.objects.filter(name__icontains=query)
-            context["tags"] = Tag.objects.filter(name__icontains=query)
             context["routines"] = Routine.objects.filter(name__icontains=query)
             context["habits"] = Habit.objects.filter(name__icontains=query)
+            context["tags"] = Tag.objects.filter(name__icontains=query)
         context["status_options"] = Status.objects.all()
         return context
 
