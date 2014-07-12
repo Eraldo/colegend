@@ -3,6 +3,11 @@
     <br/>
     {% include "tags/_tags_field.html" with tags=routine.tags.all %}
     <br/>
+    <div class="type-field inline">
+        <u>type</u>: {{ routine.type }}
+    </div>
+    {{ routine.type }}
+    <br/>
     {% include "lib/_description_field.html" with description=routine.description %}
     <br/>
     <a href="{{ routine.get_edit_url }}" class="btn btn-default btn-sm" role="button">edit</a>

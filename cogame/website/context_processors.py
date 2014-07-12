@@ -26,6 +26,7 @@ def menu(request):
             MenuItem("home", url="home", icon="home"),
             MenuItem("projects", url="projects:project_list", icon="folder-open"),
             MenuItem("tasks", url="tasks:task_list", icon="check"),
+            MenuItem("routines", url="routines:routine_list", icon="asterisk"),
             MenuItem("habits", url="habits:habit_list", icon="link"),
             MenuItem("tags", url="tags:tag_list", icon="tags"),
         ],

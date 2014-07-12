@@ -7,7 +7,7 @@ __author__ = 'eraldo'
 
 class RoutineMixin:
     model = Routine
-    fields = ['name', 'description', 'tags']
+    fields = ['name', 'description', 'type', 'tags']
     
 
 class RoutineCheckView(View):

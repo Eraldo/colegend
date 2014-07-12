@@ -11,7 +11,7 @@
     <h3>tasks</h3>
     {% include 'tasks/_task_list.html' with tasks=tag.tasks.all %}
     <h3>routines</h3>
-    {% include 'routines/_routine_list.html' with habits=tag.routines.all %}
+    {% include 'routines/_routine_list.html' with routines=tag.routines.all %}
     <h3>habits</h3>
     {% include 'habits/_habit_list.html' with habits=tag.habits.all %}
 {% endblock %}
