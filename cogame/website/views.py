@@ -1,6 +1,8 @@
 from django.contrib import messages
 from django.views.generic import TemplateView
+from habits.models import Habit
 from projects.models import Project
+from routines.models import Routine
 from status.models import Status
 from tags.models import Tag
 from tasks.models import Task
@@ -29,6 +31,8 @@ class SearchView(TemplateView):
             context["projects"] = Project.objects.filter(name__icontains=query)
             context["tasks"] = Task.objects.filter(name__icontains=query)
             context["tags"] = Tag.objects.filter(name__icontains=query)
+            context["routines"] = Routine.objects.filter(name__icontains=query)
+            context["habits"] = Habit.objects.filter(name__icontains=query)
         context["status_options"] = Status.objects.all()
         return context
 
