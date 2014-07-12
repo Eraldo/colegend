@@ -21,11 +21,11 @@ class TestView(TemplateView):
         return super(TestView, self).get(request, *args, **kwargs)
 
 
-class SearchView(TemplateView):
+class SearchResultsView(TemplateView):
     template_name = 'website/search.html'
 
     def get_context_data(self, *args, **kwargs):
-        context = super(SearchView, self).get_context_data(*args, **kwargs)
+        context = super(SearchResultsView, self).get_context_data(*args, **kwargs)
         query = self.request.GET.get("q")
         if query:
             context["projects"] = Project.objects.filter(name__icontains=query)
