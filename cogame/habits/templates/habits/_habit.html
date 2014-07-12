@@ -5,6 +5,8 @@
     <br/>
     {% include "lib/_description_field.html" with description=habit.description %}
     <br/>
+    <u>type</u>: -
+    <br/>
     <a href="{{ habit.get_edit_url }}" class="btn btn-default btn-sm" role="button">edit</a>
     <a href="{{ habit.get_delete_url }}" class="btn btn-default btn-sm" role="button">delete</a>
 </div>

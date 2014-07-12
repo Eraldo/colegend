@@ -1,27 +1,33 @@
-from django.views.generic import TemplateView
+from django.views.generic import DetailView, View
+from routines.models import Routine
 
 __author__ = 'eraldo'
 
 
 class RoutineMixin:
+    model = Routine
+    fields = ['name', 'description', 'tags']
+    template_name = "routines/routine.html"
+
+    def get_object(self, queryset=None):
+        return Routine.objects.get(name=self.routine_name)
+
+
+class RoutineCheckView(View):
     pass
 
 
-class RoutineCheckView(RoutineMixin, TemplateView):
-    pass
+class RoutineDailyView(RoutineMixin, DetailView):
+    routine_name = "daily routine"
 
 
-class RoutineDailyView(RoutineMixin, TemplateView):
-    template_name = "routines/routine.html"
+class RoutineWeeklyView(RoutineMixin, DetailView):
+    routine_name = "weekly routine"
 
 
-class RoutineWeeklyView(RoutineMixin, TemplateView):
-    template_name = "routines/routine.html"
+class RoutineMonthlyView(RoutineMixin, DetailView):
+    routine_name = "monthly routine"
 
 
-class RoutineMonthlyView(RoutineMixin, TemplateView):
-    template_name = "routines/routine.html"
-
-
-class RoutineYearlyView(RoutineMixin, TemplateView):
-    template_name = "routines/routine.html"
+class RoutineYearlyView(RoutineMixin, DetailView):
+    routine_name = "yearly routine"

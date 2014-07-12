@@ -19,6 +19,7 @@ urlpatterns = patterns('',
     url(r'', include('website.urls')),
     url(r'^projects/', include('projects.urls', namespace="projects")),
     url(r'^tasks/', include('tasks.urls', namespace="tasks")),
+    url(r'^routines/', include('routines.urls', namespace="routines")),
     url(r'^habits/', include('habits.urls', namespace="habits")),
     url(r'^tags/', include('tags.urls', namespace="tags")),
 
