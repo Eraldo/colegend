@@ -1,0 +1,9 @@
+<div class="feature well well-sm">
+    <b>{{ feature }}</b>
+    <br/>
+    {% include "lib/_description_field.html" with description=feature.description %}
+    <br/>
+    <div class="date-published-field inline">
+        <u>date published</u>: {{ feature.date_published }}
+    </div>
+</div>

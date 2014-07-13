@@ -23,6 +23,7 @@ urlpatterns = patterns('',
     url(r'^habits/', include('habits.urls', namespace="habits")),
     url(r'^tags/', include('tags.urls', namespace="tags")),
 
+    url(r'^features/', include('features.urls', namespace="features")),
     url(r'^commands/', include('commands.urls')),
 
     url(r'^admin/', include(admin.site.urls)),

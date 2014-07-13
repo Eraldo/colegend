@@ -219,6 +219,7 @@ PROJECT_APPS = (
     # user interface
     'website',
     'home',
+    'features',
     'commands',  # command text interface
     # styling
     'bootstrap3',
