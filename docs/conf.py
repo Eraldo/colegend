@@ -25,7 +25,7 @@ import os
 import sys
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'cogame'))
-os.environ['DJANGO_SETTINGS_MODULE'] = 'manager.settings.documentation'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'configuration.settings.documentation'
 from django.conf import settings
 
 # -- General configuration ------------------------------------------------

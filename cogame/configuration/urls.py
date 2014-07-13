@@ -11,7 +11,7 @@ admin.site.unregister(Group)
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'manager.views.home', name='home'),
+    # url(r'^$', 'configuration.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
     # main urls
