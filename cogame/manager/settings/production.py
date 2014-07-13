@@ -41,6 +41,9 @@ DEBUG = True if get_setting('DEBUG') == "True" else False
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
 TEMPLATE_DEBUG = DEBUG
+# http://david.feinzeig.com/blog/2012/02/18/
+# tips-for-creating-404-page-not-found-and-500-server-error-templates-in-django-plus-configuring-email-alerts/
+SEND_BROKEN_LINK_EMAILS = True
 ########## END DEBUG CONFIGURATION
 
 
