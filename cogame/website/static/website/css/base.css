@@ -1,17 +1,35 @@
 /* Move down content because we have a fixed navbar that is 50px tall */
 
+
+/* fonts */
 @font-face {
     font-family: 'ubuntu';
     src: url('../fonts/ubuntu.ttf');
     src: local('ubuntu'), url('../fonts/ubuntu.ttf') format('truetype');
 }
+/* end fonts */
 
 
+/* general */
 body.body {
     padding-top: 50px;
     font-family: 'ubuntu', Georgia, serif;
 }
 
+.inline {
+    display: inline;
+}
+/* end general */
+
+
+/* messages */
+#messages .alert {
+    margin-bottom: 0px;
+}
+/*end messages*/
+
+
+/* menu */
 .navbar-brand.navbar-logo {
     padding-top: 0px;
     padding-bottom: 0px;
@@ -21,13 +39,10 @@ img#logo {
     display: inline-block;
     max-height: 50px;
 }
+/* end menu */
 
-.inline {
-    display: inline;
-}
 
 /* projects */
-
 .project.well {
     border-left: solid thick blue;
 }
@@ -35,15 +50,31 @@ img#logo {
 .project-field {
     color: blue;
 }
+/* end projects */
+
 
 /* tasks */
-
 .task.well {
-    border-left: solid thick grey;
+    border-left: solid thick #00b3ee;
 }
+/* end tasks */
+
+
+/* routines */
+.routine.well {
+    border-left: solid thick darkgreen;
+}
+/* end routines */
+
+
+/* habits */
+.habit.well {
+    border-left: solid thick teal;
+}
+/* end habits */
+
 
 /* status */
-
 .status.status-todo {
     background-color: orange;
 }
@@ -63,8 +94,4 @@ img#logo {
 .status.status-canceled {
     background-color: darkgreen;
 }
-
-/* messages */
-#messages .alert {
-    margin-bottom: 0px;
-}
+/* end status */
