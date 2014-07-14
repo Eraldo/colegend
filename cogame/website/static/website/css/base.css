@@ -1,5 +1,10 @@
 /* Move down content because we have a fixed navbar that is 50px tall */
 
+@import url("/static/projects/css/projects.css");
+@import url("/static/tasks/css/tasks.css");
+@import url("/static/routines/css/routines.css");
+@import url("/static/habits/css/habits.css");
+@import url("/static/status/css/status.css");
 
 /* fonts */
 @font-face {
@@ -41,57 +46,3 @@ img#logo {
 }
 /* end menu */
 
-
-/* projects */
-.project.well {
-    border-left: solid thick blue;
-}
-
-.project-field {
-    color: blue;
-}
-/* end projects */
-
-
-/* tasks */
-.task.well {
-    border-left: solid thick #00b3ee;
-}
-/* end tasks */
-
-
-/* routines */
-.routine.well {
-    border-left: solid thick darkgreen;
-}
-/* end routines */
-
-
-/* habits */
-.habit.well {
-    border-left: solid thick teal;
-}
-/* end habits */
-
-
-/* status */
-.status.status-todo {
-    background-color: orange;
-}
-
-.status.status-active {
-    background-color: red;
-}
-
-.status.status-done {
-    background-color: green;
-}
-
-.status.status-waiting {
-    background-color: purple;
-}
-
-.status.status-canceled {
-    background-color: darkgreen;
-}
-/* end status */

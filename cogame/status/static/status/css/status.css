@@ -1,0 +1,21 @@
+/* status */
+.status.status-todo {
+    background-color: orange;
+}
+
+.status.status-active {
+    background-color: red;
+}
+
+.status.status-done {
+    background-color: green;
+}
+
+.status.status-waiting {
+    background-color: purple;
+}
+
+.status.status-canceled {
+    background-color: darkgreen;
+}
+/* end status */
