@@ -72,7 +72,7 @@ TIME_ZONE = 'Europe/Vienna'
 LANGUAGE_CODE = 'en-us'
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#site-id
-SITE_ID = 1
+SITE_ID = 1  # required by django-allauth
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
 USE_I18N = True
@@ -205,6 +205,8 @@ DJANGO_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'django.contrib.sites',  # required by django-allauth
+
     # Useful template tags:
     # 'django.contrib.humanize',
 
@@ -216,6 +218,8 @@ DJANGO_APPS = (
 # Apps specific for this project go here.
 
 PROJECT_APPS = (
+    # system
+    'users',  # custom users app
     # user interface
     'website',
     'home',
@@ -291,6 +295,57 @@ INSTALLED_APPS += (
 # Don't need to use South when setting up a test database.
 SOUTH_TESTS_MIGRATE = False
 ########## END SOUTH CONFIGURATION
+
+
+########## AUTHENTICATION CONFIGURATION
+INSTALLED_APPS += (
+    # Needs to come after south for now because of a weird edge case between
+    #   South and allauth
+    'allauth',  # registration
+    'allauth.account',  # registration
+    'allauth.socialaccount',  # registration
+     # ... include the providers you want to enable:
+    'allauth.socialaccount.providers.google',
+)
+TEMPLATE_CONTEXT_PROCESSORS += (
+    "allauth.account.context_processors.account",
+    "allauth.socialaccount.context_processors.socialaccount",
+)
+AUTHENTICATION_BACKENDS = (
+      # Needed to login by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+# Some really nice defaults
+ACCOUNT_AUTHENTICATION_METHOD = "username"
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+########## END AUTHENTICATION CONFIGURATION
+
+
+########## CUSTOM USER
+# Select the correct user model
+AUTH_USER_MODEL = "users.User"
+LOGIN_REDIRECT_URL = "users:redirect"
+LOGIN_URL = "account_login"
+########## END CUSTOM USER
+
+
+########## USER AVATARS
+INSTALLED_APPS += (
+    'avatar',
+)
+########## END USER AVATARS
+
+
+
+
+
+########## SLUGLIFIER
+AUTOSLUG_SLUGIFY_FUNCTION = "slugify.slugify"
+########## END SLUGLIFIER
 
 
 ########## BOOTSTRAP3 CONFIGURATION
