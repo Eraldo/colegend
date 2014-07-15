@@ -1,4 +1,6 @@
+from braces.views import LoginRequiredMixin
 from django.contrib import messages
+from django.core.exceptions import PermissionDenied
 from django.views.generic import TemplateView
 from habits.models import Habit
 from projects.models import Project
@@ -14,6 +16,10 @@ class TestView(TemplateView):
     template_name = "website/test.html"
 
     def get(self, request, *args, **kwargs):
+        # check permission
+        if not request.user.username == "eraldo":
+            raise PermissionDenied
+
         message = "test1"
         messages.add_message(request, messages.INFO, message)
         message = "test2"
@@ -21,7 +27,7 @@ class TestView(TemplateView):
         return super(TestView, self).get(request, *args, **kwargs)
 
 
-class SearchResultsView(TemplateView):
+class SearchResultsView(LoginRequiredMixin, TemplateView):
     template_name = 'website/search.html'
 
     def get_context_data(self, *args, **kwargs):

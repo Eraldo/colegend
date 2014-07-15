@@ -1,3 +1,4 @@
+from braces.views import LoginRequiredMixin
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from habits.models import Habit
@@ -5,7 +6,7 @@ from habits.models import Habit
 __author__ = 'eraldo'
 
 
-class HabitMixin:
+class HabitMixin(LoginRequiredMixin):
     model = Habit
     fields = ['routine', 'name', 'tags']
 

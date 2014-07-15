@@ -1,3 +1,4 @@
+from braces.views import LoginRequiredMixin
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from status.utils import StatusFilterMixin
@@ -6,7 +7,7 @@ from tasks.models import Task
 __author__ = 'eraldo'
 
 
-class TaskMixin:
+class TaskMixin(LoginRequiredMixin):
     model = Task
     fields = ['project', 'name', 'description', 'status', 'date', 'deadline', 'tags']
 

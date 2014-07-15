@@ -1,3 +1,4 @@
+from braces.views import LoginRequiredMixin
 from django.contrib import messages
 from django.views.generic import FormView
 from commands.forms import CommandsForm
@@ -19,7 +20,7 @@ def process_command(command, request):
         messages.add_message(request, messages.INFO, message)
 
 
-class CommandsView(FormView):
+class CommandsView(LoginRequiredMixin, FormView):
     template_name = "commands/commands.html"
     form_class = CommandsForm
     success_url = "."
