@@ -306,6 +306,7 @@ INSTALLED_APPS += (
     'allauth.socialaccount',  # registration
      # ... include the providers you want to enable:
     'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
 )
 TEMPLATE_CONTEXT_PROCESSORS += (
     "allauth.account.context_processors.account",
