@@ -26,3 +26,6 @@ docs/_templates
 
 # browser components
 bower_components
+
+# ignore log files
+*.log
