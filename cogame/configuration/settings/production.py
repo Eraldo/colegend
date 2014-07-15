@@ -17,27 +17,39 @@ with open(local_settings_file) as file:
     settings = json.loads(file.read())
 
 
-def get_setting(setting, settings=settings, default=None):
+def get_setting(setting, settings=settings, default=None, conversion_type=None):
     """ Get the environment setting or return exception """
-
+    result = None
     # try to get it from the environment variables
     if setting in environ:
-        return environ.get(setting)
+        result = environ.get(setting)
 
     # try to get it from a local json settings file
     try:
-        return settings[setting]
+        result = settings[setting]
     except KeyError:
         if default:
             return default
         error_msg = "Set the %s env variable" % setting
         raise ImproperlyConfigured(error_msg)
 
+    # convert to correct type if given
+    if conversion_type:
+        if conversion_type == bool:
+                result = True if result == "True" else False
+        elif conversion_type == int:
+            try:
+                result = int(result)
+            except ValueError:
+                error_msg = "The local variable %s was expected to be a string representing an integer" % setting
+                raise ImproperlyConfigured(error_msg)
+    return result
+
 
 ########## DEBUG CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#debug
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True if get_setting('DEBUG') == "True" else False
+DEBUG = get_setting('DEBUG', default=False, conversion_type=bool)
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
 TEMPLATE_DEBUG = DEBUG
@@ -131,3 +143,9 @@ STATICFILES_FINDERS = (
 ########## ADMIN CONFIGURATION
 ADMIN_URL_BASE = r"^admin/"
 ########## END ADMIN CONFIGURATION
+
+
+########## SECURITY CONFIGURATION
+CSRF_COOKIE_SECURE = get_setting('CSRF_COOKIE_SECURE', default=True, conversion_type=bool)
+SESSION_COOKIE_SECURE = get_setting('SESSION_COOKIE_SECURE', default=True, conversion_type=bool)
+########## END SECURITY CONFIGURATION
