@@ -6,9 +6,6 @@ from django.conf.urls.static import static
 from django.contrib import admin
 admin.autodiscover()
 
-# remove group model from admin
-from django.contrib.auth.models import Group
-admin.site.unregister(Group)
 
 urlpatterns = patterns('',
     # Examples:
@@ -38,3 +35,7 @@ urlpatterns = patterns('',
     url(r'^avatar/', include('avatar.urls')),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# remove group model from admin
+from django.contrib.auth.models import Group
+admin.site.unregister(Group)

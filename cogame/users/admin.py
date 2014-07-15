@@ -1,3 +1,10 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
+from users.models import User
 
-# Register your models here.
+__author__ = 'eraldo'
+
+
+class UserAdmin(AuthUserAdmin):
+    pass
+admin.site.register(User, UserAdmin)
