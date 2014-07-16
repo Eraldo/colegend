@@ -1,30 +1,36 @@
 from django.db import models
-from lib.models import AutoUrlMixin, TimeStampedBase
+from lib.models import AutoUrlMixin, OwnedBase, TrackedBase
 
 __author__ = 'eraldo'
 
 
 class TagManager(models.Manager):
-    def get_by_natural_key(self, name):
-        return self.get(name=name)
+    def get_by_natural_key(self, owner, name):
+        return self.get(owner=owner, name=name)
 
 
-class Tag(AutoUrlMixin, TimeStampedBase, models.Model):
+class Tag(AutoUrlMixin, OwnedBase, TrackedBase, models.Model):
     """
     A django model representing a text-tag.
     """
-    name = models.CharField(unique=True, max_length=100)
+    # > owner: User
+    name = models.CharField(max_length=100)
+
+    description = models.TextField(blank=True)
 
     objects = TagManager()
 
     class Meta:
         ordering = ["name"]
+        unique_together = (('owner', 'name'),)
 
     def __str__(self):
         return self.name
 
     def natural_key(self):
-        return [self.name]
+        return [self.owner, self.name]
+
+    natural_key.dependencies = ['users.user']
 
 
 class TaggableBase(models.Model):
