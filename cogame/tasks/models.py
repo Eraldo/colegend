@@ -23,7 +23,7 @@ class Task(AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):
     """
     A django model representing a task.
     """
-    #> owner: User
+    # > owner: User
     project = models.ForeignKey(Project, blank=True, null=True, related_name="tasks")
     name = models.CharField(max_length=100)
 
@@ -43,4 +43,5 @@ class Task(AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):
 
     def natural_key(self):
         return [self.owner.natural_key(), self.project.natural_key(), self.name]
-    natural_key.dependencies = ['projects.project']
+
+    natural_key.dependencies = ['users.user', 'projects.project']

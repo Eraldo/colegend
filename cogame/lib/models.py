@@ -26,7 +26,7 @@ class TrackedBase(TimeStampedBase, LoggableBase):
 
 
 class OwnedBase(models.Model):
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, null=True)
 
     class Meta:
         abstract = True
