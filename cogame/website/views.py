@@ -17,7 +17,7 @@ class TestView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         # check permission
-        if not request.user.username == "eraldo":
+        if not request.user.is_superuser:
             raise PermissionDenied
 
         message = "test1"
