@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load bootstrap3 %}
 
 
 {% block title %}
@@ -10,8 +11,13 @@
         We are in early alpha stage.. so things might not work the way you want them to yet.<br>
         There is the magical work: "yet".<br>
         Great news: You can help us get there.<br>
-        <br/>
+    </p>
+    <p>
+        Newest feature : <a href="{% url "features:feature_list" %}">{{ feature }}</a>.
+    </p>
+    <p>
         Feel free to tell me what is wrong.. or what you want. ;)<br/>
         <a href="mailto:eraldo@cogame.org?Subject=[CoGame]%20Feedback" target="_top">
->> Feedback</a>
+            >> Feedback</a>
+    </p>
 {% endblock %}

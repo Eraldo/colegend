@@ -31,7 +31,7 @@ def menu(request):
             MenuItem("tags", url="tags:tag_list", icon="tags"),
         ],
         'extra': [
-            MenuItem("features", url="features:feature_list", icon="flash"),
+            MenuItem("feature roadmap", url="features:feature_list", icon="road"),
             MenuItem("commands", url="commands", icon="bullhorn"),
         ],
         'settings': [
