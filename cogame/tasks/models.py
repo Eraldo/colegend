@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models.query import QuerySet
 from model_utils.managers import PassThroughManagerMixin
-from lib.models import TrackedBase, AutoUrlMixin
+from lib.models import TrackedBase, AutoUrlMixin, OwnedBase
 from projects.models import Project
 from status.models import Status
 from status.utils import StatusQueryMixin
@@ -15,14 +15,15 @@ class TaskQuerySet(StatusQueryMixin, QuerySet):
 
 
 class TaskManager(PassThroughManagerMixin, models.Manager):
-    def get_by_natural_key(self, project, name):
-        return self.get(project=project, name=name)
+    def get_by_natural_key(self, owner, project, name):
+        return self.get(owner=owner, project=project, name=name)
 
 
-class Task(AutoUrlMixin, TrackedBase, TaggableBase, models.Model):
+class Task(AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):
     """
     A django model representing a task.
     """
+    #> owner: User
     project = models.ForeignKey(Project, blank=True, null=True, related_name="tasks")
     name = models.CharField(max_length=100)
 
@@ -35,11 +36,11 @@ class Task(AutoUrlMixin, TrackedBase, TaggableBase, models.Model):
 
     class Meta:
         ordering = ["project", "name"]
-        unique_together = (('project', 'name'),)
+        unique_together = (('owner', 'project', 'name'),)
 
     def __str__(self):
         return self.name
 
     def natural_key(self):
-        return [self.project.natural_key(), self.name]
+        return [self.owner.natural_key(), self.project.natural_key(), self.name]
     natural_key.dependencies = ['projects.project']

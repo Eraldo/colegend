@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
 
@@ -20,6 +21,13 @@ class LoggableBase(models.Model):
 
 
 class TrackedBase(TimeStampedBase, LoggableBase):
+    class Meta:
+        abstract = True
+
+
+class OwnedBase(models.Model):
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL)
+
     class Meta:
         abstract = True
 
