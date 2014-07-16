@@ -21,6 +21,11 @@ class ProjectListView(StatusFilterMixin, ProjectMixin, ListView):
 class ProjectNewView(ProjectMixin, CreateView):
     success_url = reverse_lazy('projects:project_list')
 
+    def form_valid(self, form):
+        user = self.request.user
+        form.instance.owner = user
+        return super(ProjectNewView, self).form_valid(form)
+
 
 class ProjectShowView(StatusFilterMixin, ProjectMixin, DetailView):
     template_name = "projects/project_show.html"

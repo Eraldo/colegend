@@ -19,6 +19,11 @@ class TagListView(TagMixin, ListView):
 class TagNewView(TagMixin, CreateView):
     success_url = reverse_lazy('tags:tag_list')
 
+    def form_valid(self, form):
+        user = self.request.user
+        form.instance.owner = user
+        return super(TagNewView, self).form_valid(form)
+
 
 class TagShowView(TagMixin, DetailView):
     template_name = "tags/tag_show.html"

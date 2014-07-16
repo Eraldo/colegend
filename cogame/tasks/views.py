@@ -28,6 +28,11 @@ class TaskNewView(TaskMixin, CreateView):
             initial['project'] = project
         return initial
 
+    def form_valid(self, form):
+        user = self.request.user
+        form.instance.owner = user
+        return super(TaskNewView, self).form_valid(form)
+
 
 class TaskShowView(TaskMixin, DetailView):
     template_name = "tasks/task_show.html"

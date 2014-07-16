@@ -18,6 +18,11 @@ class HabitListView(HabitMixin, ListView):
 class HabitNewView(HabitMixin, CreateView):
     success_url = reverse_lazy('habits:habit_list')
 
+    def form_valid(self, form):
+        user = self.request.user
+        form.instance.owner = user
+        return super(HabitNewView, self).form_valid(form)
+
 
 class HabitShowView(HabitMixin, DetailView):
     template_name = "habits/habit_show.html"

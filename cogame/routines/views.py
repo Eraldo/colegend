@@ -9,7 +9,7 @@ __author__ = 'eraldo'
 class RoutineMixin(LoginRequiredMixin):
     model = Routine
     fields = ['name', 'description', 'type', 'tags']
-    
+
 
 class RoutineCheckView(View):
     pass
@@ -23,6 +23,11 @@ class RoutineListView(RoutineMixin, ListView):
 
 class RoutineNewView(RoutineMixin, CreateView):
     success_url = reverse_lazy('routines:routine_list')
+
+    def form_valid(self, form):
+        user = self.request.user
+        form.instance.owner = user
+        return super(RoutineNewView, self).form_valid(form)
 
 
 class RoutineShowView(RoutineMixin, DetailView):
@@ -42,7 +47,7 @@ class RoutineEditView(RoutineMixin, UpdateView):
 
 class RoutineDeleteView(RoutineMixin, DeleteView):
     success_url = reverse_lazy('routines:routine_list')
-    
+
 
 ## special routines
 
@@ -51,11 +56,11 @@ class SpecialRoutineMixin(RoutineMixin):
 
     def get_object(self, queryset=None):
         return Routine.objects.get(name=self.routine_name)
-    
+
 
 class RoutineDailyView(SpecialRoutineMixin, DetailView):
     routine_name = "daily routine"
-    
+
     def get_object(self, queryset=None):
         return Routine.objects.get(name=self.routine_name)
 
