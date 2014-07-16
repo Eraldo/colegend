@@ -6,7 +6,20 @@
     Test
 {% endblock %}
 {% block content %}
-    <h1>test</h1>
+    <h1>tests</h1>
+    <h2>test username</h2>
+    {% if user %}
+        {{ user }}
+    {% endif %}
+    <br/>
+    <h2>test avatar</h2>
+    {% load avatar_tags %}
+    {% if user %}
+        {{ user }}
+        {% avatar user %}
+    {% endif %}
+    <br/>
+    <h2>test modal</h2>
 {#star: {% bootstrap_icon "star" %}#}
 <!-- Button trigger modal -->
 <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
@@ -33,7 +46,7 @@
 </div>
 
 
-
+<h2>test bootstrap elements</h2>
       <div class="page-header">
         <h1>Navbars</h1>
       </div>
