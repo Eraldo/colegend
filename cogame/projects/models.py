@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.db.models.query import QuerySet
 from model_utils.managers import PassThroughManagerMixin
@@ -14,8 +15,7 @@ class ProjectQuerySet(StatusQueryMixin, QuerySet):
 
 
 class ProjectManager(PassThroughManagerMixin, models.Manager):
-    def get_by_natural_key(self, owner, name):
-        return self.get(owner=owner, name=name)
+    pass
 
 
 class Project(AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):
@@ -36,9 +36,4 @@ class Project(AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):
 
     def __str__(self):
         return self.name
-
-    def natural_key(self):
-        return [self.owner.natural_key(), self.name]
-
-    natural_key.dependencies = ['users.user']
 

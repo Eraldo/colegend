@@ -6,8 +6,7 @@ __author__ = 'eraldo'
 
 
 class RoutineManager(models.Manager):
-    def get_by_natural_key(self, owner, name):
-        return self.get(owner=owner, name=name)
+    pass
 
 
 class Routine(AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):
@@ -40,8 +39,3 @@ class Routine(AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):
 
     def __str__(self):
         return self.name
-
-    def natural_key(self):
-        return [self.owner.natural_key(), self.name]
-
-    natural_key.dependencies = ['users.user']

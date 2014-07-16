@@ -15,8 +15,7 @@ class TaskQuerySet(StatusQueryMixin, QuerySet):
 
 
 class TaskManager(PassThroughManagerMixin, models.Manager):
-    def get_by_natural_key(self, owner, project, name):
-        return self.get(owner=owner, project=project, name=name)
+    pass
 
 
 class Task(AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):
@@ -40,8 +39,3 @@ class Task(AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):
 
     def __str__(self):
         return self.name
-
-    def natural_key(self):
-        return [self.owner.natural_key(), self.project.natural_key(), self.name]
-
-    natural_key.dependencies = ['users.user', 'projects.project']

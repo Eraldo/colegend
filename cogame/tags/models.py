@@ -5,8 +5,7 @@ __author__ = 'eraldo'
 
 
 class TagManager(models.Manager):
-    def get_by_natural_key(self, owner, name):
-        return self.get(owner=owner, name=name)
+    pass
 
 
 class Tag(AutoUrlMixin, OwnedBase, TrackedBase, models.Model):
@@ -26,11 +25,6 @@ class Tag(AutoUrlMixin, OwnedBase, TrackedBase, models.Model):
 
     def __str__(self):
         return self.name
-
-    def natural_key(self):
-        return [self.owner.natural_key(), self.name]
-
-    natural_key.dependencies = ['users.user']
 
 
 class TaggableBase(models.Model):

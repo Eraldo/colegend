@@ -13,8 +13,7 @@ class HabitQuerySet(QuerySet):
 
 
 class HabitManager(PassThroughManagerMixin, models.Manager):
-    def get_by_natural_key(self, owner, routine, name):
-        return self.get(owner=owner, routine=routine, name=name)
+    pass
 
 
 class Habit(AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):
@@ -35,8 +34,3 @@ class Habit(AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):
 
     def __str__(self):
         return self.name
-
-    def natural_key(self):
-        return [self.owner.natural_key(), self.routine.natural_key(), self.name]
-
-    natural_key.dependencies = ['users.user', 'routines.routine']

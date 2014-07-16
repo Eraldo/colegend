@@ -4,9 +4,6 @@ __author__ = 'eraldo'
 
 
 class StatusManager(models.Manager):
-    def get_by_natural_key(self, name):
-        return self.get(name=name)
-
     def open(self):
         return self.filter(type=Status.OPEN)
 
@@ -39,9 +36,6 @@ class Status(models.Model):
 
     def __str__(self):
         return self.name
-
-    def natural_key(self):
-        return [self.name]
 
     def open(self):
         return self.type == self.OPEN
