@@ -44,5 +44,11 @@ img#logo {
     display: inline-block;
     max-height: 50px;
 }
+
+#menu a#profile-dropdown {
+    padding-top: 5px;
+    padding-bottom: 0px;
+    /*background-color: red !important;*/
+}
 /* end menu */
 

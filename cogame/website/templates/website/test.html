@@ -15,8 +15,10 @@
     <h2>test avatar</h2>
     {% load avatar_tags %}
     {% if user %}
+        {{ user|has_avatar }}
         {{ user }}
         {% avatar user %}
+        {% avatar_url user %}
     {% endif %}
     <br/>
     <h2>test modal</h2>
