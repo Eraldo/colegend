@@ -23,7 +23,7 @@ class Project(AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):
     A django model representing a project.
     """
     # > owner: User
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100)
 
     description = models.TextField(blank=True)
     status = models.ForeignKey(Status, default=Status.DEFAULT_PK)
