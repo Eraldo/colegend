@@ -9,6 +9,7 @@ __author__ = 'eraldo'
 
 class TagMixin(LoginRequiredMixin):
     model = Tag
+    fields = ['name', 'description']
 
 
 class TagListView(TagMixin, ListView):
