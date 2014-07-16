@@ -338,6 +338,7 @@ LOGIN_URL = "account_login"
 INSTALLED_APPS += (
     'avatar',
 )
+AVATAR_STORAGE_DIR = "avatars"
 ########## END USER AVATARS
 
 
