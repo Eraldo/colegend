@@ -7,20 +7,20 @@ __author__ = 'eraldo'
 
 class HabitInline(InlineMixin, admin.TabularInline):
     model = Habit
-    fields = ['name', 'tags', 'change_link']
+    fields = ['name', 'tags', 'owner', 'change_link']
     extra = 0
     readonly_fields = ['change_link']
 
 
 class HabitAdmin(admin.ModelAdmin):
-    list_display = ['name', 'routine']
+    list_display = ['name', 'routine', 'owner']
     search_fields = ['name', 'description']
-    list_filter = ['tags']
+    list_filter = ['tags', 'owner']
     filter_horizontal = ['tags']
     readonly_fields = ['creation_date', 'modification_date', 'history']
 
     fieldsets = [
-        (None, {'fields': ['routine']}),
+        (None, {'fields': ['owner', 'routine']}),
         (None, {'fields': ['name', 'description']}),
         (None, {'fields': ['tags']}),
         ('history', {'fields': ['creation_date', 'modification_date', 'history'], 'classes': ['collapse']}),
