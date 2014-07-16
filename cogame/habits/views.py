@@ -18,6 +18,13 @@ class HabitListView(HabitMixin, ListView):
 class HabitNewView(HabitMixin, CreateView):
     success_url = reverse_lazy('habits:habit_list')
 
+    def get_initial(self):
+        initial = super(HabitNewView, self).get_initial()
+        routine = self.request.GET.get('routine')
+        if routine:
+            initial['routine'] = routine
+        return initial
+
     def form_valid(self, form):
         user = self.request.user
         form.instance.owner = user
