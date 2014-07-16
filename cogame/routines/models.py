@@ -42,6 +42,6 @@ class Routine(AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):
         return self.name
 
     def natural_key(self):
-        return [self.owner, self.name]
+        return [self.owner.natural_key(), self.name]
 
     natural_key.dependencies = ['users.user']
