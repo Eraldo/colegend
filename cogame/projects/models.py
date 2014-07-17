@@ -32,7 +32,7 @@ class Project(AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):
     objects = ProjectManager.for_queryset_class(ProjectQuerySet)()
 
     class Meta:
-        unique_together = (('owner', 'name'),)
+        unique_together = ('owner', 'name')
 
     def __str__(self):
         return self.name

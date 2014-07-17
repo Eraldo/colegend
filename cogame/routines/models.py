@@ -41,7 +41,7 @@ class Routine(AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):
 
     class Meta:
         ordering = ["name"]
-        unique_together = (('owner', 'name'),)
+        unique_together = ('owner', 'name')
 
     def __str__(self):
         return self.name

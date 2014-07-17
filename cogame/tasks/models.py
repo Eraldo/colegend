@@ -1,7 +1,8 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models.query import QuerySet
 from model_utils.managers import PassThroughManagerMixin
-from lib.models import TrackedBase, AutoUrlMixin, OwnedBase, OwnedQueryMixin
+from lib.models import TrackedBase, AutoUrlMixin, OwnedBase, OwnedQueryMixin, ValidateModelMixin
 from projects.models import Project
 from status.models import Status
 from status.utils import StatusQueryMixin
@@ -18,7 +19,7 @@ class TaskManager(PassThroughManagerMixin, models.Manager):
     pass
 
 
-class Task(AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):
+class Task(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):
     """
     A django model representing a task.
     """
@@ -39,3 +40,9 @@ class Task(AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):
 
     def __str__(self):
         return self.name
+
+    def clean(self):
+        super(Task, self).clean()
+        # prevent duplicate names if the project was not set
+        if not self.project and Task.objects.filter(project__isnull=True, name=self.name).exists():
+            raise ValidationError("A Task with this name and without a project exists already.")
