@@ -6,7 +6,8 @@ __author__ = 'eraldo'
 
 
 class RoutineManager(models.Manager):
-    pass
+    def owned_by(self, user):
+        return self.filter(owner=user)
 
 
 class Routine(AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):

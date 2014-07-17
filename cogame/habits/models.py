@@ -13,7 +13,8 @@ class HabitQuerySet(QuerySet):
 
 
 class HabitManager(PassThroughManagerMixin, models.Manager):
-    pass
+    def owned_by(self, user):
+        return self.filter(owner=user)
 
 
 class Habit(AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):

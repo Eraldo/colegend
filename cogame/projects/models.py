@@ -15,7 +15,8 @@ class ProjectQuerySet(StatusQueryMixin, QuerySet):
 
 
 class ProjectManager(PassThroughManagerMixin, models.Manager):
-    pass
+    def owned_by(self, user):
+        return self.filter(owner=user)
 
 
 class Project(AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):

@@ -5,7 +5,8 @@ __author__ = 'eraldo'
 
 
 class TagManager(models.Manager):
-    pass
+    def owned_by(self, user):
+        return self.filter(owner=user)
 
 
 class Tag(AutoUrlMixin, OwnedBase, TrackedBase, models.Model):
