@@ -8,7 +8,7 @@ __author__ = 'eraldo'
 
 class UserAdmin(AuthUserAdmin):
     add_form = UserCreationForm
-    form = UserCreationForm
+    # form = UserCreationForm
 
 
 admin.site.register(User, UserAdmin)
