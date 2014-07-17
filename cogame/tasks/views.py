@@ -1,15 +1,24 @@
 from braces.views import LoginRequiredMixin
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
+from lib.views import OwnedItemsMixin
 from status.utils import StatusFilterMixin
 from tasks.models import Task
 
 __author__ = 'eraldo'
 
 
-class TaskMixin(LoginRequiredMixin):
+class TaskMixin(LoginRequiredMixin, OwnedItemsMixin):
     model = Task
     fields = ['project', 'name', 'description', 'status', 'date', 'deadline', 'tags']
+
+    def get_form(self, form_class):
+        form = super(TaskMixin, self).get_form(form_class)
+        # limit project choices to owned projects
+        projects = form.fields['project'].queryset
+        form.fields['project'].queryset = projects.owned_by(self.request.user)
+        return form
+
 
 
 class TaskListView(StatusFilterMixin, TaskMixin, ListView):

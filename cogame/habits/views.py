@@ -2,13 +2,21 @@ from braces.views import LoginRequiredMixin
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from habits.models import Habit
+from lib.views import OwnedItemsMixin
 
 __author__ = 'eraldo'
 
 
-class HabitMixin(LoginRequiredMixin):
+class HabitMixin(LoginRequiredMixin, OwnedItemsMixin):
     model = Habit
     fields = ['routine', 'name', 'tags']
+
+    def get_form(self, form_class):
+        form = super(HabitMixin, self).get_form(form_class)
+        # limit routine choices to owned routines
+        routines = form.fields['routine'].queryset
+        form.fields['routine'].queryset = routines.owned_by(self.request.user)
+        return form
 
 
 class HabitListView(HabitMixin, ListView):

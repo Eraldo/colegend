@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models.query import QuerySet
 from model_utils.managers import PassThroughManagerMixin
-from lib.models import TrackedBase, AutoUrlMixin, OwnedBase
+from lib.models import TrackedBase, AutoUrlMixin, OwnedBase, OwnedQueryMixin
 from projects.models import Project
 from status.models import Status
 from status.utils import StatusQueryMixin
@@ -10,13 +10,12 @@ from tags.models import TaggableBase
 __author__ = 'eraldo'
 
 
-class TaskQuerySet(StatusQueryMixin, QuerySet):
+class TaskQuerySet(StatusQueryMixin, OwnedQueryMixin, QuerySet):
     pass
 
 
 class TaskManager(PassThroughManagerMixin, models.Manager):
-    def owned_by(self, user):
-        return self.filter(owner=user)
+    pass
 
 
 class Task(AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):

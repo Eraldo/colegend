@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.db.models.query import QuerySet
 from model_utils.managers import PassThroughManagerMixin
-from lib.models import TrackedBase, AutoUrlMixin, OwnedBase
+from lib.models import TrackedBase, AutoUrlMixin, OwnedBase, OwnedQueryMixin
 from status.models import Status
 from status.utils import StatusQueryMixin
 from tags.models import TaggableBase
@@ -10,13 +10,12 @@ from tags.models import TaggableBase
 __author__ = 'eraldo'
 
 
-class ProjectQuerySet(StatusQueryMixin, QuerySet):
+class ProjectQuerySet(StatusQueryMixin, OwnedQueryMixin, QuerySet):
     pass
 
 
 class ProjectManager(PassThroughManagerMixin, models.Manager):
-    def owned_by(self, user):
-        return self.filter(owner=user)
+    pass
 
 
 class Project(AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):

@@ -1,13 +1,14 @@
 from braces.views import LoginRequiredMixin
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
+from lib.views import OwnedItemsMixin
 from projects.models import Project
 from status.utils import StatusFilterMixin
 
 __author__ = 'eraldo'
 
 
-class ProjectMixin(LoginRequiredMixin):
+class ProjectMixin(LoginRequiredMixin, OwnedItemsMixin):
     model = Project
     fields = ['name', 'description', 'status', 'deadline', 'tags']
 

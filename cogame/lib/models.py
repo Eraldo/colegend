@@ -25,6 +25,11 @@ class TrackedBase(TimeStampedBase, LoggableBase):
         abstract = True
 
 
+class OwnedQueryMixin:
+    def owned_by(self, user):
+        return self.filter(owner=user)
+
+
 class OwnedBase(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL)
 

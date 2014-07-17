@@ -1,12 +1,13 @@
 from braces.views import LoginRequiredMixin
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import DetailView, View, ListView, CreateView, UpdateView, DeleteView
+from lib.views import OwnedItemsMixin
 from routines.models import Routine
 
 __author__ = 'eraldo'
 
 
-class RoutineMixin(LoginRequiredMixin):
+class RoutineMixin(LoginRequiredMixin, OwnedItemsMixin):
     model = Routine
     fields = ['name', 'description', 'type', 'tags']
 

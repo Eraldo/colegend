@@ -1,3 +1,6 @@
-from django.shortcuts import render
+__author__ = 'eraldo'
 
-# Create your views here.
+
+class OwnedItemsMixin:
+    def get_queryset(self):
+        return super(OwnedItemsMixin, self).get_queryset().owned_by(self.request.user)

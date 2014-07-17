@@ -1,12 +1,17 @@
 from django.db import models
-from lib.models import AutoUrlMixin, OwnedBase, TrackedBase
+from django.db.models.query import QuerySet
+from model_utils.managers import PassThroughManager
+from lib.models import AutoUrlMixin, OwnedBase, TrackedBase, OwnedQueryMixin
 
 __author__ = 'eraldo'
 
 
-class TagManager(models.Manager):
-    def owned_by(self, user):
-        return self.filter(owner=user)
+class TagQuerySet(OwnedQueryMixin, QuerySet):
+    pass
+
+
+class TagManager(PassThroughManager, models.Manager):
+    pass
 
 
 class Tag(AutoUrlMixin, OwnedBase, TrackedBase, models.Model):
@@ -18,7 +23,7 @@ class Tag(AutoUrlMixin, OwnedBase, TrackedBase, models.Model):
 
     description = models.TextField(blank=True)
 
-    objects = TagManager()
+    objects = TagManager.for_queryset_class(TagQuerySet)()
 
     class Meta:
         ordering = ["name"]
