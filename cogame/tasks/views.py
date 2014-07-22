@@ -2,7 +2,7 @@ from braces.views import LoginRequiredMixin
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from lib.views import OwnedItemsMixin
-from status.utils import StatusFilterMixin
+from statuses.utils import StatusFilterMixin
 from tasks.models import Task
 
 __author__ = 'eraldo'

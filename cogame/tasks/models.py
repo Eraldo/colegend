@@ -4,8 +4,8 @@ from django.db.models.query import QuerySet
 from model_utils.managers import PassThroughManagerMixin
 from lib.models import TrackedBase, AutoUrlMixin, OwnedBase, OwnedQueryMixin, ValidateModelMixin
 from projects.models import Project
-from status.models import Status
-from status.utils import StatusQueryMixin
+from statuses.models import Status
+from statuses.utils import StatusQueryMixin
 from tags.models import TaggableBase
 
 __author__ = 'eraldo'

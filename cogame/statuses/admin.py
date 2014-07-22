@@ -1,5 +1,5 @@
 from django.contrib import admin
-from status.models import Status
+from statuses.models import Status
 
 __author__ = 'Eraldo Helal'
 

@@ -233,7 +233,7 @@ PROJECT_APPS = (
     'routines',
     'habits',
     'tags',
-    'status',
+    'statuses',
     # common
     'lib',
 )

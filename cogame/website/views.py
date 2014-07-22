@@ -5,7 +5,7 @@ from django.views.generic import TemplateView
 from habits.models import Habit
 from projects.models import Project
 from routines.models import Routine
-from status.models import Status
+from statuses.models import Status
 from tags.models import Tag
 from tasks.models import Task
 

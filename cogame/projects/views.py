@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from lib.views import OwnedItemsMixin
 from projects.models import Project
-from status.utils import StatusFilterMixin
+from statuses.utils import StatusFilterMixin
 
 __author__ = 'eraldo'
 
