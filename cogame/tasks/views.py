@@ -20,7 +20,6 @@ class TaskMixin(LoginRequiredMixin, OwnedItemsMixin):
         return form
 
 
-
 class TaskListView(StatusFilterMixin, TaskMixin, ListView):
     def get_queryset(self):
         queryset = super(TaskListView, self).get_queryset()
