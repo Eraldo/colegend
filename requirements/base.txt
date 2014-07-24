@@ -1,6 +1,9 @@
 # Framework
 django==1.6.5
 
+# Webserver
+gunicorn==19.0.0
+
 # Configuration
 django-secure==1.0
 
