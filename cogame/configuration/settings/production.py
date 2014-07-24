@@ -62,6 +62,7 @@ SEND_BROKEN_LINK_EMAILS = True
 ########## HOST CONFIGURATION
 # See: https://docs.djangoproject.com/en/1.5/releases/1.5/#allowed-hosts-required-in-production
 ALLOWED_HOSTS = get_setting('ALLOWED_HOSTS', default=[])
+USE_X_FORWARDED_HOST = get_setting('ALLOWED_HOSTS', default=False, conversion_type=bool)
 ########## END HOST CONFIGURATION
 
 
