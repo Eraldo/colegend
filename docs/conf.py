@@ -24,7 +24,7 @@ import os
 # django setup
 import sys
 import os
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'cogame'))
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'colegend'))
 os.environ['DJANGO_SETTINGS_MODULE'] = 'configuration.settings.documentation'
 from django.conf import settings
 
@@ -55,7 +55,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'CoGame'
+project = 'Colegend'
 copyright = '2014, Eraldo Helal'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -188,7 +188,7 @@ html_static_path = ['_static']
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'CoGamedoc'
+htmlhelp_basename = 'Colegenddoc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -208,7 +208,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('index', 'CoGame.tex', 'CoGame Documentation',
+  ('index', 'Colegend.tex', 'Colegend Documentation',
    'Eraldo Helal', 'manual'),
 ]
 
@@ -238,7 +238,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'cogame', 'CoGame Documentation',
+    ('index', 'colegend', 'Colegend Documentation',
      ['Eraldo Helal'], 1)
 ]
 
@@ -252,8 +252,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'CoGame', 'CoGame Documentation',
-   'Eraldo Helal', 'CoGame', 'One line description of project.',
+  ('index', 'Colegend', 'Colegend Documentation',
+   'Eraldo Helal', 'Colegend', 'One line description of project.',
    'Miscellaneous'),
 ]
 

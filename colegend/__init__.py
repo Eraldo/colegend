@@ -6,7 +6,7 @@ from django.utils.version import get_version
 # https://docs.djangoproject.com/en/1.6/internals/release-process/
 VERSION = (0, 1, 0, 'alpha', 1)
 
-__title__ = 'CoGame Project'
+__title__ = 'CoLegend Project'
 # Returns a PEP 386-compliant version number.
 __version__ = get_version(VERSION)
 __author__ = 'Eraldo Helal'

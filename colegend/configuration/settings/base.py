@@ -17,7 +17,7 @@ DJANGO_ROOT = dirname(CONFIG_ROOT)
 PROJECT_ROOT = dirname(DJANGO_ROOT)
 
 # project name:
-PROJECT_NAME = "CoGame"
+PROJECT_NAME = "CoLegend"
 
 # main app name:
 MAIN_APP_NAME = basename(CONFIG_ROOT)
