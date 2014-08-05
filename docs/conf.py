@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# CoGame documentation build configuration file, created by
+# CoLegend documentation build configuration file, created by
 # sphinx-quickstart on Mon Jun 23 18:52:10 2014.
 #
 # This file is execfile()d with the current directory set to its

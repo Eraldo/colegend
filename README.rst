@@ -1,8 +1,8 @@
 ==============
-cogame-project
+colegend-project
 ==============
 
-CoGame is a playful online peer-2-peer co-coaching platform.
+CoLegend is a playful online peer-2-peer co-coaching platform.
 
 It provides a guided journey to gain an overview over the personal development jungle.
 
