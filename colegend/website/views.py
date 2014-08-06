@@ -2,6 +2,7 @@ from braces.views import LoginRequiredMixin
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.views.generic import TemplateView
+from features.models import Feature
 from habits.models import Habit
 from projects.models import Project
 from routines.models import Routine
@@ -10,6 +11,19 @@ from tags.models import Tag
 from tasks.models import Task
 
 __author__ = 'eraldo'
+
+
+class AboutView(TemplateView):
+    template_name = "website/about.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(AboutView, self).get_context_data(**kwargs)
+        context['feature'] = Feature.objects.first()
+        return context
+
+
+class HomeView(LoginRequiredMixin, TemplateView):
+    template_name = "website/home.html"
 
 
 class TestView(TemplateView):

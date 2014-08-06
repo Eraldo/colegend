@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+{% block menu %}{% endblock %}
+
+{% block title %}
+    About
+{% endblock %}
+
+{% block content %}
+    <div class="container"
+         style="margin-top: 40px;">
+        <div class="text-center">
+            <img src="http://placehold.it/400x150&text=CoLegend" alt="CoLegend"
+                 class="center-block img-responsive">
+
+            <h3><span style="display:inline-block;">Be Awesome,</span> <span style="display:inline-block;">Love with an Open Heart</span>
+                <span style="display:inline-block;">and Live a Legendary Life</span> <span
+                        style="display:inline-block;">..Today!</span>
+            </h3>
+
+            <p><a class="btn btn-primary btn-lg" role="button">Let's do it!</a></p>
+            <hr/>
+            <div>
+                <img class="img-responsive img-rounded center-block"
+                     src="https://scontent-b-fra.xx.fbcdn.net/hphotos-xpa1/t31.0-8/1014835_10202029731683519_1779905903_o.jpg"
+                     alt="Cover"/>
+            </div>
+        </div>
+        <br/>
+
+        <div class="well lead text-center">
+            <h1>What is CoLegend?
+                Where am I?</h1>
+
+            <p>
+                It is a Socially-Intelligent Life-Management Platform.<br/>
+                But that are just words..<br/>
+                So, why does it exist?<br/>
+            <ol>
+                <li>To help you find out what you truly and deeply want.</li>
+                <li>To support you on that path and help you get there.</li>
+                (and make the journey an awesome one)
+            </ol>
+            According to an old legend, some people are chosen to live an awesome life.
+            They break out of the typical
+            life and transform into ..well.. legends.
+            The interesting question here is:
+            Are you one of them?
+            - Well, let us find out.
+            </p>
+        </div>
+
+        <div class="well text-center">
+            <h1>Special Features</h1>
+
+            <p>
+                The platform has 3 Roles..
+                - Coach
+                - Manager
+                - Motivator
+            </p>
+
+        </div>
+
+        <div class="well text-center">
+            <h1>Alpha Version</h1>
+
+            <p>
+                We are in early alpha stage.. so things might not work the way you want them to yet.<br>
+                There is the magical work: "yet".<br>
+                Great news: You can help us get there.<br>
+            </p>
+
+            <p>
+                Newest feature: <a href="{% url "features:feature_list" %}">{{ feature }}</a>.
+            </p>
+
+            <p>
+                Feel free to tell me what is wrong.. or what you want. ;)<br/>
+                <a href="mailto:eraldo@colegend.org?Subject=[CoLegend]%20Feedback" target="_top">
+                    >> Feedback</a>
+            </p>
+        </div>
+
+    </div>
+{% endblock %}
