@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 
+{% block extra_head %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}website/css/dialogue.css"/>
+{% endblock %}
+
 {% block title %}
     Test
 {% endblock %}
@@ -11,18 +16,62 @@
 	border-top: 10px solid transparent; border-bottom: 10px solid transparent;"></div>
 
     <div class="container-fluid">
-        <div class="row">
+        <div class="row npc">
             <div class="col-sm-11">
                 <div class="avatar pull-left">
                     <img src="http://placehold.it/100x100&text=TESTER" alt="Greeter"
                          class="img-thumbnail">
                 </div>
-                <div class="speech-bubble well well-lg" style="font-size: large; margin-left: 120px;">
-                    <div class="speech-bubble-arrow arrow-left pull-left" style="position: relative; left: -35px; margin-top: 10px; width: 0; height: 0; border-right: 10px solid #e3e3e3;
-	border-top: 10px solid transparent; border-bottom: 10px solid transparent;"></div>
-
-                    Welcome Spirit!<br/>
-                    Do I know you?
+                <div class="speech-bubble-arrow speech-bubble-arrow-left pull-left"></div>
+                <div class="speech-bubble well well-lg">
+                    Sample Talk Text line 1<br/>
+                    Sample Talk Text line 2 Question?
+                </div>
+            </div>
+        </div>
+        <div class="row speech-answers">
+            <div class="col-sm-offset-1">
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-primary">
+                        <div class="speech-bubble-arrow-right pull-right"></div>
+                        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                            <h3 class="panel-title">
+                                Answer A ..
+                            </h3>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                body
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-primary">
+                        <div class="speech-bubble-arrow-right pull-right"></div>
+                        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                            <h3 class="panel-title">
+                                Answer B ..
+                            </h3>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                body
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-primary">
+                        <div class="speech-bubble-arrow-right pull-right"></div>
+                        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion"
+                             href="#collapseThree">
+                            <h3 class="panel-title">
+                                Answer C ..
+                            </h3>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                body
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

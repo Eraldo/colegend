@@ -1,0 +1,30 @@
+.speech-bubble-arrow {
+    width: 0;
+    height: 0;
+}
+
+.speech-bubble-arrow-left {
+    margin-top: 10px;
+    border-right: 10px solid #e3e3e3;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+}
+
+.speech-bubble-arrow-right {
+    position: absolute;
+    right: 5px;
+    margin-top: 5px;
+    border-left: 10px solid #428bca;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+}
+
+.speech-bubble {
+    position: relative;
+    font-size: large;
+    margin-left: 120px;
+}
+
+.speech-answers .panel-heading {
+    cursor: pointer;
+}
