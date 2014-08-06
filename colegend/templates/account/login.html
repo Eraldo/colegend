@@ -1,0 +1,77 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load account %}
+{% load socialaccount %}
+{% load url from future %}
+{% load bootstrap3 %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+    <div id="signin" class="container" style="margin-top: 10px;">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+
+{#                <h2>{% trans "Sign In" %}</h2>#}
+{#                <hr/>#}
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <div class="avatar pull-left">
+                                <img src="http://placehold.it/100x100&text=GREETER" alt="Greeter"
+                                     class="img-thumbnail">
+                            </div>
+                            <div class="speech well well-lg" style="font-size: large; margin-left: 120px;">
+                                Welcome Spirit!<br/>
+                                Do I know you?
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+
+                    <div class="row">
+                        <div class="col-sm-offset-1">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Sure, I am ..</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <form class="login" method="POST" action="{% url 'account_login' %}">
+                                        {% csrf_token %}
+                                        {% bootstrap_form form layout='inline' %}
+                                        {% if redirect_field_value %}
+                                            <input type="hidden" name="{{ redirect_field_name }}"
+                                                   value="{{ redirect_field_value }}"/>
+                                        {% endif %}
+                                        <a class="button secondaryAction pull-right"
+                                           href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+                                        <button class="btn btn-primary" type="submit">{% trans "Answer" %}</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">They will tell you who I am ..</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <a href="{% provider_login_url "google" %}" class="btn btn-primary">Google</a>
+                                    <a href="{% provider_login_url "facebook" %}" class="btn btn-primary">Facebook</a>
+                                </div>
+                            </div>
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Nop, I am new here ..</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <a href="{{ signup_url }}" class="btn btn-primary">How can I join?</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
