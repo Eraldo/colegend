@@ -222,7 +222,6 @@ PROJECT_APPS = (
     'users',  # custom users app
     # user interface
     'website',
-    'home',
     'features',
     'commands',  # command text interface
     # styling

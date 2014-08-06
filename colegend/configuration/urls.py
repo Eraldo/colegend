@@ -13,7 +13,6 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     # main urls
-    url(r'', include('home.urls')),
     url(r'', include('website.urls')),
     url(r'^projects/', include('projects.urls', namespace="projects")),
     url(r'^tasks/', include('tasks.urls', namespace="tasks")),
