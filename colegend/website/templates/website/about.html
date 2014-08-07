@@ -11,7 +11,7 @@
     <div class="container"
          style="margin-top: 40px;">
         <div class="text-center">
-            <img src="http://placehold.it/400x150&text=CoLegend" alt="CoLegend"
+            <img src="{{ STATIC_URL }}website/images/CoLegendLogo.png" alt="CoLegend"
                  class="center-block img-responsive">
 
             <h3><span style="display:inline-block;">Be Awesome,</span> <span style="display:inline-block;">Love with an Open Heart</span>
@@ -19,7 +19,7 @@
                         style="display:inline-block;">..Today!</span>
             </h3>
 
-            <p><a class="btn btn-primary btn-lg" role="button">Let's do it!</a></p>
+            <p><a href="{% url "account_login" %}" class="btn btn-primary btn-lg" role="button">Let's do it!</a></p>
             <hr/>
             <div class="container">
                 <div class="embed-responsive embed-responsive-16by9 col-xs-12">
