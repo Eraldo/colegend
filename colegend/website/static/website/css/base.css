@@ -43,7 +43,9 @@ body.body {
 
 img#logo {
     display: inline-block;
-    max-height: 50px;
+    max-height: 40px;
+    padding-top: 10px;
+    /*padding-bottom: 5px;*/
 }
 
 #menu a#profile-dropdown {
