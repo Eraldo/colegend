@@ -58,7 +58,8 @@
 
             <div class="row">
                 <div class="col-sm-4">
-                    <img class="img-circle" src="http://placehold.it/140x140&text=Coach" alt="Coach"/>
+                    <img class="img-circle" src="{{ STATIC_URL }}website/images/coach_140x140.jpg" alt="Coach"/>
+{#                    <img class="img-circle" src="http://placehold.it/140x140&text=Coach" alt="Coach"/>#}
 
                     <h2>Coach</h2>
 
@@ -68,11 +69,12 @@
                     </p>
 
                     <p>
-                        <a class="btn btn-default" href="#" role="button">View details »</a>
+                        <a class="btn btn-default" href="#" role="button" data-toggle="modal" data-target="#coach-info">View details »</a>
+                        {% include "website/_coach_modal.html" with name="coach-info" %}
                     </p>
                 </div>
                 <div class="col-sm-4">
-                    <img class="img-circle" src="http://placehold.it/140x140&text=Manager" alt="Manager"/>
+                    <img class="img-circle" src="{{ STATIC_URL }}website/images/manager_140x140.jpg" alt="Manager"/>
 
                     <h2>Manager</h2>
 
@@ -82,11 +84,12 @@
                     </p>
 
                     <p>
-                        <a class="btn btn-default" href="#" role="button">View details »</a>
+                        <a class="btn btn-default" href="#" role="button" data-toggle="modal" data-target="#manager-info">View details »</a>
+                        {% include "website/_manager_modal.html" with name="manager-info" %}
                     </p>
                 </div>
                 <div class="col-sm-4">
-                    <img class="img-circle" src="http://placehold.it/140x140&text=Motivator" alt="Motivator"/>
+                    <img class="img-circle" src="{{ STATIC_URL }}website/images/motivator_140x140.jpg" alt="Motivator"/>
 
                     <h2>Motivator</h2>
 
@@ -96,7 +99,8 @@
                     </p>
 
                     <p>
-                        <a class="btn btn-default" href="#" role="button">View details »</a>
+                        <a class="btn btn-default" href="#" role="button" data-toggle="modal" data-target="#motivator-info">View details »</a>
+                        {% include "website/_motivator_modal.html" with name="motivator-info" %}
                     </p>
                 </div>
             </div>

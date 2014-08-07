@@ -1,6 +1,7 @@
 from braces.views import LoginRequiredMixin
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
+from django.core.urlresolvers import reverse_lazy
 from django.views.generic import TemplateView
 from features.models import Feature
 from habits.models import Habit
@@ -24,6 +25,8 @@ class AboutView(TemplateView):
 
 class HomeView(LoginRequiredMixin, TemplateView):
     template_name = "website/home.html"
+
+    login_url = reverse_lazy('about')
 
 
 class TestView(TemplateView):
