@@ -21,10 +21,11 @@
 
             <p><a class="btn btn-primary btn-lg" role="button">Let's do it!</a></p>
             <hr/>
-            <div>
-                <img class="img-responsive img-rounded center-block"
-                     src="https://scontent-b-fra.xx.fbcdn.net/hphotos-xpa1/t31.0-8/1014835_10202029731683519_1779905903_o.jpg"
-                     alt="Cover"/>
+            <div class="container">
+                <div class="embed-responsive embed-responsive-16by9 col-xs-12">
+                    <iframe class="embed-responsive-item" allowfullscreen
+                            src="//www.youtube.com/embed/enNpHIV2Ys8"></iframe>
+                </div>
             </div>
         </div>
         <br/>
@@ -47,20 +48,58 @@
             life and transform into ..well.. legends.
             The interesting question here is:
             Are you one of them?
-            - Well, let us find out.
+            - Well, let us find it out.<br/>
+            <a class="btn btn-primary btn-lg" role="button">Explore</a>
             </p>
         </div>
 
-        <div class="well text-center">
+        <div class="well text-center lead">
             <h1>Special Features</h1>
 
-            <p>
-                The platform has 3 Roles..
-                - Coach
-                - Manager
-                - Motivator
-            </p>
+            <div class="row">
+                <div class="col-sm-4">
+                    <img class="img-circle" src="http://placehold.it/140x140&text=Coach" alt="Coach"/>
 
+                    <h2>Coach</h2>
+
+                    <p>
+                        Helps you uncover your deep desires and explore your legendary <b style="display:inline-block;">life
+                        vision</b>.
+                    </p>
+
+                    <p>
+                        <a class="btn btn-default" href="#" role="button">View details »</a>
+                    </p>
+                </div>
+                <div class="col-sm-4">
+                    <img class="img-circle" src="http://placehold.it/140x140&text=Manager" alt="Manager"/>
+
+                    <h2>Manager</h2>
+
+                    <p>
+                        Keeps track of your projects and tasks so you always now your <b style="display: inline-block">next
+                        steps</b>.
+                    </p>
+
+                    <p>
+                        <a class="btn btn-default" href="#" role="button">View details »</a>
+                    </p>
+                </div>
+                <div class="col-sm-4">
+                    <img class="img-circle" src="http://placehold.it/140x140&text=Motivator" alt="Motivator"/>
+
+                    <h2>Motivator</h2>
+
+                    <p>
+                        Knows how to challenge and surprise you while keeping a fun <b style="display: inline-block">playful
+                        attitude</b>.
+                    </p>
+
+                    <p>
+                        <a class="btn btn-default" href="#" role="button">View details »</a>
+                    </p>
+                </div>
+            </div>
         </div>
 
         <div class="well text-center">
@@ -84,4 +123,16 @@
         </div>
 
     </div>
+{% endblock %}
+
+{% block body_scripts %}
+    {{ block.super }}
+    <script type="text/javascript">
+        $('#intro').on('hidden.bs.modal', function () {
+            $('#intro iframe').removeAttr('src');
+        })
+        $('#intro').on('shown.bs.modal', function () {
+            $('#intro iframe').attr('src', "//www.youtube.com/embed/enNpHIV2Ys8")
+        })
+    </script>
 {% endblock %}
