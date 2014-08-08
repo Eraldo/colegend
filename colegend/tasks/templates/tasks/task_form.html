@@ -1,10 +1,7 @@
 {% extends 'base.html' %}
-{% load bootstrap3 %}
+{% load crispy_forms_tags %}
 
 {% block content %}
     <legend>{% if object %}edit task{% else %}new task{% endif %}</legend>
-    <form method="post">{% csrf_token %}
-        {% bootstrap_form form %}
-        {% bootstrap_button "save" button_type="submit" icon="floppy-saved" %}
-    </form>
+    {% crispy form %}
 {% endblock %}

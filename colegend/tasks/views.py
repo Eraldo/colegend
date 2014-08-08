@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from lib.views import OwnedItemsMixin
 from statuses.utils import StatusFilterMixin
+from tasks.forms import TaskForm
 from tasks.models import Task
 
 __author__ = 'eraldo'
@@ -10,7 +11,7 @@ __author__ = 'eraldo'
 
 class TaskMixin(LoginRequiredMixin, OwnedItemsMixin):
     model = Task
-    fields = ['project', 'name', 'description', 'status', 'date', 'deadline', 'tags']
+    form_class = TaskForm
 
     def get_form(self, form_class):
         form = super(TaskMixin, self).get_form(form_class)
