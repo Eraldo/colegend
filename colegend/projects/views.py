@@ -2,6 +2,7 @@ from braces.views import LoginRequiredMixin
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from lib.views import OwnedItemsMixin
+from projects.forms import ProjectForm
 from projects.models import Project
 from statuses.utils import StatusFilterMixin
 
@@ -10,7 +11,7 @@ __author__ = 'eraldo'
 
 class ProjectMixin(LoginRequiredMixin, OwnedItemsMixin):
     model = Project
-    fields = ['name', 'description', 'status', 'deadline', 'tags']
+    form_class = ProjectForm
 
 
 class ProjectListView(StatusFilterMixin, ProjectMixin, ListView):
