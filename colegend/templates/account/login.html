@@ -4,11 +4,17 @@
 {% load account %}
 {% load socialaccount %}
 {% load url from future %}
-{% load bootstrap3 %}
+{% load crispy_forms_tags %}
 
 {% block extra_head %}
     {{ block.super }}
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}website/css/dialogue.css"/>
+    <style>
+        .control-label {
+            display: none;
+        }
+    </style>
+
 {% endblock %}
 
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
@@ -46,7 +52,7 @@
                                         <div class="panel-body">
                                             <form class="login" method="POST" action="{% url 'account_login' %}">
                                                 {% csrf_token %}
-                                                {% bootstrap_form form layout='inline' %}
+                                                {{ form|crispy }}
                                                 {% if redirect_field_value %}
                                                     <input type="hidden" name="{{ redirect_field_name }}"
                                                            value="{{ redirect_field_value }}"/>
