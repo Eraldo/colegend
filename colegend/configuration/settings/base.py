@@ -226,6 +226,8 @@ PROJECT_APPS = (
     'commands',  # command text interface
     # styling
     'bootstrap3',
+    'crispy_forms',
+    'floppyforms',
     # data
     'projects',
     'tasks',
@@ -355,6 +357,13 @@ BOOTSTRAP3 = {
     'include_jquery': True,
 }
 ########## END BOOTSTRAP3 CONFIGURATION
+
+
+########## CRISPY-FORMS CONFIGURATION
+# See: http://django-crispy-forms.readthedocs.org/en/latest/install.html#template-packs
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+CRISPY_FAIL_SILENTLY = not DEBUG
+########## END CRISPY-FORMS CONFIGURATION
 
 
 ########## DJANGOSECURE CONFIGURATION

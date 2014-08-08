@@ -9,6 +9,8 @@ django-secure==1.0
 
 # Forms
 django-braces==1.4.0
+django-crispy-forms==1.4.0
+django-floppyforms==1.2.0
 
 # Models
 South==0.8.4 # database migrations
