@@ -12,5 +12,4 @@ class TaskForm(ModelForm):
         fields = ['project', 'name', 'description', 'status', 'date', 'deadline', 'tags']
 
     helper = FormHelper()
-    helper.form_method = 'POST'
     helper.add_input(Submit('save', 'Save'))

@@ -13,5 +13,4 @@ class TagForm(ModelForm):
         fields = ['name', 'description']
 
     helper = FormHelper()
-    helper.form_method = 'POST'
     helper.add_input(Submit('save', 'Save'))

@@ -12,5 +12,4 @@ class ProjectForm(ModelForm):
         fields = ['name', 'description', 'status', 'deadline', 'tags']
 
     helper = FormHelper()
-    helper.form_method = 'POST'
     helper.add_input(Submit('save', 'Save'))
