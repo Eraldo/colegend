@@ -17,7 +17,6 @@ class TagAdmin(admin.ModelAdmin):
         (None, {'fields': ['name', 'description']}),
         ('history', {'fields': ['creation_date', 'modification_date', 'history'], 'classes': ['collapse']}),
     ]
-    # TODO: inlines = [TaskInline, etc]
 
 
 admin.site.register(Tag, TagAdmin)
