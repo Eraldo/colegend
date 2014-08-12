@@ -6,4 +6,8 @@
 <h1 id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:_('CoLegend administration') }}</a></h1>
 {% endblock %}
 
+{% block extrahead %}
+    <link rel="shortcut icon" href="{{ STATIC_URL }}website/images/favicon_red.ico">
+{% endblock %}
+
 {% block nav-global %}{% endblock %}
