@@ -37,6 +37,7 @@ def menu(request):
             MenuItem("contact", url="home", icon="envelope"),
         ],
         'experimental': [
+            MenuItem("visions", url="visions:vision_list", icon="eye-open"),
             MenuItem("routines", url="routines:routine_list", icon="asterisk"),
             MenuItem("habits", url="habits:habit_list", icon="link"),
             MenuItem("commands", url="commands", icon="bullhorn"),

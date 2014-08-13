@@ -235,6 +235,7 @@ PROJECT_APPS = (
     'habits',
     'tags',
     'statuses',
+    'visions',
     # common
     'lib',
 )

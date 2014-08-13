@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ vision }}</h1>
+    <div class="well well-sm">
+    {{ vision.description }}
+    </div>
+    <a href="{{ vision.get_edit_url }}" class="btn btn-primary btn-sm" role="button">Update</a>
+    <a href="{{ vision.get_delete_url }}" class="btn btn-danger btn-sm" role="button">Delete</a>
+{% endblock %}
