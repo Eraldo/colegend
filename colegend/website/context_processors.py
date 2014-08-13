@@ -23,12 +23,12 @@ def menu(request):
     """A context processor that provides menu_items."""
     menu_items = {
         'main': [
-            MenuItem("Home", url="home", icon="home"),
             MenuItem("Projects", url="projects:project_list", icon="folder-open"),
             MenuItem("Tasks", url="tasks:task_list", icon="check"),
             MenuItem("Tags", url="tags:tag_list", icon="tags"),
         ],
         'extra': [
+            MenuItem("Home", url="home", icon="home"),
             MenuItem("About", url="about", icon="info-sign"),
             MenuItem("Feature Roadmap", url="features:feature_list", icon="road"),
         ],
