@@ -31,8 +31,8 @@ class HomeView(LoginRequiredMixin, TemplateView):
     login_url = reverse_lazy('about')
 
 
-class CoSpaceView(LoginRequiredMixin, TemplateView):
-    template_name = "website/cospace.html"
+class MeetingsView(LoginRequiredMixin, TemplateView):
+    template_name = "website/meetings.html"
 
     def get_counter(self):
         now = datetime.datetime.now()
@@ -42,7 +42,7 @@ class CoSpaceView(LoginRequiredMixin, TemplateView):
         return timeuntil(date, now)
 
     def get_context_data(self, **kwargs):
-        context = super(CoSpaceView, self).get_context_data(**kwargs)
+        context = super(MeetingsView, self).get_context_data(**kwargs)
         context['counter'] = self.get_counter()
         return context
 
