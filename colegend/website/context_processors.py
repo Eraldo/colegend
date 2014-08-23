@@ -31,6 +31,7 @@ def menu(request):
             MenuItem("Home", url="home", icon="home"),
             MenuItem("About", url="about", icon="info-sign"),
             MenuItem("Meetings", url="meetings", icon="map-marker"),
+            MenuItem("vision", url="visions:vision_list", icon="eye-open"),
             MenuItem("Feature Roadmap", url="features:feature_list", icon="road"),
         ],
         'settings': [
@@ -38,7 +39,6 @@ def menu(request):
             MenuItem("contact", url="home", icon="envelope"),
         ],
         'experimental': [
-            MenuItem("visions", url="visions:vision_list", icon="eye-open"),
             MenuItem("routines", url="routines:routine_list", icon="asterisk"),
             MenuItem("habits", url="habits:habit_list", icon="link"),
             MenuItem("commands", url="commands", icon="bullhorn"),
