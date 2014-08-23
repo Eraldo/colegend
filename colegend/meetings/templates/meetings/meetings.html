@@ -14,10 +14,14 @@
              class="center-block img-circle img-responsive" style="max-height: 200px;">
 
         <h3>Next Meeting</h3>
+        {% if date %}
         {{ date }}<br/>
         Countdown: {{ counter }}<br/>
         <a href="https://plus.google.com/hangouts/_/eraldo.org/cospace" target="_blank" class="btn btn-default">»
             Hangout</a>
+        {% else %}
+            Currently there are no planned meetings.
+        {% endif %}
 
         <h2>"CoSpace"</h2>
 

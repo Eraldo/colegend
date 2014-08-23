@@ -11,7 +11,9 @@ class MeetingsView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(MeetingsView, self).get_context_data(**kwargs)
         now = timezone.now()
-        date = Meeting.objects.first().date
-        context['date'] = date
-        context['counter'] = timeuntil(date, now)
+        meeting = Meeting.objects.first()
+        if meeting:
+            date = meeting.date
+            context['date'] = date
+            context['counter'] = timeuntil(date, now)
         return context
