@@ -30,6 +30,7 @@ def menu(request):
         'extra': [
             MenuItem("Home", url="home", icon="home"),
             MenuItem("About", url="about", icon="info-sign"),
+            MenuItem("Meetings", url="cospace", icon="map-marker"),
             MenuItem("Feature Roadmap", url="features:feature_list", icon="road"),
         ],
         'settings': [

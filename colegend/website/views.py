@@ -1,7 +1,9 @@
+import datetime
 from braces.views import LoginRequiredMixin
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse_lazy
+from django.utils.timesince import timeuntil
 from django.views.generic import TemplateView
 from features.models import Feature
 from habits.models import Habit
@@ -29,19 +31,20 @@ class HomeView(LoginRequiredMixin, TemplateView):
     login_url = reverse_lazy('about')
 
 
-class TestView(TemplateView):
-    template_name = "website/test.html"
+class CoSpaceView(LoginRequiredMixin, TemplateView):
+    template_name = "website/cospace.html"
 
-    def get(self, request, *args, **kwargs):
-        # check permission
-        if not request.user.is_superuser:
-            raise PermissionDenied
+    def get_counter(self):
+        now = datetime.datetime.now()
+        date = datetime.datetime(now.year, now.month, now.day, 16, 4)
+        while date.weekday() != 6:
+            date += datetime.timedelta(1)
+        return timeuntil(date, now)
 
-        message = "test1"
-        messages.add_message(request, messages.INFO, message)
-        message = "test2"
-        messages.add_message(request, messages.INFO, message)
-        return super(TestView, self).get(request, *args, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super(CoSpaceView, self).get_context_data(**kwargs)
+        context['counter'] = self.get_counter()
+        return context
 
 
 class SearchResultsView(LoginRequiredMixin, TemplateView):
@@ -68,3 +71,18 @@ class SearchResultsView(LoginRequiredMixin, TemplateView):
             message = "todo: create {}:{}".format(model, name)
             messages.add_message(request, messages.INFO, message)
         return self.get(request, *args, **kwargs)
+
+
+class TestView(TemplateView):
+    template_name = "website/test.html"
+
+    def get(self, request, *args, **kwargs):
+        # check permission
+        if not request.user.is_superuser:
+            raise PermissionDenied
+
+        message = "test1"
+        messages.add_message(request, messages.INFO, message)
+        message = "test2"
+        messages.add_message(request, messages.INFO, message)
+        return super(TestView, self).get(request, *args, **kwargs)
