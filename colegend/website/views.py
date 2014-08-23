@@ -1,9 +1,7 @@
-import datetime
 from braces.views import LoginRequiredMixin
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse_lazy
-from django.utils.timesince import timeuntil
 from django.views.generic import TemplateView
 from features.models import Feature
 from habits.models import Habit
@@ -29,22 +27,6 @@ class HomeView(LoginRequiredMixin, TemplateView):
     template_name = "website/home.html"
 
     login_url = reverse_lazy('about')
-
-
-class MeetingsView(LoginRequiredMixin, TemplateView):
-    template_name = "website/meetings.html"
-
-    def get_counter(self):
-        now = datetime.datetime.now()
-        date = datetime.datetime(now.year, now.month, now.day, 16, 4)
-        while date.weekday() != 6:
-            date += datetime.timedelta(1)
-        return timeuntil(date, now)
-
-    def get_context_data(self, **kwargs):
-        context = super(MeetingsView, self).get_context_data(**kwargs)
-        context['counter'] = self.get_counter()
-        return context
 
 
 class SearchResultsView(LoginRequiredMixin, TemplateView):
