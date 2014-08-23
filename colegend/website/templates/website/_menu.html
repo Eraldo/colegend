@@ -18,11 +18,38 @@
                 {% for menu_item in menu_items.main %}
                     {% include 'website/_menu_item.html' %}
                 {% endfor %}
-                {#            <li>{% include 'commands/_quick_command_form.html' %}</li>#}
+
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-rocket"></i> Coach <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        {% for menu_item in menu_items.extra %}
+                        {% for menu_item in menu_items.coach %}
+                            {% include 'website/_menu_item.html' %}
+                        {% endfor %}
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-briefcase"></i> Manager <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        {% for menu_item in menu_items.manager %}
+                            {% include 'website/_menu_item.html' %}
+                        {% endfor %}
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-smile-o"></i> Motivator <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        {% for menu_item in menu_items.motivator %}
+                            {% include 'website/_menu_item.html' %}
+                        {% endfor %}
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-desktop"></i> Operator <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        {% for menu_item in menu_items.operator %}
                             {% include 'website/_menu_item.html' %}
                         {% endfor %}
                         <li class="divider"></li>
@@ -47,7 +74,6 @@
                             <img id="menu-avatar" src="{% avatar_url user %}" alt="user" class="center-block"/>
                         <div style="text-align: center">{{ user }}</div>
                         <li class="divider"></li>
-{#                        <li class="dropdown-header">settings</li>#}
                         {% for menu_item in menu_items.settings %}
                             {% include 'website/_menu_item.html' %}
                         {% endfor %}

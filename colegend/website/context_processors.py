@@ -21,21 +21,25 @@ class MenuItem:
 def menu(request):
     """A context processor that provides menu_items."""
     menu_items = {
-        'main': [
+        'coach': [
+            MenuItem("vision", url="visions:vision_list", icon="eye"),
+            MenuItem("Meetings", url="meetings", icon="comments-o"),
+        ],
+        'manager': [
             MenuItem("Projects", url="projects:project_list", icon="sitemap"),
             MenuItem("Tasks", url="tasks:task_list", icon="check-circle"),
             MenuItem("Tags", url="tags:tag_list", icon="tags"),
         ],
-        'extra': [
-            MenuItem("Home", url="home", icon="home"),
+        'motivator': [
+        ],
+        'operator': [
+            MenuItem("Contact", url="home", icon="envelope"),
             MenuItem("About", url="about", icon="info-circle"),
-            MenuItem("Meetings", url="meetings", icon="comments-o"),
-            MenuItem("vision", url="visions:vision_list", icon="eye"),
             MenuItem("Feature Roadmap", url="features:feature_list", icon="road"),
+            MenuItem("Home", url="home", icon="home"),
         ],
         'settings': [
             MenuItem("settings", url="home", icon="wrench"),
-            MenuItem("contact", url="home", icon="envelope"),
         ],
         'experimental': [
             MenuItem("routines", url="routines:routine_list", icon="stack-overflow"),
