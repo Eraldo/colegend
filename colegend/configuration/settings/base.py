@@ -228,14 +228,16 @@ PROJECT_APPS = (
     'bootstrap3',
     'crispy_forms',
     'floppyforms',
-    # data
+    # manager
     'projects',
     'tasks',
-    'routines',
-    'habits',
     'tags',
     'statuses',
+    'routines',
+    'habits',
+    # coach
     'visions',
+    'meetings',
     # common
     'lib',
 )
