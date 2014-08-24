@@ -16,6 +16,9 @@ class HabitMixin(LoginRequiredMixin, OwnedItemsMixin):
         # limit routine choices to owned routines
         routines = form.fields['routine'].queryset
         form.fields['routine'].queryset = routines.owned_by(self.request.user)
+        # limit tag choices to owned tags
+        tags = form.fields['tags'].queryset
+        form.fields['tags'].queryset = tags.owned_by(self.request.user)
         return form
 
 

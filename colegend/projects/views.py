@@ -13,6 +13,13 @@ class ProjectMixin(LoginRequiredMixin, OwnedItemsMixin):
     model = Project
     form_class = ProjectForm
 
+    def get_form(self, form_class):
+        form = super(ProjectMixin, self).get_form(form_class)
+        # limit tag choices to owned tags
+        tags = form.fields['tags'].queryset
+        form.fields['tags'].queryset = tags.owned_by(self.request.user)
+        return form
+
 
 class ProjectListView(StatusFilterMixin, ProjectMixin, ListView):
     def get_queryset(self):

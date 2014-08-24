@@ -11,6 +11,13 @@ class RoutineMixin(LoginRequiredMixin, OwnedItemsMixin):
     model = Routine
     fields = ['name', 'description', 'type', 'tags']
 
+    def get_form(self, form_class):
+        form = super(RoutineMixin, self).get_form(form_class)
+        # limit tag choices to owned tags
+        tags = form.fields['tags'].queryset
+        form.fields['tags'].queryset = tags.owned_by(self.request.user)
+        return form
+
 
 class RoutineCheckView(View):
     pass
