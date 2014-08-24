@@ -55,3 +55,9 @@ img#logo {
 }
 /* end menu */
 
+/* avatar */
+div.avatar img {
+    max-height: 110px;
+    max-width: 110px;
+}
+/* end avatar */
