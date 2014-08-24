@@ -4,7 +4,7 @@
     <h1>My Life Vision</h1>
     <div class="well well-sm">
     <h2>{{ vision }}</h2>
-    {{ vision.description }}
+    {{ vision.description|linebreaks }}
     </div>
     <a href="{{ vision.get_edit_url }}" class="btn btn-primary btn-sm" role="button">Update</a>
     <a href="{{ vision.get_delete_url }}" class="btn btn-danger btn-sm" role="button">Delete</a>
