@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Life Vision: {{ vision }}</h1>
+    <h1>My Life Vision</h1>
     <div class="well well-sm">
+    <h2>{{ vision }}</h2>
     {{ vision.description }}
     </div>
     <a href="{{ vision.get_edit_url }}" class="btn btn-primary btn-sm" role="button">Update</a>
