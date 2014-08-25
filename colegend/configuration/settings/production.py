@@ -73,11 +73,11 @@ EMAIL_BACKEND = get_setting('EMAIL_BACKEND', default='django.core.mail.backends.
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-host
 EMAIL_HOST = get_setting('EMAIL_HOST', default='smtp.gmail.com')
 
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#email-host-user
+EMAIL_HOST_USER = get_setting('EMAIL_HOST_USER', default='colegend@colegend.org')
+
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-host-password
 EMAIL_HOST_PASSWORD = get_setting('EMAIL_HOST_PASSWORD', default='-')
-
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#email-host-user
-EMAIL_HOST_USER = get_setting('EMAIL_HOST_USER', default='your_email@example.com')
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-port
 EMAIL_PORT = get_setting('EMAIL_PORT', default=587)
@@ -90,6 +90,10 @@ EMAIL_USE_TLS = True
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#server-email
 SERVER_EMAIL = EMAIL_HOST_USER
+
+DEFAULT_FROM_EMAIL = get_setting('EMAIL_HOST_PASSWORD', default='system@colegend.org')
+
+DEFAULT_TO_EMAIL = get_setting('EMAIL_HOST_PASSWORD', default='eraldo@colegend.org')
 ########## END EMAIL CONFIGURATION
 
 ########## DATABASE CONFIGURATION
