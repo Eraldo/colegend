@@ -1,5 +1,5 @@
 <li>
-    <a href="{% url menu_item.url %}">
+    <a href="{% if menu_item.arg %}{% url menu_item.url menu_item.arg %}{% else %}{% url menu_item.url %}{% endif %}">
         {% if menu_item.icon %}
             {{ menu_item.icon }}&nbsp;
         {% endif %}

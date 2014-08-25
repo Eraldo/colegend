@@ -6,9 +6,10 @@ __author__ = 'eraldo'
 class MenuItem:
     positions = ["main", "extra", "settings"]
 
-    def __init__(self, name, url, icon=None):
+    def __init__(self, name, url, arg=None, icon=None):
         self.name = name
         self.url = url
+        self.arg = arg
         # add icon if given
         if icon:
             icon = mark_safe('<i class="fa fa-{}"></i>'.format(icon))
@@ -39,7 +40,7 @@ def menu(request):
             MenuItem("Home", url="home", icon="home"),
         ],
         'settings': [
-            MenuItem("settings", url="home", icon="wrench"),
+            MenuItem("settings", url="users:detail", arg=request.user, icon="wrench"),
         ],
         'experimental': [
             MenuItem("routines", url="routines:routine_list", icon="stack-overflow"),
