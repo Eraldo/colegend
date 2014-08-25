@@ -12,7 +12,7 @@ class MeetingsView(LoginRequiredMixin, TemplateView):
         context = super(MeetingsView, self).get_context_data(**kwargs)
         now = timezone.now()
         meeting = Meeting.objects.first()
-        if meeting:
+        if meeting and meeting.date > now:
             date = meeting.date
             context['date'] = date
             context['counter'] = timeuntil(date, now)
