@@ -34,7 +34,7 @@ def menu(request):
         'motivator': [
         ],
         'operator': [
-            MenuItem("Contact", url="home", icon="envelope"),
+            MenuItem("Contact", url="contact", icon="envelope"),
             MenuItem("About", url="about", icon="info-circle"),
             MenuItem("Feature Roadmap", url="features:feature_list", icon="road"),
             MenuItem("Home", url="home", icon="home"),

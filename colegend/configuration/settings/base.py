@@ -218,16 +218,12 @@ DJANGO_APPS = (
 # Apps specific for this project go here.
 
 PROJECT_APPS = (
-    # system
+    # operator
     'users',  # custom users app
-    # user interface
     'website',
+    'contact',
     'features',
     'commands',  # command text interface
-    # styling
-    'bootstrap3',
-    'crispy_forms',
-    'floppyforms',
     # manager
     'projects',
     'tasks',
@@ -240,6 +236,10 @@ PROJECT_APPS = (
     'meetings',
     # common
     'lib',
+    # styling
+    'bootstrap3',
+    'crispy_forms',
+    'floppyforms',
 )
 EXTRA_APPS = (
     'django_extensions',
