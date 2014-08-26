@@ -11,7 +11,7 @@ class ContactForm(forms.Form):
 
     def send_email(self, user):
         # send email using the self.cleaned_data dictionary
-        subject = "[CoLegend] Message from '{}'".format(self.user)
+        subject = "[CoLegend] Message from '{}'".format(user)
         message = self.cleaned_data["message"]
         send_mail(subject, message, user.email, ['eraldo@colegend.org'])
 
