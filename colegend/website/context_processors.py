@@ -23,7 +23,7 @@ def menu(request):
     """A context processor that provides menu_items."""
     menu_items = {
         'coach': [
-            MenuItem("vision", url="visions:vision_list", icon="eye"),
+            MenuItem("Life Vision", url="visions:vision_list", icon="eye"),
             MenuItem("Meetings", url="meetings", icon="comments-o"),
         ],
         'manager': [
