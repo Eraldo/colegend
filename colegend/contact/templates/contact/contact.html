@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    contact
+{% endblock %}
+
+{% block content %}
+    <h1>Contact</h1>
+    <div class="well">
+        {% crispy form %}
+    </div>
+    <div class="well">
+        <legend>Personal Contact</legend>
+
+        <p>
+            <span style="font-weight: 700">Eraldo Helal</span>
+        </p>
+
+        <p>
+            <span style="color: gray"><span
+                    class="glyphicon glyphicon-phone"></span> mobile</span><br>
+            <a href="tel:004369910203039">
+                +43 699 10 20 30 39</a><br>
+            <a href="tel:004917697994480">
+                +49 176 97 99 44 80</a>
+        </p>
+
+        <p><a href="mailto:homepage@eraldo.org" target="_blank"><span style="color: gray"><span
+                class="glyphicon glyphicon-envelope"></span> email</span><br>
+            eraldo@colegend.org</a></p>
+
+        <p><a href="http://www.eraldo.org/contact/T42/" target="_blank"><span style="color: gray"><span
+                class="glyphicon glyphicon-user"></span> face to face</span><br>
+            project T42</a></p>
+
+    </div>
+{% endblock %}
+
