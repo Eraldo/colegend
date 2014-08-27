@@ -9,3 +9,13 @@
         $('#menu a[href*="' + location.pathname.split("/")[1] + '"][class!="noselect"]').parent().addClass('active');
     }
 </script>
+
+<script src="{{ STATIC_URL }}website/bower_components/jquery-ui/jquery-ui.min.js"></script>
+<script>
+{#    $(function() {#}
+        $(".dateinput").datepicker({
+            changeMonth: true,
+            changeYear: true
+        });
+{#    });#}
+</script>
