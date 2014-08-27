@@ -13,6 +13,9 @@ class ProjectForm(ModelForm):
 
     helper = FormHelper()
     helper.layout = Layout(
-        Field('name', autofocus='True')
+        Field('name', autofocus='True'),
+        Field('description'),
+        Field('status'),
+        Field('deadline'),
     )
     helper.add_input(Submit('save', 'Save'))
