@@ -9,6 +9,8 @@
     <div class="col-xs-12">
         <h2>{% trans "Your current avatar: " %}</h2>
         {% avatar user %}
+        <p></p>
+        <div class="well">
         {% if not avatars %}
             <p>{% trans "You haven't uploaded an avatar yet. Please upload one now." %}</p>
         {% else %}
@@ -20,11 +22,14 @@
                 <p>{% csrf_token %}<input type="submit" value="{% trans "Choose new Default" %}" class="btn btn-primary"/></p>
             </form>
         {% endif %}
+        </div>
+        <div class="well">
         <form enctype="multipart/form-data" method="POST" action="{% url 'avatar_add' %}">
             <legend>Upload New Avatar</legend>
             {{ upload_avatar_form|crispy }}
             <p>{% csrf_token %}<input type="submit" class="btn btn-primary" value="{% trans "Upload New Image" %}" /></p>
         </form>
+        </div>
     </div>
   </div>
 </div>
