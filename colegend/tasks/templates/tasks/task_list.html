@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>tasks <span class="badge">{{ task_list.count }}</span></h1>
+    <h1>Tasks <span class="badge">{{ task_list.count }}</span></h1>
     {% include 'tasks/_task_list.html' with tasks=task_list %}
 {% endblock %}

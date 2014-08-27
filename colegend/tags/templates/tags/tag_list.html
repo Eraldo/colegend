@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>tags <span class="badge">{{ tag_list.count }}</span></h1>
+    <h1>Tags <span class="badge">{{ tag_list.count }}</span></h1>
     {% include 'tags/_tag_list.html' with tags=object_list %}
 {% endblock %}

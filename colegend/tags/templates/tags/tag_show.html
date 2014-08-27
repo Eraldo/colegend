@@ -5,13 +5,13 @@
     <a href="{{ tag.get_edit_url }}" class="btn btn-default btn-sm" role="button">edit</a>
     <a href="{{ tag.get_delete_url }}" class="btn btn-default btn-sm" role="button">delete</a>
 
-    <h2>items</h2>
-    <h3>projects</h3>
+    <h2>Items</h2>
+    <h3>Projects</h3>
     {% include 'projects/_project_list.html' with projects=tag.projects.all %}
-    <h3>tasks</h3>
+    <h3>Tasks</h3>
     {% include 'tasks/_task_list.html' with tasks=tag.tasks.all %}
-    <h3>routines</h3>
+    <h3>Routines</h3>
     {% include 'routines/_routine_list.html' with routines=tag.routines.all %}
-    <h3>habits</h3>
+    <h3>Habits</h3>
     {% include 'habits/_habit_list.html' with habits=tag.habits.all %}
 {% endblock %}

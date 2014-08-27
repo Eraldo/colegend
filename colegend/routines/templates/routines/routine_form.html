@@ -2,7 +2,7 @@
 {% load bootstrap3 %}
 
 {% block content %}
-    <legend>{% if object %}edit routine{% else %}new routine{% endif %}</legend>
+    <legend>{% if object %}Edit Routine{% else %}New Routine{% endif %}</legend>
     <form method="post">{% csrf_token %}
         {% bootstrap_form form %}
         {% bootstrap_button "save" button_type="submit" icon="floppy-saved" %}

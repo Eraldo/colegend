@@ -1,6 +1,6 @@
 <div class="project-list">
     <div class="list-controls container-fluid well well-sm">
-        <a href="{% url "projects:project_new" %}" class="btn btn-default" role="button">new</a>
+        <a href="{% url "projects:project_new" %}" class="btn btn-default" role="button">New</a>
         {% include 'status/_status_filter_form.html' %}
     </div>
     {% for project in projects %}
