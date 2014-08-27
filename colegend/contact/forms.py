@@ -20,12 +20,13 @@ class ContactForm(forms.Form):
     helper.layout = Layout(
         Fieldset(
             'Contact Form',
-            Field('message', rows="4", css_class='form-control', placeholder="Your message...", style="resize: vertical;"),
+            Field('message', rows="4", css_class='form-control', placeholder="Your message...",
+                  style="resize: vertical;", autofocus="True"),
         ),
         # HTML("""
         # <br>
         # <button type="submit" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-send"></span> send
-        #     message
+        # message
         # </button>
         #  """),
     )

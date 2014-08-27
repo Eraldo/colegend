@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load avatar_tags %}
 
 {% block title %}
     contact
@@ -14,6 +15,7 @@
         <legend>Personal Contact</legend>
 
         <p>
+            <img id="menu-avatar" src="{% avatar_url user 100 %}" alt="user" class="img-circle"/>
             <span style="font-weight: 700">Eraldo Helal</span>
         </p>
 
