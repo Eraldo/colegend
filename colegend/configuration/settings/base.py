@@ -347,9 +347,6 @@ AVATAR_STORAGE_DIR = "avatars"
 ########## END USER AVATARS
 
 
-
-
-
 ########## SLUGLIFIER
 AUTOSLUG_SLUGIFY_FUNCTION = "slugify.slugify"
 ########## END SLUGLIFIER
