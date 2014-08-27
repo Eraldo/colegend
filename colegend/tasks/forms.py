@@ -14,6 +14,7 @@ class TaskForm(ModelForm):
     helper = FormHelper()
     helper.layout = Layout(
         Field('project'),
-        Field('name', autofocus='True')
+        Field('name', autofocus='True'),
+        Field('desciption'),
     )
     helper.add_input(Submit('save', 'Save'))

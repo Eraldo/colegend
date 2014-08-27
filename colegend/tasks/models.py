@@ -29,7 +29,7 @@ class Task(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, TaggableBas
 
     description = models.TextField(blank=True)
     status = models.ForeignKey(Status, default=Status.DEFAULT_PK)
-    date = models.DateField(blank=True, null=True)
+    date = models.DateField(blank=True, null=True, help_text="When will I start?")
     deadline = models.DateField(blank=True, null=True)
 
     objects = TaskManager.for_queryset_class(TaskQuerySet)()
