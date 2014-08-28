@@ -6,15 +6,19 @@
     Home
 {% endblock %}
 {% block content %}
-    <h1>Welcome Home</h1>
-    <p>
-        We are in early alpha stage.. so things might not work the way you want them to yet.<br>
-        There is the magical work: "yet".<br>
-        Great news: You can help us get there.<br>
-    </p>
-    <p>
-        Feel free to tell me what is wrong.. or what you want. ;)<br/>
-        <a href="mailto:eraldo@colegend.org?Subject=[CoLegend]%20Feedback" target="_blank">
-            >> Feedback</a>
-    </p>
+    <h1>Welcome {{ user|title }}</h1>
+    <div class="well">
+    <h2>Alpha Version</h2>
+        <p>
+            We are in early alpha stage.. so things might not work the way you want them to yet.<br>
+            There is the magical work: "yet".<br>
+            Great news: You can help us get there.<br>
+        </p>
+
+        <p>
+            Feel free to tell me what is wrong.. or what you want. ;)<br/>
+            <a href="mailto:eraldo@colegend.org?Subject=[CoLegend]%20Feedback" target="_blank" class="btn btn-primary">
+                >> Feedback</a>
+        </p>
+    </div>
 {% endblock %}
