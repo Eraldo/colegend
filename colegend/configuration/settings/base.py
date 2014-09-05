@@ -339,6 +339,11 @@ LOGIN_URL = "account_login"
 ########## END CUSTOM USER
 
 
+########## TESTING
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
+########## END TESTING
+
+
 ########## USER AVATARS
 INSTALLED_APPS += (
     'avatar',
