@@ -12,7 +12,7 @@ class Feature(models.Model):
     name = models.CharField(max_length=100, unique=True)
 
     description = models.TextField(blank=True)
-    date_published = models.DateField(default=timezone.now())
+    date_published = models.DateField(default=timezone.now)
 
     objects = FeatureManager()
 
