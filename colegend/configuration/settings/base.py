@@ -290,21 +290,8 @@ WSGI_APPLICATION = '%s.wsgi.application' % MAIN_APP_NAME
 ########## END WSGI CONFIGURATION
 
 
-########## SOUTH CONFIGURATION
-# See: http://south.readthedocs.org/en/latest/installation.html#configuring-your-django-installation
-INSTALLED_APPS += (
-    # Database migration helpers:
-    'south',
-)
-# Don't need to use South when setting up a test database.
-SOUTH_TESTS_MIGRATE = False
-########## END SOUTH CONFIGURATION
-
-
 ########## AUTHENTICATION CONFIGURATION
 INSTALLED_APPS += (
-    # Needs to come after south for now because of a weird edge case between
-    #   South and allauth
     'allauth',  # registration
     'allauth.account',  # registration
     'allauth.socialaccount',  # registration

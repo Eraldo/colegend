@@ -13,7 +13,6 @@ django-crispy-forms==1.4.0
 django-floppyforms==1.2.0
 
 # Models
-South==0.8.4 # database migrations
 django-model-utils==2.0.3
 
 # Images
