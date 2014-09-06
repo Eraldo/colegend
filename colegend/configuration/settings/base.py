@@ -234,6 +234,7 @@ PROJECT_APPS = (
     # coach
     'visions',
     'meetings',
+    'journals',
     # common
     'lib',
     # styling

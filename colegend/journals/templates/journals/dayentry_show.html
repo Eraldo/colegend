@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ dayentry.date }}</h1>
+    <p>{{ dayentry.text|linebreaks }}</p>
+    <a href="{{ dayentry.get_edit_url }}" class="btn btn-primary btn-sm" role="button">edit</a>
+    <a href="{{ dayentry.get_delete_url }}" class="btn btn-danger btn-sm" role="button">delete</a>
+
+{% endblock %}

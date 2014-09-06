@@ -25,6 +25,7 @@ urlpatterns = patterns('',
     url(r'^tags/', include('tags.urls', namespace="tags")),
     # coach
     url(r'^visions/', include('visions.urls', namespace="visions")),
+    url(r'^journals/', include('journals.urls', namespace="journals")),
     url(r'^meetings/', include('meetings.urls')),
 
 
