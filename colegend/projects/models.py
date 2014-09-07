@@ -1,7 +1,5 @@
-from django.contrib.auth import get_user_model
 from django.db import models
 from django.db.models.query import QuerySet
-from model_utils.managers import PassThroughManagerMixin
 from lib.models import TrackedBase, AutoUrlMixin, OwnedBase, OwnedQueryMixin
 from statuses.models import Status
 from statuses.utils import StatusQueryMixin
@@ -11,10 +9,6 @@ __author__ = 'eraldo'
 
 
 class ProjectQuerySet(StatusQueryMixin, OwnedQueryMixin, QuerySet):
-    pass
-
-
-class ProjectManager(PassThroughManagerMixin, models.Manager):
     pass
 
 
@@ -29,7 +23,7 @@ class Project(AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):
     status = models.ForeignKey(Status, default=Status.DEFAULT_PK)
     deadline = models.DateField(blank=True, null=True)
 
-    objects = ProjectManager.for_queryset_class(ProjectQuerySet)()
+    objects = ProjectQuerySet.as_manager()
 
     class Meta:
         unique_together = ('owner', 'name')

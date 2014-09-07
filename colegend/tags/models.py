@@ -1,16 +1,11 @@
 from django.db import models
 from django.db.models.query import QuerySet
-from model_utils.managers import PassThroughManager
 from lib.models import AutoUrlMixin, OwnedBase, TrackedBase, OwnedQueryMixin
 
 __author__ = 'eraldo'
 
 
 class TagQuerySet(OwnedQueryMixin, QuerySet):
-    pass
-
-
-class TagManager(PassThroughManager, models.Manager):
     pass
 
 
@@ -23,7 +18,7 @@ class Tag(AutoUrlMixin, OwnedBase, TrackedBase, models.Model):
 
     description = models.TextField(blank=True)
 
-    objects = TagManager.for_queryset_class(TagQuerySet)()
+    objects = TagQuerySet.as_manager()
 
     class Meta:
         ordering = ["name"]

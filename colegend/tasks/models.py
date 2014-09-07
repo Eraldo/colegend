@@ -1,7 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models.query import QuerySet
-from model_utils.managers import PassThroughManagerMixin
 from lib.models import TrackedBase, AutoUrlMixin, OwnedBase, OwnedQueryMixin, ValidateModelMixin
 from projects.models import Project
 from statuses.models import Status
@@ -12,10 +11,6 @@ __author__ = 'eraldo'
 
 
 class TaskQuerySet(StatusQueryMixin, OwnedQueryMixin, QuerySet):
-    pass
-
-
-class TaskManager(PassThroughManagerMixin, models.Manager):
     pass
 
 
@@ -32,7 +27,7 @@ class Task(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, TaggableBas
     date = models.DateField(blank=True, null=True, help_text="When will I start?")
     deadline = models.DateField(blank=True, null=True)
 
-    objects = TaskManager.for_queryset_class(TaskQuerySet)()
+    objects = TaskQuerySet.as_manager()
 
     class Meta:
         ordering = ["project", "name"]

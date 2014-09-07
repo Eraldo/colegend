@@ -1,6 +1,5 @@
 from django.db import models
 from django.db.models.query import QuerySet
-from model_utils.managers import PassThroughManagerMixin
 from lib.models import TrackedBase, AutoUrlMixin, OwnedBase, OwnedQueryMixin
 from tags.models import TaggableBase
 
@@ -8,10 +7,6 @@ __author__ = 'eraldo'
 
 
 class RoutineQuerySet(OwnedQueryMixin, QuerySet):
-    pass
-
-
-class RoutineManager(PassThroughManagerMixin, models.Manager):
     pass
 
 
@@ -37,7 +32,7 @@ class Routine(AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):
     )
     type = models.CharField(default=DEFAULT, max_length=50, choices=TYPES)
 
-    objects = RoutineManager.for_queryset_class(RoutineQuerySet)()
+    objects = RoutineQuerySet.as_manager()
 
     class Meta:
         ordering = ["name"]

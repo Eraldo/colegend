@@ -1,6 +1,5 @@
 from django.db import models
 from django.db.models.query import QuerySet
-from model_utils.managers import PassThroughManagerMixin
 from lib.models import AutoUrlMixin, TrackedBase, OwnedBase, OwnedQueryMixin
 from routines.models import Routine
 from tags.models import TaggableBase
@@ -9,10 +8,6 @@ __author__ = 'eraldo'
 
 
 class HabitQuerySet(OwnedQueryMixin, QuerySet):
-    pass
-
-
-class HabitManager(PassThroughManagerMixin, models.Manager):
     pass
 
 
@@ -26,7 +21,7 @@ class Habit(AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):
 
     description = models.TextField(blank=True)
 
-    objects = HabitManager.for_queryset_class(HabitQuerySet)()
+    objects = HabitQuerySet.as_manager()
 
     class Meta:
         ordering = ["name"]
