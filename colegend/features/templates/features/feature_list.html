@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>features
+    <h1>Features
         <span class="badge status">{{ feature_list.count }}</span>
     </h1>
     {% include 'features/_feature_list.html' with features=feature_list %}
