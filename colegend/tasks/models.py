@@ -20,7 +20,7 @@ class Task(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, TaggableBas
     """
     # > owner: User
     project = models.ForeignKey(Project, blank=True, null=True, related_name="tasks")
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, help_text="Tip: Use a verb as the first word.")
 
     description = models.TextField(blank=True)
     status = models.ForeignKey(Status, default=Status.DEFAULT_PK)
