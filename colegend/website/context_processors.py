@@ -25,7 +25,7 @@ def menu(request):
         'coach': [
             MenuItem("Life Vision", url="visions:vision_list", icon="eye"),
             MenuItem("Meetings", url="meetings", icon="comments-o"),
-            MenuItem("Journal", url="journals:dayentry_list", icon=""),
+            MenuItem("Journal", url="journals:dayentry_list", icon="book"),
         ],
         'manager': [
             MenuItem("Projects", url="projects:project_list", icon="sitemap"),
