@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from journals.validators import validate_present_or_past
 from lib.models import AutoUrlMixin, OwnedBase, TrackedBase, OwnedQueryMixin, ValidateModelMixin
 
 __author__ = 'eraldo'
@@ -21,7 +22,7 @@ class DayEntry(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, models.
     A django model representing a daily journal entry in text form.
     """
     # > owner: User
-    date = models.DateField(default=timezone.datetime.today)
+    date = models.DateField(default=timezone.datetime.today, validators=[validate_present_or_past])
     text = models.TextField()
 
     objects = DayEntryQuerySet.as_manager()
