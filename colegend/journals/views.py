@@ -1,5 +1,4 @@
 from braces.views import LoginRequiredMixin
-from django.core.urlresolvers import reverse_lazy
 from django.views.generic import DetailView, UpdateView, DeleteView, CreateView, ArchiveIndexView
 from journals.forms import DayEntryForm
 from journals.models import DayEntry
@@ -16,6 +15,8 @@ class DayEntryMixin(LoginRequiredMixin, OwnedItemsMixin):
 class DayEntryListView(DayEntryMixin, ArchiveIndexView):
     date_field = "date"
     template_name = "journals/dayentry_list.html"
+
+    allow_empty = True
 
 
 class DayEntryNewView(DayEntryMixin, CreateView):
