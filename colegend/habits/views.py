@@ -1,4 +1,5 @@
 from braces.views import LoginRequiredMixin
+from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from habits.models import Habit
@@ -20,6 +21,14 @@ class HabitMixin(LoginRequiredMixin, OwnedItemsMixin):
         tags = form.fields['tags'].queryset
         form.fields['tags'].queryset = tags.owned_by(self.request.user)
         return form
+
+    def form_valid(self, form):
+        try:
+            return super(HabitMixin, self).form_valid(form)
+        except ValidationError as e:
+            # Catch model errors (e.g. unique_together).
+            form.add_error(None, e)
+            return super(HabitMixin, self).form_invalid(form)
 
 
 class HabitListView(HabitMixin, ListView):

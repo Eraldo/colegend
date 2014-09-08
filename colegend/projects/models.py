@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models.query import QuerySet
-from lib.models import TrackedBase, AutoUrlMixin, OwnedBase, OwnedQueryMixin
+from lib.models import TrackedBase, AutoUrlMixin, OwnedBase, OwnedQueryMixin, ValidateModelMixin
 from statuses.models import Status
 from statuses.utils import StatusQueryMixin
 from tags.models import TaggableBase
@@ -12,7 +12,7 @@ class ProjectQuerySet(StatusQueryMixin, OwnedQueryMixin, QuerySet):
     pass
 
 
-class Project(AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):
+class Project(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):
     """
     A django model representing a project.
     """

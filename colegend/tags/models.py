@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models.query import QuerySet
-from lib.models import AutoUrlMixin, OwnedBase, TrackedBase, OwnedQueryMixin
+from lib.models import AutoUrlMixin, OwnedBase, TrackedBase, OwnedQueryMixin, ValidateModelMixin
 
 __author__ = 'eraldo'
 
@@ -9,7 +9,7 @@ class TagQuerySet(OwnedQueryMixin, QuerySet):
     pass
 
 
-class Tag(AutoUrlMixin, OwnedBase, TrackedBase, models.Model):
+class Tag(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, models.Model):
     """
     A django model representing a text-tag.
     """

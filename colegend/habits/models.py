@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models.query import QuerySet
-from lib.models import AutoUrlMixin, TrackedBase, OwnedBase, OwnedQueryMixin
+from lib.models import AutoUrlMixin, TrackedBase, OwnedBase, OwnedQueryMixin, ValidateModelMixin
 from routines.models import Routine
 from tags.models import TaggableBase
 
@@ -11,7 +11,7 @@ class HabitQuerySet(OwnedQueryMixin, QuerySet):
     pass
 
 
-class Habit(AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):
+class Habit(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):
     """
     A django model representing a habit.
     """

@@ -1,4 +1,5 @@
 from braces.views import LoginRequiredMixin
+from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from lib.views import OwnedItemsMixin
@@ -15,10 +16,18 @@ class ProjectMixin(LoginRequiredMixin, OwnedItemsMixin):
 
     def get_form(self, form_class):
         form = super(ProjectMixin, self).get_form(form_class)
-        # limit tag choices to owned tags
+        # Limit tag choices to owned tags.
         tags = form.fields['tags'].queryset
         form.fields['tags'].queryset = tags.owned_by(self.request.user)
         return form
+
+    def form_valid(self, form):
+        try:
+            return super(ProjectMixin, self).form_valid(form)
+        except ValidationError as e:
+            # Catch model errors (e.g. unique_together).
+            form.add_error(None, e)
+            return super(ProjectMixin, self).form_invalid(form)
 
 
 class ProjectListView(StatusFilterMixin, ProjectMixin, ListView):

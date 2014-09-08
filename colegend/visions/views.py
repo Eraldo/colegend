@@ -1,4 +1,5 @@
 from braces.views import LoginRequiredMixin
+from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import redirect
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
@@ -13,6 +14,14 @@ __author__ = 'eraldo'
 class VisionMixin(LoginRequiredMixin, OwnedItemsMixin):
     model = Vision
     form_class = VisionForm
+
+    def form_valid(self, form):
+        try:
+            return super(VisionMixin, self).form_valid(form)
+        except ValidationError as e:
+            # Catch model errors (e.g. unique_together).
+            form.add_error(None, e)
+            return super(VisionMixin, self).form_invalid(form)
 
 
 class VisionListView(VisionMixin, ListView):

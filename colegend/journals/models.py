@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from lib.models import AutoUrlMixin, OwnedBase, TrackedBase, OwnedQueryMixin
+from lib.models import AutoUrlMixin, OwnedBase, TrackedBase, OwnedQueryMixin, ValidateModelMixin
 
 __author__ = 'eraldo'
 
@@ -16,7 +16,7 @@ class DayEntryQuerySet(OwnedQueryMixin, models.QuerySet):
     pass
 
 
-class DayEntry(AutoUrlMixin, OwnedBase, TrackedBase, models.Model):
+class DayEntry(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, models.Model):
     """
     A django model representing a daily journal entry in text form.
     """

@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models.query import QuerySet
-from lib.models import TrackedBase, AutoUrlMixin, OwnedBase, OwnedQueryMixin
+from lib.models import TrackedBase, AutoUrlMixin, OwnedBase, OwnedQueryMixin, ValidateModelMixin
 from tags.models import TaggableBase
 
 __author__ = 'eraldo'
@@ -10,7 +10,7 @@ class RoutineQuerySet(OwnedQueryMixin, QuerySet):
     pass
 
 
-class Routine(AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):
+class Routine(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):
     """
     A django model representing a routine.
     """

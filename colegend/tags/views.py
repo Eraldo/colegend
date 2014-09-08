@@ -1,4 +1,5 @@
 from braces.views import LoginRequiredMixin
+from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from lib.views import OwnedItemsMixin
@@ -12,6 +13,14 @@ __author__ = 'eraldo'
 class TagMixin(LoginRequiredMixin, OwnedItemsMixin):
     model = Tag
     form_class = TagForm
+
+    def form_valid(self, form):
+        try:
+            return super(TagMixin, self).form_valid(form)
+        except ValidationError as e:
+            # Catch model errors (e.g. unique_together).
+            form.add_error(None, e)
+            return super(TagMixin, self).form_invalid(form)
 
 
 class TagListView(TagMixin, ListView):

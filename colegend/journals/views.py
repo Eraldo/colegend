@@ -1,4 +1,5 @@
 from braces.views import LoginRequiredMixin
+from django.core.exceptions import ValidationError
 from django.views.generic import DetailView, UpdateView, DeleteView, CreateView, ArchiveIndexView
 from journals.forms import DayEntryForm
 from journals.models import DayEntry
@@ -11,6 +12,13 @@ class DayEntryMixin(LoginRequiredMixin, OwnedItemsMixin):
     model = DayEntry
     form_class = DayEntryForm
 
+    def form_valid(self, form):
+        try:
+            return super(DayEntryMixin, self).form_valid(form)
+        except ValidationError as e:
+            # Catch model errors (e.g. unique_together).
+            form.add_error(None, e)
+            return super(DayEntryMixin, self).form_invalid(form)
 
 class DayEntryListView(DayEntryMixin, ArchiveIndexView):
     date_field = "date"
