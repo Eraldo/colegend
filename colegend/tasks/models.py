@@ -1,4 +1,4 @@
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError, SuspiciousOperation
 from django.db import models
 from django.db.models.query import QuerySet
 from lib.models import TrackedBase, AutoUrlMixin, OwnedBase, OwnedQueryMixin, ValidateModelMixin
@@ -38,6 +38,9 @@ class Task(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, TaggableBas
 
     def clean(self):
         super(Task, self).clean()
-        # prevent duplicate names if the project was not set
+        # Prevent duplicate names if the project was not set.
         if not self.project and Task.objects.filter(project__isnull=True, name=self.name).exists():
             raise ValidationError("A Task with this name and without a project exists already.")
+        # Prevent the creation of a task for a project that is not owned.
+        if self.project and not self.project.owner == self.owner:
+            raise SuspiciousOperation("Cannot create a Task for a foreign project.")
