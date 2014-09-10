@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from django.core.exceptions import SuspiciousOperation
+from django.core.exceptions import SuspiciousOperation, ValidationError
 from django.test import TestCase
 from projects.models import Project
 from statuses.models import Status
@@ -38,3 +38,22 @@ class TaskModelTests(TestCase):
             Task.objects.create,
             name="Task", owner=self.user, project=project2
         )
+
+    def test_duplicate_task_creation(self):
+        """Make sure that creating a duplicate task with the same owner, project and name raises an exception."""
+        task = Task.objects.create(name="Task", project=self.project, owner=self.user)
+        self.assertRaises(
+            ValidationError,
+            Task.objects.create,
+            name="Task", owner=self.user, project=self.project
+        )
+
+    def test_duplicate_task_creation_without_project(self):
+        """Make sure that creating a duplicate task with the same owner, project and name raises an exception."""
+        task = Task.objects.create(name="Task", owner=self.user)
+        self.assertRaises(
+            ValidationError,
+            Task.objects.create,
+            name="Task", owner=self.user
+        )
+
