@@ -8,6 +8,21 @@ __author__ = 'eraldo'
 class User(AbstractUser):
     pass
 
+    # As of Django 1.8 this will be fixed by using "default_related_name" in the respective model's Meta class.
+    # https://docs.djangoproject.com/en/dev/ref/models/options/#default-related-name
+    # example: http://gitelephant.cypresslab.net/django/commit/87d0a3384cc263fe0df749a28e2fbc1e1240f043
+    @property
+    def projects(self):
+        return self.project_set
+
+    @property
+    def tasks(self):
+        return self.task_set
+
+    @property
+    def tags(self):
+        return self.tag_set
+
 
 from allauth.account.signals import user_signed_up
 from django.dispatch import receiver
