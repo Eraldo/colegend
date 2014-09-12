@@ -1,4 +1,4 @@
-from django.contrib.auth.models import PermissionsMixin, AbstractBaseUser, UserManager
+from django.contrib.auth.models import PermissionsMixin, AbstractBaseUser
 from django.core import validators
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
@@ -6,11 +6,127 @@ from django.core.mail import send_mail, mail_managers
 from django.db import models
 from lib.modelfields import PhoneField
 from users.modelfields import RequiredBooleanField
+from users.managers import UserManager
 
 __author__ = 'eraldo'
 
 
+class User(AbstractBaseUser, PermissionsMixin):
+    """
+    Fully featured User model with admin-compliant permissions.
+
+    Username and password are required. Other fields are optional.
+    """
+    username = models.CharField(_('username'), max_length=30, unique=True,
+                                help_text=_('Required. 30 characters or fewer. Letters, digits and '
+                                            '@/./+/-/_ only.'),
+                                validators=[
+                                    validators.RegexValidator(r'^[\w.@+-]+$', _('Enter a valid username.'), 'invalid')
+                                ])
+
+    # > contact
+    # > profile
+
+    @property
+    def first_name(self):
+        try:
+            return self.contact.first_name
+        except Contact.DoesNotExist:
+            return ""
+
+    @first_name.setter
+    def first_name(self, value):
+            self.contact.first_name = value
+
+    @property
+    def last_name(self):
+        try:
+            return self.contact.last_name
+        except Contact.DoesNotExist:
+            return ""
+
+    @last_name.setter
+    def last_name(self, value):
+            self.contact.last_name = value
+
+    @property
+    def email(self):
+        try:
+            return self.contact.email
+        except Contact.DoesNotExist:
+            return ""
+
+    @email.setter
+    def email(self, value):
+            self.contact.email = value
+
+    # Roles
+
+    is_staff = models.BooleanField(_('staff status'), default=False,
+                                   help_text=_('Designates whether the user can log into this admin '
+                                               'site.'))
+    is_active = models.BooleanField(_('active'), default=False,
+                                    help_text=_('Designates whether this user should be treated as '
+                                                'active. Unselect this instead of deleting accounts.'))
+
+    is_tester = models.BooleanField(verbose_name="tester status", default=False,
+                                    help_text="Designates whether the user can access the site's test features.")
+
+    date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
+
+    objects = UserManager()
+
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = []
+
+    class Meta:
+        verbose_name = _('user')
+        verbose_name_plural = _('users')
+
+    def __init__(self, *args, **kwargs):
+
+        super(User, self).__init__(*args, **kwargs)
+
+    def get_full_name(self):
+        """
+        Returns the first_name plus the last_name, with a space in between.
+        """
+        if self.contact:
+            return self.contact.name
+        else:
+            return self.username
+
+    def get_short_name(self):
+        "Returns the short name for the user."
+        if self.contact:
+            return self.contact.first_name
+        else:
+            return self.username
+
+    def email_user(self, subject, message, from_email=None, **kwargs):
+        """
+        Sends an email to this User.
+        """
+        send_mail(subject, message, from_email, [self.email], **kwargs)
+
+    # As of Django 1.8 this will be fixed by using "default_related_name" in the respective model's Meta class.
+    # https://docs.djangoproject.com/en/dev/ref/models/options/#default-related-name
+    # example: http://gitelephant.cypresslab.net/django/commit/87d0a3384cc263fe0df749a28e2fbc1e1240f043
+    @property
+    def projects(self):
+        return self.project_set
+
+    @property
+    def tasks(self):
+        return self.task_set
+
+    @property
+    def tags(self):
+        return self.tag_set
+
+
 class Contact(models.Model):
+    user = models.OneToOneField(User)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
 
@@ -31,7 +147,7 @@ class Contact(models.Model):
 
     # @property
     # def user(self):
-    #     try:
+    # try:
     #         return self.user
     #     except User.DoesNotExist as e:
     #         return None
@@ -42,9 +158,9 @@ class Contact(models.Model):
         return "{} {}".format(self.first_name, self.last_name)
 
     def __str__(self):
-        try:
+        if self.user:
             user = self.user
-        except User.DoesNotExist:
+        else:
             user = "Unknown"
         return "{} ({})".format(self.name, user)
 
@@ -54,8 +170,7 @@ class Profile(models.Model):
     A user signup application model.
     This is used to get and save some information about the user upon account signup.
     """
-    # > owner
-    # > questions
+    user = models.OneToOneField(User)
 
     # QUESTIONS
     origin = models.TextField(
@@ -122,125 +237,11 @@ class Profile(models.Model):
     )
 
     def __str__(self):
-        try:
+        if self.user:
             user = self.user
-        except User.DoesNotExist:
+        else:
             user = "Unknown"
         return "{}'s Profile".format(user)
-
-
-class User(AbstractBaseUser, PermissionsMixin):
-    """
-    Fully featured User model with admin-compliant permissions.
-
-    Username and password are required. Other fields are optional.
-    """
-    username = models.CharField(_('username'), max_length=30, unique=True,
-        help_text=_('Required. 30 characters or fewer. Letters, digits and '
-                    '@/./+/-/_ only.'),
-        validators=[
-            validators.RegexValidator(r'^[\w.@+-]+$', _('Enter a valid username.'), 'invalid')
-        ])
-
-    @property
-    def first_name(self):
-        if self.contact:
-            return self.contact.first_name
-        else:
-            return ""
-
-    @first_name.setter
-    def first_name(self, value):
-        self.contact.first_name = value
-
-    @property
-    def last_name(self):
-        if self.contact:
-            return self.contact.last_name
-        else:
-            return ""
-
-    @last_name.setter
-    def last_name(self, value):
-        self.contact.last_name = value
-
-    @property
-    def email(self):
-        if self.contact:
-            return self.contact.email
-        else:
-            return ""
-
-    @email.setter
-    def email(self, value):
-        self.contact.email = value
-
-
-    is_staff = models.BooleanField(_('staff status'), default=False,
-        help_text=_('Designates whether the user can log into this admin '
-                    'site.'))
-    is_active = models.BooleanField(_('active'), default=False,
-        help_text=_('Designates whether this user should be treated as '
-                    'active. Unselect this instead of deleting accounts.'))
-
-    is_tester = models.BooleanField(verbose_name="tester status", default=False,
-                                    help_text="Designates whether the user can access the site's test features.")
-
-    date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
-
-    contact = models.OneToOneField(Contact, null=True)
-    profile = models.OneToOneField(Profile, null=True)
-    # Roles
-
-    objects = UserManager()
-
-    USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = []
-
-    class Meta:
-        verbose_name = _('user')
-        verbose_name_plural = _('users')
-
-    def __init__(self, *args, **kwargs):
-
-        super(User, self).__init__(*args, **kwargs)
-
-    def get_full_name(self):
-        """
-        Returns the first_name plus the last_name, with a space in between.
-        """
-        if self.contact:
-            return self.contact.name
-        else:
-            return self.username
-
-    def get_short_name(self):
-        "Returns the short name for the user."
-        if self.contact:
-            return self.contact.first_name
-        else:
-            return self.username
-
-    def email_user(self, subject, message, from_email=None, **kwargs):
-        """
-        Sends an email to this User.
-        """
-        send_mail(subject, message, from_email, [self.email], **kwargs)
-
-    # As of Django 1.8 this will be fixed by using "default_related_name" in the respective model's Meta class.
-    # https://docs.djangoproject.com/en/dev/ref/models/options/#default-related-name
-    # example: http://gitelephant.cypresslab.net/django/commit/87d0a3384cc263fe0df749a28e2fbc1e1240f043
-    @property
-    def projects(self):
-        return self.project_set
-
-    @property
-    def tasks(self):
-        return self.task_set
-
-    @property
-    def tags(self):
-        return self.tag_set
 
 
 from allauth.account.signals import user_signed_up
