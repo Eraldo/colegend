@@ -1,12 +1,31 @@
 from django.contrib import messages
 from django.contrib.auth.models import AbstractUser
 from django.core.mail import mail_admins
+from django.db import models
+from lib.modelfields import PhoneField
 
 __author__ = 'eraldo'
 
 
 class User(AbstractUser):
-    pass
+    # DETAILS
+    GENDER_CHOICES = (
+        ('M', 'Male Legend ♂'),
+        ('F', 'Female Legend ♀'),
+    )
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
+    birthday = models.DateField()
+    # CONTACT (apart from email)
+    phone_number = PhoneField(help_text="Mobile or other phone number. Example: +4369910203039")
+    street = models.CharField(max_length=100)
+    postal_code = models.CharField(max_length=5)
+    city = models.CharField(max_length=100)
+    country = models.CharField(max_length=100)
+
+    # ROLES
+    is_tester = models.BooleanField(default=False)
+
+    REQUIRED_FIELDS = ["email", "gender", "birthday", "phone_number", "street", "postal_code", "city", "country"]
 
     # As of Django 1.8 this will be fixed by using "default_related_name" in the respective model's Meta class.
     # https://docs.djangoproject.com/en/dev/ref/models/options/#default-related-name
