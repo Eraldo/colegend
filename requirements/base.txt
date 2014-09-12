@@ -20,7 +20,7 @@ Pillow==2.5.3
 
 # For user registration, either via email or social
 # Well-built with regular release cycles!
-django-allauth==0.17.0
+django-allauth==0.18.0
 # Useful extension for user avatars
 django-avatar==2.0
 
