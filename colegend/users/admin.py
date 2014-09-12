@@ -28,6 +28,7 @@ class ContactAdmin(admin.ModelAdmin):
     list_filter = ['user']
 
     fieldsets = (
+        (None, {'fields': ('user',)}),
         (_('Name'), {'fields': ('first_name', 'last_name')}),
         (_('Details'), {'fields': ('gender', 'birthday')}),
         (_('Contact options'), {'fields': ('email', 'phone_number')}),
