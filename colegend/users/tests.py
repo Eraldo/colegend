@@ -9,12 +9,6 @@ class UserModelTests(TestCase):
     def setUp(self):
         self.user_data = {
             "username": "Usernew", "email": "user_new@example.com", "password": "usernew",
-            "birthday": datetime.date(2004, 4, 4),
-            "phone_number": "+43123456789",
-            "street": "NewStreet 4",
-            "postal_code": "1234",
-            "city": "Linz",
-            "country": "Austria"
         }
 
     def test_user_creation(self):
@@ -22,7 +16,7 @@ class UserModelTests(TestCase):
         User.objects.create_user(**self.user_data)
         user = User.objects.get(username="Usernew")
         self.assertEquals(user.email, "user_new@example.com")
-        self.assertEquals(user.country, "Austria")
+        self.assertEquals(user.check_password("usernew"), True)
 
     def test_username_taken(self):
         """Test the creation of a user with a username that is already taken."""
@@ -30,16 +24,17 @@ class UserModelTests(TestCase):
         self.assertRaises(
             IntegrityError,
             User.objects.create_user,
-            self.user_data
+            **self.user_data
         )
 
-    def test_country_missing(self):
+    def test_username_missing(self):
         """Test the creation of a user without the required country field."""
-        User.objects.create_user(**self.user_data.pop("country"))
+        data = self.user_data
+        data.pop("username")
         self.assertRaises(
-            IntegrityError,
+            TypeError,
             User.objects.create_user,
-            self.user_data
+            **data
         )
 
 
