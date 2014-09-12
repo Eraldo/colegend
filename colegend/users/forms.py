@@ -59,6 +59,7 @@ class SignUpApplicationForm(ModelForm):
     )
     gender = forms.ChoiceField(choices=GENDER_CHOICES)
     birthday = forms.DateField(validators=[validate_in_past])
+    email = forms.EmailField()
     phone_number = PhoneField(help_text="Mobile or other phone number. Example: +4369910203039")
     street = forms.CharField(max_length=100)
     postal_code = forms.CharField(max_length=5)
@@ -140,18 +141,4 @@ class SignUpApplicationForm(ModelForm):
     helper.form_tag = False
 
     def signup(self, request, user):
-        data = self.cleaned_data
-        print(data)
-        contact_fields = ["first_name", "last_name", "gender", "birthday",
-                          "email", "phone_number",
-                          "street", "postal_code", "city", "country"]
-        contact_data = { key:value for key,value in data.items() if key in contact_fields }
-        user.contact = Contact.objects.create(**contact_data)
-        profile_fields = [
-            'origin', "referrer", 'experience', 'motivation', 'change', 'drive', 'expectations', 'other',
-            'stop', 'discretion', 'responsibility', 'appreciation', 'terms',
-        ]
-        profile_data = { key:value for key,value in data.items() if key in profile_fields }
-        user.profile = Profile.objects.create(**profile_data)
-
-        user.save()
+        pass
