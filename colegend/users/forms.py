@@ -16,13 +16,14 @@ class UserForm(ModelForm):
         model = User
 
         # Constrain the UserForm to just these fields.
-        fields = ("first_name", "last_name")
+        fields = ["username"]
 
 
 class UserCreationForm(AuthUserCreationForm):
     """
     Custom user creation form.
     """
+    username = forms.CharField(max_length=30)
 
     class Meta(AuthUserCreationForm.Meta):
         model = User

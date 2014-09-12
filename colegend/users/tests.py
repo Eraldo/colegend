@@ -8,14 +8,13 @@ from users.models import User
 class UserModelTests(TestCase):
     def setUp(self):
         self.user_data = {
-            "username": "Usernew", "email": "user_new@example.com", "password": "usernew",
+            "username": "Usernew", "password": "usernew",
         }
 
     def test_user_creation(self):
         """Test the creation of a new user."""
         User.objects.create_user(**self.user_data)
         user = User.objects.get(username="Usernew")
-        self.assertEquals(user.email, "user_new@example.com")
         self.assertEquals(user.check_password("usernew"), True)
 
     def test_username_taken(self):
@@ -36,6 +35,15 @@ class UserModelTests(TestCase):
             User.objects.create_user,
             **data
         )
+
+    def test_password_missing(self):
+        """Test the creation of a user without the required country field."""
+        data = self.user_data
+        data.pop("password")
+        print(data)
+        User.objects.create_user(**data)
+        user = User.objects.get(username="Usernew")
+        self.assertEquals(user.password, '')
 
 
 class UserViewTests(TestCase):

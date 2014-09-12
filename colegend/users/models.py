@@ -1,7 +1,8 @@
-from django.contrib import messages
-from django.contrib.auth.models import AbstractUser
-from django.core.exceptions import ObjectDoesNotExist
-from django.core.mail import mail_admins
+from django.contrib.auth.models import PermissionsMixin, AbstractBaseUser, UserManager
+from django.core import validators
+from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
+from django.core.mail import send_mail, mail_managers
 from django.db import models
 from lib.modelfields import PhoneField
 from users.modelfields import RequiredBooleanField
@@ -128,12 +129,103 @@ class Profile(models.Model):
         return "{}'s Profile".format(user)
 
 
-class User(AbstractUser):
+class User(AbstractBaseUser, PermissionsMixin):
+    """
+    Fully featured User model with admin-compliant permissions.
+
+    Username and password are required. Other fields are optional.
+    """
+    username = models.CharField(_('username'), max_length=30, unique=True,
+        help_text=_('Required. 30 characters or fewer. Letters, digits and '
+                    '@/./+/-/_ only.'),
+        validators=[
+            validators.RegexValidator(r'^[\w.@+-]+$', _('Enter a valid username.'), 'invalid')
+        ])
+
+    @property
+    def first_name(self):
+        if self.contact:
+            return self.contact.first_name
+        else:
+            return ""
+
+    @first_name.setter
+    def first_name(self, value):
+        self.contact.first_name = value
+
+    @property
+    def last_name(self):
+        if self.contact:
+            return self.contact.last_name
+        else:
+            return ""
+
+    @last_name.setter
+    def last_name(self, value):
+        self.contact.last_name = value
+
+    @property
+    def email(self):
+        if self.contact:
+            return self.contact.email
+        else:
+            return ""
+
+    @email.setter
+    def email(self, value):
+        self.contact.email = value
+
+
+    is_staff = models.BooleanField(_('staff status'), default=False,
+        help_text=_('Designates whether the user can log into this admin '
+                    'site.'))
+    is_active = models.BooleanField(_('active'), default=False,
+        help_text=_('Designates whether this user should be treated as '
+                    'active. Unselect this instead of deleting accounts.'))
+
+    is_tester = models.BooleanField(verbose_name="tester status", default=False,
+                                    help_text="Designates whether the user can access the site's test features.")
+
+    date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
+
     contact = models.OneToOneField(Contact, null=True)
     profile = models.OneToOneField(Profile, null=True)
     # Roles
-    is_tester = models.BooleanField(verbose_name="tester status", default=False,
-                                    help_text="Designates whether the user can access the site's test features.")
+
+    objects = UserManager()
+
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = []
+
+    class Meta:
+        verbose_name = _('user')
+        verbose_name_plural = _('users')
+
+    def __init__(self, *args, **kwargs):
+
+        super(User, self).__init__(*args, **kwargs)
+
+    def get_full_name(self):
+        """
+        Returns the first_name plus the last_name, with a space in between.
+        """
+        if self.contact:
+            return self.contact.name
+        else:
+            return self.username
+
+    def get_short_name(self):
+        "Returns the short name for the user."
+        if self.contact:
+            return self.contact.first_name
+        else:
+            return self.username
+
+    def email_user(self, subject, message, from_email=None, **kwargs):
+        """
+        Sends an email to this User.
+        """
+        send_mail(subject, message, from_email, [self.email], **kwargs)
 
     # As of Django 1.8 this will be fixed by using "default_related_name" in the respective model's Meta class.
     # https://docs.djangoproject.com/en/dev/ref/models/options/#default-related-name
@@ -155,26 +247,19 @@ from allauth.account.signals import user_signed_up
 from django.dispatch import receiver
 
 
-@receiver(user_signed_up, dispatch_uid="some.unique.string.id.for.allauth.user_signed_up")
-def notify_admin_after_signup(request, user, **kwargs):
+@receiver(user_signed_up, dispatch_uid="notify_managers_after_signup")
+def notify_managers_after_signup(request, user, **kwargs):
     """
     Inform the admin that a new user has signed up for the system.
-    This is used to control the active users during alpha stage.
 
     :param request:
     :param user:
     :param kwargs:
     """
 
-    # Notify the admins.
-    mail_admins(
+    # Notify the managers.
+    mail_managers(
         subject="New user: {}".format(user),
         message="A new user has signed up:\nUsername: {}\nEmail: {}".format(user, user.email),
         fail_silently=True
     )
-    # Deactivate the account.
-    user.is_active = False
-    user.save()
-    # Inform the user that he needs an admin to activate his account.
-    message_deactivated = "Your account has been deactivated! - The project is still in a closed alpha state."
-    messages.add_message(request, messages.INFO, message_deactivated)
