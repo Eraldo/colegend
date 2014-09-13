@@ -1,13 +1,34 @@
 {% extends "admin/base.html" %}
 
-{% block title %}{{ title }} | {{ site_title|default:_('CoLegend administration') }}{% endblock %}
+{% load i18n %}
+{#{% load avatar_tags %}#}
+
+{% block title %}{{ title }} | {{ site_title|default:_('CoLegend backend') }}{% endblock %}
 
 {% block branding %}
-<h1 id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:_('CoLegend administration') }}</a></h1>
+    <h1 id="site-name"><a href="{% url 'admin:index' %}" style="color: white;"><img
+            src="{{ STATIC_URL }}website/images/favicon_red.ico" alt="Logo" height="20px"/> CoLegend backend</a></h1>
 {% endblock %}
 
 {% block extrahead %}
     <link rel="shortcut icon" href="{{ STATIC_URL }}website/images/favicon_red.ico">
+{% endblock %}
+
+{% block welcome-msg %}
+    Welcome Master
+    <strong>{% firstof user.get_short_name user.get_username %}</strong>.
+{% endblock %}
+
+{% block userlinks %}
+    {% url 'django-admindocs-docroot' as docsroot %}
+    {% if docsroot %}
+        <a href="{{ docsroot }}">{% trans 'Documentation' %}</a> /
+    {% endif %}
+    {% if user.has_usable_password %}
+        <a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a> /
+    {% endif %}
+    <a href="{% url 'home' %}">{% trans 'Frontend' %}</a> /
+    <a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a>
 {% endblock %}
 
 {% block nav-global %}{% endblock %}

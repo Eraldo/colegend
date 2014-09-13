@@ -55,6 +55,7 @@ def menu(request):
             MenuItem("settings", url="users:detail", arg=request.user, icon="wrench"),
         ],
         'admin': [
+            MenuItem("Backend", url="admin:index", icon="database"),
             MenuItem("test", url="test", icon="code"),
         ],
     }
