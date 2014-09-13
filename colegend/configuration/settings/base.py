@@ -231,7 +231,7 @@ PROJECT_APPS = (
     'statuses',
     'routines',
     'habits',
-    # coach
+    # mentor
     'visions',
     'meetings',
     'journals',
