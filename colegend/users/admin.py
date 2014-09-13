@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
-from django.core.urlresolvers import reverse
 from lib.admin import EmailMixin
 from users.forms import UserCreationForm
 from users.models import User, Contact, Profile
