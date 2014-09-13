@@ -1,4 +1,4 @@
-from braces.views import LoginRequiredMixin
+from lib.views import ActiveUserRequiredMixin
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
@@ -10,7 +10,7 @@ from tags.models import Tag
 __author__ = 'eraldo'
 
 
-class TagMixin(LoginRequiredMixin, OwnedItemsMixin):
+class TagMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
     model = Tag
     form_class = TagForm
 

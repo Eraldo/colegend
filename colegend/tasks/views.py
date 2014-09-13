@@ -1,4 +1,4 @@
-from braces.views import LoginRequiredMixin
+from lib.views import ActiveUserRequiredMixin
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
@@ -10,7 +10,7 @@ from tasks.models import Task
 __author__ = 'eraldo'
 
 
-class TaskMixin(LoginRequiredMixin, OwnedItemsMixin):
+class TaskMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
     model = Task
     form_class = TaskForm
 

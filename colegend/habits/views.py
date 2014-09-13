@@ -1,4 +1,4 @@
-from braces.views import LoginRequiredMixin
+from lib.views import ActiveUserRequiredMixin
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
@@ -8,7 +8,7 @@ from lib.views import OwnedItemsMixin
 __author__ = 'eraldo'
 
 
-class HabitMixin(LoginRequiredMixin, OwnedItemsMixin):
+class HabitMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
     model = Habit
     fields = ['routine', 'name', 'tags']
 

@@ -1,10 +1,10 @@
-from braces.views import LoginRequiredMixin
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import TemplateView
 from features.models import Feature
 from habits.models import Habit
+from lib.views import ActiveUserRequiredMixin
 from projects.models import Project
 from routines.models import Routine
 from statuses.models import Status
@@ -23,13 +23,13 @@ class AboutView(TemplateView):
         return context
 
 
-class HomeView(LoginRequiredMixin, TemplateView):
+class HomeView(ActiveUserRequiredMixin, TemplateView):
     template_name = "website/home.html"
 
     login_url = reverse_lazy('about')
 
 
-class SearchResultsView(LoginRequiredMixin, TemplateView):
+class SearchResultsView(ActiveUserRequiredMixin, TemplateView):
     template_name = 'website/search.html'
 
     def get_context_data(self, *args, **kwargs):

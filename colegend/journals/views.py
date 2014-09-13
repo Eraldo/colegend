@@ -1,4 +1,4 @@
-from braces.views import LoginRequiredMixin
+from lib.views import ActiveUserRequiredMixin
 from django.core.exceptions import ValidationError
 from django.views.generic import DetailView, UpdateView, DeleteView, CreateView, ArchiveIndexView
 from journals.forms import DayEntryForm
@@ -8,7 +8,7 @@ from lib.views import OwnedItemsMixin
 __author__ = 'eraldo'
 
 
-class DayEntryMixin(LoginRequiredMixin, OwnedItemsMixin):
+class DayEntryMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
     model = DayEntry
     form_class = DayEntryForm
 

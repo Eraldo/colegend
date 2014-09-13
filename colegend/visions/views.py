@@ -1,4 +1,4 @@
-from braces.views import LoginRequiredMixin
+from lib.views import ActiveUserRequiredMixin
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import redirect
@@ -11,7 +11,7 @@ from visions.models import Vision
 __author__ = 'eraldo'
 
 
-class VisionMixin(LoginRequiredMixin, OwnedItemsMixin):
+class VisionMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
     model = Vision
     form_class = VisionForm
 

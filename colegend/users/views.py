@@ -8,7 +8,7 @@ from django.views.generic import UpdateView
 from django.views.generic import ListView
 
 # Only authenticated users can access views using this.
-from braces.views import LoginRequiredMixin
+from lib.views import ActiveUserRequiredMixin
 
 # Import the form from users/forms.py
 from .forms import UserForm
@@ -17,14 +17,14 @@ from .forms import UserForm
 from .models import User
 
 
-class UserDetailView(LoginRequiredMixin, DetailView):
+class UserDetailView(ActiveUserRequiredMixin, DetailView):
     model = User
     # These next two lines tell the view to index lookups by username
     slug_field = "username"
     slug_url_kwarg = "username"
 
 
-class UserRedirectView(LoginRequiredMixin, RedirectView):
+class UserRedirectView(ActiveUserRequiredMixin, RedirectView):
     permanent = False
 
     def get_redirect_url(self):
@@ -32,7 +32,7 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
             kwargs={"username": self.request.user.username})
 
 
-class UserUpdateView(LoginRequiredMixin, UpdateView):
+class UserUpdateView(ActiveUserRequiredMixin, UpdateView):
 
     form_class = UserForm
 
@@ -49,7 +49,7 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
         return User.objects.get(username=self.request.user.username)
 
 
-class UserListView(LoginRequiredMixin, ListView):
+class UserListView(ActiveUserRequiredMixin, ListView):
     model = User
     # These next two lines tell the view to index lookups by username
     slug_field = "username"
