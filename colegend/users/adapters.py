@@ -16,6 +16,10 @@ class AccountAdapter(DefaultAccountAdapter):
 
         username = data.get('username')
         user_username(user, username)
+
+        email = data.get('email')
+        user_email(user, email)
+
         if 'password1' in data:
             user.set_password(data["password1"])
         else:
@@ -24,9 +28,9 @@ class AccountAdapter(DefaultAccountAdapter):
 
         # Create and fill in contact.
         contact_fields = ["first_name", "last_name", "gender", "birthday",
-                          "email", "phone_number",
+                          "phone_number",
                           "street", "postal_code", "city", "country"]
-        contact_data = { key:value for key,value in data.items() if key in contact_fields }
+        contact_data = {key: value for key, value in data.items() if key in contact_fields}
         contact = Contact(**contact_data)
 
         # Create and fill in profile.
@@ -34,16 +38,8 @@ class AccountAdapter(DefaultAccountAdapter):
             'origin', "referrer", 'experience', 'motivation', 'change', 'drive', 'expectations', 'other',
             'stop', 'discretion', 'responsibility', 'appreciation', 'terms',
         ]
-        profile_data = { key:value for key,value in data.items() if key in profile_fields }
+        profile_data = {key: value for key, value in data.items() if key in profile_fields}
         profile = Profile(**profile_data)
-
-        first_name = data.get('first_name')
-        last_name = data.get('last_name')
-        email = data.get('email')
-
-        user_email(user, email)
-        user_field(user, 'contact__first_name', first_name or '')
-        user_field(user, 'contact__last_name', last_name or '')
 
         if commit:
             # Ability not to commit makes it easier to derive from

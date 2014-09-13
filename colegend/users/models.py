@@ -23,6 +23,7 @@ class User(AbstractBaseUser, PermissionsMixin):
                                 validators=[
                                     validators.RegexValidator(r'^[\w.@+-]+$', _('Enter a valid username.'), 'invalid')
                                 ])
+    email = models.EmailField(_('email address'), blank=True)
 
     # > contact
     # > profile
@@ -36,7 +37,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     @first_name.setter
     def first_name(self, value):
-            self.contact.first_name = value
+        self.contact.first_name = value
 
     @property
     def last_name(self):
@@ -47,18 +48,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     @last_name.setter
     def last_name(self, value):
-            self.contact.last_name = value
-
-    @property
-    def email(self):
-        try:
-            return self.contact.email
-        except Contact.DoesNotExist:
-            return ""
-
-    @email.setter
-    def email(self, value):
-            self.contact.email = value
+        self.contact.last_name = value
 
     # Roles
 
@@ -77,7 +67,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['email']
 
     class Meta:
         verbose_name = _('user')
@@ -96,12 +86,16 @@ class User(AbstractBaseUser, PermissionsMixin):
         else:
             return self.username
 
+    get_full_name.short_description = 'Name'
+
     def get_short_name(self):
         "Returns the short name for the user."
         if self.contact:
             return self.contact.first_name
         else:
             return self.username
+
+    get_short_name.short_description = 'Short name'
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         """
@@ -138,6 +132,21 @@ class Contact(models.Model):
     birthday = models.DateField()
 
     email = models.EmailField()
+
+    @property
+    def email(self):
+        if self.user:
+            return self.user.email
+        else:
+            return ""
+
+    @email.setter
+    def email(self, value):
+        if self.user:
+            self.user.email = value
+        else:
+            raise User.DoesNotExist
+
     phone_number = PhoneField(help_text="Mobile or other phone number. Example: +4369910203039")
 
     street = models.CharField(max_length=100)
@@ -148,7 +157,7 @@ class Contact(models.Model):
     # @property
     # def user(self):
     # try:
-    #         return self.user
+    # return self.user
     #     except User.DoesNotExist as e:
     #         return None
 

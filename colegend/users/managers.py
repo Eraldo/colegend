@@ -5,15 +5,17 @@ __author__ = 'eraldo'
 
 
 class UserManager(BaseUserManager):
-    def _create_user(self, username, password,
-                     is_staff, is_superuser, is_active=False, **extra_fields):
+
+    def _create_user(self, username, email, password,
+                     is_staff, is_superuser, is_active, **extra_fields):
         """
         Creates and saves a User with the given username, email and password.
         """
         now = timezone.now()
         if not username:
             raise ValueError('The given username must be set')
-        user = self.model(username=username,
+        email = self.normalize_email(email)
+        user = self.model(username=username, email=email,
                           is_staff=is_staff, is_active=is_active,
                           is_superuser=is_superuser, last_login=now,
                           date_joined=now, **extra_fields)
@@ -21,10 +23,10 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_user(self, username, password=None, **extra_fields):
-        return self._create_user(username, password, False, False,
+    def create_user(self, username, email=None, password=None, **extra_fields):
+        return self._create_user(username, email, password, False, False, False,
                                  **extra_fields)
 
-    def create_superuser(self, username, password, **extra_fields):
-        return self._create_user(username, password, True, True,
-                                 is_active=True, **extra_fields)
+    def create_superuser(self, username, email, password, **extra_fields):
+        return self._create_user(username, email, password, True, True, True, is_tester=True,
+                                 **extra_fields)
