@@ -25,7 +25,7 @@ class ActiveUserRequiredMixin(AccessMixin):
                                          self.get_redirect_field_name())
 
         if not request.user.is_accepted:
-            return redirect("inactive")
+            return redirect("users:inactive")
         return super(ActiveUserRequiredMixin, self).dispatch(
             request, *args, **kwargs)
 

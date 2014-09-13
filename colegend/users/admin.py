@@ -16,12 +16,13 @@ class ContactInline(admin.StackedInline):
 class UserAdmin(EmailMixin, AuthUserAdmin):
     add_form = UserCreationForm
     readonly_fields = ['first_name', 'last_name']
-    list_display = ('username', 'email_link', 'get_full_name', 'is_staff')
+    list_display = ('username', 'email_link', 'get_full_name', 'is_accepted', 'is_tester', 'is_staff')
+    list_filter = ('is_active', 'is_accepted', 'is_tester', 'is_staff', 'is_superuser', 'groups')
 
     fieldsets = (
         (None, {'fields': ('username', 'password', 'email')}),
         (_('Roles'), {
-            'fields': ('is_active', 'is_staff', 'is_superuser', 'is_tester')}),
+            'fields': ('is_active', 'is_accepted', 'is_tester', 'is_staff', 'is_superuser')}),
         (_('Permissions'), {
             'classes': ('collapse',),
             'fields': ('groups', 'user_permissions')}),
@@ -32,7 +33,6 @@ class UserAdmin(EmailMixin, AuthUserAdmin):
     inlines = [ContactInline]
 
 
-# admin.site.register(User, AuthUserAdmin)
 admin.site.register(User, UserAdmin)
 
 
@@ -56,7 +56,6 @@ admin.site.register(Contact, ContactAdmin)
 
 
 class ProfileAdmin(admin.ModelAdmin):
-    # list_display = ['__str__', 'user']
     list_filter = ['user']
 
 

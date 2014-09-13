@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+    <h1><span class="label label-success">Success</span></h1>
+    <div class="well lead">
+        <h1><i class="fa fa-clock-o"></i> Processing Application</h1>
+
+        <p>
+            {{ user }}, we have recieved your account appliaction.<br>
+            All you need to do now is sit back and wait for us to check if everything is fine.
+        </p>
+
+        <p>If you do not want to wait.. feel free to <a href="{% url "contact" %}">contact us</a>.</p>
+    </div>
+    </div>
+{% endblock %}

@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.models import PermissionsMixin, AbstractBaseUser
 from django.core import validators
 from django.utils import timezone
@@ -52,15 +53,18 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     # Roles
 
-    is_staff = models.BooleanField(_('staff status'), default=False,
-                                   help_text=_('Designates whether the user can log into this admin '
-                                               'site.'))
-    is_active = models.BooleanField(_('active'), default=False,
+    is_active = models.BooleanField(verbose_name=_('active'), default=True,
                                     help_text=_('Designates whether this user should be treated as '
                                                 'active. Unselect this instead of deleting accounts.'))
+    is_accepted = models.BooleanField(verbose_name=_('accepted'), default=False,
+                                      help_text="Designates whether the user has been accepted by the site managers.")
 
-    is_tester = models.BooleanField(verbose_name="tester status", default=False,
+    is_tester = models.BooleanField(verbose_name=_('tester'), default=False,
                                     help_text="Designates whether the user can access the site's test features.")
+
+    is_staff = models.BooleanField(verbose_name=_('staff'), default=False,
+                                   help_text=_('Designates whether the user can log into this admin '
+                                               'site.'))
 
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
 
@@ -72,10 +76,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = _('user')
         verbose_name_plural = _('users')
-
-    def __init__(self, *args, **kwargs):
-
-        super(User, self).__init__(*args, **kwargs)
 
     def get_full_name(self):
         """
@@ -153,14 +153,6 @@ class Contact(models.Model):
     postal_code = models.CharField(max_length=5)
     city = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
-
-    # @property
-    # def user(self):
-    # try:
-    # return self.user
-    #     except User.DoesNotExist as e:
-    #         return None
-
 
     @property
     def name(self):
@@ -273,3 +265,4 @@ def notify_managers_after_signup(request, user, **kwargs):
         message="A new user has signed up:\nUsername: {}\nEmail: {}".format(user, user.email),
         fail_silently=True
     )
+    messages.add_message(request, messages.SUCCESS, 'We have received your application.')

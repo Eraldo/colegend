@@ -1,8 +1,9 @@
 # Import the reverse lookup function
+from braces.views import LoginRequiredMixin
 from django.core.urlresolvers import reverse
 
 # view imports
-from django.views.generic import DetailView
+from django.views.generic import DetailView, TemplateView
 from django.views.generic import RedirectView
 from django.views.generic import UpdateView
 from django.views.generic import ListView
@@ -15,6 +16,10 @@ from .forms import UserForm
 
 # Import the customized User model
 from .models import User
+
+
+class UserInactiveView(LoginRequiredMixin, TemplateView):
+    template_name = "users/inactive.html"
 
 
 class UserDetailView(ActiveUserRequiredMixin, DetailView):
