@@ -27,7 +27,8 @@ class EmailMixin:
     def email_link(self, obj):
         return '<a href="{0}{1}">{1}</a>'.format("mailto:", obj.email)
     email_link.allow_tags = True
+    email_link.short_description = 'Email'
 
     def get_readonly_fields(self, request, obj=None):
         readonly_fields = super(EmailMixin, self).get_readonly_fields(request, obj=None)
-        return readonly_fields + ('email_link',)
+        return tuple(readonly_fields) + ('email_link',)
