@@ -27,12 +27,20 @@ def menu(request):
             MenuItem("Meetings", url="meetings", icon="comments-o"),
             MenuItem("Journal", url="journals:dayentry_list", icon="book"),
         ],
+        'mentor_extra': [
+        ],
         'manager': [
             MenuItem("Projects", url="projects:project_list", icon="sitemap"),
             MenuItem("Tasks", url="tasks:task_list", icon="check-circle"),
             MenuItem("Tags", url="tags:tag_list", icon="tags"),
         ],
+        'manager_extra': [
+            MenuItem("routines", url="routines:routine_list", icon="stack-overflow"),
+            MenuItem("habits", url="habits:habit_list", icon="link"),
+        ],
         'motivator': [
+        ],
+        'motivator_extra': [
         ],
         'operator': [
             MenuItem("Contact", url="contact", icon="envelope"),
@@ -40,13 +48,11 @@ def menu(request):
             MenuItem("Features", url="features:feature_list", icon="road"),
             MenuItem("Home", url="home", icon="home"),
         ],
+        'operator_extra': [
+            MenuItem("commands", url="commands", icon="bullhorn"),
+        ],
         'settings': [
             MenuItem("settings", url="users:detail", arg=request.user, icon="wrench"),
-        ],
-        'experimental': [
-            MenuItem("routines", url="routines:routine_list", icon="stack-overflow"),
-            MenuItem("habits", url="habits:habit_list", icon="link"),
-            MenuItem("commands", url="commands", icon="bullhorn"),
         ],
         'admin': [
             MenuItem("test", url="test", icon="code"),

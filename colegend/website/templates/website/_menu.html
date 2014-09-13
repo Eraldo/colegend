@@ -25,53 +25,85 @@
                         {% for menu_item in menu_items.mentor %}
                             {% include 'website/_menu_item.html' %}
                         {% endfor %}
+                        {% if user.is_tester and menu_items.mentor_extra %}
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Experimental</li>
+                            {% for menu_item in menu_items.mentor_extra %}
+                                {% include 'website/_menu_item.html' %}
+                            {% endfor %}
+                        {% endif %}
+
                     </ul>
                 </li>
 
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-briefcase"></i> Manager</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-briefcase"></i>
+                        Manager</a>
                     <ul class="dropdown-menu">
                         {% for menu_item in menu_items.manager %}
                             {% include 'website/_menu_item.html' %}
                         {% endfor %}
+                        {% if user.is_tester and menu_items.manager_extra %}
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Experimental</li>
+                            {% for menu_item in menu_items.manager_extra %}
+                                {% include 'website/_menu_item.html' %}
+                            {% endfor %}
+                        {% endif %}
+
                     </ul>
                 </li>
 
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-smile-o"></i> Motivator</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-smile-o"></i>
+                        Motivator</a>
                     <ul class="dropdown-menu">
                         {% for menu_item in menu_items.motivator %}
                             {% include 'website/_menu_item.html' %}
                         {% endfor %}
+                        {% if user.is_tester and menu_items.motivator_extra %}
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Experimental</li>
+                            {% for menu_item in menu_items.motivator_extra %}
+                                {% include 'website/_menu_item.html' %}
+                            {% endfor %}
+                        {% endif %}
+
                     </ul>
                 </li>
 
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-desktop"></i> Operator</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-desktop"></i>
+                        Operator</a>
                     <ul class="dropdown-menu">
                         {% for menu_item in menu_items.operator %}
                             {% include 'website/_menu_item.html' %}
                         {% endfor %}
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Experimental</li>
-                        {% for menu_item in menu_items.experimental %}
-                            {% include 'website/_menu_item.html' %}
-                        {% endfor %}
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Admin</li>
-                        {% for menu_item in menu_items.admin %}
-                            {% include 'website/_menu_item.html' %}
-                        {% endfor %}
+                        {% if user.is_tester and menu_items.operator_extra %}
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Experimental</li>
+                            {% for menu_item in menu_items.operator_extra %}
+                                {% include 'website/_menu_item.html' %}
+                            {% endfor %}
+                        {% endif %}
+                        {% if user.is_superuser %}
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Admin</li>
+                            {% for menu_item in menu_items.admin %}
+                                {% include 'website/_menu_item.html' %}
+                            {% endfor %}
+                        {% endif %}
                     </ul>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a id="profile-dropdown" href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img id="menu-avatar" src="{% avatar_url user 40 %}" alt="user" class="img-circle"/>
+                        <img id="menu-avatar" src="{% avatar_url user 40 %}" alt="user" class="img-circle"/>
                     </a>
                     <ul class="dropdown-menu">
-                            <img id="menu-avatar" src="{% avatar_url user %}" alt="user" class="center-block"/>
+                        <img id="menu-avatar" src="{% avatar_url user %}" alt="user" class="center-block"/>
+
                         <div style="text-align: center">{{ user }}</div>
                         <li class="divider"></li>
                         {% for menu_item in menu_items.settings %}
