@@ -74,7 +74,12 @@ class SignUpApplicationForm(ModelForm):
         ]
 
     def __init__(self, *args, **kwargs):
+        initial = kwargs["initial"]
+        username = initial.get("username")
+        first_name = initial.get("first_name")
+        kwargs["initial"]["first_name"] = first_name or username
         super(SignUpApplicationForm, self).__init__(*args, **kwargs)
+        # remove some labels
         self.fields['referrer'].label = ""
         self.fields['username'].label = ""
 
