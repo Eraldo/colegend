@@ -2,6 +2,6 @@
 colegend-project
 ================
 
-It is a Socially-Intelligent Life-Management Platform.
+CoLegend is a “Socially-Intelligent Life-Management Platform for Sustainable Personal Development”.
 
 www.colegend.org
