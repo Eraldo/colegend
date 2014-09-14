@@ -58,5 +58,12 @@ admin.site.register(Contact, ContactAdmin)
 class ProfileAdmin(admin.ModelAdmin):
     list_filter = ['user']
 
+    fieldsets = (
+        (None, {'fields': ('user',)}),
+        (_('Questions'),
+         {'fields': ('origin', 'referrer', 'experience', 'motivation', 'change', 'drive', 'expectations', 'other')}),
+        (_('Guidelines'), {'fields': ('stop', 'discretion', 'responsibility', 'appreciation', 'terms')})
+    )
+
 
 admin.site.register(Profile, ProfileAdmin)
