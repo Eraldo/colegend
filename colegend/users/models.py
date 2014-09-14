@@ -26,32 +26,13 @@ class User(AbstractBaseUser, PermissionsMixin):
                                 validators=[
                                     validators.RegexValidator(r'^[\w.@+-]+$', _('Enter a valid username.'), 'invalid')
                                 ])
+    first_name = models.CharField(_('first name'), max_length=30, blank=True)
+    last_name = models.CharField(_('last name'), max_length=30, blank=True)
+
     email = models.EmailField(_('email address'), blank=True)
 
     # > contact
     # > profile
-
-    @property
-    def first_name(self):
-        try:
-            return self.contact.first_name
-        except Contact.DoesNotExist:
-            return ""
-
-    @first_name.setter
-    def first_name(self, value):
-        self.contact.first_name = value
-
-    @property
-    def last_name(self):
-        try:
-            return self.contact.last_name
-        except Contact.DoesNotExist:
-            return ""
-
-    @last_name.setter
-    def last_name(self, value):
-        self.contact.last_name = value
 
     # Roles
 
@@ -83,19 +64,18 @@ class User(AbstractBaseUser, PermissionsMixin):
         """
         Returns the first_name plus the last_name, with a space in between.
         """
-        if self.contact:
-            return self.contact.name
-        else:
-            return self.username
+        return "{} {}".format(self.first_name, self.last_name)
 
     get_full_name.short_description = 'Name'
 
+    def get_name(self):
+        return self.get_full_name()
+
+    get_name.short_description = 'Name'
+
     def get_short_name(self):
         "Returns the short name for the user."
-        if self.contact:
-            return self.contact.first_name
-        else:
-            return self.username
+        return self.first_name
 
     get_short_name.short_description = 'Short name'
 
@@ -145,30 +125,28 @@ def notify_managers_after_signup(request, user, **kwargs):
 
 
 class Contact(models.Model):
-    user = models.OneToOneField(User)
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
+    owner = AutoOneToOneField(User)
+    # first_name = models.CharField(max_length=30)
+    @property
+    def first_name(self):
+        return self.owner.first_name
 
-    GENDER_CHOICES = (
-        ('M', 'Male Legend ♂'),
-        ('F', 'Female Legend ♀'),
-    )
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
-    birthday = models.DateField()
-
-    email = models.EmailField()
+    # last_name = models.CharField(max_length=30)
+    @property
+    def last_name(self):
+        return self.owner.last_name
 
     @property
     def email(self):
-        if self.user:
-            return self.user.email
+        if self.owner:
+            return self.owner.email
         else:
             return ""
 
     @email.setter
     def email(self, value):
-        if self.user:
-            self.user.email = value
+        if self.owner:
+            self.owner.email = value
         else:
             raise User.DoesNotExist
 
@@ -179,16 +157,22 @@ class Contact(models.Model):
     city = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
 
-    @property
-    def name(self):
-        return "{} {}".format(self.first_name, self.last_name)
+    GENDER_CHOICES = (
+        ('M', 'Male Legend ♂'),
+        ('F', 'Female Legend ♀'),
+    )
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
+    birthday = models.DateField()
 
     def __str__(self):
-        if self.user:
-            user = self.user
+        if self.owner:
+            user = self.owner
         else:
             user = "Unknown"
-        return "{} ({})".format(self.name, user)
+        return "{} ({})".format(self.get_name(), user)
+
+    def get_name(self):
+        return self.owner.get_name()
 
 
 class Profile(models.Model):
@@ -196,7 +180,7 @@ class Profile(models.Model):
     A user signup application model.
     This is used to get and save some information about the user upon account signup.
     """
-    user = models.OneToOneField(User)
+    owner = AutoOneToOneField(User)
 
     # QUESTIONS
     origin = models.TextField(
@@ -263,8 +247,8 @@ class Profile(models.Model):
     )
 
     def __str__(self):
-        if self.user:
-            user = self.user
+        if self.owner:
+            user = self.owner
         else:
             user = "Unknown"
         return "{}'s Profile".format(user)

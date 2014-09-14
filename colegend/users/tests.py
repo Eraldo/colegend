@@ -40,10 +40,18 @@ class UserModelTests(TestCase):
         """Test the creation of a user without the password. A random password should be chosen."""
         data = self.user_data
         data.pop("password")
-        print(data)
         User.objects.create_user(**data)
         user = User.objects.get(username="Usernew")
         self.assertEquals(len(user.password), 41)
+
+    def test_get_name(self):
+        """Test the retrieval of the user's name."""
+        data = self.user_data
+        data["first_name"] = "FirstName"
+        data["last_name"] = "LastName"
+        User.objects.create_user(**data)
+        user = User.objects.get(username="Usernew")
+        self.assertEquals(user.get_name(), "FirstName LastName")
 
 
 class UserViewTests(TestCase):

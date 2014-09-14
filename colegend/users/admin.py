@@ -19,12 +19,12 @@ class SettingsInline(admin.StackedInline):
 
 class UserAdmin(EmailMixin, AuthUserAdmin):
     add_form = UserCreationForm
-    readonly_fields = ['first_name', 'last_name']
     list_display = ('username', 'email_link', 'get_full_name', 'is_accepted', 'is_tester', 'is_staff')
     list_filter = ('is_active', 'is_accepted', 'is_tester', 'is_staff', 'is_superuser', 'groups')
 
     fieldsets = (
-        (None, {'fields': ('username', 'password', 'email')}),
+        (None, {'fields': ('username', 'password')}),
+        (_('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
         (_('Roles'), {
             'fields': ('is_active', 'is_accepted', 'is_tester', 'is_staff', 'is_superuser')}),
         (_('Permissions'), {
@@ -41,18 +41,18 @@ admin.site.register(User, UserAdmin)
 
 
 class ContactAdmin(EmailMixin, admin.ModelAdmin):
-    list_display = ['name', 'email_link', 'user']
-    search_fields = ['first_name', 'last_name']
-    list_filter = ['user']
+    list_display = ['get_name', 'email_link', 'owner']
+    search_fields = ['owner__first_name', 'owner__last_name']
+    list_filter = ['owner']
+    readonly_fields = ['first_name', 'last_name']
 
     fieldsets = (
-        (None, {'fields': ('user',)}),
-        (_('Name'), {'fields': ('first_name', 'last_name')}),
-        (_('Details'), {'fields': ('gender', 'birthday')}),
-        (_('Contact options'), {
-            'fields': ('email_link', 'phone_number'),
-            'description': '<div class="help">Use the User admin to change the email address.</div>'}),
+        (None, {'fields': ('owner',)}),
+        (None, {
+            'description': '<div class="help">Use the User admin to change the name and email address.</div>',
+            'fields': ('first_name', 'last_name', 'email_link', 'phone_number'), }),
         (_('Address'), {'fields': ('street', 'postal_code', 'city', 'country')}),
+        (_('Details'), {'fields': ('gender', 'birthday')}),
     )
 
 
@@ -60,10 +60,10 @@ admin.site.register(Contact, ContactAdmin)
 
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_filter = ['user']
+    list_filter = ['owner']
 
     fieldsets = (
-        (None, {'fields': ('user',)}),
+        (None, {'fields': ('owner',)}),
         (_('Questions'),
          {'fields': ('origin', 'referrer', 'experience', 'motivation', 'change', 'drive', 'expectations', 'other')}),
         (_('Guidelines'), {'fields': ('stop', 'discretion', 'responsibility', 'appreciation', 'terms')})

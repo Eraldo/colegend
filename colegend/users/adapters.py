@@ -13,15 +13,15 @@ class AccountAdapter(DefaultAccountAdapter):
         Saves a new `User` instance using information provided in the
         signup form.
         """
-
         data = form.cleaned_data
-
-        username = data.get('username')
-        user_username(user, username)
-
+        first_name = data.get('first_name')
+        last_name = data.get('last_name')
         email = data.get('email')
+        username = data.get('username')
         user_email(user, email)
-
+        user_username(user, username)
+        user_field(user, 'first_name', first_name or '')
+        user_field(user, 'last_name', last_name or '')
         if 'password1' in data:
             user.set_password(data["password1"])
         else:
@@ -29,9 +29,9 @@ class AccountAdapter(DefaultAccountAdapter):
         self.populate_username(request, user)
 
         # Create and fill in contact.
-        contact_fields = ["first_name", "last_name", "gender", "birthday",
-                          "phone_number",
-                          "street", "postal_code", "city", "country"]
+        contact_fields = ["phone_number",
+                          "street", "postal_code", "city", "country",
+                          "gender", "birthday"]
         contact_data = {key: value for key, value in data.items() if key in contact_fields}
         contact = Contact(**contact_data)
 
@@ -47,9 +47,9 @@ class AccountAdapter(DefaultAccountAdapter):
             # Ability not to commit makes it easier to derive from
             # this adapter by adding
             user.save()
-            contact.user = user
+            contact.owner = user
             contact.save()
-            profile.user = user
+            profile.owner = user
             profile.save()
         return user
 
@@ -77,13 +77,11 @@ class SocialAccountAdapter(DefaultSocialAccountAdapter):
         last_name = data.get('last_name')
         email = data.get('email')
         name = data.get('name')
-
         user = sociallogin.account.user
-
         user_username(user, username or first_name or last_name or '')
         user_email(user, valid_email_or_none(email) or '')
         name_parts = (name or '').partition(' ')
-        user_field(user, 'contact__first_name', first_name or name_parts[0])
-        user_field(user, 'contact__last_name', last_name or name_parts[2])
+        user_field(user, 'first_name', first_name or name_parts[0])
+        user_field(user, 'last_name', last_name or name_parts[2])
         return user
 
