@@ -102,9 +102,11 @@
                         <img id="menu-avatar" src="{% avatar_url user 40 %}" alt="user" class="img-circle"/>
                     </a>
                     <ul class="dropdown-menu">
-                        <img id="menu-avatar" src="{% avatar_url user %}" alt="user" class="center-block"/>
+                        <a href="{% url "users:detail" user.username %}">
+                            <img id="menu-avatar" src="{% avatar_url user %}" alt="user" class="center-block"/>
 
-                        <div style="text-align: center">{{ user }}</div>
+                            <div style="text-align: center">{{ user }}</div>
+                        </a>
                         <li class="divider"></li>
                         {% for menu_item in menu_items.settings %}
                             {% include 'website/_menu_item.html' %}
