@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, url
-from users.views import UserInactiveView, UserListView, UserRedirectView, UserDetailView, UserUpdateView
+from users.views import UserInactiveView, UserListView, UserRedirectView, UserDetailView, UserUpdateView, \
+    SettingsUpdateView
 
 __author__ = 'eraldo'
 
@@ -34,4 +35,15 @@ urlpatterns = patterns(
         view=UserUpdateView.as_view(),
         name='update'
     ),
+
+    # SETTINGS
+
+    url(
+        regex=r'^~settings/$',
+        # regex=r'^settings/(?P<owner>[\w.@+-]+)/$',
+        view=SettingsUpdateView.as_view(),
+        name='settings'
+    ),
+
+
 )

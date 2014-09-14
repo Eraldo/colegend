@@ -5,7 +5,7 @@ from floppyforms.__future__.models import ModelForm
 import floppyforms as forms
 from lib.formfields import PhoneField
 from lib.validators import validate_in_past, PhoneValidator
-from users.models import User, Profile, Contact
+from users.models import User, Profile, Contact, Settings
 
 __author__ = 'eraldo'
 
@@ -147,3 +147,10 @@ class SignUpApplicationForm(ModelForm):
 
     def signup(self, request, user):
         pass
+
+
+class SettingsForm(ModelForm):
+    class Meta:
+        model = Settings
+
+        fields = ['language', 'day_start', 'sound']
