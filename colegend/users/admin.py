@@ -32,7 +32,7 @@ class UserAdmin(EmailMixin, AuthUserAdmin):
             'fields': ('groups', 'user_permissions')}),
         (_('Dates'), {
             'classes': ('collapse',),
-            'fields': ('last_login', 'date_joined')}),
+            'fields': ('last_login', 'date_accepted', 'date_joined')}),
     )
     inlines = [ContactInline, SettingsInline]
 

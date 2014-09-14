@@ -50,6 +50,7 @@ class User(AbstractBaseUser, PermissionsMixin):
                                                'site.'))
 
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
+    date_accepted = models.DateTimeField(_('date accepted'), null=True, blank=True)
 
     objects = UserManager()
 
@@ -79,11 +80,20 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     get_short_name.short_description = 'Short name'
 
-    def email_user(self, subject, message, from_email=None, **kwargs):
+    def email_user(self, subject, message, from_email="colegend@colegend.org", **kwargs):
         """
         Sends an email to this User.
         """
+        # TODO: Add link to website. (use Email template)
         send_mail(subject, message, from_email, [self.email], **kwargs)
+
+    def accept(self, accepter=None):
+        self.is_accepted = True
+        self.date_accepted = timezone.now()
+        # TODO: Add person who accepted to the email
+        message = "Congratulations - Your account signup has been accepted!"
+        self.email_user("[CoLegend] Accepted!", message)
+
 
     # As of Django 1.8 this will be fixed by using "default_related_name" in the respective model's Meta class.
     # https://docs.djangoproject.com/en/dev/ref/models/options/#default-related-name

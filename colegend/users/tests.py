@@ -53,6 +53,35 @@ class UserModelTests(TestCase):
         user = User.objects.get(username="Usernew")
         self.assertEquals(user.get_name(), "FirstName LastName")
 
+    def test_is_accepted(self):
+        """Test the user property: default, get, set."""
+        User.objects.create_user(**self.user_data)
+        user = User.objects.get(username="Usernew")
+        # Test getter
+        self.assertIsNotNone(user.is_accepted)
+        # Make sure that a new user is not accepted by default.
+        self.assertFalse(user.is_accepted)
+        # Test setter
+        user.is_accepted = True
+        self.assertTrue(user.is_accepted)
+
+    def test_accept(self):
+        User.objects.create_user(**self.user_data)
+        user = User.objects.get(username="Usernew")
+        user.accept()
+
+        # Check if the acceptance flag was set.
+        self.assertTrue(user.is_accepted)
+
+    def test_accept_email(self):
+        from django.core import mail
+        User.objects.create_user(**self.user_data)
+        user = User.objects.get(username="Usernew")
+        user.accept()
+
+        self.assertEquals(len(mail.outbox), 1)
+        self.assertEquals(mail.outbox[0].subject, '[CoLegend] Accepted!')
+
 
 class UserViewTests(TestCase):
     def test_list_view_anonymous(self):
