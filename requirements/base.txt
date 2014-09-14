@@ -14,6 +14,7 @@ django-floppyforms==1.2.0
 
 # Models
 django-model-utils==2.0.3
+django-annoying==0.8.0
 
 # Images
 Pillow==2.5.3

@@ -1,6 +1,8 @@
+from annoying.fields import AutoOneToOneField
 from django.contrib import messages
 from django.contrib.auth.models import PermissionsMixin, AbstractBaseUser
 from django.core import validators
+from django.core.validators import MaxValueValidator
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.core.mail import send_mail, mail_managers
@@ -142,7 +144,6 @@ def notify_managers_after_signup(request, user, **kwargs):
     messages.add_message(request, messages.SUCCESS, 'We have received your application.')
 
 
-
 class Contact(models.Model):
     user = models.OneToOneField(User)
     first_name = models.CharField(max_length=30)
@@ -267,3 +268,26 @@ class Profile(models.Model):
         else:
             user = "Unknown"
         return "{}'s Profile".format(user)
+
+
+class Settings(models.Model):
+    owner = AutoOneToOneField(User, primary_key=True)
+    # ISO 639-1
+    ENGLISH = "EN"
+    LANGUAGE_CHOICES = (
+        (ENGLISH, 'English'),
+    )
+    language = models.CharField(max_length=2,
+                                choices=LANGUAGE_CHOICES,
+                                default=ENGLISH)
+    day_start = models.PositiveSmallIntegerField(
+        verbose_name="Day start time", default=0,
+        help_text="When does your day start? Enter number between 0 and 24 (24h clock).",
+        validators=[MaxValueValidator(24)])
+    sound = models.BooleanField(verbose_name="Sound enabled", default=True)
+
+    class Meta:
+        verbose_name_plural = "Settings"
+
+    def __str__(self):
+        return "{}'s Settings".format(self.owner)

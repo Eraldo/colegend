@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 from lib.admin import EmailMixin
 from users.forms import UserCreationForm
-from users.models import User, Contact, Profile
+from users.models import User, Contact, Profile, Settings
 from django.utils.translation import ugettext_lazy as _
 
 __author__ = 'eraldo'
@@ -11,6 +11,10 @@ __author__ = 'eraldo'
 class ContactInline(admin.StackedInline):
     model = Contact
     verbose_name_plural = "Contact"
+
+
+class SettingsInline(admin.StackedInline):
+    model = Settings
 
 
 class UserAdmin(EmailMixin, AuthUserAdmin):
@@ -30,7 +34,7 @@ class UserAdmin(EmailMixin, AuthUserAdmin):
             'classes': ('collapse',),
             'fields': ('last_login', 'date_joined')}),
     )
-    inlines = [ContactInline]
+    inlines = [ContactInline, SettingsInline]
 
 
 admin.site.register(User, UserAdmin)
@@ -67,3 +71,16 @@ class ProfileAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Profile, ProfileAdmin)
+
+
+class SettingsAdmin(admin.ModelAdmin):
+    list_filter = ['owner']
+
+    fieldsets = (
+        (None, {'fields': ('owner',)}),
+        (_('Settings'),
+         {'fields': ('language', 'day_start', 'sound')}),
+    )
+
+
+admin.site.register(Settings, SettingsAdmin)
