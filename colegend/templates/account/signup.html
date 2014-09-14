@@ -24,4 +24,16 @@
     </div>
 {% endblock content %}
 
+{% block body_scripts %}
+    {{ block.super }}
+    <script>
+        $(".dateinput").datepicker("option", {
+            yearRange: "-100y:-16y",
+            minDate: "-100y",
+            maxDate: "-16y",
+            defaultDate: "-20y"
+        });
+    </script>
+{% endblock %}
+
 
