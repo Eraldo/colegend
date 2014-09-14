@@ -131,10 +131,18 @@ class Contact(models.Model):
     def first_name(self):
         return self.owner.first_name
 
+    @first_name.setter
+    def first_name(self, value):
+        self.owner.first_name = value
+
     # last_name = models.CharField(max_length=30)
     @property
     def last_name(self):
         return self.owner.last_name
+
+    @last_name.setter
+    def last_name(self, value):
+        self.owner.last_name = value
 
     @property
     def email(self):
