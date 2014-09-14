@@ -119,6 +119,30 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.tag_set
 
 
+from allauth.account.signals import user_signed_up
+from django.dispatch import receiver
+
+
+@receiver(user_signed_up, dispatch_uid="notify_managers_after_signup")
+def notify_managers_after_signup(request, user, **kwargs):
+    """
+    Inform the admin that a new user has signed up for the system.
+
+    :param request:
+    :param user:
+    :param kwargs:
+    """
+
+    # Notify the managers.
+    mail_managers(
+        subject="New user: {}".format(user),
+        message="A new user has signed up:\nUsername: {}\nEmail: {}".format(user, user.email),
+        fail_silently=True
+    )
+    messages.add_message(request, messages.SUCCESS, 'We have received your application.')
+
+
+
 class Contact(models.Model):
     user = models.OneToOneField(User)
     first_name = models.CharField(max_length=30)
@@ -243,26 +267,3 @@ class Profile(models.Model):
         else:
             user = "Unknown"
         return "{}'s Profile".format(user)
-
-
-from allauth.account.signals import user_signed_up
-from django.dispatch import receiver
-
-
-@receiver(user_signed_up, dispatch_uid="notify_managers_after_signup")
-def notify_managers_after_signup(request, user, **kwargs):
-    """
-    Inform the admin that a new user has signed up for the system.
-
-    :param request:
-    :param user:
-    :param kwargs:
-    """
-
-    # Notify the managers.
-    mail_managers(
-        subject="New user: {}".format(user),
-        message="A new user has signed up:\nUsername: {}\nEmail: {}".format(user, user.email),
-        fail_silently=True
-    )
-    messages.add_message(request, messages.SUCCESS, 'We have received your application.')
