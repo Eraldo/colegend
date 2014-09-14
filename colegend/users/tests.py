@@ -27,7 +27,7 @@ class UserModelTests(TestCase):
         )
 
     def test_username_missing(self):
-        """Test the creation of a user without the required country field."""
+        """Test the creation of a user without the required username field."""
         data = self.user_data
         data.pop("username")
         self.assertRaises(
@@ -37,13 +37,13 @@ class UserModelTests(TestCase):
         )
 
     def test_password_missing(self):
-        """Test the creation of a user without the required country field."""
+        """Test the creation of a user without the password. A random password should be chosen."""
         data = self.user_data
         data.pop("password")
         print(data)
         User.objects.create_user(**data)
         user = User.objects.get(username="Usernew")
-        self.assertEquals(user.password, '')
+        self.assertEquals(len(user.password), 41)
 
 
 class UserViewTests(TestCase):
@@ -53,9 +53,16 @@ class UserViewTests(TestCase):
 
     def test_list_view_authenticated(self):
         """Test the user list view with a logged in user."""
-        usernew = User.objects.create_user(username="Usernew", password="usernew")
+        usernew = User.objects.create_user(username="Usernew", password="usernew", is_accepted=True)
         self.client.login(username="Usernew", password="usernew")
         response = self.client.get(reverse('users:list'))
         self.assertEquals(response.status_code, 200)
         self.assertContains(response, "Usernew")
         self.assertQuerysetEqual(response.context['user_list'], ['<User: Usernew>'])
+
+    def test_list_view_unauthenticated(self):
+        """Test the user list view with a logged in user."""
+        usernew = User.objects.create_user(username="Usernew", password="usernew", is_accepted=False)
+        self.client.login(username="Usernew", password="usernew")
+        response = self.client.get(reverse('users:list'))
+        self.assertEquals(response.status_code, 302)
