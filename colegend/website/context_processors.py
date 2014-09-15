@@ -41,6 +41,7 @@ def menu(request):
         'motivator': [
         ],
         'motivator_extra': [
+            MenuItem("Legend", url="legend:home", icon="paw"),
         ],
         'operator': [
             MenuItem("Contact", url="contact", icon="envelope"),

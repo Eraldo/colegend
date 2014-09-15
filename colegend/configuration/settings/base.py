@@ -221,6 +221,7 @@ PROJECT_APPS = (
     # operator
     'users',  # custom users app
     'website',
+    'legend',
     'contact',
     'features',
     'commands',  # command text interface
