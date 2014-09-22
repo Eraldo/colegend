@@ -10,5 +10,9 @@ class LegendView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(LegendView, self).get_context_data(**kwargs)
-        context['introduction'] = Block.objects.get(name="Introduction").description
+        try:
+            introduction = Block.objects.get(name="Introduction").description
+        except Block.DoesNotExist:
+            introduction = None
+        context['introduction'] = introduction
         return context
