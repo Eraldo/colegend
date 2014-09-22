@@ -16,7 +16,7 @@ class RandomQuoteView(QuoteMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(RandomQuoteView, self).get_context_data(**kwargs)
         try:
-            quote = Quote.objects.order_by('?').first()
+            quote = Quote.objects.filter(accepted=True).order_by('?').first()
         except Quote.DoesNotExist:
             quote = None
         context['quote'] = quote

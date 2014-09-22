@@ -23,6 +23,7 @@ class Quote(models.Model):
     author = models.CharField(max_length=100)
     category = models.ForeignKey(Category)
     provider = models.ForeignKey(settings.AUTH_USER_MODEL)
+    accepted = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
