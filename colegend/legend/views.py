@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.shortcuts import render
 
 # Create your views here.
@@ -20,4 +21,5 @@ class LegendView(QuoteMixin, TemplateView):
         except Block.DoesNotExist:
             introduction = None
         context['introduction'] = introduction
+        context['candidates'] = get_user_model().objects.accepted()
         return context

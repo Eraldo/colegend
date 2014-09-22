@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.models import PermissionsMixin, AbstractBaseUser
 from django.core import validators
 from django.core.validators import MaxValueValidator
+from django.db.models import QuerySet
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.core.mail import send_mail, mail_managers
@@ -12,6 +13,11 @@ from users.modelfields import RequiredBooleanField
 from users.managers import UserManager
 
 __author__ = 'eraldo'
+
+
+class UserQuerySet(QuerySet):
+    def accepted(self):
+        return self.filter(is_accepted=True)
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -52,7 +58,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     date_accepted = models.DateTimeField(_('date accepted'), null=True, blank=True)
 
-    objects = UserManager()
+    objects = UserManager.from_queryset(UserQuerySet)()
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']

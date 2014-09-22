@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load avatar_tags %}
 
 {% block content %}
     <div class="container">
@@ -6,6 +7,19 @@
 
         <div class="well">
             {{ introduction|linebreaks }}
+        </div>
+        <div class="well">
+        <h3>Candidates</h3>
+            <div class="list-group">
+                {% for candidate in candidates %}
+                    <a href="{% url 'users:detail' candidate.username %}" class="list-group-item">
+                        <h4 class="list-group-item-heading">{% avatar candidate %} {{ candidate.username }}</h4>
+{#                        {% if candidate.vision %}#}
+{#                        <p class="list-group-item-text"><b>Vision:</b> {{ candidate.vision.name }}</p>#}
+{#                        {% endif %}#}
+                    </a>
+                {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock %}
