@@ -40,6 +40,7 @@ def menu(request):
         ],
         'motivator': [
             MenuItem("Legend", url="legend:home", icon="paw"),
+            MenuItem("Quotes", url="quotes:random", icon="quote-left"),
         ],
         'motivator_extra': [
         ],

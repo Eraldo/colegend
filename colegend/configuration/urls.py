@@ -14,7 +14,6 @@ urlpatterns = patterns('',
 
     # operator
     url(r'', include('website.urls')),
-    url(r'^legend/', include('legend.urls', namespace="legend")),
     url(r'^features/', include('features.urls', namespace="features")),
     url(r'^commands/', include('commands.urls')),
     url(r'^contact/', include('contact.urls')),
@@ -28,7 +27,9 @@ urlpatterns = patterns('',
     url(r'^visions/', include('visions.urls', namespace="visions")),
     url(r'^journals/', include('journals.urls', namespace="journals")),
     url(r'^meetings/', include('meetings.urls')),
-
+    # motivator
+    url(r'^legend/', include('legend.urls', namespace="legend")),
+    url(r'^quotes/', include('quotes.urls', namespace="quotes")),
 
     # Uncomment the next line to enable the admin:
     url(r'^backend/', include(admin.site.urls)),
