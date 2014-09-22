@@ -20,7 +20,7 @@ class Quote(models.Model):
 
     name = models.CharField(max_length=100, unique=True)
     text = models.TextField(blank=True)
-    author = models.CharField(max_length=100)
+    author = models.CharField(max_length=100, blank=True)
     category = models.ForeignKey(Category)
     provider = models.ForeignKey(settings.AUTH_USER_MODEL)
     accepted = models.BooleanField(default=False)

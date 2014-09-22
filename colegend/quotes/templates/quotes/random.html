@@ -18,7 +18,7 @@
             <h3>Share your quotes</h3>
 
             <p>Can you think of a quote that you could share? Awesome!</p>
-            <a href="mailto:eraldo@colegend.org?Subject=[CoLegend]%20Quotes" target="_blank" class="btn btn-primary"><i class="fa fa-share"></i> Share a Quote</a>
+            <a href="{% url "quotes:quote_new" %}" class="btn btn-primary"><i class="fa fa-share"></i> Share a Quote</a>
         </div>
     </div>
 {% endblock %}
