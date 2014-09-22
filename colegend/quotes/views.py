@@ -1,8 +1,13 @@
 from django.views.generic import TemplateView
+from lib.views import ActiveUserRequiredMixin
 from quotes.models import Quote
 
 
-class RandomQuoteView(TemplateView):
+class QuoteMixin(ActiveUserRequiredMixin):
+    model = Quote
+
+
+class RandomQuoteView(QuoteMixin, TemplateView):
     template_name = "quotes/random.html"
 
     def get_context_data(self, **kwargs):
