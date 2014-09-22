@@ -39,9 +39,9 @@ def menu(request):
             MenuItem("habits", url="habits:habit_list", icon="link"),
         ],
         'motivator': [
+            MenuItem("Legend", url="legend:home", icon="paw"),
         ],
         'motivator_extra': [
-            MenuItem("Legend", url="legend:home", icon="paw"),
         ],
         'operator': [
             MenuItem("Contact", url="contact", icon="envelope"),
