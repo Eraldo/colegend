@@ -4,6 +4,7 @@ __author__ = 'eraldo'
 
 
 class InlineMixin:
+    @staticmethod
     def change_link(instance):
         if not instance.id:
             return "(save and then edit)"
@@ -26,6 +27,7 @@ class InlineMixin:
 class EmailMixin:
     def email_link(self, obj):
         return '<a href="{0}{1}">{1}</a>'.format("mailto:", obj.email)
+
     email_link.allow_tags = True
     email_link.short_description = 'Email'
 

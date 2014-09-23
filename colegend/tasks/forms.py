@@ -9,7 +9,7 @@ __author__ = 'eraldo'
 class TaskForm(ModelForm):
     class Meta:
         model = Task
-        fields = ['project', 'name', 'description', 'status', 'date', 'deadline', 'tags']
+        fields = ['project', 'name', 'description', 'status', 'priority', 'date', 'deadline', 'tags']
 
     helper = FormHelper()
     helper.layout = Layout(
@@ -17,6 +17,7 @@ class TaskForm(ModelForm):
         Field('name', autofocus='True'),
         Field('description'),
         Field('status'),
+        Field('priority'),
         Field('date'),
         Field('deadline'),
     )

@@ -9,13 +9,14 @@ __author__ = 'eraldo'
 class ProjectForm(ModelForm):
     class Meta:
         model = Project
-        fields = ['name', 'description', 'status', 'deadline', 'tags']
+        fields = ['name', 'description', 'status', 'priority', 'deadline', 'tags']
 
     helper = FormHelper()
     helper.layout = Layout(
         Field('name', autofocus='True'),
         Field('description'),
         Field('status'),
+        Field('priority'),
         Field('deadline'),
     )
     helper.add_input(Submit('save', 'Save'))

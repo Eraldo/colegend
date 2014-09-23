@@ -24,6 +24,7 @@ class Task(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, TaggableBas
 
     description = models.TextField(blank=True)
     status = models.ForeignKey(Status, default=Status.DEFAULT_PK)
+    priority = models.IntegerField(default=1)
     date = models.DateField(blank=True, null=True, help_text="When will I start?")
     deadline = models.DateField(blank=True, null=True)
 
