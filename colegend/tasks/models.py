@@ -40,7 +40,7 @@ class Task(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, TaggableBas
     def clean(self):
         super(Task, self).clean()
         # Prevent duplicate names if the project was not set.
-        if not self.project and Task.objects.filter(project__isnull=True, name=self.name).exists():
+        if not self.pk and not self.project and Task.objects.filter(project__isnull=True, name=self.name).exists():
             raise ValidationError("A Task with this name and without a project exists already.")
         # Prevent the creation of a task for a project that is not owned.
         if self.project and not self.project.owner == self.owner:
