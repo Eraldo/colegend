@@ -19,8 +19,8 @@ class Quote(models.Model):
     """A motivational text quote."""
 
     name = models.CharField(max_length=100, unique=True)
-    text = models.TextField(blank=True)
-    author = models.CharField(max_length=100, blank=True)
+    text = models.TextField()
+    author = models.CharField(max_length=100, default="Someone")
     category = models.ForeignKey(Category)
     provider = models.ForeignKey(settings.AUTH_USER_MODEL)
     accepted = models.BooleanField(default=False)
