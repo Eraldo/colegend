@@ -43,6 +43,13 @@ class TagShowView(TagMixin, DetailView):
 class TagEditView(TagMixin, UpdateView):
     success_url = reverse_lazy('tags:tag_list')
 
+    def get_context_data(self, **kwargs):
+        context = super(TagEditView, self).get_context_data(**kwargs)
+        # The context variable 'tag' conflicts with the crispy form template
+        # which also uses the variable 'tag' to insert 'html-div-tags'.
+        context.pop('tag')
+        return context
+
 
 class TagDeleteView(TagMixin, DeleteView):
     success_url = reverse_lazy('tags:tag_list')

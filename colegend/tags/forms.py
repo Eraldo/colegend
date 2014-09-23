@@ -13,6 +13,7 @@ class TagForm(ModelForm):
 
     helper = FormHelper()
     helper.layout = Layout(
-        Field('name', autofocus='True')
+        Field('name', autofocus='True'),
+        Field('description'),
     )
     helper.add_input(Submit('save', 'Save'))
