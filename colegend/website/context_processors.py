@@ -53,8 +53,9 @@ def menu(request):
         'operator_extra': [
             MenuItem("commands", url="commands", icon="bullhorn"),
         ],
-        'settings': [
-            MenuItem("settings", url="users:detail", arg=request.user, icon="wrench"),
+        'account': [
+            MenuItem("profile", url="users:detail", arg=request.user, icon="user"),
+            MenuItem("settings", url="users:settings", icon="wrench"),
         ],
         'admin': [
             MenuItem("Backend", url="admin:index", icon="database"),
