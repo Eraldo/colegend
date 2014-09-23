@@ -14,9 +14,9 @@ class QuoteForm(ModelForm):
 
     helper = FormHelper()
     helper.layout = Layout(
-        Field('name', autofocus='True'),
-        Field('text'),
-        Field('author'),
+        Field('name', autofocus='True', placeholder="Some Words"),
+        Field('text', placeholder="Some words are more than nothing."),
+        Field('author', placeholder='Someone'),
         Field('category'),
     )
     helper.add_input(Submit('save', 'Save'))

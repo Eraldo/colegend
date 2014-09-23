@@ -18,7 +18,7 @@ class Category(models.Model):
 class Quote(models.Model):
     """A motivational text quote."""
 
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100, unique=True, help_text="What is the quote about?")
     text = models.TextField()
     author = models.CharField(max_length=100, default="Someone")
     category = models.ForeignKey(Category)
