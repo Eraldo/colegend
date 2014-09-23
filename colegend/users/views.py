@@ -19,6 +19,11 @@ from .forms import UserForm, SettingsForm
 from .models import User, Settings
 
 
+class UserMixin(ActiveUserRequiredMixin):
+    def get_queryset(self):
+        return super(UserMixin, self).get_queryset().accepted()
+
+
 class UserInactiveView(LoginRequiredMixin, TemplateView):
     template_name = "users/inactive.html"
 
@@ -28,14 +33,14 @@ class UserInactiveView(LoginRequiredMixin, TemplateView):
         return super(UserInactiveView, self).get(request, *args, **kwargs)
 
 
-class UserDetailView(ActiveUserRequiredMixin, DetailView):
+class UserDetailView(UserMixin, DetailView):
     model = User
     # These next two lines tell the view to index lookups by username
     slug_field = "username"
     slug_url_kwarg = "username"
 
 
-class UserRedirectView(ActiveUserRequiredMixin, RedirectView):
+class UserRedirectView(UserMixin, RedirectView):
     permanent = False
 
     def get_redirect_url(self):
@@ -43,7 +48,7 @@ class UserRedirectView(ActiveUserRequiredMixin, RedirectView):
                        kwargs={"username": self.request.user.username})
 
 
-class UserUpdateView(ActiveUserRequiredMixin, UpdateView):
+class UserUpdateView(UserMixin, UpdateView):
     form_class = UserForm
 
     # we already imported User in the view code above, remember?
@@ -59,14 +64,14 @@ class UserUpdateView(ActiveUserRequiredMixin, UpdateView):
         return User.objects.get(username=self.request.user.username)
 
 
-class UserListView(ActiveUserRequiredMixin, ListView):
+class UserListView(UserMixin, ListView):
     model = User
     # These next two lines tell the view to index lookups by username
     slug_field = "username"
     slug_url_kwarg = "username"
 
 
-class SettingsUpdateView(ActiveUserRequiredMixin, UpdateView):
+class SettingsUpdateView(UserMixin, UpdateView):
     model = Settings
     form_class = SettingsForm
 
