@@ -32,7 +32,7 @@ class Task(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, TaggableBas
 
     class Meta:
         ordering = ["status", "priority", "project", "name"]
-        unique_together = (('owner', 'project', 'name'),)
+        unique_together = ('owner', 'project', 'name')
 
     def __str__(self):
         return self.name
