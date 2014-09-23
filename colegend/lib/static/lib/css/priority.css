@@ -4,26 +4,30 @@
 }
 
 .priority.priority-0 {
-    background-color: red;
+    background-color: black;
 }
 
 .priority.priority-1 {
-    background-color: orange;
+    background-color: red;
 }
 
 .priority.priority-2 {
-    background-color: gold;
+    background-color: orange;
 }
 
 .priority.priority-3 {
-    background-color: green;
+    background-color: gold;
 }
 
 .priority.priority-4 {
-    background-color: blue;
+    background-color: green;
 }
 
 .priority.priority-5 {
+    background-color: blue;
+}
+
+.priority.priority-6 {
     background-color: purple;
 }
 /* end priority */

@@ -24,14 +24,14 @@ class Task(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, TaggableBas
 
     description = models.TextField(blank=True)
     status = models.ForeignKey(Status, default=Status.DEFAULT_PK)
-    priority = models.IntegerField(default=1)
+    priority = models.IntegerField(default=2)
     date = models.DateField(blank=True, null=True, help_text="When will I start?")
     deadline = models.DateField(blank=True, null=True)
 
     objects = TaskQuerySet.as_manager()
 
     class Meta:
-        ordering = ["project", "name"]
+        ordering = ["status", "priority", "project", "name"]
         unique_together = (('owner', 'project', 'name'),)
 
     def __str__(self):
