@@ -5,8 +5,8 @@ from quotes.models import Quote, Category
 
 
 class QuoteAdmin(admin.ModelAdmin):
-    list_display = ['name', 'category']
-    list_filter = ['category']
+    list_display = ['name', 'author', 'category']
+    list_filter = ['category', 'author']
 
 
 admin.site.register(Quote, QuoteAdmin)
