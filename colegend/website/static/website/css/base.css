@@ -1,5 +1,4 @@
 /* Move down content because we have a fixed navbar that is 50px tall */
-
 @import url("/static/projects/css/projects.css");
 @import url("/static/tasks/css/tasks.css");
 @import url("/static/routines/css/routines.css");
@@ -14,8 +13,8 @@
     src: url('../fonts/ubuntu.ttf');
     src: local('ubuntu'), url('../fonts/ubuntu.ttf') format('truetype');
 }
-/* end fonts */
 
+/* end fonts */
 
 /* general */
 body.body {
@@ -26,15 +25,15 @@ body.body {
 .inline {
     display: inline;
 }
-/* end general */
 
+/* end general */
 
 /* messages */
 #messages .alert {
     margin-bottom: 0px;
 }
-/*end messages*/
 
+/*end messages*/
 
 /* menu */
 .navbar-brand.navbar-logo {
@@ -54,6 +53,7 @@ img#logo {
     padding-bottom: 0px;
     /*background-color: red !important;*/
 }
+
 /* end menu */
 
 /* avatar */
@@ -61,10 +61,27 @@ div.avatar img {
     max-height: 110px;
     max-width: 110px;
 }
+
 /* end avatar */
 
 /* django-cirspy-forms */
 .asteriskField {
     color: darkred;
 }
+
 /* end django-cirspy-forms */
+
+/* system role colors */
+.label.bg-mentor {
+    background-color: orange;
+}
+.label.bg-manager {
+    background-color: blue;
+}
+.label.bg-motivator {
+    background-color: purple;
+}
+.label.bg-operator {
+    background-color: black;
+}
+    /* end system role colors */

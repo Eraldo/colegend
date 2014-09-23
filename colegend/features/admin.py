@@ -5,6 +5,7 @@ __author__ = 'eraldo'
 
 
 class FeatureAdmin(admin.ModelAdmin):
-    list_display = ['name', 'date_published']
+    list_display = ['name', 'date_published', 'role']
+    list_filter = ['role']
     search_fields = ['name']
 admin.site.register(Feature, FeatureAdmin)

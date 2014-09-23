@@ -1,5 +1,5 @@
 <div class="feature well well-sm">
-    <b>{{ feature }}</b>
+    <b>{{ feature }}</b> <small class="pull-right"><span class="label label-default bg-{{ feature.get_role_display|lower }}"> {{ feature.get_role_display }}</span></small>
     <br/>
     {% include "lib/_description_field.html" with description=feature.description %}
     <br/>
