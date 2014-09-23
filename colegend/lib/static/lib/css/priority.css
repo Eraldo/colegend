@@ -1,0 +1,29 @@
+/* priority */
+.priority {
+    background-color: grey;
+}
+
+.priority.priority-0 {
+    background-color: red;
+}
+
+.priority.priority-1 {
+    background-color: orange;
+}
+
+.priority.priority-2 {
+    background-color: gold;
+}
+
+.priority.priority-3 {
+    background-color: green;
+}
+
+.priority.priority-4 {
+    background-color: blue;
+}
+
+.priority.priority-5 {
+    background-color: purple;
+}
+/* end priority */

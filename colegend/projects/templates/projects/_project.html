@@ -2,6 +2,7 @@
     <b><a href="{{ project.get_show_url }}">{{ project }}</a></b>
     <br/>
     {% include "status/_status_field.html" with status=project.status %}
+    {% include "lib/_priority_field.html" with priority=project.priority %}
     {% include "tags/_tags_field.html" with tags=project.tags.all %}
     <br/>
     {% include "lib/_description_field.html" with description=project.description %}

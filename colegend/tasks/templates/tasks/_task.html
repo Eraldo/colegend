@@ -2,6 +2,7 @@
     <b>{% include "tasks/_task_link.html" %}</b>
     <br/>
     {% include "status/_status_field.html" with status=task.status %}
+    {% include "lib/_priority_field.html" with priority=task.priority %}
     {% include "tags/_tags_field.html" with tags=task.tags.all %}
     <br/>
     {% include "projects/_project_field.html" with project=task.project %}
