@@ -218,12 +218,11 @@ DJANGO_APPS = (
 # Apps specific for this project go here.
 
 PROJECT_APPS = (
-    # operator
-    'users',  # custom users app
-    'website',
-    'contact',
-    'features',
-    'commands',  # command text interface
+    # mentor
+    'visions',
+    'meetings',
+    'journals',
+    'dojo',
     # manager
     'projects',
     'tasks',
@@ -231,13 +230,15 @@ PROJECT_APPS = (
     'statuses',
     'routines',
     'habits',
-    # mentor
-    'visions',
-    'meetings',
-    'journals',
     # motivator
     'legend',
     'quotes',
+    # operator
+    'users',  # custom users app
+    'website',
+    'contact',
+    'features',
+    'commands',  # command text interface
     # common
     'lib',
     # styling

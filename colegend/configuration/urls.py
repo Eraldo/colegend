@@ -12,24 +12,25 @@ urlpatterns = patterns('',
     # url(r'^$', 'configuration.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
-    # operator
-    url(r'', include('website.urls')),
-    url(r'^features/', include('features.urls', namespace="features")),
-    url(r'^commands/', include('commands.urls')),
-    url(r'^contact/', include('contact.urls')),
+    # mentor
+    url(r'^visions/', include('visions.urls', namespace="visions")),
+    url(r'^journals/', include('journals.urls', namespace="journals")),
+    url(r'^meetings/', include('meetings.urls')),
+    url(r'^dojo/', include('dojo.urls', namespace="dojo")),
     # manager
     url(r'^projects/', include('projects.urls', namespace="projects")),
     url(r'^tasks/', include('tasks.urls', namespace="tasks")),
     url(r'^routines/', include('routines.urls', namespace="routines")),
     url(r'^habits/', include('habits.urls', namespace="habits")),
     url(r'^tags/', include('tags.urls', namespace="tags")),
-    # mentor
-    url(r'^visions/', include('visions.urls', namespace="visions")),
-    url(r'^journals/', include('journals.urls', namespace="journals")),
-    url(r'^meetings/', include('meetings.urls')),
     # motivator
     url(r'^legend/', include('legend.urls', namespace="legend")),
     url(r'^quotes/', include('quotes.urls', namespace="quotes")),
+    # operator
+    url(r'', include('website.urls')),
+    url(r'^features/', include('features.urls', namespace="features")),
+    url(r'^commands/', include('commands.urls')),
+    url(r'^contact/', include('contact.urls')),
 
     # Uncomment the next line to enable the admin:
     url(r'^backend/', include(admin.site.urls)),
