@@ -1,17 +1,18 @@
 from django.contrib.auth import get_user_model
-from django.shortcuts import render
 
 # Create your views here.
 from django.views.generic import TemplateView
 from legend.models import Block
 from lib.views import ActiveUserRequiredMixin
 
+__author__ = 'eraldo'
 
-class QuoteMixin(ActiveUserRequiredMixin):
+
+class LegendMixin(ActiveUserRequiredMixin):
     pass
 
 
-class LegendView(QuoteMixin, TemplateView):
+class LegendView(LegendMixin, TemplateView):
     template_name = "legend/legend.html"
 
     def get_context_data(self, **kwargs):
