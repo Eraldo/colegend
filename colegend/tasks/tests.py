@@ -49,7 +49,7 @@ class TaskModelTests(TestCase):
         )
 
     def test_duplicate_task_creation_without_project(self):
-        """Make sure that creating a duplicate task with the same owner, project and name raises an exception."""
+        """Make sure that creating a duplicate task with the same owner, name and without a project raises an exception."""
         task = Task.objects.create(name="Task", owner=self.user)
         self.assertRaises(
             ValidationError,
