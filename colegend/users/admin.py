@@ -78,8 +78,10 @@ class SettingsAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {'fields': ('owner',)}),
-        (_('Settings'),
+        (_('General Settings'),
          {'fields': ('language', 'day_start', 'sound')}),
+        (_('Journal Settings'),
+         {'fields': ('journal_entry_template',)}),
     )
 
 

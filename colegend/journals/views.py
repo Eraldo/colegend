@@ -20,6 +20,7 @@ class DayEntryMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
             form.add_error(None, e)
             return super(DayEntryMixin, self).form_invalid(form)
 
+
 class DayEntryListView(DayEntryMixin, ArchiveIndexView):
     date_field = "date"
     template_name = "journals/dayentry_list.html"
@@ -34,6 +35,13 @@ class DayEntryNewView(DayEntryMixin, CreateView):
         user = self.request.user
         form.instance.owner = user
         return super(DayEntryNewView, self).form_valid(form)
+
+    def get_initial(self):
+        initial = super(DayEntryNewView, self).get_initial()
+        entry_template = self.request.user.settings.journal_entry_template
+        if entry_template:
+            initial['text'] = entry_template
+        return initial
 
 
 class DayEntryShowView(DayEntryMixin, DetailView):

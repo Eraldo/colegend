@@ -293,6 +293,9 @@ class Settings(models.Model):
         help_text="When does your day start? Enter number between 0 and 24 (24h clock).",
         validators=[MaxValueValidator(24)])
     sound = models.BooleanField(verbose_name="Sound enabled", default=True)
+    journal_entry_template = models.TextField(
+        blank=True,
+        help_text="The default text to be used as a basis when creating a new journal entry.")
 
     class Meta:
         verbose_name_plural = "Settings"

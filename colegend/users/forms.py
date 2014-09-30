@@ -153,4 +153,19 @@ class SettingsForm(ModelForm):
     class Meta:
         model = Settings
 
-        fields = ['language', 'day_start', 'sound']
+        fields = ['language', 'day_start', 'sound', 'journal_entry_template']
+
+    helper = FormHelper()
+    helper.layout = Layout(
+        Fieldset(
+            "General Settings",
+            Field("language"),
+            Field("day_start"),
+            Field("sound"),
+        ),
+        Fieldset(
+            "Journal Settings",
+            Field("journal_entry_template"),
+        ),
+    )
+    helper.add_input(Submit('save', 'Update'))

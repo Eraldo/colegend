@@ -9,16 +9,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1>{{ user|title }}'s Settings</h1>
-
-                <form method="post">
-                    {% csrf_token %}
-                    {{ form|crispy }}
-                    <div class="control-group">
-                        <div class="controls">
-                            <button type="submit" class="btn btn-primary">Update</button>
-                        </div>
-                    </div>
-                </form>
+                {% crispy form %}
             </div>
         </div>
     </div>
