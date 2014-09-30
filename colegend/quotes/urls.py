@@ -9,7 +9,7 @@ urlpatterns = patterns(
     url(r'^$',
         RandomQuoteView.as_view(),
         name='random'),
-    # ex: ../
+    # ex: ../new/
     url(r'^new/$',
         QuoteCreateView.as_view(),
         name='quote_new'),
