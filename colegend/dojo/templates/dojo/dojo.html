@@ -6,6 +6,19 @@
 
         <div class="well">
             Here you can expand your knowledge and integrate new concepts by doing exercises.
+            <h2>Modules</h2>
+            {% for module in modules %}
+                <a href="{{ module.get_show_url }}" class="btn btn-primary">{{ module }}</a>
+            {% empty %}
+                No modules here yet.
+            {% endfor %}
         </div>
+        <div class="well">
+            <h3>Share your module</h3>
+
+            <p>Can you think of some content combined with an exercise that you could share? Awesome!</p>
+            <a href="{% url "dojo:module_new" %}" class="btn btn-primary"><i class="fa fa-share"></i> Share a Module</a>
+        </div>
+
     </div>
 {% endblock %}

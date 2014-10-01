@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from lib.models import AutoUrlMixin
 
 __author__ = 'eraldo'
 
@@ -15,12 +16,12 @@ class Category(models.Model):
         verbose_name_plural = "categories"
 
 
-class Module(models.Model):
+class Module(AutoUrlMixin, models.Model):
     """
     A course module with some content to learn about and practise.
     """
     name = models.CharField(max_length=100)
-    description = models.TextField(blank=True)
+    description = models.TextField(help_text="A compact description of the theory or concept followed by an exercise.")
 
     category = models.ForeignKey(Category)
     provider = models.ForeignKey(settings.AUTH_USER_MODEL)

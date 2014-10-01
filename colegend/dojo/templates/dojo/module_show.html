@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ module }}</h1>
+    {% if not user.is_superuser %}
+        <a href="{{ tag.get_edit_url }}" class="btn btn-default btn-sm" role="button">edit</a>
+        <a href="{{ tag.get_delete_url }}" class="btn btn-default btn-sm" role="button">delete</a>
+    {% endif %}
+    <div class="well">
+        {{ module.description|linebreaksbr }}
+        <footer><cite class="small pull-right">— shared
+                        by {{ module.provider }}</cite></footer>
+    </div>
+
+{% endblock %}
