@@ -7,7 +7,8 @@
         <a href="{{ tag.get_delete_url }}" class="btn btn-default btn-sm" role="button">delete</a>
     {% endif %}
     <div class="well">
-        {{ module.description|linebreaksbr }}
+        <p class="lead">{{ module.description|linebreaksbr }}</p>
+        {{ module.content|linebreaksbr }}
         <footer><cite class="small pull-right">— shared
                         by {{ module.provider }}</cite></footer>
     </div>
