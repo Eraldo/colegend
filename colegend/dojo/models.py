@@ -14,6 +14,7 @@ class Category(models.Model):
 
     class Meta:
         verbose_name_plural = "categories"
+        ordering = ["-pk"]
 
 
 class Module(AutoUrlMixin, models.Model):
@@ -21,7 +22,9 @@ class Module(AutoUrlMixin, models.Model):
     A course module with some content to learn about and practise.
     """
     name = models.CharField(max_length=100)
-    description = models.TextField(help_text="A compact description of the theory or concept followed by an exercise.")
+    description = models.TextField(help_text="A short description of the course content.")
+
+    content = models.TextField(help_text="A compact explanation of the theory or concept followed by an exercise.")
 
     category = models.ForeignKey(Category)
     provider = models.ForeignKey(settings.AUTH_USER_MODEL)
