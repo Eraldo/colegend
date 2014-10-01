@@ -1,5 +1,6 @@
+from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse_lazy
-from django.views.generic import TemplateView, CreateView, DetailView
+from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView
 from dojo.forms import ModuleForm
 from dojo.models import Module
 from lib.views import ActiveUserRequiredMixin
@@ -32,3 +33,15 @@ class ModuleCreateView(DojoMixin, CreateView):
 
 class ModuleShowView(DojoMixin, DetailView):
     template_name = "dojo/module_show.html"
+
+
+class ModuleEditView(DojoMixin, UpdateView):
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_superuser or request.user == self.get_object().provider:
+            return super(ModuleEditView, self).dispatch(request, *args, **kwargs)
+        else:
+            raise PermissionDenied
+
+
+class ModuleDeleteView(DojoMixin, DeleteView):
+    success_url = reverse_lazy('dojo:home')

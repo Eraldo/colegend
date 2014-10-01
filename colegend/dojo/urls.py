@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-from dojo.views import DojoView, ModuleCreateView, ModuleShowView
+from dojo.views import DojoView, ModuleCreateView, ModuleShowView, ModuleEditView, ModuleDeleteView
 
 __author__ = 'eraldo'
 
@@ -17,4 +17,14 @@ urlpatterns = patterns(
     url(r'^(?P<pk>\d+)/$',
         ModuleShowView.as_view(),
         name='module_show'),
+    # ex: ../edit/
+    url(r'^(?P<pk>\d+)/edit/$',
+        ModuleEditView.as_view(),
+        name='module_edit'),
+
+    # ex: ../4/delete/
+    url(r'^(?P<pk>\d+)/delete/$',
+        ModuleDeleteView.as_view(),
+        name='module_delete'),
+
 )
