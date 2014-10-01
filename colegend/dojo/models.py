@@ -25,6 +25,7 @@ class Module(AutoUrlMixin, models.Model):
 
     category = models.ForeignKey(Category)
     provider = models.ForeignKey(settings.AUTH_USER_MODEL)
+    source = models.TextField(help_text="Where is the content from? URL? Author?", blank=True)
     accepted = models.BooleanField(default=False)
 
     def __str__(self):

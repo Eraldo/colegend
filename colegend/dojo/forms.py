@@ -9,12 +9,13 @@ __author__ = 'eraldo'
 class ModuleForm(ModelForm):
     class Meta:
         model = Module
-        fields = ['name', 'description', 'category']
+        fields = ['name', 'description', 'category', 'source']
 
     helper = FormHelper()
     helper.layout = Layout(
         Field('name', autofocus='True', placeholder="Module title."),
         Field('description', placeholder="Module content."),
         Field('category'),
+        Field('source', rows=2),
     )
     helper.add_input(Submit('save', 'Save'))
