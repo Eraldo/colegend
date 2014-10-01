@@ -10,14 +10,19 @@
     }
 </script>
 
-<script src="{{ STATIC_URL }}website/bower_components/jquery-ui/jquery-ui.min.js"></script>
 <script>
-{#    $(function() {#}
-        $(".dateinput").datepicker({
-            dateFormat: $.datepicker.ISO_8601,
-            firstDay: 1,
-            changeMonth: true,
-            changeYear: true
-        });
-{#    });#}
+    $('[data-toggle="tooltip"]').tooltip();
+</script>
+
+<script src="{{ STATIC_URL }}website/bower_components/jquery-ui/jquery-ui.min.js"></script>
+
+<script>
+    {#    $(function() {#}
+    $(".dateinput").datepicker({
+        dateFormat: $.datepicker.ISO_8601,
+        firstDay: 1,
+        changeMonth: true,
+        changeYear: true
+    });
+    {#    });#}
 </script>
