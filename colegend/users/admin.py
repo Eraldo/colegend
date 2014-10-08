@@ -17,6 +17,10 @@ class SettingsInline(admin.StackedInline):
     model = Settings
 
 
+class ProfileInline(admin.StackedInline):
+    model = Profile
+
+
 class UserAdmin(EmailMixin, AuthUserAdmin):
     add_form = UserCreationForm
     list_display = ('username', 'email_link', 'get_full_name', 'is_accepted', 'is_tester', 'is_staff')
@@ -34,7 +38,7 @@ class UserAdmin(EmailMixin, AuthUserAdmin):
             'classes': ('collapse',),
             'fields': ('last_login', 'date_accepted', 'date_joined')}),
     )
-    inlines = [ContactInline, SettingsInline]
+    inlines = [ContactInline, SettingsInline, ProfileInline]
 
 
 admin.site.register(User, UserAdmin)
