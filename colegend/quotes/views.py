@@ -20,6 +20,7 @@ class RandomQuoteView(QuoteMixin, TemplateView):
         except Quote.DoesNotExist:
             quote = None
         context['quote'] = quote
+        context['contribution_counter'] = Quote.objects.filter(provider=self.request.user).count()
         return context
 
 
