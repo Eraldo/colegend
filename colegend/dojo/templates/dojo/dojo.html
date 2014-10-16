@@ -12,14 +12,28 @@
         </h1>
 
         <div class="well">
-            <h2>Modules</h2>
+            <h2>
+                <span data-toggle="tooltip" title="Challenges to stretch your comfort zone.">
+                Challenges
+                </span>
+            </h2>
+            {% for challenge in challenges %}
+                <a href="{{ challenge.get_show_url }}" class="btn btn-primary">{{ challenge }}</a>
+            {% empty %}
+                No challenges here yet.
+            {% endfor %}
+        </div>
+        <div class="well">
+            <h2>
+                <span data-toggle="tooltip" title="Modules to explore and practise new concepts.">
+                Modules
+                </span>
+            </h2>
             {% for module in modules %}
                 <a href="{{ module.get_show_url }}" class="btn btn-primary">{{ module }}</a>
             {% empty %}
                 No modules here yet.
             {% endfor %}
-        </div>
-        <div class="well">
             <h3>Share your module</h3>
 
             <p>Can you think of some content combined with an exercise that you could share? Awesome!</p>
