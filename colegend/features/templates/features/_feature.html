@@ -1,9 +1,7 @@
 <div class="feature well well-sm">
-    <b>{{ feature }}</b> <small class="pull-right"><span class="label label-default bg-{{ feature.get_role_display|lower }}"> {{ feature.get_role_display }}</span></small>
+    <b>{{ feature }}</b>
+    <div class="date-published-field inline"><small style="color: grey">&mdash; {{ feature.date_published }}</small></div>
+    <small class="pull-right"><span class="label label-default bg-{{ feature.get_role_display|lower }}"> {{ feature.get_role_display }}</span></small>
     <br/>
-    {% include "lib/_description_field.html" with description=feature.description %}
-    <br/>
-    <div class="date-published-field inline">
-        <u>date published</u>: {{ feature.date_published }}
-    </div>
+    {{ feature.description|linebreaksbr }}
 </div>
