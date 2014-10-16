@@ -16,6 +16,7 @@ class DayEntryForm(ModelForm):
     helper.layout = Layout(
         Field('date'),
         Field('location'),
-        Field('text', autofocus='True', rows="20")
+        # Field('focus'),
+        Field('text', autofocus='True', rows="20"),
     )
     helper.add_input(Submit('save', 'Save'))

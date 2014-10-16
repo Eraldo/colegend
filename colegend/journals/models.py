@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models, OperationalError
 from django.utils import timezone
 from journals.validators import validate_present_or_past
 from lib.models import AutoUrlMixin, OwnedBase, TrackedBase, OwnedQueryMixin, ValidateModelMixin
@@ -20,7 +20,7 @@ class DayEntryQuerySet(OwnedQueryMixin, models.QuerySet):
 def get_last_location():
     try:
         return DayEntry.objects.latest('date').location
-    except DayEntry.DoesNotExist:
+    except (DayEntry.DoesNotExist, OperationalError):
         return ""
 
 
