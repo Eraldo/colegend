@@ -10,13 +10,13 @@ __author__ = 'eraldo'
 class DayEntryForm(ModelForm):
     class Meta:
         model = DayEntry
-        fields = ['date', 'location', 'text']
+        fields = ['date', 'location', 'focus', 'text']
 
     helper = FormHelper()
     helper.layout = Layout(
         Field('date'),
         Field('location'),
-        # Field('focus'),
+        Field('focus'),
         Field('text', autofocus='True', rows="20"),
     )
     helper.add_input(Submit('save', 'Save'))
