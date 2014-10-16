@@ -17,6 +17,13 @@ class DayEntryQuerySet(OwnedQueryMixin, models.QuerySet):
     pass
 
 
+def get_last_location():
+    try:
+        return DayEntry.objects.latest('date').location
+    except DayEntry.DoesNotExist:
+        return ""
+
+
 class DayEntry(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, models.Model):
     """
     A django model representing a daily journal entry in text form.
@@ -24,6 +31,8 @@ class DayEntry(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, models.
     # > owner: User
     date = models.DateField(default=timezone.datetime.today, validators=[validate_present_or_past])
     text = models.TextField()
+
+    location = models.CharField(max_length=100, default=get_last_location)
 
     objects = DayEntryQuerySet.as_manager()
 

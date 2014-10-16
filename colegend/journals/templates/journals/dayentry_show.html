@@ -2,6 +2,7 @@
 
 {% block content %}
     <h1>{{ dayentry.date }}</h1>
+    @{{ dayentry.location|default:"?" }}
     <div class="well">
     <p>{{ dayentry.text|linebreaks }}</p>
     </div>
