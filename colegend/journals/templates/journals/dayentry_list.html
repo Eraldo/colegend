@@ -8,7 +8,7 @@
             <a href="{% url "journals:dayentry_new" %}" class="btn btn-default" role="button">New</a>
         </div>
         {% for dayentry in latest %}
-            <a href="{{ dayentry.get_show_url }}">{{ dayentry.date }}</a><br>
+            <a href="{{ dayentry.get_show_url }}">{{ dayentry.date }} - {{ dayentry.location }}</a><br>
         {% endfor %}
     </div>
 
