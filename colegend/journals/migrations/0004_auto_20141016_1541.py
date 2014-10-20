@@ -15,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='dayentry',
             name='location',
-            field=models.CharField(max_length=100, default=journals.models.get_last_location),
+            field=models.CharField(max_length=100, default=""),
         ),
     ]
