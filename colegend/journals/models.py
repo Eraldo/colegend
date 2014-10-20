@@ -12,16 +12,17 @@ __author__ = 'eraldo'
 #     """
 #     pass
 
+def get_last_location():
+    return ""
+
 
 class DayEntryQuerySet(OwnedQueryMixin, models.QuerySet):
-    pass
-
-
-def get_last_location():
-    try:
-        return DayEntry.objects.latest('date').location
-    except (DayEntry.DoesNotExist, OperationalError):
-        return ""
+    def latest_for(self, user):
+        try:
+            latest = self.owned_by(user).latest('date')
+        except DayEntry.DoesNotExist:
+            latest = None
+        return latest
 
 
 class DayEntry(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, models.Model):
@@ -30,7 +31,7 @@ class DayEntry(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, models.
     """
     # > owner: User
     date = models.DateField(default=timezone.datetime.today, validators=[validate_present_or_past])
-    location = models.CharField(max_length=100, default=get_last_location)
+    location = models.CharField(max_length=100)
     focus = models.CharField(max_length=100, help_text="What was the most important experience/topic on this day?")
     text = models.TextField()
 
