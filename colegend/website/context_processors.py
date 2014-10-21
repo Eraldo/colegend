@@ -23,10 +23,10 @@ def menu(request):
     """A context processor that provides menu_items."""
     menu_items = {
         'mentor': [
-            MenuItem("Life Vision", url="visions:vision_list", icon="eye"),
-            MenuItem("Meetings", url="meetings", icon="comments-o"),
             MenuItem("Journal", url="journals:dayentry_list", icon="book"),
+            MenuItem("Meetings", url="meetings", icon="comments-o"),
             MenuItem("Dojo", url="dojo:home", icon="university"),
+            MenuItem("Life Vision", url="visions:vision_list", icon="eye"),
         ],
         'mentor_extra': [
         ],
