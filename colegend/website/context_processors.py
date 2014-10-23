@@ -4,7 +4,6 @@ __author__ = 'eraldo'
 
 
 class MenuItem:
-    positions = ["main", "extra", "settings"]
 
     def __init__(self, name, url, arg=None, icon=None):
         self.name = name
@@ -36,8 +35,8 @@ def menu(request):
             MenuItem("Tags", url="tags:tag_list", icon="tags"),
         ],
         'manager_extra': [
-            MenuItem("routines", url="routines:routine_list", icon="stack-overflow"),
-            MenuItem("habits", url="habits:habit_list", icon="link"),
+            MenuItem("Routines", url="routines:routine_list", icon="stack-overflow"),
+            MenuItem("Habits", url="habits:habit_list", icon="link"),
         ],
         'motivator': [
             MenuItem("Legend", url="legend:home", icon="paw"),
@@ -52,15 +51,15 @@ def menu(request):
             MenuItem("Home", url="home", icon="home"),
         ],
         'operator_extra': [
-            MenuItem("commands", url="commands", icon="bullhorn"),
+            MenuItem("Commands", url="commands", icon="bullhorn"),
         ],
         'account': [
-            MenuItem("profile", url="users:detail", arg=request.user, icon="user"),
-            MenuItem("settings", url="users:settings", icon="wrench"),
+            MenuItem("Profile", url="users:detail", arg=request.user, icon="user"),
+            MenuItem("Settings", url="users:settings", icon="wrench"),
         ],
         'admin': [
             MenuItem("Backend", url="admin:index", icon="database"),
-            MenuItem("test", url="test", icon="code"),
+            MenuItem("Test", url="test", icon="code"),
         ],
     }
     return {'menu_items': menu_items}
