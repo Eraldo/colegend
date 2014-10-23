@@ -21,10 +21,12 @@ class Habit(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, TaggableBa
 
     description = models.TextField(blank=True)
 
+    order = models.PositiveIntegerField()
+
     objects = HabitQuerySet.as_manager()
 
     class Meta:
-        ordering = ["name"]
+        ordering = ["order", "name"]
         unique_together = ('owner', 'name')
 
     def __str__(self):

@@ -10,7 +10,7 @@ __author__ = 'eraldo'
 
 class HabitMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
     model = Habit
-    fields = ['routine', 'name', 'description', 'tags']
+    fields = ['routine', 'name', 'description', 'order', 'tags']
 
     def get_form(self, form_class):
         form = super(HabitMixin, self).get_form(form_class)
