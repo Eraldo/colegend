@@ -36,6 +36,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(_('last name'), max_length=30, blank=True)
 
     email = models.EmailField(_('email address'), blank=True)
+    notes = models.TextField(
+        help_text="Notes about this user.",
+        blank=True
+    )
 
     # > contact
     # > profile

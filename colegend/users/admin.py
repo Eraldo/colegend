@@ -29,7 +29,11 @@ class UserAdmin(EmailMixin, AuthUserAdmin):
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         (_('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
+        (_('Notes'), {
+            'classes': ('collapse',),
+            'fields': ('notes',)}),
         (_('Roles'), {
+            'classes': ('collapse',),
             'fields': ('is_active', 'is_accepted', 'is_tester', 'is_staff', 'is_superuser')}),
         (_('Permissions'), {
             'classes': ('collapse',),
