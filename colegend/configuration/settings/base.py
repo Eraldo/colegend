@@ -223,6 +223,7 @@ PROJECT_APPS = (
     'meetings',
     'journals',
     'dojo',
+    'challenges',
     # manager
     'projects',
     'tasks',

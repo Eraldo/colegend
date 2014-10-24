@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ challenge }}</h1>
+    {% if user.is_superuser or user == module.provider %}
+        <a href="{{ challenge.get_edit_url }}" class="btn btn-default btn-sm" role="button">edit</a>
+        <a href="{{ challenge.get_delete_url }}" class="btn btn-default btn-sm" role="button">delete</a>
+    {% endif %}
+    <div class="well">
+        <p class="lead">{{ challenge.description|linebreaksbr }}</p>
+        <footer><cite class="small pull-right">— shared
+                        by {{ challenge.provider }}</cite></footer>
+    </div>
+
+{% endblock %}

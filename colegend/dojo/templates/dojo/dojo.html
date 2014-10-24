@@ -10,19 +10,6 @@
             {% endblock %}
             </span>
         </h1>
-
-        <div class="well">
-            <h2>
-                <span data-toggle="tooltip" title="Challenges to stretch your comfort zone.">
-                Challenges
-                </span>
-            </h2>
-            {% for challenge in challenges %}
-                <a href="{{ challenge.get_show_url }}" class="btn btn-primary">{{ challenge }}</a>
-            {% empty %}
-                No challenges here yet.
-            {% endfor %}
-        </div>
         <div class="well">
             <h2>
                 <span data-toggle="tooltip" title="Modules to explore and practise new concepts.">
