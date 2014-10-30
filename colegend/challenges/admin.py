@@ -10,7 +10,7 @@ __author__ = 'eraldo'
 
 
 class ChallengeAdmin(admin.ModelAdmin):
-    list_display = ['name', 'description', 'category', 'accepted', 'provider']
+    list_display = ['name', 'category', 'accepted', 'provider']
     list_filter = ['category']
 
 
