@@ -24,6 +24,7 @@ class Quote(models.Model):
     category = models.ForeignKey(Category)
     provider = models.ForeignKey(settings.AUTH_USER_MODEL)
     accepted = models.BooleanField(default=False)
+    used_as_daily = models.DateField(null=True, blank=True, unique=True)
 
     def __str__(self):
         return self.name

@@ -5,7 +5,7 @@ from quotes.models import Quote, Category
 
 
 class QuoteAdmin(admin.ModelAdmin):
-    list_display = ['name', 'author', 'category', 'accepted', 'provider']
+    list_display = ['name', 'author', 'category', 'accepted', 'used_as_daily', 'provider']
     list_filter = ['category', 'author']
 
 
