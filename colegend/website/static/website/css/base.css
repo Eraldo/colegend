@@ -85,3 +85,7 @@ div.avatar img {
     background-color: black;
 }
     /* end system role colors */
+
+span.streak {
+    background-color: green;
+}

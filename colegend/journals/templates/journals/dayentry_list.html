@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Journal Entries <span class="badge">{{ latest.count }}</span></h1>
+    <h1>Journal Entries <span class="badge">{{ latest.count }}</span> <span class="streak badge"><i class="fa fa-link"></i> {{ streak }}</span></h1>
 
     <div class="dayentry-list">
         <div class="list-controls container-fluid well well-sm">

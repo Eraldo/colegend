@@ -24,6 +24,22 @@ class DayEntryQuerySet(OwnedQueryMixin, models.QuerySet):
             latest = None
         return latest
 
+    def streak_for(self, user):
+        entries = self.owned_by(user)
+        dates = entries.dates('date', kind='day', order="DESC")
+        today = timezone.datetime.today().date()
+        # if not today in dates:
+        #     return 0
+        counter = 0
+        for date in dates:
+            if (today - date).days == counter:
+                counter += 1
+            else:
+                return counter
+
+
+
+
 
 class DayEntry(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, models.Model):
     """

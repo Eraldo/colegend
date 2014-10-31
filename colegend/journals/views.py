@@ -24,8 +24,12 @@ class DayEntryMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
 class DayEntryListView(DayEntryMixin, ArchiveIndexView):
     date_field = "date"
     template_name = "journals/dayentry_list.html"
-
     allow_empty = True
+
+    def get_context_data(self, **kwargs):
+        context = super(DayEntryListView, self).get_context_data(**kwargs)
+        context['streak'] = DayEntry.objects.streak_for(self.request.user)
+        return context
 
 
 class DayEntryNewView(DayEntryMixin, CreateView):
