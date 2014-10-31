@@ -38,9 +38,6 @@ class DayEntryQuerySet(OwnedQueryMixin, models.QuerySet):
                 return counter
 
 
-
-
-
 class DayEntry(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, models.Model):
     """
     A django model representing a daily journal entry in text form.
