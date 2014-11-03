@@ -6,6 +6,7 @@ from features.models import Feature
 from habits.models import Habit
 from lib.views import ActiveUserRequiredMixin
 from projects.models import Project
+from quotes.models import Quote
 from routines.models import Routine
 from statuses.models import Status
 from tags.models import Tag
@@ -25,8 +26,14 @@ class AboutView(TemplateView):
 
 class HomeView(ActiveUserRequiredMixin, TemplateView):
     template_name = "website/home.html"
-
     login_url = reverse_lazy('about')
+
+    def get_context_data(self, **kwargs):
+        context = super(HomeView, self).get_context_data(**kwargs)
+        quote = Quote.objects.daily_quote()
+        context['quote'] = quote
+        return context
+
 
 
 class SearchResultsView(ActiveUserRequiredMixin, TemplateView):
