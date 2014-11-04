@@ -220,7 +220,7 @@ DJANGO_APPS = (
 PROJECT_APPS = (
     # mentor
     'visions',
-    'meetings',
+    'gatherings',
     'journals',
     'dojo',
     'challenges',

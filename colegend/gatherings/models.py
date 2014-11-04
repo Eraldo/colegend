@@ -1,11 +1,10 @@
 from django.db import models
 from django.utils import timezone
-from django.utils.timezone import localtime
 
 __author__ = 'eraldo'
 
 
-class Meeting(models.Model):
+class Gathering(models.Model):
     date = models.DateTimeField(blank=True, null=True)
 
     class Meta:

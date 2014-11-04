@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-from meetings.views import GatheringsView
+from gatherings.views import GatheringsView
 
 __author__ = 'eraldo'
 

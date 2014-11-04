@@ -15,7 +15,7 @@ urlpatterns = patterns('',
     # mentor
     url(r'^visions/', include('visions.urls', namespace="visions")),
     url(r'^journals/', include('journals.urls', namespace="journals")),
-    url(r'^meetings/', include('meetings.urls')),
+    url(r'^gatherings/', include('gatherings.urls')),
     url(r'^dojo/', include('dojo.urls', namespace="dojo")),
     url(r'^challenges/', include('challenges.urls', namespace="challenges")),
     # manager

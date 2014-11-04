@@ -2,7 +2,7 @@ from lib.views import ActiveUserRequiredMixin
 from django.utils import timezone
 from django.utils.timesince import timeuntil
 from django.views.generic import TemplateView
-from meetings.models import Meeting
+from gatherings.models import Gathering
 
 
 class GatheringsView(ActiveUserRequiredMixin, TemplateView):
@@ -13,8 +13,8 @@ class GatheringsView(ActiveUserRequiredMixin, TemplateView):
         now = timezone.now()
         # Get next gathering.
         try:
-            gathering = Meeting.objects.filter(date__gt=now).last()
-        except Meeting.DoesNotExist:
+            gathering = Gathering.objects.filter(date__gt=now).last()
+        except Gathering.DoesNotExist:
             gathering = None
         if gathering:
             date = gathering.date
