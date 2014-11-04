@@ -11,8 +11,12 @@ class MeetingsView(ActiveUserRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(MeetingsView, self).get_context_data(**kwargs)
         now = timezone.now()
-        meeting = Meeting.objects.first()
-        if meeting and meeting.date > now:
+        # Get next meeting.
+        try:
+            meeting = Meeting.objects.filter(date__gt=now).last()
+        except Meeting.DoesNotExist:
+            meeting = None
+        if meeting:
             date = meeting.date
             context['date'] = date
             context['counter'] = timeuntil(date, now)
