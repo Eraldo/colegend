@@ -5,7 +5,7 @@ __author__ = 'eraldo'
 
 
 class Gathering(models.Model):
-    date = models.DateTimeField(blank=True, null=True)
+    date = models.DateTimeField()
 
     class Meta:
         ordering = ["-date"]
