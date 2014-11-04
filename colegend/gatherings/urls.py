@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, url
-from gatherings.views import GatheringsView, GatheringCreateView, GatheringEditView, GatheringDeleteView
+from gatherings.views import GatheringsView, GatheringCreateView, GatheringEditView, GatheringDeleteView, \
+    GatheringListView
 
 __author__ = 'eraldo'
 
@@ -7,7 +8,10 @@ urlpatterns = patterns(
     '',
     url(r'^$',
         GatheringsView.as_view(),
-        name='gatherings'),
+        name='home'),
+    url(r'^list/$',
+        GatheringListView.as_view(),
+        name='gathering_list'),
     # ex: ../new/
     url(r'^new/$',
         GatheringCreateView.as_view(),

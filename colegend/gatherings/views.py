@@ -1,8 +1,9 @@
+from django.core.urlresolvers import reverse_lazy
 from gatherings.forms import GatheringForm
 from lib.views import ActiveUserRequiredMixin, ManagerRequiredMixin
 from django.utils import timezone
 from django.utils.timesince import timeuntil
-from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView
+from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView, ListView
 from gatherings.models import Gathering
 
 
@@ -29,13 +30,24 @@ class GatheringsView(ActiveUserRequiredMixin, TemplateView):
         return context
 
 
+class GatheringListView(GatheringMixin, ListView):
+    pass
+
+
 class GatheringCreateView(GatheringMixin, CreateView):
     """View for scheduling new gatherings"""
+    success_url = reverse_lazy('gatherings:gathering_list')
+
+    def get_initial(self):
+        initial = super(GatheringCreateView, self).get_initial()
+        initial['date'] = timezone.now()
+        return initial
 
 
 class GatheringEditView(GatheringMixin, UpdateView):
-    pass
+    success_url = reverse_lazy('gatherings:gathering_list')
 
 
 class GatheringDeleteView(GatheringMixin, DeleteView):
-    pass
+    success_url = reverse_lazy('gatherings:gathering_list')
+

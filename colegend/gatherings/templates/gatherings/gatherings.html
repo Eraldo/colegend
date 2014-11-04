@@ -22,6 +22,13 @@
         {% else %}
             Currently there are no planned gatherings.
         {% endif %}
+        {% if user.is_manager %}
+            <div>
+                <a href="{% url "gatherings:gathering_list" %}" class="btn btn-danger">
+                    Manage</a>
+            </div>
+        {% endif %}
+
     </div>
 
     <div class="well lead text-center container">

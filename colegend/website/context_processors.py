@@ -23,7 +23,7 @@ def menu(request):
     menu_items = {
         'mentor': [
             MenuItem("Journal", url="journals:dayentry_list", icon="book"),
-            MenuItem("Gatherings", url="gatherings", icon="comments-o"),
+            MenuItem("Gatherings", url="gatherings:home", icon="comments-o"),
             MenuItem("Challenges", url="challenges:challenge_list", icon="star"),
             MenuItem("Dojo", url="dojo:home", icon="university"),
             MenuItem("Life Vision", url="visions:vision_list", icon="eye"),

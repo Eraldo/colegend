@@ -1,10 +1,12 @@
+from django.conf import settings
 from django.db import models
 from django.utils import timezone
+from lib.models import AutoUrlMixin
 
 __author__ = 'eraldo'
 
 
-class Gathering(models.Model):
+class Gathering(AutoUrlMixin, models.Model):
     date = models.DateTimeField()
 
     class Meta:

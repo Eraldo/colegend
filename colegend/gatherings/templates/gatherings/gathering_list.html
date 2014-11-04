@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1>
+            {% block title %}
+                Gatherings
+            {% endblock %}
+        </h1>
+
+        <div class="well">
+            <p>
+                <a href="{% url "gatherings:gathering_new" %}" class="btn btn-default">New</a>
+            </p>
+            {% for gathering in gathering_list %}
+                <p>
+                    <a href="{{ gathering.get_edit_url }}" class="btn btn-primary">{{ gathering }}</a>
+                    <a href="{{ gathering.get_delete_url }}" class="btn btn-danger">Delete</a>
+                </p>
+            {% empty %}
+                No gatherings here yet.
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
