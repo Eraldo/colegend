@@ -7,7 +7,7 @@ from django.views.generic import TemplateView, CreateView, UpdateView, DeleteVie
 from gatherings.models import Gathering
 
 
-class GatheringMixin():
+class GatheringMixin(ManagerRequiredMixin):
     model = Gathering
     form_class = GatheringForm
 

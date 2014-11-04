@@ -37,7 +37,7 @@ class ManagerRequiredMixin(ActiveUserRequiredMixin):
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_manager:
             raise PermissionDenied  # return a forbidden response
-        super(ManagerRequiredMixin, self).dispatch(
+        return super(ManagerRequiredMixin, self).dispatch(
             request, *args, **kwargs)
 
 
