@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <legend>{% if object %}Edit Gathering{% else %}New Gathering{% endif %}</legend>
+    {% crispy form %}
+{% endblock %}
