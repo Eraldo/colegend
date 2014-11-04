@@ -3,29 +3,29 @@
 
 
 {% block title %}
-    Meetings
+    Gatherings
 {% endblock %}
 {% block content %}
     <div class="text-center">
-        <h1>Meetings</h1>
+        <h1>Gatherings</h1>
     </div>
     <div class="well lead text-center container">
         <img src="{{ STATIC_URL }}website/images/CoSpace_circle.png" alt="CoSpace"
              class="center-block img-circle img-responsive" style="max-height: 200px;">
 
-        <h3>Next Meeting</h3>
+        <h3>Next Gathering</h3>
         {% if date %}
             {{ date }}<br/>
             Countdown: {{ counter }}<br/>
-            <a href="http://meeting.colegend.org" target="_blank" class="btn btn-default">»
+            <a href="http://gathering.colegend.org" target="_blank" class="btn btn-default">»
                 Hangout</a>
         {% else %}
-            Currently there are no planned meetings.
+            Currently there are no planned gatherings.
         {% endif %}
     </div>
 
     <div class="well lead text-center container">
-        <h2>About "CoSpace" Meetings</h2>
+        <h2>About "CoSpace" Gatherings</h2>
 
         <p>
             A place where we can connect on a regular basis.<br/>

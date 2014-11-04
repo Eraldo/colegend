@@ -5,19 +5,19 @@ from django.views.generic import TemplateView
 from meetings.models import Meeting
 
 
-class MeetingsView(ActiveUserRequiredMixin, TemplateView):
-    template_name = "meetings/meetings.html"
+class GatheringsView(ActiveUserRequiredMixin, TemplateView):
+    template_name = "gatherings/gatherings.html"
 
     def get_context_data(self, **kwargs):
-        context = super(MeetingsView, self).get_context_data(**kwargs)
+        context = super(GatheringsView, self).get_context_data(**kwargs)
         now = timezone.now()
-        # Get next meeting.
+        # Get next gathering.
         try:
-            meeting = Meeting.objects.filter(date__gt=now).last()
+            gathering = Meeting.objects.filter(date__gt=now).last()
         except Meeting.DoesNotExist:
-            meeting = None
-        if meeting:
-            date = meeting.date
+            gathering = None
+        if gathering:
+            date = gathering.date
             context['date'] = date
             context['counter'] = timeuntil(date, now)
         return context
