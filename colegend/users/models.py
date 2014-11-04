@@ -55,6 +55,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_tester = models.BooleanField(verbose_name=_('tester'), default=False,
                                     help_text="Designates whether the user can access the site's test features.")
 
+    is_manager = models.BooleanField(verbose_name=_('manager'), default=False,
+                                    help_text="Designates whether the user can access the site's management features.")
+
     is_staff = models.BooleanField(verbose_name=_('staff'), default=False,
                                    help_text=_('Designates whether the user can log into this admin '
                                                'site.'))

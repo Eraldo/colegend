@@ -23,8 +23,8 @@ class ProfileInline(admin.StackedInline):
 
 class UserAdmin(EmailMixin, AuthUserAdmin):
     add_form = UserCreationForm
-    list_display = ('username', 'email_link', 'get_full_name', 'is_accepted', 'is_tester', 'is_staff')
-    list_filter = ('is_active', 'is_accepted', 'is_tester', 'is_staff', 'is_superuser', 'groups')
+    list_display = ('username', 'email_link', 'get_full_name', 'is_accepted', 'is_tester', 'is_manager', 'is_staff')
+    list_filter = ('is_active', 'is_accepted', 'is_tester', 'is_manager', 'is_staff', 'is_superuser', 'groups')
 
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
@@ -34,7 +34,7 @@ class UserAdmin(EmailMixin, AuthUserAdmin):
             'fields': ('notes',)}),
         (_('Roles'), {
             'classes': ('collapse',),
-            'fields': ('is_active', 'is_accepted', 'is_tester', 'is_staff', 'is_superuser')}),
+            'fields': ('is_active', 'is_accepted', 'is_tester', 'is_manager', 'is_staff', 'is_superuser')}),
         (_('Permissions'), {
             'classes': ('collapse',),
             'fields': ('groups', 'user_permissions')}),
