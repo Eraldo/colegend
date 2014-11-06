@@ -22,6 +22,7 @@
             <p><a href="{% url "account_login" %}?next=/" class="btn btn-primary btn-lg" role="button">Let's do it!</a>
             </p>
             <hr/>
+            <audio id="audioplayer" src="{{ STATIC_URL }}website/audio/colegend_song.mp3" controls autoplay loop></audio>
             <div class="container">
                 <div class="embed-responsive embed-responsive-16by9 col-xs-12">
                     <iframe class="embed-responsive-item" allowfullscreen
@@ -110,7 +111,7 @@
         </div>
 
         <div class="well text-center">
-{#            <h1>Impression</h1>#}
+            {#            <h1>Impression</h1>#}
 
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                 <!-- Indicators -->
@@ -207,18 +208,5 @@
                     >> Feedback</a>
             </p>
         </div>
-
     </div>
-{% endblock %}
-
-{% block body_scripts %}
-    {{ block.super }}
-    <script type="text/javascript">
-        $('#intro').on('hidden.bs.modal', function () {
-            $('#intro iframe').removeAttr('src');
-        })
-        $('#intro').on('shown.bs.modal', function () {
-            $('#intro iframe').attr('src', "//www.youtube.com/embed/enNpHIV2Ys8")
-        })
-    </script>
 {% endblock %}
