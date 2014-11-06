@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.views.generic import FormView
-from contact.forms import ContactForm
+from contact.forms import ContactForm, PublicContactForm
 
 __author__ = "Eraldo Helal"
 
@@ -10,6 +10,11 @@ class ContactView(FormView):
     template_name = "contact/contact.html"
     form_class = ContactForm
     success_url = '.'
+
+    def get_form_class(self):
+        if not self.request.user.is_authenticated():
+            return PublicContactForm
+        return super().get_form_class()
 
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed.

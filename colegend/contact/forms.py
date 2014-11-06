@@ -13,7 +13,7 @@ class ContactForm(forms.Form):
         # send email using the self.cleaned_data dictionary
         subject = "[CoLegend] Message from '{}'".format(user)
         message = self.cleaned_data["message"]
-        send_mail(subject, message, user.email, ['eraldo@colegend.org'])
+        send_mail(subject, message, user.email, ['connect@colegend.org'])
 
     helper = FormHelper()
     helper.add_input(Submit('send', 'Send'))
@@ -23,10 +23,27 @@ class ContactForm(forms.Form):
             Field('message', rows="4", css_class='form-control', placeholder="Your message...",
                   style="resize: vertical;", autofocus="True"),
         ),
-        # HTML("""
-        # <br>
-        # <button type="submit" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-send"></span> send
-        # message
-        # </button>
-        #  """),
+    )
+
+
+class PublicContactForm(forms.Form):
+    email = forms.EmailField()
+    message = forms.CharField(label="Message", widget=forms.Textarea)
+
+    def send_email(self, user):
+        # send email using the self.cleaned_data dictionary
+        message = self.cleaned_data["message"]
+        email = self.cleaned_data["email"]
+        subject = "[CoLegend] Message from '{}'".format(email)
+        send_mail(subject, message, email, ['connect@colegend.org'])
+
+    helper = FormHelper()
+    helper.add_input(Submit('send', 'Send'))
+    helper.layout = Layout(
+        Fieldset(
+            'Contact Form',
+            Field('email'),
+            Field('message', rows="4", css_class='form-control', placeholder="Your message...",
+                  style="resize: vertical;", autofocus="True"),
+        ),
     )
