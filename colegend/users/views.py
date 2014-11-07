@@ -1,5 +1,6 @@
 # Import the reverse lookup function
 from braces.views import LoginRequiredMixin
+from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
 
 # view imports
@@ -10,7 +11,7 @@ from django.views.generic import UpdateView
 from django.views.generic import ListView
 
 # Only authenticated users can access views using this.
-from lib.views import ActiveUserRequiredMixin
+from lib.views import ActiveUserRequiredMixin, ManagerRequiredMixin
 
 # Import the form from users/forms.py
 from .forms import UserForm, SettingsForm
@@ -83,3 +84,40 @@ class SettingsUpdateView(UserMixin, UpdateView):
         return Settings.objects.get(owner=self.request.user)
         # slug_field = "owner"
         # slug_url_kwarg = "owner"
+
+
+class UserManageListView(ManagerRequiredMixin, ListView):
+    model = User
+    template_name = "users/user_manage.html"
+
+    def get_queryset(self):
+        return super().get_queryset().pending()
+
+
+class UserManageDetailView(ManagerRequiredMixin, DetailView):
+    model = User
+    template_name = "users/user_manage_detail.html"
+    # These next two lines tell the view to index lookups by username
+    slug_field = "username"
+    slug_url_kwarg = "username"
+
+    def get_queryset(self):
+        return super().get_queryset().pending()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.get_object()
+        context['name'] = user.first_name
+        context['pronoun'] = "him" if user.contact.gender == 'M' else "her"
+        context['profile'] = user.profile
+        context['contact'] = user.contact
+        return context
+
+    def post(self, request, *args, **kwargs):
+        verify = request.POST.get("verify")
+        user = self.get_object()
+        if user.pk == int(verify):
+            user.accept(accepter=self.request.user)
+            message = '{} is now verified.'.format(user)
+            messages.add_message(request, messages.SUCCESS, message)
+        return redirect("users:manage")

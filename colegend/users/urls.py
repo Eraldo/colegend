@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 from users.views import UserInactiveView, UserListView, UserRedirectView, UserDetailView, UserUpdateView, \
-    SettingsUpdateView
+    SettingsUpdateView, UserManageListView, UserManageDetailView
 
 __author__ = 'eraldo'
 
@@ -11,6 +11,16 @@ urlpatterns = patterns(
         regex=r'^inactive$',
         view=UserInactiveView.as_view(),
         name='inactive'
+    ),
+    url(
+        regex=r'^manage$',
+        view=UserManageListView.as_view(),
+        name='manage'
+    ),
+    url(
+        regex=r'^manage/(?P<username>[\w.@+-]+)/$',
+        view=UserManageDetailView.as_view(),
+        name='manage_detail'
     ),
     url(
         regex=r'^$',
@@ -44,6 +54,4 @@ urlpatterns = patterns(
         view=SettingsUpdateView.as_view(),
         name='settings'
     ),
-
-
 )

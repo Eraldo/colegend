@@ -19,6 +19,9 @@ class UserQuerySet(QuerySet):
     def accepted(self):
         return self.filter(is_accepted=True)
 
+    def pending(self):
+        return self.filter(is_accepted=False)
+
 
 class User(AbstractBaseUser, PermissionsMixin):
     """
@@ -103,9 +106,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     def accept(self, accepter=None):
         self.is_accepted = True
         self.date_accepted = timezone.now()
-        # TODO: Add person who accepted to the email
-        message = "Congratulations - Your account signup has been accepted!"
-        self.email_user("[CoLegend] Accepted!", message)
+        if not accepter:
+            accepter = "CoLegend"
+        message = "Congratulations - Your account has been verified by {}.\nwww.colegend.org".format(accepter)
+        self.email_user("[CoLegend] Account verified!", message)
+        self.save()
 
 
     # As of Django 1.8 this will be fixed by using "default_related_name" in the respective model's Meta class.
@@ -204,6 +209,21 @@ class Contact(models.Model):
 
     def get_name(self):
         return self.owner.get_name()
+
+    def get_gender_symbol(self):
+        return self.get_gender_display()[-1:]
+
+    def get_address(self):
+        return "{}\n{} {}\n{}".format(
+            self.street,
+            self.postal_code, self.city,
+            self.country
+        )
+
+    def get_age(self):
+        born = self.birthday
+        today = timezone.datetime.today()
+        return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
 
 
 class Profile(models.Model):

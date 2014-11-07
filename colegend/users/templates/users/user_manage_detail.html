@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% load avatar_tags %}
+{% load static %}
+
+{% block title %}User: {{ object.username }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                {% avatar object 200 %}<br/>
+
+                <h2>{{ object.username }}</h2>
+
+            </div>
+        </div>
+        <div class="well">
+            <h2>Person</h2>
+            <table class="table table-responsive">
+                <tr>
+                    <td>
+                        Name
+                    </td>
+                    <td>
+                        <b>{{ object.get_full_name }}</b> ({{ contact.get_age }}{{ contact.get_gender_symbol }})
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Email
+                    </td>
+                    <td>
+                        <a href="mailto:{{ object.email }}" target="_blank">{{ object.email }}</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Phone
+                    </td>
+                    <td>
+                        <a href="tel:{{ contact.phone_number }}">{{ contact.phone_number }}</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Location
+                    </td>
+                    <td>
+                        <a href="http://maps.google.com/maps?q={{ contact.city }}, {{ contact.country }}"
+                           target="_blank">{{ contact.city }}, {{ contact.country }}</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Join
+                    </td>
+                    <td>
+                        {{ object.date_joined }}
+                    </td>
+                </tr>
+            </table>
+            <h2>Application</h2>
+            <table class="table table-responsive">
+                <tr>
+                    <td>
+                        Origin
+                    </td>
+                    <td>
+                        {{ profile.origin|linebreaksbr }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Referrer
+                    </td>
+                    <td>
+                        {{ profile.referrer }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Experience
+                    </td>
+                    <td>
+                        {{ profile.experience|linebreaksbr }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Motivation
+                    </td>
+                    <td>
+                        {{ profile.motivation|linebreaksbr }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Change
+                    </td>
+                    <td>
+                        {{ profile.change|linebreaksbr }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Drive
+                    </td>
+                    <td>
+                        <div class="progress" style="margin: 0">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="{{ profile.drive }}"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100" style="width: {{ profile.drive }}0%;">
+                                {{ profile.drive }}0%
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Expectations
+                    </td>
+                    <td>
+                        {{ profile.expectations|linebreaksbr }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Other
+                    </td>
+                    <td>
+                        {{ profile.other|linebreaksbr }}
+                    </td>
+                </tr>
+            </table>
+            <h2>Verification</h2>
+            <ol>
+                <li>Inform the team that you want to contact {{ name }}.</li>
+                Does someone in the team already know {{ pronoun }}?<br/>
+                <li>Agree on who will contact {{ pronoun }}.</li>
+                <li>Contact {{ name }} via email and ask for a personal talk.</li>
+                You can suggest phone or skype.. or whatever you like.<br/>
+                Ask {{ name }} for {{ pronoun }} preferred means of personal contact.
+                <li>Contact {{ pronoun }} in the chosen way.</li>
+                Introduce her to CoLegend. Check if she has questions.
+                <li>Contact {{ pronoun }} in the chosen way.</li>
+            </ol>
+            If everything went fine:<br>
+
+            <form method="POST">{% csrf_token %}
+            <input type="hidden" name="verify" value="{{ object.pk }}">
+            <button type="submit" class="btn btn-warning">Verify {{ name }}</button>
+            </form>
+        </div>
+    </div>
+{% endblock content %}
