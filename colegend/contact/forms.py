@@ -42,7 +42,7 @@ class PublicContactForm(forms.Form):
     helper.layout = Layout(
         Fieldset(
             'Contact Form',
-            Field('email'),
+            Field('email', placeholder="Your email address..."),
             Field('message', rows="4", css_class='form-control', placeholder="Your message...",
                   style="resize: vertical;", autofocus="True"),
         ),
