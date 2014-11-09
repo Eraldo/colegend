@@ -9,7 +9,13 @@
                 The Dojo
             {% endblock %}
             </span>
+            <span class="badge status">{{ contribution_counter }}</span>
         </h1>
+
+        <div class="list-controls container-fluid well well-sm">
+            <a href="{% url "dojo:module_new" %}" class="btn btn-default">New</a>
+        </div>
+
         <div class="well">
             <h2>
                 <span data-toggle="tooltip" title="Modules to explore and practise new concepts.">

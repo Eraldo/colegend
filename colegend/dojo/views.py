@@ -19,6 +19,7 @@ class DojoView(DojoMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(DojoView, self).get_context_data(**kwargs)
         context['modules'] = Module.objects.filter(accepted=True)
+        context["contribution_counter"] = Module.objects.filter(provider=self.request.user).count()
         return context
 
 

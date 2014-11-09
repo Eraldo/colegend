@@ -18,7 +18,10 @@ class ChallengeMixin(ActiveUserRequiredMixin):
 
 
 class ChallengeListView(ChallengeMixin, ListView):
-    pass
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["contribution_counter"] = Challenge.objects.filter(provider=self.request.user).count()
+        return context
 
 
 class ChallengeCreateView(ChallengeMixin, CreateView):

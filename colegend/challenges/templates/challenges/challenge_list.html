@@ -9,10 +9,16 @@
                 Challenges
             {% endblock %}
             </span>
+            <span class="badge status">{{ contribution_counter }}</span>
         </h1>
 
+        <div class="list-controls container-fluid well well-sm">
+            <a href="{% url "challenges:challenge_new" %}" class="btn btn-default">New</a>
+        </div>
+
         <div class="well">
-            <p>Here you can expand your comfort zone and make new experiences by doing things that you might not do otherwise.</p>
+            <p>Here you can expand your comfort zone and make new experiences by doing things that you might not do
+                otherwise.</p>
             {% for challenge in challenge_list %}
                 <a href="{{ challenge.get_show_url }}" class="btn btn-primary">{{ challenge }}</a>
             {% empty %}
@@ -23,7 +29,8 @@
             <h3>Share your challenge</h3>
 
             <p>Can you think of another challenge that you could share? Awesome!</p>
-            <a href="{% url "challenges:challenge_new" %}" class="btn btn-primary"><i class="fa fa-share"></i> Share a Challenge</a>
+            <a href="{% url "challenges:challenge_new" %}" class="btn btn-primary"><i class="fa fa-share"></i> Share a
+                Challenge</a>
         </div>
 
     </div>

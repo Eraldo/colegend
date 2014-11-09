@@ -20,8 +20,8 @@
             <h3>Share your quotes</h3>
 
             {% if contribution_counter %}
-                You have contributed <span class="badge">{{ contribution_counter }}</span> quote
-                {{ contribution_counter|pluralize }}!
+                You have contributed <span class="badge">{{ contribution_counter }}</span>
+                quote{{ contribution_counter|pluralize }}!
             {% else %}
                 Time to enter your <span class="badge">first</span> quote.
             {% endif %}
