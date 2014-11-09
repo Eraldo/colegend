@@ -12,6 +12,6 @@
     {% include "lib/_date_field.html" with date=task.date %}
     {% include "lib/_deadline_field.html" with deadline=task.deadline %}
     <br/>
-    <a href="{{ task.get_edit_url }}" class="btn btn-default btn-sm" role="button">Edit</a>
-    <a href="{{ task.get_delete_url }}" class="btn btn-default btn-sm" role="button">Delete</a>
+    <a href="{{ task.get_edit_url }}" class="btn btn-primary btn-sm" role="button">Edit</a>
+    <a href="{{ task.get_delete_url }}" class="btn btn-danger btn-sm" role="button">Delete</a>
 </div>

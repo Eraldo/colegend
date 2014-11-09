@@ -2,8 +2,10 @@
 
 {% block content %}
     <h1>{{ tag }}</h1>
-    <a href="{{ tag.get_edit_url }}" class="btn btn-default btn-sm" role="button">edit</a>
-    <a href="{{ tag.get_delete_url }}" class="btn btn-default btn-sm" role="button">delete</a>
+    <div class="list-controls container-fluid well well-sm">
+        <a href="{{ tag.get_edit_url }}" class="btn btn-primary btn-sm" role="button">edit</a>
+        <a href="{{ tag.get_delete_url }}" class="btn btn-danger btn-sm" role="button">delete</a>
+    </div>
 
     <h2>Items</h2>
     <h3>Projects</h3>

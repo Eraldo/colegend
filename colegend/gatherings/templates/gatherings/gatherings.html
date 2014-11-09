@@ -8,6 +8,13 @@
 {% block content %}
     <div class="text-center">
         <h1>Gatherings</h1>
+
+        {% if user.is_manager %}
+            <div class="list-controls container container-fluid well well-sm">
+                <a href="{% url "gatherings:gathering_list" %}" class="btn btn-danger">
+                    Manage</a>
+            </div>
+        {% endif %}
     </div>
     <div class="well lead text-center container">
         <img src="{{ STATIC_URL }}website/images/CoSpace_circle.png" alt="CoSpace"
@@ -22,13 +29,6 @@
         {% else %}
             Currently there are no planned gatherings.
         {% endif %}
-        {% if user.is_manager %}
-            <div>
-                <a href="{% url "gatherings:gathering_list" %}" class="btn btn-danger">
-                    Manage</a>
-            </div>
-        {% endif %}
-
     </div>
 
     <div class="well lead text-center container">

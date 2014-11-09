@@ -3,8 +3,11 @@
 {% block content %}
     <h1>{{ module }}</h1>
     {% if user.is_superuser or user == module.provider %}
-        <a href="{{ module.get_edit_url }}" class="btn btn-default btn-sm" role="button">edit</a>
-        <a href="{{ module.get_delete_url }}" class="btn btn-default btn-sm" role="button">delete</a>
+    <div class="list-controls container-fluid well well-sm">
+        <a href="{{ module.get_edit_url }}" class="btn btn-primary" role="button">edit</a>
+        <a href="{{ module.get_delete_url }}" class="btn btn-danger" role="button">delete</a>
+    </div>
+
     {% endif %}
     <div class="well">
         <p class="lead">{{ module.description|linebreaksbr }}</p>

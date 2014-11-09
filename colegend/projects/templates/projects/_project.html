@@ -9,6 +9,6 @@
     <br/>
     {% include "lib/_deadline_field.html" with deadline=project.deadline %}
     <br/>
-    <a href="{{ project.get_edit_url }}" class="btn btn-default btn-sm" role="button">Edit</a>
-    <a href="{{ project.get_delete_url }}" class="btn btn-default btn-sm" role="button">Delete</a>
+    <a href="{{ project.get_edit_url }}" class="btn btn-primary btn-sm" role="button">Edit</a>
+    <a href="{{ project.get_delete_url }}" class="btn btn-danger btn-sm" role="button">Delete</a>
 </div>
