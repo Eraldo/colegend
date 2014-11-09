@@ -8,9 +8,12 @@
             {% endblock %}
         </h1>
 
+        <div class="list-controls container-fluid well well-sm">
+            <a href="{% url "gatherings:gathering_new" %}" class="btn btn-default">New</a>
+        </div>
+
         <div class="well">
             <p>
-                <a href="{% url "gatherings:gathering_new" %}" class="btn btn-default">New</a>
             </p>
             {% for gathering in gathering_list %}
                 <p>
