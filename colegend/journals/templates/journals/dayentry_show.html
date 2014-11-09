@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{{ dayentry.date }}</h1>
-    @{{ dayentry.location|default:"?" }}
+    <h1>{{ dayentry.date }} <small>@{{ dayentry.location|default:"?" }}</small></h1>
+    <div class="list-controls container-fluid well well-sm">
+    <a href="{{ dayentry.get_edit_url }}" class="btn btn-primary btn-sm" role="button">Edit</a>
+    <a href="{{ dayentry.get_delete_url }}" class="btn btn-danger btn-sm" role="button">Delete</a>
+    </div>
     <div class="well">
     <p>
         <h4>{{ dayentry.focus }}</h4>
         {{ dayentry.text|linebreaks }}
     </p>
     </div>
-    <a href="{{ dayentry.get_edit_url }}" class="btn btn-primary btn-sm" role="button">edit</a>
-    <a href="{{ dayentry.get_delete_url }}" class="btn btn-danger btn-sm" role="button">delete</a>
 
 {% endblock %}
