@@ -22,5 +22,5 @@ class LegendView(LegendMixin, TemplateView):
         except Block.DoesNotExist:
             introduction = None
         context['introduction'] = introduction
-        context['candidates'] = get_user_model().objects.accepted()
+        context['candidates'] = get_user_model().objects.accepted().exclude(pk__lt=4)
         return context
