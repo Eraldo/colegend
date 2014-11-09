@@ -1,15 +1,35 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Journal Entries <span class="badge">{{ latest.count }}</span> <span class="streak badge"><i class="fa fa-link"></i> {{ streak }}</span></h1>
+    <h1>Journal Entries <span class="badge">{{ latest.count }}</span> <span class="streak badge"><i
+            class="fa fa-link"></i> {{ streak }}</span></h1>
 
     <div class="dayentry-list">
         <div class="list-controls container-fluid well well-sm">
             <a href="{% url "journals:dayentry_new" %}" class="btn btn-default" role="button">New</a>
         </div>
-        {% for dayentry in latest %}
-            <a href="{{ dayentry.get_show_url }}">{{ dayentry.date }} - {{ dayentry.location }} - {{ dayentry.focus }}</a><br>
-        {% endfor %}
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Location(s)</th>
+                <th>Focus</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for dayentry in latest %}
+                <tr>
+                    <td>
+                        <a href="{{ dayentry.get_show_url }}">{{ dayentry.date }}</a><br>
+                    </td>
+                    <td>
+                        {{ dayentry.location }}
+                    </td>
+                    <td>{{ dayentry.focus }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 
 {% endblock %}
