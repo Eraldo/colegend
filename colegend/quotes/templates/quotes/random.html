@@ -2,7 +2,13 @@
 
 {% block content %}
     <div class="container">
-        <h1>{% block title %}Quotes{% endblock %}</h1>
+        <h1>{% block title %}Quotes{% endblock %}
+            <span class="badge status">{{ contribution_counter }}</span>
+        </h1>
+
+        <div class="list-controls container-fluid well well-sm">
+            <a href="{% url "quotes:quote_new" %}" class="btn btn-default">New</a>
+        </div>
 
         <div class="well">
             {% if quote %}
@@ -14,7 +20,8 @@
             <h3>Share your quotes</h3>
 
             {% if contribution_counter %}
-                You have contributed <span class="badge">{{ contribution_counter }}</span> quote{{ contribution_counter|pluralize }}!
+                You have contributed <span class="badge">{{ contribution_counter }}</span> quote
+                {{ contribution_counter|pluralize }}!
             {% else %}
                 Time to enter your <span class="badge">first</span> quote.
             {% endif %}
