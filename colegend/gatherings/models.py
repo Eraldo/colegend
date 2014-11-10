@@ -8,6 +8,9 @@ __author__ = 'eraldo'
 
 class Gathering(AutoUrlMixin, models.Model):
     date = models.DateTimeField()
+    LOCATION_DEFAULT = "http://gathering.colegend.org/"
+    location = models.CharField(max_length=200, default=LOCATION_DEFAULT)
+    online = models.BooleanField(default=True)
 
     class Meta:
         ordering = ["-date"]
