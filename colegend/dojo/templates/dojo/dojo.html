@@ -27,11 +27,23 @@
             {% empty %}
                 No modules here yet.
             {% endfor %}
+        </div>
+
+        <div class="well">
             <h3>Share your module</h3>
 
-            <p>Can you think of some content combined with an exercise that you could share? Awesome!</p>
-            <a href="{% url "dojo:module_new" %}" class="btn btn-primary"><i class="fa fa-share"></i> Share a Module</a>
+            {% if contribution_counter %}
+                You have contributed <span class="badge">{{ contribution_counter }}</span>
+                module{{ contribution_counter|pluralize }}!
+            {% else %}
+                Time to share your <span class="badge">first</span> module.
+            {% endif %}
+
+            <p>Can you think of another module that you could share? Awesome!</p>
+            <a href="{% url "dojo:module_new" %}" class="btn btn-primary"><i class="fa fa-share"></i> Share a
+                Module</a>
         </div>
+
 
     </div>
 {% endblock %}
