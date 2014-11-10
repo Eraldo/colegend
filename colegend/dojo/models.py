@@ -1,21 +1,9 @@
 from django.conf import settings
 from django.db import models
 from lib.models import AutoUrlMixin
-from categories.models import Category as CategoryNew
+from categories.models import Category
 
 __author__ = 'eraldo'
-
-
-class Category(models.Model):
-    name = models.CharField(max_length=100, unique=True)
-    description = models.TextField(blank=True)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name_plural = "categories"
-        ordering = ["-pk"]
 
 
 class Module(AutoUrlMixin, models.Model):

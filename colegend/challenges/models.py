@@ -2,7 +2,7 @@ from django.conf import settings
 from django.db import models
 
 # Create your models here.
-from dojo.models import Category
+from categories.models import Category
 from lib.models import AutoUrlMixin
 
 __author__ = 'eraldo'
