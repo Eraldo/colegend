@@ -1,5 +1,6 @@
 from django.core.urlresolvers import reverse_lazy
 from gatherings.forms import GatheringForm
+from lib.utilities import get_location_url
 from lib.views import ActiveUserRequiredMixin, ManagerRequiredMixin
 from django.utils import timezone
 from django.utils.timesince import timeuntil
@@ -28,11 +29,11 @@ class GatheringsView(ActiveUserRequiredMixin, TemplateView):
             context['date'] = date
             context['online'] = gathering.online
             if gathering.online:
-                location = "Hangout"
+                location = "Virtual Room"
                 url = gathering.location
             else:
                 location = gathering.location
-                url = "http://maps.google.com/maps?q={}".format(location)
+                url = get_location_url(gathering.location)
             context['location'] = location
             context['url'] = url
             context['counter'] = timeuntil(date, now)
