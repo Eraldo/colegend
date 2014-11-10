@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <legend>{% if object %}Edit News-Block{% else %}New News-Block{% endif %}</legend>
+    {% crispy form %}
+{% endblock %}

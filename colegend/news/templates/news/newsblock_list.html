@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1>
+            <span data-toggle="tooltip"
+                  title="Here you can expand your comfort zone and make new experiences.">
+            {% block title %}
+                News
+            {% endblock %}
+            </span>
+            <span class="badge status">{{ contribution_counter }}</span>
+        </h1>
+        {% if user.is_manager %}
+            <div class="list-controls container-fluid well well-sm">
+                <a href="{% url "news:newsblock_new" %}" class="btn btn-default">New</a>
+            </div>
+        {% endif %}
+
+        <div class="well">
+            {% for block in newsblock_list %}
+                <a href="{{ block.get_show_url }}" class="btn btn-primary">{{ block }}</a>
+            {% empty %}
+                No news here yet.
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

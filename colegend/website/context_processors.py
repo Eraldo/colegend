@@ -50,6 +50,7 @@ def menu(request):
             MenuItem("About", url="about", icon="info-circle"),
             MenuItem("Features", url="features:feature_list", icon="road"),
             MenuItem("Home", url="home", icon="home"),
+            MenuItem("News", url="news:newsblock_list", icon="star"),
         ],
         'operator_extra': [
             MenuItem("Commands", url="commands", icon="bullhorn"),

@@ -239,6 +239,7 @@ PROJECT_APPS = (
     'website',
     'contact',
     'features',
+    'news',
     'commands',  # command text interface
     # common
     'categories',

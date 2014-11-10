@@ -5,6 +5,7 @@ from django.views.generic import TemplateView
 from features.models import Feature
 from habits.models import Habit
 from lib.views import ActiveUserRequiredMixin
+from news.models import NewsBlock
 from projects.models import Project
 from quotes.models import Quote
 from routines.models import Routine
@@ -32,8 +33,8 @@ class HomeView(ActiveUserRequiredMixin, TemplateView):
         context = super(HomeView, self).get_context_data(**kwargs)
         quote = Quote.objects.daily_quote()
         context['quote'] = quote
+        context['newsblock'] = NewsBlock.objects.first()
         return context
-
 
 
 class SearchResultsView(ActiveUserRequiredMixin, TemplateView):

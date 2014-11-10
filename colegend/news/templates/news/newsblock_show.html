@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ newsblock }}</h1>
+    {% if user.is_superuser or user == newsblock.owner %}
+        <div class="list-controls container-fluid well well-sm">
+            <a href="{{ newsblock.get_edit_url }}" class="btn btn-primary" role="button">Edit</a>
+            <a href="{{ newsblock.get_delete_url }}" class="btn btn-danger" role="button">Delete</a>
+        </div>
+    {% endif %}
+    <div class="well">
+        <p>{{ newsblock.description|linebreaksbr }}</p>
+        <footer><cite class="small pull-right">— created
+            by {{ newsblock.owner }} on {{ newsblock.date }}</cite></footer>
+    </div>
+
+{% endblock %}
