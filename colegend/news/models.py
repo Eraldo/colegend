@@ -9,7 +9,7 @@ class NewsBlock(AutoUrlMixin, OwnedBase, models.Model):
     date = models.DateField(default=timezone.now)
 
     class Meta:
-        ordering = ['-date']
+        ordering = ['date']
 
     def __str__(self):
         return self.name
