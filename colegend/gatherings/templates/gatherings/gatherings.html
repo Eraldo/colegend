@@ -24,8 +24,8 @@
         {% if date %}
             {{ date }}<br/>
             Countdown: {{ counter }}<br/>
-            <a href="http://gathering.colegend.org" target="_blank" class="btn btn-default">»
-                Hangout</a>
+            <a href="{{ url }}" target="_blank" class="btn btn-default">»
+                {{ location }}</a>
         {% else %}
             Currently there are no planned gatherings.
         {% endif %}

@@ -26,6 +26,15 @@ class GatheringsView(ActiveUserRequiredMixin, TemplateView):
         if gathering:
             date = gathering.date
             context['date'] = date
+            context['online'] = gathering.online
+            if gathering.online:
+                location = "Hangout"
+                url = gathering.location
+            else:
+                location = gathering.location
+                url = "http://maps.google.com/maps?q={}".format(location)
+            context['location'] = location
+            context['url'] = url
             context['counter'] = timeuntil(date, now)
         return context
 
