@@ -17,8 +17,12 @@
             </p>
             {% for gathering in gathering_list %}
                 <p>
+                {% if user == gathering.host %}
                     <a href="{{ gathering.get_edit_url }}" class="btn btn-primary">{{ gathering }}</a>
                     <a href="{{ gathering.get_delete_url }}" class="btn btn-danger">Delete</a>
+                {% else %}
+                    <a href="#" class="btn btn-default">{{ gathering }}</a>
+                {% endif %}
                 </p>
             {% empty %}
                 No gatherings here yet.

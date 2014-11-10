@@ -11,6 +11,7 @@ class Gathering(AutoUrlMixin, models.Model):
     LOCATION_DEFAULT = "http://gathering.colegend.org/"
     location = models.CharField(max_length=200, default=LOCATION_DEFAULT)
     online = models.BooleanField(default=True)
+    host = models.ForeignKey(settings.AUTH_USER_MODEL)
 
     class Meta:
         ordering = ["-date"]

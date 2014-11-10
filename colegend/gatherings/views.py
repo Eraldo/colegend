@@ -37,6 +37,7 @@ class GatheringsView(ActiveUserRequiredMixin, TemplateView):
             context['location'] = location
             context['url'] = url
             context['counter'] = timeuntil(date, now)
+            context['host'] = gathering.host
         return context
 
 
@@ -52,6 +53,11 @@ class GatheringCreateView(GatheringMixin, CreateView):
         initial = super(GatheringCreateView, self).get_initial()
         initial['date'] = timezone.now()
         return initial
+
+    def form_valid(self, form):
+        user = self.request.user
+        form.instance.host = user
+        return super().form_valid(form)
 
 
 class GatheringEditView(GatheringMixin, UpdateView):
