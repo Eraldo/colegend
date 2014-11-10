@@ -1,19 +1,9 @@
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
+from categories.models import Category as CategoryNew
 
 __author__ = 'eraldo'
-
-
-class Category(models.Model):
-    name = models.CharField(max_length=100, unique=True)
-    description = models.TextField(blank=True)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name_plural = "categories"
 
 
 class QuoteQuerySet(models.QuerySet):
@@ -55,7 +45,7 @@ class Quote(models.Model):
     name = models.CharField(max_length=100, unique=True, help_text="What is the quote about?")
     text = models.TextField()
     author = models.CharField(max_length=100, default="Someone")
-    category = models.ForeignKey(Category)
+    category = models.ForeignKey(CategoryNew)
     provider = models.ForeignKey(settings.AUTH_USER_MODEL)
     accepted = models.BooleanField(default=False)
     used_as_daily = models.DateField(null=True, blank=True, unique=True)

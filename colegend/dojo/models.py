@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.db import models
 from lib.models import AutoUrlMixin
+from categories.models import Category as CategoryNew
 
 __author__ = 'eraldo'
 

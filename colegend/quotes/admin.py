@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from quotes.models import Quote, Category
+from quotes.models import Quote
 
 
 def accept(modeladmin, request, queryset):
@@ -18,4 +18,3 @@ class QuoteAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Quote, QuoteAdmin)
-admin.site.register(Category)

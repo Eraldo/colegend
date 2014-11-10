@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from dojo.models import Module, Category
+from dojo.models import Module
 
 __author__ = 'eraldo'
 
@@ -12,4 +12,3 @@ class ModuleAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Module, ModuleAdmin)
-admin.site.register(Category)
