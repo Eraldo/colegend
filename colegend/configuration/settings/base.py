@@ -241,6 +241,7 @@ PROJECT_APPS = (
     'features',
     'commands',  # command text interface
     # common
+    'categories',
     'lib',
     # styling
     'bootstrap3',
