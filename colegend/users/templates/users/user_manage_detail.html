@@ -60,6 +60,8 @@
                     </td>
                 </tr>
             </table>
+        </div>
+        <div class="well">
             <h2>Application</h2>
             <table class="table table-responsive">
                 <tr>
@@ -133,6 +135,8 @@
                     </td>
                 </tr>
             </table>
+        </div>
+        <div class="well">
             <h2>Verification</h2>
             <ol>
                 <li>Inform the team that you want to contact {{ name }}.</li>
@@ -148,8 +152,8 @@
             If everything went fine:<br>
 
             <form method="POST">{% csrf_token %}
-            <input type="hidden" name="verify" value="{{ object.pk }}">
-            <button type="submit" class="btn btn-warning">Verify {{ name }}</button>
+                <input type="hidden" name="verify" value="{{ object.pk }}">
+                <button type="submit" class="btn btn-warning">Verify {{ name }}</button>
             </form>
         </div>
     </div>
