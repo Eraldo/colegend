@@ -2,13 +2,23 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from categories.models import Category as CategoryNew
+from lib.models import AutoUrlMixin, OwnedQueryMixin
 
 __author__ = 'eraldo'
 
 
-class QuoteQuerySet(models.QuerySet):
+class QuoteQuerySet(OwnedQueryMixin, models.QuerySet):
     def accepted(self):
         return self.filter(accepted=True)
+
+    def pending(self):
+        return self.filter(accepted=False)
+
+    def random(self):
+        return self.accepted().order_by('?').first()
+
+    def owned_by(self, user):
+        return self.filter(provider=user)
 
     def daily_quote(self, date=None):
         # Use only accepted quotes.
@@ -39,7 +49,7 @@ class QuoteQuerySet(models.QuerySet):
         return current_quote
 
 
-class Quote(models.Model):
+class Quote(AutoUrlMixin, models.Model):
     """A motivational text quote."""
 
     name = models.CharField(max_length=100, unique=True, help_text="What is the quote about?")
@@ -54,3 +64,6 @@ class Quote(models.Model):
 
     def __str__(self):
         return self.name
+
+    def pending(self):
+        return not self.accepted

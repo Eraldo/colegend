@@ -41,7 +41,7 @@ def menu(request):
         ],
         'motivator': [
             MenuItem("Legend", url="legend:home", icon="paw"),
-            MenuItem("Quotes", url="quotes:random", icon="quote-left"),
+            MenuItem("Quotes", url="quotes:quote_list", icon="quote-left"),
         ],
         'motivator_extra': [
         ],

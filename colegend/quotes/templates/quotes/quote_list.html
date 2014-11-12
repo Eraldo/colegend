@@ -10,12 +10,29 @@
             <a href="{% url "quotes:quote_new" %}" class="btn btn-default">New</a>
         </div>
 
+        {% if random_quote %}
+            <div class="well well-sm">
+                {% include "quotes/_quote.html" with quote=random_quote %}
+            </div>
+        {% endif %}
+
         <div class="well">
-            {% if quote %}
-                <h2>Random Quote</h2>
-                {% include "quotes/_quote.html" %}
-            {% endif %}
+        <h2>My Quotes</h2>
+            {% for quote in quotes %}
+                <a href="{{ quote.get_show_url }}" class="btn btn-default">
+                    {{ quote }}
+                </a>
+            {% endfor %}
+        {% if pending %}
+        <h3>Pending</h3>
+            {% for quote in pending %}
+                <a href="{{ quote.get_show_url }}" class="btn btn-default">
+                    {{ quote }}
+                </a>
+            {% endfor %}
+        {% endif %}
         </div>
+
         <div class="well">
             <h3>Share your quotes</h3>
 
@@ -28,5 +45,6 @@
             <p>Can you think of a quote that you could share? Awesome!</p>
             <a href="{% url "quotes:quote_new" %}" class="btn btn-primary"><i class="fa fa-share"></i> Share a Quote</a>
         </div>
+
     </div>
 {% endblock %}
