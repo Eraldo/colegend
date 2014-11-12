@@ -1,4 +1,5 @@
 from django.core.urlresolvers import reverse_lazy
+from django.shortcuts import redirect
 from django.views.generic import TemplateView, CreateView, ListView, DetailView, UpdateView, DeleteView
 from lib.views import ActiveUserRequiredMixin, ManagerRequiredMixin
 from quotes.forms import QuoteForm
@@ -49,6 +50,11 @@ class QuoteShowView(DetailView):
         can_edit = quote.pending() and user.is_manager
         context['controls'] = context['owned'] or can_edit
         return context
+
+    def post(self, request, *args, **kwargs):
+        if "accept" in self.request.POST:
+            self.get_object().accept()
+        return redirect("quotes:quote_list")
 
 
 class QuoteEditView(QuoteMixin, UpdateView):

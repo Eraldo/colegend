@@ -10,7 +10,7 @@
         {% endif %}
         {% if quote.pending and user.is_manager %}
             <form method="POST" class="inline">{% csrf_token %}
-                <button type="submit" value="quote" class="btn btn-warning pull-right">Accept</button>
+                <button type="submit" name="accept" class="btn btn-warning pull-right">Accept</button>
             </form>
         {% endif %}
     </div>

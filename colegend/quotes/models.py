@@ -67,3 +67,8 @@ class Quote(AutoUrlMixin, models.Model):
 
     def pending(self):
         return not self.accepted
+
+    def accept(self):
+        self.accepted = True
+        self.save()
+        # TODO notify user
