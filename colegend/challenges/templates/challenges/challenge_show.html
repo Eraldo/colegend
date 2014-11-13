@@ -4,8 +4,8 @@
     <h1>{{ challenge }}</h1>
     {% if user.is_superuser or user == module.provider %}
         <div class="list-controls container-fluid well well-sm">
-            <a href="{{ challenge.get_edit_url }}" class="btn btn-primary" role="button">edit</a>
-            <a href="{{ challenge.get_delete_url }}" class="btn btn-danger" role="button">delete</a>
+            <a href="{{ challenge.get_edit_url }}" class="btn btn-primary" role="button">Edit</a>
+            <a href="{{ challenge.get_delete_url }}" class="btn btn-danger" role="button">Delete</a>
         </div>
     {% endif %}
     <div class="well">

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ tutorial }}</h1>
+    {% if user.is_manager %}
+        <div class="list-controls container-fluid well well-sm">
+            <a href="{{ tutorial.get_edit_url }}" class="btn btn-primary" role="button">Edit</a>
+            <a href="{{ tutorial.get_delete_url }}" class="btn btn-danger" role="button">Delete</a>
+        </div>
+    {% endif %}
+    <div class="well">
+        <p>{{ tutorial.description|linebreaksbr }}</p>
+    </div>
+
+{% endblock %}
