@@ -30,15 +30,17 @@
             Currently there are no planned gatherings.
         {% endif %}
     </div>
-    <div class="well text-center container">
-        <h3>Further Upcoming Gatherings</h3>
-        Please keep in mind.. that the dates/times can still change.<br>
-        {% for gathering in future_gatherings %}
-            {{ gathering }}<br/>
-        {% empty %}
-            -- No future gatherings scheduled.
-        {% endfor %}
-    </div>
+    {% if future_gatherings %}
+        <div class="well text-center container">
+            <h3>Further Upcoming Gatherings</h3>
+            Please keep in mind.. that the dates/times can still change.<br>
+            {% for gathering in future_gatherings %}
+                {{ gathering }}<br/>
+            {% empty %}
+                -- No future gatherings scheduled.
+            {% endfor %}
+        </div>
+    {% endif %}
 
     <div class="well lead text-center container">
         <h2>About "CoSpace" Gatherings</h2>
