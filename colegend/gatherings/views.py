@@ -38,6 +38,8 @@ class GatheringsView(ActiveUserRequiredMixin, TemplateView):
             context['url'] = url
             context['counter'] = timeuntil(date, now)
             context['host'] = gathering.host
+            # scheduled gatherings
+            context['future_gatherings'] = Gathering.objects.filter(date__gt=date)
         return context
 
 
