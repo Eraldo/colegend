@@ -15,7 +15,7 @@ class QuoteMixin(ActiveUserRequiredMixin):
 
 
 class QuoteCreateView(QuoteMixin, CreateView):
-    success_url = reverse_lazy('quotes:random')
+    success_url = reverse_lazy('quotes:quote_list')
 
     def form_valid(self, form):
         user = self.request.user
