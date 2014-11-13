@@ -81,7 +81,7 @@ class SettingsUpdateView(UserMixin, UpdateView):
                        kwargs={"username": self.request.user.username})
 
     def get_object(self):
-        return Settings.objects.get(owner=self.request.user)
+        return self.request.user.settings
         # slug_field = "owner"
         # slug_url_kwarg = "owner"
 
