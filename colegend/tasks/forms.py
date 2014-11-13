@@ -20,5 +20,6 @@ class TaskForm(ModelForm):
         Field('priority'),
         Field('date'),
         Field('deadline'),
+        Field('tags'),
     )
     helper.add_input(Submit('save', 'Save'))
