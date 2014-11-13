@@ -8,6 +8,10 @@
 
         <div class="list-controls container-fluid well well-sm">
             <a href="{% url "quotes:quote_new" %}" class="btn btn-default">New</a>
+            {% if user.is_manager %}
+                <a href="{% url "quotes:quote_manage" %}" class="btn btn-warning pull-right">Manage</a>
+            {% endif %}
+
         </div>
 
         {% if random_quote %}
@@ -17,20 +21,20 @@
         {% endif %}
 
         <div class="well">
-        <h2>My Quotes</h2>
+            <h2>My Quotes</h2>
             {% for quote in quotes %}
                 <a href="{{ quote.get_show_url }}" class="btn btn-default">
                     {{ quote }}
                 </a>
             {% endfor %}
-        {% if pending %}
-        <h3>Pending</h3>
-            {% for quote in pending %}
-                <a href="{{ quote.get_show_url }}" class="btn btn-default">
-                    {{ quote }}
-                </a>
-            {% endfor %}
-        {% endif %}
+            {% if pending %}
+                <h3>Pending</h3>
+                {% for quote in pending %}
+                    <a href="{{ quote.get_show_url }}" class="btn btn-default">
+                        {{ quote }}
+                    </a>
+                {% endfor %}
+            {% endif %}
         </div>
 
         <div class="well">

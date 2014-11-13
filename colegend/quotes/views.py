@@ -35,7 +35,12 @@ class QuoteListView(QuoteMixin, ListView):
 
 
 class QuoteManageView(ManagerRequiredMixin, ListView):
+    template_name = "quotes/quote_manage.html"
     model = Quote
+
+    def get_queryset(self):
+        return super().get_queryset().pending()
+
 
 
 class QuoteShowView(DetailView):
