@@ -48,9 +48,9 @@ class DayEntryNewView(DayEntryMixin, CreateView):
         if entry_template:
             initial['text'] = entry_template
         # location
-        location = DayEntry.objects.latest_for(user).location
-        if location:
-            initial['location'] = location
+        entry = DayEntry.objects.latest_for(user)
+        if entry:
+            initial['location'] = entry.location
         return initial
 
 
