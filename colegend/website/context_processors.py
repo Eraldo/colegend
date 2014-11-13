@@ -61,6 +61,7 @@ def menu(request):
         ],
         'team': [
             MenuItem("Manage Users", url="users:manage", icon="user-md"),
+            MenuItem("Manage Tutorials", url="tutorials:tutorial_list", icon="graduation-cap"),
         ],
         'admin': [
             MenuItem("Backend", url="admin:index", icon="database"),
