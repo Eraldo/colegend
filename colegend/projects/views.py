@@ -6,6 +6,7 @@ from lib.views import OwnedItemsMixin
 from projects.forms import ProjectForm
 from projects.models import Project
 from statuses.utils import StatusFilterMixin
+from tutorials.models import get_tutorial
 
 __author__ = 'eraldo'
 
@@ -34,6 +35,11 @@ class ProjectListView(StatusFilterMixin, ProjectMixin, ListView):
     def get_queryset(self):
         queryset = super(ProjectListView, self).get_queryset()
         return self.filter_status(queryset)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tutorial'] = get_tutorial("Projects")
+        return context
 
 
 class ProjectNewView(ProjectMixin, CreateView):

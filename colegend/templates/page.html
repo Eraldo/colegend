@@ -6,22 +6,24 @@
 
 {% block content %}
     <h1>
-    <div class="pull-right">
-        {% block back_link %}
-            <a href="javascript:history.go(-1)"><i class="fa fa-arrow-circle-left"></i></a>
-        {% endblock %}
-        {% block page_tutorial %}
-            {% if tutorial %}
-                <a href="{{ tutorial.get_show_url }}"><i class="fa fa-question-circle"></i></a>
-            {% endif %}
-        {% endblock %}
-    </div>
+        <div class="pull-right">
+            {% block back_link %}
+                <a href="javascript:history.go(-1)"><i class="fa fa-arrow-circle-left"></i></a>
+            {% endblock %}
+            {% block page_tutorial %}
+                {% if tutorial %}
+                    <a href="{{ tutorial.get_show_url }}"><i class="fa fa-question-circle"></i></a>
+                {% endif %}
+            {% endblock %}
+        </div>
         {% block title %}{% block page_title %}Main Page{% endblock %}{% endblock %}
         {% block page_title_extras %}{% endblock %}
     </h1>
-    <div class="list-controls container-fluid well well-sm">
-        {% block page_controls %}{% endblock %}
-    </div>
+    {% block page_controls_container %}
+        <div class="list-controls container-fluid well well-sm">
+            {% block page_controls %}{% endblock %}
+        </div>
+    {% endblock %}
     {% block page_content %}
     {% endblock %}
 {% endblock %}

@@ -1,8 +1,12 @@
-{% extends 'base.html' %}
+{% extends 'page.html' %}
 
-{% block content %}
-    <h1>Projects
-        <span class="badge status">{{ project_list.count }}</span>
-    </h1>
+{% block page_title %}
+    Projects
+{% endblock %}
+{% block page_title_extras %}
+    <span class="badge status">{{ project_list.count }}</span>
+{% endblock %}
+{% block page_controls_container %}{% endblock %}
+{% block page_content %}
     {% include 'projects/_project_list.html' with projects=project_list %}
 {% endblock %}
