@@ -1,10 +1,10 @@
-{% extends 'base.html' %}
+{% extends 'page.html' %}
 {% load avatar_tags %}
 
-{% block content %}
-    <div class="container">
-        <h1>{% block title %}The Legend{% endblock %}</h1>
-
+{% block page_title %}
+    The Legend
+{% endblock %}
+{% block page_content %}
         <div class="well">
             {{ introduction|linebreaks }}
         </div>
@@ -14,9 +14,6 @@
                 {% for candidate in candidates %}
                     <a href="{% url 'users:detail' candidate.username %}" class="list-group-item">
                         <h4 class="list-group-item-heading">{% avatar candidate %} {{ candidate.username }}</h4>
-{#                        {% if candidate.vision %}#}
-{#                        <p class="list-group-item-text"><b>Vision:</b> {{ candidate.vision.name }}</p>#}
-{#                        {% endif %}#}
                     </a>
                 {% endfor %}
             </div>

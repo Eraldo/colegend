@@ -1,6 +1,12 @@
-{% extends 'base.html' %}
+{% extends 'page.html' %}
 
-{% block content %}
-    <h1>Habits <span class="badge">{{ habit_list.count }}</span></h1>
+{% block page_title %}
+    Habits
+{% endblock %}
+{% block page_title_extras %}
+    <span class="badge">{{ habit_list.count }}</span>
+{% endblock %}
+{% block page_controls_container %}{% endblock %}
+{% block page_content %}
     {% include 'habits/_habit_list.html' with habits=habit_list %}
 {% endblock %}

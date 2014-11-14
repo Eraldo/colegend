@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from habits.models import Habit
 from lib.views import OwnedItemsMixin
+from tutorials.models import get_tutorial
 
 __author__ = 'eraldo'
 
@@ -32,7 +33,10 @@ class HabitMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
 
 
 class HabitListView(HabitMixin, ListView):
-    pass
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tutorial'] = get_tutorial("Habits")
+        return context
 
 
 class HabitNewView(HabitMixin, CreateView):
