@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 from django.views.generic import TemplateView
 from legend.models import Block
 from lib.views import ActiveUserRequiredMixin
+from tutorials.models import get_tutorial
 
 __author__ = 'eraldo'
 
@@ -23,4 +24,5 @@ class LegendView(LegendMixin, TemplateView):
             introduction = None
         context['introduction'] = introduction
         context['candidates'] = get_user_model().objects.accepted().exclude(pk__lt=4)
+        context['tutorial'] = get_tutorial("Legend")
         return context
