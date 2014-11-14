@@ -1,19 +1,28 @@
-{% extends 'base.html' %}
+{% extends 'page.html' %}
 {% load bootstrap3 %}
 
-
-{% block title %}
-    Home
+{% block page_title %}
+    Welcome {{ user|title }}
 {% endblock %}
-{% block content %}
-    <h1>Welcome {{ user|title }}</h1>
+
+{% block controls %}
+    <a href="{% url "journals:dayentry_new" %}" class="btn btn-default" role="button">New Journal Entry</a>
+    <a href="{% url "projects:project_new" %}" class="btn btn-default" role="button">New Project</a>
+    <a href="{% url "tasks:task_new" %}" class="btn btn-default" role="button">New Task</a>
+    <a href="{% url "contact" %}" class="btn btn-default" role="button">New Message</a>
+{% endblock %}
+
+{% block page_content %}
     <div class="well">
-        <h2>{{ newsblock }}</h2>
+        <h2>{{ newsblock|default:"No news is good news." }}</h2>
+
         <p>{{ newsblock.description|linebreaksbr }}</p>
         <a href="{% url "contact" %}" class="btn btn-primary">Feedback</a>
         <a href="{% url "news:newsblock_list" %}" class="btn btn-default">News Archive</a>
-        <footer><cite class="small pull-right">— created
-            by {{ newsblock.owner }} on {{ newsblock.date }}</cite></footer>
+        {% if newsblock %}
+            <footer><cite class="small pull-right">— created
+                by {{ newsblock.owner }} on {{ newsblock.date }}</cite></footer>
+        {% endif %}
     </div>
     {% if quote %}
         <div class="well well-sm">
