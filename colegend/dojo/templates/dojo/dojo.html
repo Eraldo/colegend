@@ -1,48 +1,45 @@
-{% extends 'base.html' %}
+{% extends 'page.html' %}
 
-{% block content %}
-    <div class="container">
-        <h1>
-            <span data-toggle="tooltip"
-                  title="Here you can expand your knowledge and integrate new concepts by doing exercises.">
-            {% block title %}
-                The Dojo
-            {% endblock %}
-            </span>
-            <span class="badge status">{{ contribution_counter }}</span>
-        </h1>
+{% block page_title %}
+    The Dojo
+{% endblock %}
 
-        <div class="list-controls container-fluid well well-sm">
-            <a href="{% url "dojo:module_new" %}" class="btn btn-default">New</a>
-        </div>
+{% block page_title_extras %}
+    <span class="badge status">{{ contribution_counter }}</span>
+{% endblock %}
 
-        <div class="well">
-            <h2>
+{% block page_controls %}
+
+{% endblock %}
+        <a href="{% url "dojo:module_new" %}" class="btn btn-default">New</a>
+{% block page_content %}
+    <div class="well">
+        <h2>
                 <span data-toggle="tooltip" title="Modules to explore and practise new concepts.">
                 Modules
                 </span>
-            </h2>
-            {% for module in modules %}
-                <a href="{{ module.get_show_url }}" class="btn btn-primary">{{ module }}</a>
-            {% empty %}
-                No modules here yet.
-            {% endfor %}
-        </div>
+        </h2>
+        {% for module in modules %}
+            <a href="{{ module.get_show_url }}" class="btn btn-primary">{{ module }}</a>
+        {% empty %}
+            No modules here yet.
+        {% endfor %}
+    </div>
 
-        <div class="well">
-            <h3>Share your module</h3>
+    <div class="well">
+        <h3>Share your module</h3>
 
-            {% if contribution_counter %}
-                You have contributed <span class="badge">{{ contribution_counter }}</span>
-                module{{ contribution_counter|pluralize }}!
-            {% else %}
-                Time to share your <span class="badge">first</span> module.
-            {% endif %}
+        {% if contribution_counter %}
+            You have contributed <span class="badge">{{ contribution_counter }}</span>
+            module{{ contribution_counter|pluralize }}!
+        {% else %}
+            Time to share your <span class="badge">first</span> module.
+        {% endif %}
 
-            <p>Can you think of another module that you could share? Awesome!</p>
-            <a href="{% url "dojo:module_new" %}" class="btn btn-primary"><i class="fa fa-share"></i> Share a
-                Module</a>
-        </div>
+        <p>Can you think of another module that you could share? Awesome!</p>
+        <a href="{% url "dojo:module_new" %}" class="btn btn-primary"><i class="fa fa-share"></i> Share a
+            Module</a>
+    </div>
 
 
     </div>
