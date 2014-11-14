@@ -36,7 +36,8 @@ class TaggableBase(models.Model):
     tags.help_text = string_concat(
         "<a href='",
         reverse_lazy("tags:tag_new"),
-        "' target='_blank'><i class='fa fa-plus-circle' style='color: green;'></i> New Tag</a> - <small>*Refresh page to view new tag.</small><br>"
+        "' target='_blank'><i class='fa fa-plus-circle' style='color: green;'></i> New Tag</a>",
+        "- <small>*Refresh page to view new tag.</small><br>"
     )
 
     class Meta:
