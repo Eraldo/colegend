@@ -86,19 +86,19 @@
                                 {% include 'website/_menu_item.html' %}
                             {% endfor %}
                         {% endif %}
-                        {% if user.is_manager or user.is_superuser %}
+                        {% if user.is_manager %}
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Manage</li>
+                            {% for menu_item in menu_items.manage %}
+                                {% include 'website/_menu_item.html' %}
+                            {% endfor %}
+                        {% endif %}
+                        {% if user.is_superuser %}
                             <li class="divider"></li>
                             <li class="dropdown-header">Admin</li>
-                            {% if user.is_manager %}
-                                {% for menu_item in menu_items.team %}
-                                    {% include 'website/_menu_item.html' %}
-                                {% endfor %}
-                            {% endif %}
-                            {% if user.is_superuser %}
-                                {% for menu_item in menu_items.admin %}
-                                    {% include 'website/_menu_item.html' %}
-                                {% endfor %}
-                            {% endif %}
+                            {% for menu_item in menu_items.admin %}
+                                {% include 'website/_menu_item.html' %}
+                            {% endfor %}
                         {% endif %}
                     </ul>
                 </li>

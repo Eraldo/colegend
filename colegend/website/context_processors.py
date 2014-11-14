@@ -51,6 +51,7 @@ def menu(request):
             MenuItem("Features", url="features:feature_list", icon="road"),
             MenuItem("Home", url="home", icon="home"),
             MenuItem("News", url="news:newsblock_list", icon="newspaper-o"),
+            MenuItem("Tutorials", url="tutorials:tutorial_list", icon="graduation-cap"),
         ],
         'operator_extra': [
             MenuItem("Commands", url="commands", icon="bullhorn"),
@@ -59,9 +60,8 @@ def menu(request):
             MenuItem("Profile", url="users:detail", arg=request.user, icon="user"),
             MenuItem("Settings", url="users:settings", icon="wrench"),
         ],
-        'team': [
-            MenuItem("Manage Users", url="users:manage", icon="user-md"),
-            MenuItem("Manage Tutorials", url="tutorials:tutorial_list", icon="graduation-cap"),
+        'manage': [
+            MenuItem("Users", url="users:manage", icon="user-md"),
         ],
         'admin': [
             MenuItem("Backend", url="admin:index", icon="database"),
