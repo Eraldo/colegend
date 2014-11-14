@@ -9,16 +9,11 @@
 {% endblock %}
 
 {% block page_controls %}
-
+    <a href="{% url "dojo:module_new" %}" class="btn btn-default">New</a>
 {% endblock %}
-        <a href="{% url "dojo:module_new" %}" class="btn btn-default">New</a>
+
 {% block page_content %}
     <div class="well">
-        <h2>
-                <span data-toggle="tooltip" title="Modules to explore and practise new concepts.">
-                Modules
-                </span>
-        </h2>
         {% for module in modules %}
             <a href="{{ module.get_show_url }}" class="btn btn-primary">{{ module }}</a>
         {% empty %}
