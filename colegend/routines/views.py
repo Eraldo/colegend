@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import DetailView, View, ListView, CreateView, UpdateView, DeleteView
 from lib.views import OwnedItemsMixin
+from routines.forms import RoutineForm
 from routines.models import Routine
 from tutorials.models import get_tutorial
 
@@ -11,6 +12,7 @@ __author__ = 'eraldo'
 
 class RoutineMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
     model = Routine
+    form_class = RoutineForm
     fields = ['name', 'description', 'type', 'tags']
 
     def get_form(self, form_class):

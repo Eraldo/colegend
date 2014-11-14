@@ -1,7 +1,2 @@
-{% extends 'base.html' %}
-{% load crispy_forms_tags %}
-
-{% block content %}
-    <legend>{% if object %}Edit Entry{% else %}New Entry{% endif %}</legend>
-    {% crispy form %}
-{% endblock %}
+{% extends 'form.html' %}
+{% block form_title %}Entry{% endblock %}

@@ -1,3 +1,4 @@
+from habits.forms import HabitForm
 from lib.views import ActiveUserRequiredMixin
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse_lazy
@@ -11,6 +12,7 @@ __author__ = 'eraldo'
 
 class HabitMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
     model = Habit
+    form_class = HabitForm
     fields = ['routine', 'name', 'description', 'order', 'tags']
 
     def get_form(self, form_class):

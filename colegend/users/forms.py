@@ -1,11 +1,12 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, HTML, Field, Submit
 from django.contrib.auth.forms import UserCreationForm as AuthUserCreationForm, UserChangeForm as AuthUserChangeForm
+from django.core.urlresolvers import reverse_lazy
 from floppyforms.__future__.models import ModelForm
 import floppyforms as forms
 from lib.formfields import PhoneField
 from lib.validators import validate_in_past, PhoneValidator
-from users.models import User, Profile, Contact, Settings
+from users.models import User, Profile, Settings
 
 __author__ = 'eraldo'
 
@@ -14,9 +15,15 @@ class UserForm(ModelForm):
     class Meta:
         # Set this form to use the User model.
         model = User
-
         # Constrain the UserForm to just these fields.
         fields = ["username"]
+
+    helper = FormHelper()
+    helper.form_action = reverse_lazy("users:update")
+    helper.layout = Layout(
+        Field('username', autofocus='True'),
+    )
+    helper.add_input(Submit('save', 'Save'))
 
 
 class UserCreationForm(AuthUserCreationForm):
