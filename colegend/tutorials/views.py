@@ -13,7 +13,7 @@ class TutorialMixin():
     form_class = TutorialForm
 
 
-class TutorialListView(TutorialMixin, ListView):
+class TutorialListView(ActiveUserRequiredMixin, TutorialMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['tutorial'] = get_object_or_None(Tutorial, name="Tutorials")
