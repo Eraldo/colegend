@@ -2,7 +2,11 @@
 
 {% block content %}
     <h1>Journal Entries <span class="badge">{{ latest.count }}</span> <span class="streak badge"><i
-            class="fa fa-link"></i> {{ streak }}</span></h1>
+            class="fa fa-link"></i> {{ streak }}</span>
+    {% if tutorial %}
+        <a href="{{ tutorial.get_show_url }}" class="pull-right"><i class="fa fa-question-circle"></i></a>
+    {% endif %}
+    </h1>
 
     <div class="dayentry-list">
         <div class="list-controls container-fluid well well-sm">

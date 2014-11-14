@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block head_links %}{{ block.super }}{% endblock %}
+{% block extra_head %}{{ block.super }}{% endblock %}
+{% block menu %}{{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1>
+    <div class="pull-right">
+        {% block back_link %}
+            <a href="javascript:history.go(-1)"><i class="fa fa-arrow-circle-left"></i></a>
+        {% endblock %}
+        {% block tutorial %}
+            {% if tutorial %}
+                <a href="{{ tutorial.get_show_url }}"><i class="fa fa-question-circle"></i></a>
+            {% endif %}
+        {% endblock %}
+    </div>
+        {% block title %}{% block page_title %}Main Page{% endblock %}{% endblock %}
+        {% block badges %}{% endblock %}
+    </h1>
+    <div class="list-controls container-fluid well well-sm">
+        {% block controls %}
+            <a href="{% url "projects:project_new" %}" class="btn btn-default" role="button">New</a>
+        {% endblock %}
+    </div>
+    {% block page_content %}
+    {% endblock %}
+{% endblock %}
+
+{% block body_scripts %}{{ block.super }}{% endblock %}

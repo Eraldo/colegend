@@ -1,14 +1,17 @@
-{% extends 'base.html' %}
+{% extends 'page.html' %}
 
 {% block extra_head %}
     {{ block.super }}
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}website/css/dialogue.css"/>
 {% endblock %}
 
-{% block title %}
-    Test
+{% block page_title %}
+    Test foo
 {% endblock %}
-{% block content %}
+{% block badges %}badge-demo{% endblock %}
+{% block controls %}controls{% endblock %}
+
+{% block page_content %}
     <h1>tests</h1>
     <h2>temp</h2>
     <i class="fa fa-camera-retro"></i> fa-camera-retro

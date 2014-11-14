@@ -1,24 +1,19 @@
-{% extends 'base.html' %}
+{% extends 'page.html' %}
 
-{% block content %}
-    <div class="container">
-        <h1>
-            {% block title %}
-                Tutorials
-            {% endblock %}
-        </h1>
+{% block page_title %}
+    Tutorials
+{% endblock %}
 
-        <div class="list-controls container-fluid well well-sm">
-            <a href="{% url "tutorials:tutorial_new" %}" class="btn btn-default">New</a>
-        </div>
+{% block controls %}
+    <a href="{% url "tutorials:tutorial_new" %}" class="btn btn-default">New</a>
+{% endblock %}
 
-        <div class="well">
-            {% for tutorial in tutorial_list %}
-                <a href="{{ tutorial.get_show_url }}" class="btn btn-primary">{{ tutorial }}</a>
-            {% empty %}
-                No tutorials here yet.
-            {% endfor %}
-        </div>
-
+{% block page_content %}
+    <div class="well">
+        {% for tutorial in tutorial_list %}
+            <a href="{{ tutorial.get_show_url }}" class="btn btn-primary">{{ tutorial }}</a>
+        {% empty %}
+            No tutorials here yet.
+        {% endfor %}
     </div>
 {% endblock %}
