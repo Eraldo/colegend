@@ -10,7 +10,7 @@
         {% block back_link %}
             <a href="javascript:history.go(-1)"><i class="fa fa-arrow-circle-left"></i></a>
         {% endblock %}
-        {% block tutorial %}
+        {% block page_tutorial %}
             {% if tutorial %}
                 <a href="{{ tutorial.get_show_url }}"><i class="fa fa-question-circle"></i></a>
             {% endif %}
@@ -20,7 +20,7 @@
         {% block badges %}{% endblock %}
     </h1>
     <div class="list-controls container-fluid well well-sm">
-        {% block controls %}{% endblock %}
+        {% block page_controls %}{% endblock %}
     </div>
     {% block page_content %}
     {% endblock %}

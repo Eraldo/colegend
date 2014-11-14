@@ -2,7 +2,7 @@
 
 {% block page_title %}{{ tutorial }}{% endblock %}
 
-{% block controls %}
+{% block page_controls %}
     {% if user.is_manager %}
         <a href="{{ tutorial.get_edit_url }}" class="btn btn-primary" role="button">Edit</a>
         <a href="{{ tutorial.get_delete_url }}" class="btn btn-danger" role="button">Delete</a>

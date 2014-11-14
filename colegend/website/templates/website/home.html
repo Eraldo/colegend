@@ -5,7 +5,7 @@
     Welcome {{ user|title }}
 {% endblock %}
 
-{% block controls %}
+{% block page_controls %}
     <a href="{% url "journals:dayentry_new" %}" class="btn btn-default" role="button">New Journal Entry</a>
     <a href="{% url "projects:project_new" %}" class="btn btn-default" role="button">New Project</a>
     <a href="{% url "tasks:task_new" %}" class="btn btn-default" role="button">New Task</a>
