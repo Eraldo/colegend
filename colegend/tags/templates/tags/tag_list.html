@@ -1,6 +1,12 @@
-{% extends 'base.html' %}
+{% extends 'page.html' %}
 
-{% block content %}
-    <h1>Tags <span class="badge">{{ tag_list.count }}</span></h1>
+{% block page_title %}
+    Tags
+{% endblock %}
+{% block page_title_extras %}
+    <span class="badge">{{ tag_list.count }}</span>
+{% endblock %}
+{% block page_controls_container %}{% endblock %}
+{% block page_content %}
     {% include 'tags/_tag_list.html' with tags=object_list %}
 {% endblock %}
