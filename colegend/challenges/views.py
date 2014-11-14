@@ -4,6 +4,7 @@ from django.views.generic import CreateView, DetailView, UpdateView, DeleteView,
 from challenges.forms import ChallengeForm
 from challenges.models import Challenge
 from lib.views import ActiveUserRequiredMixin
+from tutorials.models import get_tutorial
 
 __author__ = 'eraldo'
 
@@ -21,6 +22,7 @@ class ChallengeListView(ChallengeMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["contribution_counter"] = Challenge.objects.filter(provider=self.request.user).count()
+        context["tutorial"] = get_tutorial("Challenges")
         return context
 
 

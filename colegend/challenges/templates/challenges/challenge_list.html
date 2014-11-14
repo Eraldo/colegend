@@ -1,44 +1,41 @@
-{% extends 'base.html' %}
+{% extends 'page.html' %}
 
-{% block content %}
-    <div class="container">
-        <h1>
-            <span data-toggle="tooltip"
-                  title="Here you can expand your comfort zone and make new experiences.">
-            {% block title %}
-                Challenges
-            {% endblock %}
-            </span>
-            <span class="badge status">{{ contribution_counter }}</span>
-        </h1>
+{% block page_title %}
+    Challenges
+{% endblock %}
 
-        <div class="list-controls container-fluid well well-sm">
-            <a href="{% url "challenges:challenge_new" %}" class="btn btn-default">New</a>
-        </div>
+{% block page_title_extras %}
+    <span class="badge status">{{ contribution_counter }}</span>
+{% endblock %}
 
-        <div class="well">
-            <p>Here you can expand your comfort zone and make new experiences by doing things that you might not do
-                otherwise.</p>
-            {% for challenge in challenge_list %}
-                <a href="{{ challenge.get_show_url }}" class="btn btn-primary">{{ challenge }}</a>
-            {% empty %}
-                No challenges here yet.
-            {% endfor %}
-        </div>
-        <div class="well">
-            <h3>Share your challenges</h3>
+{% block page_controls %}
+        <a href="{% url "challenges:challenge_new" %}" class="btn btn-default">New</a>
+{% endblock %}
 
-            {% if contribution_counter %}
-                You have contributed <span class="badge">{{ contribution_counter }}</span>
-                challenge{{ contribution_counter|pluralize }}!
-            {% else %}
-                Time to share your <span class="badge">first</span> challenge.
-            {% endif %}
+{% block page_content %}
+    <div class="well">
+        <p>Here you can expand your comfort zone and make new experiences by doing things that you might not do
+            otherwise.</p>
+        {% for challenge in challenge_list %}
+            <a href="{{ challenge.get_show_url }}" class="btn btn-primary">{{ challenge }}</a>
+        {% empty %}
+            No challenges here yet.
+        {% endfor %}
+    </div>
+    <div class="well">
+        <h3>Share your challenges</h3>
 
-            <p>Can you think of another challenge that you could share? Awesome!</p>
-            <a href="{% url "challenges:challenge_new" %}" class="btn btn-primary"><i class="fa fa-share"></i> Share a
-                Challenge</a>
-        </div>
+        {% if contribution_counter %}
+            You have contributed <span class="badge">{{ contribution_counter }}</span>
+            challenge{{ contribution_counter|pluralize }}!
+        {% else %}
+            Time to share your <span class="badge">first</span> challenge.
+        {% endif %}
+
+        <p>Can you think of another challenge that you could share? Awesome!</p>
+        <a href="{% url "challenges:challenge_new" %}" class="btn btn-primary"><i class="fa fa-share"></i> Share a
+            Challenge</a>
+    </div>
 
     </div>
 {% endblock %}
