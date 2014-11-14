@@ -1,6 +1,11 @@
-{% extends 'base.html' %}
-
-{% block content %}
-    <h1>Tasks <span class="badge">{{ task_list.count }}</span></h1>
+{% extends 'page.html' %}
+{% block page_title %}
+    Tasks
+{% endblock %}
+{% block page_title_extras %}
+<span class="badge">{{ task_list.count }}</span>
+{% endblock %}
+{% block page_controls_container %}{% endblock %}
+{% block page_content %}
     {% include 'tasks/_task_list.html' with tasks=task_list %}
 {% endblock %}
