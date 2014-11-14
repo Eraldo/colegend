@@ -1,54 +1,52 @@
-{% extends 'base.html' %}
+{% extends 'page.html' %}
 
-{% block content %}
-    <div class="container">
-        <h1>{% block title %}Quotes{% endblock %}
-            <span class="badge status">{{ contribution_counter }}</span>
-        </h1>
-
-        <div class="list-controls container-fluid well well-sm">
-            <a href="{% url "quotes:quote_new" %}" class="btn btn-default">New</a>
-            {% if user.is_manager %}
-                <a href="{% url "quotes:quote_manage" %}" class="btn btn-warning pull-right">Manage</a>
-            {% endif %}
-
-        </div>
-
-        {% if random_quote %}
-            <div class="well well-sm">
-                {% include "quotes/_quote.html" with quote=random_quote %}
-            </div>
+{% block page_title %}
+    Quotes
+{% endblock %}
+{% block page_title_extras %}
+    <span class="badge status">{{ contribution_counter }}</span>
+{% endblock %}
+{% block page_controls %}
+        <a href="{% url "quotes:quote_new" %}" class="btn btn-default">New</a>
+        {% if user.is_manager %}
+            <a href="{% url "quotes:quote_manage" %}" class="btn btn-warning pull-right">Manage</a>
         {% endif %}
+{% endblock %}
 
-        <div class="well">
-            <h2>My Quotes</h2>
-            {% for quote in quotes %}
+{% block page_content %}
+    {% if random_quote %}
+        <div class="well well-sm">
+            {% include "quotes/_quote.html" with quote=random_quote %}
+        </div>
+    {% endif %}
+
+    <div class="well">
+        <h2>My Quotes</h2>
+        {% for quote in quotes %}
+            <a href="{{ quote.get_show_url }}" class="btn btn-default">
+                {{ quote }}
+            </a>
+        {% endfor %}
+        {% if pending %}
+            <h3>Pending</h3>
+            {% for quote in pending %}
                 <a href="{{ quote.get_show_url }}" class="btn btn-default">
                     {{ quote }}
                 </a>
             {% endfor %}
-            {% if pending %}
-                <h3>Pending</h3>
-                {% for quote in pending %}
-                    <a href="{{ quote.get_show_url }}" class="btn btn-default">
-                        {{ quote }}
-                    </a>
-                {% endfor %}
-            {% endif %}
-        </div>
+        {% endif %}
+    </div>
 
-        <div class="well">
-            <h3>Share your quotes</h3>
+    <div class="well">
+        <h3>Share your quotes</h3>
 
-            {% if contribution_counter %}
-                You have contributed <span class="badge">{{ contribution_counter }}</span>
-                quote{{ contribution_counter|pluralize }}!
-            {% else %}
-                Time to enter your <span class="badge">first</span> quote.
-            {% endif %}
-            <p>Can you think of a quote that you could share? Awesome!</p>
-            <a href="{% url "quotes:quote_new" %}" class="btn btn-primary"><i class="fa fa-share"></i> Share a Quote</a>
-        </div>
-
+        {% if contribution_counter %}
+            You have contributed <span class="badge">{{ contribution_counter }}</span>
+            quote{{ contribution_counter|pluralize }}!
+        {% else %}
+            Time to enter your <span class="badge">first</span> quote.
+        {% endif %}
+        <p>Can you think of a quote that you could share? Awesome!</p>
+        <a href="{% url "quotes:quote_new" %}" class="btn btn-primary"><i class="fa fa-share"></i> Share a Quote</a>
     </div>
 {% endblock %}

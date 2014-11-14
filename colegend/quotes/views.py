@@ -4,6 +4,7 @@ from django.views.generic import TemplateView, CreateView, ListView, DetailView,
 from lib.views import ActiveUserRequiredMixin, ManagerRequiredMixin
 from quotes.forms import QuoteForm
 from quotes.models import Quote
+from tutorials.models import get_tutorial
 
 
 class QuoteMixin(ActiveUserRequiredMixin):
@@ -31,6 +32,7 @@ class QuoteListView(QuoteMixin, ListView):
         context['pending'] = quotes.pending()
         context['contribution_counter'] = quotes.count()
         context['random_quote'] = Quote.objects.accepted().random()
+        context['tutorial'] = get_tutorial("Quotes")
         return context
 
 
