@@ -1,11 +1,10 @@
-from annoying.functions import get_object_or_None
 from lib.views import ActiveUserRequiredMixin
 from django.core.exceptions import ValidationError
 from django.views.generic import DetailView, UpdateView, DeleteView, CreateView, ArchiveIndexView
 from journals.forms import DayEntryForm
 from journals.models import DayEntry
 from lib.views import OwnedItemsMixin
-from tutorials.models import Tutorial
+from tutorials.models import get_tutorial
 
 __author__ = 'eraldo'
 
@@ -31,7 +30,7 @@ class DayEntryListView(DayEntryMixin, ArchiveIndexView):
     def get_context_data(self, **kwargs):
         context = super(DayEntryListView, self).get_context_data(**kwargs)
         context['streak'] = DayEntry.objects.streak_for(self.request.user)
-        context['tutorial'] = get_object_or_None(Tutorial, name="Journal")
+        context['tutorial'] = get_tutorial(name="Journal")
         return context
 
 

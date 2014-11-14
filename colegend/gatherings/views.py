@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.utils.timesince import timeuntil
 from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView, ListView
 from gatherings.models import Gathering
+from tutorials.models import get_tutorial
 
 
 class GatheringMixin(ManagerRequiredMixin):
@@ -40,6 +41,8 @@ class GatheringsView(ActiveUserRequiredMixin, TemplateView):
             context['host'] = gathering.host
             # scheduled gatherings
             context['future_gatherings'] = Gathering.objects.filter(date__gt=date)
+            # tutorial
+            context['tutorial'] = get_tutorial("Gatherings")
         return context
 
 

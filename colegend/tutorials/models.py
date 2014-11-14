@@ -1,3 +1,4 @@
+from annoying.functions import get_object_or_None
 from django.db import models
 from lib.models import AutoUrlMixin
 
@@ -10,3 +11,7 @@ class Tutorial(AutoUrlMixin, models.Model):
 
     def __str__(self):
         return self.name
+
+
+def get_tutorial(name):
+    return get_object_or_None(Tutorial, name=name)

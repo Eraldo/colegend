@@ -1,58 +1,46 @@
-{% extends 'base.html' %}
+{% extends 'page.html' %}
 {% load bootstrap3 %}
 
 
-{% block title %}
+{% block page_title %}
     Gatherings
 {% endblock %}
-{% block content %}
-    <div class="text-center">
-        <h1>Gatherings</h1>
 
-        {% if user.is_manager %}
-            <div class="list-controls container container-fluid well well-sm">
-                <a href="{% url "gatherings:gathering_list" %}" class="btn btn-warning">
-                    Manage</a>
-            </div>
-        {% endif %}
-    </div>
-    <div class="well lead text-center container">
-        <img src="{{ STATIC_URL }}website/images/CoSpace_circle.png" alt="CoSpace"
-             class="center-block img-circle img-responsive" style="max-height: 200px;">
-
-        <h3>Next Gathering</h3>
-        {% if date %}
-            {{ date }}<br/>
-            Countdown: {{ counter }}<br/>
-            <a href="{{ url }}" target="_blank" class="btn btn-default">»
-                {{ location }}</a>
-        {% else %}
-            Currently there are no planned gatherings.
-        {% endif %}
-    </div>
-    {% if future_gatherings %}
-        <div class="well text-center container">
-            <h3>Further Upcoming Gatherings</h3>
-            Please keep in mind.. that the dates/times can still change.<br>
-            {% for gathering in future_gatherings %}
-                {{ gathering }}<br/>
-            {% empty %}
-                -- No future gatherings scheduled.
-            {% endfor %}
-        </div>
+{% block page_controls %}
+    {% if user.is_manager %}
+        <a href="{% url "gatherings:gathering_list" %}" class="btn btn-warning pull-right">
+            Manage</a>
     {% endif %}
+{% endblock %}
 
-    <div class="well lead text-center container">
-        <h2>About "CoSpace" Gatherings</h2>
+{% block page_content %}
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="well lead text-center">
 
-        <p>
-            A place where we can connect on a regular basis.<br/>
-            In the center there is a question: “How can we support each other to be(come) more legendary?”<br/>
-            A safe space where we can talk about our biggest current challenges and strongest emotions.<br/>
-            <br/>
-            For now this will take place in the form of weekly video/audio hangouts.<br/>
-            In the longer run, as we increase in number, this will shift to your local tribes.<br/>
-            Once a year starting 2015 the tribes will be invited to merge and enjoy a legendary celebration.<br/>
-        </p>
+                <h2>Next Gathering</h2>
+                {% if date %}
+                    {{ date }}<br/>
+                    Countdown: {{ counter }}<br/>
+                    <img src="{{ STATIC_URL }}website/images/CoSpace_circle.png" alt="CoSpace"
+                         class="center-block img-circle img-responsive" style="max-height: 200px;">
+                    <a href="{{ url }}" target="_blank" class="btn btn-default">»
+                        {{ location }}</a>
+                {% else %}
+                    Currently there are no planned gatherings.
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="well text-center">
+                <h3>Further Gatherings</h3>
+                {% for gathering in future_gatherings %}
+                    <a class="btn btn-default">{{ gathering }}</a><br/>
+                {% empty %}
+                    -- No future gatherings scheduled.
+                {% endfor %}
+                <small>*Please keep in mind.. that the dates/times can still change.<br></small>
+            </div>
+        </div>
     </div>
 {% endblock %}
