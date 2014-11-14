@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import redirect
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from lib.views import OwnedItemsMixin
+from tutorials.models import get_tutorial
 from visions.forms import VisionForm
 from visions.models import Vision
 
@@ -48,6 +49,11 @@ class VisionNewView(VisionMixin, CreateView):
 
 class VisionShowView(VisionMixin, DetailView):
     template_name = "visions/vision_show.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tutorial'] = get_tutorial("Life Vision")
+        return context
 
 
 class VisionEditView(VisionMixin, UpdateView):

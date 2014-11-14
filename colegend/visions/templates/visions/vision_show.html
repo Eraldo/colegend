@@ -1,12 +1,15 @@
-{% extends 'base.html' %}
+{% extends 'page.html' %}
 
-{% block content %}
-    <h1>My Life Vision</h1>
-        <div class="list-controls container-fluid well well-sm">
+{% block page_title %}
+    My Life Vision
+{% endblock %}
+
+{% block page_controls %}
     <a href="{{ vision.get_edit_url }}" class="btn btn-primary" role="button">Update</a>
     <a href="{{ vision.get_delete_url }}" class="btn btn-danger" role="button">Delete</a>
-    </div>
+{% endblock %}
 
+{% block page_content %}
     <div class="well well-sm">
     <h2>{{ vision }}</h2>
     {{ vision.description|linebreaks }}
