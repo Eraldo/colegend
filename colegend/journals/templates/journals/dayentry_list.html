@@ -2,19 +2,19 @@
 
 {% block page_title %}
     Journal Entries
-    {% block badges %} <span class="badge">{{ latest.count }}</span> <span class="streak badge"><i
-            class="fa fa-link"></i> {{ streak }}</span>
-    {% endblock %}
+{% endblock %}
+
+{% block page_title_extras %}
+    <span class="badge">{{ latest.count }}</span>
+    <span class="streak badge"><i class="fa fa-link"></i> {{ streak }}</span>
 {% endblock %}
 
 {% block page_controls %}
+    <a href="{% url "journals:dayentry_new" %}" class="btn btn-default" role="button">New</a>
 {% endblock %}
 
 {% block page_content %}
     <div class="dayentry-list">
-        <div class="list-controls container-fluid well well-sm">
-            <a href="{% url "journals:dayentry_new" %}" class="btn btn-default" role="button">New</a>
-        </div>
         <table class="table table-hover">
             <thead>
             <tr>
