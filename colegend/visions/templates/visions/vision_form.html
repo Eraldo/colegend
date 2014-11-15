@@ -1,2 +1,7 @@
 {% extends 'form.html' %}
 {% block form_title %}Life Vision{% endblock %}
+
+{% block page_content %}
+    {{ form.media }}
+    {{ block.super }}
+{% endblock %}

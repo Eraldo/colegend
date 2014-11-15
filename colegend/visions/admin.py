@@ -6,13 +6,13 @@ __author__ = 'eraldo'
 
 class VisionAdmin(admin.ModelAdmin):
     list_display = ['name', 'owner']
-    search_fields = ['name', 'description']
+    search_fields = ['name', 'content']
     list_filter = ['owner']
     readonly_fields = ['creation_date', 'modification_date', 'history']
 
     fieldsets = [
         (None, {'fields': ['owner']}),
-        (None, {'fields': ['name', 'description']}),
+        (None, {'fields': ['name', 'content']}),
         ('history', {'fields': ['creation_date', 'modification_date', 'history'], 'classes': ['collapse']}),
     ]
 
