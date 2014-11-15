@@ -249,6 +249,7 @@ PROJECT_APPS = (
     'bootstrap3',
     'crispy_forms',
     'floppyforms',
+    'markitup',
 )
 EXTRA_APPS = (
     'django_extensions',
@@ -385,3 +386,10 @@ MIDDLEWARE_CLASSES += (
 # SESSION_COOKIE_SECURE = True
 # SESSION_COOKIE_HTTPONLY = True
 ########## END DJANGOSECURE CONFIGURATION
+
+
+########## MARKITUP CONFIGURATION
+MARKITUP_FILTER = ('markdown.markdown', {'safe_mode': True})
+MARKITUP_SET = 'markitup/sets/markdown'
+# JQUERY_URL = None
+########## MARKITUP CONFIGURATION

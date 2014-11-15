@@ -2,7 +2,7 @@
 
 {% block content %}
 <form method="post">{% csrf_token %}
-    <legend>Are you sure you want to delete "{{ object.date }}" ?</legend>
+    <legend>Are you sure you want to delete "{{ object }}" ?</legend>
     <button type="submit" class="btn btn-danger">Delete</button>
 </form>
 {% endblock %}

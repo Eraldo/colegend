@@ -4,13 +4,13 @@ from journals.models import DayEntry
 
 class DayEntryAdmin(admin.ModelAdmin):
     list_display = ['date', 'location', 'focus', 'owner']
-    search_fields = ['focus', 'text']
+    search_fields = ['focus', 'content']
     list_filter = ['owner', 'location']
     readonly_fields = ['creation_date', 'modification_date', 'history']
 
     fieldsets = [
         (None, {'fields': ['owner']}),
-        (None, {'fields': ['date', 'location', 'focus', 'text']}),
+        (None, {'fields': ['date', 'location', 'focus', 'content']}),
         ('history', {'fields': ['creation_date', 'modification_date', 'history'], 'classes': ['collapse']}),
     ]
 

@@ -45,6 +45,9 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable avatars
     url(r'^avatar/', include('avatar.urls')),
 
+    # django-markitup AJAX preview
+    url(r'^markitup/', include('markitup.urls'))
+
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # remove group model from admin

@@ -1,5 +1,6 @@
-from django.db import models, OperationalError
+from django.db import models
 from django.utils import timezone
+from markitup.fields import MarkupField
 from journals.validators import validate_present_or_past
 from lib.models import AutoUrlMixin, OwnedBase, TrackedBase, OwnedQueryMixin, ValidateModelMixin
 
@@ -47,6 +48,7 @@ class DayEntry(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, models.
     location = models.CharField(max_length=100)
     focus = models.CharField(max_length=100, help_text="What was the most important experience/topic on this day?")
     text = models.TextField()
+    content = MarkupField()
 
     objects = DayEntryQuerySet.as_manager()
 

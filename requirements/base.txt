@@ -16,6 +16,10 @@ django-floppyforms==1.2.0
 django-model-utils==2.0.3
 django-annoying==0.8.0
 
+# Markup
+django-markitup==2.2.2
+Markdown==2.5.1
+
 # Images
 Pillow==2.5.3
 
