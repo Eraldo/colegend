@@ -389,7 +389,7 @@ MIDDLEWARE_CLASSES += (
 
 
 ########## MARKITUP CONFIGURATION
-MARKITUP_FILTER = ('markdown.markdown', {'safe_mode': True, 'extensions': ['nl2br', 'sane_lists']})
+MARKITUP_FILTER = ('lib.markup.markup', {})
 MARKITUP_SET = 'markitup/sets/markdown'
 MARKITUP_SKIN = 'markitup/skins/bootstrap'
 JQUERY_URL = "website/bower_components/jquery/dist/jquery.min.js"
