@@ -47,7 +47,6 @@ class DayEntry(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, models.
     date = models.DateField(default=timezone.datetime.today, validators=[validate_present_or_past])
     location = models.CharField(max_length=100)
     focus = models.CharField(max_length=100, help_text="What was the most important experience/topic on this day?")
-    text = models.TextField()
     content = MarkupField()
 
     objects = DayEntryQuerySet.as_manager()
