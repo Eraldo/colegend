@@ -1,7 +1,7 @@
 {% extends 'page.html' %}
 
-{% block title %}
-    {% block page_title %}{{ dayentry.date }}{% endblock %}
+{% block page_title %}{{ dayentry.date }}{% endblock %}
+{% block page_title_extras %}
     <small>@{{ dayentry.location|default:"?" }}</small>
 {% endblock %}
 
