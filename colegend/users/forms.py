@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm as AuthUserCreationForm, 
 from django.core.urlresolvers import reverse_lazy
 from floppyforms.__future__.models import ModelForm
 import floppyforms as forms
+from markitup.widgets import MarkItUpWidget
 from lib.formfields import PhoneField
 from lib.validators import validate_in_past, PhoneValidator
 from users.models import User, Profile, Settings
@@ -159,8 +160,10 @@ class SignUpApplicationForm(ModelForm):
 class SettingsForm(ModelForm):
     class Meta:
         model = Settings
-
         fields = ['language', 'day_start', 'sound', 'journal_entry_template']
+        widgets = {
+            'journal_entry_template': MarkItUpWidget(),
+        }
 
     helper = FormHelper()
     helper.layout = Layout(
