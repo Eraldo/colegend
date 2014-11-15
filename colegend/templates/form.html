@@ -1,9 +1,10 @@
 {% extends 'page.html' %}
 {% load crispy_forms_tags %}
-{% block page_controls_container %}{% endblock %}
+{% block extra_head %}{{ block.super }}{% endblock %}
 {% block page_title %}
     {% if object %}Edit{% else %}New{% endif %} {% block form_title %}{% endblock %}
 {% endblock %}
+{% block page_controls_container %}{% endblock %}
 {% block page_content %}
     <div class="well">
         {% crispy form %}

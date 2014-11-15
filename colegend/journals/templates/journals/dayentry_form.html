@@ -1,2 +1,12 @@
 {% extends 'form.html' %}
+
+{% block extra_head %}
+    {{ block.super }}
+{% endblock %}
+
 {% block form_title %}Entry{% endblock %}
+
+{% block page_content %}
+    {{ form.media }}
+    {{ block.super }}
+{% endblock %}

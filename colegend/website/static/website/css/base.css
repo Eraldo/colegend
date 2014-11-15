@@ -14,6 +14,12 @@
     src: local('ubuntu'), url('../fonts/ubuntu.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: 'ubuntu-mono';
+    src: url('../fonts/ubuntu-mono.ttf');
+    src: local('ubuntu-mono'), url('../fonts/ubuntu-mono.ttf') format('truetype');
+}
+
 /* end fonts */
 
 /* general */
@@ -75,16 +81,20 @@ div.avatar img {
 .label.bg-mentor {
     background-color: orange;
 }
+
 .label.bg-manager {
     background-color: blue;
 }
+
 .label.bg-motivator {
     background-color: purple;
 }
+
 .label.bg-operator {
     background-color: black;
 }
-    /* end system role colors */
+
+/* end system role colors */
 
 span.streak {
     background-color: green;

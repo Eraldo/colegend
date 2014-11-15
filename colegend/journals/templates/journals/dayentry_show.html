@@ -1,16 +1,20 @@
-{% extends 'base.html' %}
+{% extends 'page.html' %}
 
-{% block content %}
-    <h1>{{ dayentry.date }} <small>@{{ dayentry.location|default:"?" }}</small></h1>
-    <div class="list-controls container-fluid well well-sm">
+{% block title %}
+    {% block page_title %}{{ dayentry.date }}{% endblock %}
+    <small>@{{ dayentry.location|default:"?" }}</small>
+{% endblock %}
+
+{% block page_controls %}
     <a href="{{ dayentry.get_edit_url }}" class="btn btn-primary btn-sm" role="button">Edit</a>
     <a href="{{ dayentry.get_delete_url }}" class="btn btn-danger btn-sm" role="button">Delete</a>
-    </div>
+{% endblock %}
+
+{% block page_content %}
     <div class="well">
-    <p>
+        <p>
         <h4>{{ dayentry.focus }}</h4>
         {{ dayentry.content }}
-    </p>
+        </p>
     </div>
-
 {% endblock %}
