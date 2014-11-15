@@ -1,5 +1,5 @@
 # Framework
-django==1.7
+django==1.7.1
 
 # Webserver
 gunicorn==19.0.0
