@@ -1,19 +1,21 @@
-{% extends 'base.html' %}
+{% extends 'page.html' %}
 
-{% block content %}
-    <h1>{{ module }}</h1>
+{% block page_title %}
+    {{ module }}
+{% endblock %}
+
+{% block page_controls %}
     {% if user.is_superuser or user == module.provider %}
-    <div class="list-controls container-fluid well well-sm">
         <a href="{{ module.get_edit_url }}" class="btn btn-primary" role="button">edit</a>
         <a href="{{ module.get_delete_url }}" class="btn btn-danger" role="button">delete</a>
-    </div>
-
     {% endif %}
+{% endblock %}
+
+{% block page_content %}
     <div class="well">
         <p class="lead">{{ module.description|linebreaksbr }}</p>
-        {{ module.content|linebreaksbr }}
+        {{ module.content }}
         <footer><cite class="small pull-right">— shared
-                        by {{ module.provider }}</cite></footer>
+            by {{ module.provider }}</cite></footer>
     </div>
-
 {% endblock %}

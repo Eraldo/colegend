@@ -16,7 +16,7 @@
     <div class="well">
         <h2>{{ newsblock|default:"No news is good news." }}</h2>
 
-        <p>{{ newsblock.description|linebreaksbr }}</p>
+        <p>{{ newsblock.content }}</p>
         <a href="{% url "contact" %}" class="btn btn-primary">Feedback</a>
         <a href="{% url "news:newsblock_list" %}" class="btn btn-default">News Archive</a>
         {% if newsblock %}

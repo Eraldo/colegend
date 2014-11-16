@@ -1,6 +1,7 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Field
 from django.forms import ModelForm
+from markitup.widgets import MarkItUpWidget
 from dojo.models import Module
 
 __author__ = 'eraldo'
@@ -10,6 +11,9 @@ class ModuleForm(ModelForm):
     class Meta:
         model = Module
         fields = ['name', 'description', 'content', 'category', 'source']
+        widgets = {
+            'content': MarkItUpWidget(),
+        }
 
     helper = FormHelper()
     helper.layout = Layout(
