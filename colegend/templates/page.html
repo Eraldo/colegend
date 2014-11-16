@@ -5,20 +5,26 @@
 {% block menu %}{{ block.super }}{% endblock %}
 
 {% block content %}
-    <h1>
+    <div class="page-head">
+        <div class="page-navigation">
+            <i class="fa fa-fw fa-{% block page_icon %}circle{% endblock %} page-status-{% block page_status %}none{% endblock %}"></i><br/>&nbsp;
+        </div>
         <div class="pull-right">
             {% block back_link %}
-                <a href="javascript:history.go(-1)"><i class="fa fa-arrow-circle-left"></i></a>
+                <a href="javascript:history.go(-1)"><i class="fa fa-arrow-circle-left fa-3x"></i></a>
             {% endblock %}
             {% block page_tutorial %}
                 {% if tutorial %}
-                    <a href="{{ tutorial.get_show_url }}"><i class="fa fa-question-circle"></i></a>
+                    <a href="{{ tutorial.get_show_url }}"><i class="fa fa-question-circle fa-3x"></i></a>
                 {% endif %}
             {% endblock %}
         </div>
-        {% block title %}{% block page_title %}Main Page{% endblock %}{% endblock %}
-        {% block page_title_extras %}{% endblock %}
-    </h1>
+        <h1 class="inline">{% block title %}{% block page_title %}Main Page{% endblock %}{% endblock %}</h1>
+
+        <div class="page-navigation">
+            {% block page_title_extras %}{% endblock %}
+        </div>
+    </div>
     {% block page_controls_container %}
         <div class="list-controls container-fluid well well-sm">
             {% block page_controls %}{% endblock %}

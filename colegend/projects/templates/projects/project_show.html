@@ -1,7 +1,14 @@
 {% extends 'page.html' %}
 
+{% block page_status %}ok{% endblock %}
+{% block page_icon %}sitemap{% endblock %}
 {% block page_title %}
-Project
+    {{ project }}
+{% endblock %}
+{% block page_title_extras %}
+    {% include "status/_status_field.html" with status=project.status %}
+    {% include "lib/_priority_field.html" with priority=project.priority %}
+    {% include "tags/_tags_field.html" with tags=project.tags.all %}
 {% endblock %}
 
 {% block page_controls %}
@@ -10,7 +17,9 @@ Project
 {% endblock %}
 
 {% block page_content %}
-    {% include "projects/_project.html" %}
+    <div class="project-details well">
+        {{ project.description }}
+    </div>
 
     <div class="project-tasks">
         <h2>Tasks</h2>

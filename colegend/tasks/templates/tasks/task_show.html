@@ -1,6 +1,28 @@
-{% extends 'base.html' %}
+{% extends 'page.html' %}
 
-{% block content %}
-    <h1>Task</h1>
-    {% include "tasks/_task.html" %}
+{% block page_status %}ok{% endblock %}
+{% block page_icon %}check-circle{% endblock %}
+{% block page_title %}
+    {{ task }}
+{% endblock %}
+{% block page_title_extras %}
+    {% include "status/_status_field.html" with status=task.status %}
+    {% include "lib/_priority_field.html" with priority=task.priority %}
+    {% include "tags/_tags_field.html" with tags=task.tags.all %}
+    {% include "projects/_project_field.html" with project=task.project %}
+{% endblock %}
+
+{% block page_controls %}
+    <a href="{{ task.get_edit_url }}" class="btn btn-primary" role="button">Edit</a>
+    <a href="{{ task.get_delete_url }}" class="btn btn-danger" role="button">Delete</a>
+{% endblock %}
+
+{% block page_content %}
+    <div class="task-details well">
+        <div class="pull-right">
+            {% include "lib/_date_field.html" with date=task.date %}
+            {% include "lib/_deadline_field.html" with deadline=task.deadline %}
+        </div>
+        {{ task.description }}
+    </div>
 {% endblock %}

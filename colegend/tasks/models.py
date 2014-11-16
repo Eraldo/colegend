@@ -1,6 +1,7 @@
 from django.core.exceptions import ValidationError, SuspiciousOperation
 from django.db import models
 from django.db.models.query import QuerySet
+from markitup.fields import MarkupField
 from lib.models import TrackedBase, AutoUrlMixin, OwnedBase, OwnedQueryMixin, ValidateModelMixin
 from projects.models import Project
 from statuses.models import Status
@@ -22,7 +23,7 @@ class Task(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, TaggableBas
     project = models.ForeignKey(Project, blank=True, null=True, related_name="tasks")
     name = models.CharField(max_length=100, help_text="Tip: Use a verb as the first word.")
 
-    description = models.TextField(blank=True)
+    description = MarkupField(blank=True)
     status = models.ForeignKey(Status, default=Status.DEFAULT_PK)
     priority = models.IntegerField(default=2)
     date = models.DateField(blank=True, null=True, help_text="When will I start?")

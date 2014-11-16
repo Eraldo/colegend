@@ -34,6 +34,30 @@ body.body {
 
 /* end general */
 
+/* page */
+.page-head {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 4px;
+}
+.page-navigation {
+    display: inline-block;
+    line-height: 0;
+}
+.page-status-none {
+    color: #777;
+}
+.page-status-ok {
+    color: green;
+}
+.page-status-warning {
+    color: orange;
+}
+.page-status-danger {
+    color: red;
+}
+/* end page */
+
 /* messages */
 #messages .alert {
     margin-bottom: 0px;
