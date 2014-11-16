@@ -6,9 +6,10 @@
     {% include "tags/_tags_field.html" with tags=project.tags.all %}
     <br/>
     {% include "lib/_description_field.html" with description=project.description %}
-    <br/>
     {% include "lib/_deadline_field.html" with deadline=project.deadline %}
     <br/>
-    <a href="{{ project.get_edit_url }}" class="btn btn-primary btn-sm" role="button">Edit</a>
-    <a href="{{ project.get_delete_url }}" class="btn btn-danger btn-sm" role="button">Delete</a>
+    {% if controls %}
+        <a href="{{ project.get_edit_url }}" class="btn btn-primary btn-sm" role="button">Edit</a>
+        <a href="{{ project.get_delete_url }}" class="btn btn-danger btn-sm" role="button">Delete</a>
+    {% endif %}
 </div>

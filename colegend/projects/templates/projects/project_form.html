@@ -1,2 +1,6 @@
 {% extends 'form.html' %}
 {% block form_title %}Project{% endblock %}
+{% block page_content %}
+    {{ form.media }}
+    {{ block.super }}
+{% endblock %}

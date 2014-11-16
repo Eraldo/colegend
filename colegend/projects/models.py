@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models import Min
 from django.db.models.query import QuerySet
+from markitup.fields import MarkupField
 from lib.models import TrackedBase, AutoUrlMixin, OwnedBase, OwnedQueryMixin, ValidateModelMixin
 from statuses.models import Status
 from statuses.utils import StatusQueryMixin
@@ -20,7 +21,7 @@ class Project(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, Taggable
     # > owner: User
     name = models.CharField(max_length=100)
 
-    description = models.TextField(blank=True)
+    description = MarkupField(blank=True)
     status = models.ForeignKey(Status, default=Status.DEFAULT_PK)
     priority = models.IntegerField(default=2)
     deadline = models.DateField(blank=True, null=True)
