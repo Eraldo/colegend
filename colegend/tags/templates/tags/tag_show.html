@@ -1,12 +1,18 @@
-{% extends 'base.html' %}
+{% extends 'page.html' %}
 
-{% block content %}
-    <h1>{{ tag }}</h1>
-    <div class="list-controls container-fluid well well-sm">
-        <a href="{{ tag.get_edit_url }}" class="btn btn-primary btn-sm" role="button">edit</a>
-        <a href="{{ tag.get_delete_url }}" class="btn btn-danger btn-sm" role="button">delete</a>
-    </div>
+{% block page_title %}
+    {{ tag }}
+{% endblock %}
 
+{% block page_controls %}
+        <a href="{{ tag.get_edit_url }}" class="btn btn-primary" role="button">Edit</a>
+        <a href="{{ tag.get_delete_url }}" class="btn btn-danger" role="button">Delete</a>
+{% endblock %}
+
+{% block page_content %}
+<div class="well">
+{{ tag.description }}
+</div>
     <h2>Items</h2>
     <h3>Projects</h3>
     {% include 'projects/_project_list.html' with projects=tag.projects.all %}

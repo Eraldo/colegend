@@ -2,6 +2,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.db import models
 from django.db.models.query import QuerySet
 from django.utils.translation import string_concat
+from markitup.fields import MarkupField
 from lib.models import AutoUrlMixin, OwnedBase, TrackedBase, OwnedQueryMixin, ValidateModelMixin
 
 __author__ = 'eraldo'
@@ -18,7 +19,7 @@ class Tag(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, models.Model
     # > owner: User
     name = models.CharField(max_length=100)
 
-    description = models.TextField(blank=True)
+    description = MarkupField(blank=True)
 
     objects = TagQuerySet.as_manager()
 
