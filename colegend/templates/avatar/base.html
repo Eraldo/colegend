@@ -1,4 +1,14 @@
-{% extends "base.html" %}
+{% extends "page.html" %}
 
-{% block title %}django-avatar{% endblock %}
-{% block content %}{% endblock %}
+{% block page_title %}
+    Avatar
+{% endblock %}
+
+{% block up_url %}{% url "users:settings" %}{% endblock %}
+{% block up_icon %}wrench{% endblock %}
+
+{% block page_content %}
+    <div class="well">
+    {% block content %}{% endblock %}
+    </div>
+{% endblock %}

@@ -1,10 +1,12 @@
 {% extends 'page.html' %}
 {% load bootstrap3 %}
 
-
 {% block page_title %}
     Gatherings
 {% endblock %}
+
+{% block up_url %}{% url "gatherings:home" %}{% endblock %}
+{% block up_icon %}comments-o{% endblock %}
 
 {% block page_controls %}
     {% if user.is_manager %}
@@ -37,7 +39,7 @@
                 {% for gathering in future_gatherings %}
                     <a class="btn btn-default">{{ gathering }}</a><br/>
                 {% empty %}
-                    -- No future gatherings scheduled.
+                    -- No future gatherings scheduled.<br>
                 {% endfor %}
                 <small>*Please keep in mind.. that the dates/times can still change.<br></small>
             </div>

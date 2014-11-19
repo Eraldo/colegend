@@ -4,6 +4,9 @@
     {{ tag }}
 {% endblock %}
 
+{% block up_url %}{% url "tags:tag_list" %}{% endblock %}
+{% block up_icon %}tags{% endblock %}
+
 {% block page_controls %}
         <a href="{{ tag.get_edit_url }}" class="btn btn-primary" role="button">Edit</a>
         <a href="{{ tag.get_delete_url }}" class="btn btn-danger" role="button">Delete</a>

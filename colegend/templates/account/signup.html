@@ -4,17 +4,14 @@
 {% load i18n %}
 {% load crispy_forms_tags %}
 
-{% block title %}{% trans "Signup" %}{% endblock title %}
+{% block up_url %}#{% endblock %}
+{% block up_icon %}sign-in{% endblock %}
 
-{% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3">
+{% block page_title %}{% trans "Sign Up Application" %}{% endblock %}
 
-                <h1>{% trans "Sign Up Application" %}</h1>
-
-                <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>
-                    .{% endblocktrans %}</p>
+{% block page_content %}
+    <div class="well">
+                <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
 
                 <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
                     {% crispy form %}
@@ -22,7 +19,7 @@
             </div>
         </div>
     </div>
-{% endblock content %}
+{% endblock %}
 
 {% block body_scripts %}
     {{ block.super }}

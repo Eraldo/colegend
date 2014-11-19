@@ -4,6 +4,9 @@
     {{ newsblock }}
 {% endblock %}
 
+{% block up_url %}{% url "news:newsblock_list" %}{% endblock %}
+{% block up_icon %}newspaper-o{% endblock %}
+
 {% block page_controls %}
     {% if user.is_superuser or user == newsblock.owner %}
         <a href="{{ newsblock.get_edit_url }}" class="btn btn-primary" role="button">Edit</a>

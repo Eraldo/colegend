@@ -3,10 +3,16 @@
 {% block page_title %}
     Routines
 {% endblock %}
+
+{% block up_url %}{% url "routines:routine_list" %}{% endblock %}
+{% block up_icon %}stack-overflow{% endblock %}
+
 {% block page_title_extras %}
     <span class="badge status">{{ routine_list.count }}</span>
 {% endblock %}
+
 {% block page_controls_container %}{% endblock %}
+
 {% block page_content %}
     {% include 'routines/_routine_list.html' with routines=routine_list %}
 {% endblock %}

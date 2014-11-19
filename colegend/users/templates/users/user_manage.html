@@ -1,32 +1,29 @@
-{% extends "base.html" %}
+{% extends "page.html" %}
+
 {% load static %}{% load i18n %}
 {% load avatar_tags %}
 
-{% block title %}Pending Users{% endblock %}
+{% block page_title %}Manage Users{% endblock %}
 
-{% block content %}
+{% block up_url %}{% url "users:manage" %}{% endblock %}
+{% block up_icon %}user-md{% endblock %}
 
-<div class="container">
+{% block page_controls %}
+        <a href="{% url "users:list" %}" class="btn btn-warning pull-right" role="button">All</a>
+{% endblock %}
 
-  <div class="row">
-    <div class="col-xs-12">
-      <h2>Pending Users</h2>
+{% block page_content %}
+    <div class="well">
+        <h2>Pending Users</h2>
+
+        <div class="list-group">
+            {% for user in user_list %}
+                <a href="{% url 'users:manage_detail' user.username %}" class="list-group-item">
+                    <h4 class="list-group-item-heading">{% avatar user %} {{ user.username }}</h4>
+
+                    <p class="list-group-item-text">{{ maker.tagline }}</p>
+                </a>
+            {% endfor %}
+        </div>
     </div>
-  </div>
-
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="list-group">
-          {% for user in user_list %}
-            <a href="{% url 'users:manage_detail' user.username %}" class="list-group-item">
-              <h4 class="list-group-item-heading">{% avatar user %} {{ user.username }}</h4>
-              <p class="list-group-item-text">{{ maker.tagline }}</p>
-            </a>
-          {% endfor %}
-      </div>
-    </div>
-  </div>
-
-</div>
-
-{% endblock content %}
+{% endblock %}

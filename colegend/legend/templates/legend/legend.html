@@ -4,6 +4,10 @@
 {% block page_title %}
     The Legend
 {% endblock %}
+
+{% block up_url %}{% url "legend:home" %}{% endblock %}
+{% block up_icon %}paw{% endblock %}
+
 {% block page_content %}
         <div class="well">
             {{ introduction|linebreaks }}

@@ -6,23 +6,27 @@
 
 {% block content %}
     <div class="page-head">
-        <div class="page-navigation">
-            <i class="fa fa-fw fa-{% block page_icon %}circle{% endblock %} page-status-{% block page_status %}none{% endblock %}"></i><br/>&nbsp;
-        </div>
-        <div class="pull-right">
+        <div class="tutorial pull-right">
             {% block page_tutorial %}
                 {% if tutorial %}
                     <a href="{{ tutorial.get_show_url }}"><i class="fa fa-question-circle fa-3x"></i></a>
                 {% endif %}
             {% endblock %}
-            {% block back_link %}
-                <a href="javascript:history.go(-1)"><i class="fa fa-arrow-circle-left fa-3x"></i></a>
-            {% endblock %}
         </div>
-        <h1 class="inline">{% block title %}{% block page_title %}Main Page{% endblock %}{% endblock %}</h1>
-
         <div class="page-navigation">
-            {% block page_title_extras %}{% endblock %}
+            <h1>
+                {% block up_link %}
+                    <a href="{% block up_url %}javascript:history.go(-1){% endblock %}" class="back-link">
+                        <i class="fa fa-{% block up_icon %}arrow-left{% endblock %}"></i>
+                    </a>
+                {% endblock %}
+                <div class="page-title">
+                    {% block title %}{% block page_title %}Page{% endblock %}{% endblock %}
+                </div>
+            </h1>
+            <div class="page-extras">
+                {% block page_title_extras %}{% endblock %}
+            </div>
         </div>
     </div>
     {% block page_controls_container %}

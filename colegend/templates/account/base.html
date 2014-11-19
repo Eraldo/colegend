@@ -1,2 +1,4 @@
-{% extends "base.html" %}
-{% block title %}{% block head_title %}{% endblock head_title %}{% endblock title %}
+{% extends "page.html" %}
+
+{% block up_url %}{% url "users:settings" %}{% endblock %}
+{% block up_icon %}wrench{% endblock %}

@@ -1,2 +1,6 @@
 {% extends 'form.html' %}
+
 {% block form_title %}Routine{% endblock %}
+
+{% block up_url %}{% url "routines:routine_list" %}{% endblock %}
+{% block up_icon %}stack-overflow{% endblock %}

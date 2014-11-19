@@ -5,6 +5,9 @@
     <small>@{{ dayentry.location|default:"?" }}</small>
 {% endblock %}
 
+{% block up_url %}{% url "journals:dayentry_list" %}{% endblock %}
+{% block up_icon %}book{% endblock %}
+
 {% block page_controls %}
     <a href="{{ dayentry.get_edit_url }}" class="btn btn-primary" role="button">Edit</a>
     <a href="{{ dayentry.get_delete_url }}" class="btn btn-danger" role="button">Delete</a>

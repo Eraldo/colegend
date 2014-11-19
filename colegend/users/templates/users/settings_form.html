@@ -1,17 +1,20 @@
-{% extends "base.html" %}
+{% extends "form.html" %}
 {% load crispy_forms_tags %}
 
-{% block title %}{{ user|title }}'s Settings{% endblock %}
+{% block form_title %} Settings{% endblock %}
 
-{% block content %}
+{% block up_url %}{% url "users:settings" %}{% endblock %}
+{% block up_icon %}wrench{% endblock %}
 
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1>{{ user|title }}'s Settings</h1>
-                {{ form.media }}
-                {% crispy form %}
-            </div>
-        </div>
+{% block page_content %}
+    <div class="well">
+        <a class="btn btn-info" href="{% url 'users:update' %}"><i class="fa fa-info"></i> My Info</a>
+        <a class="btn btn-info" href="{% url 'avatar_change' %}"><i class="fa fa-camera"></i> Avatar</a>
+        <a class="btn btn-info" href="{% url 'account_email' %}"><i class="fa fa-at"></i> E-Mail</a>
+        <a class="btn btn-info" href="{% url 'socialaccount_connections' %}"><i class="fa fa-cloud"></i>
+            Social Accounts</a>
+        <a class="btn btn-info" href="{% url 'account_change_password' %}"><i class="fa fa-lock"></i>
+            Password</a>
     </div>
+    {{ block.super }}
 {% endblock %}

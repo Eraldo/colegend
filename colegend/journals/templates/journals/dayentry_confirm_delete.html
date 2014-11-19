@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 
+{% block up_url %}{% url "journals:dayentry_list" %}{% endblock %}
+{% block up_icon %}book{% endblock %}
+
 {% block content %}
 <form method="post">{% csrf_token %}
     <legend>Are you sure you want to delete "{{ object }}" ?</legend>

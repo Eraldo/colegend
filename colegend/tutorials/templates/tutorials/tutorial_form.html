@@ -1,5 +1,10 @@
 {% extends 'form.html' %}
+
 {% block form_title %}Tutorial{% endblock %}
+
+{% block up_url %}{% url "tutorials:tutorial_list" %}{% endblock %}
+{% block up_icon %}graduation-cap{% endblock %}
+
 {% block page_content %}
     {{ form.media }}
     {{ block.super }}

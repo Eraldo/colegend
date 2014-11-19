@@ -2,6 +2,9 @@
 
 {% block page_title %}{{ tutorial }}{% endblock %}
 
+{% block up_url %}{% url "tutorials:tutorial_list" %}{% endblock %}
+{% block up_icon %}graduation-cap{% endblock %}
+
 {% block page_controls %}
     {% if user.is_manager %}
         <a href="{{ tutorial.get_edit_url }}" class="btn btn-primary" role="button">Edit</a>

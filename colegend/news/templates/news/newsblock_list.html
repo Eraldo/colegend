@@ -4,6 +4,9 @@
     News
 {% endblock %}
 
+{% block up_url %}{% url "news:newsblock_list" %}{% endblock %}
+{% block up_icon %}newspaper-o{% endblock %}
+
 {% block page_title_extras %}
     <span class="badge status">{{ contribution_counter }}</span>
 {% endblock %}

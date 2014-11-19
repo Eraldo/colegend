@@ -1,32 +1,31 @@
-{% extends 'base.html' %}
+{% extends 'page.html' %}
 
-{% block content %}
-    <div class="container">
-        <h1>
-            {% block title %}
-                Gatherings
-            {% endblock %}
-        </h1>
+{% block page_title %}
+    Gatherings
+{% endblock %}
 
-        <div class="list-controls container-fluid well well-sm">
-            <a href="{% url "gatherings:gathering_new" %}" class="btn btn-default">New</a>
-        </div>
+{% block up_url %}{% url "gatherings:home" %}{% endblock %}
+{% block up_icon %}comments-o{% endblock %}
 
-        <div class="well">
+{% block page_controls %}
+    <a href="{% url "gatherings:gathering_new" %}" class="btn btn-default">New</a>
+{% endblock %}
+
+{% block page_content %}
+    <div class="well">
+        <p>
+        </p>
+        {% for gathering in gathering_list %}
             <p>
-            </p>
-            {% for gathering in gathering_list %}
-                <p>
                 {% if user == gathering.host %}
                     <a href="{{ gathering.get_edit_url }}" class="btn btn-primary">{{ gathering }}</a>
                     <a href="{{ gathering.get_delete_url }}" class="btn btn-danger">Delete</a>
                 {% else %}
                     <a href="#" class="btn btn-default">{{ gathering }}</a>
                 {% endif %}
-                </p>
-            {% empty %}
-                No gatherings here yet.
-            {% endfor %}
-        </div>
+            </p>
+        {% empty %}
+            No gatherings here yet.
+        {% endfor %}
     </div>
 {% endblock %}

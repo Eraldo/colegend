@@ -1,47 +1,37 @@
-{% extends "base.html" %}
+{% extends "page.html" %}
 {% load avatar_tags %}
 {% load static %}
 
-{% block title %}User: {{ object.username }}{% endblock %}
+{% block page_title %}{{ object.username }}{% endblock %}
 
-{% block content %}
-    <div class="container">
+{% block up_url %}{% url "users:detail" object %}{% endblock %}
+{% block up_icon %}user{% endblock %}
 
-        <div class="row">
-            <div class="col-sm-12 text-center">
-                {% avatar object 200 %}<br/>
+{% block page_controls %}
+    {% if object == request.user %}
+        <a class="btn btn-primary" href="{% url 'users:settings' %}"><i class="fa fa-wrench"></i> Settings</a>
+    {% endif %}
+{% endblock %}
 
-                <h2>{{ object.username }}</h2>
-                {% if object == request.user %}
-                    {{ object.get_name }}<br/>
-                    <a href="mailto:{{ object.email }}">{{ object.email }}</a>
-
-                    <h3>Account</h3>
-                    <p>
-                        <a class="btn btn-info" href="{% url 'users:update' %}"><i class="fa fa-info"></i> My Info</a>
-                        <a class="btn btn-info" href="{% url 'avatar_change' %}"><i class="fa fa-camera"></i> Avatar</a>
-                        <a class="btn btn-info" href="{% url 'account_email' %}"><i class="fa fa-at"></i> E-Mail</a>
-                        <a class="btn btn-info" href="{% url 'socialaccount_connections' %}"><i class="fa fa-cloud"></i>
-                            Social Accounts</a>
-                        <a class="btn btn-info" href="{% url 'users:settings' %}"><i class="fa fa-wrench"></i> Settings</a>
-                        <a class="btn btn-info" href="{% url 'account_change_password' %}"><i class="fa fa-lock"></i> Password</a>
-                    </p>
-                {% endif %}
-
-            </div>
-        </div>
-
+{% block page_content %}
+    <div class="well">
+        {% avatar object 200 %}<br/>
         {% if object == request.user %}
-            <!-- Action buttons -->
-            <div class="row">
-                <div class="col-sm-12 ">
-                    <!-- Your Stuff: Custom user template urls -->
-                </div>
-
-            </div>
-            <!-- End Action buttons -->
+            <h2>{{ object.get_name }}</h2>
+            <a href="mailto:{{ object.email }}">{{ object.email }}</a>
         {% endif %}
 
-
     </div>
-{% endblock content %}
+
+    {% if object == request.user %}
+        <!-- Action buttons -->
+        <div class="row">
+            <div class="col-sm-12 ">
+                <!-- Your Stuff: Custom user template urls -->
+            </div>
+
+        </div>
+        <!-- End Action buttons -->
+    {% endif %}
+
+{% endblock %}

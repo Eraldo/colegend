@@ -4,6 +4,9 @@
     The Dojo
 {% endblock %}
 
+{% block up_url %}{% url "dojo:home" %}{% endblock %}
+{% block up_icon %}university{% endblock %}
+
 {% block page_title_extras %}
     <span class="badge status">{{ contribution_counter }}</span>
 {% endblock %}

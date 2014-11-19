@@ -1,11 +1,18 @@
 {% extends 'page.html' %}
+
 {% block page_title %}
     Tasks
 {% endblock %}
+
+{% block up_url %}{% url "tasks:task_list" %}{% endblock %}
+{% block up_icon %}check{% endblock %}
+
 {% block page_title_extras %}
-<span class="badge">{{ task_list.count }}</span>
+    <span class="badge">{{ task_list.count }}</span>
 {% endblock %}
+
 {% block page_controls_container %}{% endblock %}
+
 {% block page_content %}
     {% include 'tasks/_task_list.html' with tasks=task_list %}
 {% endblock %}

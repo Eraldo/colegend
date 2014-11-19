@@ -135,15 +135,13 @@ class SignUpApplicationForm(ModelForm):
         ),
         Fieldset(
             "{% if form.fields.password1 %}Account{% endif %}",
-            # HTML("""{% if form.fields.password1 %}Account{% endif %}"""),
-            # "Account",
             "password1",
             "password2",
             "confirmation_key"
         ),
         HTML(
             """<hr>If you are happy with your answers..<br>
-            feel free to go ahead and send the application form.</p>"""),
+            feel free to go ahead and send the application form.<br>I'll see you on the other side. ;)</p>"""),
         HTML("""
             {% if redirect_field_value %}
                 <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>

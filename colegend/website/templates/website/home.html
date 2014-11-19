@@ -5,6 +5,10 @@
     Welcome {{ user|title }}
 {% endblock %}
 
+{% block up_url %}{% url "home" %}{% endblock %}
+{% block up_icon %}home{% endblock %}
+
+
 {% block page_controls %}
     <a href="{% url "journals:dayentry_new" %}" class="btn btn-default" role="button">New Journal Entry</a>
     <a href="{% url "projects:project_new" %}" class="btn btn-default" role="button">New Project</a>

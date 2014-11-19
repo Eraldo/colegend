@@ -1,22 +1,26 @@
-{% extends 'base.html' %}
+{% extends 'page.html' %}
 
-{% block content %}
-    <h1>Quote</h1>
-    {% if controls %}
-    <div class="list-controls container-fluid well well-sm">
-        {% if owned %}
+{% block page_title %}
+    Quote
+{% endblock %}
+
+{% block up_url %}{% url "quotes:quote_list" %}{% endblock %}
+{% block up_icon %}quote-left{% endblock %}
+
+{% block page_controls %}
+    {% if owned %}
         <a href="{{ quote.get_edit_url }}" class="btn btn-primary" role="button">Edit</a>
         <a href="{{ quote.get_delete_url }}" class="btn btn-danger" role="button">Delete</a>
-        {% endif %}
-        {% if quote.pending and user.is_manager %}
-            <form method="POST" class="inline">{% csrf_token %}
-                <button type="submit" name="accept" class="btn btn-warning pull-right">Accept</button>
-            </form>
-        {% endif %}
-    </div>
     {% endif %}
+    {% if quote.pending and user.is_manager %}
+        <form method="POST" class="inline">{% csrf_token %}
+            <button type="submit" name="accept" class="btn btn-warning pull-right">Accept</button>
+        </form>
+    {% endif %}
+{% endblock %}
+
+{% block page_content %}
     <div class="well">
         {% include "quotes/_quote.html" %}
     </div>
-
 {% endblock %}

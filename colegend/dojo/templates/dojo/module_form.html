@@ -1,5 +1,10 @@
 {% extends 'form.html' %}
+
 {% block form_title %}Module{% endblock %}
+
+{% block up_url %}{% url "dojo:home" %}{% endblock %}
+{% block up_icon %}university{% endblock %}
+
 {% block page_content %}
     {{ form.media }}
     {{ block.super }}

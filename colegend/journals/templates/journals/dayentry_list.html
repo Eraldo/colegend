@@ -4,6 +4,9 @@
     Journal Entries
 {% endblock %}
 
+{% block up_url %}{% url "journals:dayentry_list" %}{% endblock %}
+{% block up_icon %}book{% endblock %}
+
 {% block page_title_extras %}
     <span class="badge">{{ latest.count }}</span>
     <span class="streak badge"><i class="fa fa-link"></i> {{ streak }}</span>

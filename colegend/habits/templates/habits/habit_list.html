@@ -3,6 +3,10 @@
 {% block page_title %}
     Habits
 {% endblock %}
+
+{% block up_url %}{% url "habits:habit_list" %}{% endblock %}
+{% block up_icon %}link{% endblock %}
+
 {% block page_title_extras %}
     <span class="badge">{{ habit_list.count }}</span>
 {% endblock %}

@@ -1,5 +1,7 @@
 {% extends 'form.html' %}
 {% block form_title %}Project{% endblock %}
+{% block up_url %}{% url "projects:project_list" %}{% endblock %}
+{% block up_icon %}sitemap{% endblock %}
 {% block page_content %}
     {{ form.media }}
     {{ block.super }}

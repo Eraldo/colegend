@@ -12,6 +12,7 @@ from routines.models import Routine
 from statuses.models import Status
 from tags.models import Tag
 from tasks.models import Task
+from tutorials.models import get_tutorial
 
 __author__ = 'eraldo'
 
@@ -34,6 +35,7 @@ class HomeView(ActiveUserRequiredMixin, TemplateView):
         quote = Quote.objects.daily_quote()
         context['quote'] = quote
         context['newsblock'] = NewsBlock.objects.first()
+        context['tutorial'] = get_tutorial("Home")
         return context
 
 

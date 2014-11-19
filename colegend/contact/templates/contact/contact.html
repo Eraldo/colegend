@@ -1,13 +1,15 @@
-{% extends 'base.html' %}
+{% extends 'page.html' %}
 {% load crispy_forms_tags %}
 {% load avatar_tags %}
 
-{% block title %}
-    contact
+{% block up_url %}{% url "contact" %}{% endblock %}
+{% block up_icon %}envelope{% endblock %}
+
+{% block page_title %}
+    Contact
 {% endblock %}
 
-{% block content %}
-    <h1>Contact</h1>
+{% block page_content %}
     <div class="well">
         {% crispy form %}
     </div>

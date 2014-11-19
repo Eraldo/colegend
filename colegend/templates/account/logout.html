@@ -3,26 +3,22 @@
 {% load url from future %}
 {% load i18n %}
 
-{% block head_title %}{% trans "Sign Out" %}{% endblock %}
+{% block up_url %}javascript:history.go(-1){% endblock %}
+{% block up_icon %}sign-out{% endblock %}
 
-{% block content %}
-<div class="container">
-  <div class="row">
-    <div class="col-md-5">
+{% block page_title %}{% trans "Sign Out" %}{% endblock %}
 
-        <h2>{% trans "Sign Out" %}</h2>
-
+{% block page_content %}
+    <div class="well">
         <p>{% trans 'Are you sure you want to sign out?' %}</p>
 
         <form method="post" action="{% url 'account_logout' %}">
-          {% csrf_token %}
-          {% if redirect_field_value %}
-          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
-          {% endif %}
-          <button class="btn btn-danger" type="submit">{% trans 'Sign Out' %}</button>
+            {% csrf_token %}
+            {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+            {% endif %}
+            <button class="btn btn-danger" type="submit">{% trans 'Sign Out' %}</button>
+            <a href="javascript:history.go(-1)" class="btn btn-primary" type="submit">{% trans 'Cancel' %}</a>
         </form>
     </div>
-  </div>
-</div>
-
 {% endblock %}

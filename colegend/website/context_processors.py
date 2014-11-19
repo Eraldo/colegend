@@ -32,7 +32,7 @@ def menu(request):
         ],
         'manager': [
             MenuItem("Projects", url="projects:project_list", icon="sitemap"),
-            MenuItem("Tasks", url="tasks:task_list", icon="check-circle"),
+            MenuItem("Tasks", url="tasks:task_list", icon="check"),
             MenuItem("Tags", url="tags:tag_list", icon="tags"),
         ],
         'manager_extra': [

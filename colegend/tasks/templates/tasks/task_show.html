@@ -1,15 +1,13 @@
 {% extends 'page.html' %}
 
-{% block page_status %}ok{% endblock %}
-{% block page_icon %}check-circle{% endblock %}
 {% block page_title %}
     {{ task }}
 {% endblock %}
+
+{% block up_url %}{% url "tasks:task_list" %}{% endblock %}
+{% block up_icon %}check{% endblock %}
+
 {% block page_title_extras %}
-    {% include "status/_status_field.html" with status=task.status %}
-    {% include "lib/_priority_field.html" with priority=task.priority %}
-    {% include "tags/_tags_field.html" with tags=task.tags.all %}
-    {% include "projects/_project_field.html" with project=task.project %}
 {% endblock %}
 
 {% block page_controls %}
@@ -19,10 +17,14 @@
 
 {% block page_content %}
     <div class="task-details well">
+        {% include "status/_status_field.html" with status=task.status %}
+        {% include "lib/_priority_field.html" with priority=task.priority %}
         <div class="pull-right">
             {% include "lib/_date_field.html" with date=task.date %}
             {% include "lib/_deadline_field.html" with deadline=task.deadline %}
         </div>
+        {% include "tags/_tags_field.html" with tags=task.tags.all %}
+        {% include "projects/_project_field.html" with project=task.project %}
         {{ task.description }}
     </div>
 {% endblock %}

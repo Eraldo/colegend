@@ -1,5 +1,10 @@
 {% extends 'form.html' %}
+
 {% block form_title %}Task{% endblock %}
+
+{% block up_url %}{% url "tasks:task_list" %}{% endblock %}
+{% block up_icon %}check{% endblock %}
+
 {% block page_content %}
     {{ form.media }}
     {{ block.super }}

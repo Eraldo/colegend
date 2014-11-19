@@ -3,9 +3,14 @@
 {% block page_title %}
     Quotes
 {% endblock %}
+
+{% block up_url %}{% url "quotes:quote_list" %}{% endblock %}
+{% block up_icon %}quote-left{% endblock %}
+
 {% block page_title_extras %}
     <span class="badge status">{{ contribution_counter }}</span>
 {% endblock %}
+
 {% block page_controls %}
         <a href="{% url "quotes:quote_new" %}" class="btn btn-default">New</a>
         {% if user.is_manager %}
