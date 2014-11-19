@@ -1,6 +1,11 @@
 <div class="quote">
     <blockquote>
-        <span class="lead">{{ quote }}</span>
+        <span class="lead page-navigation">
+            <a href="{{ quote.get_show_url }}" class="back-link">
+                <i class="fa fa-quote-left"></i>
+            </a>
+            {{ quote }}</span>
+
         <p>{{ quote.text|linebreaksbr }}</p>
         <footer>by <cite title="Author">{{ quote.author }}</cite><br/><cite class="small pull-right">shared
             by {{ quote.provider }}</cite></footer>

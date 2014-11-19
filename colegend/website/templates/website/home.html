@@ -18,7 +18,12 @@
 
 {% block page_content %}
     <div class="well">
-        <h2>{{ newsblock|default:"No news is good news." }}</h2>
+        <h2 class="page-navigation">
+            <a href="{{ newsblock.get_show_url }}" class="back-link">
+                <i class="fa fa-newspaper-o"></i>
+                </a>
+            {{ newsblock|default:"No news is good news." }}
+        </h2>
 
         <p>{{ newsblock.content }}</p>
         <a href="{% url "contact" %}" class="btn btn-primary">Feedback</a>
