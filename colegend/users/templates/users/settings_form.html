@@ -1,20 +1,24 @@
-{% extends "form.html" %}
+{% extends "page.html" %}
 {% load crispy_forms_tags %}
 
-{% block form_title %} Settings{% endblock %}
+{% block page_title %} Settings{% endblock %}
 
 {% block up_url %}{% url "users:settings" %}{% endblock %}
 {% block up_icon %}wrench{% endblock %}
 
+{% block page_controls %}
+    <a class="btn btn-info" href="{% url 'users:update' %}"><i class="fa fa-info"></i> My Info</a>
+    <a class="btn btn-info" href="{% url 'avatar_change' %}"><i class="fa fa-camera"></i> Avatar</a>
+    <a class="btn btn-info" href="{% url 'account_email' %}"><i class="fa fa-at"></i> E-Mail</a>
+    <a class="btn btn-info" href="{% url 'socialaccount_connections' %}"><i class="fa fa-cloud"></i>
+        Social Accounts</a>
+    <a class="btn btn-info" href="{% url 'account_change_password' %}"><i class="fa fa-lock"></i>
+        Password</a>
+{% endblock %}
+
 {% block page_content %}
     <div class="well">
-        <a class="btn btn-info" href="{% url 'users:update' %}"><i class="fa fa-info"></i> My Info</a>
-        <a class="btn btn-info" href="{% url 'avatar_change' %}"><i class="fa fa-camera"></i> Avatar</a>
-        <a class="btn btn-info" href="{% url 'account_email' %}"><i class="fa fa-at"></i> E-Mail</a>
-        <a class="btn btn-info" href="{% url 'socialaccount_connections' %}"><i class="fa fa-cloud"></i>
-            Social Accounts</a>
-        <a class="btn btn-info" href="{% url 'account_change_password' %}"><i class="fa fa-lock"></i>
-            Password</a>
+        {{ form.media }}
+        {% crispy form %}
     </div>
-    {{ block.super }}
 {% endblock %}
