@@ -66,4 +66,5 @@ class HabitEditView(HabitMixin, UpdateView):
 
 
 class HabitDeleteView(HabitMixin, DeleteView):
+    template_name = "confirm_delete.html"
     success_url = reverse_lazy('habits:habit_list')

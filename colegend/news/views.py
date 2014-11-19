@@ -35,4 +35,5 @@ class NewsBlockEditView(NewsBlockMixin, UpdateView):
 
 
 class NewsBlockDeleteView(NewsBlockMixin, DeleteView):
+    template_name = "confirm_delete.html"
     success_url = reverse_lazy('news:newsblock_list')

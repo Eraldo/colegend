@@ -47,4 +47,5 @@ class ModuleEditView(DojoMixin, UpdateView):
 
 
 class ModuleDeleteView(DojoMixin, DeleteView):
+    template_name = "confirm_delete.html"
     success_url = reverse_lazy('dojo:home')

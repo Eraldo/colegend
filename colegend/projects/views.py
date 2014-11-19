@@ -67,4 +67,5 @@ class ProjectEditView(ProjectMixin, UpdateView):
 
 
 class ProjectDeleteView(ProjectMixin, DeleteView):
+    template_name = "confirm_delete.html"
     success_url = reverse_lazy('projects:project_list')

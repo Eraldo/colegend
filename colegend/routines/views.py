@@ -71,6 +71,7 @@ class RoutineEditView(RoutineMixin, UpdateView):
 
 
 class RoutineDeleteView(RoutineMixin, DeleteView):
+    template_name = "confirm_delete.html"
     success_url = reverse_lazy('routines:routine_list')
 
 
@@ -88,7 +89,6 @@ class RoutineDailyView(SpecialRoutineMixin, DetailView):
 
     def get_object(self, queryset=None):
         return Routine.objects.get(name=self.routine_name)
-
 
     def get_context_data(self, **kwargs):
         context = super(RoutineDailyView, self).get_context_data(**kwargs)

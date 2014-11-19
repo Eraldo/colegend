@@ -61,4 +61,5 @@ class VisionEditView(VisionMixin, UpdateView):
 
 
 class VisionDeleteView(VisionMixin, DeleteView):
+    template_name = "confirm_delete.html"
     success_url = reverse_lazy('visions:vision_list')

@@ -33,4 +33,5 @@ class TutorialEditView(ManagerRequiredMixin, TutorialMixin, UpdateView):
 
 
 class TutorialDeleteView(ManagerRequiredMixin, TutorialMixin, DeleteView):
+    template_name = "confirm_delete.html"
     success_url = reverse_lazy('tutorials:tutorial_list')

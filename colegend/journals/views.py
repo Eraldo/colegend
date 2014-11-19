@@ -65,4 +65,5 @@ class DayEntryEditView(DayEntryMixin, UpdateView):
 
 
 class DayEntryDeleteView(DayEntryMixin, DeleteView):
-    pass
+    template_name = "confirm_delete.html"
+

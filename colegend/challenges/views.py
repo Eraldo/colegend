@@ -48,4 +48,5 @@ class ChallengeEditView(ChallengeMixin, UpdateView):
 
 
 class ChallengeDeleteView(ChallengeMixin, DeleteView):
+    template_name = "confirm_delete.html"
     success_url = reverse_lazy('challenges:challenge_list')

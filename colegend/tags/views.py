@@ -56,4 +56,5 @@ class TagEditView(TagMixin, UpdateView):
 
 
 class TagDeleteView(TagMixin, DeleteView):
+    template_name = "confirm_delete.html"
     success_url = reverse_lazy('tags:tag_list')

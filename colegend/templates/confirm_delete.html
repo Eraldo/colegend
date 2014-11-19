@@ -1,0 +1,16 @@
+{% extends 'page.html' %}
+
+{% block page_title %}
+    Delete {{ object }}
+{% endblock %}
+
+{% block page_controls_container %}{% endblock %}
+
+{% block page_content %}
+    <div class="well">
+        <form method="post">{% csrf_token %}
+            <legend>Are you sure you want to delete "{{ object }}" ?</legend>
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+    </div>
+{% endblock %}

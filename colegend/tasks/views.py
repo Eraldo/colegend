@@ -70,4 +70,5 @@ class TaskEditView(TaskMixin, UpdateView):
 
 
 class TaskDeleteView(TaskMixin, DeleteView):
+    template_name = "confirm_delete.html"
     success_url = reverse_lazy('tasks:task_list')

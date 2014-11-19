@@ -68,4 +68,5 @@ class QuoteEditView(QuoteMixin, UpdateView):
 
 
 class QuoteDeleteView(QuoteMixin, DeleteView):
+    template_name = "confirm_delete.html"
     success_url = reverse_lazy('quotes:quote_list')

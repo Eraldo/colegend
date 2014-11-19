@@ -70,5 +70,6 @@ class GatheringEditView(GatheringMixin, UpdateView):
 
 
 class GatheringDeleteView(GatheringMixin, DeleteView):
+    template_name = "confirm_delete.html"
     success_url = reverse_lazy('gatherings:gathering_list')
 
