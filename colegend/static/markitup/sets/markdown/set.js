@@ -35,8 +35,8 @@ mySettings = {
 		{name:'Code Block / Code', openWith:'(!(\t|!|`)!)', closeWith:'(!(`)!)'},
 		{separator:'---------------'},
 		{name:'Preview', call:'preview', className:"preview"},
-		{name:'Info', className:"info pull-right", closeWith:function() {
-            return window.open('http://en.wikipedia.org/wiki/Markdown', '_blank');
+		{name:'Info', className:"info pull-right", openWith:function() {
+            window.open('http://en.wikipedia.org/wiki/Markdown', '_blank');
         }}
 	]
 }
