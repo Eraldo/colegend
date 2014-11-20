@@ -1,5 +1,5 @@
 from habits.forms import HabitForm
-from lib.views import ActiveUserRequiredMixin
+from lib.views import ActiveUserRequiredMixin, get_icon
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
@@ -14,6 +14,11 @@ class HabitMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
     model = Habit
     form_class = HabitForm
     fields = ['routine', 'name', 'description', 'order', 'tags']
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["icon"] = get_icon("link")
+        return context
 
     def get_form(self, form_class):
         form = super(HabitMixin, self).get_form(form_class)

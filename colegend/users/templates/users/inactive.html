@@ -1,10 +1,11 @@
-{% extends 'base.html' %}
+{% extends 'page.html' %}
 
-{% block content %}
-    <div class="container">
-    <h1><span class="label label-success"><i class="fa fa-clock-o"></i> Success</span></h1>
+{% block page_title %}
+    Processing Application
+{% endblock %}
+
+{% block page_content %}
     <div class="well lead">
-        <h1>Processing Application</h1>
 
         <p>
             {{ user }}, we have recieved your account appliaction.<br>
@@ -12,6 +13,5 @@
         </p>
 
         <p>If you do not want to wait.. feel free to <a href="{% url "contact" %}">contact us</a>.</p>
-    </div>
     </div>
 {% endblock %}

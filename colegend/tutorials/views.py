@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
 from tutorials.forms import TutorialForm
 from tutorials.models import Tutorial
-from lib.views import ManagerRequiredMixin, ActiveUserRequiredMixin
+from lib.views import ManagerRequiredMixin, ActiveUserRequiredMixin, get_icon
 
 __author__ = 'eraldo'
 
@@ -11,6 +11,11 @@ __author__ = 'eraldo'
 class TutorialMixin():
     model = Tutorial
     form_class = TutorialForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["icon"] = get_icon("graduation-cap")
+        return context
 
 
 class TutorialListView(ActiveUserRequiredMixin, TutorialMixin, ListView):

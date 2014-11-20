@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic import TemplateView
 from features.models import Feature
 from habits.models import Habit
-from lib.views import ActiveUserRequiredMixin
+from lib.views import ActiveUserRequiredMixin, get_icon
 from news.models import NewsBlock
 from projects.models import Project
 from quotes.models import Quote
@@ -36,6 +36,7 @@ class HomeView(ActiveUserRequiredMixin, TemplateView):
         context['quote'] = quote
         context['newsblock'] = NewsBlock.objects.first()
         context['tutorial'] = get_tutorial("Home")
+        context["icon"] = get_icon("home")
         return context
 
 

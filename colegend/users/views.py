@@ -11,7 +11,7 @@ from django.views.generic import UpdateView
 from django.views.generic import ListView
 
 # Only authenticated users can access views using this.
-from lib.views import ActiveUserRequiredMixin, ManagerRequiredMixin
+from lib.views import ActiveUserRequiredMixin, ManagerRequiredMixin, get_icon
 
 # Import the form from users/forms.py
 from .forms import UserForm, SettingsForm
@@ -24,9 +24,19 @@ class UserMixin(ActiveUserRequiredMixin):
     def get_queryset(self):
         return super(UserMixin, self).get_queryset().accepted()
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["icon"] = get_icon("user")
+        return context
+
 
 class UserInactiveView(LoginRequiredMixin, TemplateView):
     template_name = "users/inactive.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["icon"] = get_icon("clock-o")
+        return context
 
     def get(self, request, *args, **kwargs):
         if request.user.is_accepted:
@@ -72,9 +82,26 @@ class UserListView(UserMixin, ListView):
     slug_url_kwarg = "username"
 
 
-class SettingsUpdateView(UserMixin, UpdateView):
+class UserManagerMixin():
+    model = User
+
+    def get_queryset(self):
+        return super().get_queryset().pending()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["icon"] = get_icon("user-md")
+        return context
+
+
+class SettingsUpdateView(UpdateView):
     model = Settings
     form_class = SettingsForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["icon"] = get_icon("wrench")
+        return context
 
     def get_success_url(self):
         return reverse("users:detail",
@@ -82,27 +109,17 @@ class SettingsUpdateView(UserMixin, UpdateView):
 
     def get_object(self):
         return self.request.user.settings
-        # slug_field = "owner"
-        # slug_url_kwarg = "owner"
 
 
-class UserManageListView(ManagerRequiredMixin, ListView):
-    model = User
+class UserManageListView(ManagerRequiredMixin, UserManagerMixin, ListView):
     template_name = "users/user_manage.html"
 
-    def get_queryset(self):
-        return super().get_queryset().pending()
 
-
-class UserManageDetailView(ManagerRequiredMixin, DetailView):
-    model = User
+class UserManageDetailView(ManagerRequiredMixin, UserManagerMixin, DetailView):
     template_name = "users/user_manage_detail.html"
     # These next two lines tell the view to index lookups by username
     slug_field = "username"
     slug_url_kwarg = "username"
-
-    def get_queryset(self):
-        return super().get_queryset().pending()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

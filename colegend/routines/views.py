@@ -1,4 +1,4 @@
-from lib.views import ActiveUserRequiredMixin
+from lib.views import ActiveUserRequiredMixin, get_icon
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import DetailView, View, ListView, CreateView, UpdateView, DeleteView
@@ -14,6 +14,11 @@ class RoutineMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
     model = Routine
     form_class = RoutineForm
     fields = ['name', 'description', 'type', 'tags']
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["icon"] = get_icon("stack-overflow")
+        return context
 
     def get_form(self, form_class):
         form = super(RoutineMixin, self).get_form(form_class)

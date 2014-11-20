@@ -1,7 +1,7 @@
 from django.core.urlresolvers import reverse_lazy
 from gatherings.forms import GatheringForm
 from lib.utilities import get_location_url
-from lib.views import ActiveUserRequiredMixin, ManagerRequiredMixin
+from lib.views import ActiveUserRequiredMixin, ManagerRequiredMixin, get_icon
 from django.utils import timezone
 from django.utils.timesince import timeuntil
 from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView, ListView
@@ -9,9 +9,14 @@ from gatherings.models import Gathering
 from tutorials.models import get_tutorial
 
 
-class GatheringMixin(ManagerRequiredMixin):
+class GatheringMixin():
     model = Gathering
     form_class = GatheringForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["icon"] = get_icon("comments-o")
+        return context
 
 
 class GatheringsView(ActiveUserRequiredMixin, TemplateView):
@@ -46,11 +51,11 @@ class GatheringsView(ActiveUserRequiredMixin, TemplateView):
         return context
 
 
-class GatheringListView(GatheringMixin, ListView):
+class GatheringListView(ManagerRequiredMixin, GatheringMixin, ListView):
     pass
 
 
-class GatheringCreateView(GatheringMixin, CreateView):
+class GatheringCreateView(ManagerRequiredMixin, GatheringMixin, CreateView):
     """View for scheduling new gatherings"""
     success_url = reverse_lazy('gatherings:gathering_list')
 
@@ -65,11 +70,11 @@ class GatheringCreateView(GatheringMixin, CreateView):
         return super().form_valid(form)
 
 
-class GatheringEditView(GatheringMixin, UpdateView):
+class GatheringEditView(ManagerRequiredMixin, GatheringMixin, UpdateView):
     success_url = reverse_lazy('gatherings:gathering_list')
 
 
-class GatheringDeleteView(GatheringMixin, DeleteView):
+class GatheringDeleteView(ManagerRequiredMixin, GatheringMixin, DeleteView):
     template_name = "confirm_delete.html"
     success_url = reverse_lazy('gatherings:gathering_list')
 

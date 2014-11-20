@@ -1,7 +1,7 @@
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import redirect
 from django.views.generic import TemplateView, CreateView, ListView, DetailView, UpdateView, DeleteView
-from lib.views import ActiveUserRequiredMixin, ManagerRequiredMixin
+from lib.views import ActiveUserRequiredMixin, ManagerRequiredMixin, get_icon
 from quotes.forms import QuoteForm
 from quotes.models import Quote
 from tutorials.models import get_tutorial
@@ -13,6 +13,11 @@ class QuoteMixin(ActiveUserRequiredMixin):
 
     def get_queryset(self):
         return super().get_queryset().owned_by(self.request.user)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["icon"] = get_icon("quote-left")
+        return context
 
 
 class QuoteCreateView(QuoteMixin, CreateView):
@@ -36,17 +41,18 @@ class QuoteListView(QuoteMixin, ListView):
         return context
 
 
-class QuoteManageView(ManagerRequiredMixin, ListView):
+class QuoteManageView(ManagerRequiredMixin, QuoteMixin, ListView):
     template_name = "quotes/quote_manage.html"
-    model = Quote
 
     def get_queryset(self):
-        return super().get_queryset().pending()
+        return Quote.objects.pending()
 
 
-class QuoteShowView(DetailView):
+class QuoteShowView(QuoteMixin, DetailView):
     template_name = "quotes/quote_show.html"
-    model = Quote
+
+    def get_queryset(self):
+        return DeleteView.get_queryset(self)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

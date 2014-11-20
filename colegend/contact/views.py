@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.views.generic import FormView
 from contact.forms import ContactForm, PublicContactForm
+from lib.views import get_icon
 
 __author__ = "Eraldo Helal"
 
@@ -31,4 +32,5 @@ class ContactView(FormView):
         except user_model.DoesNotExist:
             eraldo = None
         context['eraldo'] = eraldo
+        context["icon"] = get_icon("envelope")
         return context

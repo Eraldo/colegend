@@ -17,7 +17,11 @@
             <h1>
                 {% block up_link %}
                     <a href="{% block up_url %}javascript:history.go(-1){% endblock %}" class="back-link">
-                        <i class="fa fa-{% block up_icon %}arrow-left{% endblock %}"></i>
+                        {% if icon %}
+                            {{ icon }}
+                        {% else %}
+                            <i class="fa fa-{% block up_icon %}arrow-left{% endblock %}"></i>
+                        {% endif %}
                     </a>
                 {% endblock %}
                 <div class="page-title">

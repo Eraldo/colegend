@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView
 from dojo.forms import ModuleForm
 from dojo.models import Module
-from lib.views import ActiveUserRequiredMixin
+from lib.views import ActiveUserRequiredMixin, get_icon
 from tutorials.models import get_tutorial
 
 __author__ = 'eraldo'
@@ -12,6 +12,11 @@ __author__ = 'eraldo'
 class DojoMixin(ActiveUserRequiredMixin):
     model = Module
     form_class = ModuleForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["icon"] = get_icon("university")
+        return context
 
 
 class DojoView(DojoMixin, TemplateView):

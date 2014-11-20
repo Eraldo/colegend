@@ -1,7 +1,10 @@
-{% extends 'base.html' %}
+{% extends 'page.html' %}
 
-{% block content %}
-    <h1>search</h1>
+{% block page_title %}
+    Search
+{% endblock %}
+
+{% block page_content %}
     <h2>projects</h2>
     {% include 'projects/_project_list.html' %}
     <h2>tasks</h2>

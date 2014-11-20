@@ -2,6 +2,7 @@ from braces.views._access import AccessMixin
 from django.contrib.auth.views import redirect_to_login
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect
+from django.utils.safestring import mark_safe
 
 __author__ = 'eraldo'
 
@@ -44,3 +45,7 @@ class ManagerRequiredMixin(ActiveUserRequiredMixin):
 class OwnedItemsMixin:
     def get_queryset(self):
         return super(OwnedItemsMixin, self).get_queryset().owned_by(self.request.user)
+
+
+def get_icon(name):
+    return mark_safe("""<i class="fa fa-{}"></i>""".format(name))

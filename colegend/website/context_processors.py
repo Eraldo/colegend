@@ -33,7 +33,7 @@ def menu(request):
         'manager': [
             MenuItem("Projects", url="projects:project_list", icon="sitemap"),
             MenuItem("Tasks", url="tasks:task_list", icon="check"),
-            MenuItem("Tags", url="tags:tag_list", icon="tags"),
+            MenuItem("Tags", url="tags:tag_list", icon="tag"),
         ],
         'manager_extra': [
             MenuItem("Routines", url="routines:routine_list", icon="stack-overflow"),
