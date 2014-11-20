@@ -8,6 +8,6 @@
 
         <p>{{ quote.text|linebreaksbr }}</p>
         <footer>by <cite title="Author">{{ quote.author }}</cite><br/><cite class="small pull-right">shared
-            by {{ quote.provider }}</cite></footer>
+            by {% include "users/_user_link.html" with user=quote.provider %}</cite></footer>
     </blockquote>
 </div>

@@ -19,6 +19,6 @@
         <p class="lead">{{ module.description|linebreaksbr }}</p>
         {{ module.content }}
         <footer><cite class="small pull-right">— shared
-            by {{ module.provider }}</cite></footer>
+            by {% include "users/_user_link.html" with user=module.provider %}</cite></footer>
     </div>
 {% endblock %}

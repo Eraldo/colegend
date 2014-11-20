@@ -2,6 +2,7 @@ from annoying.fields import AutoOneToOneField
 from django.contrib import messages
 from django.contrib.auth.models import PermissionsMixin, AbstractBaseUser
 from django.core import validators
+from django.core.urlresolvers import reverse
 from django.core.validators import MaxValueValidator
 from django.db.models import QuerySet
 from django.utils import timezone
@@ -9,6 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.mail import send_mail, mail_managers
 from django.db import models
 from lib.modelfields import PhoneField
+from lib.models import AutoUrlMixin
 from users.modelfields import RequiredBooleanField
 from users.managers import UserManager
 
@@ -95,6 +97,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.first_name
 
     get_short_name.short_description = 'Short name'
+
+    def get_show_url(self):
+        return reverse("users:detail", args=[self.username])
 
     def email_user(self, subject, message, from_email="colegend@colegend.org", **kwargs):
         """

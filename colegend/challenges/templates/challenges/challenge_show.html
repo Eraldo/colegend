@@ -18,6 +18,6 @@
     <div class="well">
         <p class="lead">{{ challenge.content }}</p>
         <footer><cite class="small pull-right">— shared
-            by {{ challenge.provider }}</cite></footer>
+            by {% include "users/_user_link.html" with user=challenge.provider %}</cite></footer>
     </div>
 {% endblock %}
