@@ -91,9 +91,9 @@ EMAIL_USE_TLS = True
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#server-email
 SERVER_EMAIL = EMAIL_HOST_USER
 
-DEFAULT_FROM_EMAIL = get_setting('EMAIL_HOST_PASSWORD', default='system@colegend.org')
+DEFAULT_FROM_EMAIL = get_setting('DEFAULT_FROM_EMAIL', default='system@colegend.org')
 
-DEFAULT_TO_EMAIL = get_setting('EMAIL_HOST_PASSWORD', default='eraldo@colegend.org')
+DEFAULT_TO_EMAIL = get_setting('DEFAULT_TO_EMAIL', default='eraldo@colegend.org')
 ########## END EMAIL CONFIGURATION
 
 ########## DATABASE CONFIGURATION
