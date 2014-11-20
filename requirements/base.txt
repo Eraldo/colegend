@@ -20,6 +20,7 @@ django-annoying==0.8.0
 django-markitup==2.2.2
 Markdown==2.5.1
 mdx_linkify==0.5
+markdown-checklist==0.4.0
 
 # Images
 Pillow==2.5.3

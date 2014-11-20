@@ -1,5 +1,6 @@
 from urllib.parse import urlparse, parse_qs
 from markdown import markdown
+from markdown_checklist.extension import ChecklistExtension
 from mdx_linkify.mdx_linkify import LinkifyExtension
 
 __author__ = 'eraldo'
@@ -33,8 +34,10 @@ def embed_youtube(attrs, new=False):
 
 def markup(text, *args, **kwargs):
     return markdown(text, *args, safe_mode=True,
-                    extensions=['nl2br', 'sane_lists', 'extra', 'lib.external.mdx_del_ins',
-                                LinkifyExtension(
-                                    configs={"linkify_callbacks": [set_target_blank, embed_youtube]}
-                                )],
+                    extensions=[
+                        'nl2br', 'sane_lists', 'extra', 'lib.external.mdx_del_ins',
+                        ChecklistExtension(),
+                        LinkifyExtension(
+                            configs={"linkify_callbacks": [set_target_blank, embed_youtube]}
+                        )],
                     **kwargs)
