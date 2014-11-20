@@ -33,7 +33,7 @@ def embed_youtube(attrs, new=False):
 
 def markup(text, *args, **kwargs):
     return markdown(text, *args, safe_mode=True,
-                    extensions=['nl2br', 'sane_lists', 'extra',
+                    extensions=['nl2br', 'sane_lists', 'extra', 'lib.external.mdx_del_ins',
                                 LinkifyExtension(
                                     configs={"linkify_callbacks": [set_target_blank, embed_youtube]}
                                 )],
