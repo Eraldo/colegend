@@ -1,5 +1,6 @@
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse_lazy
+from django.template.loader import render_to_string
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
 from challenges.forms import ChallengeForm
 from challenges.models import Challenge
@@ -38,6 +39,12 @@ class ChallengeCreateView(ChallengeMixin, CreateView):
         user = self.request.user
         form.instance.provider = user
         return super(ChallengeCreateView, self).form_valid(form)
+
+    def get_initial(self):
+        initial = super().get_initial()
+        template = render_to_string("challenges/challenge.md")
+        initial['content'] = template
+        return initial
 
 
 class ChallengeShowView(ChallengeMixin, DetailView):

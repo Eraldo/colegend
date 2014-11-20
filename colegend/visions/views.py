@@ -1,3 +1,4 @@
+from django.template.loader import render_to_string
 from lib.views import ActiveUserRequiredMixin
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse_lazy
@@ -45,6 +46,12 @@ class VisionNewView(VisionMixin, CreateView):
         user = self.request.user
         form.instance.owner = user
         return super(VisionNewView, self).form_valid(form)
+
+    def get_initial(self):
+        initial = super().get_initial()
+        template = render_to_string("visions/vision.md")
+        initial['content'] = template
+        return initial
 
 
 class VisionShowView(VisionMixin, DetailView):

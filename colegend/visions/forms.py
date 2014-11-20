@@ -17,6 +17,7 @@ class VisionForm(ModelForm):
 
     helper = FormHelper()
     helper.layout = Layout(
-        Field('name', autofocus='True')
+        Field('name', autofocus='True'),
+        Field('content', rows="20"),
     )
     helper.add_input(Submit('save', 'Save'))

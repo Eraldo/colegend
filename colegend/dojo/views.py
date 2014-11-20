@@ -1,5 +1,6 @@
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse_lazy
+from django.template.loader import render_to_string
 from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView
 from dojo.forms import ModuleForm
 from dojo.models import Module
@@ -37,6 +38,12 @@ class ModuleCreateView(DojoMixin, CreateView):
         user = self.request.user
         form.instance.provider = user
         return super(ModuleCreateView, self).form_valid(form)
+
+    def get_initial(self):
+        initial = super().get_initial()
+        template = render_to_string("dojo/module.md")
+        initial['content'] = template
+        return initial
 
 
 class ModuleShowView(DojoMixin, DetailView):
