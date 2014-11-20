@@ -6,11 +6,14 @@
 
 {% block page_controls_container %}{% endblock %}
 
+{% block up_icon %}trash{% endblock %}
+
 {% block page_content %}
     <div class="well">
         <form method="post">{% csrf_token %}
             <legend>Are you sure you want to delete "{{ object }}" ?</legend>
-            <button type="submit" class="btn btn-danger">Delete</button>
+            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
+            <a href="javascript:history.go(-1)" class="btn btn-primary">Cancel</a>
         </form>
     </div>
 {% endblock %}
