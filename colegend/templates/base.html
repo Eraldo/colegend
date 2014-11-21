@@ -14,7 +14,7 @@
         {% block extra_head %}{% endblock %}
     {% endblock %}
 </head>
-<body id="{% block body_id %}body{% endblock %}" class="body {% block body_class %}{% endblock %}">
+<body id="{% block body_id %}body{% endblock %}" class="{% block body_class %}body{% endblock %}">
 {% block body %}
     {% block header %}{% endblock %}
     <div id="menu">
