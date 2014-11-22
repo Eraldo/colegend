@@ -35,7 +35,7 @@ def embed_youtube(attrs, new=False):
 def markup(text, *args, **kwargs):
     return markdown(text, *args, safe_mode=True,
                     extensions=[
-                        'nl2br', 'sane_lists', 'extra',
+                        'nl2br', 'sane_lists', 'extra', 'toc',
                         'lib.external.mdx_del_ins', 'lib.external.mdx_tasks', 'lib.external.mdx_replacement',
                         ChecklistExtension(),
                         LinkifyExtension(
