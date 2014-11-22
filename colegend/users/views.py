@@ -82,18 +82,6 @@ class UserListView(UserMixin, ListView):
     slug_url_kwarg = "username"
 
 
-class UserManagerMixin():
-    model = User
-
-    def get_queryset(self):
-        return super().get_queryset().pending()
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["icon"] = get_icon("user-md")
-        return context
-
-
 class SettingsUpdateView(UserMixin, UpdateView):
     model = Settings
     form_class = SettingsForm
@@ -109,6 +97,18 @@ class SettingsUpdateView(UserMixin, UpdateView):
 
     def get_object(self):
         return self.request.user.settings
+
+
+class UserManagerMixin():
+    model = User
+
+    def get_queryset(self):
+        return super().get_queryset().pending()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["icon"] = get_icon("user-md")
+        return context
 
 
 class UserManageListView(ManagerRequiredMixin, UserManagerMixin, ListView):
