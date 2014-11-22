@@ -8,7 +8,7 @@
 {% block up_icon %}book{% endblock %}
 
 {% block page_title_extras %}
-    <span class="badge">{{ latest.count }}</span>
+    <span class="badge">{{ counter }}</span>
     <span class="streak badge"><i class="fa fa-link"></i> {{ streak }}</span>
 {% endblock %}
 
@@ -38,8 +38,22 @@
                     <td>{{ dayentry.focus }}</td>
                 </tr>
             {% endfor %}
+
             </tbody>
         </table>
+        {% if is_paginated %}
+            <nav>
+                <ul class="pager">
+                    {% if page_obj.has_previous %}
+                        <li class="previous"><a href="?page={{ page_obj.previous_page_number }}"><span
+                                aria-hidden="true">&larr;</span> Newer</a></li>
+                    {% endif %}
+                    {% if page_obj.has_next %}
+                        <li class="next"><a href="?page={{ page_obj.next_page_number }}">Older <span
+                                aria-hidden="true">&rarr;</span></a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        {% endif %}
     </div>
-
 {% endblock %}

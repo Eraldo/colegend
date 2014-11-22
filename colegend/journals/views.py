@@ -31,9 +31,11 @@ class DayEntryListView(DayEntryMixin, ArchiveIndexView):
     date_field = "date"
     template_name = "journals/dayentry_list.html"
     allow_empty = True
+    paginate_by = 10
 
     def get_context_data(self, **kwargs):
         context = super(DayEntryListView, self).get_context_data(**kwargs)
+        context['counter'] = self.get_queryset().count()
         context['streak'] = DayEntry.objects.streak_for(self.request.user)
         context['tutorial'] = get_tutorial(name="Journal")
         return context
