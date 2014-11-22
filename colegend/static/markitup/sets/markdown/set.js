@@ -36,7 +36,7 @@ mySettings = {
 		{separator:'---------------'},
 		{name:'Preview', call:'preview', className:"preview"},
 		{name:'Info', className:"info pull-right", openWith:function() {
-            window.open('http://en.wikipedia.org/wiki/Markdown', '_blank');
+            window.open('https://www.colegend.org/tutorials/text-areas', '_blank');
         }}
 	]
 }

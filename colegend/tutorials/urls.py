@@ -1,4 +1,7 @@
 from django.conf.urls import patterns, url
+from django.core.urlresolvers import reverse_lazy
+from django.views.generic import RedirectView
+from tutorials.models import Tutorial
 from tutorials.views import TutorialListView, TutorialCreateView, TutorialShowView, TutorialEditView, \
     TutorialDeleteView
 
@@ -28,4 +31,10 @@ urlpatterns = patterns(
         TutorialDeleteView.as_view(),
         name='tutorial_delete'),
 
+    # ex: ../text-areas
+    url(r'^text-areas/$',
+        RedirectView.as_view(
+            url=reverse_lazy("tutorials:tutorial_show",
+                             args=[Tutorial.objects.get(name="Text Areas").pk]), permanent=False),
+        name='text-areas'),
 )
