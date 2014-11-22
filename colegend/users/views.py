@@ -94,7 +94,7 @@ class UserManagerMixin():
         return context
 
 
-class SettingsUpdateView(UpdateView):
+class SettingsUpdateView(UserMixin, UpdateView):
     model = Settings
     form_class = SettingsForm
 
