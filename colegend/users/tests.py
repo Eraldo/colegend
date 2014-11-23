@@ -244,7 +244,7 @@ class ProfileFactory(factory.DjangoModelFactory):
 class ProfileModelTests(TestCase):
     def test_profile_string(self):
         profile = ProfileFactory()
-        self.assertEqual(str(profile), "johndoe's Profile")
+        self.assertEqual(str(profile), "{}'s Profile".format(profile.owner.username))
 
 
 class SettingsFactory(factory.DjangoModelFactory):
@@ -260,7 +260,7 @@ class SettingsFactory(factory.DjangoModelFactory):
 class SettingsModelTests(TestCase):
     def test_settings_string(self):
         settings = SettingsFactory()
-        self.assertEqual(str(settings), "johndoe's Settings")
+        self.assertEqual(str(settings), "{}'s Settings".format(settings.owner.username))
 
 
 class SignupNotificationTests(TestCase):
