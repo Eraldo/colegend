@@ -14,8 +14,8 @@ class UserModelTests(TestCase):
     def test_user_creation(self):
         """Test the creation of a new user."""
         User.objects.create_user(**self.user_data)
-        user = User.objects.get(username="Usernew")
-        self.assertEquals(user.check_password("usernew"), True)
+        user = User.objects.get(username=self.user_data["username"])
+        self.assertEquals(user.check_password(self.user_data["password"]), True)
 
     def test_username_taken(self):
         """Test the creation of a user with a username that is already taken."""
@@ -50,13 +50,13 @@ class UserModelTests(TestCase):
         data["first_name"] = "FirstName"
         data["last_name"] = "LastName"
         User.objects.create_user(**data)
-        user = User.objects.get(username="Usernew")
+        user = User.objects.get(username=data["username"])
         self.assertEquals(user.get_name(), "FirstName LastName")
 
     def test_is_accepted(self):
         """Test the user property: default, get, set."""
         User.objects.create_user(**self.user_data)
-        user = User.objects.get(username="Usernew")
+        user = User.objects.get(username=self.user_data["username"])
         # Test getter
         self.assertIsNotNone(user.is_accepted)
         # Make sure that a new user is not accepted by default.
@@ -67,7 +67,7 @@ class UserModelTests(TestCase):
 
     def test_accept(self):
         User.objects.create_user(**self.user_data)
-        user = User.objects.get(username="Usernew")
+        user = User.objects.get(username=self.user_data["username"])
         user.accept()
 
         # Check if the acceptance flag was set.
@@ -76,7 +76,7 @@ class UserModelTests(TestCase):
     def test_accept_email(self):
         from django.core import mail
         User.objects.create_user(**self.user_data)
-        user = User.objects.get(username="Usernew")
+        user = User.objects.get(username=self.user_data["username"])
         user.accept()
 
         self.assertEquals(len(mail.outbox), 1)
