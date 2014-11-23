@@ -5,12 +5,12 @@ from django.core import validators
 from django.core.urlresolvers import reverse
 from django.core.validators import MaxValueValidator
 from django.db.models import QuerySet
+from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.core.mail import send_mail, mail_managers
 from django.db import models
 from lib.modelfields import PhoneField
-from lib.models import AutoUrlMixin
 from users.modelfields import RequiredBooleanField
 from users.managers import UserManager
 
@@ -61,7 +61,7 @@ class User(AbstractBaseUser, PermissionsMixin):
                                     help_text="Designates whether the user can access the site's test features.")
 
     is_manager = models.BooleanField(verbose_name=_('manager'), default=False,
-                                    help_text="Designates whether the user can access the site's management features.")
+                                     help_text="Designates whether the user can access the site's management features.")
 
     is_staff = models.BooleanField(verbose_name=_('staff'), default=False,
                                    help_text=_('Designates whether the user can log into this admin '
@@ -93,7 +93,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     get_name.short_description = 'Name'
 
     def get_short_name(self):
-        "Returns the short name for the user."
+        """Returns the short name for the user."""
         return self.first_name
 
     get_short_name.short_description = 'Short name'
@@ -116,7 +116,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         message = "Congratulations - Your account has been verified by {}.\nwww.colegend.org".format(accepter)
         self.email_user("[CoLegend] Account verified!", message)
         self.save()
-
 
     # As of Django 1.8 this will be fixed by using "default_related_name" in the respective model's Meta class.
     # https://docs.djangoproject.com/en/dev/ref/models/options/#default-related-name
@@ -149,17 +148,21 @@ def notify_managers_after_signup(request, user, **kwargs):
     """
 
     # Notify the managers.
+    message = render_to_string(
+        "users/signup_manager_notification_email.txt",
+        {'username': user, 'email': user.email})
     mail_managers(
         subject="New user: {}".format(user),
-        message="A new user has signed up:\nUsername: {}\nEmail: {}".format(user, user.email),
+        message=message,
         fail_silently=True
     )
+    # Notify the user.
     messages.add_message(request, messages.SUCCESS, 'We have received your application.')
 
 
 class Contact(models.Model):
     owner = AutoOneToOneField(User)
-    # first_name = models.CharField(max_length=30)
+
     @property
     def first_name(self):
         return self.owner.first_name
@@ -168,7 +171,6 @@ class Contact(models.Model):
     def first_name(self, value):
         self.owner.first_name = value
 
-    # last_name = models.CharField(max_length=30)
     @property
     def last_name(self):
         return self.owner.last_name
@@ -179,17 +181,11 @@ class Contact(models.Model):
 
     @property
     def email(self):
-        if self.owner:
-            return self.owner.email
-        else:
-            return ""
+        return self.owner.email
 
     @email.setter
     def email(self, value):
-        if self.owner:
-            self.owner.email = value
-        else:
-            raise User.DoesNotExist
+        self.owner.email = value
 
     phone_number = PhoneField(help_text="Mobile or other phone number. Example: +4369910203039")
 
@@ -206,11 +202,7 @@ class Contact(models.Model):
     birthday = models.DateField()
 
     def __str__(self):
-        if self.owner:
-            user = self.owner
-        else:
-            user = "Unknown"
-        return "{} ({})".format(self.get_name(), user)
+        return "{} ({})".format(self.get_name(), self.owner)
 
     def get_name(self):
         return self.owner.get_name()
@@ -303,11 +295,7 @@ class Profile(models.Model):
     )
 
     def __str__(self):
-        if self.owner:
-            user = self.owner
-        else:
-            user = "Unknown"
-        return "{}'s Profile".format(user)
+        return "{}'s Profile".format(self.owner)
 
 
 class Settings(models.Model):
