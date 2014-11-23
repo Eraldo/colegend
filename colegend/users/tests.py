@@ -80,7 +80,7 @@ class UserModelTests(TestCase):
         user.accept()
 
         self.assertEquals(len(mail.outbox), 1)
-        self.assertEquals(mail.outbox[0].subject, '[CoLegend] Accepted!')
+        self.assertEquals(mail.outbox[0].subject, '[CoLegend] Account verified!')
 
 
 class UserViewTests(TestCase):

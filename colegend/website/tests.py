@@ -6,8 +6,6 @@ from users.models import User
 
 
 class ViewTests(LiveServerTestCase):
-    # fixtures = ['local']
-
     @classmethod
     def setUpClass(cls):
         cls.selenium = WebDriver()
@@ -19,8 +17,7 @@ class ViewTests(LiveServerTestCase):
         super(ViewTests, cls).tearDownClass()
 
     def test_login(self):
-        # tester = User.objects.get(username="Tester")
-        tester = User.objects.create_user(username="Tester2", password="tester")
+        tester = User.objects.create_user(username="Tester", password="tester")
         self.selenium.get('%s%s' % (self.live_server_url, '/accounts/login/'))
         username_input = self.selenium.find_element_by_name("login")
         username_input.send_keys(tester.username)

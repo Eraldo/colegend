@@ -1,6 +1,6 @@
 from annoying.functions import get_object_or_None
 from django.core.urlresolvers import reverse_lazy
-from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView, RedirectView
 from tutorials.forms import TutorialForm
 from tutorials.models import Tutorial
 from lib.views import ManagerRequiredMixin, ActiveUserRequiredMixin, get_icon
@@ -40,3 +40,15 @@ class TutorialEditView(ManagerRequiredMixin, TutorialMixin, UpdateView):
 class TutorialDeleteView(ManagerRequiredMixin, TutorialMixin, DeleteView):
     template_name = "confirm_delete.html"
     success_url = reverse_lazy('tutorials:tutorial_list')
+
+
+class TutorialRedirectView(RedirectView):
+    permanent = False
+
+    def get_redirect_url(self, *args, **kwargs):
+        try:
+            return reverse_lazy("tutorials:tutorial_show",
+                               args=[Tutorial.objects.get(name="Text Areas").pk])
+        except Tutorial.DoesNotExist:
+            return None
+

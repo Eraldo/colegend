@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic import RedirectView
 from tutorials.models import Tutorial
 from tutorials.views import TutorialListView, TutorialCreateView, TutorialShowView, TutorialEditView, \
-    TutorialDeleteView
+    TutorialDeleteView, TutorialRedirectView
 
 __author__ = 'eraldo'
 
@@ -33,8 +33,6 @@ urlpatterns = patterns(
 
     # ex: ../text-areas
     url(r'^text-areas/$',
-        RedirectView.as_view(
-            url=reverse_lazy("tutorials:tutorial_show",
-                             args=[Tutorial.objects.get(name="Text Areas").pk]), permanent=False),
+        TutorialRedirectView.as_view(),
         name='text-areas'),
 )
