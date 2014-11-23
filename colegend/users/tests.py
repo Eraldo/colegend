@@ -1,11 +1,25 @@
-import datetime
 from django.core.urlresolvers import reverse
 from django.db import IntegrityError
 from django.test import TestCase
+import factory
 from users.models import User
 
 
+class UserFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = User
+        django_get_or_create = ('username',)
+
+    first_name = "John"
+    last_name = "Doe"
+    username = factory.LazyAttribute(lambda a: '{0}{1}'.format(a.first_name, a.last_name).lower())
+    password = factory.PostGenerationMethodCall('set_password', 'tester')
+    email = factory.LazyAttribute(lambda a: '{0}@example.com'.format(a.username).lower())
+    is_accepted = True
+
+
 class UserModelTests(TestCase):
+
     def setUp(self):
         self.user_data = {
             "username": "Usernew", "password": "usernew",
@@ -75,6 +89,7 @@ class UserModelTests(TestCase):
 
     def test_accept_email(self):
         from django.core import mail
+
         User.objects.create_user(**self.user_data)
         user = User.objects.get(username=self.user_data["username"])
         user.accept()
