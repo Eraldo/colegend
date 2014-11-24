@@ -17,7 +17,7 @@ install:
 
 before_script:
   - cd colegend
-  – python manage.py syncdb –migrate –noinput
+  - python manage.py syncdb –migrate –noinput
 
 # command to run tests, e.g. python setup.py test
 script:  coverage run manage.py test
