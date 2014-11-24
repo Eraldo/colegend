@@ -8,8 +8,5 @@ Pygments==1.6 # coloring for Sphinx
 # Server
 django-sslserver==0.12 # https
 
-# Configuration
-django-secure==1.0
-
 # Debug toolbar that works with Django 1.5+
 django-debug-toolbar==1.2.1

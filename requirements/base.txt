@@ -39,3 +39,6 @@ logutils==0.3.3
 
 # project specific
 django-bootstrap3==4.8.2
+
+# Configuration
+django-secure==1.0
