@@ -26,7 +26,6 @@ import sys
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'colegend'))
 os.environ['DJANGO_SETTINGS_MODULE'] = 'configuration.settings.documentation'
-from django.conf import settings
 
 # -- General configuration ------------------------------------------------
 
