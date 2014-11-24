@@ -17,8 +17,8 @@ install:
 
 before_script:
   - cd colegend
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
   - sleep 3 # give xvfb some time to start
 
 # command to run tests, e.g. python setup.py test
@@ -28,7 +28,7 @@ services:
   - selenium
 
 after_script:
-  - "/etc/init.d/xvfb stop"
+  - sh -e /etc/init.d/xvfb stop
 
 after_success:
   # Report coverage results to coveralls.io
