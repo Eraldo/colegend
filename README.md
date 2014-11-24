@@ -12,5 +12,5 @@ CoLegend is a “Socially-Intelligent Life-Management Platform for Sustainable P
 * GitHub: https://github.com/Eraldo/colegend
 * Social: https://www.facebook.com/colegend.org
 
-![CoLegend Logo](https://www.colegend.org/static/website/images/CoLegendLogo.png)
+[![CoLegend Logo](https://www.colegend.org/static/website/images/CoLegendLogo.png)](https://www.colegend.org)
 
