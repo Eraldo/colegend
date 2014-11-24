@@ -29,3 +29,6 @@ bower_components
 
 # ignore log files
 *.log
+
+# testing files
+.coveralls.yml
