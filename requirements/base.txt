@@ -1,12 +1,6 @@
 # Framework
 django==1.7.1
 
-# Webserver
-gunicorn==19.0.0
-
-# Configuration
-django-secure==1.0
-
 # Forms
 django-braces==1.4.0
 django-crispy-forms==1.4.0
@@ -45,9 +39,3 @@ logutils==0.3.3
 
 # project specific
 django-bootstrap3==4.8.2
-
-# Debug toolbar that works with Django 1.5+
-django-debug-toolbar==1.2.1
-
-# Web testing
-selenium==2.43.0
