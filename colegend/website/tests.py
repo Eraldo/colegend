@@ -4,6 +4,7 @@ from django.test import TestCase
 from django.test import LiveServerTestCase
 from selenium.webdriver.firefox.webdriver import WebDriver
 from users.models import User
+from users.tests import UserFactory
 
 
 class ViewTests(LiveServerTestCase):
@@ -31,6 +32,7 @@ class ViewTests(LiveServerTestCase):
         # self.selenium.save_screenshot("/Users/eraldo/inbox/test.png")
 
     def test_can_view_admin_site(self):
+        UserFactory(is_superuser=True, is_staff=True)
         # Gertrude opens her web browser, and goes to the admin page
         self.selenium.get(self.live_server_url + '/backend/')
 
