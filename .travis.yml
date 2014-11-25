@@ -16,6 +16,9 @@ test:
   database: ":memory:"
   timeout: 500
 
+env:
+  - DB=sqlite
+
 # Saucelabs brower testing
 addons:
   sauce_connect:
