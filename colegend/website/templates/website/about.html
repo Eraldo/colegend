@@ -4,7 +4,7 @@
 {% block menu %}{% endblock %}
 
 {% block title %}
-    About
+    CoLegend
 {% endblock %}
 
 {% block content %}
@@ -14,12 +14,12 @@
             <img src="{{ STATIC_URL }}website/images/CoLegendLogo.png" alt="CoLegend"
                  class="center-block img-responsive">
 
-            <h3><span style="display:inline-block;">Be Awesome,</span> <span style="display:inline-block;">Love with an Open Heart</span>
+            <h3 id="slogan"><span style="display:inline-block;">Be Awesome,</span> <span style="display:inline-block;">Love with an Open Heart</span>
                 <span style="display:inline-block;">and Live a Legendary Life</span> <span
                         style="display:inline-block;">..Today!</span>
             </h3>
 
-            <p><a href="{% url "account_login" %}?next=/" class="btn btn-primary btn-lg" role="button">Let's do it!</a>
+            <p><a id="login-button" href="{% url "account_login" %}?next=/" class="btn btn-primary btn-lg" role="button">Let's do it!</a>
             </p>
             <hr/>
             <audio id="audioplayer" src="{{ STATIC_URL }}website/audio/colegend_song.mp3" controls autoplay

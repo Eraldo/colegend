@@ -1,5 +1,4 @@
 import datetime
-from unittest import mock
 from allauth.account.signals import user_signed_up
 from django.contrib.messages import get_messages
 from django.contrib.messages.storage.fallback import FallbackStorage
@@ -23,6 +22,23 @@ class UserFactory(factory.DjangoModelFactory):
     password = factory.PostGenerationMethodCall('set_password', 'tester')
     email = factory.LazyAttribute(lambda a: '{0}@example.com'.format(a.username).lower())
     is_accepted = True
+
+    @factory.post_generation
+    def confirm_email(self, create, extracted, **kwargs):
+        """
+        Automatically verify the user's email address.
+
+        Verification takes place if the object is created:
+        Example: UserFactory(...) or UserFactory.create(...)
+
+        Verification does not take place if the object is created with this attribute set to False:
+        Example: UserFactory(confirm_email=False)
+        """
+        if create and not extracted is False:
+            self.emailaddress_set.add_email(None, self, self.email)
+            email_obj = self.emailaddress_set.first()
+            email_obj.verified = True
+            email_obj.set_as_primary(conditional=True)
 
 
 class UserModelTests(TestCase):

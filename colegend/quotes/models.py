@@ -44,8 +44,9 @@ class QuoteQuerySet(OwnedQueryMixin, models.QuerySet):
         except Quote.DoesNotExist:
             # There is no quote for today yet.. so assign one.
             current_quote = quotes.order_by('used_as_daily').first()
-            current_quote.used_as_daily = today
-            current_quote.save()
+            if current_quote:
+                current_quote.used_as_daily = today
+                current_quote.save()
         return current_quote
 
 
