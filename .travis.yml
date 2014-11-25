@@ -10,6 +10,13 @@ branches:
   only:
     - master
 
+# Saucelabs brower testing
+addons:
+  sauce_connect:
+    username: "eraldo"
+    access_key:
+      secure: "t+HDOa7LYYa5BUelbw3Ah2anqALoPqju4/h73t1J0OpDBds3SK+7Wklxlqh2syIP0v/mBVpYGOoNBnri5sabZ0U0Cf8piMoxnMB8ktMVcdMvWi4Dq2kF5EGAbERD64IbQICMBB/fPfGgWp2k6zTbC5XWkOoaQEMBblkNTubCGcc="
+
 # command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
 install:
   - pip install -r requirements/test.txt

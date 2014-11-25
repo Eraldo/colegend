@@ -4,6 +4,7 @@ colegend-project
 [![GitHub version](https://badge.fury.io/gh/Eraldo%2Fcolegend.svg)](http://badge.fury.io/gh/Eraldo%2Fcolegend)
 [![Build Status](https://travis-ci.org/Eraldo/colegend.svg?branch=master)](https://travis-ci.org/Eraldo/colegend)
 [![Coverage Status](https://img.shields.io/coveralls/Eraldo/colegend.svg)](https://coveralls.io/r/Eraldo/colegend)
+[![Sauce Test Status](https://saucelabs.com/buildstatus/eraldo)](https://saucelabs.com/u/eraldo)
 [![Documentation Status](https://readthedocs.org/projects/colegend/badge/?version=latest)](https://readthedocs.org/projects/colegend/?badge=latest)
 
 
