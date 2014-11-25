@@ -10,12 +10,6 @@ branches:
   only:
     - master
 
-# use sqlite3
-test:
-  adapter: sqlite3
-  database: ":memory:"
-  timeout: 500
-
 env:
   - DB=sqlite
 
