@@ -65,8 +65,8 @@ class TagNewViewTest(LoggedInTestMixin, TestCase):
 
         self.assertEqual(Tag.objects.count(), 1)
         new_tag = Tag.objects.first()
-        self.assertEqual(response.status_code, 200)
         self.assertEqual(new_tag.name, tag_attributes["name"])
+        self.assertRedirects(response, reverse("tags:tag_list"))
 
 
 class TagShowViewTest(LoggedInTestMixin, TestCase):
