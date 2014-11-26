@@ -41,7 +41,7 @@ class AutoUrlMixin():
 
     def _get_auto_url(self, operation, pk=None):
         namespace = self._meta.app_label
-        prefix = self._meta.module_name
+        prefix = self._meta.model_name
         alias = '{}:{}_{}'.format(namespace, prefix, operation)
         args=[]
         if pk:
