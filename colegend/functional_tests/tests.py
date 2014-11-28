@@ -45,7 +45,7 @@ class ViewTests(LiveServerTestCase):
         # He clicks clicks on the area which says "Nope, I am new here ..."
         browser.find_element_by_id("signup_choice").click()
         # He clicks clicks on the button which says "How can I join?"
-        browser.find_element_by_id("signup").click(Fi)
+        browser.find_element_by_id("signup").click()
         # He enters his personal data..
         browser.find_element_by_id("id_username").send_keys("newuser")
         browser.find_element_by_id("id_origin").send_keys("some origin")
