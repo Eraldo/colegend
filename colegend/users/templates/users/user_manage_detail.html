@@ -148,7 +148,7 @@
 
         <form method="POST">{% csrf_token %}
             <input type="hidden" name="verify" value="{{ object.pk }}">
-            <button type="submit" class="btn btn-warning">Verify {{ name }}</button>
+            <button id="verify-pending-user" type="submit" class="btn btn-warning">Verify {{ name }}</button>
         </form>
     </div>
     </div>
