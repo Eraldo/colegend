@@ -109,7 +109,6 @@ class ViewTests(LiveServerTestCase):
 
         # A manager signs in and navigates to the user management page.
         manager = UserFactory(is_manager=True, username="hugodoe")
-        print(manager)
         browser.get(self.live_server_url + reverse("account_login"))
 
         # Hugo logs in
