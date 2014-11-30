@@ -24,5 +24,13 @@
         changeMonth: true,
         changeYear: true
     });
-    {#    });#}
+</script>
+
+{# datetimepicker #}
+<script src="{{ STATIC_URL }}website/bower_components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script>
+    $('.datetimeinput').datetimepicker({
+        weekStart: 1,
+        autoclose: true
+    });
 </script>
