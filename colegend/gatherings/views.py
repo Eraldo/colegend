@@ -68,8 +68,6 @@ class GatheringCreateView(ManagerRequiredMixin, GatheringMixin, CreateView):
         except Gathering.DoesNotExist:
             last_start = now
         initial['start'] = timezone.datetime.combine(now.date(), last_start.time())
-        # TODO: Test/Fix: What happens when last end was after midnight?
-        # idea: Instead of using today's date.. add the day difference to the old end time.
         initial['end'] = timezone.datetime.combine(now.date(), last_end.time())
         return initial
 
