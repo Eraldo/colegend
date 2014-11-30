@@ -23,16 +23,17 @@ class GatheringsView(ActiveUserRequiredMixin, TemplateView):
     template_name = "gatherings/gatherings.html"
 
     def get_context_data(self, **kwargs):
-        context = super(GatheringsView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         now = timezone.now()
         # Get next gathering.
         try:
-            gathering = Gathering.objects.filter(date__gt=now).last()
+            gathering = Gathering.objects.filter(
+                start__gte=now - timezone.timedelta(hours=1)
+            ).last()
         except Gathering.DoesNotExist:
             gathering = None
         if gathering:
-            date = gathering.date
-            context['date'] = date
+            context['start'] = gathering.start
             context['online'] = gathering.online
             if gathering.online:
                 location = "Virtual Room"
@@ -42,10 +43,10 @@ class GatheringsView(ActiveUserRequiredMixin, TemplateView):
                 url = get_location_url(gathering.location)
             context['location'] = location
             context['url'] = url
-            context['counter'] = timeuntil(date, now)
+            context['counter'] = timeuntil(gathering.start, now)
             context['host'] = gathering.host
             # scheduled gatherings
-            context['future_gatherings'] = Gathering.objects.filter(date__gt=date)
+            context['future_gatherings'] = Gathering.objects.filter(start__gt=gathering.start)
             # tutorial
             context['tutorial'] = get_tutorial("Gatherings")
         return context
@@ -61,7 +62,17 @@ class GatheringCreateView(ManagerRequiredMixin, GatheringMixin, CreateView):
 
     def get_initial(self):
         initial = super(GatheringCreateView, self).get_initial()
-        initial['date'] = timezone.now()
+        now = timezone.now()
+        try:
+            last_gathering = Gathering.objects.first()
+            last_start = timezone.localtime(last_gathering.start)
+            last_end = timezone.localtime(last_gathering.end)
+        except Gathering.DoesNotExist:
+            last_start = now
+        initial['start'] = timezone.datetime.combine(now.date(), last_start.time())
+        # TODO: Test/Fix: What happens when last end was after midnight?
+        # idea: Instead of using today's date.. add the day difference to the old end time.
+        initial['end'] = timezone.datetime.combine(now.date(), last_end.time())
         return initial
 
     def form_valid(self, form):

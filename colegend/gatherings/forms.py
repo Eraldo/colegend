@@ -9,11 +9,12 @@ __author__ = 'eraldo'
 class GatheringForm(ModelForm):
     class Meta:
         model = Gathering
-        fields = ['date', 'location', 'online']
+        fields = ['start', 'end', 'location', 'online']
 
     helper = FormHelper()
     helper.layout = Layout(
-        Field('date'),
+        Field('start'),
+        Field('end'),
         Field('location'),
         Field('online'),
     )

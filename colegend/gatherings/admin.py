@@ -3,7 +3,7 @@ from gatherings.models import Gathering
 
 
 class GatheringAdmin(admin.ModelAdmin):
-    list_display = ['date', 'location', 'online', 'host']
+    list_display = ['start', 'end', 'location', 'online', 'host']
     list_filter = ['online', 'host']
 
 

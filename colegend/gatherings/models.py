@@ -7,14 +7,15 @@ __author__ = 'eraldo'
 
 
 class Gathering(AutoUrlMixin, models.Model):
-    date = models.DateTimeField()
+    start = models.DateTimeField()
+    end = models.DateTimeField()
     LOCATION_DEFAULT = "http://gathering.colegend.org/"
     location = models.CharField(max_length=200, default=LOCATION_DEFAULT)
     online = models.BooleanField(default=True)
     host = models.ForeignKey(settings.AUTH_USER_MODEL)
 
     class Meta:
-        ordering = ["-date"]
+        ordering = ["-start"]
 
     def __str__(self):
-        return timezone.localtime(self.date).strftime('%A %Y-%m-%d %H:%M')
+        return timezone.localtime(self.start).strftime('%A %Y-%m-%d %H:%M')
