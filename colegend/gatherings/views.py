@@ -25,13 +25,11 @@ class GatheringsView(ActiveUserRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         now = timezone.now()
+        current = Gathering.objects.current()
+        if current:
+            context['current'] = True
         # Get next gathering.
-        try:
-            gathering = Gathering.objects.filter(
-                start__gte=now - timezone.timedelta(hours=1)
-            ).last()
-        except Gathering.DoesNotExist:
-            gathering = None
+        gathering = Gathering.objects.next()
         if gathering:
             context['start'] = gathering.start
             context['online'] = gathering.online

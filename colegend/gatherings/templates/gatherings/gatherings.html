@@ -23,7 +23,7 @@
                 <h2>Next Gathering</h2>
                 {% if start %}
                     {{ start }}<br/>
-                    Countdown: {{ counter }}<br/>
+                    Gathering {% if current %}NOW{% else %}in {{ counter }}{% endif %}<br/>
                     <img src="{{ STATIC_URL }}website/images/CoSpace_circle.png" alt="CoSpace"
                          class="center-block img-circle img-responsive" style="max-height: 200px;">
                     <a href="{{ url }}" target="_blank" class="btn btn-default">»
@@ -38,10 +38,12 @@
                 <h3>Further Gatherings</h3>
                 {% for gathering in future_gatherings %}
                     <a class="btn btn-default">{{ gathering }}</a><br/>
+                    {% if forloop.last %}
+                    <small>*Please keep in mind.. that the dates/times can still change.<br></small>
+                    {% endif %}
                 {% empty %}
                     -- No future gatherings scheduled.<br>
                 {% endfor %}
-                <small>*Please keep in mind.. that the dates/times can still change.<br></small>
             </div>
         </div>
     </div>
