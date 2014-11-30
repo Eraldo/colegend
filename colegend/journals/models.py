@@ -37,6 +37,8 @@ class DayEntryQuerySet(OwnedQueryMixin, models.QuerySet):
                 counter += 1
             else:
                 return counter
+        # no dates found..
+        return counter
 
 
 class DayEntry(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, models.Model):
