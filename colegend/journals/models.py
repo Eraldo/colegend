@@ -35,8 +35,7 @@ class DayEntryQuerySet(OwnedQueryMixin, models.QuerySet):
         for date in dates:
             if (today - date).days == counter:
                 counter += 1
-            else:
-                return counter
+        return counter
 
 
 class DayEntry(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, models.Model):
