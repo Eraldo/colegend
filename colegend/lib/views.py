@@ -36,7 +36,8 @@ class ManagerRequiredMixin(ActiveUserRequiredMixin):
     View mixin that makes sure.. that only active managers get access.
     """
     def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_manager:
+        user = request.user
+        if not (user.is_authenticated() and user.is_accepted and user.is_manager):
             raise PermissionDenied  # return a forbidden response
         return super(ManagerRequiredMixin, self).dispatch(
             request, *args, **kwargs)
