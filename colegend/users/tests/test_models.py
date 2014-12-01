@@ -3,9 +3,7 @@ from allauth.account.signals import user_signed_up
 from django.contrib.messages import get_messages
 from django.contrib.messages.storage.fallback import FallbackStorage
 from django.core import mail
-from django.core.urlresolvers import reverse
 from django.db import IntegrityError
-from django.http import HttpRequest
 from django.test import TestCase, RequestFactory
 import factory
 from users.models import User, Contact, Profile, Settings
@@ -154,28 +152,6 @@ class UserModelTests(TestCase):
         self.assertEqual(accepted_users.count(), 1)
         self.assertTrue(user1 in accepted_users)
         self.assertFalse(user2 in accepted_users)
-
-
-class UserViewTests(TestCase):
-    def test_list_view_anonymous(self):
-        response = self.client.get(reverse('users:list'))
-        self.assertEquals(response.status_code, 302)
-
-    def test_list_view_authenticated(self):
-        """Test the user list view with a logged in user."""
-        usernew = User.objects.create_user(username="Usernew", password="usernew", is_accepted=True)
-        self.client.login(username="Usernew", password="usernew")
-        response = self.client.get(reverse('users:list'))
-        self.assertEquals(response.status_code, 200)
-        self.assertContains(response, "Usernew")
-        self.assertQuerysetEqual(response.context['user_list'], ['<User: Usernew>'])
-
-    def test_list_view_unauthenticated(self):
-        """Test the user list view with a logged in user."""
-        usernew = User.objects.create_user(username="Usernew", password="usernew", is_accepted=False)
-        self.client.login(username="Usernew", password="usernew")
-        response = self.client.get(reverse('users:list'))
-        self.assertEquals(response.status_code, 302)
 
 
 class ContactFactory(factory.DjangoModelFactory):
