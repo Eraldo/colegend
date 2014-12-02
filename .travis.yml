@@ -32,7 +32,7 @@ before_script:
   - sleep 3 # give xvfb some time to start
 
 # command to run tests, e.g. python setup.py test
-script:  coverage run manage.py test --settings=configuration.settings.test
+script:  coverage run --source='.' manage.py test --settings=configuration.settings.test
 
 services:
   - selenium
