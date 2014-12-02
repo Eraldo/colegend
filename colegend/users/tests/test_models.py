@@ -153,6 +153,18 @@ class UserModelTests(TestCase):
         self.assertTrue(user1 in accepted_users)
         self.assertFalse(user2 in accepted_users)
 
+    def test_get_users_projects(self):
+        user = UserFactory()
+        self.assertEqual(user.projects.count(), 0)
+
+    def test_get_users_tasks(self):
+        user = UserFactory()
+        self.assertEqual(user.tasks.count(), 0)
+
+    def test_get_users_tags(self):
+        user = UserFactory()
+        self.assertEqual(user.tags.count(), 0)
+
 
 class ContactFactory(factory.DjangoModelFactory):
     class Meta:

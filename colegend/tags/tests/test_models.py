@@ -1,4 +1,3 @@
-from django.core.urlresolvers import reverse
 from django.test import TestCase
 import factory
 from tags.models import Tag

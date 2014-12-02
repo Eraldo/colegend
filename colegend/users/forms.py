@@ -82,14 +82,17 @@ class SignUpApplicationForm(ModelForm):
         ]
 
     def __init__(self, *args, **kwargs):
-        initial = kwargs["initial"]
-        username = initial.get("username")
-        first_name = initial.get("first_name")
-        kwargs["initial"]["first_name"] = first_name or username
+        initial = kwargs.get("initial")
+        if initial:  # should exist
+            username = initial.get("username")
+            first_name = initial.get("first_name")
+            kwargs["initial"]["first_name"] = first_name or username
         super(SignUpApplicationForm, self).__init__(*args, **kwargs)
         # remove some labels
-        self.fields['referrer'].label = ""
-        self.fields['username'].label = ""
+        if self.fields.get('referrer'):
+            self.fields['referrer'].label = ""
+        if self.fields.get('username'):
+            self.fields['username'].label = ""
 
     helper = FormHelper()
     helper.layout = Layout(

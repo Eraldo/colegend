@@ -50,7 +50,6 @@ urlpatterns = patterns(
 
     url(
         regex=r'^~settings/$',
-        # regex=r'^settings/(?P<owner>[\w.@+-]+)/$',
         view=SettingsUpdateView.as_view(),
         name='settings'
     ),
