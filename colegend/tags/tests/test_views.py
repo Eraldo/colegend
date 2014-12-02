@@ -1,19 +1,12 @@
 from django.core.urlresolvers import reverse
 from django.test import TestCase
+from lib.tests.test_views import LoggedInTestMixin
 from tags.forms import TagForm
 from tags.models import Tag
 from tags.tests.test_models import TagFactory
 from users.tests.test_models import UserFactory
 
 __author__ = 'eraldo'
-
-
-class LoggedInTestMixin():
-
-    def setUp(self):
-        user = UserFactory()
-        self.client.login(username=user.username, password="tester")
-        self.user = user
 
 
 class TagListViewTest(LoggedInTestMixin, TestCase):
