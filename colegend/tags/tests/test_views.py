@@ -47,6 +47,15 @@ class TagNewViewTest(LoggedInTestMixin, TestCase):
         self.assertEqual(new_tag.name, tag_attributes["name"])
         self.assertRedirects(response, reverse("tags:tag_list"))
 
+    def test_duplicate_owner_and_name(self):
+        tag_attributes = TagFactory.attributes()
+        tag_attributes["owner"] = self.user
+        Tag.objects.create(**tag_attributes)
+        url = reverse("tags:tag_new")
+        response = self.client.post(url, data=tag_attributes)
+
+        self.assertFormError(response, 'form', None, 'Tag with this Owner and Name already exists.')
+
 
 class TagShowViewTest(LoggedInTestMixin, TestCase):
 
