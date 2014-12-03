@@ -32,7 +32,6 @@ urlpatterns = patterns('',
     url(r'^features/', include('features.urls', namespace="features")),
     url(r'^news/', include('news.urls', namespace="news")),
     url(r'^tutorials/', include('tutorials.urls', namespace="tutorials")),
-    url(r'^commands/', include('commands.urls')),
     url(r'^contact/', include('contact.urls')),
 
     # Uncomment the next line to enable the admin:

@@ -54,7 +54,6 @@ def menu(request):
             MenuItem("Tutorials", url="tutorials:tutorial_list", icon="graduation-cap"),
         ],
         'operator_extra': [
-            MenuItem("Commands", url="commands", icon="bullhorn"),
         ],
         'account': [
             MenuItem("Profile", url="users:detail", arg=request.user, icon="user"),

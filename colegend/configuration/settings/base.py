@@ -241,7 +241,6 @@ PROJECT_APPS = (
     'features',
     'news',
     'tutorials',
-    'commands',  # command text interface
     # common
     'categories',
     'lib',
