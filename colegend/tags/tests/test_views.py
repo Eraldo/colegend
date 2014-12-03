@@ -4,7 +4,6 @@ from lib.tests.test_views import LoggedInTestMixin
 from tags.forms import TagForm
 from tags.models import Tag
 from tags.tests.test_models import TagFactory
-from users.tests.test_models import UserFactory
 
 __author__ = 'eraldo'
 
