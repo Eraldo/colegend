@@ -1,6 +1,6 @@
 from django.core.urlresolvers import reverse
 from django.test import TestCase
-from lib.tests.test_views import LoggedInTestMixin, LoggedInManagerTestMixin
+from lib.tests.test_views import LoggedInTestMixin
 from projects.forms import ProjectForm
 from projects.models import Project
 from projects.tests.test_models import ProjectFactory

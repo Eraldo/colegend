@@ -7,6 +7,7 @@ from projects.models import Project
 from statuses.models import Status
 from statuses.utils import StatusQueryMixin
 from tags.models import TaggableBase
+from users.models import User
 
 __author__ = 'eraldo'
 
@@ -40,11 +41,23 @@ class Task(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, TaggableBas
 
     def clean(self):
         super(Task, self).clean()
-        # TODO: Prevent duplicate names if the project was not set.
-        # Not working - editing will through error even if no change.
-        # if not self.pk and not self.project and Task.objects.filter(project__isnull=True, name=self.name).exists():
-        #     raise ValidationError("A Task with this name and without a project exists already.")
-        # TODO: Prevent the creation of a task for a project that is not owned.
-        # Not working - a new task does not have an owner yet > Error.
-        # if self.project and not self.project.owner == self.owner:
-        #     raise SuspiciousOperation("Cannot create a Task for a foreign project.")
+
+        # Check if the instance to clean has an owner.
+        # A form can exclude the owner field.. in which case the following checks can be skipped.
+        if not hasattr(self, "owner"):
+            return
+
+        # Prevent the creation of a task for a project that is not owned.
+        if self.owner and self.project and self.owner != self.project.owner:
+            raise SuspiciousOperation("Cannot create a Task for a foreign project.")
+
+        # Prevent duplicate names if the project was not set.
+        if self.owner and not self.project:
+            duplicates = Task.objects.filter(owner=self.owner, name=self.name, project__isnull=True)
+            # Prevent a task from finding itself as a duplicate.
+            if self.pk:
+                duplicates = duplicates.exclude(pk=self.pk)
+            # If a task was still found.. the current one is a duplicate.
+            if duplicates.exists():
+                raise ValidationError("A Task with this name and owner and without a project exists already.")
+
