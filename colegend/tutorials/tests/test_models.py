@@ -1,8 +1,6 @@
 from django.test import TestCase
 import factory
-from tags.models import Tag
 from tutorials.models import Tutorial, get_tutorial
-from users.tests.test_models import UserFactory
 
 __author__ = 'eraldo'
 
