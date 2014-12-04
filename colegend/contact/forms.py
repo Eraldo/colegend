@@ -32,7 +32,7 @@ class PublicContactForm(forms.Form):
     email = forms.EmailField()
     message = forms.CharField(label="Message", widget=forms.Textarea)
 
-    def send_email(self, user):
+    def send_email(self, user=None):  # User should be anonymous user.
         # send email using the self.cleaned_data dictionary
         email = self.cleaned_data["email"]
         subject = "[CoLegend] Message from '{}'".format(email)

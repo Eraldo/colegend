@@ -25,6 +25,8 @@ class ContactView(FormView):
         return super(ContactView, self).form_valid(form)
 
     def get_context_data(self, **kwargs):
+        # TODO: Remove hardcoded username from contact view.
+        # At the moment the user avatar needs this user.
         context = super(ContactView, self).get_context_data(**kwargs)
         user_model = get_user_model()
         try:
