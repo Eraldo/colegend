@@ -1,5 +1,6 @@
 from django.views.generic import TemplateView
 from lib.views import ActiveUserRequiredMixin, get_icon
+from tutorials.models import get_tutorial
 
 
 class AgendaView(ActiveUserRequiredMixin, TemplateView):
@@ -12,4 +13,5 @@ class AgendaView(ActiveUserRequiredMixin, TemplateView):
         context["top_projects"] = projects = user.projects.all()[:3]
         context["top_deadline_tasks"] = user.tasks.filter(deadline__isnull=False).order_by('deadline')[:4]
         context["single_tasks"] = user.tasks.filter(project__isnull=True)[:4]
+        context['tutorial'] = get_tutorial("Agenda")
         return context
