@@ -31,6 +31,7 @@ def menu(request):
         'mentor_extra': [
         ],
         'manager': [
+            MenuItem("Agenda", url="manager:agenda", icon="crosshairs"),
             MenuItem("Projects", url="projects:project_list", icon="sitemap"),
             MenuItem("Tasks", url="tasks:task_list", icon="check"),
             MenuItem("Tags", url="tags:tag_list", icon="tag"),

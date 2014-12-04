@@ -225,6 +225,7 @@ PROJECT_APPS = (
     'dojo',
     'challenges',
     # manager
+    'manager',
     'projects',
     'tasks',
     'tags',

@@ -19,6 +19,7 @@ urlpatterns = patterns('',
     url(r'^dojo/', include('dojo.urls', namespace="dojo")),
     url(r'^challenges/', include('challenges.urls', namespace="challenges")),
     # manager
+    url(r'^manager/', include('manager.urls', namespace="manager")),
     url(r'^projects/', include('projects.urls', namespace="projects")),
     url(r'^tasks/', include('tasks.urls', namespace="tasks")),
     url(r'^routines/', include('routines.urls', namespace="routines")),

@@ -1,0 +1,43 @@
+{% extends 'page.html' %}
+
+{% block page_title %}
+    Agenda
+{% endblock %}
+
+{% block up_url %}{% url "manager:agenda" %}{% endblock %}
+
+{% block page_content %}
+    <h2>Focus <small>Top 3 Projects and next steps.</small></h2>
+    <div class="well">
+        <div class="row">
+            {% for project in top_projects %}
+                <div class="col-md-4">
+                    <span class="lead">{% include "projects/_project_field.html" %}</span><br/>
+                    <i class="fa fa-angle-right"></i> {% include "tasks/_task_link.html" with task=project.tasks.first %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <h2>Upcoming <small>Top 4 tasks with a deadline.</small></h2>
+    <div class="well">
+        <div class="row">
+            {% for task in top_deadline_tasks %}
+                <div class="col-md-3">
+                    <span class="lead">{{ task.deadline }}</span><br/>
+                    {% include "tasks/_task_link.html" %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <h2>Other <small>Top 4 tasks without a project.</small></h2>
+    <div class="well">
+        <div class="row">
+            {% for task in single_tasks %}
+                <div class="col-md-3">
+                    {% include "tasks/_task_link.html" %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
