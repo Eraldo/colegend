@@ -23,14 +23,14 @@ class Routine(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, Taggable
     WEEKLY = "weekly"
     MONTHLY = "monthly"
     YEARLY = "yearly"
-    DEFAULT = DAILY
+    DEFAULT_TYPE = DAILY
     TYPES = (
         (DAILY, "daily"),
         (WEEKLY, "weekly"),
         (MONTHLY, "monthly"),
         (YEARLY, "yearly"),
     )
-    type = models.CharField(default=DEFAULT, max_length=50, choices=TYPES)
+    type = models.CharField(default=DEFAULT_TYPE, max_length=50, choices=TYPES)
 
     objects = RoutineQuerySet.as_manager()
 
