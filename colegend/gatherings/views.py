@@ -45,6 +45,8 @@ class GatheringsView(ActiveUserRequiredMixin, TemplateView):
             context['host'] = gathering.host
             # scheduled gatherings
             context['future_gatherings'] = Gathering.objects.filter(start__gt=gathering.start)
+            # virtual room
+            context['virtual_room_url'] = Gathering.LOCATION_DEFAULT
             # tutorial
             context['tutorial'] = get_tutorial("Gatherings")
         return context

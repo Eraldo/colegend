@@ -9,6 +9,8 @@
 {% block up_icon %}comments-o{% endblock %}
 
 {% block page_controls %}
+    <a href="{{ virtual_room_url }}" target="_blank" class="btn btn-default">
+                        Enter Virtual Room</a>
     {% if user.is_manager %}
         <a href="{% url "gatherings:gathering_list" %}" class="btn btn-warning pull-right">
             Manage</a>
@@ -44,6 +46,16 @@
                 {% empty %}
                     -- No future gatherings scheduled.<br>
                 {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="well well-sm text-center">
+                <h3>Virtual Room</h3>
+                Apart from scheduled gatherings, you can meet and hang around in here any time.<br>
+                <a href="{{ virtual_room_url }}" target="_blank" class="btn btn-default">»
+                        Enter</a>
             </div>
         </div>
     </div>
