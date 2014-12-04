@@ -10,8 +10,8 @@ class AgendaView(ActiveUserRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context["icon"] = get_icon("crosshairs")
         user = self.request.user
-        context["top_projects"] = projects = user.projects.all()[:3]
-        context["top_deadline_tasks"] = user.tasks.filter(deadline__isnull=False).order_by('deadline')[:4]
-        context["single_tasks"] = user.tasks.filter(project__isnull=True)[:4]
+        context["top_projects"] = user.projects.open()[:3]
+        context["top_deadline_tasks"] = user.tasks.open().filter(deadline__isnull=False).order_by('deadline')[:4]
+        context["single_tasks"] = user.tasks.open().filter(project__isnull=True)[:4]
         context['tutorial'] = get_tutorial("Agenda")
         return context
