@@ -18,25 +18,25 @@
 {% endblock %}
 
 {% block page_content %}
-    <div class="well">
-        <h2 class="page-navigation">
-            <a href="{{ newsblock.get_show_url }}" class="back-link">
-                <i class="fa fa-newspaper-o"></i>
-                </a>
-            {{ newsblock|default:"No news is good news." }}
-        </h2>
-
-        <p>{{ newsblock.content }}</p>
-        <a href="{% url "contact" %}" class="btn btn-primary">Feedback</a>
-        <a href="{% url "news:newsblock_list" %}" class="btn btn-default">News Archive</a>
-        {% if newsblock %}
-            <footer><cite class="small pull-right">— created
-                by {{ newsblock.owner }} on {{ newsblock.date }}</cite></footer>
-        {% endif %}
-    </div>
     {% if quote %}
         <div class="well well-sm">
             {% include "quotes/_quote.html" %}
         </div>
     {% endif %}
+    <div class="row">
+        <div class="col-md-6">
+            {% for newsblock in newsblocks %}
+                <div class="well">
+                    {% include "news/_newsblock.html" %}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-md-6">
+            {% for newsblock in sticky_newsblocks %}
+                <div class="well">
+                    {% include "news/_newsblock.html" %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

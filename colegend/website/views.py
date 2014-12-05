@@ -34,7 +34,9 @@ class HomeView(ActiveUserRequiredMixin, TemplateView):
         context = super(HomeView, self).get_context_data(**kwargs)
         quote = Quote.objects.daily_quote()
         context['quote'] = quote
-        context['newsblock'] = NewsBlock.objects.first()
+        number_of_newsblocks = 1
+        context['newsblocks'] = NewsBlock.objects.filter(sticky=False)[0:number_of_newsblocks]
+        context['sticky_newsblocks'] = NewsBlock.objects.filter(sticky=True)[0:number_of_newsblocks]
         context['tutorial'] = get_tutorial("Home")
         context["icon"] = get_icon("home")
         return context

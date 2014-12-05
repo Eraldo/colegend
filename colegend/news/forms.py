@@ -10,7 +10,7 @@ __author__ = 'eraldo'
 class NewsBlockForm(ModelForm):
     class Meta:
         model = NewsBlock
-        fields = ['name', 'content', 'date']
+        fields = ['name', 'content', 'date', 'sticky']
         widgets = {
             'content': MarkItUpWidget(),
         }
@@ -18,7 +18,8 @@ class NewsBlockForm(ModelForm):
     helper = FormHelper()
     helper.layout = Layout(
         Field('name', autofocus='True'),
-        Field('content', rows=20),
         Field('date'),
+        Field('sticky'),
+        Field('content', rows=20),
     )
     helper.add_input(Submit('save', 'Save'))

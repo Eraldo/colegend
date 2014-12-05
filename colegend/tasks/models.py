@@ -13,11 +13,7 @@ __author__ = 'eraldo'
 
 
 class TaskQuerySet(StatusQueryMixin, OwnedQueryMixin, QuerySet):
-    def open(self):
-        return self.filter(status__type=Status.OPEN)
-
-    def closed(self):
-        return self.filter(status__type=Status.CLOSED)
+    pass
 
 
 class Task(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):
