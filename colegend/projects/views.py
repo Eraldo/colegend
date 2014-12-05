@@ -1,4 +1,4 @@
-from lib.views import ActiveUserRequiredMixin, get_icon
+from lib.views import ActiveUserRequiredMixin
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
@@ -14,10 +14,10 @@ __author__ = 'eraldo'
 class ProjectMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
     model = Project
     form_class = ProjectForm
+    icon = "project"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["icon"] = get_icon("sitemap")
         return context
 
     def get_form(self, form_class):

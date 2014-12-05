@@ -16,6 +16,7 @@ __author__ = 'eraldo'
 class VisionMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
     model = Vision
     form_class = VisionForm
+    icon = "vision"
 
     def form_valid(self, form):
         try:

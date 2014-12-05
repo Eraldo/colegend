@@ -1,11 +1,12 @@
 {% extends "account/base.html" %}
 
+{% load icons %}
 {% load url from future %}
 {% load i18n %}
 {% load crispy_forms_tags %}
 
 {% block up_url %}#{% endblock %}
-{% block up_icon %}sign-in{% endblock %}
+{% block up_icon %}{% icon "signup" %}{% endblock %}
 
 {% block page_title %}{% trans "Sign Up Application" %}{% endblock %}
 

@@ -1,7 +1,9 @@
 {% extends 'form.html' %}
+
 {% block form_title %}Challenge{% endblock %}
+
 {% block up_url %}{% url "challenges:challenge_list" %}{% endblock %}
-{% block up_icon %}star{% endblock %}
+
 {% block page_content %}
     {{ form.media }}
     {{ block.super }}

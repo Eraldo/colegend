@@ -1,4 +1,4 @@
-from lib.views import ActiveUserRequiredMixin, get_icon
+from lib.views import ActiveUserRequiredMixin
 from django.core.exceptions import ValidationError
 from django.views.generic import DetailView, UpdateView, DeleteView, CreateView, ArchiveIndexView
 from journals.forms import DayEntryForm
@@ -12,10 +12,10 @@ __author__ = 'eraldo'
 class DayEntryMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
     model = DayEntry
     form_class = DayEntryForm
+    icon = "journal"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["icon"] = get_icon("book")
         return context
 
     def form_valid(self, form):

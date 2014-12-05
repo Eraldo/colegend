@@ -5,7 +5,6 @@
 {% endblock %}
 
 {% block up_url %}{% url "dojo:home" %}{% endblock %}
-{% block up_icon %}university{% endblock %}
 
 {% block page_controls %}
     {% if user.is_superuser or user == module.provider %}

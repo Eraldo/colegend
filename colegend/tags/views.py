@@ -1,4 +1,4 @@
-from lib.views import ActiveUserRequiredMixin, get_icon
+from lib.views import ActiveUserRequiredMixin
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
@@ -14,10 +14,10 @@ __author__ = 'eraldo'
 class TagMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
     model = Tag
     form_class = TagForm
+    icon = "tag"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["icon"] = get_icon("tag")
         return context
 
     def form_valid(self, form):

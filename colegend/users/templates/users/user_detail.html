@@ -5,7 +5,6 @@
 {% block page_title %}{{ object.username }}{% endblock %}
 
 {% block up_url %}{% url "users:detail" object %}{% endblock %}
-{% block up_icon %}user{% endblock %}
 
 {% block page_controls %}
     {% if object == request.user %}

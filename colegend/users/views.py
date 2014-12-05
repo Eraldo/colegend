@@ -1,9 +1,6 @@
-# Import the reverse lookup function
 from braces.views import LoginRequiredMixin
 from django.contrib import messages
-from django.core.urlresolvers import reverse, reverse_lazy
-
-# view imports
+from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.views.generic import DetailView, TemplateView
 from django.views.generic import RedirectView
@@ -11,7 +8,7 @@ from django.views.generic import UpdateView
 from django.views.generic import ListView
 
 # Only authenticated users can access views using this.
-from lib.views import ActiveUserRequiredMixin, ManagerRequiredMixin, get_icon
+from lib.views import ActiveUserRequiredMixin, ManagerRequiredMixin
 
 # Import the form from users/forms.py
 from .forms import UserForm, SettingsForm
@@ -21,21 +18,22 @@ from .models import User, Settings
 
 
 class UserMixin(ActiveUserRequiredMixin):
+    icon = "user"
+
     def get_queryset(self):
         return super(UserMixin, self).get_queryset().accepted()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["icon"] = get_icon("user")
         return context
 
 
 class UserInactiveView(LoginRequiredMixin, TemplateView):
     template_name = "users/inactive.html"
+    icon = "clock-o"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["icon"] = get_icon("clock-o")
         return context
 
     def get(self, request, *args, **kwargs):
@@ -61,6 +59,7 @@ class UserRedirectView(UserMixin, RedirectView):
 
 class UserUpdateView(UserMixin, UpdateView):
     form_class = UserForm
+    icon = "setting"
 
     # we already imported User in the view code above, remember?
     model = User
@@ -77,6 +76,7 @@ class UserUpdateView(UserMixin, UpdateView):
 
 class UserListView(UserMixin, ListView):
     model = User
+    icon = "usermanager"
     # These next two lines tell the view to index lookups by username
     slug_field = "username"
     slug_url_kwarg = "username"
@@ -85,10 +85,10 @@ class UserListView(UserMixin, ListView):
 class SettingsUpdateView(UserMixin, UpdateView):
     model = Settings
     form_class = SettingsForm
+    icon = "setting"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["icon"] = get_icon("wrench")
         return context
 
     def get_success_url(self):
@@ -101,13 +101,13 @@ class SettingsUpdateView(UserMixin, UpdateView):
 
 class UserManagerMixin():
     model = User
+    icon = "usermanager"
 
     def get_queryset(self):
         return super().get_queryset().pending()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["icon"] = get_icon("user-md")
         return context
 
 

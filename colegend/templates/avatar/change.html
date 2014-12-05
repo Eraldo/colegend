@@ -1,14 +1,9 @@
-{% extends "page.html" %}
+{% extends "avatar/base.html" %}
 {% load i18n avatar_tags %}
 {% load crispy_forms_tags %}
 {% load url from future %}
 
-{% block page_title %}
-    Avatar
-{% endblock %}
-
-{% block up_url %}{% url "users:settings" %}{% endblock %}
-{% block up_icon %}wrench{% endblock %}
+{#{% block up_url %}{% url "users:settings" %}{% endblock %}#}
 
 {% block page_content %}
     <div class="well">

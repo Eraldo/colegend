@@ -1,7 +1,7 @@
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import redirect
-from django.views.generic import TemplateView, CreateView, ListView, DetailView, UpdateView, DeleteView
-from lib.views import ActiveUserRequiredMixin, ManagerRequiredMixin, get_icon
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
+from lib.views import ActiveUserRequiredMixin, ManagerRequiredMixin
 from quotes.forms import QuoteForm
 from quotes.models import Quote
 from tutorials.models import get_tutorial
@@ -10,13 +10,13 @@ from tutorials.models import get_tutorial
 class QuoteMixin(ActiveUserRequiredMixin):
     model = Quote
     form_class = QuoteForm
+    icon = "quote"
 
     def get_queryset(self):
         return super().get_queryset().owned_by(self.request.user)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["icon"] = get_icon("quote-left")
         return context
 
 

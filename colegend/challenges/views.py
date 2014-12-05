@@ -4,7 +4,7 @@ from django.template.loader import render_to_string
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
 from challenges.forms import ChallengeForm
 from challenges.models import Challenge
-from lib.views import ActiveUserRequiredMixin, get_icon
+from lib.views import ActiveUserRequiredMixin
 from tutorials.models import get_tutorial
 
 __author__ = 'eraldo'
@@ -13,15 +13,11 @@ __author__ = 'eraldo'
 class ChallengeMixin(ActiveUserRequiredMixin):
     model = Challenge
     form_class = ChallengeForm
+    icon = "challenge"
 
     def get_queryset(self):
         qs = super(ChallengeMixin, self).get_queryset()
         return qs.filter(accepted=True)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["icon"] = get_icon("star")
-        return context
 
 
 class ChallengeListView(ChallengeMixin, ListView):

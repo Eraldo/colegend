@@ -2,7 +2,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
 from news.forms import NewsBlockForm
 from news.models import NewsBlock
-from lib.views import ManagerRequiredMixin, ActiveUserRequiredMixin, get_icon
+from lib.views import ManagerRequiredMixin, ActiveUserRequiredMixin
 
 __author__ = 'eraldo'
 
@@ -10,10 +10,10 @@ __author__ = 'eraldo'
 class NewsBlockMixin():
     model = NewsBlock
     form_class = NewsBlockForm
+    icon = "news"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["icon"] = get_icon("newspaper-o")
         return context
 
 

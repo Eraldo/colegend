@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load icons %}
 
 {% block head_links %}{{ block.super }}{% endblock %}
 {% block extra_head %}{{ block.super }}{% endblock %}
@@ -17,11 +18,13 @@
             <h1>
                 {% block up_link %}
                     <a href="{% block up_url %}javascript:history.go(-1){% endblock %}" class="back-link">
-                        {% if icon %}
-                            {{ icon }}
-                        {% else %}
-                            <i class="fa fa-{% block up_icon %}arrow-left{% endblock %}"></i>
-                        {% endif %}
+                        {% block up_icon %}
+                            {% if view.icon %}
+                                {% icon view.icon %}
+                            {% else %}
+                                {% icon "back" %}
+                            {% endif %}
+                        {% endblock %}
                     </a>
                 {% endblock %}
                 <div class="page-title">

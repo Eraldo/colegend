@@ -4,7 +4,7 @@ from django.template.loader import render_to_string
 from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView
 from dojo.forms import ModuleForm
 from dojo.models import Module
-from lib.views import ActiveUserRequiredMixin, get_icon
+from lib.views import ActiveUserRequiredMixin
 from tutorials.models import get_tutorial
 
 __author__ = 'eraldo'
@@ -13,10 +13,10 @@ __author__ = 'eraldo'
 class DojoMixin(ActiveUserRequiredMixin):
     model = Module
     form_class = ModuleForm
+    icon = "dojo"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["icon"] = get_icon("university")
         return context
 
 

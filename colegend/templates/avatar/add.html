@@ -1,4 +1,4 @@
-{% extends "page.html" %}
+{% extends "avatar/base.html" %}
 {% load i18n avatar_tags %}
 {% load url from future %}
 
@@ -6,8 +6,7 @@
     Avatar Upload
 {% endblock %}
 
-{% block up_url %}{% url "users:settings" %}{% endblock %}
-{% block up_icon %}wrench{% endblock %}
+{% block up_url %}{% url "avatar_change" %}{% endblock %}
 
 {% block page_content %}
     <div class="well">

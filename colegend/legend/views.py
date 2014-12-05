@@ -3,17 +3,14 @@ from django.contrib.auth import get_user_model
 # Create your views here.
 from django.views.generic import TemplateView
 from legend.models import Block
-from lib.views import ActiveUserRequiredMixin, get_icon
+from lib.views import ActiveUserRequiredMixin
 from tutorials.models import get_tutorial
 
 __author__ = 'eraldo'
 
 
 class LegendMixin(ActiveUserRequiredMixin):
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["icon"] = get_icon("paw")
-        return context
+    icon = "legend"
 
 
 class LegendView(LegendMixin, TemplateView):

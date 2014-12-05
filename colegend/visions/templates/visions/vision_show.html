@@ -5,10 +5,9 @@
 {% endblock %}
 
 {% block up_url %}{% url "visions:vision_list" %}{% endblock %}
-{% block up_icon %}eye{% endblock %}
 
 {% block page_controls %}
-    <a href="{{ vision.get_edit_url }}" class="btn btn-primary" role="button">Update</a>
+    <a href="{{ vision.get_edit_url }}" class="btn btn-primary" role="button">Edit</a>
     <a href="{{ vision.get_delete_url }}" class="btn btn-danger" role="button">Delete</a>
 {% endblock %}
 

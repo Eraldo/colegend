@@ -49,4 +49,41 @@ class OwnedItemsMixin:
 
 
 def get_icon(name):
+    icon_map = {
+        # views / models
+        "journal": "book",
+        "gathering": "comments-o",
+        "challenge": "star",
+        "dojo": "university",
+        "vision": "eye",
+        "agenda": "crosshairs",
+        "project": "sitemap",
+        "task": "check",
+        "tag": "tag",
+        "routine": "stack-overflow",
+        "habit": "link",
+        "legend": "paw",
+        "quote": "quote-left",
+        "contact": "envelope",
+        "about": "info-circle",
+        "feature": "road",
+        "home": "home",
+        "news": "newspaper-o",
+        "tutorial": "graduation-cap",
+        "profile": "user",
+        "setting": "wrench",
+        "usermanager": "user-md",
+        "backend": "database",
+        "test": "code",
+        "search": "search",
+        # controls
+        "back": "arrow-left",
+        "edit": "",
+        "delete": "trash",
+        # other
+        "sign-out": "sign-out",
+        "signup": "sign-in",
+    }
+    if name in icon_map:
+        name = icon_map.get(name)
     return mark_safe("""<i class="fa fa-{}"></i>""".format(name))

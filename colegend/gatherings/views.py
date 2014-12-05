@@ -1,7 +1,7 @@
 from django.core.urlresolvers import reverse_lazy
 from gatherings.forms import GatheringForm
 from lib.utilities import get_location_url
-from lib.views import ActiveUserRequiredMixin, ManagerRequiredMixin, get_icon
+from lib.views import ActiveUserRequiredMixin, ManagerRequiredMixin
 from django.utils import timezone
 from django.utils.timesince import timeuntil
 from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView, ListView
@@ -12,10 +12,10 @@ from tutorials.models import get_tutorial
 class GatheringMixin():
     model = Gathering
     form_class = GatheringForm
+    icon = "gathering"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["icon"] = get_icon("comments-o")
         return context
 
 
