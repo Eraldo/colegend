@@ -36,6 +36,9 @@
     </div>
     <div id="footer">
         {% block footer %}
+            <div id="footer-content">
+                <small>Copyright © 2014 - {% now "Y" %} CoLegend | <a href="{% url "contact" %}" class="text-muted" target="_blank">Impressum</a> | Designed by <a href="http://www.eraldo.org" class="text-muted" target="_blank">Eraldo Webdesign</a></small>
+            </div>
         {% endblock %}
     </div>
     {% block body_scripts %}

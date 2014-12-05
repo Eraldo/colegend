@@ -40,31 +40,40 @@ body.body {
     margin-top: 20px;
     margin-bottom: 4px;
 }
+
 .page-navigation, .page-navigation h1 {
     display: inline;
 }
+
 .page-navigation .back-link {
     color: #777;
     text-decoration: none;
 }
+
 .page-title, .page-title h1 {
     display: inline;
 }
+
 .page-extras {
     display: inline;
 }
+
 .page-status-none {
     color: #777;
 }
+
 .page-status-ok {
     color: green;
 }
+
 .page-status-warning {
     color: orange;
 }
+
 .page-status-danger {
     color: red;
 }
+
 /* end page */
 
 /* messages */
@@ -102,6 +111,29 @@ div.avatar img {
 }
 
 /* end avatar */
+
+/* footer */
+#footer:hover div#footer-content {
+    visibility: visible;
+    /* for animation (transition) */
+    opacity: 1;
+    transition-delay: 0s;
+
+}
+
+#footer-content {
+    border-top: solid 1px #e7e7e7;
+    text-align: center;
+    color: #777;
+    margin-top: 10px;
+    /* hidden by default */
+    visibility: hidden;
+    /* for animation (transition) */
+    opacity: 0;
+    transition: visibility 0s linear 0.5s, opacity 0.5s linear;
+}
+
+/* end footer */
 
 /* django-cirspy-forms */
 .asteriskField {
