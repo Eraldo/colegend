@@ -15,6 +15,9 @@
     <a href="{% url "projects:project_new" %}" class="btn btn-default" role="button">New Project</a>
     <a href="{% url "tasks:task_new" %}" class="btn btn-default" role="button">New Task</a>
     <a href="{% url "contact" %}" class="btn btn-default" role="button">New Message</a>
+    {% if user.is_manager %}
+        <a href="{% url "news:newsblock_new" %}" class="btn btn-warning pull-right">New News</a>
+    {% endif %}
 {% endblock %}
 
 {% block page_content %}
