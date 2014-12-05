@@ -42,12 +42,12 @@ class HomeView(ActiveUserRequiredMixin, TemplateView):
         return context
 
 
-class SearchResultsView(ActiveUserRequiredMixin, TemplateView):
+class SearchView(ActiveUserRequiredMixin, TemplateView):
     template_name = 'website/search.html'
     icon = "search"
 
     def get_context_data(self, *args, **kwargs):
-        context = super(SearchResultsView, self).get_context_data(*args, **kwargs)
+        context = super().get_context_data(*args, **kwargs)
         query = self.request.GET.get("q")
         if query:
             context["projects"] = Project.objects.filter(name__icontains=query)
@@ -56,6 +56,7 @@ class SearchResultsView(ActiveUserRequiredMixin, TemplateView):
             context["habits"] = Habit.objects.filter(name__icontains=query)
             context["tags"] = Tag.objects.filter(name__icontains=query)
         context["status_options"] = Status.objects.all()
+        context['tutorial'] = get_tutorial("Search")
         return context
 
     def post(self, request, *args, **kwargs):

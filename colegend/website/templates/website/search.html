@@ -4,6 +4,12 @@
     Search
 {% endblock %}
 
+{% block page_controls %}
+    <form action="{% url 'search' %}" method="GET">
+        <input type="text" name="q" class="form-control" placeholder="search..." value="{{ request.GET.q }}">
+    </form>
+{% endblock %}
+
 {% block page_content %}
     <h2>projects</h2>
     {% include 'projects/_project_list.html' %}

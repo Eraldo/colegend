@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-from website.views import TestView, SearchResultsView, AboutView, HomeView
+from website.views import TestView, SearchView, AboutView, HomeView
 
 __author__ = 'eraldo'
 
@@ -12,7 +12,7 @@ urlpatterns = patterns(
         HomeView.as_view(),
         name='home'),
     url(r'^search/$',
-        SearchResultsView.as_view(),
+        SearchView.as_view(),
         name='search'),
     url(r'^test/$',
         TestView.as_view(),
