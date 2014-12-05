@@ -20,7 +20,8 @@
                 {% endfor %}
 
                 <li class="dropdown">
-                    <a id="mentor-menu" href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-rocket"></i> Mentor</a>
+                    <a id="mentor-menu" href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                            class="fa fa-rocket"></i> Mentor</a>
                     <ul class="dropdown-menu">
                         {% for menu_item in menu_items.mentor %}
                             {% include 'website/_menu_item.html' %}
@@ -37,7 +38,8 @@
                 </li>
 
                 <li class="dropdown">
-                    <a id="manager-menu" href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-briefcase"></i>
+                    <a id="manager-menu" href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                            class="fa fa-briefcase"></i>
                         Manager</a>
                     <ul class="dropdown-menu">
                         {% for menu_item in menu_items.manager %}
@@ -55,7 +57,8 @@
                 </li>
 
                 <li class="dropdown">
-                    <a id="motivator-menu" href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-smile-o"></i>
+                    <a id="motivator-menu" href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                            class="fa fa-smile-o"></i>
                         Motivator</a>
                     <ul class="dropdown-menu">
                         {% for menu_item in menu_items.motivator %}
@@ -73,7 +76,8 @@
                 </li>
 
                 <li class="dropdown">
-                    <a id="operator-menu" href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-desktop"></i>
+                    <a id="operator-menu" href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                            class="fa fa-desktop"></i>
                         Operator</a>
                     <ul class="dropdown-menu">
                         {% for menu_item in menu_items.operator %}
@@ -126,7 +130,7 @@
             </ul>
             <div id="global-search">
                 <form action="{% url 'search' %}" method="GET" class="navbar-form navbar-right">
-                    <input type="text" name="q" class="form-control" placeholder="search...">
+                    <input type="text" name="q" class="form-control" placeholder="search..." style="max-width: 160px;">
                 </form>
             </div>
         </div>
