@@ -78,8 +78,10 @@ def get_icon(name):
         "search": "search",
         # controls
         "back": "arrow-left",
-        "edit": "",
+        "new": "plus",
+        "edit": "pencil",
         "delete": "trash",
+        "cancel": "times",
         # other
         "sign-out": "sign-out",
         "signup": "sign-in",
