@@ -1,8 +1,9 @@
 {% extends 'page.html' %}
+{% load icons %}
 
 {% block page_title %}{{ dayentry.date }}{% endblock %}
 {% block page_title_extras %}
-    <small>@{{ dayentry.location|default:"?" }}</small>
+    <small>{% icon "location" %} {{ dayentry.location|default:"?" }}</small>
 {% endblock %}
 
 {% block up_url %}{% url "journals:dayentry_list" %}{% endblock %}

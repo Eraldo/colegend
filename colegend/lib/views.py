@@ -85,6 +85,7 @@ def get_icon(name):
         # other
         "sign-out": "sign-out",
         "signup": "sign-in",
+        "location": "map-marker",
     }
     if name in icon_map:
         name = icon_map.get(name)
