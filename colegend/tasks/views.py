@@ -6,7 +6,6 @@ from lib.views import OwnedItemsMixin
 from statuses.utils import StatusFilterMixin
 from tasks.forms import TaskForm
 from tasks.models import Task
-from tutorials.models import get_tutorial
 
 __author__ = 'eraldo'
 
@@ -15,6 +14,7 @@ class TaskMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
     model = Task
     form_class = TaskForm
     icon = "task"
+    tutorial = "Tasks"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -43,11 +43,6 @@ class TaskListView(StatusFilterMixin, TaskMixin, ListView):
     def get_queryset(self):
         queryset = super(TaskListView, self).get_queryset()
         return self.filter_status(queryset)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['tutorial'] = get_tutorial("Tasks")
-        return context
 
 
 class TaskNewView(TaskMixin, CreateView):

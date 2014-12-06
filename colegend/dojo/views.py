@@ -5,7 +5,6 @@ from django.views.generic import TemplateView, CreateView, DetailView, UpdateVie
 from dojo.forms import ModuleForm
 from dojo.models import Module
 from lib.views import ActiveUserRequiredMixin
-from tutorials.models import get_tutorial
 
 __author__ = 'eraldo'
 
@@ -14,6 +13,7 @@ class DojoMixin(ActiveUserRequiredMixin):
     model = Module
     form_class = ModuleForm
     icon = "dojo"
+    tutorial = "Dojo"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -27,7 +27,6 @@ class DojoView(DojoMixin, TemplateView):
         context = super(DojoView, self).get_context_data(**kwargs)
         context['modules'] = Module.objects.filter(accepted=True)
         context["contribution_counter"] = Module.objects.filter(provider=self.request.user).count()
-        context["tutorial"] = get_tutorial("Dojo")
         return context
 
 

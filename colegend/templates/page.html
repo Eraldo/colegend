@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load icons %}
+{% load tutorials %}
 
 {% block head_links %}{{ block.super }}{% endblock %}
 {% block extra_head %}{{ block.super }}{% endblock %}
@@ -9,8 +10,8 @@
     <div class="page-head">
         <div class="tutorial pull-right">
             {% block page_tutorial %}
-                {% if tutorial %}
-                    <a href="{{ tutorial.get_show_url }}"><i class="fa fa-question-circle fa-3x"></i></a>
+                {% if view.tutorial %}
+                    {% tutorial_link view.tutorial %}
                 {% endif %}
             {% endblock %}
         </div>

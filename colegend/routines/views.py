@@ -5,7 +5,6 @@ from django.views.generic import DetailView, View, ListView, CreateView, UpdateV
 from lib.views import OwnedItemsMixin
 from routines.forms import RoutineForm
 from routines.models import Routine
-from tutorials.models import get_tutorial
 
 __author__ = 'eraldo'
 
@@ -15,6 +14,7 @@ class RoutineMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
     form_class = RoutineForm
     fields = ['name', 'description', 'type', 'tags']
     icon = "routine"
+    tutorial = "Routines"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -41,14 +41,7 @@ class RoutineCheckView(View):
 
 
 class RoutineListView(RoutineMixin, ListView):
-    def get_queryset(self):
-        queryset = super(RoutineListView, self).get_queryset()
-        return queryset
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['tutorial'] = get_tutorial("Routines")
-        return context
+    pass
 
 
 class RoutineNewView(RoutineMixin, CreateView):

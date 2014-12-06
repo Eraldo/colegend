@@ -4,7 +4,6 @@ from django.views.generic import DetailView, UpdateView, DeleteView, CreateView,
 from journals.forms import DayEntryForm
 from journals.models import DayEntry
 from lib.views import OwnedItemsMixin
-from tutorials.models import get_tutorial
 
 __author__ = 'eraldo'
 
@@ -13,6 +12,7 @@ class DayEntryMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
     model = DayEntry
     form_class = DayEntryForm
     icon = "journal"
+    tutorial = "Journal"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -37,13 +37,10 @@ class DayEntryListView(DayEntryMixin, ArchiveIndexView):
         context = super(DayEntryListView, self).get_context_data(**kwargs)
         context['counter'] = self.get_queryset().count()
         context['streak'] = DayEntry.objects.streak_for(self.request.user)
-        context['tutorial'] = get_tutorial(name="Journal")
         return context
 
 
 class DayEntryNewView(DayEntryMixin, CreateView):
-    # success_url = reverse_lazy('tags:tag_list')
-
     def form_valid(self, form):
         user = self.request.user
         form.instance.owner = user

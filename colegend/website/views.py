@@ -12,7 +12,6 @@ from routines.models import Routine
 from statuses.models import Status
 from tags.models import Tag
 from tasks.models import Task
-from tutorials.models import get_tutorial
 
 __author__ = 'eraldo'
 
@@ -30,6 +29,7 @@ class HomeView(ActiveUserRequiredMixin, TemplateView):
     template_name = "website/home.html"
     login_url = reverse_lazy('about')
     icon = "home"
+    tutorial = "Home"
 
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
@@ -38,13 +38,13 @@ class HomeView(ActiveUserRequiredMixin, TemplateView):
         number_of_newsblocks = 1
         context['newsblocks'] = NewsBlock.objects.filter(sticky=False)[0:number_of_newsblocks]
         context['sticky_newsblocks'] = NewsBlock.objects.filter(sticky=True)[0:number_of_newsblocks]
-        context['tutorial'] = get_tutorial("Home")
         return context
 
 
 class SearchView(ActiveUserRequiredMixin, TemplateView):
     template_name = 'website/search.html'
     icon = "search"
+    tutorial = "Search"
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -56,7 +56,6 @@ class SearchView(ActiveUserRequiredMixin, TemplateView):
             context["habits"] = Habit.objects.filter(name__icontains=query)
             context["tags"] = Tag.objects.filter(name__icontains=query)
         context["status_options"] = Status.objects.all()
-        context['tutorial'] = get_tutorial("Search")
         return context
 
     def post(self, request, *args, **kwargs):

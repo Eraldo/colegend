@@ -5,8 +5,6 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView, D
 from lib.views import OwnedItemsMixin
 from tags.forms import TagForm
 from tags.models import Tag
-from tutorials.models import get_tutorial
-
 
 __author__ = 'eraldo'
 
@@ -15,6 +13,7 @@ class TagMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
     model = Tag
     form_class = TagForm
     icon = "tag"
+    tutorial = "Tags"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -30,10 +29,7 @@ class TagMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
 
 
 class TagListView(TagMixin, ListView):
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['tutorial'] = get_tutorial("Tags")
-        return context
+    pass
 
 
 class TagNewView(TagMixin, CreateView):

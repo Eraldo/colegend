@@ -4,13 +4,13 @@ from django.views.generic import CreateView, ListView, DetailView, UpdateView, D
 from lib.views import ActiveUserRequiredMixin, ManagerRequiredMixin
 from quotes.forms import QuoteForm
 from quotes.models import Quote
-from tutorials.models import get_tutorial
 
 
 class QuoteMixin(ActiveUserRequiredMixin):
     model = Quote
     form_class = QuoteForm
     icon = "quote"
+    tutorial = "Quotes"
 
     def get_queryset(self):
         return super().get_queryset().owned_by(self.request.user)
@@ -37,7 +37,6 @@ class QuoteListView(QuoteMixin, ListView):
         context['pending'] = quotes.pending()
         context['contribution_counter'] = quotes.count()
         context['random_quote'] = Quote.objects.accepted().random()
-        context['tutorial'] = get_tutorial("Quotes")
         return context
 
 

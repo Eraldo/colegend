@@ -6,20 +6,16 @@ from django.utils import timezone
 from django.utils.timesince import timeuntil
 from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView, ListView
 from gatherings.models import Gathering
-from tutorials.models import get_tutorial
 
 
 class GatheringMixin():
     model = Gathering
     form_class = GatheringForm
     icon = "gathering"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
+    tutorial = "Gatherings"
 
 
-class GatheringsView(ActiveUserRequiredMixin, TemplateView):
+class GatheringsView(ActiveUserRequiredMixin, GatheringMixin, TemplateView):
     template_name = "gatherings/gatherings.html"
 
     def get_context_data(self, **kwargs):
@@ -47,8 +43,6 @@ class GatheringsView(ActiveUserRequiredMixin, TemplateView):
             context['future_gatherings'] = Gathering.objects.filter(start__gt=gathering.start)
             # virtual room
             context['virtual_room_url'] = Gathering.LOCATION_DEFAULT
-            # tutorial
-            context['tutorial'] = get_tutorial("Gatherings")
         return context
 
 
