@@ -82,10 +82,14 @@ def get_icon(name):
         "edit": "pencil",
         "delete": "trash",
         "cancel": "times",
+        # fields
+        "location": "map-marker",
+        "date": "calendar",
+        "deadline": "calendar-o",
+        "description": "file-text-o",
         # other
         "sign-out": "sign-out",
         "signup": "sign-in",
-        "location": "map-marker",
     }
     if name in icon_map:
         name = icon_map.get(name)

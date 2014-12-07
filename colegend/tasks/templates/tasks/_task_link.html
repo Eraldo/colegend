@@ -1,1 +1,3 @@
-<a href="{{ task.get_show_url }}">{{ task }}</a>
+{% load icons %}
+
+{% icon "task" %} <a href="{{ task.get_show_url }}">{{ task }}</a>

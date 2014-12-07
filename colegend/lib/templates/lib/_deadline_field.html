@@ -1,3 +1,6 @@
+{% load icons %}
+
+
 <div class="deadline-field inline">
-    <i class="fa fa-calendar-o"></i> {{ deadline }}
+    {% icon "deadline" %} {{ deadline|default:"" }}
 </div>

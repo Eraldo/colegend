@@ -1,3 +1,5 @@
+{% load icons %}
+
 <div class="project-field inline">
-    <a href="{{ project.get_show_url }}">{{ project|default:"-" }}</a>
+    {% icon "project" %} <a href="{{ project.get_show_url }}">{{ project|default:"" }}</a>
 </div>

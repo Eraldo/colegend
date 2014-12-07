@@ -13,7 +13,7 @@
             {% for project in top_projects %}
                 <div class="col-md-4">
                     <span class="lead">{% include "projects/_project_field.html" %}</span><br/>
-                    <i class="fa fa-angle-right"></i> {% include "tasks/_task_link.html" with task=project.tasks.first %}
+                    {% include "tasks/_task_link.html" with task=project.tasks.first %}
                 </div>
             {% endfor %}
         </div>

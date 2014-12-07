@@ -1,3 +1,5 @@
+{% load icons %}
+
 <div class="date-field inline">
-    <i class="fa fa-calendar"></i> {{ date }}
+    {% icon "date" %} {{ date|default:"" }}
 </div>

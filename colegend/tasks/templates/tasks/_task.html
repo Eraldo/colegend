@@ -1,16 +1,20 @@
 <div class="task well well-sm">
-    <b>{% include "tasks/_task_link.html" %}</b>
-    <br/>
+    <div class="item-controls pull-right">
+        <a href="{{ task.get_edit_url }}" class="btn btn-primary btn-xs" role="button">Edit</a>
+        <a href="{{ task.get_delete_url }}" class="btn btn-danger btn-xs" role="button">Delete</a>
+    </div>
+    <div class="">
+        <b>{% include "tasks/_task_link.html" %}</b>
+        {% include "tags/_tags_field.html" with tags=task.tags.all %}
+    </div>
+    {# TODO: refactor to use bootstrap rows   #}
+    <div style="height: 5px;"></div>
     {% include "status/_status_field.html" with status=task.status %}
     {% include "lib/_priority_field.html" with priority=task.priority %}
-    {% include "tags/_tags_field.html" with tags=task.tags.all %}
-    <br/>
-    {% include "projects/_project_field.html" with project=task.project %}
-    <br/>
+    <div class="pull-right" style="margin-right: 2px;">
+        {% include "projects/_project_field.html" with project=task.project %}
+        {% include "lib/_date_field.html" with date=task.date %}
+        {% include "lib/_deadline_field.html" with deadline=task.deadline %}
+    </div>
     {% include "lib/_description_field.html" with description=task.description %}
-    {% include "lib/_date_field.html" with date=task.date %}
-    {% include "lib/_deadline_field.html" with deadline=task.deadline %}
-    <br/>
-    <a href="{{ task.get_edit_url }}" class="btn btn-primary btn-sm" role="button">Edit</a>
-    <a href="{{ task.get_delete_url }}" class="btn btn-danger btn-sm" role="button">Delete</a>
 </div>

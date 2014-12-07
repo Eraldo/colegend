@@ -1,3 +1,5 @@
+{% load icons %}
+
 <div class="tags-field inline">
-    {% for tag in tags %}{% include "tags/_tag.html" %}{% endfor %}
+    {% icon "tag" %}{% for tag in tags %}{% include "tags/_tag.html" %}{% endfor %}
 </div>
