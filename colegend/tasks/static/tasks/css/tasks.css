@@ -1,5 +1,6 @@
 /* tasks */
 .task.well {
     border-left: solid thick #00b3ee;
+    margin-bottom: 10px;
 }
 /* end tasks */
