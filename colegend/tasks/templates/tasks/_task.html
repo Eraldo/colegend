@@ -1,7 +1,9 @@
+{% load icons %}
+
 <div class="task well well-sm">
     <div class="item-controls pull-right">
-        <a href="{{ task.get_edit_url }}" class="btn btn-primary btn-xs" role="button">Edit</a>
-        <a href="{{ task.get_delete_url }}" class="btn btn-danger btn-xs" role="button">Delete</a>
+        <a href="{{ task.get_edit_url }}" class="btn btn-primary btn-xs" role="button">{% icon "edit" %}<span class="sr-only"> Edit</span></a>
+        <a href="{{ task.get_delete_url }}" class="btn btn-danger btn-xs" role="button">{% icon "delete" %}<span class="sr-only"> Delete</span></a>
     </div>
     <div class="">
         <b>{% include "tasks/_task_link.html" %}</b>
