@@ -1,5 +1,5 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Field
+from crispy_forms.layout import Submit, Layout, Field, Div
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm
 from gatherings.models import Gathering
@@ -14,8 +14,11 @@ class GatheringForm(ModelForm):
 
     helper = FormHelper()
     helper.layout = Layout(
-        Field('start'),
-        Field('end'),
+        Div(
+            Field('start', wrapper_class="col-md-6"),
+            Field('end', wrapper_class="col-md-6"),
+            css_class="row",
+        ),
         Field('location'),
         Field('online'),
     )

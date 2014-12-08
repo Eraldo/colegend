@@ -1,5 +1,5 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Field
+from crispy_forms.layout import Submit, Layout, Field, Div
 from django.forms import ModelForm
 from markitup.widgets import MarkItUpWidget
 from projects.models import Project
@@ -19,8 +19,11 @@ class ProjectForm(ModelForm):
     helper.layout = Layout(
         Field('name', autofocus='True'),
         Field('description'),
-        Field('status'),
-        Field('priority'),
-        Field('deadline'),
+        Div(
+            Field('status', wrapper_class="col-md-4"),
+            Field('priority', wrapper_class="col-md-4"),
+            Field('deadline', wrapper_class="col-md-4"),
+            css_class="row",
+        ),
     )
     helper.add_input(Submit('save', 'Save'))

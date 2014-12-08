@@ -1,5 +1,5 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Field
+from crispy_forms.layout import Submit, Layout, Field, Div
 from django.forms import ModelForm
 from markitup.widgets import MarkItUpWidget
 from journals.models import DayEntry
@@ -17,9 +17,12 @@ class DayEntryForm(ModelForm):
 
     helper = FormHelper()
     helper.layout = Layout(
-        Field('date'),
-        Field('location'),
-        Field('focus'),
-        Field('content', autofocus='True', rows="20"),
+        Div(
+            Field('date', wrapper_class="col-md-6"),
+            Field('location', wrapper_class="col-md-6"),
+            css_class="row",
+        ),
+        Field('focus', autofocus='True'),
+        Field('content', rows="20"),
     )
     helper.add_input(Submit('save', 'Save'))
