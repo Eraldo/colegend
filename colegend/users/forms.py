@@ -1,5 +1,5 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, HTML, Field, Submit
+from crispy_forms.layout import Layout, Fieldset, HTML, Field, Submit, Div
 from django.contrib.auth.forms import UserCreationForm as AuthUserCreationForm, UserChangeForm as AuthUserChangeForm
 from django.core.urlresolvers import reverse_lazy
 from floppyforms.__future__.models import ModelForm
@@ -125,22 +125,42 @@ class SignUpApplicationForm(ModelForm):
         ),
         Fieldset(
             "Contact",
-            "first_name",
-            "last_name",
-            "gender",
-            "birthday",
-            "email",
-            Field("phone_number", pattern=PhoneValidator.regex, title=PhoneValidator.message),
-            "street",
-            "postal_code",
-            "city",
-            "country",
+            Div(
+                Field("first_name", wrapper_class="col-md-6"),
+                Field("last_name", wrapper_class="col-md-6"),
+                css_class="row",
+            ),
+            Div(
+                Field("gender", wrapper_class="col-md-6"),
+                Field("birthday", wrapper_class="col-md-6"),
+                css_class="row",
+            ),
+            Div(
+                Field("email", wrapper_class="col-md-6"),
+                Field("phone_number", pattern=PhoneValidator.regex, title=PhoneValidator.message, wrapper_class="col-md-6"),
+                css_class="row",
+            ),
+            Div(
+                Field("street", wrapper_class="col-md-6"),
+                Field("postal_code", wrapper_class="col-md-2"),
+                Field("city", wrapper_class="col-md-2"),
+                Field("country", wrapper_class="col-md-2"),
+                css_class="row",
+            ),
+            Div(
+                Field("", wrapper_class="col-md-6"),
+                css_class="row",
+            ),
+            Div(
+                Field("", wrapper_class="col-md-6"),
+            ),
         ),
         Fieldset(
             "{% if form.fields.password1 %}Account{% endif %}",
-            "password1",
-            "password2",
-            "confirmation_key"
+            Field("password1", wrapper_class="col-md-6"),
+            Field("password2", wrapper_class="col-md-6"),
+            "confirmation_key",
+            css_class="row",
         ),
         HTML(
             """<hr>If you are happy with your answers..<br>
