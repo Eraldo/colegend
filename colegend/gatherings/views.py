@@ -42,7 +42,7 @@ class GatheringsView(ActiveUserRequiredMixin, GatheringMixin, TemplateView):
             # scheduled gatherings
             context['future_gatherings'] = Gathering.objects.filter(start__gt=gathering.start)
             # virtual room
-            context['virtual_room_url'] = Gathering.LOCATION_DEFAULT
+        context['virtual_room_url'] = Gathering.LOCATION_DEFAULT
         return context
 
 
