@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 from gatherings.views import GatheringsView, GatheringCreateView, GatheringEditView, GatheringDeleteView, \
-    GatheringListView
+    GatheringListView, GatheringRoomView
 
 __author__ = 'eraldo'
 
@@ -26,4 +26,8 @@ urlpatterns = patterns(
         GatheringDeleteView.as_view(),
         name='gathering_delete'),
 
+    # ex: ../room/
+    url(r'^room/$',
+        GatheringRoomView.as_view(),
+        name='room'),
 )

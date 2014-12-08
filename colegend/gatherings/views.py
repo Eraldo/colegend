@@ -1,10 +1,10 @@
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse_lazy, reverse
 from gatherings.forms import GatheringForm
 from lib.utilities import get_location_url
 from lib.views import ActiveUserRequiredMixin, ManagerRequiredMixin
 from django.utils import timezone
 from django.utils.timesince import timeuntil
-from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView, ListView
+from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView, ListView, RedirectView
 from gatherings.models import Gathering
 
 
@@ -42,7 +42,7 @@ class GatheringsView(ActiveUserRequiredMixin, GatheringMixin, TemplateView):
             # scheduled gatherings
             context['future_gatherings'] = Gathering.objects.filter(start__gt=gathering.start)
             # virtual room
-        context['virtual_room_url'] = Gathering.LOCATION_DEFAULT
+        context['virtual_room_url'] = reverse("gatherings:room")
         return context
 
 
@@ -81,3 +81,7 @@ class GatheringDeleteView(ManagerRequiredMixin, GatheringMixin, DeleteView):
     template_name = "confirm_delete.html"
     success_url = reverse_lazy('gatherings:gathering_list')
 
+
+class GatheringRoomView(ActiveUserRequiredMixin, RedirectView):
+    permanent = False
+    url = "https://plus.google.com/hangouts/_/g3ci4r3boo5tkipdx4kzpilrfya"

@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.db import models
 from django.utils import timezone
 from lib.models import AutoUrlMixin
@@ -45,6 +46,7 @@ class Gathering(AutoUrlMixin, models.Model):
     host = models.ForeignKey(settings.AUTH_USER_MODEL)
 
     objects = GatheringQuerySet.as_manager()
+
 
     class Meta:
         ordering = ["-start"]
