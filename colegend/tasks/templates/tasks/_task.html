@@ -5,11 +5,10 @@
         <a href="{{ task.get_edit_url }}" class="btn btn-primary btn-xs" role="button">{% icon "edit" %}<span class="sr-only"> Edit</span></a>
         <a href="{{ task.get_delete_url }}" class="btn btn-danger btn-xs" role="button">{% icon "delete" %}<span class="sr-only"> Delete</span></a>
     </div>
-    <div class="">
+    <div class="task-line-1">
         <b>{% include "tasks/_task_link.html" %}</b>
         {% include "tags/_tags_field.html" with tags=task.tags.all %}
     </div>
-    {# TODO: refactor to use bootstrap rows   #}
     <div style="height: 5px;"></div>
     {% include "status/_status_field.html" with status=task.status %}
     {% include "lib/_priority_field.html" with priority=task.priority %}
