@@ -11,7 +11,7 @@
 
 {% block page_controls %}
     <a href="{% url "manager:agenda" %}" class="btn btn-default" role="button" data-toggle="tooltip" title="View Agenda" data-placement="bottom">{% icon "agenda" %}</a>
-    <a href="{% url "journals:dayentry_new" %}" class="btn btn-default" role="button" data-toggle="tooltip" title="Update/New Journal Entry" data-placement="bottom">{% icon "new" %} {% icon "journal" %}</a>
+    <a href="{% url "journals:dayentry_continue" %}" class="btn btn-default" role="button" data-toggle="tooltip" title="Current Journal Entry" data-placement="bottom">{% icon "journal" %}</a>
     <a href="{% url "projects:project_new" %}" class="btn btn-default" role="button" data-toggle="tooltip" title="New Project" data-placement="bottom">{% icon "new" %} {% icon "project" %}</a>
     <a href="{% url "tasks:task_new" %}" class="btn btn-default" role="button" data-toggle="tooltip" title="New Task" data-placement="bottom">{% icon "new" %} {% icon "task" %}</a>
     <a href="{% url "contact" %}" class="btn btn-default" role="button" data-toggle="tooltip" title="New Message" data-placement="bottom">{% icon "new" %} {% icon "contact" %}</a>

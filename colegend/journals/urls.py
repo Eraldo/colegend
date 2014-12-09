@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, url
-from journals.views import DayEntryShowView, DayEntryNewView, DayEntryEditView, DayEntryDeleteView, DayEntryListView
+from journals.views import DayEntryShowView, DayEntryNewView, DayEntryEditView, DayEntryDeleteView, DayEntryListView, \
+    DayEntryContinueView
 
 __author__ = 'eraldo'
 
@@ -30,4 +31,8 @@ urlpatterns = patterns(
         DayEntryDeleteView.as_view(),
         name='dayentry_delete'),
 
+    # ex: ../continue/
+    url(r'^continue/$',
+        DayEntryContinueView.as_view(),
+        name='dayentry_continue'),
 )

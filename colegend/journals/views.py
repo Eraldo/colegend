@@ -1,6 +1,8 @@
+from django.core.urlresolvers import reverse
+from django.utils import timezone
 from lib.views import ActiveUserRequiredMixin
 from django.core.exceptions import ValidationError
-from django.views.generic import DetailView, UpdateView, DeleteView, CreateView, ArchiveIndexView
+from django.views.generic import DetailView, UpdateView, DeleteView, CreateView, ArchiveIndexView, RedirectView
 from journals.forms import DayEntryForm
 from journals.models import DayEntry
 from lib.views import OwnedItemsMixin
@@ -71,3 +73,14 @@ class DayEntryEditView(DayEntryMixin, UpdateView):
 class DayEntryDeleteView(DayEntryMixin, DeleteView):
     template_name = "confirm_delete.html"
 
+
+class DayEntryContinueView(DayEntryMixin, RedirectView):
+    permanent = False
+
+    def get_redirect_url(self):
+        user = self.request.user
+        current_entry = user.dayentry_set.filter(date=timezone.now().date()).first()
+        if current_entry:
+            return current_entry.get_show_url()
+        else:
+            return reverse('journals:dayentry_new')
