@@ -1,4 +1,5 @@
 {% extends 'page.html' %}
+{% load icons %}
 
 {% block page_title %}
     Challenges
@@ -11,7 +12,7 @@
 {% endblock %}
 
 {% block page_controls %}
-        <a href="{% url "challenges:challenge_new" %}" class="btn btn-default">New</a>
+        <a href="{% url "challenges:challenge_new" %}" class="btn btn-default">{% icon "new" %}</a>
 {% endblock %}
 
 {% block page_content %}

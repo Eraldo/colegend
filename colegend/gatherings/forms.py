@@ -1,8 +1,9 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Field, Div
+from crispy_forms.layout import Layout, Field, Div
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm
 from gatherings.models import Gathering
+from lib.crispy import SaveButton, CancelButton
 
 __author__ = 'eraldo'
 
@@ -21,8 +22,9 @@ class GatheringForm(ModelForm):
         ),
         Field('location'),
         Field('online'),
+        SaveButton(),
+        CancelButton(),
     )
-    helper.add_input(Submit('save', 'Save'))
 
     def clean_end(self):
         """

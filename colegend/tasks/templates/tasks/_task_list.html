@@ -1,7 +1,9 @@
+{% load icons %}
+
 <div class="task-list">
     <div class="list-controls container-fluid well well-sm">
         <a href="{% url "tasks:task_new" %}{% if project %}?project={{ project.pk }}{% endif %}" class="btn btn-default"
-           role="button">New</a>
+           role="button">{% icon "new" %}</a>
         {% include 'status/_status_filter_form.html' %}
     </div>
     {% for task in tasks %}

@@ -1,7 +1,8 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Field
+from crispy_forms.layout import Layout, Field
 from django.forms import ModelForm
 from markitup.widgets import MarkItUpWidget
+from lib.crispy import CancelButton, SaveButton
 from news.models import NewsBlock
 
 __author__ = 'eraldo'
@@ -21,5 +22,6 @@ class NewsBlockForm(ModelForm):
         Field('date'),
         Field('sticky'),
         Field('content', rows=20),
+        SaveButton(),
+        CancelButton(),
     )
-    helper.add_input(Submit('save', 'Save'))

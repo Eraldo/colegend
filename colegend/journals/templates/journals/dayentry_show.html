@@ -2,6 +2,7 @@
 {% load icons %}
 
 {% block page_title %}{{ dayentry.date }}{% endblock %}
+
 {% block page_title_extras %}
     <small>{% icon "location" %} {{ dayentry.location|default:"?" }}</small>
 {% endblock %}
@@ -9,8 +10,8 @@
 {% block up_url %}{% url "journals:dayentry_list" %}{% endblock %}
 
 {% block page_controls %}
-    <a href="{{ dayentry.get_edit_url }}" class="btn btn-primary" role="button">Edit</a>
-    <a href="{{ dayentry.get_delete_url }}" class="btn btn-danger" role="button">Delete</a>
+    <a href="{{ dayentry.get_edit_url }}" class="btn btn-primary" role="button">{% icon "edit" %}</a>
+    <a href="{{ dayentry.get_delete_url }}" class="btn btn-danger" role="button">{% icon "delete" %}</a>
 {% endblock %}
 
 {% block page_content %}

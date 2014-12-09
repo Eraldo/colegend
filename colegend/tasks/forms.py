@@ -1,7 +1,8 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Field, Div
+from crispy_forms.layout import Layout, Field, Row
 from django.forms import ModelForm
 from markitup.widgets import MarkItUpWidget
+from lib.crispy import CancelButton, SaveButton
 from tasks.models import Task
 
 __author__ = 'eraldo'
@@ -17,19 +18,18 @@ class TaskForm(ModelForm):
 
     helper = FormHelper()
     helper.layout = Layout(
-        Div(
+        Row(
             Field('name', autofocus='True', wrapper_class="col-md-8"),
             Field('project', wrapper_class="col-md-4"),
-            css_class="row",
         ),
         Field('description'),
-        Div(
+        Row(
             Field('status', wrapper_class="col-md-3"),
             Field('priority', wrapper_class="col-md-3"),
             Field('date', wrapper_class="col-md-3"),
             Field('deadline', wrapper_class="col-md-3"),
-            css_class="row",
         ),
         Field('tags'),
+        SaveButton(),
+        CancelButton(),
     )
-    helper.add_input(Submit('save', 'Save'))

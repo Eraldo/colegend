@@ -1,7 +1,8 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Field, Div
+from crispy_forms.layout import Layout, Field, Div
 from django.forms import ModelForm
 from markitup.widgets import MarkItUpWidget
+from lib.crispy import CancelButton, SaveButton
 from projects.models import Project
 
 __author__ = 'eraldo'
@@ -25,5 +26,7 @@ class ProjectForm(ModelForm):
             Field('deadline', wrapper_class="col-md-4"),
             css_class="row",
         ),
+        Field('tags'),
+        SaveButton(),
+        CancelButton(),
     )
-    helper.add_input(Submit('save', 'Save'))

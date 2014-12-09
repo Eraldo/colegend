@@ -11,8 +11,10 @@
     <div class="well">
         <form method="post">{% csrf_token %}
             <legend>Are you sure you want to delete "{{ object }}" ?</legend>
-            <button type="submit" class="btn btn-danger">{% icon "delete" %} Delete</button>
-            <a href="javascript:history.go(-1)" class="btn btn-primary">Cancel</a>
+            <div class="controls">
+                <button type="submit" class="btn btn-danger">{% icon "delete" %} Delete</button>
+                <a href="javascript:history.go(-1)" class="btn btn-primary">{% icon "cancel" %} Cancel</a>
+            </div>
         </form>
     </div>
 {% endblock %}

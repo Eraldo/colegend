@@ -1,4 +1,5 @@
 {% extends 'page.html' %}
+{% load icons %}
 
 {% block page_title %}
     Quote
@@ -8,12 +9,12 @@
 
 {% block page_controls %}
     {% if owned %}
-        <a href="{{ quote.get_edit_url }}" class="btn btn-primary" role="button">Edit</a>
-        <a href="{{ quote.get_delete_url }}" class="btn btn-danger" role="button">Delete</a>
+        <a href="{{ quote.get_edit_url }}" class="btn btn-primary" role="button">{% icon "edit" %}</a>
+        <a href="{{ quote.get_delete_url }}" class="btn btn-danger" role="button">{% icon "delete" %}</a>
     {% endif %}
     {% if quote.pending and user.is_manager %}
         <form method="POST" class="inline">{% csrf_token %}
-            <button type="submit" name="accept" class="btn btn-warning pull-right">Accept</button>
+            <button type="submit" name="accept" class="btn btn-warning pull-right">{% icon "accept" %}</button>
         </form>
     {% endif %}
 {% endblock %}

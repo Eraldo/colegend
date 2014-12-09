@@ -1,5 +1,6 @@
 {% extends "page.html" %}
 {% load avatar_tags %}
+{% load icons %}
 {% load static %}
 
 {% block page_title %}{{ object.username }}{% endblock %}
@@ -8,7 +9,7 @@
 
 {% block page_controls %}
     {% if object == request.user %}
-        <a class="btn btn-primary" href="{% url 'users:settings' %}"><i class="fa fa-wrench"></i> Settings</a>
+        <a class="btn btn-primary" href="{% url 'users:settings' %}">{% icon "setting" %} Settings</a>
     {% endif %}
 {% endblock %}
 

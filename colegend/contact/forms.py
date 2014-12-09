@@ -1,7 +1,8 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Field, Fieldset, Submit
+from crispy_forms.layout import Layout, Field, Fieldset, Submit, HTML, Button
 from django import forms
-from django.core.mail import send_mail, EmailMessage
+from django.core.mail import EmailMessage
+from lib.crispy import IconButton
 
 __author__ = 'Eraldo Helal'
 
@@ -18,13 +19,13 @@ class ContactForm(forms.Form):
         email.send()
 
     helper = FormHelper()
-    helper.add_input(Submit('send', 'Send'))
     helper.layout = Layout(
         Fieldset(
             'Contact Form',
             Field('message', rows="4", css_class='form-control', placeholder="Your message...",
                   style="resize: vertical;", autofocus="True"),
         ),
+        IconButton("send", "Send", "send", css_class="btn-primary")
     )
 
 
@@ -49,4 +50,5 @@ class PublicContactForm(forms.Form):
             Field('message', rows="4", css_class='form-control', placeholder="Your message...",
                   style="resize: vertical;", autofocus="True"),
         ),
+        IconButton("send", "Send", "send")
     )

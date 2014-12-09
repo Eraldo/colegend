@@ -1,8 +1,8 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Field
+from crispy_forms.layout import Layout, Field
 from django.forms import ModelForm
+from lib.crispy import CancelButton, SaveButton
 from quotes.models import Quote
-from tags.models import Tag
 
 __author__ = 'eraldo'
 
@@ -18,5 +18,6 @@ class QuoteForm(ModelForm):
         Field('text', placeholder="Some words are more than nothing."),
         Field('author', placeholder='Someone'),
         Field('category'),
+        SaveButton(),
+        CancelButton(),
     )
-    helper.add_input(Submit('save', 'Save'))

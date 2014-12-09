@@ -1,8 +1,9 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Field
+from crispy_forms.layout import Layout, Field
 from django.forms import ModelForm
 from markitup.widgets import MarkItUpWidget
 from dojo.models import Module
+from lib.crispy import SaveButton, CancelButton
 
 __author__ = 'eraldo'
 
@@ -22,5 +23,7 @@ class ModuleForm(ModelForm):
         Field('content', placeholder="Module content.", rows=20),
         Field('category'),
         Field('source', rows=2),
+        SaveButton(),
+        CancelButton(),
     )
-    helper.add_input(Submit('save', 'Save'))
+

@@ -1,4 +1,3 @@
-from django.utils.safestring import mark_safe
 from lib.views import get_icon
 
 __author__ = 'eraldo'
@@ -50,10 +49,11 @@ def menu(request):
         'operator': [
             MenuItem("Contact", url="contact", icon="contact"),
             MenuItem("About", url="about", icon="about"),
-            MenuItem("Features", url="features:feature_list", icon="feature"),
-            MenuItem("Home", url="home", icon="home"),
             MenuItem("News", url="news:newsblock_list", icon="news"),
             MenuItem("Tutorials", url="tutorials:tutorial_list", icon="tutorial"),
+            MenuItem("Search", url="search", icon="search"),
+            MenuItem("Home", url="home", icon="home"),
+            MenuItem("Features", url="features:feature_list", icon="feature"),
         ],
         'operator_extra': [
         ],

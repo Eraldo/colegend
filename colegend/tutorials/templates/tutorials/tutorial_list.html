@@ -1,4 +1,5 @@
 {% extends 'page.html' %}
+{% load icons %}
 
 {% block page_title %}
     Tutorials
@@ -8,7 +9,7 @@
 
 {% block page_controls %}
     {% if user.is_manager %}
-        <a href="{% url "tutorials:tutorial_new" %}" class="btn btn-default">New</a>
+        <a href="{% url "tutorials:tutorial_new" %}" class="btn btn-warning">{% icon "new" %}</a>
     {% endif %}
 {% endblock %}
 

@@ -1,7 +1,8 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Field
+from crispy_forms.layout import Layout, Field
 from django.forms import ModelForm
 from markitup.widgets import MarkItUpWidget
+from lib.crispy import CancelButton, SaveButton
 from tutorials.models import Tutorial
 
 __author__ = 'eraldo'
@@ -19,5 +20,6 @@ class TutorialForm(ModelForm):
     helper.layout = Layout(
         Field('name', autofocus='True', placeholder="Tutorial title."),
         Field('description', placeholder="Tutorial description.", rows=20),
+        SaveButton(),
+        CancelButton(),
     )
-    helper.add_input(Submit('save', 'Save'))

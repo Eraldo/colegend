@@ -1,4 +1,5 @@
 {% extends 'page.html' %}
+{% load icons %}
 
 {% block page_title %}
     {{ task }}
@@ -10,8 +11,8 @@
 {% endblock %}
 
 {% block page_controls %}
-    <a href="{{ task.get_edit_url }}" class="btn btn-primary" role="button">Edit</a>
-    <a href="{{ task.get_delete_url }}" class="btn btn-danger" role="button">Delete</a>
+    <a href="{{ task.get_edit_url }}" class="btn btn-primary" role="button">{% icon "edit" %}</a>
+    <a href="{{ task.get_delete_url }}" class="btn btn-danger" role="button">{% icon "delete" %}</a>
 {% endblock %}
 
 {% block page_content %}

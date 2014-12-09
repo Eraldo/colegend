@@ -1,6 +1,7 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Field
+from crispy_forms.layout import Layout, Field, Row
 from django.forms import ModelForm
+from lib.crispy import SaveButton, CancelButton
 from routines.models import Routine
 
 __author__ = 'eraldo'
@@ -13,7 +14,12 @@ class RoutineForm(ModelForm):
 
     helper = FormHelper()
     helper.layout = Layout(
-        Field('name', autofocus='True'),
+        Row(
+            Field('name', autofocus='True', wrapper_class="col-md-9"),
+            Field('type', wrapper_class="col-md-3"),
+        ),
         Field('description'),
+        Field('tags'),
+        SaveButton(),
+        CancelButton(),
     )
-    helper.add_input(Submit('save', 'Save'))

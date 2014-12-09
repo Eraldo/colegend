@@ -1,5 +1,6 @@
 {% extends 'page.html' %}
 {% load bootstrap3 %}
+{% load icons %}
 
 {% block page_title %}
     Gatherings
@@ -12,7 +13,7 @@
                         Enter Virtual Room</a>
     {% if user.is_manager %}
         <a href="{% url "gatherings:gathering_list" %}" class="btn btn-warning pull-right">
-            Manage</a>
+            {% icon "manage" %}</a>
     {% endif %}
 {% endblock %}
 

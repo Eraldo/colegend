@@ -1,7 +1,8 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Field
+from crispy_forms.layout import Layout, Field
 from django.forms import ModelForm
 from markitup.widgets import MarkItUpWidget
+from lib.crispy import SaveButton, CancelButton
 from tags.models import Tag
 
 __author__ = 'eraldo'
@@ -19,5 +20,6 @@ class TagForm(ModelForm):
     helper.layout = Layout(
         Field('name', autofocus='True'),
         Field('description'),
+        SaveButton(),
+        CancelButton(),
     )
-    helper.add_input(Submit('save', 'Save'))

@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse_lazy
 from floppyforms.__future__.models import ModelForm
 import floppyforms as forms
 from markitup.widgets import MarkItUpWidget
+from lib.crispy import CancelButton, SaveButton
 from lib.formfields import PhoneField
 from lib.validators import validate_in_past, PhoneValidator
 from users.models import User, Profile, Settings
@@ -23,8 +24,9 @@ class UserForm(ModelForm):
     helper.form_action = reverse_lazy("users:update")
     helper.layout = Layout(
         Field('username', autofocus='True'),
+        SaveButton(),
+        CancelButton(),
     )
-    helper.add_input(Submit('save', 'Save'))
 
 
 class UserCreationForm(AuthUserCreationForm):

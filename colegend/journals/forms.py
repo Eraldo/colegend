@@ -1,8 +1,9 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Field, Div
+from crispy_forms.layout import Layout, Field, Div
 from django.forms import ModelForm
 from markitup.widgets import MarkItUpWidget
 from journals.models import DayEntry
+from lib.crispy import CancelButton, SaveButton
 
 __author__ = 'eraldo'
 
@@ -24,5 +25,6 @@ class DayEntryForm(ModelForm):
         ),
         Field('focus', autofocus='True'),
         Field('content', rows="20"),
+        SaveButton(),
+        CancelButton(),
     )
-    helper.add_input(Submit('save', 'Save'))
