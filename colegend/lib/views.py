@@ -94,6 +94,12 @@ def get_icon(name):
         "date": "calendar",
         "deadline": "calendar-o",
         "description": "file-text-o",
+        # statuses
+        "active": "dot-circle-o",
+        "todo": "circle-o",
+        "waiting": "clock-o",
+        "done": "check-circle-o",
+        "canceled": "times-circle-o",
         # other
         "sign-out": "sign-out",
         "signup": "sign-in",

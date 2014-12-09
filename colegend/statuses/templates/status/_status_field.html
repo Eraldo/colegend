@@ -1,3 +1,5 @@
+{% load icons %}
+
 <div class="status-field inline">
-    <span class="badge status status-{{ status }}">{{ status }}</span>
+    <span class="badge status status-{{ status }}" data-toggle="tooltip" title="{{ status }}">{% icon status.name %}</span>
 </div>
