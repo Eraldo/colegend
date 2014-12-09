@@ -1,3 +1,4 @@
+from django.shortcuts import redirect
 from lib.views import ActiveUserRequiredMixin
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse_lazy
@@ -72,3 +73,14 @@ class TaskEditView(TaskMixin, UpdateView):
 class TaskDeleteView(TaskMixin, DeleteView):
     template_name = "confirm_delete.html"
     success_url = reverse_lazy('tasks:task_list')
+
+
+def task_complete(request, pk):
+    task = Task.objects.get(pk=pk, owner=request.user)
+    task.complete()
+
+    next_url = request.POST.get('next')
+    if next_url:
+        return redirect(next)
+    return redirect(task)
+

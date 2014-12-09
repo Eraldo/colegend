@@ -1,3 +1,12 @@
 {% load icons %}
 
-{% icon "task" %} <a href="{{ task.get_show_url }}">{{ task }}</a>
+{% if task.open %}
+    <form method="POST" action="{% url "tasks:task_complete" task.pk %}" role="form" class="inline">{% csrf_token %}
+        <button class="btn btn-xs btn-default" role="submit">{% icon "task" %}</button>
+    </form>
+{% elif task.closed %}
+    <form method="GET" action="{% url "tasks:task_show" task.pk %}" role="form" class="inline">{% csrf_token %}
+        <button class="btn btn-xs btn-success" role="submit">{% icon "task" %}</button>
+    </form>
+{% endif %}
+<a href="{{ task.get_show_url }}">{{ task }}</a>

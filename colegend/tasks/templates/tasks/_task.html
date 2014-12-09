@@ -12,7 +12,7 @@
     <div style="height: 5px;"></div>
     {% include "status/_status_field.html" with status=task.status %}
     {% include "lib/_priority_field.html" with priority=task.priority %}
-    <div class="pull-right" style="margin-right: 2px;">
+    <div class="task-context pull-right">
         {% include "projects/_project_field.html" with project=task.project %}
         {% include "lib/_date_field.html" with date=task.date %}
         {% include "lib/_deadline_field.html" with deadline=task.deadline %}

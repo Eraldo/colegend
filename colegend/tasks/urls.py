@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-from tasks.views import TaskListView, TaskNewView, TaskShowView, TaskEditView, TaskDeleteView
+from tasks.views import TaskListView, TaskNewView, TaskShowView, TaskEditView, TaskDeleteView, task_complete
 
 __author__ = 'eraldo'
 
@@ -29,4 +29,11 @@ urlpatterns = patterns(
     url(r'^(?P<pk>\d+)/delete/$',
         TaskDeleteView.as_view(),
         name='task_delete'),
+
+    ## Actions
+
+    # ex: ../4/complete/
+    url(r'^(?P<pk>\d+)/complete/$',
+        task_complete,
+        name='task_complete'),
 )

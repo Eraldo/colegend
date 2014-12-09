@@ -39,6 +39,18 @@ class Task(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, TaggableBas
     def __str__(self):
         return self.name
 
+    @property
+    def open(self):
+        return self.status in Status.objects.open()
+
+    @property
+    def closed(self):
+        return self.status in Status.objects.closed()
+
+    def complete(self):
+        self.status = Status.objects.get(name="done")
+        self.save()
+
     def clean(self):
         super(Task, self).clean()
 
