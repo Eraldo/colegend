@@ -91,6 +91,6 @@ def task_complete(request, pk):
     # redirect
     next_url = request.POST.get('next')
     if next_url:
-        return redirect(next)
+        return redirect(next_url)
     return redirect(task)
 

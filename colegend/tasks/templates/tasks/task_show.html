@@ -11,23 +11,13 @@
 {% endblock %}
 
 {% block page_controls %}
+    {% include "tasks/_task_complete_button.html" with button_size="md" %}
     <a href="{{ task.get_edit_url }}" class="btn btn-primary" role="button">{% icon "edit" %}</a>
     <a href="{{ task.get_delete_url }}" class="btn btn-danger" role="button">{% icon "delete" %}</a>
 {% endblock %}
 
 {% block page_content %}
     <div class="task-details well">
-        {% if task.open %}
-            <form method="POST" action="{% url "tasks:task_complete" task.pk %}" role="form"
-                  class="inline">{% csrf_token %}
-                <button class="btn btn-xs btn-default" role="submit">{% icon "task" %}</button>
-            </form>
-        {% elif task.closed %}
-            <form method="GET" action="{% url "tasks:task_show" task.pk %}" role="form"
-                  class="inline">{% csrf_token %}
-                <button class="btn btn-xs btn-success" role="submit">{% icon "task" %}</button>
-            </form>
-        {% endif %}
         {% include "status/_status_field.html" with status=task.status %}
         {% include "lib/_priority_field.html" with priority=task.priority %}
         {% include "tags/_tags_field.html" with tags=task.tags.all %}
