@@ -15,6 +15,7 @@
   "dependencies": {
     "bootstrap": "~3.2.0",
     "jquery-ui": "1.11.1",
-    "smalot-bootstrap-datetimepicker": "2.3.1"
+    "smalot-bootstrap-datetimepicker": "2.3.1",
+    "mousetrap": "1.4.6"
   }
 }
