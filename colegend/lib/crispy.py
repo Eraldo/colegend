@@ -1,5 +1,6 @@
 # Custom extensions to django-crispy-forms.
 from crispy_forms.layout import Button, HTML
+from django.template.loader import render_to_string
 
 __author__ = 'eraldo'
 
@@ -21,4 +22,4 @@ class SaveButton(IconButton):
 
 class CancelButton(HTML):
     def __init__(self):
-        self.html = """{% load icons %}<a href="javascript:history.go(-1)" class="btn btn-default">{% icon "cancel" %} Cancel</a>"""
+        self.html = render_to_string("lib/_cancel_button.html")

@@ -18,8 +18,8 @@
             {% if redirect_field_value %}
                 <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
             {% endif %}
-            <button id="sign_out" class="btn btn-danger" type="submit">{% trans 'Sign Out' %}</button>
-            <a href="javascript:history.go(-1)" class="btn btn-primary" type="submit">{% trans 'Cancel' %}</a>
+            <button id="sign_out" class="btn btn-danger" type="submit">{% icon "sign-out" %} {% trans 'Sign Out' %}</button>
+            {% include "lib/_cancel_button.html" with button_type="primary" %}
         </form>
     </div>
 {% endblock %}
