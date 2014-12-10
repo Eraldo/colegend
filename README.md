@@ -19,5 +19,8 @@ CoLegend is a “Socially-Intelligent Life-Management Platform for Sustainable P
 Donations
 =========
 
-[![Gratipay](http://img.shields.io/gratipay/Eraldo.svg)](https://www.gittip.com/Eraldo)
+Paypal:
 [![Paypal](https://www.paypalobjects.com/en_US/DE/i/btn/btn_donateCC_LG.gif "Paypal")](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=eraldo%40eraldo%2eorg&lc=DE&item_name=CoLegend&item_number=colegend&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted "Paypal")
+
+Gratipay:
+[![Gratipay](http://img.shields.io/gratipay/Eraldo.svg)](https://www.gittip.com/Eraldo)
