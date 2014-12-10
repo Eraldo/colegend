@@ -1,4 +1,7 @@
+from django.contrib import messages
 from django.shortcuts import redirect
+from django.utils.html import escape
+from django.utils.safestring import mark_safe
 from lib.views import ActiveUserRequiredMixin
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse_lazy
@@ -76,9 +79,16 @@ class TaskDeleteView(TaskMixin, DeleteView):
 
 
 def task_complete(request, pk):
+    # prepare
     task = Task.objects.get(pk=pk, owner=request.user)
-    task.complete()
-
+    # act
+    completed = task.complete()
+    if completed:
+        message = """Completed Task: <a href="{url}">{task}</a>.""".format(
+            url=task.get_show_url(), task=escape(task)
+        )
+        messages.add_message(request, messages.SUCCESS, mark_safe(message))
+    # redirect
     next_url = request.POST.get('next')
     if next_url:
         return redirect(next)

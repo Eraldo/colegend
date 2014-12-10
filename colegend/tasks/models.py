@@ -50,6 +50,7 @@ class Task(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, TaggableBas
     def complete(self):
         self.status = Status.objects.get(name="done")
         self.save()
+        return True  # worked
 
     def clean(self):
         super(Task, self).clean()
