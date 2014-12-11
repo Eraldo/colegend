@@ -39,6 +39,7 @@ BINDINGS = [
         'keys': 'c',
         'command': 'keyboard_complete()',
     },
+
     {
         'keys': 's',
         'command': 'keyboard_save()',
@@ -94,7 +95,7 @@ BINDINGS = [
     # Mentor
     {
         'keys': 'g j',  # go journal
-        'command': 'home-menu-item',
+        'command': 'journal-menu-item',
         'action': 'link_id'
     },
     {
