@@ -39,90 +39,94 @@
 </script>
 
 {# keyboard shortcuts #}
-{% load keyboard %}{% keyboard %}
-<script>
-    function keyboard_help() {
-        window.open("{% url "tutorials:keyboard" %}");
-    }
-    function keyboard_deselect() {
-        // deselect currently selected item and input focus
-        var selected = $(".nav-item.selected").removeClass("selected");
-        document.activeElement.blur();
-    }
-
-    function keyboard_new() {
-        $(".new-button")[0].click();
-    }
-    function keyboard_show() {
-        // redirect to the keyboard tutorial
-        var item = $(".nav-item.selected")[0];
-        if (!item) {return}
-        var url = item.getAttribute("data-url")
-        if (url) {
-            window.location.href = url;
+{% if user.settings.keyboard %}
+    {% load keyboard %}{% keyboard %}
+    <script>
+        function keyboard_help() {
+            window.open("{% url "tutorials:keyboard" %}");
         }
-    }
-    function _click_selected_or_global_button(button_class) {
-        // click the complete button of the selected item
-        // or click on the first found non-item complete button
-        var button = $(".nav-item.selected .item-" + button_class)[0];
-        if (!button) {
-            // Get the top most non-item complete button.
-            var button = $("." + button_class)[0];
+        function keyboard_deselect() {
+            // deselect currently selected item and input focus
+            var selected = $(".nav-item.selected").removeClass("selected");
+            document.activeElement.blur();
         }
-        if (button) {
-            button.click();
+
+        function keyboard_new() {
+            $(".new-button")[0].click();
         }
-    }
-    function keyboard_edit() {
-        _click_selected_or_global_button("edit-button");
-    }
-    function keyboard_delete() {
-        _click_selected_or_global_button("delete-button");
-    }
-    function keyboard_complete() {
-        _click_selected_or_global_button("complete-button");
-    }
-
-    function keyboard_save() {
-        $(".save-button")[0].click();
-    }
-    function keyboard_cancel() {
-        $(".cancel-button")[0].click();
-    }
-
-    function keyboard_navigate(direction) {
-        // selection class
-        var item_class = ".nav-item";
-        var selection_class = "selected";
-        // check if there is a selection
-        var selected = $(item_class + "." + selection_class);
-        if (selected.length > 0) { // selection exists
-            if (direction == "down") {
-                var next = selected.next(item_class);
-            } else if (direction == "up") {
-                var next = selected.prev(item_class);
-            } else {
+        function keyboard_show() {
+            // redirect to the keyboard tutorial
+            var item = $(".nav-item.selected")[0];
+            if (!item) {
                 return
+            }
+            var url = item.getAttribute("data-url")
+            if (url) {
+                window.location.href = url;
+            }
+        }
+        function _click_selected_or_global_button(button_class) {
+            // click the complete button of the selected item
+            // or click on the first found non-item complete button
+            var button = $(".nav-item.selected .item-" + button_class)[0];
+            if (!button) {
+                // Get the top most non-item complete button.
+                var button = $("." + button_class)[0];
+            }
+            if (button) {
+                button.click();
+            }
+        }
+        function keyboard_edit() {
+            _click_selected_or_global_button("edit-button");
+        }
+        function keyboard_delete() {
+            _click_selected_or_global_button("delete-button");
+        }
+        function keyboard_complete() {
+            _click_selected_or_global_button("complete-button");
+        }
+
+        function keyboard_save() {
+            $(".save-button")[0].click();
+        }
+        function keyboard_cancel() {
+            $(".cancel-button")[0].click();
+        }
+
+        function keyboard_navigate(direction) {
+            // selection class
+            var item_class = ".nav-item";
+            var selection_class = "selected";
+            // check if there is a selection
+            var selected = $(item_class + "." + selection_class);
+            if (selected.length > 0) { // selection exists
+                if (direction == "down") {
+                    var next = selected.next(item_class);
+                } else if (direction == "up") {
+                    var next = selected.prev(item_class);
+                } else {
+                    return
+                }
+                if (next.length > 0) {
+                    selected.removeClass(selection_class)
+                }
+            } else {
+                if (direction == "down") {
+                    var next = $(item_class).first();
+                } else if (direction == "up") {
+                    var next = $(item_class).last();
+                } else {
+                    return
+                }
             }
             if (next.length > 0) {
-                selected.removeClass(selection_class)
-            }
-        } else {
-            if (direction == "down") {
-                var next = $(item_class).first();
-            } else if (direction == "up") {
-                var next = $(item_class).last();
-            } else {
-                return
+                next.addClass(selection_class);
+                // scroll to item
+                $('html, body').animate({
+                    scrollTop: $(next).offset().top - ($(window).height() / 2) + 'px'
+                }, 0);
             }
         }
-        if (next.length > 0) {
-            next.addClass(selection_class);
-            // scroll to item
-            $('html, body').animate({
-                scrollTop: $(next).offset().top - ($(window).height() / 2) + 'px'
-            }, 0);
-        }
-    }
-</script>
+    </script>
+{% endif %}

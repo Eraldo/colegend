@@ -183,7 +183,7 @@ class SignUpApplicationForm(ModelForm):
 class SettingsForm(ModelForm):
     class Meta:
         model = Settings
-        fields = ['language', 'day_start', 'sound', 'journal_entry_template']
+        fields = ['language', 'day_start', 'keyboard', 'sound', 'journal_entry_template']
         widgets = {
             'journal_entry_template': MarkItUpWidget(),
         }
@@ -194,6 +194,7 @@ class SettingsForm(ModelForm):
             "General Settings",
             Field("language"),
             Field("day_start"),
+            Field("keyboard"),
             Field("sound"),
         ),
         Fieldset(
