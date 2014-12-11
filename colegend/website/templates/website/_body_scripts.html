@@ -52,6 +52,7 @@
         $(".new-button")[0].click();
     }
     function keyboard_show() {
+        // redirect to the keyboard tutorial
         var item = $(".nav-item.selected")[0];
         if (!item) {return}
         var url = item.getAttribute("data-url")
@@ -66,7 +67,18 @@
         $(".delete-button")[0].click();
     }
     function keyboard_complete() {
-        $(".complete-button")[0].click();
+        // complete the selected item
+        // or click on the first found complete button
+        var selected = $(".nav-item.selected")[0];
+        if (selected) {
+            var button = $(".nav-item.selected .complete-button")[0];
+        } else {
+            // Click the top most non-item complete button.
+            var button = $(".list-controls .complete-button")[0];
+        }
+        if (button) {
+            button.click();
+        }
     }
     function keyboard_save() {
         $(".save-button")[0].click();
