@@ -250,6 +250,8 @@ PROJECT_APPS = (
     'crispy_forms',
     'floppyforms',
     'markitup',
+    # usability
+    'keyboard',
 )
 EXTRA_APPS = (
     'django_extensions',

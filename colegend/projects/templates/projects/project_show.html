@@ -11,8 +11,8 @@
 {% endblock %}
 
 {% block page_controls %}
-    <a href="{{ project.get_edit_url }}" class="btn btn-primary btn-sm" role="button">{% icon "edit" %}</a>
-    <a href="{{ project.get_delete_url }}" class="btn btn-danger btn-sm" role="button">{% icon "delete" %}</a>
+    <a href="{{ project.get_edit_url }}" class="edit-button btn btn-primary btn-sm" role="button">{% icon "edit" %}</a>
+    <a href="{{ project.get_delete_url }}" class="delete-button btn btn-danger btn-sm" role="button">{% icon "delete" %}</a>
 {% endblock %}
 
 {% block page_content %}

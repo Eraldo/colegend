@@ -2,8 +2,15 @@
 
 <div class="task-list">
     <div class="list-controls container-fluid well well-sm">
-        <a id="new" href="{% url "tasks:task_new" %}{% if project %}?project={{ project.pk }}{% endif %}" class="btn btn-default"
-           role="button">{% icon "new" %}</a>
+        <form method="GET" action="{% url "tasks:task_new" %}{% if project %}?project={{ project.pk }}{% endif %}"
+              role="form" class="inline">
+            {% if project %}
+                <input type="hidden" name="project" value="{{ project.pk }}">
+            {% endif %}
+            <input type="hidden" name="next" value="{{ request.get_full_path }}">
+            <button class="new-button btn btn-default" role="submit" data-toggle="tooltip"
+                    title="New Task">{% icon "new" %}</button>
+        </form>
         {% include 'status/_status_filter_form.html' %}
     </div>
     {% for task in tasks %}

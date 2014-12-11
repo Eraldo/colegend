@@ -31,8 +31,13 @@ urlpatterns = patterns(
         TutorialDeleteView.as_view(),
         name='tutorial_delete'),
 
-    # ex: ../text-areas
+    # ex: ../text-areas/
     url(r'^text-areas/$',
-        TutorialRedirectView.as_view(),
+        TutorialRedirectView.as_view(name="Text Areas"),
         name='text-areas'),
+
+    # ex: ../keyboard/
+    url(r'^keyboard/$',
+        TutorialRedirectView.as_view(name="Keyboard"),
+        name='keyboard'),
 )

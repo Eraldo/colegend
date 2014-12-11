@@ -10,12 +10,15 @@
     }
 </script>
 
+{# tooltips #}
 <script>
     $('[data-toggle="tooltip"]').tooltip();
 </script>
 
+{# jqueryUI #}
 <script src="{{ STATIC_URL }}website/bower_components/jquery-ui/jquery-ui.min.js"></script>
 
+{# datepicker #}
 <script>
     {#    $(function() {#}
     $(".dateinput").datepicker({
@@ -33,4 +36,81 @@
         weekStart: 1,
         autoclose: true
     });
+</script>
+
+{# keyboard shortcuts #}
+{% load keyboard %}{% keyboard %}
+<script>
+    function keyboard_help() {
+        window.open("{% url "tutorials:keyboard" %}");
+    }
+    function keyboard_escape() {
+        document.activeElement.blur();
+    }
+
+    function keyboard_new() {
+        $(".new-button")[0].click();
+    }
+    function keyboard_show() {
+        var item = $(".nav-item.selected")[0];
+        if (!item) {return}
+        var url = item.getAttribute("data-url")
+        if (url) {
+            window.location.href = url;
+        }
+    }
+    function keyboard_edit() {
+        $(".edit-button")[0].click();
+    }
+    function keyboard_delete() {
+        $(".delete-button")[0].click();
+    }
+    function keyboard_complete() {
+        $(".complete-button")[0].click();
+    }
+    function keyboard_save() {
+        $(".save-button")[0].click();
+    }
+    function keyboard_cancel() {
+        $(".cancel-button")[0].click();
+    }
+
+{#    function _get_selected_item() {#}
+{#        $(".nav-item.selected")#}
+{#    }#}
+
+    function keyboard_navigate(direction) {
+        // selection class
+        var item_class = ".nav-item";
+        var selection_class = "selected";
+        // check if there is a selection
+        var selected = $(item_class + "." + selection_class);
+        if (selected.length > 0) { // selection exists
+            if (direction == "down") {
+                var next = selected.next(item_class);
+            } else if (direction == "up") {
+                var next = selected.prev(item_class);
+            } else {
+                return
+            }
+            if (next.length > 0) {
+                selected.removeClass(selection_class)
+            }
+        } else {
+            if (direction == "down") {
+                var next = $(item_class).first();
+            } else if (direction == "up") {
+                var next = $(item_class).last();
+            } else {
+                return
+            }
+        }
+        if (next.length > 0) {
+            next.addClass(selection_class);
+            // scroll to item
+            $('html, body').animate({
+                scrollTop: $(next).offset().top - ($(window).height() / 2) + 'px'
+            }, 0);
+        }
+    }
 </script>

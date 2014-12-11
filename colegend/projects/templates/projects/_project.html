@@ -1,9 +1,9 @@
 {% load icons %}
 
-<div class="project well well-sm">
+<div id="Project-{{ project.pk }}" class="project nav-item well well-sm" data-url="{{ project.get_show_url }}">
     <div class="item-controls pull-right">
-        <a href="{{ project.get_edit_url }}" class="btn btn-primary btn-xs" role="button">{% icon "edit" %}<span class="sr-only"> Edit</span></a>
-        <a href="{{ project.get_delete_url }}" class="btn btn-danger btn-xs" role="button">{% icon "delete" %}<span class="sr-only"> Delete</span></a>
+        <a href="{{ project.get_edit_url }}" class="edit-button btn btn-primary btn-xs" role="button">{% icon "edit" %}<span class="sr-only"> Edit</span></a>
+        <a href="{{ project.get_delete_url }}" class="delete-button btn btn-danger btn-xs" role="button">{% icon "delete" %}<span class="sr-only"> Delete</span></a>
     </div>
     <div class="task-line-1">
     <b><a href="{{ project.get_show_url }}">{% icon "project" %} {{ project }}</a></b>

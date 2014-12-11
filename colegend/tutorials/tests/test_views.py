@@ -81,4 +81,4 @@ class TutorialRedirectViewTest(LoggedInTestMixin, TestCase):
         url = reverse("tutorials:text-areas")
         response = self.client.get(url, follow=True)
 
-        self.assertEqual(response.status_code, 410)
+        self.assertEqual(response.status_code, 404)

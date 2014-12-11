@@ -12,8 +12,8 @@
 
 {% block page_controls %}
     {% include "tasks/_task_complete_button.html" with button_size="md" %}
-    <a href="{{ task.get_edit_url }}" class="btn btn-primary" role="button">{% icon "edit" %}</a>
-    <a href="{{ task.get_delete_url }}" class="btn btn-danger" role="button">{% icon "delete" %}</a>
+    <a href="{{ task.get_edit_url }}" class="edit-button btn btn-primary" role="button">{% icon "edit" %}</a>
+    <a href="{{ task.get_delete_url }}" class="delete-button btn btn-danger" role="button">{% icon "delete" %}</a>
 {% endblock %}
 
 {% block page_content %}

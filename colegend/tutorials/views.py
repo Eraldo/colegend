@@ -1,5 +1,6 @@
 from annoying.functions import get_object_or_None
 from django.core.urlresolvers import reverse_lazy
+from django.http import Http404
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView, RedirectView
 from tutorials.forms import TutorialForm
 from tutorials.models import Tutorial
@@ -44,11 +45,14 @@ class TutorialDeleteView(ManagerRequiredMixin, TutorialMixin, DeleteView):
 
 class TutorialRedirectView(RedirectView):
     permanent = False
+    name = None
 
     def get_redirect_url(self, *args, **kwargs):
+        if not self.name:
+            raise Http404
         try:
             return reverse_lazy("tutorials:tutorial_show",
-                               args=[Tutorial.objects.get(name="Text Areas").pk])
+                               args=[Tutorial.objects.get(name=self.name).pk])
         except Tutorial.DoesNotExist:
-            return None
+            raise Http404
 

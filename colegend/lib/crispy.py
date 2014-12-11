@@ -17,7 +17,7 @@ class SaveButton(IconButton):
     input_type = "submit"
 
     def __init__(self):
-        super().__init__('save', 'Save', 'save', input_type="submit", css_class="btn-primary")
+        super().__init__('save', 'Save', 'save', input_type="submit", css_class="save-button btn-primary")
 
 
 class CancelButton(HTML):

@@ -58,22 +58,6 @@ body.body {
     display: inline;
 }
 
-.page-status-none {
-    color: #777;
-}
-
-.page-status-ok {
-    color: green;
-}
-
-.page-status-warning {
-    color: orange;
-}
-
-.page-status-danger {
-    color: red;
-}
-
 /* end page */
 
 /* messages */
@@ -100,6 +84,10 @@ img#logo {
     padding-top: 5px;
     padding-bottom: 0px;
     /*background-color: red !important;*/
+}
+
+input#global-search-input {
+    /*max-width: 160px !important;*/
 }
 
 /* end menu */
@@ -163,4 +151,10 @@ div.avatar img {
 
 span.streak {
     background-color: green;
+}
+
+/* keyboard navigation */
+.nav-item.selected {
+    border-color: black;
+    /*border: solid #000000 5px !important;*/
 }
