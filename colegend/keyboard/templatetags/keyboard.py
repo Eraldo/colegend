@@ -86,6 +86,18 @@ BINDINGS = [
         'command': 'home-menu-item',
         'action': 'link_id'
     },
+
+
+    {
+        'keys': 'g u',  # go profile
+        'command': 'profile-menu-item',
+        'action': 'link_id'
+    },
+    {
+        'keys': 'g *',  # go settings
+        'command': 'settings-menu-item',
+        'action': 'link_id'
+    },
     {
         'keys': 'g b',  # go back
         'command': 'javascript:history.go(-1);',

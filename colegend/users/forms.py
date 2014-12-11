@@ -201,5 +201,5 @@ class SettingsForm(ModelForm):
             "Journal Settings",
             Field("journal_entry_template"),
         ),
+        SaveButton(),
     )
-    helper.add_input(Submit('save', 'Update'))
