@@ -8,7 +8,7 @@
 {% block page_controls %}
     <form action="{% url 'search' %}" method="GET">
         <div class="input-group">
-            <input type="text" name="q" class="form-control" placeholder="search..." value="{{ request.GET.q }}">
+            <input type="text" name="q" class="form-control" placeholder="search..." value="{{ request.GET.q }}" autofocus>
             <div class="input-group-btn">
                 <button type="submit" class="btn btn-default">{% icon "search" %}</button>
             </div>
