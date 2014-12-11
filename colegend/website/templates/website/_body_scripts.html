@@ -44,7 +44,9 @@
     function keyboard_help() {
         window.open("{% url "tutorials:keyboard" %}");
     }
-    function keyboard_escape() {
+    function keyboard_deselect() {
+        // deselect currently selected item and input focus
+        var selected = $(".nav-item.selected").removeClass("selected");
         document.activeElement.blur();
     }
 
@@ -60,36 +62,34 @@
             window.location.href = url;
         }
     }
-    function keyboard_edit() {
-        $(".edit-button")[0].click();
-    }
-    function keyboard_delete() {
-        $(".delete-button")[0].click();
-    }
-    function keyboard_complete() {
-        // complete the selected item
-        // or click on the first found complete button
-        var selected = $(".nav-item.selected")[0];
-        if (selected) {
-            var button = $(".nav-item.selected .complete-button")[0];
-        } else {
-            // Click the top most non-item complete button.
-            var button = $(".list-controls .complete-button")[0];
+    function _click_selected_or_global_button(button_class) {
+        // click the complete button of the selected item
+        // or click on the first found non-item complete button
+        var button = $(".nav-item.selected .item-" + button_class)[0];
+        if (!button) {
+            // Get the top most non-item complete button.
+            var button = $("." + button_class)[0];
         }
         if (button) {
             button.click();
         }
     }
+    function keyboard_edit() {
+        _click_selected_or_global_button("edit-button");
+    }
+    function keyboard_delete() {
+        _click_selected_or_global_button("delete-button");
+    }
+    function keyboard_complete() {
+        _click_selected_or_global_button("complete-button");
+    }
+
     function keyboard_save() {
         $(".save-button")[0].click();
     }
     function keyboard_cancel() {
         $(".cancel-button")[0].click();
     }
-
-{#    function _get_selected_item() {#}
-{#        $(".nav-item.selected")#}
-{#    }#}
 
     function keyboard_navigate(direction) {
         // selection class

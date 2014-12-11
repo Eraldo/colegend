@@ -15,7 +15,7 @@ BINDINGS = [
     },
     {
         'keys': 'esc',
-        'command': 'keyboard_escape()',
+        'command': 'keyboard_deselect()',
         'is_global': True,  # global binding
     },
 
