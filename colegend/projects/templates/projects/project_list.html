@@ -1,4 +1,5 @@
 {% extends 'page.html' %}
+{% load icons %}
 
 {% block page_title %}
     Projects
@@ -10,8 +11,16 @@
     <span class="badge status">{{ project_list.count }}</span>
 {% endblock %}
 
-{% block page_controls_container %}{% endblock %}
+{#{% block page_controls_container %}{% endblock %}#}
+{% block page_controls %}
+    <a href="{% url "projects:project_new" %}" class="new-button btn btn-default" role="button">{% icon "new" %}</a>
+    {% include 'status/_status_filter_form.html' %}
+{% endblock %}
 
 {% block page_content %}
-    {% include 'projects/_project_list.html' with projects=project_list %}
+    <div class="project-list">
+        {% for project in project_list %}
+            {% include 'projects/_project.html' %}
+        {% endfor %}
+    </div>
 {% endblock %}
