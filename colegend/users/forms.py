@@ -139,7 +139,8 @@ class SignUpApplicationForm(ModelForm):
             ),
             Div(
                 Field("email", wrapper_class="col-md-6"),
-                Field("phone_number", pattern=PhoneValidator.regex, title=PhoneValidator.message, wrapper_class="col-md-6"),
+                Field("phone_number", pattern=PhoneValidator.regex, title=PhoneValidator.message,
+                      wrapper_class="col-md-6"),
                 css_class="row",
             ),
             Div(
@@ -195,6 +196,11 @@ class SettingsForm(ModelForm):
             Field("language"),
             Field("day_start"),
             Field("keyboard"),
+            # TODO: Fix workaround (Is there another way to add a help text?)
+            HTML("""
+                <a id="hint_id_keyboard" href="{% url "tutorials:keyboard" %}"
+                target="_blank" class="help-block" style="position: relative; top: -15px;">
+                {% load icons %}{% icon "tutorial" %} Keyboard Tutorial</a>"""),
             Field("sound"),
         ),
         Fieldset(
