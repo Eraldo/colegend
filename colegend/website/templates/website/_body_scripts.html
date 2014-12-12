@@ -42,60 +42,81 @@
 {% if user.settings.keyboard %}
     {% load keyboard %}{% keyboard %}
     <script>
+        // Helper variables and functions.
+        var item_class = "nav-item";
+        var selection_class = "selected";
+
+        function _get_selected_item() {
+            return $('.' + item_class + '.' + selection_class)[0];
+        }
+        function _select_item(item) {
+            if (item) {
+                $(item).addClass(selection_class);
+            }
+        }
+        function _deselect_item() {
+            var item = _get_selected_item();
+            if (item) {
+                $(item).removeClass(selection_class);
+            }
+        }
+        function _click_selected_or_global_button(button_class) {
+            // click the complete button of the selected item
+            // or click on the first found non-item complete button
+            var item = _get_selected_item();
+            if (item) {
+                var button = item.getElementsByClassName("item-" + button_class)[0];
+            } else {
+                // Get the top most non-item complete button.
+                var button = $("." + button_class)[0];
+            }
+            if (button) {
+                button.click();
+            }
+        }
+
         function keyboard_help() {
             // Redirect to the keyboard tutorial.
             window.open("{% url "tutorials:keyboard" %}");
         }
         function keyboard_deselect() {
             // Deselect currently selected item.
-            var selected = $(".nav-item.selected").removeClass("selected");
+            _deselect_item();
             // Unfocus the active element if it is an input field.
             var element = document.activeElement;
             var tag = element.tagName;
             // If the active element is a nav-item or input element.
-            if (element.className.indexOf("nav-item") != -1 ||
-                    tag == "INPUT" || tag == "SELECT" || tag == "TEXTAREA" || tag.isContentEditable) {
-                document.activeElement.blur();
+            if (tag == "INPUT" || tag == "SELECT" || tag == "TEXTAREA" || tag.isContentEditable) {
+                element.blur();
             }
         }
         function keyboard_menu(main) {
             if (main) {
                 // focus the main menu
-                {#                alert("MAIN");#}
                 $("#menu a")[0].focus();
             } else {
                 // focus the page menu
-                $("#page-menu .btn")[0].focus();
+                var page_menu = $("#page-menu .btn")[0];
+                if (page_menu) {
+                    page_menu.focus();
+                }
             }
         }
 
         function keyboard_new() {
-            // click on the new button
-            $(".new-button")[0].click();
+            _click_selected_or_global_button("new-button");
         }
         function keyboard_show() {
             // open the detail page of the selected item
             // or open the open-button
-            var item = $(".nav-item.selected")[0];
+            var item = _get_selected_item();
             if (item) {
                 var url = item.getAttribute("data-url");
                 if (url) {
                     window.location.href = url;
                 }
             } else {
-                $(".open-button")[0].click();
-            }
-        }
-        function _click_selected_or_global_button(button_class) {
-            // click the complete button of the selected item
-            // or click on the first found non-item complete button
-            var button = $(".nav-item.selected .item-" + button_class)[0];
-            if (!button) {
-                // Get the top most non-item complete button.
-                var button = $("." + button_class)[0];
-            }
-            if (button) {
-                button.click();
+                _click_selected_or_global_button("open-button");
             }
         }
         function keyboard_edit() {
@@ -109,41 +130,30 @@
         }
 
         function keyboard_save() {
-            $(".save-button")[0].click();
+            _click_selected_or_global_button("save-button");
         }
         function keyboard_cancel() {
-            $(".cancel-button")[0].click();
+            _click_selected_or_global_button("cancel-button");
         }
 
         function keyboard_navigate(direction) {
-            // selection class
-            var item_class = ".nav-item";
-            var selection_class = "selected";
-            // check if there is a selection
-            var selected = $(item_class + "." + selection_class);
-            if (selected.length > 0) { // selection exists
+            var item = _get_selected_item();
+            if (item) { // selection exists
                 if (direction == "down") {
-                    var next = selected.next(item_class);
+                    var next = $(item).next('.' + item_class)[0];
                 } else if (direction == "up") {
-                    var next = selected.prev(item_class);
-                } else {
-                    return
-                }
-                if (next.length > 0) {
-                    selected.removeClass(selection_class)
+                    var next = $(item).prev('.' + item_class)[0];
                 }
             } else {
                 if (direction == "down") {
-                    var next = $(item_class).first();
+                    var next = $('.' + item_class).first()[0];
                 } else if (direction == "up") {
-                    var next = $(item_class).last();
-                } else {
-                    return
+                    var next = $('.' + item_class).last()[0];
                 }
             }
-            if (next.length > 0) {
-                next.addClass(selection_class);
-                next.focus();
+            if (next) {
+                $(item).removeClass(selection_class);
+                $(next).addClass(selection_class);
                 // scroll to item
                 $('html, body').animate({
                     scrollTop: $(next).offset().top - ($(window).height() / 2) + 'px'
