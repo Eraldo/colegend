@@ -10,8 +10,10 @@
     <span class="badge">{{ tag_list.count }}</span>
 {% endblock %}
 
-{% block page_controls_container %}{% endblock %}
+{% block page_controls %}
+    {% include "tags/_tag_list_controls.html" %}
+{% endblock %}
 
 {% block page_content %}
-    {% include 'tags/_tag_list.html' with tags=object_list menu="True" %}
+    {% include 'tags/_tag_list.html' with tags=object_list %}
 {% endblock %}
