@@ -50,15 +50,18 @@
             // Deselect currently selected item.
             var selected = $(".nav-item.selected").removeClass("selected");
             // Unfocus the active element if it is an input field.
-            var tag = document.activeElement.tagName;
-            if (tag=="INPUT"||tag=="SELECT"||tag=="TEXTAREA"||tag.isContentEditable) {
+            var element = document.activeElement;
+            var tag = element.tagName;
+            // If the active element is a nav-item or input element.
+            if (element.className.indexOf("nav-item") != -1 ||
+                    tag == "INPUT" || tag == "SELECT" || tag == "TEXTAREA" || tag.isContentEditable) {
                 document.activeElement.blur();
             }
         }
         function keyboard_menu(main) {
             if (main) {
                 // focus the main menu
-{#                alert("MAIN");#}
+                {#                alert("MAIN");#}
                 $("#menu a")[0].focus();
             } else {
                 // focus the page menu
