@@ -69,7 +69,7 @@ def get_icon(name):
         "feature": "road",
         "home": "home",
         "news": "newspaper-o",
-        "tutorial": "graduation-cap",
+        "tutorial": "question-circle",
         "profile": "user",
         "setting": "wrench",
         "usermanager": "user-md",
