@@ -10,8 +10,10 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand navbar-logo" href="{% url 'home' %}"><img id="logo" class="img-responsive"
-                                                                             src="{{ STATIC_URL }}website/images/Co_100x50.png"></a>
+            <a class="navbar-brand navbar-logo" href="{% url 'home' %}"
+               data-toggle="tooltip" data-placement="bottom" title="CoLegend Home">
+                <img id="logo" class="img-responsive" src="{{ STATIC_URL }}website/images/Co_100x50.png">
+            </a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -19,7 +21,7 @@
                     {% include 'website/_menu_item.html' %}
                 {% endfor %}
 
-                <li class="dropdown">
+                <li class="dropdown" data-placement="bottom" data-toggle="tooltip" title="Mentor Menu">
                     <a id="mentor-menu" href="#" class="dropdown-toggle" data-toggle="dropdown"><i
                             class="fa fa-rocket"></i> Mentor</a>
                     <ul class="dropdown-menu">
@@ -37,10 +39,9 @@
                     </ul>
                 </li>
 
-                <li class="dropdown">
+                <li class="dropdown" data-placement="bottom" data-toggle="tooltip" title="Manager Menu">
                     <a id="manager-menu" href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="fa fa-briefcase"></i>
-                        Manager</a>
+                            class="fa fa-briefcase"></i> Manager</a>
                     <ul class="dropdown-menu">
                         {% for menu_item in menu_items.manager %}
                             {% include 'website/_menu_item.html' %}
@@ -56,7 +57,7 @@
                     </ul>
                 </li>
 
-                <li class="dropdown">
+                <li class="dropdown" data-placement="bottom" data-toggle="tooltip" title="Motivator Menu">
                     <a id="motivator-menu" href="#" class="dropdown-toggle" data-toggle="dropdown"><i
                             class="fa fa-smile-o"></i>
                         Motivator</a>
@@ -75,7 +76,7 @@
                     </ul>
                 </li>
 
-                <li class="dropdown">
+                <li class="dropdown" data-placement="bottom" data-toggle="tooltip" title="Operator Menu">
                     <a id="operator-menu" href="#" class="dropdown-toggle" data-toggle="dropdown"><i
                             class="fa fa-desktop"></i>
                         Operator</a>
@@ -108,7 +109,7 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
+                <li class="dropdown" data-placement="bottom" data-toggle="tooltip" title="Account Menu">
                     <a id="profile-dropdown" href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img id="menu-avatar" src="{% avatar_url user 40 %}" alt="user" class="img-circle"/>
                     </a>
@@ -130,7 +131,8 @@
             </ul>
             <div id="global-search">
                 <form action="{% url 'search' %}" method="GET" class="navbar-form navbar-right">
-                    <input id="global-search-input" type="text" name="q" class="form-control" placeholder="search..." style="max-width: 160px;">
+                    <input id="global-search-input" type="text" name="q" class="form-control" placeholder="search..."
+                           style="max-width: 160px;">
                 </form>
             </div>
         </div>

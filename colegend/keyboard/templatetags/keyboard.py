@@ -18,6 +18,14 @@ BINDINGS = [
         'command': 'keyboard_deselect()',
         'is_global': True,  # global binding
     },
+    {
+        'keys': 'm',
+        'command': 'keyboard_menu()',
+    },
+    {
+        'keys': 'M',
+        'command': 'keyboard_menu(main=true)',
+    },
 
     {
         'keys': 'n',

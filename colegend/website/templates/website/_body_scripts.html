@@ -43,26 +43,44 @@
     {% load keyboard %}{% keyboard %}
     <script>
         function keyboard_help() {
+            // Redirect to the keyboard tutorial.
             window.open("{% url "tutorials:keyboard" %}");
         }
         function keyboard_deselect() {
-            // deselect currently selected item and input focus
+            // Deselect currently selected item.
             var selected = $(".nav-item.selected").removeClass("selected");
-            document.activeElement.blur();
+            // Unfocus the active element if it is an input field.
+            var tag = document.activeElement.tagName;
+            if (tag=="INPUT"||tag=="SELECT"||tag=="TEXTAREA"||tag.isContentEditable) {
+                document.activeElement.blur();
+            }
+        }
+        function keyboard_menu(main) {
+            if (main) {
+                // focus the main menu
+{#                alert("MAIN");#}
+                $("#menu a")[0].focus();
+            } else {
+                // focus the page menu
+                $("#page-menu .btn")[0].focus();
+            }
         }
 
         function keyboard_new() {
+            // click on the new button
             $(".new-button")[0].click();
         }
         function keyboard_show() {
-            // redirect to the keyboard tutorial
+            // open the detail page of the selected item
+            // or open the open-button
             var item = $(".nav-item.selected")[0];
-            if (!item) {
-                return
-            }
-            var url = item.getAttribute("data-url")
-            if (url) {
-                window.location.href = url;
+            if (item) {
+                var url = item.getAttribute("data-url");
+                if (url) {
+                    window.location.href = url;
+                }
+            } else {
+                $(".open-button")[0].click();
             }
         }
         function _click_selected_or_global_button(button_class) {
@@ -122,6 +140,7 @@
             }
             if (next.length > 0) {
                 next.addClass(selection_class);
+                next.focus();
                 // scroll to item
                 $('html, body').animate({
                     scrollTop: $(next).offset().top - ($(window).height() / 2) + 'px'

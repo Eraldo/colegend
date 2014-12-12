@@ -83,11 +83,15 @@ img#logo {
 #menu a#profile-dropdown {
     padding-top: 5px;
     padding-bottom: 0px;
-    /*background-color: red !important;*/
 }
 
 input#global-search-input {
     /*max-width: 160px !important;*/
+}
+
+#menu .dropdown-menu {
+    /* place drowdown over the tooltip */
+    z-index: 1100;
 }
 
 /* end menu */

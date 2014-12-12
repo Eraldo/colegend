@@ -1,6 +1,6 @@
 {% load icons %}
 
-<div id="Task-{{ task.pk }}" class="task nav-item well well-sm" data-url="{{ task.get_show_url }}">
+<div id="Task-{{ task.pk }}" class="task nav-item well well-sm" data-url="{{ task.get_show_url }}" tabindex="-1">
     <div class="item-controls pull-right">
         <a href="{{ task.get_edit_url }}" class="item-edit-button btn btn-primary btn-xs" role="button">{% icon "edit" %}<span class="sr-only"> Edit</span></a>
         <a href="{{ task.get_delete_url }}" class="item-delete-button btn btn-danger btn-xs" role="button">{% icon "delete" %}<span class="sr-only"> Delete</span></a>

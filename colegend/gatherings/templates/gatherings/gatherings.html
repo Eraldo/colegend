@@ -9,7 +9,7 @@
 {% block up_url %}{% url "gatherings:home" %}{% endblock %}
 
 {% block page_controls %}
-    <a href="{{ virtual_room_url }}" target="_blank" class="btn btn-default">
+    <a href="{{ virtual_room_url }}" target="_blank" class="open-button btn btn-default">
                         Enter Virtual Room</a>
     {% if user.is_manager %}
         <a href="{% url "gatherings:gathering_list" %}" class="btn btn-warning pull-right">
