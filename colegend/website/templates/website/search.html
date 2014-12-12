@@ -18,13 +18,13 @@
 
 {% block page_content %}
     <h2>projects</h2>
-    {% include 'projects/_project_list.html' %}
+    {% include 'projects/_project_list.html' with menu="True" %}
     <h2>tasks</h2>
-    {% include 'tasks/_task_list.html' %}
+    {% include 'tasks/_task_list.html' with menu="True" %}
     <h2>routines</h2>
     {% include 'routines/_routine_list.html' %}
     <h2>habits</h2>
     {% include 'habits/_habit_list.html' %}
     <h2>tags</h2>
-    {% include 'tags/_tag_list.html' %}
+    {% include 'tags/_tag_list.html' with menu="True" %}
 {% endblock %}
