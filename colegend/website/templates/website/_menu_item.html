@@ -1,8 +1,14 @@
 <li>
-    <a id="{{ menu_item|slugify }}-menu-item" href="{% if menu_item.arg %}{% url menu_item.url menu_item.arg %}{% else %}{% url menu_item.url %}{% endif %}">
+    <a id="{{ menu_item|slugify }}-menu-item"
+       href="{% if menu_item.arg %}{% url menu_item.url menu_item.arg %}{% else %}{% url menu_item.url %}{% endif %}">
         {% if menu_item.icon %}
             {{ menu_item.icon }}&nbsp;
         {% endif %}
         {{ menu_item }}
+        {% if user.settings.keyboard and menu_item.keyboard_shortcut %}
+            <div class="menu-keyboard-shortcut-hint pull-right hidden-xs">
+                <small> {{ menu_item.keyboard_shortcut }}</small>
+            </div>
+        {% endif %}
     </a>
 </li>

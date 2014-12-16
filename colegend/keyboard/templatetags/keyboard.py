@@ -98,6 +98,11 @@ BINDINGS = [
         'command': 'home-menu-item',
         'action': 'link_id'
     },
+    {
+        'keys': 'g %',  # go backend
+        'command': 'backend-menu-item',
+        'action': 'link_id'
+    },
 
 
     {

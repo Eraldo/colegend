@@ -162,3 +162,7 @@ span.streak {
     border-color: black;
     /*border: solid #000000 5px !important;*/
 }
+.menu-keyboard-shortcut-hint {
+    position: relative;
+    right: -10px;
+}
