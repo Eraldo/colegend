@@ -5,16 +5,18 @@ from django.core.exceptions import ValidationError
 from django.views.generic import DetailView, UpdateView, DeleteView, CreateView, ArchiveIndexView, RedirectView
 from journals.forms import DayEntryForm
 from journals.models import DayEntry
-from lib.views import OwnedItemsMixin
 
 __author__ = 'eraldo'
 
 
-class DayEntryMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
+class DayEntryMixin(ActiveUserRequiredMixin):
     model = DayEntry
     form_class = DayEntryForm
     icon = "journal"
     tutorial = "Journal"
+
+    def get_queryset(self):
+        return super().get_queryset().owned_by(self.request.user)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -45,7 +47,7 @@ class DayEntryListView(DayEntryMixin, ArchiveIndexView):
 class DayEntryNewView(DayEntryMixin, CreateView):
     def form_valid(self, form):
         user = self.request.user
-        form.instance.owner = user
+        form.instance.journal = user.journal
         return super(DayEntryNewView, self).form_valid(form)
 
     def get_initial(self):
@@ -79,7 +81,7 @@ class DayEntryContinueView(DayEntryMixin, RedirectView):
 
     def get_redirect_url(self):
         user = self.request.user
-        current_entry = user.dayentry_set.filter(date=timezone.now().date()).first()
+        current_entry = user.journal.entries.filter(date=timezone.now().date()).first()
         if current_entry:
             return current_entry.get_show_url()
         else:

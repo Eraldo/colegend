@@ -2,22 +2,25 @@ from django.db import models
 from django.utils import timezone
 from markitup.fields import MarkupField
 from journals.validators import validate_present_or_past
-from lib.models import AutoUrlMixin, OwnedBase, TrackedBase, OwnedQueryMixin, ValidateModelMixin
+from lib.models import AutoUrlMixin, OwnedBase, TrackedBase, OwnedQueryMixin, ValidateModelMixin, AutoOwnedBase
 
 __author__ = 'eraldo'
 
 
-# class Journal(models.Model):
-#     """
-#     A django model representing a journal with an arbitrary number of entries per day.
-#     """
-#     pass
+class Journal(AutoOwnedBase, models.Model):
+    """
+    A django model representing a journal with one entry per day.
+    """
+    # > owner (pk)
+    # > entries
+    def __str__(self):
+        return "{}'s Journal".format(self.owner)
 
-def get_last_location():
-    return ""
 
+class DayEntryQuerySet(models.QuerySet):
+    def owned_by(self, user):
+        return self.filter(journal__owner=user)
 
-class DayEntryQuerySet(OwnedQueryMixin, models.QuerySet):
     def latest_for(self, user):
         try:
             latest = self.owned_by(user).latest('date')
@@ -29,8 +32,6 @@ class DayEntryQuerySet(OwnedQueryMixin, models.QuerySet):
         entries = self.owned_by(user)
         dates = entries.dates('date', kind='day', order="DESC")
         today = timezone.datetime.today().date()
-        # if not today in dates:
-        #     return 0
         counter = 0
         for date in dates:
             if (today - date).days == counter:
@@ -41,11 +42,11 @@ class DayEntryQuerySet(OwnedQueryMixin, models.QuerySet):
         return counter
 
 
-class DayEntry(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, models.Model):
+class DayEntry(ValidateModelMixin, AutoUrlMixin, TrackedBase, models.Model):
     """
     A django model representing a daily journal entry in text form.
     """
-    # > owner: User
+    journal = models.ForeignKey(Journal, related_name="entries")
     date = models.DateField(default=timezone.datetime.today, validators=[validate_present_or_past])
     location = models.CharField(max_length=100)
     focus = models.CharField(max_length=100, help_text="What was the most important experience/topic on this day?")
@@ -55,7 +56,7 @@ class DayEntry(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, models.
 
     class Meta:
         ordering = ["-date"]
-        unique_together = ('owner', 'date')
+        unique_together = ('journal', 'date')
         verbose_name_plural = "Day Entries"
 
     def __str__(self):
