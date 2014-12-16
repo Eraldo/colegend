@@ -19,6 +19,10 @@ BINDINGS = [
         'is_global': True,  # global binding
     },
     {
+        'keys': 'r',
+        'command': 'keyboard_refresh()',
+    },
+    {
         'keys': 'm',
         'command': 'keyboard_menu()',
     },
