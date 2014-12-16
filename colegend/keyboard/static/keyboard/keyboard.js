@@ -11,6 +11,7 @@ function _get_selected_item() {
 }
 function _select_item(item) {
     if (item) {
+        _deselect_item();
         $(item).addClass(selection_class);
     }
 }
@@ -20,6 +21,7 @@ function _deselect_item() {
         $(item).removeClass(selection_class);
     }
 }
+
 function _click_selected_or_global_button(button_class) {
     // click the complete button of the selected item
     // or click on the first found non-item complete button
@@ -123,3 +125,15 @@ function keyboard_navigate(direction) {
         }, 0);
     }
 }
+
+// Keyboard related functions
+$('.' + item_class).hover(
+    function () {
+        _select_item(this);
+//        $(this)
+    },
+    function() {
+        _deselect_item(this);
+//        $(this).removeClass('hover')
+    }
+);
