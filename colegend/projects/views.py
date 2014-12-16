@@ -37,6 +37,8 @@ class ProjectMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
 
 
 class ProjectListView(StatusFilterMixin, ProjectMixin, ListView):
+    paginate_by = 10
+
     def get_queryset(self):
         queryset = super(ProjectListView, self).get_queryset()
         return self.filter_status(queryset)

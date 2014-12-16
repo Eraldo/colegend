@@ -44,6 +44,8 @@ class TaskMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
 
 
 class TaskListView(StatusFilterMixin, TaskMixin, ListView):
+    paginate_by = 10
+
     def get_queryset(self):
         queryset = super(TaskListView, self).get_queryset()
         return self.filter_status(queryset)

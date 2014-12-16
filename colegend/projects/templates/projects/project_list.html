@@ -13,14 +13,10 @@
 
 {#{% block page_controls_container %}{% endblock %}#}
 {% block page_controls %}
-    <a href="{% url "projects:project_new" %}" class="new-button btn btn-default" role="button">{% icon "new" %}</a>
-    {% include 'status/_status_filter_form.html' %}
+    {% include "projects/_project_list_controls.html" %}
+
 {% endblock %}
 
 {% block page_content %}
-    <div class="project-list">
-        {% for project in project_list %}
-            {% include 'projects/_project.html' %}
-        {% endfor %}
-    </div>
+    {% include "projects/_project_list.html" with projects=project_list %}
 {% endblock %}
