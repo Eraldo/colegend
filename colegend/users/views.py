@@ -8,7 +8,7 @@ from django.views.generic import UpdateView
 from django.views.generic import ListView
 
 # Only authenticated users can access views using this.
-from lib.views import ActiveUserRequiredMixin, ManagerRequiredMixin
+from lib.views import ActiveUserRequiredMixin, ManagerRequiredMixin, AdminRequiredMixin
 
 # Import the form from users/forms.py
 from .forms import UserForm, SettingsForm
@@ -138,3 +138,20 @@ class UserManageDetailView(ManagerRequiredMixin, UserManagerMixin, DetailView):
             message = '{} is now verified.'.format(user)
             messages.add_message(request, messages.SUCCESS, message)
         return redirect("users:manage")
+
+
+class UserAdminDetailView(AdminRequiredMixin, DetailView):
+    template_name = "users/user_admin_detail.html"
+    # These next two lines tell the view to index lookups by username
+    slug_field = "username"
+    slug_url_kwarg = "username"
+    model = User
+    icon = "usermanager"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.get_object()
+        context['name'] = user.first_name
+        context['profile'] = user.profile
+        context['contact'] = user.contact
+        return context

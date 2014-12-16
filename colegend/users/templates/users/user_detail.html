@@ -11,6 +11,9 @@
     {% if object == request.user %}
         <a class="btn btn-primary" href="{% url 'users:settings' %}">{% icon "setting" %} Settings</a>
     {% endif %}
+    {% if user.is_superuser %}
+        <a class="btn btn-danger pull-right" href="{% url 'users:admin_detail' username=object.username %}">{% icon "usermanager" %} Admin</a>
+    {% endif %}
 {% endblock %}
 
 {% block page_content %}

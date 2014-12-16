@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 from users.views import UserInactiveView, UserListView, UserRedirectView, UserDetailView, UserUpdateView, \
-    SettingsUpdateView, UserManageListView, UserManageDetailView
+    SettingsUpdateView, UserManageListView, UserManageDetailView, UserAdminDetailView
 
 __author__ = 'eraldo'
 
@@ -53,4 +53,13 @@ urlpatterns = patterns(
         view=SettingsUpdateView.as_view(),
         name='settings'
     ),
+
+    # ADMIN
+
+    url(
+        regex=r'^(?P<username>[\w.@+-]+)/admin/$',
+        view=UserAdminDetailView.as_view(),
+        name='admin_detail'
+    ),
+
 )

@@ -43,6 +43,18 @@ class ManagerRequiredMixin(ActiveUserRequiredMixin):
             request, *args, **kwargs)
 
 
+class AdminRequiredMixin(ActiveUserRequiredMixin):
+    """
+    View mixin that makes sure.. that only superusers (admins) get access.
+    """
+    def dispatch(self, request, *args, **kwargs):
+        user = request.user
+        if not user.is_superuser:
+            raise PermissionDenied  # return a forbidden response
+        return super().dispatch(
+            request, *args, **kwargs)
+
+
 class OwnedItemsMixin:
     def get_queryset(self):
         return super(OwnedItemsMixin, self).get_queryset().owned_by(self.request.user)
