@@ -22,10 +22,6 @@ class TaskMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
     icon = "task"
     tutorial = "Tasks"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
-
     def get_form(self, form_class):
         form = super(TaskMixin, self).get_form(form_class)
         # limit project choices to owned projects
