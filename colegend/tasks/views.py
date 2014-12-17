@@ -1,3 +1,4 @@
+from annoying.functions import get_object_or_None
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.utils.html import escape
@@ -7,6 +8,7 @@ from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from lib.views import OwnedItemsMixin
+from projects.models import Project
 from statuses.utils import StatusFilterMixin
 from tasks.forms import TaskForm
 from tasks.models import Task
@@ -62,9 +64,13 @@ class TaskNewView(TaskMixin, CreateView):
 
     def get_initial(self):
         initial = super(TaskNewView, self).get_initial()
-        project = self.request.GET.get('project')
-        if project:
-            initial['project'] = project
+        project_pk = int(self.request.GET.get('project'))
+        if project_pk:
+            project = get_object_or_None(Project, pk=project_pk, owner=self.request.user)
+            if project:
+                initial['project'] = project.pk
+                # Use the projects tags as the default tags for the new task.
+                initial['tags'] = project.tags.all()
         return initial
 
     def form_valid(self, form):
