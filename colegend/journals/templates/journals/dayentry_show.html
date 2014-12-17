@@ -15,10 +15,38 @@
 {% endblock %}
 
 {% block page_content %}
-    <div class="well">
-        <p>
-        <h4>{{ dayentry.focus }}</h4>
-        {{ dayentry.content }}
-        </p>
+    <div class="row">
+        <div class="col-md-{% if day_tasks %}8{% else %}12{% endif %}">
+            <div class="well">
+                <p>
+                <h4>{{ dayentry.focus }}</h4>
+                {{ dayentry.content }}
+                </p>
+            </div>
+        </div>
+        {% if day_tasks %}
+            <div class="col-md-4">
+                <div class="well">
+                    {% if scheduled_tasks %}
+                        <h4>Scheduled</h4>
+                        {% for task in scheduled_tasks %}
+                            {% include "tasks/_task_link.html" %}
+                        {% endfor %}
+                    {% endif %}
+                    {% if deadline_tasks %}
+                        <h4>Deadlined</h4>
+                        {% for task in deadline_tasks %}
+                            {% include "tasks/_task_link.html" %}
+                        {% endfor %}
+                    {% endif %}
+                    {% if done_tasks %}
+                        <h4>Done</h4>
+                        {% for task in done_tasks %}
+                            {% include "tasks/_task_link.html" %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}

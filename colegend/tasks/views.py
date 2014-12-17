@@ -60,7 +60,10 @@ class TaskNewView(TaskMixin, CreateView):
 
     def get_initial(self):
         initial = super(TaskNewView, self).get_initial()
-        project_pk = int(self.request.GET.get('project'))
+        try:
+            project_pk = int(self.request.GET.get('project'))
+        except TypeError:
+            project_pk = None
         if project_pk:
             project = get_object_or_None(Project, pk=project_pk, owner=self.request.user)
             if project:
