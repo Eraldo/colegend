@@ -30,19 +30,19 @@
                     {% if scheduled_tasks %}
                         <h4>Scheduled</h4>
                         {% for task in scheduled_tasks %}
-                            {% include "tasks/_task_link.html" %}
+                            {% include "tasks/_task_link.html" %}<br/>
                         {% endfor %}
                     {% endif %}
                     {% if deadline_tasks %}
                         <h4>Deadlined</h4>
                         {% for task in deadline_tasks %}
-                            {% include "tasks/_task_link.html" %}
+                            {% include "tasks/_task_link.html" %}<br/>
                         {% endfor %}
                     {% endif %}
                     {% if done_tasks %}
                         <h4>Done</h4>
                         {% for task in done_tasks %}
-                            {% include "tasks/_task_link.html" %}
+                            {% include "tasks/_task_link.html" %}<br/>
                         {% endfor %}
                     {% endif %}
                 </div>

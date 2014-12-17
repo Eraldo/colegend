@@ -75,8 +75,7 @@ class DayEntryShowView(DayEntryMixin, DetailView):
         user = self.request.user
         scheduled_tasks = user.tasks.filter(date=entry.date)
         deadline_tasks = user.tasks.filter(deadline=entry.date)
-        # TODO: Replace with all done tasks.. not only scheduled ones. (waiting for completion date)
-        done_tasks = user.tasks.filter(date=entry.date).closed()
+        done_tasks = user.tasks.closed().filter(completion_date__contains=entry.date).order_by('completion_date')
         day_tasks = scheduled_tasks or deadline_tasks or done_tasks
         if day_tasks:
             context["day_tasks"] = day_tasks
