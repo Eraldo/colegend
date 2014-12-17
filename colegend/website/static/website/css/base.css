@@ -162,7 +162,18 @@ span.streak {
     border-color: black;
     /*border: solid #000000 5px !important;*/
 }
+
 .menu-keyboard-shortcut-hint {
     position: relative;
     right: -10px;
 }
+
+/* end keyboard navigation */
+
+/* tooltips */
+/* underline tooltip text anchor */
+span[data-toggle="tooltip"] {
+    border-bottom: 1px dashed #999;
+}
+
+/* end tooltips */
