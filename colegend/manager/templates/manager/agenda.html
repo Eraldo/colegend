@@ -7,36 +7,56 @@
 {% block up_url %}{% url "manager:agenda" %}{% endblock %}
 
 {% block page_content %}
-    <h2>Focus <small>Top 3 Projects and next steps.</small></h2>
-    <div class="well">
-        <div class="row">
-            {% for project in top_projects %}
-                <div class="col-md-4">
+    <div class="row">
+        <div class="col-md-6">
+            <h2><span data-toggle="tooltip" data-placement="right"
+                      title="Top 3 Projects and next steps.">Project Focus</span></h2>
+
+            <div class="well">
+                {% for project in top_projects %}
                     <span class="lead">{% include "projects/_project_field.html" %}</span><br/>
-                    {% include "tasks/_task_link.html" with task=project.tasks.first %}
-                </div>
-            {% endfor %}
+                    {% include "tasks/_task_link.html" with task=project.tasks.first %}<br/>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h2><span data-toggle="tooltip" data-placement="right"
+                      title="Top 7 tasks without a project.">Task Focus</span></h2>
+
+            <div class="well">
+                {% for task in top_single_tasks %}
+                    {% include "tasks/_task_link.html" %}<br/>
+                {% endfor %}
+            </div>
         </div>
     </div>
-    <h2>Upcoming <small>Top 4 tasks with a deadline.</small></h2>
+    <div class="row">
+        <div class="col-md-6">
+            <h2><span data-toggle="tooltip" data-placement="right" title="Top 2 scheduled tasks.">Scheduled</span></h2>
+
+            <div class="well">
+                <div class="row">
+                    {% for task in top_scheduled_tasks %}
+                        <div class="col-md-6">
+                            <span class="lead">{{ task.date }}</span><br/>
+                            {% include "tasks/_task_link.html" %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+    <h2><span data-toggle="tooltip" data-placement="right" title="Top 2 deadlined tasks.">Deadlined</span></h2>
     <div class="well">
         <div class="row">
-            {% for task in top_deadline_tasks %}
-                <div class="col-md-3">
+            {% for task in top_deadlined_tasks %}
+                <div class="col-md-6">
                     <span class="lead">{{ task.deadline }}</span><br/>
                     {% include "tasks/_task_link.html" %}
                 </div>
             {% endfor %}
         </div>
     </div>
-    <h2>Other <small>Top 4 tasks without a project.</small></h2>
-    <div class="well">
-        <div class="row">
-            {% for task in single_tasks %}
-                <div class="col-md-3">
-                    {% include "tasks/_task_link.html" %}
-                </div>
-            {% endfor %}
         </div>
     </div>
 
