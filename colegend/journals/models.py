@@ -13,6 +13,8 @@ class Journal(AutoOwnedBase, models.Model):
     """
     # > owner (pk)
     # > entries
+    max_streak = models.IntegerField(default=0)
+
     def __str__(self):
         return "{}'s Journal".format(self.owner)
 
@@ -61,3 +63,13 @@ class DayEntry(ValidateModelMixin, AutoUrlMixin, TrackedBase, models.Model):
 
     def __str__(self):
         return "{}".format(self.date)
+
+    def update_streak(self):
+        streak = DayEntry.objects.streak_for(self.journal.owner)
+        if streak > self.journal.max_streak:
+            self.journal.max_streak = streak
+            self.journal.save()
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        self.update_streak()

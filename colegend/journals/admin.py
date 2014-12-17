@@ -5,7 +5,7 @@ from lib.admin import InlineMixin
 
 class DayEntryInline(InlineMixin, admin.TabularInline):
     model = DayEntry
-    fields = ['date', 'location', 'focus', 'owner', 'change_link']
+    fields = ['date', 'location', 'focus', 'journal', 'change_link']
     extra = 0
     readonly_fields = ['change_link']
 
