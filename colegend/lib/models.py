@@ -2,6 +2,7 @@ from annoying.fields import AutoOneToOneField
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.utils import timezone
 
 __author__ = 'eraldo'
 
@@ -43,6 +44,24 @@ class AutoOwnedBase(models.Model):
 
     class Meta:
         abstract = True
+
+
+class StatusTrackedBase(models.Model):
+    completion_date = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        abstract = True
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.old_status = self.status
+
+    def save(self, *args, **kwargs):
+        # Track status change and add completion date if closing task.
+        if self.old_status.open() and self.status.closed():
+            self.completion_date = timezone.now()
+        super().save(*args, **kwargs)
+        self.old_status = self.status
 
 
 class AutoUrlMixin():

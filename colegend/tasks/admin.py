@@ -17,13 +17,13 @@ class TaskAdmin(admin.ModelAdmin):
     search_fields = ['name', 'description']
     list_filter = ['status', 'priority', 'tags', 'owner']
     filter_horizontal = ['tags']
-    readonly_fields = ['creation_date', 'modification_date', 'history']
+    readonly_fields = ['creation_date', 'modification_date', 'completion_date', 'history']
 
     fieldsets = [
         (None, {'fields': ['owner', 'project']}),
         (None, {'fields': ['name', 'description']}),
         (None, {'fields': ['status', 'priority', 'deadline', 'date', 'tags']}),
-        ('history', {'fields': ['creation_date', 'modification_date', 'history'], 'classes': ['collapse']}),
+        ('history', {'fields': ['creation_date', 'modification_date', 'completion_date', 'history'], 'classes': ['collapse']}),
     ]
 
 

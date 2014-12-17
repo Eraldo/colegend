@@ -6,5 +6,7 @@
         <button class="item-complete-button btn btn-{{ button_size|default:"xs" }} btn-default" role="submit" data-toggle="tooltip" title="Complete">{% icon "task" %}</button>
     </form>
 {% elif task.closed %}
-    <button class="btn btn-{{ button_size|default:"xs" }} btn-success" role="button" data-toggle="tooltip" title="Completed">{% icon "task" %}</button>
+    <span data-toggle="tooltip" title="Completed {{ task.completion_date|default:"" }}">
+    <button class="btn btn-{{ button_size|default:"xs" }} btn-success" role="button">{% icon "task" %}</button>
+    </span>
 {% endif %}

@@ -2,12 +2,11 @@ from django.core.exceptions import ValidationError, SuspiciousOperation
 from django.db import models
 from django.db.models.query import QuerySet
 from markitup.fields import MarkupField
-from lib.models import TrackedBase, AutoUrlMixin, OwnedBase, OwnedQueryMixin, ValidateModelMixin
+from lib.models import TrackedBase, AutoUrlMixin, OwnedBase, OwnedQueryMixin, ValidateModelMixin, StatusTrackedBase
 from projects.models import Project
 from statuses.models import Status
 from statuses.utils import StatusQueryMixin
 from tags.models import TaggableBase
-from users.models import User
 
 __author__ = 'eraldo'
 
@@ -16,7 +15,7 @@ class TaskQuerySet(StatusQueryMixin, OwnedQueryMixin, QuerySet):
     pass
 
 
-class Task(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):
+class Task(ValidateModelMixin, AutoUrlMixin, OwnedBase, StatusTrackedBase, TrackedBase, TaggableBase, models.Model):
     """
     A django model representing a task.
     """

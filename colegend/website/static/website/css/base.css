@@ -172,8 +172,11 @@ span.streak {
 
 /* tooltips */
 /* underline tooltip text anchor */
-span[data-toggle="tooltip"] {
+.tooltip-text {
     border-bottom: 1px dashed #999;
 }
+/*span[data-toggle="tooltip"] {*/
+    /*border-bottom: 1px dashed #999;*/
+/*}*/
 
 /* end tooltips */

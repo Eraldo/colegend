@@ -9,7 +9,7 @@
 {% block page_content %}
     <div class="row">
         <div class="col-md-6">
-            <h2><span data-toggle="tooltip" data-placement="right"
+            <h2><span class="tooltip-text" data-toggle="tooltip" data-placement="right"
                       title="Top 3 Projects and next steps.">Project Focus</span></h2>
 
             <div class="well">
@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="col-md-6">
-            <h2><span data-toggle="tooltip" data-placement="right"
+            <h2><span class="tooltip-text" data-toggle="tooltip" data-placement="right"
                       title="Top 7 tasks without a project.">Task Focus</span></h2>
 
             <div class="well">
@@ -32,7 +32,7 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <h2><span data-toggle="tooltip" data-placement="right" title="Top 2 scheduled tasks.">Scheduled</span></h2>
+            <h2><span class="tooltip-text" data-toggle="tooltip" data-placement="right" title="Top 2 scheduled tasks.">Scheduled</span></h2>
 
             <div class="well">
                 <div class="row">
@@ -46,7 +46,7 @@
             </div>
         </div>
         <div class="col-md-6">
-    <h2><span data-toggle="tooltip" data-placement="right" title="Top 2 deadlined tasks.">Deadlined</span></h2>
+    <h2><span class="tooltip-text" data-toggle="tooltip" data-placement="right" title="Top 2 deadlined tasks.">Deadlined</span></h2>
     <div class="well">
         <div class="row">
             {% for task in top_deadlined_tasks %}
