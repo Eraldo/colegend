@@ -43,6 +43,11 @@ class ProjectListView(StatusFilterMixin, ProjectMixin, ListView):
         queryset = super(ProjectListView, self).get_queryset()
         return self.filter_status(queryset)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['counter'] = self.get_queryset().count()
+        return context
+
 
 class ProjectNewView(ProjectMixin, CreateView):
     success_url = reverse_lazy('projects:project_list')

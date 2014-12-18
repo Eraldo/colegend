@@ -51,11 +51,11 @@ class SearchView(ActiveUserRequiredMixin, TemplateView):
         query = self.request.GET.get("q")
         if query:
             user = self.request.user
-            context["projects"] = Project.objects.owned_by(user).filter(name__icontains=query)
-            context["tasks"] = Task.objects.owned_by(user).filter(name__icontains=query)
+            context["projects"] = user.projects.filter(name__icontains=query)
+            context["tasks"] = user.tasks.filter(name__icontains=query)
             context["routines"] = Routine.objects.owned_by(user).filter(name__icontains=query)
             context["habits"] = Habit.objects.owned_by(user).filter(name__icontains=query)
-            context["tags"] = Tag.objects.owned_by(user).filter(name__icontains=query)
+            context["tags"] = user.tags.filter(name__icontains=query)
         context["status_options"] = Status.objects.all()
         return context
 

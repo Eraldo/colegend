@@ -48,6 +48,11 @@ class TaskListView(StatusFilterMixin, TaskMixin, ListView):
         queryset = super(TaskListView, self).get_queryset()
         return self.filter_status(queryset)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['counter'] = self.get_queryset().count()
+        return context
+
 
 class TaskNewView(TaskMixin, CreateView):
     success_url = reverse_lazy('tasks:task_list')

@@ -8,7 +8,7 @@
 {% block up_url %}{% url "tasks:task_list" %}{% endblock %}
 
 {% block page_title_extras %}
-    <span class="badge">{{ task_list.count }}</span>
+    <span class="badge">{{ counter }}</span>
 {% endblock %}
 
 {% block page_controls %}
