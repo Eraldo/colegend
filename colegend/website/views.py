@@ -6,11 +6,9 @@ from features.models import Feature
 from habits.models import Habit
 from lib.views import ActiveUserRequiredMixin
 from news.models import NewsBlock
-from projects.models import Project
 from quotes.models import Quote
 from routines.models import Routine
 from statuses.models import Status
-from tags.models import Tag
 from tasks.models import Task
 
 __author__ = 'eraldo'
