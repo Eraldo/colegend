@@ -10,7 +10,9 @@
 
 {% block page_controls %}
     <a href="{{ virtual_room_url }}" target="_blank" class="open-button btn btn-default">
-                        Enter Virtual Room</a>
+                        {% icon "virtual-room" %} Virtual Room</a>
+    <a href="{% url "chat" %}" target="_blank" class="open-button btn btn-default">
+                       {% icon "chat" %} Chat Room</a>
     {% if user.is_manager %}
         <a href="{% url "gatherings:gathering_list" %}" class="btn btn-warning pull-right">
             {% icon "manage" %}</a>
@@ -29,7 +31,7 @@
                     <img src="{{ STATIC_URL }}website/images/CoSpace_circle.png" alt="CoSpace"
                          class="center-block img-circle img-responsive" style="max-height: 200px;">
                     <a href="{{ url }}" target="_blank" class="btn btn-default">»
-                        {{ location }}</a>
+                        {% if online %}{% icon "virtual-room" %}{% else %}{% icon "location" %}{% endif %} {{ location }}</a>
                 {% else %}
                     Currently there are no planned gatherings.
                 {% endif %}
@@ -39,7 +41,9 @@
             <div class="well text-center">
                 <h3>Further Gatherings</h3>
                 {% for gathering in future_gatherings %}
-                    <a class="btn btn-default">{{ gathering }}</a><br/>
+                    <a class="btn btn-default" data-toggle="tooltip" title="TIME: from {{ gathering.start }} until {{ gathering.end }} LOCATION: {{ gathering.get_location_display }} HOST: {{ gathering.host }}">
+                        {% if gathering.online %}{% icon "virtual-room" %}{% else %}{% icon "location" %}{% endif %} {{ gathering }}
+                    </a><br/>
                     {% if forloop.last %}
                     <small>*Please keep in mind.. that the dates/times can still change.<br></small>
                     {% endif %}
@@ -52,7 +56,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="well well-sm text-center">
-                <h3>Virtual Room</h3>
+                <h3>{% icon "virtual-room" %} Virtual Room</h3>
                 Apart from scheduled gatherings, you can meet and hang around in here any time.<br>
                 <a href="{{ virtual_room_url }}" target="_blank" class="btn btn-default">»
                         Enter</a>

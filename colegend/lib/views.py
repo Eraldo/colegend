@@ -115,6 +115,8 @@ def get_icon(name):
         # other
         "sign-out": "sign-out",
         "signup": "sign-in",
+        "chat": "wechat",
+        "virtual-room": "cube",  # Alternative icons: group cube video-camera
     }
     if name in icon_map:
         name = icon_map.get(name)

@@ -1,0 +1,16 @@
+{% extends "page.html" %}
+
+{% block page_title %}
+    Chat
+{% endblock %}
+
+{% block page_content %}
+    <div class="visible-xs-block">
+        <iframe src="http://webchat.freenode.net?nick={{ user }}&channels=colegend&uio=MTA9dHJ1ZSYxMz1mYWxzZQae"
+                width="100%" height="300" frameBorder="0"></iframe>
+    </div>
+    <div class="hidden-xs">
+        <iframe src="http://webchat.freenode.net?nick={{ user }}&channels=colegend&uio=MTA9dHJ1ZQ49" width="100%"
+                height="600" frameBorder="0"></iframe>
+    </div>
+{% endblock %}

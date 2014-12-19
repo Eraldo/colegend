@@ -47,9 +47,14 @@ class Gathering(AutoUrlMixin, models.Model):
 
     objects = GatheringQuerySet.as_manager()
 
-
     class Meta:
         ordering = ["-start"]
 
     def __str__(self):
         return timezone.localtime(self.start).strftime('%A %Y-%m-%d %H:%M')
+
+    def get_location_display(self):
+        if self.online:
+            return "virtual room"
+        else:
+            return self.location

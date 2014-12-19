@@ -68,6 +68,11 @@ class SearchView(ActiveUserRequiredMixin, TemplateView):
         return self.get(request, *args, **kwargs)
 
 
+class ChatView(ActiveUserRequiredMixin, TemplateView):
+    icon = "chat"
+    template_name = "website/chat.html"
+
+
 class TestView(TemplateView):
     template_name = "website/test.html"
 
