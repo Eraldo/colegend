@@ -23,13 +23,12 @@ class Project(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, Taggable
 
     description = MarkupField(blank=True)
     status = models.ForeignKey(Status, default=Status.DEFAULT_PK)
-    priority = models.IntegerField(default=2)
     deadline = models.DateField(blank=True, null=True)
 
     objects = ProjectQuerySet.as_manager()
 
     class Meta:
-        ordering = ["status", "priority", "name"]
+        ordering = ["status", "name"]
         unique_together = ('owner', 'name')
 
     def __str__(self):
@@ -37,12 +36,8 @@ class Project(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, Taggable
 
     @property
     def has_next_step(self):
-        """If the project has tasks
-        and the lowest priority is 1 or lower
-        then return True
-        otherwise return False."""
         tasks = self.tasks
-        if tasks.exists() and tasks.open().aggregate(Min('priority')).get('priority__min') <= 1:
+        if tasks.exists() and tasks.filter(status__name="next"):
             return True
         else:
             return False

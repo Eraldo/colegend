@@ -6,9 +6,9 @@ __author__ = 'eraldo'
 
 
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ['name', 'status', 'priority', 'deadline', 'owner']
+    list_display = ['name', 'status', 'deadline', 'owner']
     search_fields = ['name', 'description']
-    list_filter = ['status', 'priority', 'tags', 'owner']
+    list_filter = ['status', 'tags', 'owner']
     filter_horizontal = ['tags']
     readonly_fields = ['creation_date', 'modification_date', 'history']
 
@@ -16,7 +16,7 @@ class ProjectAdmin(admin.ModelAdmin):
         (None, {'fields': ['owner']}),
         (None, {'fields': ['name', 'description']}),
         # (None, {'fields': ['reason', 'outcome']}),
-        (None, {'fields': ['status', 'priority', 'deadline', 'tags']}),
+        (None, {'fields': ['status', 'deadline', 'tags']}),
         ('history', {'fields': ['creation_date', 'modification_date', 'history'], 'classes': ['collapse']}),
     ]
     # filter_horizontal = ("members",)

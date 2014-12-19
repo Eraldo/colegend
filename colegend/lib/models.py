@@ -3,6 +3,7 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import timezone
+from statuses.models import Status
 
 __author__ = 'eraldo'
 
@@ -54,7 +55,10 @@ class StatusTrackedBase(models.Model):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.old_status = self.status
+        try:
+            self.old_status = self.status
+        except Status.DoesNotExist:
+            pass
 
     def save(self, *args, **kwargs):
         # Track status change and add completion date if closing task.

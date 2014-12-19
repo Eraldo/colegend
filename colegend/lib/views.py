@@ -107,9 +107,11 @@ def get_icon(name):
         "deadline": "calendar-o",
         "description": "file-text-o",
         # statuses
-        "active": "dot-circle-o",
+        "next": "dot-circle-o",
         "todo": "circle-o",
         "waiting": "clock-o",
+        "someday": "circle-o-notch",
+        "maybe": "circle-thin",
         "done": "check-circle-o",
         "canceled": "times-circle-o",
         # other

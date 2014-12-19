@@ -19,7 +19,6 @@
 {% block page_content %}
     <div class="task-details well">
         {% include "status/_status_field.html" with status=task.status %}
-        {% include "lib/_priority_field.html" with priority=task.priority %}
         {% include "tags/_tags_field.html" with tags=task.tags.all %}
         <div class="task-context pull-right">
             {% include "projects/_project_field.html" with project=task.project %}

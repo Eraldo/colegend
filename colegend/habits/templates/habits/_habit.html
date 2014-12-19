@@ -1,5 +1,5 @@
 <div class="habit well well-sm">
-    <span class="label priority">{{ habit.order }}</span>
+    <span class="label label-default">{{ habit.order }}</span>
     <b>{% include "habits/_habit_link.html" %}</b>
     <br/>
     {% include "tags/_tags_field.html" with tags=habit.tags.all %}

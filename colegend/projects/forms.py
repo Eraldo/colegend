@@ -11,7 +11,7 @@ __author__ = 'eraldo'
 class ProjectForm(ModelForm):
     class Meta:
         model = Project
-        fields = ['name', 'description', 'status', 'priority', 'deadline', 'tags']
+        fields = ['name', 'description', 'status', 'deadline', 'tags']
         widgets = {
             'description': MarkItUpWidget(),
         }
@@ -21,9 +21,8 @@ class ProjectForm(ModelForm):
         Field('name', autofocus='True'),
         Field('description'),
         Div(
-            Field('status', wrapper_class="col-md-4"),
-            Field('priority', wrapper_class="col-md-4"),
-            Field('deadline', wrapper_class="col-md-4"),
+            Field('status', wrapper_class="col-md-6"),
+            Field('deadline', wrapper_class="col-md-6"),
             css_class="row",
         ),
         Field('tags'),

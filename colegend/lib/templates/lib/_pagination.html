@@ -1,15 +1,7 @@
 {% if is_paginated %}
     <ul class="pagination">
-        {% if page_obj.has_previous %}
-            <li><a href="?page=1">&laquo;</a></li>
-        {% endif %}
-
         {% for i in paginator.page_range %}
-            <li {% if page_obj.number == i %} class="active" {% endif %}><a href="?page={{ i }}">{{ i }}</a></li>
+            <li {% if page_obj.number == i %} class="active" {% endif %}><a href="?page={{ i }}&{{ request.GET.urlencode }}">{{ i }}</a></li>
         {% endfor %}
-
-        {% if page_obj.has_next %}
-            <li><a href="?page={{ page_obj.paginator.num_pages }}">&raquo;</a></li>
-        {% endif %}
     </ul>
 {% endif %}

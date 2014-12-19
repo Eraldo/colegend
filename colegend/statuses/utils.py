@@ -18,7 +18,7 @@ class StatusFilterMixin:
             queryset = queryset.status(status)
         return queryset
 
-    def add_status_to_context(self, context):
+    def _add_status_to_context(self, context):
         """
         Add the posted status to the context dictionary
 
@@ -35,7 +35,7 @@ class StatusFilterMixin:
         :return: context with added key 'status_filters'
         """
         context = super(StatusFilterMixin, self).get_context_data(**kwargs)
-        self.add_status_to_context(context)
+        self._add_status_to_context(context)
         context['status_options'] = Status.objects.all()
         return context
 

@@ -18,7 +18,6 @@
 {% block page_content %}
     <div class="project-details well">
     {% include "status/_status_field.html" with status=project.status %}
-    {% include "lib/_priority_field.html" with priority=project.priority %}
     {% include "tags/_tags_field.html" with tags=project.tags.all %}
         {{ project.description }}
     </div>

@@ -1,27 +1,11 @@
 from django.core.exceptions import SuspiciousOperation, ValidationError
 from django.test import TestCase
-import factory
 from projects.tests.test_models import ProjectFactory
-from statuses.tests.test_models import StatusFactory
 from tasks.models import Task
+from tasks.tests.factories import TaskFactory
 from users.tests.test_models import UserFactory
 
 __author__ = 'eraldo'
-
-
-class TaskFactory(factory.DjangoModelFactory):
-    class Meta:
-        model = Task
-        django_get_or_create = ('name',)
-
-    owner = factory.SubFactory(UserFactory)
-    project = factory.SubFactory(ProjectFactory)
-    name = factory.Sequence(lambda n: 'Task{0}'.format(n))
-    description = "Some description."
-    status = factory.SubFactory(StatusFactory)
-    priority = 2
-    # date = ""
-    # deadline = ""
 
 
 class TaskModelTests(TestCase):

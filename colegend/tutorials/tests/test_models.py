@@ -1,18 +1,8 @@
 from django.test import TestCase
-import factory
-from tutorials.models import Tutorial, get_tutorial
+from tutorials.models import get_tutorial
+from tutorials.tests.factories import TutorialFactory
 
 __author__ = 'eraldo'
-
-
-class TutorialFactory(factory.DjangoModelFactory):
-
-    class Meta:
-        model = Tutorial
-        django_get_or_create = ('name',)
-
-    name = factory.Sequence(lambda n: 'Tutorial{0}'.format(n))
-    description = "Some description."
 
 
 class TutorialModelTests(TestCase):

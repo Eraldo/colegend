@@ -1,6 +1,6 @@
 from django.test import TestCase
 from tags.forms import TagForm
-from tags.tests.test_models import TagFactory
+from tags.tests.factories import TagFactory
 
 __author__ = 'eraldo'
 

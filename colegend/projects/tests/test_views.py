@@ -46,7 +46,6 @@ class ProjectNewViewTest(LoggedInTestMixin, TestCase):
         self.assertEqual(Project.objects.count(), 0)
         self.assertFormError(response, "form", "name", "This field is required.")
         self.assertFormError(response, "form", "status", "This field is required.")
-        self.assertFormError(response, "form", "priority", "This field is required.")
         self.assertEqual(response.status_code, 200)
 
     def test_duplicate_owner_and_name(self):

@@ -11,7 +11,7 @@ __author__ = 'eraldo'
 class TaskForm(ModelForm):
     class Meta:
         model = Task
-        fields = ['project', 'name', 'description', 'status', 'priority', 'date', 'deadline', 'tags']
+        fields = ['project', 'name', 'description', 'status', 'date', 'deadline', 'tags']
         widgets = {
             'description': MarkItUpWidget(),
         }
@@ -24,10 +24,9 @@ class TaskForm(ModelForm):
         ),
         Field('description'),
         Row(
-            Field('status', wrapper_class="col-md-3"),
-            Field('priority', wrapper_class="col-md-3"),
-            Field('date', wrapper_class="col-md-3"),
-            Field('deadline', wrapper_class="col-md-3"),
+            Field('status', wrapper_class="col-md-4"),
+            Field('date', wrapper_class="col-md-4"),
+            Field('deadline', wrapper_class="col-md-4"),
         ),
         Field('tags'),
         SaveButton(),
