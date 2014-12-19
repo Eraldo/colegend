@@ -1,6 +1,7 @@
 from django.core.exceptions import ValidationError, SuspiciousOperation
 from django.db import models
 from django.db.models.query import QuerySet
+from django.utils import timezone
 from markitup.fields import MarkupField
 from lib.models import TrackedBase, AutoUrlMixin, OwnedBase, OwnedQueryMixin, ValidateModelMixin, StatusTrackedBase
 from projects.models import Project
@@ -49,6 +50,34 @@ class Task(ValidateModelMixin, AutoUrlMixin, OwnedBase, StatusTrackedBase, Track
         self.status = Status.objects.get(name="done")
         self.save()
         return True  # worked
+
+    def get_due_string(self):
+        date = self.date
+        deadline = self.deadline
+        if not date or deadline:
+            return
+        today = timezone.now().date()
+        if date and date < today or deadline and deadline < today:
+            return "overdue"
+        elif date and date == today or deadline and deadline == today:
+            return "due"
+        else:
+            return ""
+
+
+    @property
+    def is_overdue(self):
+        date = self.date
+        deadline = self.deadline
+        if not date or deadline:
+            return False
+        today = timezone.now().date()
+        if date and date < today:
+            return True
+        elif deadline and deadline < today:
+            return True
+        else:
+            return False
 
     def clean(self):
         super(Task, self).clean()

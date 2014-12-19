@@ -179,3 +179,38 @@ span.streak {
 /*}*/
 
 /* end tooltips */
+
+/* dates and deadlines */
+.date.past {
+    color: grey;
+}
+.date.near-past {
+    color: darkred;
+}
+.date.present {
+    color: #d9534f;
+}
+.date.near-future {
+    color: #f0ad4e
+}
+.date.future {
+    color: #5cb85c;
+}
+
+.deadline.past {
+    color: grey;
+}
+.deadline.near-past {
+    color: darkred;
+}
+.deadline.present {
+    color: #d9534f;
+}
+.deadline.near-future {
+    color: #f0ad4e;
+}
+.deadline.future {
+    color: #5cb85c;
+}
+
+/* end dates and deadlines */

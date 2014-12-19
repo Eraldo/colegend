@@ -50,6 +50,9 @@ class StatusQueryMixin:
     def closed(self):
         return self.filter(status__type=Status.CLOSED)
 
+    def next(self):
+        return self.filter(status__name="next")
+
     def status(self, status):
         """
         Filters the QuerySet based on a given status.

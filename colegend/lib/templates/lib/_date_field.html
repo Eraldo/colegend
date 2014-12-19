@@ -1,5 +1,11 @@
 {% load icons %}
+{% load dates %}
 
 <div class="date-field inline">
-    {% icon "date" %} {{ date|default:"" }}
+    {% icon "date" %}
+    {% if date %}
+        <span class="date {{ date|date_tense }}" data-toggle="tooltip" title="{{ date }}">
+            {{ date|due_date }}
+        </span>
+    {% endif %}
 </div>

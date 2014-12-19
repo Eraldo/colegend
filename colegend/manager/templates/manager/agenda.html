@@ -1,4 +1,6 @@
 {% extends 'page.html' %}
+{% load icons %}
+{% load dates %}
 
 {% block page_title %}
     Agenda
@@ -10,54 +12,70 @@
     <div class="row">
         <div class="col-md-6">
             <h2><span class="tooltip-text" data-toggle="tooltip" data-placement="right"
-                      title="Top 3 Projects and next steps.">Project Focus</span></h2>
+                      title="Next Projects and one next step.">{% icon "project" %} Project Focus</span>
+                <span class="badge">{{ next_projects.count }}/4</span>
+            </h2>
 
             <div class="well">
-                {% for project in top_projects %}
+                {% for project in next_projects %}
                     <span class="lead">{% include "projects/_project_field.html" %}</span><br/>
-                    {% include "tasks/_task_link.html" with task=project.tasks.first %}<br/>
+                    {% if project.next_step %}
+                        {% include "tasks/_task_link.html" with task=project.next_step %}<br/>
+                    {% else %}
+                        <span class="text-warning">Choose a next step!</span><br/>
+                    {% endif %}
                 {% endfor %}
             </div>
-        </div>
-        <div class="col-md-6">
             <h2><span class="tooltip-text" data-toggle="tooltip" data-placement="right"
-                      title="Top 7 tasks without a project.">Task Focus</span></h2>
+                      title="Next tasks without a project.">{% icon "task" %} Task Focus</span>
+                <span class="badge">{{ next_tasks.count }}/7</span>
+            </h2>
 
             <div class="well">
-                {% for task in top_single_tasks %}
+                {% for task in next_tasks %}
                     {% include "tasks/_task_link.html" %}<br/>
                 {% endfor %}
             </div>
         </div>
-    </div>
-    <div class="row">
         <div class="col-md-6">
-            <h2><span class="tooltip-text" data-toggle="tooltip" data-placement="right" title="Top 2 scheduled tasks.">Scheduled</span></h2>
+            {#            {% if scheduled_tasks %}#}
+            <h2><span class="tooltip-text" data-toggle="tooltip" data-placement="right"
+                      title="Tasks scheduled today or before.">{% icon "date" %} Schedule</span>
+            </h2>
 
             <div class="well">
-                <div class="row">
-                    {% for task in top_scheduled_tasks %}
-                        <div class="col-md-6">
-                            <span class="lead">{{ task.date }}</span><br/>
-                            {% include "tasks/_task_link.html" %}
-                        </div>
-                    {% endfor %}
-                </div>
+                {% for task in scheduled_tasks %}
+                    {% ifchanged %}{% include "lib/_date_field.html" with date=task.date %}<br/>{% endifchanged %}
+                    {% include "tasks/_task_link.html" %}<br/>
+                {% empty %}
+                    <span class="text-success">I am the master of my time. :D</span>
+                {% endfor %}
             </div>
-        </div>
-        <div class="col-md-6">
-    <h2><span class="tooltip-text" data-toggle="tooltip" data-placement="right" title="Top 2 deadlined tasks.">Deadlined</span></h2>
-    <div class="well">
-        <div class="row">
-            {% for task in top_deadlined_tasks %}
-                <div class="col-md-6">
-                    <span class="lead">{{ task.deadline }}</span><br/>
-                    {% include "tasks/_task_link.html" %}
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-        </div>
-    </div>
+            {#            {% endif %}#}
+            <h2><span class="tooltip-text" data-toggle="tooltip" data-placement="right"
+                      title="Top 2 deadlined projects and top 4 deadlined tasks.">{% icon "deadline" %} Deadlines</span>
+            </h2>
 
+            <div class="well">
+                {% if top_deadlined_projects or top_deadlined_tasks %}
+                    {% if top_deadlined_projects %}
+                        {% for project in top_deadlined_projects %}
+                            {% include "lib/_deadline_field.html" with deadline=project.deadline %}<br/>
+                            {% include "projects/_project_field.html" %}<br/>
+                        {% endfor %}
+                        <br/>
+                    {% endif %}
+                    {% if top_deadlined_tasks %}
+                        {% for task in top_deadlined_tasks %}
+                            {% include "lib/_deadline_field.html" with deadline=task.deadline %}<br/>
+                            {% include "tasks/_task_link.html" %}<br/>
+                        {% endfor %}
+                    {% endif %}
+                {% else %}
+                    <span class="text-success">I am ahead of time. :D</span>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
 {% endblock %}

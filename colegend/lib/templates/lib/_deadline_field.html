@@ -1,6 +1,11 @@
 {% load icons %}
-
+{% load dates %}
 
 <div class="deadline-field inline">
-    {% icon "deadline" %} {{ deadline|default:"" }}
+    {% icon "deadline" %}
+    {% if deadline %}
+        <span class="deadline {{ deadline|date_tense }}" data-toggle="tooltip" title="{{ deadline }}">
+            {{ deadline|due_date }}
+        </span>
+    {% endif %}
 </div>

@@ -35,10 +35,14 @@ class Project(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, Taggable
         return self.name
 
     @property
-    def has_next_step(self):
+    def next_step(self):
         tasks = self.tasks
-        if tasks.exists() and tasks.filter(status__name="next"):
+        if tasks.exists():
+            return tasks.filter(status__name="next").first()
+
+    @property
+    def has_next_step(self):
+        if self.next_step:
             return True
         else:
             return False
-
