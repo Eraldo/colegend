@@ -174,8 +174,9 @@ span.streak {
 .tooltip-text {
     border-bottom: 1px dashed #999;
 }
+
 /*span[data-toggle="tooltip"] {*/
-    /*border-bottom: 1px dashed #999;*/
+/*border-bottom: 1px dashed #999;*/
 /*}*/
 
 /* end tooltips */
@@ -184,15 +185,19 @@ span.streak {
 .date.past {
     color: grey;
 }
+
 .date.near-past {
     color: darkred;
 }
+
 .date.present {
     color: #d9534f;
 }
+
 .date.near-future {
     color: #f0ad4e
 }
+
 .date.future {
     color: #5cb85c;
 }
@@ -200,17 +205,80 @@ span.streak {
 .deadline.past {
     color: grey;
 }
+
 .deadline.near-past {
     color: darkred;
 }
+
 .deadline.present {
     color: #d9534f;
 }
+
 .deadline.near-future {
     color: #f0ad4e;
 }
+
 .deadline.future {
     color: #5cb85c;
 }
 
 /* end dates and deadlines */
+
+/* categories */
+.text-category-7 {
+    color: darkviolet;
+}
+
+.text-category-6 {
+    color: indigo;
+}
+
+.text-category-5 {
+    color: dodgerblue;
+}
+
+.text-category-4 {
+    color: green;
+}
+
+.text-category-3 {
+    color: gold;
+}
+
+.text-category-2 {
+    color: darkorange;
+}
+
+.text-category-1 {
+    color: crimson;
+}
+
+.bg-category-7 {
+    background-color: darkviolet;
+}
+
+.bg-category-6 {
+    background-color: indigo;
+}
+
+.bg-category-5 {
+    background-color: dodgerblue;
+}
+
+.bg-category-4 {
+    background-color: green;
+}
+
+.bg-category-3 {
+    background-color: gold;
+}
+
+.bg-category-2 {
+    background-color: darkorange;
+}
+
+.bg-category-1 {
+    background-color: crimson;
+}
+
+/* end categories */

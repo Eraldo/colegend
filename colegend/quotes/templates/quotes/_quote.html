@@ -1,8 +1,13 @@
+{% load icons %}
+
 <div class="quote">
+    <span class="pull-right">
+        {% include "categories/_category_field.html" with category=quote.category %}
+    </span>
     <blockquote>
         <span class="lead page-navigation">
             <a href="{{ quote.get_show_url }}" class="back-link">
-                <i class="fa fa-quote-left"></i>
+                {% icon "quote" %}
             </a>
             {{ quote }}</span>
 
