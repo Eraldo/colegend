@@ -46,7 +46,7 @@ class ProjectListView(StatusFilterMixin, ProjectMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['total_counter'] = self.get_queryset().count()
-        context['next_counter'] = self.get_queryset().next().count()
+        context['next_counter'] = self.request.user.projects.next().count()
         return context
 
 
