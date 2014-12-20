@@ -35,6 +35,9 @@
             <div class="well">
                 {% for task in next_tasks %}
                     {% include "tasks/_task_link.html" %}<br/>
+                {% empty %}
+                    <span class="text-warning">Grab some more tasks..</span>
+                    <span class="text-success">or celebrate! :D</span>
                 {% endfor %}
             </div>
         </div>
