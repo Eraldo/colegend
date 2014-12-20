@@ -8,9 +8,8 @@
 {% block up_url %}{% url "quotes:quote_list" %}{% endblock %}
 
 {% block page_title_extras %}
-    <span data-toggle="tooltip" title="Total">
-        <span class="badge status">{{ contribution_counter }}</span>
-    </span>
+    {% include "lib/_total_counter.html" %}
+    {% include "lib/_share_counter.html" %}
 {% endblock %}
 
 {% block page_controls %}
@@ -47,9 +46,9 @@
     <div class="well">
         <h3>Share your quotes</h3>
 
-        {% if contribution_counter %}
-            You have contributed <span class="badge">{{ contribution_counter }}</span>
-            quote{{ contribution_counter|pluralize }}!
+        {% if share_counter %}
+            You have contributed <span class="badge">{{ share_counter }}</span>
+            quote{{ share_counter|pluralize }}!
         {% else %}
             Time to enter your <span class="badge">first</span> quote.
         {% endif %}

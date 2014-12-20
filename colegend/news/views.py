@@ -16,7 +16,7 @@ class NewsBlockMixin():
 class NewsBlockListView(ActiveUserRequiredMixin, NewsBlockMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["contribution_counter"] = self.get_queryset().count()
+        context["total_counter"] = self.get_queryset().count()
         return context
 
 

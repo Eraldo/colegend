@@ -40,12 +40,13 @@ class ProjectListView(StatusFilterMixin, ProjectMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        queryset = super(ProjectListView, self).get_queryset()
+        queryset = super().get_queryset()
         return self.filter_status(queryset)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['counter'] = self.get_queryset().count()
+        context['total_counter'] = self.get_queryset().count()
+        context['next_counter'] = self.get_queryset().next().count()
         return context
 
 

@@ -8,9 +8,8 @@
 {% block up_url %}{% url "projects:project_list" %}{% endblock %}
 
 {% block page_title_extras %}
-    <span data-toggle="tooltip" title="Total">
-        <span class="badge status">{{ counter }}</span>
-    </span>
+    {% include "lib/_total_counter.html" %}
+    {% include "status/_next_counter.html" with next_counter_max=4 %}
 {% endblock %}
 
 {#{% block page_controls_container %}{% endblock %}#}

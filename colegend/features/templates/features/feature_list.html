@@ -5,9 +5,7 @@
 {% block up_url %}{% url "features:feature_list" %}{% endblock %}
 
 {% block page_title_extras %}
-    <span data-toggle="tooltip" title="Total">
-        <span class="badge status">{{ feature_list.count }}</span>
-    </span>
+    {% include "lib/_total_counter.html" %}
 {% endblock %}
 
 

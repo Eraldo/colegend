@@ -50,7 +50,8 @@ class TaskListView(StatusFilterMixin, TaskMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['counter'] = self.get_queryset().count()
+        context['total_counter'] = self.get_queryset().count()
+        context['next_counter'] = self.get_queryset().next().filter(project__isnull=True).count()
         return context
 
 

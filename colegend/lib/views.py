@@ -119,6 +119,8 @@ def get_icon(name):
         "signup": "sign-in",
         "chat": "wechat",
         "virtual-room": "cube",  # Alternative icons: group cube video-camera
+        "streak": "link",
+        "share": "share",
     }
     if name in icon_map:
         name = icon_map.get(name)

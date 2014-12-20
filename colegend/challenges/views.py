@@ -16,14 +16,15 @@ class ChallengeMixin(ActiveUserRequiredMixin):
     tutorial = "Challenges"
 
     def get_queryset(self):
-        qs = super(ChallengeMixin, self).get_queryset()
+        qs = super().get_queryset()
         return qs.filter(accepted=True)
 
 
 class ChallengeListView(ChallengeMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["contribution_counter"] = Challenge.objects.filter(provider=self.request.user).count()
+        context["total_counter"] = self.get_queryset().count()
+        context["share_counter"] = self.request.user.challenge_set.count()
         return context
 
 

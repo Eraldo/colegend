@@ -39,7 +39,7 @@ class DayEntryListView(DayEntryMixin, ArchiveIndexView):
 
     def get_context_data(self, **kwargs):
         context = super(DayEntryListView, self).get_context_data(**kwargs)
-        context['counter'] = self.get_queryset().count()
+        context['total_counter'] = self.get_queryset().count()
         context['streak'] = DayEntry.objects.streak_for(self.request.user)
         return context
 

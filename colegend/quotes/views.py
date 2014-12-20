@@ -35,7 +35,8 @@ class QuoteListView(QuoteMixin, ListView):
         quotes = self.get_queryset()
         context['quotes'] = quotes.accepted()
         context['pending'] = quotes.pending()
-        context['contribution_counter'] = quotes.count()
+        context['total_counter'] = Quote.objects.accepted().count()
+        context['share_counter'] = self.request.user.quote_set.count()
         context['random_quote'] = Quote.objects.accepted().random()
         return context
 

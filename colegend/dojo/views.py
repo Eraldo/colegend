@@ -1,7 +1,7 @@
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse_lazy
 from django.template.loader import render_to_string
-from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
 from dojo.forms import ModuleForm
 from dojo.models import Module
 from lib.views import ActiveUserRequiredMixin
@@ -15,18 +15,19 @@ class DojoMixin(ActiveUserRequiredMixin):
     icon = "dojo"
     tutorial = "Dojo"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(accepted=True)
 
 
-class DojoView(DojoMixin, TemplateView):
+class DojoView(DojoMixin, ListView):
     template_name = "dojo/dojo.html"
 
     def get_context_data(self, **kwargs):
-        context = super(DojoView, self).get_context_data(**kwargs)
-        context['modules'] = Module.objects.filter(accepted=True)
-        context["contribution_counter"] = Module.objects.filter(provider=self.request.user).count()
+        context = super().get_context_data(**kwargs)
+        context['modules'] = self.get_queryset()
+        context["total_counter"] = self.get_queryset().count()
+        context["share_counter"] = self.request.user.module_set.count()
         return context
 
 

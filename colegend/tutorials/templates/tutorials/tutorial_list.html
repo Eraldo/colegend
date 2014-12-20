@@ -8,9 +8,7 @@
 {% block up_url %}{% url "tutorials:tutorial_list" %}{% endblock %}
 
 {% block page_title_extras %}
-    <span data-toggle="tooltip" title="Total">
-        <span class="badge status">{{ contribution_counter }}</span>
-    </span>
+    {% include "lib/_total_counter.html" %}
 {% endblock %}
 
 
