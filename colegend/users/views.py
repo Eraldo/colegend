@@ -64,10 +64,16 @@ class UserUpdateView(UserMixin, UpdateView):
     # we already imported User in the view code above, remember?
     model = User
 
-    # send the user back to their own page after a successful update
+    # send the user back to their settings after a successful update
     def get_success_url(self):
-        return reverse("users:detail",
-                       kwargs={"username": self.request.user.username})
+        return reverse("users:settings")
+
+    def form_valid(self, form):
+        username_old = self.request.user.username
+        username_new = form.cleaned_data.get('username')
+        message = "Username changed from '{}' to '{}'.".format(username_old, username_new)
+        messages.add_message(self.request, messages.SUCCESS, message)
+        return super().form_valid(form)
 
     def get_object(self):
         # Only get the User record for the user making the request
