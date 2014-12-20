@@ -5,7 +5,6 @@ from django.core.exceptions import ValidationError
 from django.views.generic import DetailView, UpdateView, DeleteView, CreateView, ArchiveIndexView, RedirectView
 from journals.forms import DayEntryForm
 from journals.models import DayEntry
-from statuses.models import Status
 
 __author__ = 'eraldo'
 
@@ -76,7 +75,8 @@ class DayEntryShowView(DayEntryMixin, DetailView):
         scheduled_tasks = user.tasks.filter(date=entry.date)
         deadline_tasks = user.tasks.filter(deadline=entry.date)
         done_tasks = user.tasks.closed().filter(completion_date__contains=entry.date).order_by('completion_date')
-        day_tasks = scheduled_tasks or deadline_tasks or done_tasks
+        created_tasks = user.tasks.filter(creation_date__contains=entry.date).order_by('creation_date')
+        day_tasks = scheduled_tasks or deadline_tasks or done_tasks or created_tasks
         if day_tasks:
             context["day_tasks"] = day_tasks
             if scheduled_tasks:
@@ -85,6 +85,8 @@ class DayEntryShowView(DayEntryMixin, DetailView):
                 context["deadline_tasks"] = deadline_tasks
             if done_tasks:
                 context["done_tasks"] = done_tasks
+            if created_tasks:
+                context["created_tasks"] = created_tasks
         return context
 
 

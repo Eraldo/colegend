@@ -45,6 +45,12 @@
                             {% include "tasks/_task_link.html" %}<br/>
                         {% endfor %}
                     {% endif %}
+                    {% if created_tasks %}
+                        <h4>Created</h4>
+                        {% for task in created_tasks %}
+                            {% include "tasks/_task_link.html" %}<br/>
+                        {% endfor %}
+                    {% endif %}
                 </div>
             </div>
         {% endif %}
