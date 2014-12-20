@@ -71,7 +71,7 @@ class UserUpdateViewTest(TestCase):
         user = UserFactory()
         self.client.login(username=user.username, password="tester")
         response = self.client.post(reverse('users:update'), data={"username": user.username})
-        self.assertRedirects(response, reverse("users:detail", kwargs={"username": user.username}))
+        self.assertRedirects(response, reverse("users:settings"))
 
 
 class SettingsUpdateViewTest(TestCase):
