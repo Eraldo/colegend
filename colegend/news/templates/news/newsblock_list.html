@@ -8,7 +8,9 @@
 {% block up_url %}{% url "news:newsblock_list" %}{% endblock %}
 
 {% block page_title_extras %}
-    <span class="badge status">{{ contribution_counter }}</span>
+    <span data-toggle="tooltip" title="Total">
+        <span class="badge status">{{ contribution_counter }}</span>
+    </span>
 {% endblock %}
 
 {% block page_controls %}

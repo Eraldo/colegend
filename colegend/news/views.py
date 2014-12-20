@@ -12,13 +12,12 @@ class NewsBlockMixin():
     form_class = NewsBlockForm
     icon = "news"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
-
 
 class NewsBlockListView(ActiveUserRequiredMixin, NewsBlockMixin, ListView):
-    pass
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["contribution_counter"] = self.get_queryset().count()
+        return context
 
 
 class NewsBlockCreateView(ManagerRequiredMixin, NewsBlockMixin, CreateView):

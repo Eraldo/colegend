@@ -9,8 +9,12 @@
 {% block up_url %}{% url "journals:dayentry_list" %}{% endblock %}
 
 {% block page_title_extras %}
-    <span class="badge">{{ counter }}</span>
-    <span class="streak badge"><i class="fa fa-link"></i> {{ streak }}</span>
+    <span data-toggle="tooltip" title="Total">
+        <span class="badge">{{ counter }}</span>
+    </span>
+    <span data-toggle="tooltip" title="Streak">
+        <span class="streak badge"><i class="fa fa-link"></i> {{ streak }}</span>
+    </span>
 {% endblock %}
 
 {% block page_controls %}

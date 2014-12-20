@@ -8,7 +8,9 @@
 {% block up_url %}{% url "tasks:task_list" %}{% endblock %}
 
 {% block page_title_extras %}
-    <span class="badge">{{ counter }}</span>
+    <span data-toggle="tooltip" title="Total">
+        <span class="badge">{{ counter }}</span>
+    </span>
 {% endblock %}
 
 {% block page_controls %}

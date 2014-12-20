@@ -13,6 +13,7 @@ class TutorialMixin():
     model = Tutorial
     form_class = TutorialForm
     icon = "tutorial"
+    tutorial = "Tutorials"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -22,7 +23,7 @@ class TutorialMixin():
 class TutorialListView(ActiveUserRequiredMixin, TutorialMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['tutorial'] = get_object_or_None(Tutorial, name="Tutorials")
+        context['contribution_counter'] = self.get_queryset().count()
         return context
 
 

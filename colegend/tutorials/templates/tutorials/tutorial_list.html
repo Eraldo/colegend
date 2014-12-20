@@ -7,6 +7,13 @@
 
 {% block up_url %}{% url "tutorials:tutorial_list" %}{% endblock %}
 
+{% block page_title_extras %}
+    <span data-toggle="tooltip" title="Total">
+        <span class="badge status">{{ contribution_counter }}</span>
+    </span>
+{% endblock %}
+
+
 {% block page_controls %}
     {% if user.is_manager %}
         <a href="{% url "tutorials:tutorial_new" %}" class="btn btn-warning">{% icon "new" %}</a>

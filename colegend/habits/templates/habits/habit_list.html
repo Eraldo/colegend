@@ -7,7 +7,9 @@
 {% block up_url %}{% url "habits:habit_list" %}{% endblock %}
 
 {% block page_title_extras %}
-    <span class="badge">{{ habit_list.count }}</span>
+    <span data-toggle="tooltip" title="Total">
+        <span class="badge">{{ habit_list.count }}</span>
+    </span>
 {% endblock %}
 
 {% block page_controls_container %}{% endblock %}
