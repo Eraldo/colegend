@@ -1,3 +1,4 @@
+from autocomplete_light import MultipleChoiceWidget
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, Div
 from django.forms import ModelForm
@@ -14,6 +15,7 @@ class ProjectForm(ModelForm):
         fields = ['name', 'description', 'status', 'deadline', 'tags']
         widgets = {
             'description': MarkItUpWidget(),
+            'tags': MultipleChoiceWidget(autocomplete="TagAutocomplete"),
         }
 
     helper = FormHelper()

@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models import Min
 from django.db.models.query import QuerySet
 from markitup.fields import MarkupField
 from lib.models import TrackedBase, AutoUrlMixin, OwnedBase, OwnedQueryMixin, ValidateModelMixin

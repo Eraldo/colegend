@@ -39,6 +39,7 @@ logutils==0.3.3
 
 # project specific
 django-bootstrap3==4.8.2
+django-autocomplete-light==2.0.4
 
 # Configuration
 django-secure==1.0

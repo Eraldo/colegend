@@ -1,7 +1,5 @@
-from django.core.urlresolvers import reverse_lazy
 from django.db import models
 from django.db.models.query import QuerySet
-from django.utils.translation import string_concat
 from markitup.fields import MarkupField
 from lib.models import AutoUrlMixin, OwnedBase, TrackedBase, OwnedQueryMixin, ValidateModelMixin
 
@@ -33,12 +31,6 @@ class Tag(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, models.Model
 
 class TaggableBase(models.Model):
     tags = models.ManyToManyField(Tag, blank=True, null=True, related_name="%(app_label)s")
-    tags.help_text = string_concat(  # using string_concat because format is not lazy.
-        "<a href='",
-        reverse_lazy("tags:tag_new"),
-        "' target='_blank'><i class='fa fa-plus-circle' style='color: green;'></i> New Tag</a>",
-        "- <small>*Refresh page to view new tag.</small><br>"
-    )
 
     class Meta:
         abstract = True

@@ -46,7 +46,10 @@ urlpatterns = patterns('',
     url(r'^avatar/', include('avatar.urls')),
 
     # django-markitup AJAX preview
-    url(r'^markitup/', include('markitup.urls'))
+    url(r'^markitup/', include('markitup.urls')),
+
+    # django-autocomplet-light
+    url(r'^autocomplete/', include('autocomplete_light.urls')),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

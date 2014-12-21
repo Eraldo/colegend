@@ -210,6 +210,9 @@ DJANGO_APPS = (
     # Useful template tags:
     # 'django.contrib.humanize',
 
+    # django-autocomplete-light
+    'autocomplete_light',
+
     # Admin panel and documentation:
     'django.contrib.admin',
     # 'django.contrib.admindocs',

@@ -282,3 +282,12 @@ span.streak {
 }
 
 /* end categories */
+
+/* django-autocomplete-light */
+
+#hint_id_tags {
+    display: none;
+}
+
+/* django-autocomplete-light */
+

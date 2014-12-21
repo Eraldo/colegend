@@ -99,6 +99,7 @@ def get_icon(name):
         "edit": "pencil",
         "delete": "trash",
         "cancel": "times",
+        "remove": "remove",
         "manage": "asterisk",
         "accept": "check-circle",
         # fields
