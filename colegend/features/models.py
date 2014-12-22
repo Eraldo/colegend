@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from easy_thumbnails.fields import ThumbnailerImageField
 
 __author__ = 'eraldo'
 
@@ -24,6 +25,8 @@ class Feature(models.Model):
         (OPERATOR, 'Operator'),
     )
     role = models.CharField(verbose_name="System Role", max_length=2, choices=ROLE_CHOICES, default=OPERATOR)
+
+    image = ThumbnailerImageField(upload_to='features', blank=True, resize_source=dict(size=(40, 40)))
 
     objects = FeatureManager()
 

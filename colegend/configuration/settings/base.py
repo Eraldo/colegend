@@ -255,6 +255,7 @@ PROJECT_APPS = (
     'markitup',
     # usability
     'keyboard',
+    'easy_thumbnails',
 )
 EXTRA_APPS = (
     'django_extensions',

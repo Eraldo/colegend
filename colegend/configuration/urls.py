@@ -53,7 +53,7 @@ urlpatterns = patterns('',
     # django-autocomplet-light
     url(r'^autocomplete/', include('autocomplete_light.urls')),
 
-    # robots.txt file for crawlers
+    # Added robots.txt file for crawlers (google/etc)
     (r'^robots.txt$', lambda r: HttpResponse("User-agent: *\nDisallow: /", mimetype="text/plain")),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

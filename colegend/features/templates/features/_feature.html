@@ -1,4 +1,9 @@
 <div class="feature well well-sm">
+    {% if feature.image %}
+    <div style="display: inline-block">
+        <img src="{{ MEDIA_URL }}{{ feature.image }}" alt="Feature Image">
+    </div>
+    {% endif %}
     <b>{{ feature }}</b>
     <div class="date-published-field inline"><small style="color: grey">&mdash; {{ feature.date_published }}</small></div>
     <small class="pull-right"><span class="label label-default bg-{{ feature.get_role_display|lower }}"> {{ feature.get_role_display }}</span></small>

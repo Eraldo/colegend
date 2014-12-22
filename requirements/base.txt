@@ -18,6 +18,7 @@ markdown-checklist==0.4.0
 
 # Images
 Pillow==2.5.3
+easy-thumbnails==2.2
 
 # For user registration, either via email or social
 # Well-built with regular release cycles!
