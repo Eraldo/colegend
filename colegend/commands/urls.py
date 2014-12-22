@@ -1,6 +1,5 @@
 from django.conf.urls import patterns, url
 from commands.views import quick_command
-from features.views import FeatureListView
 
 __author__ = 'eraldo'
 

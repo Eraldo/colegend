@@ -1,3 +1,5 @@
+from statuses.models import STATUSES
+
 __author__ = 'eraldo'
 
 """
@@ -18,7 +20,7 @@ from markdown.extensions import Extension
 from markdown.util import etree
 
 # Global Vars
-STATUSES = ['TODO', 'ACTIVE', 'DONE', 'WAITING', 'CANCELED']
+STATUSES
 TASK_RE = r'(({})): '.format('|'.join(STATUSES))
 
 

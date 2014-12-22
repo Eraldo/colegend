@@ -12,6 +12,9 @@
     }
 </script>
 
+{# Quick Command #}
+{% include "lib/_quick_command_modal.html" %}
+
 {# tooltips #}
 <script>
     $('[data-toggle="tooltip"]').tooltip();
@@ -39,9 +42,6 @@
         autoclose: true
     });
 </script>
-
-{# Quick Command #}
-{% include "lib/_quick_command_modal.html" %}
 
 {# keyboard shortcuts #}
 {% if user.settings.keyboard %}

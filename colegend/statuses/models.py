@@ -3,6 +3,9 @@ from django.db import models
 __author__ = 'eraldo'
 
 
+STATUSES = ['TODO', 'NEXT', 'DONE', 'WAITING', 'CANCELED']
+
+
 class StatusManager(models.Manager):
     def open(self):
         return self.filter(type=Status.OPEN)
