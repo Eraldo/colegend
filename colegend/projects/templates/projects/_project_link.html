@@ -1,7 +1,7 @@
 {% load icons %}
 
 <b>
-<span data-toggle="tooltip" title="{% if project.is_closed %}{{ project.completion_date|default:"" }}{% endif %}">
+<span data-toggle="tooltip" title="{% if project.is_closed %}Completed {{ project.completion_date|default:"" }}{% endif %}">
     {% icon "project" %}
 </span>
     <a href="{{ project.get_show_url }}">{{ project }}</a>
