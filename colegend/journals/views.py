@@ -73,8 +73,11 @@ class DayEntryShowView(DayEntryMixin, DetailView):
         entry = self.get_object()
         user = self.request.user
         scheduled_tasks = user.tasks.filter(date=entry.date)
+        deadline_projects = user.projects.filter(deadline=entry.date)
         deadline_tasks = user.tasks.filter(deadline=entry.date)
+        done_projects = user.projects.closed().filter(completion_date__contains=entry.date).order_by('completion_date')
         done_tasks = user.tasks.closed().filter(completion_date__contains=entry.date).order_by('completion_date')
+        created_projects = user.projects.filter(creation_date__contains=entry.date).order_by('creation_date')
         created_tasks = user.tasks.filter(creation_date__contains=entry.date).order_by('creation_date')
         day_tasks = scheduled_tasks or deadline_tasks or done_tasks or created_tasks
         if day_tasks:
@@ -83,8 +86,14 @@ class DayEntryShowView(DayEntryMixin, DetailView):
                 context["scheduled_tasks"] = scheduled_tasks
             if deadline_tasks:
                 context["deadline_tasks"] = deadline_tasks
+            if deadline_projects:
+                context["deadline_projects"] = deadline_projects
+            if done_projects:
+                context["done_projects"] = done_projects
             if done_tasks:
                 context["done_tasks"] = done_tasks
+            if created_projects:
+                context["created_projects"] = created_projects
             if created_tasks:
                 context["created_tasks"] = created_tasks
         return context

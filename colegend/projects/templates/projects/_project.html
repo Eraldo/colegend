@@ -6,7 +6,7 @@
         <a href="{{ project.get_delete_url }}" class="item-delete-button btn btn-danger btn-xs" role="button">{% icon "delete" %}<span class="sr-only"> Delete</span></a>
     </div>
     <div class="task-line-1">
-    <b>{% icon "project" %} <a href="{{ project.get_show_url }}">{{ project }}</a></b>
+    {% include "projects/_project_link.html" %}
     {% include "tags/_tags_field.html" with tags=project.tags.all %}
     </div>
     <div style="height: 5px;"></div>

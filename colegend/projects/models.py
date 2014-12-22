@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models.query import QuerySet
 from markitup.fields import MarkupField
-from lib.models import TrackedBase, AutoUrlMixin, OwnedBase, OwnedQueryMixin, ValidateModelMixin
+from lib.models import TrackedBase, AutoUrlMixin, OwnedBase, OwnedQueryMixin, ValidateModelMixin, StatusTrackedBase
 from statuses.models import Status
 from statuses.utils import StatusQueryMixin
 from tags.models import TaggableBase
@@ -13,7 +13,7 @@ class ProjectQuerySet(StatusQueryMixin, OwnedQueryMixin, QuerySet):
     pass
 
 
-class Project(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, TaggableBase, models.Model):
+class Project(ValidateModelMixin, AutoUrlMixin, OwnedBase, StatusTrackedBase, TrackedBase, TaggableBase, models.Model):
     """
     A django model representing a project.
     """
@@ -32,6 +32,19 @@ class Project(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, Taggable
 
     def __str__(self):
         return self.name
+
+    @property
+    def is_open(self):
+        return self.status in Status.objects.open()
+
+    @property
+    def is_closed(self):
+        return self.status in Status.objects.closed()
+
+    def complete(self):
+        self.status = Status.objects.get(name="done")
+        self.save()
+        return True  # worked
 
     @property
     def next_step(self):

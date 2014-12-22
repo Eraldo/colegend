@@ -33,20 +33,29 @@
                             {% include "tasks/_task_link.html" %}<br/>
                         {% endfor %}
                     {% endif %}
-                    {% if deadline_tasks %}
+                    {% if deadline_projects or deadline_tasks %}
                         <h4>Deadlined</h4>
+                        {% for project in deadline_projects %}
+                            {% include "projects/_project_link.html" %}<br/>
+                        {% endfor %}
                         {% for task in deadline_tasks %}
                             {% include "tasks/_task_link.html" %}<br/>
                         {% endfor %}
                     {% endif %}
-                    {% if done_tasks %}
+                    {% if done_projects or done_tasks %}
                         <h4>Done</h4>
+                        {% for project in done_projects %}
+                            {% include "projects/_project_link.html" %}<br/>
+                        {% endfor %}
                         {% for task in done_tasks %}
                             {% include "tasks/_task_link.html" %}<br/>
                         {% endfor %}
                     {% endif %}
-                    {% if created_tasks %}
+                    {% if created_projects or created_tasks %}
                         <h4>Created</h4>
+                        {% for project in created_projects %}
+                            {% include "projects/_project_link.html" %}<br/>
+                        {% endfor %}
                         {% for task in created_tasks %}
                             {% include "tasks/_task_link.html" %}<br/>
                         {% endfor %}
