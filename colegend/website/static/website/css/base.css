@@ -90,7 +90,7 @@ input#global-search-input {
 
 #menu .dropdown-menu {
     /* place drowdown over the tooltip */
-    /*z-index: 1100;*/
+    z-index: 1100;
 }
 
 /* end menu */
