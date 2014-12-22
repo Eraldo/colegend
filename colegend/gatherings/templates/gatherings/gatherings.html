@@ -26,7 +26,7 @@
 
                 <h2>Next Gathering</h2>
                 {% if start %}
-                    {{ start }}<br/>
+                    {{ start }} - {{ end }}<br/>
                     Gathering {% if current %}NOW{% else %}in {{ counter }}{% endif %}<br/>
                     <img src="{{ STATIC_URL }}website/images/CoSpace_circle.png" alt="CoSpace"
                          class="center-block img-circle img-responsive" style="max-height: 200px;">

@@ -28,6 +28,11 @@ class GatheringsView(ActiveUserRequiredMixin, GatheringMixin, TemplateView):
         gathering = Gathering.objects.next()
         if gathering:
             context['start'] = gathering.start
+            if gathering.end.date() == gathering.start.date():
+                end = timezone.localtime(gathering.end).time()
+            else:
+                end = gathering.end
+            context['end'] = end
             context['online'] = gathering.online
             if gathering.online:
                 location = "Virtual Room"
