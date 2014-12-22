@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
-from lib.views import ActiveUserRequiredMixin
+from lib.views import ActiveUserRequiredMixin, get_sound
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
@@ -106,6 +106,10 @@ def task_complete(request, pk):
         message = """Completed Task: <a href="{url}">{task}</a>.""".format(
             url=task.get_show_url(), task=escape(task)
         )
+        if request.user.settings.sound:
+            sound = get_sound("success")
+            if sound:
+                message += sound
         messages.add_message(request, messages.SUCCESS, mark_safe(message))
     # redirect
     next_url = request.POST.get('next')

@@ -2,7 +2,9 @@ from braces.views._access import AccessMixin
 from django.contrib.auth.views import redirect_to_login
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect
+from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
+from django.conf import settings
 
 __author__ = 'eraldo'
 
@@ -126,3 +128,13 @@ def get_icon(name):
     if name in icon_map:
         name = icon_map.get(name)
     return mark_safe("""<i class="fa fa-{}"></i>""".format(name))
+
+
+def get_sound(name):
+    sound_map = {
+        "success": "success.wav"
+    }
+    if name in sound_map:
+        context = {"sound": name, "STATIC_URL": settings.STATIC_URL, "file": sound_map[name]}
+        return render_to_string("lib/_audio.html", dictionary=context)
+
