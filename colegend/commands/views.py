@@ -11,12 +11,12 @@ __author__ = 'eraldo'
 
 def _handle_command(request, command):
     # help
-    if command in ["help", "h", "--h", "--help", "?"]:
+    if command in ["help", "--help", "?"]:
         message = get_tutorial("Quick Commands").description
         messages.add_message(request, messages.INFO, message)
         return
     # clear
-    if command == "clear":
+    if command in ["clear", "-"]:
         return
     # task
     task_pattern = r'^(?P<status>TODO|DONE):(\s+)?(?P<name>.*)$'
