@@ -3,6 +3,9 @@ from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.http import Http404
 from django.shortcuts import redirect, render
+from django.template.loader import render_to_string
+from django.utils.safestring import mark_safe
+from manager.parser import ManagerCommandParser
 from statuses.models import Status
 from tutorials.models import get_tutorial
 
@@ -15,27 +18,40 @@ def _handle_command(request, command):
         message = get_tutorial("Quick Commands").description
         messages.add_message(request, messages.INFO, message)
         return
+
     # clear
     if command in ["clear", "-"]:
         return
+
+    parser = ManagerCommandParser(command)
+    data = parser.parse()
+
     # task
-    task_pattern = r'^(?P<status>TODO|DONE):(\s+)?(?P<name>.*)$'
-    task_match = re.match(task_pattern, command)
-    if task_match:
-        task_data = task_match.groupdict()
-        task_data["status"] = Status.objects.get(name=task_data["status"].lower())
+    if "task" in data:
+        data.pop("task")
         try:
-            task = request.user.tasks.create(**task_data)
+            task = request.user.tasks.create(**data)
         except ValidationError as e:
             message = "Error: {}".format(e.messages[0])
             messages.add_message(request, messages.ERROR, message)
             return
-        if task.status.name == "todo":
-            status = ''
-        else:
-            status = '({})'.format(task.status)
-        message = "Created Task: '{name}' {status}".format(status=status, name=task.name)
-        messages.add_message(request, messages.SUCCESS, message)
+        message = "Created Task: '{name}'".format(
+            name=render_to_string("tasks/_task_link.html", {"task": task}))
+        messages.add_message(request, messages.SUCCESS, mark_safe(message))
+        return
+
+    # project
+    if "project" in data:
+        data.pop("project")
+        try:
+            project = request.user.projects.create(**data)
+        except ValidationError as e:
+            message = "Error: {}".format(e.messages[0])
+            messages.add_message(request, messages.ERROR, message)
+            return
+        message = "Created Project: '{name}'".format(
+            name=render_to_string("projects/_project_link.html", {"project": project}))
+        messages.add_message(request, messages.SUCCESS, mark_safe(message))
         return
 
     # command not found
