@@ -37,6 +37,8 @@ urlpatterns = patterns('',
     url(r'^tutorials/', include('tutorials.urls', namespace="tutorials")),
     url(r'^contact/', include('contact.urls')),
 
+    url(r'^commands/', include('commands.urls', namespace="commands")),
+
     # Uncomment the next line to enable the admin:
     url(r'^backend/', include(admin.site.urls)),
 

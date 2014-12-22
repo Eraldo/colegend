@@ -40,6 +40,9 @@
     });
 </script>
 
+{# Quick Command #}
+{% include "lib/_quick_command_modal.html" %}
+
 {# keyboard shortcuts #}
 {% if user.settings.keyboard %}
     {% load keyboard %}{% keyboard %}

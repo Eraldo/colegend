@@ -124,6 +124,7 @@ def get_icon(name):
         "virtual-room": "cube",  # Alternative icons: group cube video-camera
         "streak": "link",
         "share": "share",
+        "prompt": "chevron-right",
     }
     if name in icon_map:
         name = icon_map.get(name)

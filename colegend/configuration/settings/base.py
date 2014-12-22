@@ -255,6 +255,8 @@ PROJECT_APPS = (
     'markitup',
     # usability
     'keyboard',
+    'commands',
+    # hepers
     'easy_thumbnails',
 )
 EXTRA_APPS = (

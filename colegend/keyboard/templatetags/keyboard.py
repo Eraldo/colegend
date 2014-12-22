@@ -119,6 +119,10 @@ BINDINGS = [
         'keys': 'g b',  # go back
         'command': 'javascript:history.go(-1);',
     },
+    {
+        'keys': 'q',  # toggle quick command
+        'command': "keyboard_quick_command();",
+    },
 
 
     # Mentor

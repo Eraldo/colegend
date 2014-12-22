@@ -101,6 +101,10 @@ function keyboard_cancel() {
     _click_selected_or_global_button("cancel-button");
 }
 
+function keyboard_quick_command() {
+    $('#quickCommandModal').modal('toggle');
+}
+
 function keyboard_navigate(direction) {
     var item = _get_selected_item();
     if (item) { // selection exists
