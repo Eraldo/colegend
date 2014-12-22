@@ -40,4 +40,9 @@ urlpatterns = patterns(
     url(r'^keyboard/$',
         TutorialRedirectView.as_view(name="Keyboard"),
         name='keyboard'),
+
+    # ex: ../quick-commands/
+    url(r'^quick-commands/$',
+        TutorialRedirectView.as_view(name="Quick Commands"),
+        name='quick_commands'),
 )

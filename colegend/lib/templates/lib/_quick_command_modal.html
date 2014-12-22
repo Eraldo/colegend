@@ -8,8 +8,8 @@
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="quickCommandModalLabel">
             Quick Command
-            <span data-toggle="tooltip" data-placement="top" title="Enter 'help' to get a list of commands." data-container=".modal-body" class="text-primary">
-                {% icon "tutorial" %}
+            <span data-toggle="tooltip" data-placement="top" title="Enter 'help' to get more information.">
+                <a href="{% url "tutorials:quick_commands" %}" target="_blank">{% icon "tutorial" %}</a>
             </span>
         </h4>
       </div>
