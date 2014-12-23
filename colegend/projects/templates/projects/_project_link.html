@@ -2,7 +2,7 @@
 
 <b>
 <span data-toggle="tooltip" title="{% if project.is_closed %}Completed {{ project.completion_date|default:"" }}{% endif %}">
-    {% icon "project" %}&nbsp;
+    <a href="#" class="btn btn-xs btn-default">{% icon "project" %}</a>&nbsp;
 </span>
     <a href="{{ project.get_show_url }}">{{ project }}</a>
 </b>
