@@ -1,5 +1,5 @@
 {% load icons %}
 
-<div class="tags-field inline">
+<div class="field tags-field inline {% if not tags %}field-placeholder{% endif %}">
     {% icon "tag" %}{% for tag in tags %}{% include "tags/_tag.html" %}{% endfor %}
 </div>

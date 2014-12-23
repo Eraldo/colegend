@@ -1,7 +1,7 @@
 {% load icons %}
 {% load dates %}
 
-<div class="date-field inline">
+<div class="date-field inline {% if not date %}field-placeholder{% endif %}">
     {% icon "date" %}
     {% if date %}
         <span class="date {{ date|date_tense }}" data-toggle="tooltip" title="{{ date }}">

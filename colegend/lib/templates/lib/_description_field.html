@@ -1,5 +1,5 @@
 {% load icons %}
 
-<div class="description-field inline">
+<div class="description-field inline {% if not description %}field-placeholder{% endif %}">
     {% icon "description" %} {{ description|removetags:"br p"|truncatechars_html:45 }}
 </div>

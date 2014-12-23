@@ -291,3 +291,11 @@ span.streak {
 
 /* django-autocomplete-light */
 
+/* content fields */
+.nav-item .field-placeholder {
+    visibility: hidden;
+}
+.nav-item.selected .field-placeholder {
+    visibility: visible;
+}
+/* end content fields */

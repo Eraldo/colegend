@@ -1,5 +1,5 @@
 {% load icons %}
 
-<div class="project-field inline">
+<div class="project-field inline {% if not project %}field-placeholder{% endif %}">
     {% icon "project" %} <a href="{{ project.get_show_url }}">{{ project|default:"" }}</a>
 </div>
