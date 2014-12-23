@@ -13,7 +13,8 @@ class ManagerCommandParser():
     def _project(self):
         return r"^(?P<project>!{status}:(\s+)?{name}(\s+)?)$".format(
             status=self._status,
-            name=self._name)
+            name=self._name
+        )
 
     @property
     def _task(self):
@@ -21,6 +22,13 @@ class ManagerCommandParser():
             status=self._status,
             name=self._name
         )
+
+    @property
+    def _tag(self):
+        return r"^(?P<tag>TAG:(\s+)?{name}(\s+)?)$".format(
+            name=self._name
+        )
+
 
     @property
     def _status(self):
@@ -78,6 +86,14 @@ class ManagerCommandParser():
     def task_data(self):
         return self._get_data(self._task)
 
+    @property
+    def is_tag(self):
+        return bool(self._get_data(self._tag))
+
+    @property
+    def tag_data(self):
+        return self._get_data(self._tag)
+
     def _update_status(self, data):
         if not data:
             return
@@ -93,6 +109,8 @@ class ManagerCommandParser():
             data = self._get_data(self._project)
         elif self.is_task:
             data = self._get_data(self._task)
+        elif self.is_tag:
+            data = self._get_data(self._tag)
         if data:
             data = self._update_status(data)
         return data

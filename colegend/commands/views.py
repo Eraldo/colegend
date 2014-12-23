@@ -54,6 +54,20 @@ def _handle_command(request, command):
         messages.add_message(request, messages.SUCCESS, mark_safe(message))
         return
 
+    # tag
+    if "tag" in data:
+        data.pop("tag")
+        try:
+            tag = request.user.tags.create(**data)
+        except ValidationError as e:
+            message = "Error: {}".format(e.messages[0])
+            messages.add_message(request, messages.ERROR, message)
+            return
+        message = "Created Tag: '{name}'".format(
+            name=render_to_string("tags/_tag.html", {"tag": tag}))
+        messages.add_message(request, messages.SUCCESS, mark_safe(message))
+        return
+
     # command not found
     message = "Unknown command: '{}'.".format(command)
     messages.add_message(request, messages.SUCCESS, message)
