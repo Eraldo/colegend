@@ -12,9 +12,9 @@
     <div style="height: 5px;"></div>
     {% include "status/_status_field.html" with status=task.status %}
     <div class="task-context pull-right">
-        {% include "projects/_project_field.html" with project=task.project %}
         {% include "lib/_date_field.html" with date=task.date %}
         {% include "lib/_deadline_field.html" with deadline=task.deadline %}
+        {% include "projects/_project_field.html" with project=task.project %}
     </div>
     {% include "lib/_description_field.html" with description=task.description %}
 </div>
