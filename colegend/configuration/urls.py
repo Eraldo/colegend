@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 from django.http import HttpResponse
+from django.views.generic import TemplateView
 
 admin.autodiscover()
 
@@ -56,7 +57,7 @@ urlpatterns = patterns('',
     url(r'^autocomplete/', include('autocomplete_light.urls')),
 
     # Added robots.txt file for crawlers (google/etc)
-    (r'^robots.txt$', lambda r: HttpResponse("User-agent: *\nDisallow: /", mimetype="text/plain")),
+    (r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # remove group model from admin
