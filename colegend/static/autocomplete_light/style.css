@@ -41,6 +41,10 @@
     outline: 0;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0);
 }
+.yourlabs-autocomplete .hilight a {
+    color: #ffffff;
+}
+
 
 .yourlabs-autocomplete .choice,
 .yourlabs-autocomplete [data-value],
