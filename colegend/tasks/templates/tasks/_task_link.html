@@ -1,4 +1,6 @@
 {% load icons %}
 
 {% include "tasks/_task_complete_button.html" %}
+<span data-toggle="tooltip" title="{{ task.project|default:"" }}">
 <a href="{{ task.get_show_url }}">{{ task }}</a>
+</span>
