@@ -10,12 +10,14 @@ __author__ = 'eraldo'
 class NotificationForm(ModelForm):
     class Meta:
         model = Notification
-        fields = ['name', 'description', 'read']
+        fields = ['owner', 'name', 'description', 'read']
 
     helper = FormHelper()
     helper.layout = Layout(
+        Field('owner'),
         Field('name', autofocus='True'),
         Field('description'),
+        Field('read'),
         SaveButton(),
         CancelButton(),
     )

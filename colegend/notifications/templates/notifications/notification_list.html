@@ -1,4 +1,5 @@
 {% extends 'page.html' %}
+{% load icons %}
 
 {% block page_title %}
     Notifications
@@ -11,6 +12,9 @@
 {% endblock %}
 
 {% block page_controls %}
+    {% if user.is_superuser %}
+        <a href="{% url "notifications:notification_new" %}" class="btn btn-danger pull-right">{% icon "new" %}</a>
+    {% endif %}
     {#    {% include "notifications/_notification_list_controls.html" %}#}
 {% endblock %}
 

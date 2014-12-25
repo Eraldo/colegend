@@ -1,4 +1,4 @@
-from lib.views import ActiveUserRequiredMixin
+from lib.views import ActiveUserRequiredMixin, ManagerRequiredMixin
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from lib.views import OwnedItemsMixin
@@ -24,7 +24,7 @@ class NotificationListView(NotificationMixin, ListView):
         return context
 
 
-class NotificationNewView(NotificationMixin, CreateView):
+class NotificationNewView(ManagerRequiredMixin, NotificationMixin, CreateView):
     success_url = reverse_lazy('notifications:notification_list')
 
     def form_valid(self, form):

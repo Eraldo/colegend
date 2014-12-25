@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.db.models import QuerySet
 from lib.models import TimeStampedBase, OwnedQueryMixin, AutoUrlMixin
+from users.models import User
 
 __author__ = 'eraldo'
 
@@ -15,6 +16,22 @@ class NotificationQuerySet(OwnedQueryMixin, QuerySet):
 
     def top(self):
         return self[:7]
+
+    def broadcast(self, name, description=""):
+        """
+        Creates a notification for every accepted user.
+        TODO: Implement.. Will replace any instance of '{user}' with the actual username.
+        :param name:
+        :param description:
+        :return:
+        """
+        self.bulk_create(
+            [Notification(
+                owner=owner,
+                name=name.replace("{user}", owner.username),
+                description=description.replace("{user}", owner.username)
+            ) for owner in User.objects.accepted()]
+        )
 
 
 class Notification(AutoUrlMixin, TimeStampedBase):
