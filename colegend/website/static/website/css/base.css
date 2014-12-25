@@ -88,6 +88,9 @@ img#logo {
 input#global-search-input {
     /*max-width: 160px !important;*/
 }
+#global-search-box {
+    position: fixed;
+}
 
 #menu .dropdown-menu {
     /* place drowdown over the tooltip */

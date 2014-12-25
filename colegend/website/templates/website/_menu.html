@@ -106,19 +106,34 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown" data-placement="bottom" data-toggle="tooltip" title="Quick Command">
-                    <a id="quick-command-toggle" href="javascript:keyboard_quick_command();" class="extra-menu">
-                        {% icon "quick-command" %}
-                    </a>
+
+                <li class="dropdown" data-placement="bottom" data-toggle="tooltip" title="Search">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                            class="glyphicon glyphicon-search"></i></a>
+                    <ul id="global-search-box" class="dropdown-menu" style="padding:12px;">
+
+                        <form id="global-search" action="{% url 'search' %}" method="GET">
+                            <div class="input-group">
+                                <input type="text" name="q" class="form-control" placeholder="search..."
+                                       value="{{ request.GET.q }}" autofocus>
+
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-default">{% icon "search" %}</button>
+                                </div>
+                            </div>
+                        </form>
+                    </ul>
                 </li>
+
                 <li class="dropdown" data-placement="bottom" data-toggle="tooltip" title="Notifications">
                     <a id="notification-menu" href="#" class="dropdown-toggle extra-menu" data-toggle="dropdown">
                         {% icon "notification" %}
-                        <span class="badge status status-next menu-counter">{% if user.notifications.unread %}{{ user.notifications.unread.count }}{% endif %}</span>
+                        <span class="badge status status-next menu-counter">{% if user.notifications.unread %}
+                            {{ user.notifications.unread.count }}{% endif %}</span>
                     </a>
                     <ul class="dropdown-menu">
                         {% for notification in user.notifications.top %}
-                                {% include 'notifications/_notification.html' %}
+                            {% include 'notifications/_notification.html' %}
                         {% empty %}
                             <div class="text-center">
                                 <i>No notifications</i>
@@ -126,10 +141,16 @@
                         {% endfor %}
                         {% if user.notifications.all.count > 7 %}
                             <div class="text-center">
-                            <a href="{% url "notifications:notification_list" %}" class="btn btn-xs btn-default">See all Notifications</a>
+                                <a href="{% url "notifications:notification_list" %}" class="btn btn-xs btn-default">See
+                                    all Notifications</a>
                             </div>
                         {% endif %}
                     </ul>
+                </li>
+                <li class="dropdown" data-placement="bottom" data-toggle="tooltip" title="Quick Command">
+                    <a id="quick-command-toggle" href="javascript:keyboard_quick_command();" class="extra-menu">
+                        {% icon "quick-command" %}
+                    </a>
                 </li>
                 <li class="dropdown" data-placement="left" data-toggle="tooltip" title="Account Menu">
                     <a id="profile-dropdown" href="#" class="dropdown-toggle extra-menu" data-toggle="dropdown">
@@ -150,12 +171,12 @@
                     </ul>
                 </li>
             </ul>
-            <div id="global-search">
-                <form action="{% url 'search' %}" method="GET" class="navbar-form navbar-right">
-                    <input id="global-search-input" type="text" name="q" class="form-control" placeholder="search..."
-                           style="max-width: 160px;">
-                </form>
-            </div>
+            {#            <div id="global-search">#}
+            {#                <form action="{% url 'search' %}" method="GET" class="navbar-form navbar-right">#}
+            {#                    <input id="global-search-input" type="text" name="q" class="form-control" placeholder="search..."#}
+            {#                           style="max-width: 160px;">#}
+            {#                </form>#}
+            {#            </div>#}
         </div>
         <!--/.nav-collapse -->
     </div>
