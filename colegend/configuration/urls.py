@@ -37,6 +37,7 @@ urlpatterns = patterns('',
     url(r'^news/', include('news.urls', namespace="news")),
     url(r'^tutorials/', include('tutorials.urls', namespace="tutorials")),
     url(r'^contact/', include('contact.urls')),
+    url(r'^notifications/', include('notifications.urls', namespace="notifications")),
 
     url(r'^commands/', include('commands.urls', namespace="commands")),
 

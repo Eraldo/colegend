@@ -1,5 +1,6 @@
 {% load bootstrap3 %}
 {% load avatar_tags %}
+{% load icons %}
 <!-- Fixed navbar -->
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
@@ -38,7 +39,6 @@
 
                     </ul>
                 </li>
-
                 <li class="dropdown" data-placement="bottom" data-toggle="tooltip" title="Manager Menu">
                     <a id="manager-menu" href="#" class="dropdown-toggle" data-toggle="dropdown"><i
                             class="fa fa-briefcase"></i> Manager</a>
@@ -56,7 +56,6 @@
 
                     </ul>
                 </li>
-
                 <li class="dropdown" data-placement="bottom" data-toggle="tooltip" title="Motivator Menu">
                     <a id="motivator-menu" href="#" class="dropdown-toggle" data-toggle="dropdown"><i
                             class="fa fa-smile-o"></i>
@@ -72,10 +71,8 @@
                                 {% include 'website/_menu_item.html' %}
                             {% endfor %}
                         {% endif %}
-
                     </ul>
                 </li>
-
                 <li class="dropdown" data-placement="bottom" data-toggle="tooltip" title="Operator Menu">
                     <a id="operator-menu" href="#" class="dropdown-toggle" data-toggle="dropdown"><i
                             class="fa fa-desktop"></i>
@@ -109,8 +106,33 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown" data-placement="bottom" data-toggle="tooltip" title="Account Menu">
-                    <a id="profile-dropdown" href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <li class="dropdown" data-placement="bottom" data-toggle="tooltip" title="Quick Command">
+                    <a id="quick-command-toggle" href="javascript:keyboard_quick_command();" class="extra-menu">
+                        {% icon "quick-command" %}
+                    </a>
+                </li>
+                <li class="dropdown" data-placement="bottom" data-toggle="tooltip" title="Notifications">
+                    <a id="notification-menu" href="#" class="dropdown-toggle extra-menu" data-toggle="dropdown">
+                        {% icon "notification" %}
+                        <span class="badge status status-next menu-counter">{% if user.notifications.unread %}{{ user.notifications.unread.count }}{% endif %}</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% for notification in user.notifications.top %}
+                                {% include 'notifications/_notification.html' %}
+                        {% empty %}
+                            <div class="text-center">
+                                <i>No notifications</i>
+                            </div>
+                        {% endfor %}
+                        {% if user.notifications.all.count > 7 %}
+                            <div class="text-center">
+                            <a href="{% url "notifications:notification_list" %}" class="btn btn-xs btn-default">See all Notifications</a>
+                            </div>
+                        {% endif %}
+                    </ul>
+                </li>
+                <li class="dropdown" data-placement="left" data-toggle="tooltip" title="Account Menu">
+                    <a id="profile-dropdown" href="#" class="dropdown-toggle extra-menu" data-toggle="dropdown">
                         <img id="menu-avatar" src="{% avatar_url user 40 %}" alt="user" class="img-circle"/>
                     </a>
                     <ul class="dropdown-menu">
@@ -127,7 +149,6 @@
                         <li><a href="{% url "account_logout" %}"><i class="fa fa-sign-out"></i> Sign out</a></li>
                     </ul>
                 </li>
-
             </ul>
             <div id="global-search">
                 <form action="{% url 'search' %}" method="GET" class="navbar-form navbar-right">

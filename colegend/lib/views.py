@@ -95,6 +95,8 @@ def get_icon(name):
         "email": "at",
         "social-accounts": "cloud",
         "password": "lock",
+        "notification-unread": "bell",
+        "notification": "bell-o",
         # controls
         "back": "arrow-left",
         "new": "plus",
@@ -125,6 +127,7 @@ def get_icon(name):
         "streak": "link",
         "share": "share",
         "prompt": "chevron-right",
+        "quick-command": "chevron-down",
     }
     if name in icon_map:
         name = icon_map.get(name)

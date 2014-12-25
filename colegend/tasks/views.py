@@ -27,7 +27,7 @@ class TaskMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
         # limit project choices to owned projects
         projects = form.fields['project'].queryset
         form.fields['project'].queryset = projects.owned_by(self.request.user)
-        # limit tag choices to owned tags
+        # limit tag choices to owned t btnags
         tags = form.fields['tags'].queryset
         form.fields['tags'].queryset = tags.owned_by(self.request.user)
         return form

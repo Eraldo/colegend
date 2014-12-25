@@ -1,0 +1,3 @@
+{% load icons %}
+    {% include "notifications/_notification_button.html" %}&nbsp;
+<a href="{{ notification.get_show_url }}" class="{% if not notification.read %}unread{% endif %}">{{ notification }}</a>

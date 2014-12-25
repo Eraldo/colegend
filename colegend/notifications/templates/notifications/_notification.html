@@ -1,0 +1,7 @@
+{% load icons %}
+<div class="notification well well-sm">
+    <div class="item-controls pull-right">
+        <a href="{{ notification.get_delete_url }}" class="item-delete-button btn btn-danger btn-xs" role="button">{% icon "delete" %}<span class="sr-only"> Delete</span></a>
+    </div>
+        {% include "notifications/_notification_link.html" %}<br/>
+</div>

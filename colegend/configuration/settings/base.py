@@ -245,6 +245,7 @@ PROJECT_APPS = (
     'features',
     'news',
     'tutorials',
+    'notifications',
     # common
     'categories',
     'lib',

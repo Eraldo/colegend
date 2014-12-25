@@ -80,8 +80,9 @@ img#logo {
 }
 
 #menu a#profile-dropdown {
+    padding: 0;
     padding-top: 5px;
-    padding-bottom: 0px;
+    /*padding-bottom: 0px;*/
 }
 
 input#global-search-input {
@@ -299,3 +300,36 @@ span.streak {
     visibility: visible;
 }
 /* end content fields */
+
+/* notifications */
+#menu .extra-menu {
+    /*padding-left: 5px;*/
+    /*padding-right: 5px;*/
+}
+.notification a {
+    /*white-space: nowrap;*/
+}
+.notification.well {
+    min-width: 300px;
+    margin-bottom: 4px;
+}
+.notification-list .well {
+    margin-bottom: 10px;
+}
+.notification .unread {
+    font-weight: bold;
+}
+
+/*#notification-menu>.active>a, .notification-menu>.active>a:hover, .notification-menu>.active>a:focus {*/
+.dropdown-menu>.notification.active>a, .dropdown-menu>.notification.active>a:hover, .dropdown-menu>.notification.active>a:focus {
+    color: #428bca;
+    background-color: inherit;
+}
+#menu .menu-counter {
+    position: absolute;
+    top: 5px;
+    right: 2px;
+    font-size: 80%;
+    /*line-height: 80%;*/
+}
+/* end notifications */

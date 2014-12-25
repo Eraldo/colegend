@@ -1,0 +1,23 @@
+{% extends 'page.html' %}
+
+{% load icons %}
+
+{% block page_title %}
+    {{ notification }}
+{% endblock %}
+
+{% block up_url %}{% url "notifications:notification_list" %}{% endblock %}
+
+{% block page_controls %}
+    {% if user.is_superuser %}
+            <a href="{{ notification.get_edit_url }}" class="btn btn-danger pull-right" role="button">{% icon "edit" %}</a>
+    {% endif %}
+    {% include "notifications/_notification_button.html" with button_size="md" %}
+    <a href="{{ notification.get_delete_url }}" class="btn btn-danger" role="button">{% icon "delete" %}</a>
+{% endblock %}
+
+{% block page_content %}
+    <div class="well">
+        {{ notification.description }}
+    </div>
+{% endblock %}
