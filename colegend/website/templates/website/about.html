@@ -22,8 +22,9 @@
             <p><a id="login-button" href="{% url "account_login" %}?next=/" class="btn btn-primary btn-lg" role="button">Let's do it!</a>
             </p>
             <hr/>
-            <audio id="audioplayer" src="{{ STATIC_URL }}website/audio/colegend_song.mp3" controls autoplay
-                   loop></audio>
+            <div id="audio-box" style="position: fixed; top: 0; right: 0; z-index: 10000">
+                <audio id="audioplayer" src="{{ STATIC_URL }}website/audio/colegend_song.mp3" controls loop></audio>
+            </div>
             <div class="container">
                 <div class="embed-responsive embed-responsive-16by9 col-xs-12">
                     <iframe class="embed-responsive-item" allowfullscreen
