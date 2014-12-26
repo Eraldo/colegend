@@ -15,7 +15,10 @@
     {% if user.is_superuser %}
         <a href="{% url "notifications:notification_new" %}" class="btn btn-danger pull-right">{% icon "new" %}</a>
     {% endif %}
-    {#    {% include "notifications/_notification_list_controls.html" %}#}
+    <form method="POST" role="form" class="inline">{% csrf_token %}
+        <input type="hidden" name="action" value="mark_all_as_read"/>
+        <button class="btn btn-default" role="submit" data-toggle="tooltip" title="Mark all as read">{% icon "bell-slash" %}</button>
+    </form>
 {% endblock %}
 
 {% block page_content %}

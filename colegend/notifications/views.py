@@ -1,3 +1,4 @@
+from django.shortcuts import redirect
 from lib.views import ActiveUserRequiredMixin, ManagerRequiredMixin
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
@@ -22,6 +23,12 @@ class NotificationListView(NotificationMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['total_counter'] = self.get_queryset().count()
         return context
+
+    def post(self, request):
+        action = request.POST.get("action")
+        if action and action == "mark_all_as_read":
+            self.get_queryset().mark_as_read()
+        return redirect(".")
 
 
 class NotificationNewView(ManagerRequiredMixin, NotificationMixin, CreateView):

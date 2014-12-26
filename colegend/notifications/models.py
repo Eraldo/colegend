@@ -33,6 +33,9 @@ class NotificationQuerySet(OwnedQueryMixin, QuerySet):
             ) for owner in User.objects.accepted()]
         )
 
+    def mark_as_read(self):
+        self.update(read=True)
+
 
 class Notification(AutoUrlMixin, TimeStampedBase):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="notifications")
