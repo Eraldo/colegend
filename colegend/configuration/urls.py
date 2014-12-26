@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 from django.http import HttpResponse
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, RedirectView
 
 admin.autodiscover()
 
@@ -59,6 +59,9 @@ urlpatterns = patterns('',
 
     # Added robots.txt file for crawlers (google/etc)
     (r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
+
+    # favicon
+    (r'^favicon\.ico$', RedirectView.as_view(url=settings.STATIC_URL + 'favicon.ico')),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # remove group model from admin
