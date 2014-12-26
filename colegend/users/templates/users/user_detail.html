@@ -12,17 +12,17 @@
         <a class="btn btn-primary" href="{% url 'users:settings' %}">{% icon "setting" %} Settings</a>
     {% endif %}
     {% if user.is_superuser %}
-        <a class="btn btn-danger pull-right" href="{% url 'users:admin_detail' username=object.username %}">{% icon "usermanager" %} Admin</a>
+        <a class="btn btn-danger pull-right"
+           href="{% url 'users:admin_detail' username=object.username %}">{% icon "usermanager" %} Admin</a>
     {% endif %}
 {% endblock %}
 
 {% block page_content %}
     <div class="well">
         {% avatar object 200 %}<br/>
-        {% if object == request.user %}
-            <h2>{{ object.get_name }}</h2>
-            <a href="mailto:{{ object.email }}">{{ object.email }}</a>
-        {% endif %}
+
+        <h2>{{ object.get_name }}</h2>
+        <a href="mailto:{{ object.email }}" class="btn btn-default">{% icon "contact" %} Contact</a>
 
     </div>
 

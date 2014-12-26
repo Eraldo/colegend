@@ -97,6 +97,7 @@ def get_icon(name):
         "password": "lock",
         "notification-unread": "bell",
         "notification": "bell-o",
+        "mark_read": "bell-slash",
         # controls
         "back": "arrow-left",
         "new": "plus",

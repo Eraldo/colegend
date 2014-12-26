@@ -17,7 +17,7 @@
     {% endif %}
     <form method="POST" role="form" class="inline">{% csrf_token %}
         <input type="hidden" name="action" value="mark_all_as_read"/>
-        <button class="btn btn-default" role="submit" data-toggle="tooltip" title="Mark all as read">{% icon "bell-slash" %}</button>
+        <button class="btn btn-default" role="submit" data-toggle="tooltip" title="Mark all as read">{% icon "mark_read" %}</button>
     </form>
 {% endblock %}
 
