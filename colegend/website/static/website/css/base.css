@@ -323,7 +323,6 @@ span.streak {
     font-weight: bold;
 }
 
-/*#notification-menu>.active>a, .notification-menu>.active>a:hover, .notification-menu>.active>a:focus {*/
 .dropdown-menu>.notification.active>a, .dropdown-menu>.notification.active>a:hover, .dropdown-menu>.notification.active>a:focus {
     color: #428bca;
     background-color: inherit;
@@ -334,5 +333,8 @@ span.streak {
     right: 2px;
     font-size: 80%;
     /*line-height: 80%;*/
+}
+#notification-menu-dropdown {
+    padding: 5px;
 }
 /* end notifications */

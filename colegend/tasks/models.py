@@ -32,7 +32,7 @@ class Task(ValidateModelMixin, AutoUrlMixin, OwnedBase, StatusTrackedBase, Track
     objects = TaskQuerySet.as_manager()
 
     class Meta:
-        ordering = ["status", "project", "name"]
+        ordering = ["status", "project", "-modification_date"]
         unique_together = ('owner', 'project', 'name')
 
     def __str__(self):

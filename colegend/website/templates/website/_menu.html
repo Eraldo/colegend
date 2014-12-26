@@ -131,7 +131,7 @@
                         <span class="badge status status-next menu-counter">{% if user.notifications.unread %}
                             {{ user.notifications.unread.count }}{% endif %}</span>
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul id="notification-menu-dropdown" class="dropdown-menu">
                         {% for notification in user.notifications.top %}
                             {% include 'notifications/_notification.html' %}
                         {% empty %}
@@ -171,12 +171,6 @@
                     </ul>
                 </li>
             </ul>
-            {#            <div id="global-search">#}
-            {#                <form action="{% url 'search' %}" method="GET" class="navbar-form navbar-right">#}
-            {#                    <input id="global-search-input" type="text" name="q" class="form-control" placeholder="search..."#}
-            {#                           style="max-width: 160px;">#}
-            {#                </form>#}
-            {#            </div>#}
         </div>
         <!--/.nav-collapse -->
     </div>
