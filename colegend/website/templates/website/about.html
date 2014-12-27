@@ -210,3 +210,12 @@
              class="center-block img-responsive"><br/>
     </div>
 {% endblock %}
+
+{% block body_scripts %}
+    {{ block.super }}
+    {# snowstorm #}
+    <script src="{{ STATIC_URL }}website/external/snowstorm-min.js"></script>
+    <script>
+        snowStorm.snowColor = '#99ccff';   // blue-ish snow!?
+    </script>
+{% endblock %}
