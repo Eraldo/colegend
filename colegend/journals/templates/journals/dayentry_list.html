@@ -16,8 +16,15 @@
 {% endblock %}
 
 {% block page_controls %}
-    <a href="{% url "journals:dayentry_continue" %}" class="open-button btn btn-default" role="button">Today</a>
-    <a href="{% url "journals:dayentry_new" %}" class="new-button btn btn-default" role="button">{% icon "new" %}</a>
+    <a href="{% url "journals:dayentry_continue" %}" class="open-button btn btn-default" role="button" data-toggle="tooltip" title="Create/Continue Today's Entry">
+        Today
+    </a>
+    <a href="{% url "journals:dayentry_new" %}" class="new-button btn btn-default" role="button" data-toggle="tooltip" title="New Entry">
+        {% icon "new" %}
+    </a>
+    <a href="{% url "journals:map" %}" class="btn btn-default" role="button" data-toggle="tooltip" title="Travel Map">
+        {% icon "location" %}
+    </a>
 {% endblock %}
 
 {% block page_content %}

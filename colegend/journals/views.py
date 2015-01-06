@@ -2,7 +2,8 @@ from django.core.urlresolvers import reverse
 from django.utils import timezone
 from lib.views import ActiveUserRequiredMixin
 from django.core.exceptions import ValidationError
-from django.views.generic import DetailView, UpdateView, DeleteView, CreateView, ArchiveIndexView, RedirectView
+from django.views.generic import DetailView, UpdateView, DeleteView, CreateView, ArchiveIndexView, RedirectView, \
+    TemplateView
 from journals.forms import DayEntryForm
 from journals.models import DayEntry
 
@@ -117,3 +118,16 @@ class DayEntryContinueView(DayEntryMixin, RedirectView):
             return current_entry.get_show_url()
         else:
             return reverse('journals:dayentry_new')
+
+
+class MapView(DayEntryMixin, TemplateView):
+    template_name = "journals/map.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        locations = self.request.user.journal.entries.values_list('location', flat=True)
+        # TODO: Fix to use all locations not just they last one per day.
+        locations = set([location.split(';')[-1].strip() for location in locations])
+        context['locations'] = locations
+        context['total_counter'] = len(locations)
+        return context

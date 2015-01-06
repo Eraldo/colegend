@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 from journals.views import DayEntryShowView, DayEntryNewView, DayEntryEditView, DayEntryDeleteView, DayEntryListView, \
-    DayEntryContinueView
+    DayEntryContinueView, MapView
 
 __author__ = 'eraldo'
 
@@ -35,4 +35,10 @@ urlpatterns = patterns(
     url(r'^continue/$',
         DayEntryContinueView.as_view(),
         name='dayentry_continue'),
+
+    # ex: ../map/
+    url(r'^map/$',
+        MapView.as_view(),
+        name='map'),
+
 )
