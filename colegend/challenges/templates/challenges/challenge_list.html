@@ -23,7 +23,7 @@
         <p>Here you can expand your comfort zone and make new experiences by doing things that you might not do
             otherwise.</p>
         {% for challenge in challenge_list %}
-            <a href="{{ challenge.get_show_url }}" class="btn btn-primary">{{ challenge }}</a>
+            <a href="{{ challenge.get_show_url }}" class="btn btn-category bg-category-{{ challenge.category.pk }}"> {{ challenge }}</a>
         {% empty %}
             No challenges here yet.
         {% endfor %}

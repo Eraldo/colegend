@@ -1,12 +1,19 @@
 from django.conf.urls import patterns, url
 from challenges.views import ChallengeListView, ChallengeCreateView, ChallengeShowView, ChallengeEditView, \
-    ChallengeDeleteView
+    ChallengeDeleteView, HomeView, ModuleShowView
 
 __author__ = 'eraldo'
 
 urlpatterns = patterns(
     '',
     # ex: ../
+    url(r'^home$',
+        HomeView.as_view(),
+        name='home'),
+    # ex: ../module/4/
+    url(r'^module/(?P<pk>\d+)/$',
+        ModuleShowView.as_view(),
+        name='module_show'),
     url(r'^$',
         ChallengeListView.as_view(),
         name='challenge_list'),

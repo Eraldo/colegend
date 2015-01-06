@@ -10,7 +10,7 @@
     <div class="well">
         <h2>Pending Quotes</h2>
         {% for quote in quote_list %}
-            <a href="{{ quote.get_show_url }}" class="btn btn-default">
+            <a href="{{ quote.get_show_url }}" class="btn btn-category bg-category-{{ quote.category.pk }}">
                 {{ quote }}
             </a>
         {% endfor %}

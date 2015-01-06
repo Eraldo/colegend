@@ -120,6 +120,14 @@ def get_icon(name):
         "maybe": "circle-thin",
         "done": "check-circle-o",
         "canceled": "times-circle-o",
+        # categories
+        "category-7": "moon-o",
+        "category-6": "graduation-cap",  # alternatives: lightbulb-o",
+        "category-5": "child",
+        "category-4": "leaf",
+        "category-3": "credit-card",
+        "category-2": "film",  # alternatives: gamepad
+        "category-1": "heart-o",  # alternatives: cutlery
         # other
         "sign-out": "sign-out",
         "signup": "sign-in",
@@ -129,6 +137,7 @@ def get_icon(name):
         "share": "share",
         "prompt": "chevron-right",
         "quick-command": "chevron-down",
+        "locked": "lock",
     }
     if name in icon_map:
         name = icon_map.get(name)

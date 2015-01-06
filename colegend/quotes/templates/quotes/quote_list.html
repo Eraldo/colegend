@@ -29,14 +29,14 @@
     <div class="well">
         <h2>My Quotes</h2>
         {% for quote in quotes %}
-            <a href="{{ quote.get_show_url }}" class="btn btn-default">
+            <a href="{{ quote.get_show_url }}" class="btn btn-category bg-category-{{ quote.category.pk }}">
                 {{ quote }}
             </a>
         {% endfor %}
         {% if pending %}
             <h3>Pending</h3>
             {% for quote in pending %}
-                <a href="{{ quote.get_show_url }}" class="btn btn-default">
+                <a href="{{ quote.get_show_url }}" class="btn btn-category bg-category-{{ quote.category.pk }}">
                     {{ quote }}
                 </a>
             {% endfor %}

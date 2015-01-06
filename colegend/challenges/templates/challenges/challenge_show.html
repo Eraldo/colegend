@@ -16,7 +16,13 @@
 
 {% block page_content %}
     <div class="well">
-        <p class="lead">{{ challenge.content }}</p>
+        <span class="pull-right">
+            <span class="lead">{% include "categories/_category_field.html" with category=challenge.category %}</span>
+        </span>
+
+        <p class="lead">
+            {{ challenge.content }}
+        </p>
         <footer><cite class="small pull-right">— shared
             by {% include "users/_user_link.html" with user=challenge.provider %}</cite></footer>
     </div>

@@ -20,3 +20,7 @@ class Challenge(AutoUrlMixin, models.Model):
 
     def __str__(self):
         return self.name
+
+
+# class Module(AutoUrlMixin, models.Model):
+#     category = models.ForeignKey(Category)

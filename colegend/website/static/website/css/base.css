@@ -284,7 +284,11 @@ span.streak {
 .bg-category-1 {
     background-color: crimson;
 }
-
+.btn.btn-category {
+    /* TODO: remove important and replace with specific rules (link rules - hover, etc?) */
+    color: white !important;
+    border-color:rgba(0,0,0, 0.1);
+}
 /* end categories */
 
 /* django-autocomplete-light */
@@ -338,3 +342,23 @@ span.streak {
     padding: 5px;
 }
 /* end notifications */
+
+/* challenges */
+.challenge-module-row {
+    margin-bottom: 25px;
+    margin-top: 25px;
+}
+.btn-challenge-module {
+    /*height: 100px;*/
+    color: white;
+}
+.challenge {
+    margin-bottom: 25px;
+}
+.well .master-challenge {
+    border: 8px solid gold !important;
+}
+.btn-challenge {
+    height: 200px;
+}
+/* end challenges */

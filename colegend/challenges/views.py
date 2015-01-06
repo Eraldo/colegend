@@ -20,6 +20,14 @@ class ChallengeMixin(ActiveUserRequiredMixin):
         return qs.filter(accepted=True)
 
 
+class HomeView(ChallengeMixin, ListView):
+    template_name = "challenges/home.html"
+
+
+class ModuleShowView(ChallengeMixin, ListView):
+    template_name = "challenges/module.html"
+
+
 class ChallengeListView(ChallengeMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
