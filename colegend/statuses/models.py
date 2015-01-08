@@ -3,7 +3,7 @@ from django.db import models
 __author__ = 'eraldo'
 
 
-STATUSES = ['TODO', 'NEXT', 'DONE', 'WAITING', 'CANCELED']
+STATUSES = ['NEXT', 'TODO', 'WAITING', 'SOMEDAY', 'MAYBE', 'DONE', 'CANCELED']
 
 
 class StatusManager(models.Manager):
