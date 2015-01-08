@@ -13,6 +13,8 @@
                         {% icon "virtual-room" %} Virtual Room</a>
     <a href="{% url "chat" %}" target="_blank" class="open-button btn btn-default">
                        {% icon "chat" %} Chat Room</a>
+    <a href="{% url "users:map" %}" class="open-button btn btn-default">
+                       {% icon "users" %} Member Map</a>
     {% if user.is_manager %}
         <a href="{% url "gatherings:gathering_list" %}" class="btn btn-warning pull-right">
             {% icon "manage" %}</a>

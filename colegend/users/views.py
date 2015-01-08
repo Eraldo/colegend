@@ -161,3 +161,18 @@ class UserAdminDetailView(AdminRequiredMixin, DetailView):
         context['profile'] = user.profile
         context['contact'] = user.contact
         return context
+
+
+class MapView(ActiveUserRequiredMixin, TemplateView):
+    template_name = "users/map.html"
+    icon = "users"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        users = User.objects.accepted().exclude(pk__lt=4)
+        user_locations = dict()
+        for user in users:
+            user_locations[user] = user.contact.get_address().replace("\n", ", ")
+        context['user_locations'] = user_locations
+        context['total_counter'] = len(user_locations)
+        return context

@@ -1,11 +1,23 @@
 from django.conf.urls import patterns, url
 from users.views import UserInactiveView, UserListView, UserRedirectView, UserDetailView, UserUpdateView, \
-    SettingsUpdateView, UserManageListView, UserManageDetailView, UserAdminDetailView
+    SettingsUpdateView, UserManageListView, UserManageDetailView, UserAdminDetailView, MapView
 
 __author__ = 'eraldo'
 
 urlpatterns = patterns(
     '',
+
+    # OTHER
+
+    # ex: ../map/
+    url(
+        regex=r'^map/$',
+        view=MapView.as_view(),
+        name='map'
+    ),
+
+    # MAIN
+
     # URL pattern for the UserListView
     url(
         regex=r'^inactive$',
