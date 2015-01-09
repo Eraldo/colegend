@@ -13,7 +13,7 @@ accept.short_description = "Accept selected quotes."
 
 class QuoteAdmin(admin.ModelAdmin):
     list_display = ['name', 'author', 'category', 'accepted', 'used_as_daily', 'provider']
-    list_filter = ['category', 'author']
+    list_filter = ['category', 'author', 'accepted']
     actions = [accept]
 
 
