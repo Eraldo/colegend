@@ -235,6 +235,7 @@ PROJECT_APPS = (
     'statuses',
     'routines',
     'habits',
+    'trackers',
     # motivator
     'legend',
     'quotes',

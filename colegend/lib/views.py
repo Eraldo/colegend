@@ -76,6 +76,7 @@ def get_icon(name):
         "tag": "tag",
         "routine": "stack-overflow",
         "habit": "link",
+        "tracker": "list",
         "legend": "paw",
         "quote": "quote-left",
         "contact": "envelope",

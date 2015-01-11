@@ -1,0 +1,54 @@
+{% extends 'page.html' %}
+
+{% load icons %}
+
+{% block page_title %}
+    Jokes
+{% endblock %}
+
+{% block up_url %}{% url "trackers:tracker_list" %}{% endblock %}
+
+{% block page_title_extras %}
+    {% include "lib/_total_counter.html" %}
+{% endblock %}
+
+{% block page_controls %}
+    <a href="{% url "trackers:joke_new" %}" class="btn btn-default">{% icon "new" %}</a>
+{% endblock %}
+
+{% block page_content %}
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Rating</th>
+            <th>Notes</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for joke in joke_list%}
+            <tr>
+                <td>
+                    <a href="{{ joke.get_edit_url }}">{{ joke.name }}</a><br>
+                </td>
+                <td>
+                    {{ joke.description }}
+                </td>
+                <td>
+                    {{ joke.rating }}
+                </td>
+                <td>
+                    {{ joke.notes }}
+                </td>
+                <td>
+                    <a href="{{ joke.get_delete_url }}" class="item-delete-button btn btn-danger btn-xs pull-right" role="button">{% icon "delete" %}<span class="sr-only"> Delete</span></a>
+                </td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+    {% include "lib/_pager.html" %}
+{% endblock %}

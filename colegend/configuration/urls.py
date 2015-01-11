@@ -28,6 +28,7 @@ urlpatterns = patterns('',
     url(r'^routines/', include('routines.urls', namespace="routines")),
     url(r'^habits/', include('habits.urls', namespace="habits")),
     url(r'^tags/', include('tags.urls', namespace="tags")),
+    url(r'^trackers/', include('trackers.urls', namespace="trackers")),
     # motivator
     url(r'^legend/', include('legend.urls', namespace="legend")),
     url(r'^quotes/', include('quotes.urls', namespace="quotes")),

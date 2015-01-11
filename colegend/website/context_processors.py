@@ -41,6 +41,7 @@ def menu(request):
         'manager_extra': [
             MenuItem("Routines", url="routines:routine_list", icon="routine"),
             MenuItem("Habits", url="habits:habit_list", icon="habit"),
+            MenuItem("Trackers", url="trackers:tracker_list", icon="list"),
         ],
         'motivator': [
             MenuItem("Legend", url="legend:home", icon="legend", keyboard_shortcut='g l'),

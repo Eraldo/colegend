@@ -22,6 +22,9 @@ class LoggableBase(models.Model):
     class Meta:
         abstract = True
 
+    def log(self, message):
+        self.history += "[{time}] {message}\n".format(time=timezone.now(), message=message)
+
 
 class TrackedBase(TimeStampedBase, LoggableBase):
     class Meta:

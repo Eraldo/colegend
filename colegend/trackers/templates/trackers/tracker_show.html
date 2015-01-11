@@ -1,0 +1,17 @@
+{% extends 'page.html' %}
+
+{% load icons %}
+
+{% block page_title %}
+    {{ object }}
+{% endblock %}
+
+{% block up_url %}{% url "trackers:tracker_list" %}{% endblock %}
+
+{% block page_controls %}
+    <a href="{{ object.get_edit_url }}" class="edit-button btn btn-primary" role="button">{% icon "edit" %}</a>
+    <a href="{{ object.get_delete_url }}" class="delete-button btn btn-danger" role="button">{% icon "delete" %}</a>
+{% endblock %}
+
+{% block page_content %}
+{% endblock %}

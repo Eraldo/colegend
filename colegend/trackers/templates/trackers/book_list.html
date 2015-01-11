@@ -1,0 +1,54 @@
+{% extends 'page.html' %}
+
+{% load icons %}
+
+{% block page_title %}
+    Books
+{% endblock %}
+
+{% block up_url %}{% url "trackers:tracker_list" %}{% endblock %}
+
+{% block page_title_extras %}
+    {% include "lib/_total_counter.html" %}
+{% endblock %}
+
+{% block page_controls %}
+    <a href="{% url "trackers:book_new" %}" class="btn btn-default">{% icon "new" %}</a>
+{% endblock %}
+
+{% block page_content %}
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Status</th>
+            <th>Notes</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for book in book_list%}
+            <tr>
+                <td>
+                    <a href="{{ book.get_edit_url }}">{{ book.title }}</a><br>
+                </td>
+                <td>
+                    {{ book.author }}
+                </td>
+                <td>
+                    {{ book.get_status_display }}
+                </td>
+                <td>
+                    {{ book.notes }}
+                </td>
+                <td>
+                    <a href="{{ book.get_delete_url }}" class="item-delete-button btn btn-danger btn-xs pull-right" role="button">{% icon "delete" %}<span class="sr-only"> Delete</span></a>
+                </td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+    {% include "lib/_pager.html" %}
+{% endblock %}
