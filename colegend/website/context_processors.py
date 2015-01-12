@@ -46,6 +46,7 @@ def menu(request):
         'motivator': [
             MenuItem("Legend", url="legend:home", icon="legend", keyboard_shortcut='g l'),
             MenuItem("Quotes", url="quotes:quote_list", icon="quote", keyboard_shortcut='g q'),
+            MenuItem("Stats", url="stats:home", icon="stats", keyboard_shortcut='g S'),
         ],
         'motivator_extra': [
         ],

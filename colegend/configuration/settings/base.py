@@ -239,6 +239,7 @@ PROJECT_APPS = (
     # motivator
     'legend',
     'quotes',
+    'stats',
     # operator
     'users',  # custom users app
     'website',

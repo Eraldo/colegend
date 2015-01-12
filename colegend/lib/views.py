@@ -64,12 +64,15 @@ class OwnedItemsMixin:
 
 def get_icon(name):
     icon_map = {
-        # views / models
+        # mentor
         "journal": "book",
         "gathering": "comments-o",
+        "chat": "wechat",
+        "virtual-room": "cube",  # Alternative icons: group cube video-camera
         "challenge": "star",
         "dojo": "university",
         "vision": "eye",
+        # manager
         "agenda": "crosshairs",
         "project": "sitemap",
         "task": "check",
@@ -77,8 +80,11 @@ def get_icon(name):
         "routine": "stack-overflow",
         "habit": "link",
         "tracker": "list",
+        # motivator
         "legend": "paw",
         "quote": "quote-left",
+        "stats": "dashboard",
+        # operator
         "contact": "envelope",
         "about": "info-circle",
         "feature": "road",
@@ -96,6 +102,9 @@ def get_icon(name):
         "email": "at",
         "social-accounts": "cloud",
         "password": "lock",
+        "sign-out": "sign-out",
+        "signup": "sign-in",
+        # notifications
         "notification-unread": "bell",
         "notification": "bell-o",
         "mark_read": "bell-slash",
@@ -130,10 +139,6 @@ def get_icon(name):
         "category-2": "film",  # alternatives: gamepad
         "category-1": "heart-o",  # alternatives: cutlery
         # other
-        "sign-out": "sign-out",
-        "signup": "sign-in",
-        "chat": "wechat",
-        "virtual-room": "cube",  # Alternative icons: group cube video-camera
         "streak": "link",
         "share": "share",
         "prompt": "chevron-right",

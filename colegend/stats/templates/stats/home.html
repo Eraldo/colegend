@@ -1,0 +1,32 @@
+{% extends 'page.html' %}
+{% load icons %}
+
+{% block page_title %}
+    Stats
+{% endblock %}
+
+{% block up_url %}{% url "stats:home" %}{% endblock %}
+
+{% block page_content %}
+<div class="well">
+    Ahhh.. the place where the nerd-ego loves to hang around.. STATISTICS! :D<br/>
+    So, what have we got for now.. (I am currently working on this section)<br/>
+    <h2>Tasks</h2>
+    Total: {{ tasks_total }}<br/>
+    Open: {{ tasks_open }}<br/>
+    Completed: {{ tasks_closed }}<br/>
+    <br/>
+    Next: {{ tasks_next }}<br/>
+    Todo: {{ tasks_todo }}<br/>
+    Waiting: {{ tasks_waiting }}<br/>
+    Someday: {{ tasks_someday }}<br/>
+    Maybe: {{ tasks_maybe }}<br/>
+    Done: {{ tasks_done }}<br/>
+    Canceled: {{ tasks_canceled }}<br/>
+</div>
+<div class="well well-sm">
+<h4>Feedback</h4>
+Which stats do you want to have?<br/>
+    <a href="{% url "contact" %}" class="btn btn-default">Suggest</a>
+</div>
+{% endblock %}

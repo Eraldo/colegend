@@ -185,6 +185,11 @@ BINDINGS = [
         'command': 'quotes-menu-item',
         'action': 'link_id'
     },
+    {
+        'keys': 'g S',  # go quotes
+        'command': 'stats-menu-item',
+        'action': 'link_id'
+    },
     # {
     #     'keys': 'o down right left down right left',  # Saria's Song!
     #     'command': """alert("Saria's Song!");""",
