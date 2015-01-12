@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.utils import timezone
 from lib.views import ActiveUserRequiredMixin
@@ -131,3 +132,8 @@ class MapView(DayEntryMixin, TemplateView):
         context['locations'] = locations
         context['total_counter'] = len(locations)
         return context
+
+    def get(self, request, *args, **kwargs):
+        message = "Info: The travel map can need quite some time to load."
+        messages.add_message(self.request, messages.INFO, message)
+        return super().get(self.request, *args, **kwargs)
