@@ -72,6 +72,11 @@ class ChatView(ActiveUserRequiredMixin, TemplateView):
     icon = "chat"
     template_name = "website/chat.html"
 
+    def get(self, request, *args, **kwargs):
+        message = "Info: The chat needs quite some time to load."
+        messages.add_message(self.request, messages.INFO, message)
+        return super().get(self.request, *args, **kwargs)
+
 
 class TestView(TemplateView):
     template_name = "website/test.html"
