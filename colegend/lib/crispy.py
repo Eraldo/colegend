@@ -8,7 +8,8 @@ __author__ = 'eraldo'
 class IconButton(Button):
     template = "lib/_crispy_icon_button.html"
 
-    def __init__(self, name, value, icon, **kwargs):
+    def __init__(self, name, value, icon, input_type="button", **kwargs):
+        self.input_type = input_type
         super().__init__(name, value, **kwargs)
         self.icon = icon
 

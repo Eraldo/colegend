@@ -25,7 +25,7 @@ class ContactForm(forms.Form):
             Field('message', rows="4", css_class='form-control', placeholder="Your message...",
                   style="resize: vertical;", autofocus="True"),
         ),
-        IconButton("send", "Send", "send", css_class="btn-primary")
+        IconButton("send", "Send", "send", input_type="submit", css_class="btn-primary")
     )
 
 
@@ -42,7 +42,6 @@ class PublicContactForm(forms.Form):
         email.send()
 
     helper = FormHelper()
-    helper.add_input(Submit('send', 'Send'))
     helper.layout = Layout(
         Fieldset(
             'Contact Form',
@@ -50,5 +49,5 @@ class PublicContactForm(forms.Form):
             Field('message', rows="4", css_class='form-control', placeholder="Your message...",
                   style="resize: vertical;", autofocus="True"),
         ),
-        IconButton("send", "Send", "send")
+        IconButton("send", "Send", "send", input_type="submit", css_class="btn-primary")
     )
