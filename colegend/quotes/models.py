@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
-from categories.models import Category as CategoryNew
+from categories.models import Category
 from lib.models import AutoUrlMixin, OwnedQueryMixin
 
 __author__ = 'eraldo'
@@ -56,7 +56,7 @@ class Quote(AutoUrlMixin, models.Model):
     name = models.CharField(max_length=100, unique=True, help_text="What is the quote about?")
     text = models.TextField()
     author = models.CharField(max_length=100, default="Someone")
-    category = models.ForeignKey(CategoryNew)
+    category = models.ForeignKey(Category)
     provider = models.ForeignKey(settings.AUTH_USER_MODEL)
     accepted = models.BooleanField(default=False)
     used_as_daily = models.DateField(null=True, blank=True, unique=True)
