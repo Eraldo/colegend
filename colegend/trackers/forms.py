@@ -43,13 +43,14 @@ class SexForm(ModelForm):
 class BookForm(ModelForm):
     class Meta:
         model = Book
-        fields = ['title', 'author', 'status', 'notes']
+        fields = ['title', 'author', 'status', 'url', 'notes']
 
     helper = FormHelper()
     helper.layout = Layout(
         Field('title', autofocus='True'),
         Field('author'),
         Field('status'),
+        Field('url'),
         Field('notes', rows=2),
         SaveButton(),
         CancelButton(),

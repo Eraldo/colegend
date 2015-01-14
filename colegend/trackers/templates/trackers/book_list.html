@@ -23,6 +23,7 @@
             <th>Title</th>
             <th>Author</th>
             <th>Status</th>
+            <th>URL</th>
             <th>Notes</th>
             <th></th>
         </tr>
@@ -38,6 +39,11 @@
                 </td>
                 <td>
                     {{ book.get_status_display }}
+                </td>
+                <td>
+                    {% if book.url %}
+                    <a href="{{ book.url }}" target="_blank">{% icon "link" %}</a>
+                    {% endif %}
                 </td>
                 <td>
                     {{ book.notes }}

@@ -33,13 +33,13 @@ admin.site.register(Sex, SexAdmin)
 
 
 class BookAdmin(admin.ModelAdmin):
-    list_display = ['title', 'author', 'status', 'owner']
+    list_display = ['title', 'author', 'status', 'has_url', 'owner']
     list_filter = ['owner']
     readonly_fields = ['creation_date', 'modification_date', 'history']
 
     fieldsets = [
         (None, {'fields': ['owner']}),
-        (None, {'fields': ['title', 'author', 'status', 'notes']}),
+        (None, {'fields': ['title', 'author', 'status', 'url', 'notes']}),
         ('history', {'fields': ['creation_date', 'modification_date', 'history'], 'classes': ['collapse']}),
     ]
 

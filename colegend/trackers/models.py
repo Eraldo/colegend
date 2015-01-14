@@ -56,6 +56,7 @@ class Book(OwnedBase, AutoUrlMixin, TrackedBase):
     )
     status = models.PositiveSmallIntegerField(choices=STATUS_CHOICES, default=1)
     notes = models.TextField(blank=True)
+    url = models.URLField(blank=True)
 
     objects = TrackerQuerySet.as_manager()
 
@@ -77,6 +78,10 @@ class Book(OwnedBase, AutoUrlMixin, TrackedBase):
         super().save(*args, **kwargs)
         self.old_status = self.status
 
+    def has_url(self):
+        return bool(self.url)
+    has_url.boolean = True
+    has_url.short_description = "Url"
 
 class Joke(OwnedBase, AutoUrlMixin, TimeStampedBase):
     name = models.CharField(max_length=100)
