@@ -7,11 +7,17 @@
 {% block up_url %}{% url "trackers:tracker_list" %}{% endblock %}
 
 {% block page_controls %}
-        <a href="{% url "trackers:weight_list" %}" class="btn btn-default">Weight</a>
-        <a href="{% url "trackers:sex_list" %}" class="btn btn-default">Sex</a>
-        <a href="{% url "trackers:book_list" %}" class="btn btn-default">Books</a>
-        <a href="{% url "trackers:joke_list" %}" class="btn btn-default">Jokes</a>
+    <a href="{% url "trackers:weight_list" %}" class="btn btn-default">Weight</a>
+    <a href="{% url "trackers:sex_list" %}" class="btn btn-default">Sex</a>
+    <a href="{% url "trackers:transaction_list" %}" class="btn btn-default">Finances</a>
+    <a href="{% url "trackers:book_list" %}" class="btn btn-default">Books</a>
+    <a href="{% url "trackers:joke_list" %}" class="btn btn-default">Jokes</a>
 {% endblock %}
 
 {% block page_content %}
+    <div class="well well-sm">
+        <h4>Feedback</h4>
+        What do you want to keep track of?<br/>
+        <a href="{% url "contact" %}" class="btn btn-default">Suggest</a>
+    </div>
 {% endblock %}

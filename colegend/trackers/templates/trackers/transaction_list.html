@@ -1,0 +1,69 @@
+{% extends 'page.html' %}
+
+{% load icons %}
+
+{% block page_title %}
+    Transactions
+{% endblock %}
+
+{% block up_url %}{% url "trackers:tracker_list" %}{% endblock %}
+
+{% block page_title_extras %}
+    {% include "lib/_total_counter.html" %}
+{% endblock %}
+
+{% block page_controls %}
+    <a href="{% url "trackers:transaction_new" %}" class="btn btn-default">{% icon "new" %}</a>
+{% endblock %}
+
+{% block page_content %}
+    <div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Time</th>
+            <th>Amount</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Tags</th>
+            <th>Notes</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for transaction in transaction_list%}
+            <tr>
+                <td>
+                    <a href="{{ transaction.get_edit_url }}">{{ transaction.time }}</a><br>
+                </td>
+                <td align="right">
+                    {{ transaction.amount }} €
+                </td>
+                <td>
+                    {{ transaction.get_transaction_type_display }}
+                </td>
+                <td>
+                    {{ transaction.description }}
+                </td>
+                <td align="center">
+                    {% include "categories/_category_field.html" with category=transaction.category %}
+{#                    {{ transaction.category }}#}
+                </td>
+                <td>
+                    {{ transaction.tags }}
+                </td>
+                <td>
+                    {{ transaction.notes }}
+                </td>
+                <td>
+                    <a href="{{ transaction.get_delete_url }}" class="item-delete-button btn btn-danger btn-xs pull-right" role="button">{% icon "delete" %}<span class="sr-only"> Delete</span></a>
+                </td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+    {% include "lib/_pager.html" %}
+    </div>
+{% endblock %}

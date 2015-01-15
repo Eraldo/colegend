@@ -1,7 +1,8 @@
 from django.conf.urls import patterns, url
 from trackers.views import TrackerListView, WeightListView, WeightNewView, WeightEditView, WeightDeleteView, \
     WeightShowView, SexListView, SexNewView, SexShowView, SexEditView, SexDeleteView, BookListView, BookNewView, \
-    BookShowView, BookEditView, BookDeleteView, JokeListView, JokeNewView, JokeShowView, JokeEditView, JokeDeleteView
+    BookShowView, BookEditView, BookDeleteView, JokeListView, JokeNewView, JokeShowView, JokeEditView, JokeDeleteView, \
+    TransactionListView, TransactionNewView, TransactionShowView, TransactionEditView, TransactionDeleteView
 
 __author__ = 'eraldo'
 
@@ -114,4 +115,29 @@ urlpatterns = patterns(
     url(r'^joke/(?P<pk>\d+)/delete/$',
         JokeDeleteView.as_view(),
         name='joke_delete'),
+
+    # ex: ../transaction/
+    url(r'^transaction/$',
+        TransactionListView.as_view(),
+        name='transaction_list'),
+
+    # ex: ../transaction/new/
+    url(r'^transaction/new/$',
+        TransactionNewView.as_view(),
+        name='transaction_new'),
+
+    # ex: ../transaction/4/
+    url(r'^transaction/(?P<pk>\d+)/$',
+        TransactionShowView.as_view(),
+        name='transaction_show'),
+
+    # ex: ../transaction/4/edit/
+    url(r'^transaction/(?P<pk>\d+)/edit/$',
+        TransactionEditView.as_view(),
+        name='transaction_edit'),
+
+    # ex: ..transaction/4/delete/
+    url(r'^transaction/(?P<pk>\d+)/delete/$',
+        TransactionDeleteView.as_view(),
+        name='transaction_delete'),
 )

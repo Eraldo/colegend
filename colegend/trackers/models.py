@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models import QuerySet
 from django.utils import timezone
+from categories.models import Category
 from lib.models import OwnedBase, TimeStampedBase, TrackedBase, OwnedQueryMixin, AutoUrlMixin
 
 
@@ -83,6 +84,7 @@ class Book(OwnedBase, AutoUrlMixin, TrackedBase):
     has_url.boolean = True
     has_url.short_description = "Url"
 
+
 class Joke(OwnedBase, AutoUrlMixin, TimeStampedBase):
     name = models.CharField(max_length=100)
     description = models.TextField()
@@ -93,3 +95,24 @@ class Joke(OwnedBase, AutoUrlMixin, TimeStampedBase):
 
     def __str__(self):
         return self.name
+
+
+class Transaction(OwnedBase, AutoUrlMixin, TimeStampedBase):
+    time = models.DateTimeField(default=timezone.now)
+    amount = models.DecimalField(max_digits=6, decimal_places=2)
+    EXPENSE = 1
+    INCOME = 2
+    TYPE_CHOICES = (
+        (EXPENSE, "Expense"),
+        (INCOME, "Income"),
+    )
+    transaction_type = models.PositiveSmallIntegerField(verbose_name="Type", choices=TYPE_CHOICES, default=1)
+    description = models.TextField(blank=True)
+    category = models.ForeignKey(Category)
+    tags = models.CharField(max_length=100)
+    notes = models.TextField(blank=True)
+
+    objects = TrackerQuerySet.as_manager()
+
+    def __str__(self):
+        return "{time} €{amount}".format(time=self.time, amount=self.amount)

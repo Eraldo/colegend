@@ -4,7 +4,7 @@ from django.forms import ModelForm
 from markitup.widgets import MarkItUpWidget
 from lib.crispy import SaveButton, CancelButton
 from tags.models import Tag
-from trackers.models import Weight, Sex, Book, Joke
+from trackers.models import Weight, Sex, Book, Joke, Transaction
 
 __author__ = 'eraldo'
 
@@ -73,15 +73,19 @@ class JokeForm(ModelForm):
     )
 
 
-class WeightForm(ModelForm):
+class TransactionForm(ModelForm):
     class Meta:
-        model = Weight
-        fields = ['time', 'weight', 'notes']
+        model = Transaction
+        fields = ['time', 'amount', 'transaction_type', 'description', 'category', 'tags', 'notes']
 
     helper = FormHelper()
     helper.layout = Layout(
         Field('time'),
-        Field('weight', autofocus='True'),
+        Field('amount', autofocus='True'),
+        Field('transaction_type'),
+        Field('description'),
+        Field('category'),
+        Field('tags'),
         Field('notes', rows=2),
         SaveButton(),
         CancelButton(),

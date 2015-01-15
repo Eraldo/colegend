@@ -1,8 +1,8 @@
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import TemplateView, CreateView, ListView, UpdateView, DetailView, DeleteView
 from lib.views import OwnedItemsMixin, ActiveUserRequiredMixin
-from trackers.forms import WeightForm, SexForm, BookForm, JokeForm
-from trackers.models import Book, Sex, Joke, Weight
+from trackers.forms import WeightForm, SexForm, BookForm, JokeForm, TransactionForm
+from trackers.models import Book, Sex, Joke, Weight, Transaction
 
 
 class TrackerMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
@@ -175,5 +175,42 @@ class JokeEditView(JokeMixin, UpdateView):
 
 
 class JokeDeleteView(JokeMixin, DeleteView):
+    template_name = "confirm_delete.html"
+
+
+class TransactionMixin(TrackerMixin):
+    success_url = reverse_lazy("trackers:transaction_list")
+    model = Transaction
+    form_class = TransactionForm
+
+
+class TransactionListView(TransactionMixin, ListView):
+    success_url = reverse_lazy("trackers:tracker_list")
+    paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["total_counter"] = self.get_queryset().count()
+        return context
+
+
+class TransactionNewView(TransactionMixin, CreateView):
+    template_name = "trackers/tracker_form.html"
+
+    def form_valid(self, form):
+        user = self.request.user
+        form.instance.owner = user
+        return super().form_valid(form)
+
+
+class TransactionShowView(TransactionMixin, DetailView):
+    template_name = "trackers/tracker_show.html"
+
+
+class TransactionEditView(TransactionMixin, UpdateView):
+    template_name = "trackers/tracker_form.html"
+
+
+class TransactionDeleteView(TransactionMixin, DeleteView):
     template_name = "confirm_delete.html"
 
