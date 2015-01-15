@@ -1,8 +1,8 @@
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import TemplateView, CreateView, ListView, UpdateView, DetailView, DeleteView
 from lib.views import OwnedItemsMixin, ActiveUserRequiredMixin
-from trackers.forms import WeightForm, SexForm, BookForm, JokeForm, TransactionForm
-from trackers.models import Book, Sex, Joke, Weight, Transaction
+from trackers.forms import WeightForm, SexForm, BookForm, JokeForm, TransactionForm, DreamForm
+from trackers.models import Book, Sex, Joke, Weight, Transaction, Dream
 
 
 class TrackerMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
@@ -212,5 +212,42 @@ class TransactionEditView(TransactionMixin, UpdateView):
 
 
 class TransactionDeleteView(TransactionMixin, DeleteView):
+    template_name = "confirm_delete.html"
+
+
+class DreamMixin(TrackerMixin):
+    success_url = reverse_lazy("trackers:dream_list")
+    model = Dream
+    form_class = DreamForm
+
+
+class DreamListView(DreamMixin, ListView):
+    success_url = reverse_lazy("trackers:tracker_list")
+    paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["total_counter"] = self.get_queryset().count()
+        return context
+
+
+class DreamNewView(DreamMixin, CreateView):
+    template_name = "trackers/tracker_form.html"
+
+    def form_valid(self, form):
+        user = self.request.user
+        form.instance.owner = user
+        return super().form_valid(form)
+
+
+class DreamShowView(DreamMixin, DetailView):
+    template_name = "trackers/tracker_show.html"
+
+
+class DreamEditView(DreamMixin, UpdateView):
+    template_name = "trackers/tracker_form.html"
+
+
+class DreamDeleteView(DreamMixin, DeleteView):
     template_name = "confirm_delete.html"
 

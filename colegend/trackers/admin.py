@@ -1,5 +1,5 @@
 from django.contrib import admin
-from trackers.models import Weight, Joke, Book, Sex, Transaction
+from trackers.models import Weight, Joke, Book, Sex, Transaction, Dream
 
 
 class WeightAdmin(admin.ModelAdmin):
@@ -63,7 +63,7 @@ admin.site.register(Joke, JokeAdmin)
 
 
 class TransactionAdmin(admin.ModelAdmin):
-    list_display = ['time', 'amount', 'transaction_type', 'description', 'category', 'tags']
+    list_display = ['time', 'amount', 'transaction_type', 'description', 'category', 'tags', 'owner']
     list_filter = ['owner', 'category']
     readonly_fields = ['creation_date', 'modification_date']
 
@@ -75,3 +75,18 @@ class TransactionAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Transaction, TransactionAdmin)
+
+
+class DreamAdmin(admin.ModelAdmin):
+    list_display = ['date', 'name', 'symbols', 'owner']
+    list_filter = ['owner']
+    readonly_fields = ['creation_date', 'modification_date']
+
+    fieldsets = [
+        (None, {'fields': ['owner']}),
+        (None, {'fields': ['date', 'name', 'description', 'symbols']}),
+        ('history', {'fields': ['creation_date', 'modification_date'], 'classes': ['collapse']}),
+    ]
+
+
+admin.site.register(Dream, DreamAdmin)

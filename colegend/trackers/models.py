@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models import QuerySet
 from django.utils import timezone
+from markitup.fields import MarkupField
 from categories.models import Category
 from lib.models import OwnedBase, TimeStampedBase, TrackedBase, OwnedQueryMixin, AutoUrlMixin
 
@@ -116,3 +117,15 @@ class Transaction(OwnedBase, AutoUrlMixin, TimeStampedBase):
 
     def __str__(self):
         return "{time} €{amount}".format(time=self.time, amount=self.amount)
+
+
+class Dream(OwnedBase, AutoUrlMixin, TimeStampedBase):
+    date = models.DateField(default=timezone.now)
+    name = models.CharField(max_length=100)
+    description = MarkupField(blank=True)
+    symbols = models.CharField(max_length=100, blank=True, help_text="Topics? Nouns?")
+
+    objects = TrackerQuerySet.as_manager()
+
+    def __str__(self):
+        return "{date}: {name}".format(date=self.date, name=self.name)

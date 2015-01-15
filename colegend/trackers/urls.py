@@ -2,7 +2,8 @@ from django.conf.urls import patterns, url
 from trackers.views import TrackerListView, WeightListView, WeightNewView, WeightEditView, WeightDeleteView, \
     WeightShowView, SexListView, SexNewView, SexShowView, SexEditView, SexDeleteView, BookListView, BookNewView, \
     BookShowView, BookEditView, BookDeleteView, JokeListView, JokeNewView, JokeShowView, JokeEditView, JokeDeleteView, \
-    TransactionListView, TransactionNewView, TransactionShowView, TransactionEditView, TransactionDeleteView
+    TransactionListView, TransactionNewView, TransactionShowView, TransactionEditView, TransactionDeleteView, \
+    DreamListView, DreamNewView, DreamShowView, DreamEditView, DreamDeleteView
 
 __author__ = 'eraldo'
 
@@ -116,6 +117,7 @@ urlpatterns = patterns(
         JokeDeleteView.as_view(),
         name='joke_delete'),
 
+
     # ex: ../transaction/
     url(r'^transaction/$',
         TransactionListView.as_view(),
@@ -140,4 +142,30 @@ urlpatterns = patterns(
     url(r'^transaction/(?P<pk>\d+)/delete/$',
         TransactionDeleteView.as_view(),
         name='transaction_delete'),
+
+
+    # ex: ../dream/
+    url(r'^dream/$',
+        DreamListView.as_view(),
+        name='dream_list'),
+
+    # ex: ../dream/new/
+    url(r'^dream/new/$',
+        DreamNewView.as_view(),
+        name='dream_new'),
+
+    # ex: ../dream/4/
+    url(r'^dream/(?P<pk>\d+)/$',
+        DreamShowView.as_view(),
+        name='dream_show'),
+
+    # ex: ../dream/4/edit/
+    url(r'^dream/(?P<pk>\d+)/edit/$',
+        DreamEditView.as_view(),
+        name='dream_edit'),
+
+    # ex: ..dream/4/delete/
+    url(r'^dream/(?P<pk>\d+)/delete/$',
+        DreamDeleteView.as_view(),
+        name='dream_delete'),
 )
