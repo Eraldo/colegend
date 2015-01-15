@@ -7,12 +7,12 @@
 {% block up_url %}{% url "trackers:tracker_list" %}{% endblock %}
 
 {% block page_controls %}
-    <a href="{% url "trackers:weight_list" %}" class="btn btn-default">Weight</a>
-    <a href="{% url "trackers:sex_list" %}" class="btn btn-default">Sex</a>
-    <a href="{% url "trackers:transaction_list" %}" class="btn btn-default">Finances</a>
-    <a href="{% url "trackers:dream_list" %}" class="btn btn-default">Dreams</a>
-    <a href="{% url "trackers:book_list" %}" class="btn btn-default">Books</a>
-    <a href="{% url "trackers:joke_list" %}" class="btn btn-default">Jokes</a>
+    <a href="{% url "trackers:weight_list" %}" class="btn btn-category bg-category-1">Weight</a>
+    <a href="{% url "trackers:sex_list" %}" class="btn btn-category bg-category-2">Sex</a>
+    <a href="{% url "trackers:transaction_list" %}" class="btn btn-category bg-category-3">Finances</a>
+    <a href="{% url "trackers:joke_list" %}" class="btn btn-category bg-category-5">Jokes</a>
+    <a href="{% url "trackers:book_list" %}" class="btn btn-category bg-category-6">Books</a>
+    <a href="{% url "trackers:dream_list" %}" class="btn btn-category bg-category-7">Dreams</a>
 {% endblock %}
 
 {% block page_content %}
