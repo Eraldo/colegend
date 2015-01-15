@@ -173,6 +173,11 @@ BINDINGS = [
         'command': 'tags-menu-item',
         'action': 'link_id'
     },
+    {
+        'keys': 'g r',  # go trackers
+        'command': 'trackers-menu-item',
+        'action': 'link_id'
+    },
 
     # Motivator
     {
