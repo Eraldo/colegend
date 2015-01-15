@@ -37,11 +37,11 @@ def menu(request):
             MenuItem("Projects", url="projects:project_list", icon="project", keyboard_shortcut='g p'),
             MenuItem("Tasks", url="tasks:task_list", icon="task", keyboard_shortcut='g t'),
             MenuItem("Tags", url="tags:tag_list", icon="tag", keyboard_shortcut='g x'),
+            MenuItem("Trackers", url="trackers:tracker_list", icon="tracker", keyboard_shortcut='g r'),
         ],
         'manager_extra': [
             MenuItem("Routines", url="routines:routine_list", icon="routine"),
             MenuItem("Habits", url="habits:habit_list", icon="habit"),
-            MenuItem("Trackers", url="trackers:tracker_list", icon="list"),
         ],
         'motivator': [
             MenuItem("Legend", url="legend:home", icon="legend", keyboard_shortcut='g l'),
