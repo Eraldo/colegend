@@ -7,7 +7,7 @@ import floppyforms as forms
 from markitup.widgets import MarkItUpWidget
 from lib.crispy import CancelButton, SaveButton
 from lib.formfields import PhoneField
-from lib.validators import validate_in_past, PhoneValidator
+from lib.validators import PhoneValidator, validate_date_in_past
 from users.models import User, Profile, Settings
 
 __author__ = 'eraldo'
@@ -68,7 +68,7 @@ class SignUpApplicationForm(ModelForm):
         ('F', 'Female Legend ♀'),
     )
     gender = forms.ChoiceField(choices=GENDER_CHOICES)
-    birthday = forms.DateField(validators=[validate_in_past])
+    birthday = forms.DateField(validators=[validate_date_in_past])
     email = forms.EmailField()
     phone_number = PhoneField(help_text="Mobile or other phone number. Example: +4369910203039")
     street = forms.CharField(max_length=100)

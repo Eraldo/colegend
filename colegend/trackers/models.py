@@ -1,9 +1,12 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import QuerySet
 from django.utils import timezone
+from django.utils.timesince import timesince
 from markitup.fields import MarkupField
 from categories.models import Category
 from lib.models import OwnedBase, TimeStampedBase, TrackedBase, OwnedQueryMixin, AutoUrlMixin
+from lib.validators import validate_datetime_in_past
 
 
 class TrackerQuerySet(OwnedQueryMixin, QuerySet):
@@ -129,3 +132,33 @@ class Dream(OwnedBase, AutoUrlMixin, TimeStampedBase):
 
     def __str__(self):
         return "{date}: {name}".format(date=self.date, name=self.name)
+
+
+class Sleep(OwnedBase, AutoUrlMixin, TimeStampedBase):
+    start = models.DateTimeField(validators=[validate_datetime_in_past])
+    end = models.DateTimeField(null=True, blank=True, validators=[validate_datetime_in_past])
+    notes = models.TextField(blank=True)
+
+    objects = TrackerQuerySet.as_manager()
+
+    def __str__(self):
+        return "{start}-{end}".format(start=self.start, end=self.end)
+
+    @property
+    def duration(self):
+        if self.end:
+            return self.end - self.start
+
+    def get_duration_display(self):
+        if not self.duration:
+            return
+        return timesince(self.start, self.end)
+        return str(self.duration)[:-3]
+
+    def clean(self, *args, **kwargs):
+        """
+        Make sure that the end time is after the start time.
+        """
+        if self.end and self.end <= self.start:
+            raise ValidationError({'end': ["End time needs to be after start time."]})
+        super().clean(*args, **kwargs)

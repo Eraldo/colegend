@@ -1,8 +1,8 @@
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import TemplateView, CreateView, ListView, UpdateView, DetailView, DeleteView
 from lib.views import OwnedItemsMixin, ActiveUserRequiredMixin
-from trackers.forms import WeightForm, SexForm, BookForm, JokeForm, TransactionForm, DreamForm
-from trackers.models import Book, Sex, Joke, Weight, Transaction, Dream
+from trackers.forms import WeightForm, SexForm, BookForm, JokeForm, TransactionForm, DreamForm, SleepForm
+from trackers.models import Book, Sex, Joke, Weight, Transaction, Dream, Sleep
 
 
 class TrackerMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
@@ -249,5 +249,50 @@ class DreamEditView(DreamMixin, UpdateView):
 
 
 class DreamDeleteView(DreamMixin, DeleteView):
+    template_name = "confirm_delete.html"
+
+
+class SleepMixin(TrackerMixin):
+    success_url = reverse_lazy("trackers:sleep_list")
+    model = Sleep
+    form_class = SleepForm
+
+
+class SleepListView(SleepMixin, ListView):
+    success_url = reverse_lazy("trackers:tracker_list")
+    paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["total_counter"] = self.get_queryset().count()
+        return context
+
+
+class SleepNewView(SleepMixin, CreateView):
+    template_name = "trackers/tracker_form.html"
+
+    def form_valid(self, form):
+        user = self.request.user
+        form.instance.owner = user
+        return super().form_valid(form)
+
+    def get_initial(self):
+        initial = super().get_initial()
+        # try:
+        #     initial['start'] = Sleep.objects.owned_by(self.request.user).first().weight
+        # except (Sex.DoesNotExist, AttributeError):
+        #     pass
+        return initial
+
+
+class SleepShowView(SleepMixin, DetailView):
+    template_name = "trackers/tracker_show.html"
+
+
+class SleepEditView(SleepMixin, UpdateView):
+    template_name = "trackers/tracker_form.html"
+
+
+class SleepDeleteView(SleepMixin, DeleteView):
     template_name = "confirm_delete.html"
 

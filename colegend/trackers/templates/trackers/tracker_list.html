@@ -1,12 +1,13 @@
 {% extends 'page.html' %}
 
 {% block page_title %}
-    Tackers
+    Trackers
 {% endblock %}
 
 {% block up_url %}{% url "trackers:tracker_list" %}{% endblock %}
 
 {% block page_controls %}
+    <a href="{% url "trackers:sleep_list" %}" class="btn btn-category bg-category-1">Sleep</a>
     <a href="{% url "trackers:weight_list" %}" class="btn btn-category bg-category-1">Weight</a>
     <a href="{% url "trackers:sex_list" %}" class="btn btn-category bg-category-2">Sex</a>
     <a href="{% url "trackers:transaction_list" %}" class="btn btn-category bg-category-3">Finances</a>

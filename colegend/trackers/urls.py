@@ -3,7 +3,8 @@ from trackers.views import TrackerListView, WeightListView, WeightNewView, Weigh
     WeightShowView, SexListView, SexNewView, SexShowView, SexEditView, SexDeleteView, BookListView, BookNewView, \
     BookShowView, BookEditView, BookDeleteView, JokeListView, JokeNewView, JokeShowView, JokeEditView, JokeDeleteView, \
     TransactionListView, TransactionNewView, TransactionShowView, TransactionEditView, TransactionDeleteView, \
-    DreamListView, DreamNewView, DreamShowView, DreamEditView, DreamDeleteView
+    DreamListView, DreamNewView, DreamShowView, DreamEditView, DreamDeleteView, SleepListView, SleepNewView, \
+    SleepShowView, SleepEditView, SleepDeleteView
 
 __author__ = 'eraldo'
 
@@ -168,4 +169,30 @@ urlpatterns = patterns(
     url(r'^dream/(?P<pk>\d+)/delete/$',
         DreamDeleteView.as_view(),
         name='dream_delete'),
+
+
+    # ex: ../sleep/
+    url(r'^sleep/$',
+        SleepListView.as_view(),
+        name='sleep_list'),
+
+    # ex: ../sleep/new/
+    url(r'^sleep/new/$',
+        SleepNewView.as_view(),
+        name='sleep_new'),
+
+    # ex: ../sleep/4/
+    url(r'^sleep/(?P<pk>\d+)/$',
+        SleepShowView.as_view(),
+        name='sleep_show'),
+
+    # ex: ../sleep/4/edit/
+    url(r'^sleep/(?P<pk>\d+)/edit/$',
+        SleepEditView.as_view(),
+        name='sleep_edit'),
+
+    # ex: ..sleep/4/delete/
+    url(r'^sleep/(?P<pk>\d+)/delete/$',
+        SleepDeleteView.as_view(),
+        name='sleep_delete'),
 )

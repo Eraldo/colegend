@@ -1,4 +1,5 @@
 import datetime
+from django.utils import timezone
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 
@@ -11,6 +12,11 @@ class PhoneValidator(RegexValidator):
     code = "invalid_phone_number"
 
 
-def validate_in_past(date):
+def validate_date_in_past(date):
     if date >= datetime.date.today():
         raise ValidationError('Date needs to be in the past.')
+
+
+def validate_datetime_in_past(time):
+    if time > timezone.now():
+        raise ValidationError('Needs to be now or in the past.')

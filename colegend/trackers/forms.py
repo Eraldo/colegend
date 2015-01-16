@@ -4,7 +4,7 @@ from django.forms import ModelForm
 from markitup.widgets import MarkItUpWidget
 from lib.crispy import SaveButton, CancelButton
 from tags.models import Tag
-from trackers.models import Weight, Sex, Book, Joke, Transaction, Dream
+from trackers.models import Weight, Sex, Book, Joke, Transaction, Dream, Sleep
 
 __author__ = 'eraldo'
 
@@ -113,6 +113,21 @@ class DreamForm(ModelForm):
         Field('name', autofocus='True'),
         Field('description'),
         Field('symbols'),
+        SaveButton(),
+        CancelButton(),
+    )
+
+
+class SleepForm(ModelForm):
+    class Meta:
+        model = Sleep
+        fields = ['start', 'end', 'notes']
+
+    helper = FormHelper()
+    helper.layout = Layout(
+        Field('start', autofocus='True'),
+        Field('end'),
+        Field('notes', rows=2),
         SaveButton(),
         CancelButton(),
     )
