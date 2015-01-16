@@ -1,8 +1,8 @@
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import TemplateView, CreateView, ListView, UpdateView, DetailView, DeleteView
 from lib.views import OwnedItemsMixin, ActiveUserRequiredMixin
-from trackers.forms import WeightForm, SexForm, BookForm, JokeForm, TransactionForm, DreamForm, SleepForm
-from trackers.models import Book, Sex, Joke, Weight, Transaction, Dream, Sleep
+from trackers.forms import WeightForm, SexForm, BookForm, JokeForm, TransactionForm, DreamForm, SleepForm, WalkForm
+from trackers.models import Book, Sex, Joke, Weight, Transaction, Dream, Sleep, Walk
 
 
 class TrackerMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
@@ -276,14 +276,6 @@ class SleepNewView(SleepMixin, CreateView):
         form.instance.owner = user
         return super().form_valid(form)
 
-    def get_initial(self):
-        initial = super().get_initial()
-        # try:
-        #     initial['start'] = Sleep.objects.owned_by(self.request.user).first().weight
-        # except (Sex.DoesNotExist, AttributeError):
-        #     pass
-        return initial
-
 
 class SleepShowView(SleepMixin, DetailView):
     template_name = "trackers/tracker_show.html"
@@ -294,5 +286,42 @@ class SleepEditView(SleepMixin, UpdateView):
 
 
 class SleepDeleteView(SleepMixin, DeleteView):
+    template_name = "confirm_delete.html"
+
+
+class WalkMixin(TrackerMixin):
+    success_url = reverse_lazy("trackers:walk_list")
+    model = Walk
+    form_class = WalkForm
+
+
+class WalkListView(WalkMixin, ListView):
+    success_url = reverse_lazy("trackers:tracker_list")
+    paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["total_counter"] = self.get_queryset().count()
+        return context
+
+
+class WalkNewView(WalkMixin, CreateView):
+    template_name = "trackers/tracker_form.html"
+
+    def form_valid(self, form):
+        user = self.request.user
+        form.instance.owner = user
+        return super().form_valid(form)
+
+
+class WalkShowView(WalkMixin, DetailView):
+    template_name = "trackers/tracker_show.html"
+
+
+class WalkEditView(WalkMixin, UpdateView):
+    template_name = "trackers/tracker_form.html"
+
+
+class WalkDeleteView(WalkMixin, DeleteView):
     template_name = "confirm_delete.html"
 

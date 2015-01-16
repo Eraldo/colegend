@@ -1,5 +1,5 @@
 from django.contrib import admin
-from trackers.models import Weight, Joke, Book, Sex, Transaction, Dream, Sleep
+from trackers.models import Weight, Joke, Book, Sex, Transaction, Dream, Sleep, Walk
 
 
 class WeightAdmin(admin.ModelAdmin):
@@ -105,3 +105,18 @@ class SleepAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Sleep, SleepAdmin)
+
+
+class WalkAdmin(admin.ModelAdmin):
+    list_display = ['start', 'end', 'notes', 'owner']
+    list_filter = ['owner']
+    readonly_fields = ['creation_date', 'modification_date']
+
+    fieldsets = [
+        (None, {'fields': ['owner']}),
+        (None, {'fields': ['start', 'end', 'notes']}),
+        ('history', {'fields': ['creation_date', 'modification_date'], 'classes': ['collapse']}),
+    ]
+
+
+admin.site.register(Walk, WalkAdmin)
