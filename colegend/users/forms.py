@@ -184,10 +184,7 @@ class SignUpApplicationForm(ModelForm):
 class SettingsForm(ModelForm):
     class Meta:
         model = Settings
-        fields = ['language', 'day_start', 'keyboard', 'sound', 'journal_entry_template']
-        widgets = {
-            'journal_entry_template': MarkItUpWidget(),
-        }
+        fields = ['language', 'day_start', 'keyboard', 'sound']
 
     helper = FormHelper()
     helper.layout = Layout(
@@ -202,10 +199,6 @@ class SettingsForm(ModelForm):
                 target="_blank" class="help-block" style="position: relative; top: -15px;">
                 {% load icons %}{% icon "tutorial" %} Keyboard Tutorial</a>"""),
             Field("sound"),
-        ),
-        Fieldset(
-            "Journal Settings",
-            Field("journal_entry_template"),
         ),
         SaveButton(),
     )

@@ -314,9 +314,6 @@ class Settings(models.Model):
         validators=[MaxValueValidator(24)])
     sound = models.BooleanField(verbose_name="Sound", default=True)
     keyboard = models.BooleanField(verbose_name="Keyboard Control", default=False)
-    journal_entry_template = models.TextField(
-        blank=True,
-        help_text="The default text to be used as a basis when creating a new journal entry.")
 
     class Meta:
         verbose_name_plural = "Settings"

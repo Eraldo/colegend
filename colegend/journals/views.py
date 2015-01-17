@@ -68,9 +68,9 @@ class DayEntryNewView(DayEntryMixin, CreateView):
         initial = super(DayEntryNewView, self).get_initial()
         user = self.request.user
         # template
-        entry_template = user.settings.journal_entry_template
-        if entry_template:
-            initial['content'] = entry_template
+        template = user.journal.template
+        if template:
+            initial['content'] = template
         # location
         entry = DayEntry.objects.latest_for(user)
         if entry:

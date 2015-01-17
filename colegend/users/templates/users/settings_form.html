@@ -10,10 +10,10 @@
     <a class="btn btn-info" href="{% url 'users:update' %}">{% icon "info" %} My Info</a>
     <a class="btn btn-info" href="{% url 'avatar_change' %}">{% icon "avatar" %} Avatar</a>
     <a class="btn btn-info" href="{% url 'account_email' %}">{% icon "email" %} E-Mail</a>
-    <a class="btn btn-info" href="{% url 'socialaccount_connections' %}">{% icon "social-accounts" %}
-        Social Accounts</a>
-    <a class="btn btn-info" href="{% url 'account_change_password' %}">{% icon "password" %}
-        Password</a>
+    <a class="btn btn-info" href="{% url 'socialaccount_connections' %}">{% icon "social-accounts" %} Social
+        Accounts</a>
+    <a class="btn btn-info" href="{% url 'account_change_password' %}">{% icon "password" %} Password</a>
+    <a class="btn btn-default" href="{% url 'journals:journal_edit' %}">{% icon "journal" %} Journal</a>
 {% endblock %}
 
 {% block page_content %}
