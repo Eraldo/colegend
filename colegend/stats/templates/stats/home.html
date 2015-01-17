@@ -7,26 +7,70 @@
 
 {% block up_url %}{% url "stats:home" %}{% endblock %}
 
+{% block page_controls %}
+    <a href="{% url "stats:admin" %}" class="btn btn-danger pull-right">{% icon "stats" %}</a>
+{% endblock %}
+
 {% block page_content %}
-<div class="well">
-    Ahhh.. the place where the nerd-ego loves to hang around.. STATISTICS! :D<br/>
-    So, what have we got for now.. (I am currently working on this section)<br/>
-    <h2>Tasks</h2>
-    Total: {{ tasks_total }}<br/>
-    Open: {{ tasks_open }}<br/>
-    Completed: {{ tasks_closed }}<br/>
-    <br/>
-    Next: {{ tasks_next }}<br/>
-    Todo: {{ tasks_todo }}<br/>
-    Waiting: {{ tasks_waiting }}<br/>
-    Someday: {{ tasks_someday }}<br/>
-    Maybe: {{ tasks_maybe }}<br/>
-    Done: {{ tasks_done }}<br/>
-    Canceled: {{ tasks_canceled }}<br/>
-</div>
-<div class="well well-sm">
-<h4>Feedback</h4>
-Which stats do you want to have?<br/>
-    <a href="{% url "contact" %}" class="btn btn-default">Suggest</a>
-</div>
+    <div class="well">
+        Ahhh.. the place where the nerd-ego loves to hang around.. STATISTICS! :D<br/>
+        So, what have we got for now.. (I am currently working on this section)<br/>
+
+        <div class="row">
+            <div class="col-md-3">
+                <h2>Legend</h2>
+                Age: {{ user_days }}<br/>
+
+                <h2>Journal</h2>
+                Entries: {{ journal_entries }}<br/>
+                Streak: {{ journal_streak }}<br/>
+                Best Streak: {{ journal_max_streak }}<br/>
+            </div>
+            <div class="col-md-3">
+                <h2>Tasks</h2>
+                Total: {{ tasks_total }}<br/>
+                Open: {{ tasks_open }}<br/>
+                Completed: {{ tasks_closed }}<br/>
+                <br/>
+                Next: {{ tasks_next }}<br/>
+                Todo: {{ tasks_todo }}<br/>
+                Waiting: {{ tasks_waiting }}<br/>
+                Someday: {{ tasks_someday }}<br/>
+                Maybe: {{ tasks_maybe }}<br/>
+                Done: {{ tasks_done }}<br/>
+                Canceled: {{ tasks_canceled }}<br/>
+            </div>
+            <div class="col-md-3">
+                <h2>Projects</h2>
+                Total: {{ projects_total }}<br/>
+                Open: {{ projects_open }}<br/>
+                Completed: {{ projects_closed }}<br/>
+                <br/>
+                Next: {{ projects_next }}<br/>
+                Todo: {{ projects_todo }}<br/>
+                Waiting: {{ projects_waiting }}<br/>
+                Someday: {{ projects_someday }}<br/>
+                Maybe: {{ projects_maybe }}<br/>
+                Done: {{ projects_done }}<br/>
+                Canceled: {{ projects_canceled }}<br/>
+            </div>
+            <div class="col-md-3">
+                <h2>Tags</h2>
+                Total: {{ tags_total }}<br/>
+
+                <h2>Quotes</h2>
+                Shared: {{ quotes_total }}<br/>
+
+                <h2>Notifications</h2>
+                Total: {{ notifications_total }}<br/>
+                Read: {{ notifications_read }}<br/>
+                Unread: {{ notifications_unread }}<br/>
+            </div>
+        </div>
+    </div>
+    <div class="well well-sm">
+        <h4>Feedback</h4>
+        Which stats do you want to have?<br/>
+        <a href="{% url "contact" %}" class="btn btn-default">Suggest</a>
+    </div>
 {% endblock %}

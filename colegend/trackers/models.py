@@ -215,3 +215,6 @@ class Walk(OwnedBase, AutoUrlMixin, TimeStampedBase):
         if self.end and self.end <= self.start:
             raise ValidationError({'end': ["End time needs to be after start time."]})
         super().clean(*args, **kwargs)
+
+
+TRACKERS = [Sleep, Weight, Sex, Transaction, Walk, Joke, Book, Dream]

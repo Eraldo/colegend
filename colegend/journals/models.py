@@ -28,6 +28,10 @@ class Journal(AutoOwnedBase, models.Model):
     def __str__(self):
         return "{}'s Journal".format(self.owner)
 
+    @property
+    def streak(self):
+        return DayEntry.objects.streak_for(self.owner)
+
 
 class DayEntryQuerySet(models.QuerySet):
     def owned_by(self, user):
