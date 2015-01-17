@@ -1,0 +1,9 @@
+{% extends 'form.html' %}
+
+{% block up_url %}{% url "journals:dayentry_list" %}{% endblock %}
+
+{% block form_title %}Journal{% endblock %}
+
+{% block page_content %}
+    {{ block.super }}
+{% endblock %}

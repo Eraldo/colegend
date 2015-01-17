@@ -26,6 +26,12 @@
     {% endif %}
 {% endblock %}
 
+{% block page_title_extras %}
+    <span data-toggle="tooltip" title="Topic of the year">
+        <span class="label label-info">{{ topic_of_the_year }}</span>
+    </span>
+{% endblock %}
+
 {% block page_content %}
     {% if quote %}
         <div class="well well-sm">

@@ -1,19 +1,20 @@
 from django.contrib import messages
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.utils import timezone
 from lib.views import ActiveUserRequiredMixin
 from django.core.exceptions import ValidationError
 from django.views.generic import DetailView, UpdateView, DeleteView, CreateView, ArchiveIndexView, RedirectView, \
     TemplateView
-from journals.forms import DayEntryForm
-from journals.models import DayEntry
+from journals.forms import DayEntryForm, JournalForm
+from journals.models import DayEntry, Journal
 
 __author__ = 'eraldo'
 
 
-class DayEntryMixin(ActiveUserRequiredMixin):
-    model = DayEntry
-    form_class = DayEntryForm
+class JournalMixin(ActiveUserRequiredMixin):
+    success_url = reverse_lazy('journals:dayentry_list')
+    model = Journal
+    form_class = JournalForm
     icon = "journal"
     tutorial = "Journal"
 
@@ -26,11 +27,21 @@ class DayEntryMixin(ActiveUserRequiredMixin):
 
     def form_valid(self, form):
         try:
-            return super(DayEntryMixin, self).form_valid(form)
+            return super().form_valid(form)
         except ValidationError as e:
             # Catch model errors (e.g. unique_together).
             form.add_error(None, e)
-            return super(DayEntryMixin, self).form_invalid(form)
+            return super().form_invalid(form)
+
+
+class JournalEditView(JournalMixin, UpdateView):
+    def get_object(self, queryset=None):
+        return self.request.user.journal
+
+
+class DayEntryMixin(JournalMixin):
+    model = DayEntry
+    form_class = DayEntryForm
 
 
 class DayEntryListView(DayEntryMixin, ArchiveIndexView):
@@ -43,6 +54,7 @@ class DayEntryListView(DayEntryMixin, ArchiveIndexView):
         context = super(DayEntryListView, self).get_context_data(**kwargs)
         context['total_counter'] = self.get_queryset().count()
         context['streak'] = DayEntry.objects.streak_for(self.request.user)
+        context['topic_of_the_year'] = self.request.user.journal.topic_of_the_year
         return context
 
 

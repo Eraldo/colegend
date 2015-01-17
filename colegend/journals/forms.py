@@ -2,10 +2,23 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, Div
 from django.forms import ModelForm
 from markitup.widgets import MarkItUpWidget
-from journals.models import DayEntry
+from journals.models import DayEntry, Journal
 from lib.crispy import CancelButton, SaveButton
 
 __author__ = 'eraldo'
+
+
+class JournalForm(ModelForm):
+    class Meta:
+        model = Journal
+        fields = ['topic_of_the_year']
+
+    helper = FormHelper()
+    helper.layout = Layout(
+        Field('topic_of_the_year', autofocus='True'),
+        SaveButton(),
+        CancelButton(),
+    )
 
 
 class DayEntryForm(ModelForm):

@@ -7,6 +7,10 @@ from lib.models import AutoUrlMixin, OwnedBase, TrackedBase, OwnedQueryMixin, Va
 __author__ = 'eraldo'
 
 
+class JournalQuerySet(OwnedQueryMixin, models.QuerySet):
+    pass
+
+
 class Journal(AutoOwnedBase, models.Model):
     """
     A django model representing a journal with one entry per day.
@@ -14,6 +18,9 @@ class Journal(AutoOwnedBase, models.Model):
     # > owner (pk)
     # > entries
     max_streak = models.IntegerField(default=0)
+    topic_of_the_year = models.CharField(max_length=100, blank=True)
+
+    objects = JournalQuerySet.as_manager()
 
     def __str__(self):
         return "{}'s Journal".format(self.owner)

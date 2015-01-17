@@ -13,6 +13,9 @@
     <span data-toggle="tooltip" title="Streak">
         <span class="streak badge">{% icon "streak" %} {{ streak }}</span>
     </span>
+    <span data-toggle="tooltip" title="Topic of the year">
+        <span class="label label-info">{{ topic_of_the_year }}</span>
+    </span>
 {% endblock %}
 
 {% block page_controls %}
@@ -24,6 +27,9 @@
     </a>
     <a href="{% url "journals:map" %}" class="btn btn-default" role="button" data-toggle="tooltip" title="Travel Map">
         {% icon "location" %}
+    </a>
+    <a href="{% url "journals:journal_edit" %}" class="btn btn-default pull-right" role="button" data-toggle="tooltip" title="Journal Settings">
+        {% icon "setting" %}
     </a>
 {% endblock %}
 

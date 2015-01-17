@@ -1,11 +1,16 @@
 from django.conf.urls import patterns, url
 from journals.views import DayEntryShowView, DayEntryNewView, DayEntryEditView, DayEntryDeleteView, DayEntryListView, \
-    DayEntryContinueView, MapView
+    DayEntryContinueView, MapView, JournalEditView
 
 __author__ = 'eraldo'
 
 urlpatterns = patterns(
     '',
+    # ex: ../4/edit/
+    url(r'^edit/$',
+        JournalEditView.as_view(),
+        name='journal_edit'),
+
     # ex: ../
     url(r'^$',
         DayEntryListView.as_view(),

@@ -36,6 +36,7 @@ class HomeView(ActiveUserRequiredMixin, TemplateView):
         number_of_newsblocks = 1
         context['newsblocks'] = NewsBlock.objects.filter(sticky=False)[0:number_of_newsblocks]
         context['sticky_newsblocks'] = NewsBlock.objects.filter(sticky=True)[0:number_of_newsblocks]
+        context['topic_of_the_year'] = self.request.user.journal.topic_of_the_year
         return context
 
 
