@@ -11,11 +11,15 @@ __author__ = 'eraldo'
 class JournalForm(ModelForm):
     class Meta:
         model = Journal
-        fields = ['topic_of_the_year']
+        fields = ['template', 'topic_of_the_year']
+        widgets = {
+            'template': MarkItUpWidget(),
+        }
 
     helper = FormHelper()
     helper.layout = Layout(
         Field('topic_of_the_year', autofocus='True'),
+        Field('template'),
         SaveButton(),
         CancelButton(),
     )

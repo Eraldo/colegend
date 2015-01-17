@@ -17,8 +17,11 @@ class Journal(AutoOwnedBase, models.Model):
     """
     # > owner (pk)
     # > entries
-    max_streak = models.IntegerField(default=0)
     topic_of_the_year = models.CharField(max_length=100, blank=True)
+    template = models.TextField(
+        blank=True,
+        help_text="The default text to be used as a basis when creating a new journal entry.")
+    max_streak = models.IntegerField(default=0)
 
     objects = JournalQuerySet.as_manager()
 
