@@ -38,7 +38,7 @@
                     <a href="{{ transaction.get_edit_url }}">{{ transaction.time }}</a><br>
                 </td>
                 <td align="right">
-                    {{ transaction.amount }} €
+                    <span class="pull-left">€</span> {{ transaction.amount|floatformat:2 }}
                 </td>
                 <td>
                     {{ transaction.get_transaction_type_display }}
