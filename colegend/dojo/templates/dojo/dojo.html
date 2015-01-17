@@ -21,7 +21,7 @@
 {% block page_content %}
     <div class="well">
         {% for module in modules %}
-            <a href="{{ module.get_show_url }}" class="btn btn-primary">{{ module }}</a>
+            <a href="{{ module.get_show_url }}" class="btn btn-category bg-category-{{ module.category.pk }}">{{ module }}</a>
         {% empty %}
             No modules here yet.
         {% endfor %}
