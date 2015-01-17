@@ -45,19 +45,31 @@ class SexForm(ModelForm):
 class BookForm(ModelForm):
     class Meta:
         model = Book
-        fields = ['title', 'author', 'status', 'url', 'notes']
+        fields = ['title', 'author', 'status', 'category', 'book_type',
+                  'start_date', 'end_date', 'origin', 'feedback', 'rating', 'url', 'notes']
 
     helper = FormHelper()
     helper.layout = Layout(
         Row(
-            Field('title', autofocus='True', wrapper_class="col-md-6"),
-            Field('author', wrapper_class="col-md-6"),
+            Field('title', autofocus='True', wrapper_class="col-md-8"),
+            Field('author', wrapper_class="col-md-4"),
         ),
         Row(
-            Field('status', wrapper_class="col-md-6"),
-            Field('url', wrapper_class="col-md-6"),
+            Field('book_type', wrapper_class="col-md-3"),
+            Field('category', wrapper_class="col-md-3"),
+            Field('status', wrapper_class="col-md-2"),
+            Field('start_date', wrapper_class="col-md-2"),
+            Field('end_date', wrapper_class="col-md-2"),
         ),
-        Field('notes', rows=2),
+        Row(
+            Field('url', wrapper_class="col-md-6"),
+            Field('origin', wrapper_class="col-md-3"),
+            Field('rating', wrapper_class="col-md-3"),
+            ),
+        Row(
+            Field('notes', wrapper_class="col-md-6"),
+            Field('feedback', wrapper_class="col-md-6"),
+        ),
         SaveButton(),
         CancelButton(),
     )

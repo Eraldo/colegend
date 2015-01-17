@@ -60,8 +60,23 @@ class Book(OwnedBase, AutoUrlMixin, TrackedBase):
         (CANCELED, "Canceled"),
     )
     status = models.PositiveSmallIntegerField(choices=STATUS_CHOICES, default=1)
-    notes = models.TextField(blank=True)
+    BOOK = 0
+    EBOOK = 1
+    AUDIO_BOOK = 2
+    TYPE_CHOICES = (
+        (BOOK, "Book"),
+        (EBOOK, "E-Book"),
+        (AUDIO_BOOK, "Audio-Book"),
+    )
+    book_type = models.PositiveSmallIntegerField(verbose_name="Type", choices=TYPE_CHOICES, default=0)
+    category = models.ForeignKey(Category)
+    start_date = models.DateField(null=True, blank=True, validators=[validate_datetime_in_past])
+    end_date = models.DateField(null=True, blank=True, validators=[validate_datetime_in_past])
+    origin = models.CharField(blank=True, max_length=100)
+    rating = models.PositiveSmallIntegerField(null=True, blank=True)
     url = models.URLField(blank=True)
+    notes = models.TextField(blank=True)
+    feedback = models.TextField(blank=True)
 
     objects = TrackerQuerySet.as_manager()
 
@@ -87,6 +102,14 @@ class Book(OwnedBase, AutoUrlMixin, TrackedBase):
         return bool(self.url)
     has_url.boolean = True
     has_url.short_description = "Url"
+
+    def clean(self, *args, **kwargs):
+        """
+        Make sure that the end date is after the start date.
+        """
+        if self.end_date and self.end_date <= self.start_date:
+            raise ValidationError({'end': ["End date needs to be after start date."]})
+        super().clean(*args, **kwargs)
 
 
 class Joke(OwnedBase, AutoUrlMixin, TimeStampedBase):

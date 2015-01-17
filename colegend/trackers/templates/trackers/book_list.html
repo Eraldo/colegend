@@ -24,8 +24,9 @@
             <th>Title</th>
             <th>Author</th>
             <th>Status</th>
+            <th>Category</th>
             <th>URL</th>
-            <th>Notes</th>
+            <th>Rating</th>
             <th></th>
         </tr>
         </thead>
@@ -33,7 +34,9 @@
         {% for book in book_list%}
             <tr>
                 <td>
-                    <a href="{{ book.get_edit_url }}">{{ book.title }}</a><br>
+                    <span data-toggle="tooltip" title="{{ book.title }}">
+                        <a href="{{ book.get_edit_url }}">{{ book.title|truncatechars:50 }}</a><br>
+                    </span>
                 </td>
                 <td>
                     {{ book.author }}
@@ -41,13 +44,16 @@
                 <td>
                     {{ book.get_status_display }}
                 </td>
+                <td align="center">
+                    {% include "categories/_category_field.html" with category=book.category %}
+                </td>
                 <td>
                     {% if book.url %}
                     <a href="{{ book.url }}" target="_blank">{% icon "link" %}</a>
                     {% endif %}
                 </td>
                 <td>
-                    {{ book.notes }}
+                    {{ book.rating|default:"" }}
                 </td>
                 <td>
                     <a href="{{ book.get_delete_url }}" class="item-delete-button btn btn-danger btn-xs pull-right" role="button">{% icon "delete" %}<span class="sr-only"> Delete</span></a>
