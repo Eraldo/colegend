@@ -8,7 +8,9 @@
 {% block up_url %}{% url "stats:home" %}{% endblock %}
 
 {% block page_controls %}
+    {% if user.is_superuser %}
     <a href="{% url "stats:admin" %}" class="btn btn-danger pull-right">{% icon "stats" %}</a>
+    {% endif %}
 {% endblock %}
 
 {% block page_content %}

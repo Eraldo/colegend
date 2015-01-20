@@ -4,6 +4,7 @@ from django.views.generic import TemplateView
 from challenges.models import Challenge
 from features.models import Feature
 from gatherings.models import Gathering
+from lib.views import ActiveUserRequiredMixin, ManagerRequiredMixin
 from news.models import NewsBlock
 from notifications.models import Notification
 from projects.models import Project
@@ -16,7 +17,7 @@ from users.models import User
 from visions.models import Vision
 
 
-class StatsView(TemplateView):
+class StatsView(ActiveUserRequiredMixin, TemplateView):
     icon = "stats"
     template_name = "stats/home.html"
 
@@ -62,7 +63,7 @@ class StatsView(TemplateView):
         return context
 
 
-class AdminStatsView(TemplateView):
+class AdminStatsView(ManagerRequiredMixin, TemplateView):
     icon = "stats"
     template_name = "stats/admin.html"
 
