@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-from stats.views import StatsView, AdminStatsView
+from stats.views import StatsView, ManagerStatsView
 
 __author__ = 'eraldo'
 
@@ -10,7 +10,7 @@ urlpatterns = patterns(
         StatsView.as_view(),
         name='home'),
     # ex: ../admin/
-    url(r'^admin$',
-        AdminStatsView.as_view(),
-        name='admin'),
+    url(r'^manager$',
+        ManagerStatsView.as_view(),
+        name='manager'),
 )

@@ -37,9 +37,9 @@
                 Total: {{ users_total }}<br/>
                 Accepted: {{ users_accepted }}<br/>
                 Joined this month: {{ users_joined_this_month.count }}<br/>
-                <small>=> {% for user in users_joined_this_month %}{{ user }} {% endfor %}</small><br/>
+                <small>=> {% for user in users_joined_this_month %}{% include "users/_user_link.html" %} {% endfor %}</small><br/>
                 Joined last month: {{ users_joined_last_month.count }}<br/>
-                <small>=> {% for user in users_joined_last_month %}{{ user }} {% endfor %}</small><br/>
+                <small>=> {% for user in users_joined_last_month %}{% include "users/_user_link.html" %} {% endfor %}</small><br/>
             </div>
         </div>
     </div>

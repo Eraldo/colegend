@@ -63,9 +63,9 @@ class StatsView(ActiveUserRequiredMixin, TemplateView):
         return context
 
 
-class AdminStatsView(ManagerRequiredMixin, TemplateView):
+class ManagerStatsView(ManagerRequiredMixin, TemplateView):
     icon = "stats"
-    template_name = "stats/admin.html"
+    template_name = "stats/manager.html"
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
