@@ -2,5 +2,5 @@
 
 {% include "tasks/_task_complete_button.html" %}
 <span data-toggle="tooltip" title="{{ task.project|default:"" }}">
-<a href="{{ task.get_show_url }}">{{ task }}</a>
+<a href="{{ task.get_show_url }}">{% include "status/_status_field.html" with status=task.status %}{{ task }}</a>
 </span>

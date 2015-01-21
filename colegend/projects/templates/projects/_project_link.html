@@ -1,8 +1,10 @@
 {% load icons %}
 
 <b>
-<span data-toggle="tooltip" title="{% if project.is_closed %}Completed {{ project.completion_date|default:"" }}{% endif %}">
-    <a href="#" class="btn btn-xs btn-{% if project.is_closed %}success{% else %}default{% endif %}">{% icon "project" %}</a>&nbsp;
+<span data-toggle="tooltip"
+      title="{% if project.is_closed %}Completed {{ project.completion_date|default:"" }}{% endif %}">
+    <a href="#"
+       class="btn btn-xs btn-{% if project.is_closed %}success{% else %}default{% endif %}">{% icon "project" %}</a>
 </span>
-    <a href="{{ project.get_show_url }}">{{ project }}</a>
+    <a href="{{ project.get_show_url }}">{% include "status/_status_field.html" with status=project.status %} {{ project }}</a>
 </b>
