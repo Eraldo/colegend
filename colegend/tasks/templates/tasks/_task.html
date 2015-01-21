@@ -10,8 +10,6 @@
         <b>{% include "tasks/_task_link.html" %}</b>
         {% include "tags/_tags_field.html" with tags=task.tags.all %}
     </div>
-    <div style="height: 5px;"></div>
-    {% include "status/_status_field.html" with status=task.status %}
     <div class="task-context pull-right">
         {% include "lib/_date_field.html" with date=task.date %}
         {% include "lib/_deadline_field.html" with deadline=task.deadline %}

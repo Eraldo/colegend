@@ -10,8 +10,6 @@
     {% include "projects/_project_link.html" %}
     {% include "tags/_tags_field.html" with tags=project.tags.all %}
     </div>
-    <div style="height: 5px;"></div>
-    {% include "status/_status_field.html" with status=project.status %}
     <div class="pull-right" style="margin-right: 2px;">
     {% include "lib/_deadline_field.html" with deadline=project.deadline %}
     </div>
