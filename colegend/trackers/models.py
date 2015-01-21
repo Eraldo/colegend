@@ -122,6 +122,9 @@ class Joke(OwnedBase, AutoUrlMixin, TimeStampedBase):
 
     objects = TrackerQuerySet.as_manager()
 
+    class Meta:
+        ordering = ['-rating']
+
     def __str__(self):
         return self.name
 
