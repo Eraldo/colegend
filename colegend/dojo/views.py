@@ -15,17 +15,15 @@ class DojoMixin(ActiveUserRequiredMixin):
     icon = "dojo"
     tutorial = "Dojo"
 
-    def get_queryset(self):
-        qs = super().get_queryset()
-        return qs.filter(accepted=True)
-
 
 class DojoView(DojoMixin, ListView):
     template_name = "dojo/dojo.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['modules'] = self.get_queryset()
+        modules = self.get_queryset()
+        context['modules'] = modules.filter(accepted=True)
+        context['pending'] = modules.filter(accepted=False, provider=self.request.user)
         context["total_counter"] = self.get_queryset().count()
         context["share_counter"] = self.request.user.module_set.count()
         return context

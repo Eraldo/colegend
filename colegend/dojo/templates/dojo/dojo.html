@@ -25,6 +25,12 @@
         {% empty %}
             No modules here yet.
         {% endfor %}
+    {% if pending %}
+        <h3>Pending</h3>
+        {% for module in pending %}
+            <a href="{{ module.get_show_url }}" class="btn btn-category bg-category-{{ module.category.pk }}">{{ module }}</a>
+        {% endfor %}
+    {% endif %}
     </div>
 
     <div class="well">
