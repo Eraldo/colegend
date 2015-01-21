@@ -13,15 +13,15 @@ class PhoneValidator(RegexValidator):
 
 
 def validate_date_in_past(date):
-    if date >= datetime.date.today():
+    if date and date >= datetime.date.today():
         raise ValidationError('Date needs to be in the past.')
 
 
 def validate_date_today_or_in_past(time):
-    if time > timezone.now().date():
+    if time and time > timezone.now().date():
         raise ValidationError('Needs to be today or in the past.')
 
 
 def validate_datetime_in_past(time):
-    if time > timezone.now():
+    if time and time > timezone.now():
         raise ValidationError('Needs to be now or in the past.')

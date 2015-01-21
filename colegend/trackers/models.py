@@ -107,8 +107,10 @@ class Book(OwnedBase, AutoUrlMixin, TrackedBase):
         """
         Make sure that the end date is after the start date.
         """
-        if self.end_date and self.end_date <= self.start_date:
-            raise ValidationError({'end': ["End date needs to be after start date."]})
+        if self.end_date and not self.start_date:
+            raise ValidationError({'start_date': ["You need to have a start date in order to set an end date."]})
+        elif self.end_date and self.end_date < self.start_date:
+            raise ValidationError({'end_date': ["End date needs to be on the same day or after the start date."]})
         super().clean(*args, **kwargs)
 
 
