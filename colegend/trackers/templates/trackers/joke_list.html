@@ -35,7 +35,7 @@
                     <a href="{{ joke.get_edit_url }}">{{ joke.name }}</a><br>
                 </td>
                 <td>
-                    {{ joke.description }}
+                    {{ joke.description|truncatechars:80 }}
                 </td>
                 <td>
                     {{ joke.rating }}
