@@ -2,6 +2,7 @@ from django.conf import settings
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.db import models
 from django.utils import timezone
+from markitup.fields import MarkupField
 from lib.models import AutoUrlMixin
 
 __author__ = 'eraldo'
@@ -43,6 +44,9 @@ class Gathering(AutoUrlMixin, models.Model):
     LOCATION_DEFAULT = "http://gathering.colegend.org/"
     location = models.CharField(max_length=200, default=LOCATION_DEFAULT)
     online = models.BooleanField(default=True)
+    topic = models.CharField(max_length=100, blank=True)
+    notes = MarkupField(blank=True)
+    participants = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name="gatherings_participated")
     host = models.ForeignKey(settings.AUTH_USER_MODEL)
 
     objects = GatheringQuerySet.as_manager()

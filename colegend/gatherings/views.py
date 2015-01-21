@@ -44,6 +44,8 @@ class GatheringsView(ActiveUserRequiredMixin, GatheringMixin, TemplateView):
             context['url'] = url
             context['counter'] = timeuntil(gathering.start, now)
             context['host'] = gathering.host
+            context['topic'] = gathering.topic
+            context['notes'] = gathering.notes
             # scheduled gatherings
             context['future_gatherings'] = Gathering.objects.filter(start__gt=gathering.start)
             # virtual room

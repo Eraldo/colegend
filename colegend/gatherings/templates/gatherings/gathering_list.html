@@ -12,20 +12,63 @@
 {% endblock %}
 
 {% block page_content %}
-    <div class="well">
-        <p>
-        </p>
-        {% for gathering in gathering_list %}
-            <p>
-                {% if user == gathering.host %}
-                    <a href="{{ gathering.get_edit_url }}" class="btn btn-primary">{{ gathering }}</a>
-                    <a href="{{ gathering.get_delete_url }}" class="btn btn-danger">Delete</a>
-                {% else %}
-                    <a href="#" class="btn btn-default">{{ gathering }}</a>
-                {% endif %}
-            </p>
-        {% empty %}
-            No gatherings here yet.
-        {% endfor %}
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Start</th>
+                <th>End</th>
+                <th>Location</th>
+                <th>Topic</th>
+                <th>Host</th>
+                <th>Participants</th>
+                <th>Notes</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for gathering in gathering_list %}
+                <tr>
+                    <td>
+                        <a href="{{ gathering.get_edit_url }}">{{ gathering.start }}</a><br>
+                    </td>
+                    <td>
+                        {{ gathering.end }}
+                    </td>
+                    <td>
+                        {% if gathering.online %}
+                            <a href="{% url "gatherings:room" %}" target="_blank">{% icon "virtual-room" %} Virtual Room</a>
+                        {% else %}
+                            <a href="http://maps.google.com/maps?q={{ gathering.location }}" target="_blank">{% icon "location" %} {{ gathering.location }}</a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{ gathering.topic }}
+                    </td>
+                    <td>
+                        {% include "users/_user_link.html" with user=gathering.host %}
+                    </td>
+                    <td>
+                        {% for participant in gathering.participants.all %}
+                            {% include "users/_user_link.html" with user=participant %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% if gathering.notes %}
+                            {% icon "description" %}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if user == gathering.host %}
+                        <a href="{{ book.get_delete_url }}" class="item-delete-button btn btn-danger btn-xs pull-right"
+                           role="button">{% icon "delete" %}<span class="sr-only"> Delete</span></a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
     </div>
+    {% include "lib/_pagination.html" %}
 {% endblock %}
