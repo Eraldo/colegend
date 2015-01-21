@@ -89,4 +89,4 @@ class GatheringDeleteView(ManagerRequiredMixin, GatheringMixin, DeleteView):
 
 class GatheringRoomView(ActiveUserRequiredMixin, RedirectView):
     permanent = False
-    url = "https://plus.google.com/hangouts/_/g3ci4r3boo5tkipdx4kzpilrfya"
+    url = "https://plus.google.com/hangouts/_/gxonem3dddqdesvz3rv3djdmdya"
