@@ -17,6 +17,11 @@ def validate_date_in_past(date):
         raise ValidationError('Date needs to be in the past.')
 
 
+def validate_date_today_or_in_past(time):
+    if time > timezone.now():
+        raise ValidationError('Needs to be now or in the past.')
+
+
 def validate_datetime_in_past(time):
     if time > timezone.now():
         raise ValidationError('Needs to be now or in the past.')

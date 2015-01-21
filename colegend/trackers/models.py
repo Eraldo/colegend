@@ -6,7 +6,7 @@ from django.utils.timesince import timesince
 from markitup.fields import MarkupField
 from categories.models import Category
 from lib.models import OwnedBase, TimeStampedBase, TrackedBase, OwnedQueryMixin, AutoUrlMixin
-from lib.validators import validate_datetime_in_past
+from lib.validators import validate_datetime_in_past, validate_date_today_or_in_past
 
 
 class TrackerQuerySet(OwnedQueryMixin, QuerySet):
@@ -70,8 +70,8 @@ class Book(OwnedBase, AutoUrlMixin, TrackedBase):
     )
     book_type = models.PositiveSmallIntegerField(verbose_name="Type", choices=TYPE_CHOICES, default=0)
     category = models.ForeignKey(Category)
-    start_date = models.DateField(null=True, blank=True, validators=[validate_datetime_in_past])
-    end_date = models.DateField(null=True, blank=True, validators=[validate_datetime_in_past])
+    start_date = models.DateField(null=True, blank=True, validators=[validate_date_today_or_in_past])
+    end_date = models.DateField(null=True, blank=True, validators=[validate_date_today_or_in_past])
     origin = models.CharField(blank=True, max_length=100)
     rating = models.PositiveSmallIntegerField(null=True, blank=True)
     url = models.URLField(blank=True)
