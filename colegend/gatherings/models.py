@@ -55,7 +55,10 @@ class Gathering(AutoUrlMixin, models.Model):
         ordering = ["-start"]
 
     def __str__(self):
-        return timezone.localtime(self.start).strftime('%A %Y-%m-%d %H:%M')
+        return "{} {}".format(
+            timezone.localtime(self.start).strftime('%A %Y-%m-%d %H:%M'),
+            self.topic
+        )
 
     def get_location_display(self):
         if self.online:
