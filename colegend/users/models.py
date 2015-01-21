@@ -24,6 +24,9 @@ class UserQuerySet(QuerySet):
     def pending(self):
         return self.filter(is_accepted=False)
 
+    def managers(self):
+        return self.filter(is_manager=True)
+
 
 class User(AbstractBaseUser, PermissionsMixin):
     """
@@ -151,9 +154,11 @@ def notify_managers_after_signup(request, user, **kwargs):
     message = render_to_string(
         "users/signup_manager_notification_email.txt",
         {'username': user, 'email': user.email})
-    mail_managers(
+    send_mail(
         subject="New user: {}".format(user),
         message=message,
+        from_email="colegend@colegend.org",
+        recipient_list=["connect@colegend.org"],
         fail_silently=True
     )
     # Notify the user.
