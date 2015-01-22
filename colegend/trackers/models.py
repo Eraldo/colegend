@@ -169,6 +169,9 @@ class Sleep(OwnedBase, AutoUrlMixin, TimeStampedBase):
 
     objects = TrackerQuerySet.as_manager()
 
+    class Meta:
+        ordering = ['-start']
+
     def __str__(self):
         return "{start}-{end}".format(start=self.start, end=self.end)
 
