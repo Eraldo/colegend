@@ -38,7 +38,11 @@
                     {{ joke.description|truncatechars:80 }}
                 </td>
                 <td>
-                    {{ joke.rating }}
+                <span data-toggle="tooltip" title="{{ joke.rating }}">
+                {% for s in ""|ljust:joke.rating %}
+                    {% icon "star" %}
+                {% endfor %}
+                </span>
                 </td>
                 <td>
                     {{ joke.notes }}

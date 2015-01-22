@@ -53,7 +53,13 @@
                     {% endif %}
                 </td>
                 <td>
-                    {{ book.rating|default:"" }}
+                    {% if book.rating %}
+                        <span data-toggle="tooltip" title="{{ book.rating }}">
+                        {% for s in ""|ljust:book.rating %}
+                            {% icon "star" %}
+                        {% endfor %}
+                        </span>
+                    {% endif %}
                 </td>
                 <td>
                     <a href="{{ book.get_delete_url }}" class="item-delete-button btn btn-danger btn-xs pull-right" role="button">{% icon "delete" %}<span class="sr-only"> Delete</span></a>

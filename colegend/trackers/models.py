@@ -1,4 +1,5 @@
 from django.core.exceptions import ValidationError
+from django.core.validators import MaxValueValidator
 from django.db import models
 from django.db.models import QuerySet
 from django.utils import timezone
@@ -73,7 +74,7 @@ class Book(OwnedBase, AutoUrlMixin, TrackedBase):
     start_date = models.DateField(null=True, blank=True, validators=[validate_date_today_or_in_past])
     end_date = models.DateField(null=True, blank=True, validators=[validate_date_today_or_in_past])
     origin = models.CharField(blank=True, max_length=100)
-    rating = models.PositiveSmallIntegerField(null=True, blank=True)
+    rating = models.PositiveSmallIntegerField(default=0, validators=[MaxValueValidator(5)])
     url = models.URLField(blank=True)
     notes = models.TextField(blank=True)
     feedback = models.TextField(blank=True)
@@ -81,7 +82,7 @@ class Book(OwnedBase, AutoUrlMixin, TrackedBase):
     objects = TrackerQuerySet.as_manager()
 
     class Meta:
-        ordering = ['status']
+        ordering = ['status', '-rating']
 
     def __str__(self):
         return "{title} [{author}]".format(title=self.title, author=self.author)
@@ -117,7 +118,7 @@ class Book(OwnedBase, AutoUrlMixin, TrackedBase):
 class Joke(OwnedBase, AutoUrlMixin, TimeStampedBase):
     name = models.CharField(max_length=100)
     description = models.TextField()
-    rating = models.PositiveSmallIntegerField(default=0)
+    rating = models.PositiveSmallIntegerField(default=0, validators=[MaxValueValidator(5)])
     notes = models.TextField(blank=True)
 
     objects = TrackerQuerySet.as_manager()
