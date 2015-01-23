@@ -93,7 +93,7 @@ class ManagerStatsView(ManagerRequiredMixin, TemplateView):
         context["tutorials_total"] = Tutorial.objects.count()
         context["news_total"] = NewsBlock.objects.count()
         context["notifications_total"] = Notification.objects.count()
-        ## Users
+        # # Users
         context["users_total"] = User.objects.count()
         context["users_accepted"] = User.objects.accepted().count()
         now = timezone.now()
@@ -104,5 +104,8 @@ class ManagerStatsView(ManagerRequiredMixin, TemplateView):
                 now.replace(day=1)
             )
         )
-
+        context["male_percent"] = User.objects.accepted().filter(contact__gender='M').count() / context[
+            "users_accepted"] * 100
+        context["female_percent"] = User.objects.accepted().filter(contact__gender='F').count() / context[
+            "users_accepted"] * 100
         return context
