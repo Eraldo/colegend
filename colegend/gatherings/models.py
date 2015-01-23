@@ -9,14 +9,25 @@ __author__ = 'eraldo'
 
 
 class GatheringQuerySet(models.QuerySet):
-    def current(self):
+    def current(self, tolerance=None):
         """
         Get the currently happening gathering.
+
+        :param tolerance: Time tolerance. (As a timedelta object.)
+            |-tolerance-|--------gathering--------|-tolerance-|
+            Example:
+                Gathering.objects.current(tolerance=timezone.timedelta(minutes=30))
+                => A gathering happening now +- 30min.
         :return: A Gathering object or None.
         """
         now = timezone.now()
+        start = now
+        end = now
+        if tolerance:
+            start += tolerance
+            end -= tolerance
         try:
-            current = self.filter(start__lte=now, end__gte=now).first()
+            current = self.filter(start__lte=start, end__gte=end).first()
         except Gathering.DoesNotExist:
             current = None
         return current

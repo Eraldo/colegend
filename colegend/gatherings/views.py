@@ -1,4 +1,6 @@
+from django.contrib import messages
 from django.core.urlresolvers import reverse_lazy, reverse
+from django.shortcuts import redirect
 from gatherings.forms import GatheringForm
 from lib.utilities import get_location_url
 from lib.views import ActiveUserRequiredMixin, ManagerRequiredMixin
@@ -48,8 +50,6 @@ class GatheringsView(ActiveUserRequiredMixin, GatheringMixin, TemplateView):
             context['notes'] = gathering.notes
             # scheduled gatherings
             context['future_gatherings'] = Gathering.objects.filter(start__gt=gathering.start)
-            # virtual room
-        context['virtual_room_url'] = reverse("gatherings:room")
         return context
 
 
@@ -92,3 +92,15 @@ class GatheringDeleteView(ManagerRequiredMixin, GatheringMixin, DeleteView):
 class GatheringRoomView(ActiveUserRequiredMixin, RedirectView):
     permanent = False
     url = "https://plus.google.com/hangouts/_/gxonem3dddqdesvz3rv3djdmdya"
+
+    def get(self, request, *args, **kwargs):
+        current = Gathering.objects.current(tolerance=timezone.timedelta(minutes=30))
+        user = request.user
+        if current and user not in current.participants.all():
+            current.participants.add(user)
+            message = "You have been added as a participant of the current gathering: {}.".format(current)
+            messages.add_message(request, messages.INFO, message)
+        next_url = request.GET.get("next")
+        if next_url:
+            redirect(next_url)
+        return super().get(request, *args, **kwargs)

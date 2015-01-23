@@ -9,7 +9,7 @@
 {% block up_url %}{% url "gatherings:home" %}{% endblock %}
 
 {% block page_controls %}
-    <a href="{{ virtual_room_url }}" target="_blank" class="open-button btn btn-default">
+    <a href="{% url "gatherings:room" %}" target="_blank" class="open-button btn btn-default">
                         {% icon "virtual-room" %} Virtual Room</a>
     <a href="{% url "chat" %}" target="_blank" class="open-button btn btn-default">
                        {% icon "chat" %} Chat Room</a>
@@ -32,7 +32,7 @@
                     Gathering {% if current %}NOW{% else %}in {{ counter }}{% endif %}<br/>
                     <img src="{{ STATIC_URL }}website/images/CoSpace_circle.png" alt="CoSpace"
                          class="center-block img-circle img-responsive" style="max-height: 200px;">
-                    <a href="{{ url }}" target="_blank" class="btn btn-default">»
+                    <a href="{% if online %}{% url "gatherings:room" %}?next={{ url }}{% endif %}" target="_blank" class="btn btn-default">»
                         {% if online %}{% icon "virtual-room" %}{% else %}{% icon "location" %}{% endif %} {{ location }}</a>
                 {% else %}
                     Currently there are no planned gatherings.
@@ -60,7 +60,7 @@
             <div class="well well-sm text-center">
                 <h3>{% icon "virtual-room" %} Virtual Room</h3>
                 Apart from scheduled gatherings, you can meet and hang around in here any time.<br>
-                <a href="{{ virtual_room_url }}" target="_blank" class="btn btn-default">»
+                <a href="{% url "gatherings:room" %}" target="_blank" class="btn btn-default">»
                         Enter</a>
             </div>
         </div>
