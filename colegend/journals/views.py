@@ -139,10 +139,12 @@ class MapView(DayEntryMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         locations = self.request.user.journal.entries.values_list('location', flat=True)
-        # TODO: Fix to use all locations not just they last one per day.
-        locations = set([location.split(';')[-1].strip() for location in locations])
-        context['locations'] = locations
-        context['total_counter'] = len(locations)
+        location_set = set()
+        for location_string in locations:
+            for location in location_string.split(';'):
+                location_set.add(location.strip())
+        context['locations'] = location_set
+        context['total_counter'] = len(location_set)
         return context
 
     def get(self, request, *args, **kwargs):
