@@ -19,7 +19,7 @@ __author__ = 'eraldo'
 
 class UserQuerySet(QuerySet):
     def accepted(self):
-        return self.filter(is_accepted=True)
+        return self.filter(is_accepted=True, pk__gt=3)
 
     def pending(self):
         return self.filter(is_accepted=False)
