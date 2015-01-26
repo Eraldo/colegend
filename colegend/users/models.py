@@ -114,11 +114,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     def accept(self, accepter=None):
         self.is_accepted = True
         self.date_accepted = timezone.now()
+        self.save()
         if not accepter:
             accepter = "CoLegend"
         message = "Congratulations - Your account has been verified by {}.\nwww.colegend.org".format(accepter)
         self.email_user("[CoLegend] Account verified!", message)
-        self.save()
 
     # As of Django 1.8 this will be fixed by using "default_related_name" in the respective model's Meta class.
     # https://docs.djangoproject.com/en/dev/ref/models/options/#default-related-name
