@@ -12,7 +12,6 @@ __author__ = 'eraldo'
 
 
 class JournalMixin(ActiveUserRequiredMixin):
-    success_url = reverse_lazy('journals:dayentry_list')
     model = Journal
     form_class = JournalForm
     icon = "journal"
@@ -35,6 +34,8 @@ class JournalMixin(ActiveUserRequiredMixin):
 
 
 class JournalEditView(JournalMixin, UpdateView):
+    success_url = reverse_lazy('journals:dayentry_list')
+
     def get_object(self, queryset=None):
         return self.request.user.journal
 
@@ -118,6 +119,7 @@ class DayEntryEditView(DayEntryMixin, UpdateView):
 
 
 class DayEntryDeleteView(DayEntryMixin, DeleteView):
+    success_url = reverse_lazy('journals:dayentry_list')
     template_name = "confirm_delete.html"
 
 
