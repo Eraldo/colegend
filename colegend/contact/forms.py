@@ -64,10 +64,11 @@ class MessageForm(forms.Form):
     message = forms.CharField(label="Message", widget=forms.Textarea)
 
     def send(self, user):
+        member = self.cleaned_data["member"]
         subject = self.cleaned_data["subject"]
         message = self.cleaned_data["message"]
         name = "{sender}: {subject}".format(sender=user, subject=subject)
-        Notification.objects.create(owner=user, name=name, description=message)
+        Notification.objects.create(owner=member, name=name, description=message)
 
     helper = FormHelper()
     helper.layout = Layout(
