@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.db import models
 from django.db.models import QuerySet
+from markitup.fields import MarkupField
 from lib.models import TimeStampedBase, OwnedQueryMixin, AutoUrlMixin
 from users.models import User
 
@@ -40,7 +41,7 @@ class NotificationQuerySet(OwnedQueryMixin, QuerySet):
 class Notification(AutoUrlMixin, TimeStampedBase):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="notifications")
     name = models.CharField(max_length=100)
-    description = models.TextField(blank=True)
+    description = MarkupField(blank=True)
     read = models.BooleanField(default=False)
 
     objects = NotificationQuerySet.as_manager()

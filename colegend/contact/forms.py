@@ -2,7 +2,12 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, Fieldset, Submit, HTML, Button
 from django import forms
 from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
+from django.utils.html import escape
+from django.utils.safestring import mark_safe
 from lib.crispy import IconButton
+from notifications.models import Notification
+from users.models import User
 
 __author__ = 'Eraldo Helal'
 
@@ -49,5 +54,26 @@ class PublicContactForm(forms.Form):
             Field('message', rows="4", css_class='form-control', placeholder="Your message...",
                   style="resize: vertical;", autofocus="True"),
         ),
+        IconButton("send", "Send", "send", input_type="submit", css_class="btn-primary")
+    )
+
+
+class MessageForm(forms.Form):
+    member = forms.ModelChoiceField(queryset=User.objects.accepted())
+    subject = forms.CharField(label="Subject", widget=forms.TextInput)
+    message = forms.CharField(label="Message", widget=forms.Textarea)
+
+    def send(self, user):
+        subject = self.cleaned_data["subject"]
+        message = self.cleaned_data["message"]
+        name = "{sender}: {subject}".format(sender=user, subject=subject)
+        Notification.objects.create(owner=user, name=name, description=message)
+
+    helper = FormHelper()
+    helper.layout = Layout(
+        Field('member', autofocus="True"),
+        Field('subject', placeholder="Your subject or topic..."),
+        Field('message', rows="4", css_class='form-control', placeholder="Your message...",
+              style="resize: vertical;"),
         IconButton("send", "Send", "send", input_type="submit", css_class="btn-primary")
     )

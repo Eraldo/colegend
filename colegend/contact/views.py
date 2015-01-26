@@ -1,7 +1,9 @@
 from django.contrib import messages
 from django.contrib.auth import get_user_model
+from django.core.urlresolvers import reverse_lazy
 from django.views.generic import FormView
-from contact.forms import ContactForm, PublicContactForm
+from contact.forms import ContactForm, PublicContactForm, MessageForm
+from lib.views import ActiveUserRequiredMixin
 
 __author__ = "Eraldo Helal"
 
@@ -35,3 +37,17 @@ class ContactView(FormView):
             eraldo = None
         context['eraldo'] = eraldo
         return context
+
+
+class MessageView(ActiveUserRequiredMixin, FormView):
+    template_name = "contact/message.html"
+    form_class = MessageForm
+    success_url = reverse_lazy('home')
+    icon = "contact"
+
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        form.send(self.request.user)
+        messages.success(self.request, 'Your message has been sent.')
+        return super().form_valid(form)
