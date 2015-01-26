@@ -5,7 +5,7 @@ __author__ = 'eraldo'
 
 
 class NotificationAdmin(admin.ModelAdmin):
-    list_display = ['name', 'owner', 'creation_date']
+    list_display = ['name', 'owner', 'read', 'creation_date']
     search_fields = ['name']
     list_filter = ['owner', 'read']
     readonly_fields = ['creation_date', 'modification_date']
