@@ -142,7 +142,7 @@ def get_icon(name):
         "streak": "link",
         "share": "share",
         "prompt": "chevron-right",
-        "quick-command": "chevron-down",
+        "quick-command": "asterisk",
         "locked": "lock",
     }
     if name in icon_map:
