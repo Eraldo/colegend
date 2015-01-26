@@ -23,8 +23,10 @@
                     {% if project.next_step %}
                         {% include "tasks/_task_link.html" with task=project.next_step %}<br/>
                     {% else %}
-                        <span class="text-warning">Choose a next step!</span><br/>
+                        <a href="{{ project.get_show_url }}" class="text-warning">Choose a next step!</a><br/>
                     {% endif %}
+                {% empty %}
+                        <a href="{% url "projects:project_list" %}" class="text-warning">Choose a next project!</a><br/>
                 {% endfor %}
             </div>
             <h2><span class="tooltip-text" data-toggle="tooltip" data-placement="right"
@@ -36,7 +38,7 @@
                 {% for task in next_tasks %}
                     {% include "tasks/_task_link.html" %}<br/>
                 {% empty %}
-                    <span class="text-warning">Grab some more tasks..</span>
+                    <a href="{% url "tasks:task_list"%}" class="text-warning">Grab some more tasks..</a><br/>
                     <span class="text-success">or celebrate! :D</span>
                 {% endfor %}
             </div>
