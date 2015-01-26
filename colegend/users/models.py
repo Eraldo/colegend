@@ -8,7 +8,7 @@ from django.db.models import QuerySet
 from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-from django.core.mail import send_mail, mail_managers
+from django.core.mail import send_mail
 from django.db import models
 from lib.modelfields import PhoneField
 from users.modelfields import RequiredBooleanField
