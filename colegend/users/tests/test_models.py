@@ -63,7 +63,7 @@ class UserModelTests(TestCase):
 
     def test_get_full_name(self):
         user = UserFactory()
-        self.assertEqual(user.get_full_name(), "John Doe")
+        self.assertEqual(user.get_full_name(), "Joe Doe")
 
     def test_is_accepted(self):
         """Test the user property: default, get, set."""
@@ -103,21 +103,21 @@ class UserModelTests(TestCase):
 
     def test_get_show_url(self):
         user = UserFactory()
-        self.assertEqual(user.get_show_url(), "/users/johndoe/")
+        self.assertEqual(user.get_show_url(), "/users/joedoe/")
 
     # test QuerySets
 
     def test_get_pending_users(self):
         user1 = UserFactory()
-        user2 = UserFactory(first_name="John2", is_accepted=False)
+        user2 = UserFactory(first_name="Joe2", is_accepted=False)
         pending_users = User.objects.pending()
         self.assertEqual(pending_users.count(), 1)
         self.assertTrue(user2 in pending_users)
         self.assertFalse(user1 in pending_users)
 
     def test_get_accepted_users(self):
-        user1 = UserFactory()
-        user2 = UserFactory(first_name="John2", is_accepted=False)
+        user1 = UserFactory(first_name="Joe1")
+        user2 = UserFactory(first_name="Joe2", is_accepted=False)
         accepted_users = User.objects.accepted()
         self.assertEqual(accepted_users.count(), 1)
         self.assertTrue(user1 in accepted_users)
@@ -139,7 +139,7 @@ class UserModelTests(TestCase):
 class ContactModelTests(TestCase):
     def test_create_contact(self):
         contact = ContactFactory()
-        self.assertEqual(str(contact), "John Doe (johndoe)")
+        self.assertEqual(str(contact), "Joe Doe (joedoe)")
 
     def test_first_name(self):
         contact = ContactFactory()
@@ -213,5 +213,5 @@ class SignupNotificationTests(TestCase):
         # check if managers got an email
         self.assertEquals(len(mail.outbox), 1)
         email = mail.outbox[0]
-        self.assertEquals(email.subject, '[Django] New user: johndoe')
-        self.assertEquals(email.to, ['eraldo@eraldo.org'])
+        self.assertEquals(email.subject, 'New user: joedoe')
+        self.assertEquals(email.to, ['connect@colegend.org'])

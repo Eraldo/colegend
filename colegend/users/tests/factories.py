@@ -10,7 +10,7 @@ class UserFactory(factory.DjangoModelFactory):
         model = User
         django_get_or_create = ('username',)
 
-    first_name = "John"
+    first_name = "Joe"
     last_name = "Doe"
     username = factory.LazyAttribute(lambda a: '{0}{1}'.format(a.first_name, a.last_name).lower())
     password = factory.PostGenerationMethodCall('set_password', 'tester')
@@ -78,4 +78,3 @@ class SettingsFactory(factory.DjangoModelFactory):
 
     owner = factory.SubFactory(UserFactory)
     language = "EN"
-    journal_entry_template = "some journal entry template"

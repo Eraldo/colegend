@@ -1,10 +1,7 @@
-from unittest import skip
 from django.core.urlresolvers import reverse
 from django.test import TestCase
-from django.utils.http import urlencode
 from users.models import User
-from users.tests.test_models import UserFactory, SettingsFactory, ContactFactory, ProfileFactory
-from users.views import UserUpdateView
+from users.tests.test_models import UserFactory, ContactFactory, ProfileFactory
 
 
 class UserViewTests(TestCase):
