@@ -76,6 +76,7 @@ class DayEntryNewView(DayEntryMixin, CreateView):
         entry = DayEntry.objects.latest_for(user)
         if entry:
             initial['location'] = entry.location
+            initial['tags'] = entry.tags.all()
         return initial
 
 
