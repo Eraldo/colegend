@@ -3,6 +3,7 @@ from django.utils import timezone
 from markitup.fields import MarkupField
 from journals.validators import validate_present_or_past
 from lib.models import AutoUrlMixin, OwnedBase, TrackedBase, OwnedQueryMixin, ValidateModelMixin, AutoOwnedBase
+from tags.models import TaggableBase
 
 __author__ = 'eraldo'
 
@@ -58,7 +59,7 @@ class DayEntryQuerySet(models.QuerySet):
         return counter
 
 
-class DayEntry(ValidateModelMixin, AutoUrlMixin, TrackedBase, models.Model):
+class DayEntry(ValidateModelMixin, AutoUrlMixin, TrackedBase, TaggableBase, models.Model):
     """
     A django model representing a daily journal entry in text form.
     """

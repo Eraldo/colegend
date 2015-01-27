@@ -15,10 +15,11 @@ class DayEntryAdmin(admin.ModelAdmin):
     search_fields = ['focus', 'content']
     list_filter = ['journal', 'location']
     readonly_fields = ['creation_date', 'modification_date', 'history']
+    filter_horizontal = ['tags']
 
     fieldsets = [
         (None, {'fields': ['journal']}),
-        (None, {'fields': ['date', 'location', 'focus', 'content']}),
+        (None, {'fields': ['date', 'location', 'focus', 'content', 'tags']}),
         ('history', {'fields': ['creation_date', 'modification_date', 'history'], 'classes': ['collapse']}),
     ]
 

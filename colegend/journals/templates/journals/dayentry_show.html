@@ -18,10 +18,13 @@
     <div class="row">
         <div class="col-md-{% if day_tasks %}8{% else %}12{% endif %}">
             <div class="well">
-                <p>
+                <div class="pull-right">
+                    {% for tag in dayentry.tags.all %}
+                        {% include "tags/_tag.html" %}
+                    {% endfor %}
+                </div>
                 <h4>{{ dayentry.focus }}</h4>
                 {{ dayentry.content }}
-                </p>
             </div>
         </div>
         {% if day_tasks %}

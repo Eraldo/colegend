@@ -1,0 +1,8 @@
+{% load icons %}
+
+<span data-toggle="tooltip"
+      title="{{ dayentry.date }}">
+    <a href="#"
+       class="btn btn-xs btn-default">{% icon "journal" %}</a>
+</span>
+    <a href="{{ dayentry.get_show_url }}">{{ dayentry }}</a>

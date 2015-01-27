@@ -8,21 +8,33 @@
 {% block up_url %}{% url "tags:tag_list" %}{% endblock %}
 
 {% block page_controls %}
-        <a href="{{ tag.get_edit_url }}" class="btn btn-primary" role="button">{% icon "edit" %}</a>
-        <a href="{{ tag.get_delete_url }}" class="btn btn-danger" role="button">{% icon "delete" %}</a>
+    <a href="{{ tag.get_edit_url }}" class="btn btn-primary" role="button">{% icon "edit" %}</a>
+    <a href="{{ tag.get_delete_url }}" class="btn btn-danger" role="button">{% icon "delete" %}</a>
 {% endblock %}
 
 {% block page_content %}
-<div class="well">
-{{ tag.description }}
-</div>
+    <div class="well">
+        {{ tag.description }}
+    </div>
     <h2>Items</h2>
-    <h3>Projects</h3>
-    {% include 'projects/_project_list.html' with projects=tag.projects.all %}
-    <h3>Tasks</h3>
-    {% include 'tasks/_task_list.html' with tasks=tag.tasks.all %}
-    <h3>Routines</h3>
-    {% include 'routines/_routine_list.html' with routines=tag.routines.all %}
-    <h3>Habits</h3>
-    {% include 'habits/_habit_list.html' with habits=tag.habits.all %}
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Projects</h3>
+            {% for project in tag.projects.all %}
+                {% include "projects/_project_link.html" %}<br/>
+            {% endfor %}
+        </div>
+        <div class="col-md-4">
+            <h3>Tasks</h3>
+            {% for task in tag.tasks.all %}
+                {% include "tasks/_task_link.html" %}<br/>
+            {% endfor %}
+        </div>
+        <div class="col-md-4">
+            <h3>Journal Entries</h3>
+            {% for dayentry in tag.journals.all %}
+                {% include "journals/_dayentry_link.html" %}<br/>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
