@@ -41,6 +41,7 @@
                 <th>Date</th>
                 <th>Location(s)</th>
                 <th>Focus</th>
+                <th>Tags</th>
             </tr>
             </thead>
             <tbody>
@@ -53,6 +54,11 @@
                         {{ dayentry.location }}
                     </td>
                     <td>{{ dayentry.focus }}</td>
+                    <td>
+                        {% for tag in dayentry.tags.all %}
+                            {% include "tags/_tag.html" %}
+                        {% endfor %}
+                    </td>
                 </tr>
             {% endfor %}
 
