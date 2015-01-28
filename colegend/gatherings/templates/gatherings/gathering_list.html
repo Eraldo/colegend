@@ -30,7 +30,11 @@
             {% for gathering in gathering_list %}
                 <tr>
                     <td>
-                        <a href="{{ gathering.get_edit_url }}">{{ gathering.start }}</a><br>
+                        {% ifequal user gathering.host %}
+                            <a href="{{ gathering.get_edit_url }}">{{ gathering.start }}</a><br>
+                        {% else %}
+                            {{ gathering.start }}
+                        {% endifequal %}
                     </td>
                     <td>
                         {{ gathering.end }}
