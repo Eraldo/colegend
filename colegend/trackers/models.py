@@ -281,6 +281,9 @@ class Walk(OwnedBase, AutoUrlMixin, TimeStampedBase):
     def __str__(self):
         return "{start}-{end}".format(start=self.start, end=self.end)
 
+    class Meta:
+        ordering = ['-start']
+
     @property
     def duration(self):
         if self.end:
