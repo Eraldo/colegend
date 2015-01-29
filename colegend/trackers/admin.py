@@ -1,5 +1,55 @@
 from django.contrib import admin
-from trackers.models import Weight, Joke, Book, Sex, Transaction, Dream, Sleep, Walk
+from lib.admin import InlineMixin
+from trackers.models import Weight, Joke, Book, Sex, Transaction, Dream, Sleep, Walk, \
+    Tracker, NumberData, RatingData, CheckData
+
+
+class DataInline(InlineMixin, admin.TabularInline):
+    extra = 0
+
+
+class CheckDataInline(DataInline):
+    model = CheckData
+    fields = ['date', 'tracker']
+
+
+class NumberDataInline(DataInline):
+    model = NumberData
+    fields = ['date', 'number', 'tracker']
+
+
+class RatingDataInline(DataInline):
+    model = RatingData
+    fields = ['date', 'rating', 'tracker']
+
+
+class TrackerAdmin(admin.ModelAdmin):
+    list_display = ['name', 'tracker_type', 'frequency', 'owner']
+    list_filter = ['owner']
+    readonly_fields = ['creation_date', 'modification_date']
+
+    fieldsets = [
+        (None, {'fields': ['owner']}),
+        (None, {'fields': ['name', 'description', 'category', 'tracker_type', 'frequency']}),
+        ('history', {'fields': ['creation_date', 'modification_date'], 'classes': ['collapse']}),
+    ]
+    inlines = [CheckDataInline, NumberDataInline, RatingDataInline]
+    # def get_inline_instances(self, request, obj=None):
+    # inline_map = {
+    #         Tracker.CHECKBOX: CheckboxDataInline,
+    #         Tracker.NUMBER: NumberDataInline,
+    #         Tracker.RATING: RatingDataInline,
+    #     }
+    #     if obj:
+    #         self.inlines = [inline_map[obj.tracker_type]]
+    #     return super().get_inline_instances(request, obj)
+
+
+admin.site.register(Tracker, TrackerAdmin)
+
+admin.site.register(CheckData)
+admin.site.register(NumberData)
+admin.site.register(RatingData)
 
 
 class WeightAdmin(admin.ModelAdmin):

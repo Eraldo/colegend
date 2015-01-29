@@ -1,12 +1,75 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Field, Row
+from crispy_forms.layout import Layout, Field, Row, HTML
 from django.forms import ModelForm
-from markitup.widgets import MarkItUpWidget
 from lib.crispy import SaveButton, CancelButton
-from tags.models import Tag
-from trackers.models import Weight, Sex, Book, Joke, Transaction, Dream, Sleep, Walk
+from trackers.models import Weight, Sex, Book, Joke, Transaction, Dream, Sleep, Walk, \
+    Tracker, CheckData, NumberData, RatingData
 
 __author__ = 'eraldo'
+
+
+class CheckDataForm(ModelForm):
+    class Meta:
+        model = CheckData
+        fields = ['date']
+    helper = FormHelper()
+    helper.layout = Layout(
+        Field('date'),
+        HTML("""<input type="hidden" name="data-type" value="Check">"""),
+        HTML("""{% load icons %}<button type="submit" class="btn btn-default">{% icon "check" %}</button>"""),
+    )
+    helper.form_class = "form-inline"
+    helper.form_show_labels = False
+    error_text_inline = False
+
+
+class NumberDataForm(ModelForm):
+    class Meta:
+        model = NumberData
+        fields = ['date', 'number']
+
+    helper = FormHelper()
+    helper.layout = Layout(
+        Field('date'),
+        Field('number', placeholder="Number", autofocus='True'),
+        HTML("""<input type="hidden" name="data-type" value="Number">"""),
+        HTML("""{% load icons %}<button type="submit" class="btn btn-default">{% icon "check" %}</button>"""),
+    )
+    helper.form_class = "form-inline"
+    helper.form_show_labels = False
+
+
+class RatingDataForm(ModelForm):
+    class Meta:
+        model = RatingData
+        fields = ['date', 'rating']
+
+    helper = FormHelper()
+    helper.layout = Layout(
+        Field('date'),
+        Field('rating', placeholder="1-5", autofocus='True'),
+        HTML("""<input type="hidden" name="data-type" value="Rating">"""),
+        HTML("""{% load icons %}<button type="submit" class="btn btn-default">{% icon "check" %}</button>"""),
+    )
+    helper.form_class = "form-inline"
+    helper.form_show_labels = False
+
+
+class TrackerForm(ModelForm):
+    class Meta:
+        model = Tracker
+        fields = ['name', 'description', 'category', 'tracker_type', 'frequency']
+
+    helper = FormHelper()
+    helper.layout = Layout(
+        Field('name', autofocus='True'),
+        Field('description', rows=2),
+        Field('category'),
+        Field('tracker_type'),
+        Field('frequency'),
+        SaveButton(),
+        CancelButton(),
+    )
 
 
 class WeightForm(ModelForm):

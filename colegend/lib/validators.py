@@ -17,9 +17,20 @@ def validate_date_in_past(date):
         raise ValidationError('Date needs to be in the past.')
 
 
-def validate_date_today_or_in_past(time):
-    if time and time > timezone.now().date():
+def validate_date_today_or_in_past(date):
+    if date and date > timezone.now().date():
         raise ValidationError('Needs to be today or in the past.')
+
+
+def validate_date_within_days(date, days):
+    today = timezone.now().date()
+    margin = timezone.timedelta(days=days)
+    if date and not today - margin <= date <= today + margin:
+        raise ValidationError('Needs to be within {} days.'.format(days))
+
+
+def validate_date_within_one_week(date):
+    validate_date_within_days(date, 7)
 
 
 def validate_datetime_in_past(time):

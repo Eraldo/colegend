@@ -1,17 +1,91 @@
 from django.core.exceptions import ValidationError
-from django.core.validators import MaxValueValidator
+from django.core.urlresolvers import reverse
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.db.models import QuerySet
 from django.utils import timezone
 from django.utils.timesince import timesince
 from markitup.fields import MarkupField
 from categories.models import Category
-from lib.models import OwnedBase, TimeStampedBase, TrackedBase, OwnedQueryMixin, AutoUrlMixin
-from lib.validators import validate_datetime_in_past, validate_date_today_or_in_past
+from lib.models import OwnedBase, TimeStampedBase, TrackedBase, OwnedQueryMixin, AutoUrlMixin, ValidateModelMixin
+from lib.validators import validate_datetime_in_past, validate_date_today_or_in_past, validate_date_within_days, \
+    validate_date_within_one_week
 
 
 class TrackerQuerySet(OwnedQueryMixin, QuerySet):
     pass
+
+
+class Tracker(OwnedBase, AutoUrlMixin, TimeStampedBase):
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
+    category = models.ForeignKey(Category)
+    CHECK = 0
+    NUMBER = 1
+    RATING = 2
+    TYPE_CHOICES = (
+        (CHECK, "Check"),
+        (NUMBER, "Number"),
+        (RATING, "Rating"),
+    )
+    tracker_type = models.PositiveSmallIntegerField(verbose_name="Type", choices=TYPE_CHOICES, default=0)
+    UNKNOWN = 0
+    DAILY = 1
+    WEEKLY = 2
+    MONTHLY = 3
+    FREQUENCY_CHOICES = (
+        (DAILY, "Daily"),
+        (WEEKLY, "Weekly"),
+        (MONTHLY, "Monthly"),
+        (UNKNOWN, "Unknown"),
+    )
+    frequency = models.PositiveSmallIntegerField(choices=FREQUENCY_CHOICES, default=1)
+    objects = TrackerQuerySet.as_manager()
+
+    def __str__(self):
+        return self.name
+
+    @property
+    def data(self):
+        if self.tracker_type == self.CHECK:
+            return self.checkdata_set.all()
+        if self.tracker_type == self.NUMBER:
+            return self.numberdata_set.all()
+        if self.tracker_type == self.RATING:
+            return self.ratingdata_set.all()
+
+
+class BaseData(ValidateModelMixin, models.Model):
+    tracker = models.ForeignKey(Tracker)
+    date = models.DateField(default=timezone.now,
+                            validators=[validate_date_today_or_in_past, validate_date_within_one_week])
+
+    class Meta:
+        ordering = ['-date']
+        unique_together = ("tracker", "date")
+        abstract = True
+
+    def get_delete_url(self):
+        return reverse("trackers:data_delete", kwargs={"tracker_pk": self.tracker.pk, "pk": self.pk})
+
+
+class CheckData(BaseData):
+    def __str__(self):
+        return "{}: ✓".format(self.date)
+
+
+class NumberData(BaseData):
+    number = models.IntegerField()
+
+    def __str__(self):
+        return "{}: {}".format(self.date, self.number)
+
+
+class RatingData(BaseData):
+    rating = models.PositiveSmallIntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
+
+    def __str__(self):
+        return "{}: {}".format(self.date, self.rating)
 
 
 class Weight(OwnedBase, AutoUrlMixin, TimeStampedBase):
@@ -101,6 +175,7 @@ class Book(OwnedBase, AutoUrlMixin, TrackedBase):
 
     def has_url(self):
         return bool(self.url)
+
     has_url.boolean = True
     has_url.short_description = "Url"
 

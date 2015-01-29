@@ -1,5 +1,7 @@
 {% extends 'page.html' %}
 
+{% load icons %}
+
 {% block page_title %}
     Trackers
 {% endblock %}
@@ -7,17 +9,29 @@
 {% block up_url %}{% url "trackers:tracker_list" %}{% endblock %}
 
 {% block page_controls %}
-    <a href="{% url "trackers:sleep_list" %}" class="btn btn-category bg-category-1">Sleep</a>
-    <a href="{% url "trackers:weight_list" %}" class="btn btn-category bg-category-1">Weight</a>
-    <a href="{% url "trackers:sex_list" %}" class="btn btn-category bg-category-2">Sex</a>
-    <a href="{% url "trackers:transaction_list" %}" class="btn btn-category bg-category-3">Finances</a>
-    <a href="{% url "trackers:walk_list" %}" class="btn btn-category bg-category-4">Walks</a>
-    <a href="{% url "trackers:joke_list" %}" class="btn btn-category bg-category-5">Jokes</a>
-    <a href="{% url "trackers:book_list" %}" class="btn btn-category bg-category-6">Books</a>
-    <a href="{% url "trackers:dream_list" %}" class="btn btn-category bg-category-7">Dreams</a>
+    <span data-toggle="tooltip" title="New Tracker">
+        <a href="{% url "trackers:tracker_new" %}" class="btn btn-default">{% icon "new" %}</a>
+    </span>
 {% endblock %}
 
 {% block page_content %}
+    <div class="well">
+        <h4>Custom Trackers</h4>
+            {% for tracker in user.tracker_set.all %}
+                <a href="{{ tracker.get_show_url }}" class="btn btn-category bg-category-{{ tracker.category.pk }}">{{ tracker }}</a>
+            {% endfor %}
+    </div>
+    <div class="well">
+        <h4>Special Trackers</h4>
+        <a href="{% url "trackers:sleep_list" %}" class="btn btn-category bg-category-1">Sleep</a>
+        <a href="{% url "trackers:weight_list" %}" class="btn btn-category bg-category-1">Weight</a>
+        <a href="{% url "trackers:sex_list" %}" class="btn btn-category bg-category-2">Sex</a>
+        <a href="{% url "trackers:transaction_list" %}" class="btn btn-category bg-category-3">Finances</a>
+        <a href="{% url "trackers:walk_list" %}" class="btn btn-category bg-category-4">Walks</a>
+        <a href="{% url "trackers:joke_list" %}" class="btn btn-category bg-category-5">Jokes</a>
+        <a href="{% url "trackers:book_list" %}" class="btn btn-category bg-category-6">Books</a>
+        <a href="{% url "trackers:dream_list" %}" class="btn btn-category bg-category-7">Dreams</a>
+    </div>
     <div class="well well-sm">
         <h4>Feedback</h4>
         What do you want to keep track of?<br/>

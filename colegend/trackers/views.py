@@ -1,17 +1,120 @@
+from django.contrib import messages
+from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse_lazy
+from django.db import IntegrityError
+from django.shortcuts import redirect, render
 from django.views.generic import TemplateView, CreateView, ListView, UpdateView, DetailView, DeleteView
+from django.views.generic.detail import SingleObjectMixin
+from django.views.generic.edit import FormMixin
+from django.views.generic.list import MultipleObjectMixin
 from lib.views import OwnedItemsMixin, ActiveUserRequiredMixin
-from trackers.forms import WeightForm, SexForm, BookForm, JokeForm, TransactionForm, DreamForm, SleepForm, WalkForm
-from trackers.models import Book, Sex, Joke, Weight, Transaction, Dream, Sleep, Walk
+from trackers.forms import WeightForm, SexForm, BookForm, JokeForm, TransactionForm, DreamForm, SleepForm, WalkForm, \
+    TrackerForm, CheckDataForm, NumberDataForm, RatingDataForm
+from trackers.models import Book, Sex, Joke, Weight, Transaction, Dream, Sleep, Walk, Tracker
 
 
 class TrackerMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
+    model = Tracker
     icon = "tracker"
     tutorial = "Trackers"
 
 
 class TrackerListView(TrackerMixin, TemplateView):
     template_name = "trackers/tracker_list.html"
+
+
+class TrackerNewView(TrackerMixin, CreateView):
+    template_name = "trackers/tracker_form.html"
+    form_class = TrackerForm
+
+    def form_valid(self, form):
+        user = self.request.user
+        form.instance.owner = user
+        return super().form_valid(form)
+
+
+class TrackerShowView(TrackerMixin, FormMixin, SingleObjectMixin, ListView):
+    template_name = "trackers/tracker_show.html"
+    paginate_by = 10
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object(queryset=Tracker.objects.all())
+        self.object_list = self.get_queryset()
+        return super().get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object(queryset=Tracker.objects.all())
+        self.object_list = self.get_queryset()
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def get_queryset(self):
+        return self.object.data
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        tracker = self.object
+        tracker_type = tracker.tracker_type
+        context['tracker'] = tracker
+        context["type"] = tracker.get_tracker_type_display()
+        context["form"] = self.get_form_class()(self.request.POST or None)
+        return context
+
+    def get_form_class(self):
+        tracker_type = self.object.tracker_type
+        if tracker_type == Tracker.CHECK:
+            return CheckDataForm
+        if tracker_type == Tracker.NUMBER:
+            return NumberDataForm
+        if tracker_type == Tracker.RATING:
+            return RatingDataForm
+
+    def form_valid(self, form):
+        tracker = self.object
+        form.instance.tracker = tracker
+        data_class = type(form.instance)
+        data = form.cleaned_data
+        date = data.pop("date")
+        data_class.objects.update_or_create(tracker=tracker, date=date, defaults=data)
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return self.object.get_show_url()
+
+
+class TrackerEditView(TrackerMixin, UpdateView):
+    template_name = "trackers/tracker_form.html"
+    form_class = TrackerForm
+
+
+class TrackerDeleteView(TrackerMixin, DeleteView):
+    success_url = reverse_lazy("trackers:tracker_list")
+    template_name = "confirm_delete.html"
+
+
+class DataDeleteView(TrackerMixin, DeleteView):
+    success_url = reverse_lazy("trackers:tracker_list")
+    template_name = "confirm_delete.html"
+
+    def get_tracker(self):
+        tracker_pk = self.kwargs.get("tracker_pk", None)
+        if tracker_pk:
+            return self.request.user.tracker_set.get(pk=tracker_pk)
+
+    def get_success_url(self):
+        tracker = self.get_tracker()
+        return tracker.get_show_url()
+
+    def get_object(self, queryset=None):
+        pk = self.kwargs.get("pk", None)
+        if pk:
+            tracker = self.get_tracker()
+            if tracker:
+                return tracker.data.get(pk=pk)
 
 
 class WeightMixin(TrackerMixin):

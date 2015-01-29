@@ -4,7 +4,8 @@ from trackers.views import TrackerListView, WeightListView, WeightNewView, Weigh
     BookShowView, BookEditView, BookDeleteView, JokeListView, JokeNewView, JokeShowView, JokeEditView, JokeDeleteView, \
     TransactionListView, TransactionNewView, TransactionShowView, TransactionEditView, TransactionDeleteView, \
     DreamListView, DreamNewView, DreamShowView, DreamEditView, DreamDeleteView, SleepListView, SleepNewView, \
-    SleepShowView, SleepEditView, SleepDeleteView, WalkListView, WalkNewView, WalkShowView, WalkEditView, WalkDeleteView
+    SleepShowView, SleepEditView, SleepDeleteView, WalkListView, WalkNewView, WalkShowView, WalkEditView, WalkDeleteView, \
+    TrackerShowView, TrackerEditView, TrackerDeleteView, TrackerNewView, DataDeleteView
 
 __author__ = 'eraldo'
 
@@ -14,6 +15,31 @@ urlpatterns = patterns(
     url(r'^$',
         TrackerListView.as_view(),
         name='tracker_list'),
+
+    # ex: ../new/
+    url(r'^new/$',
+        TrackerNewView.as_view(),
+        name='tracker_new'),
+
+    # ex: ../4/
+    url(r'^(?P<pk>\d+)/$',
+        TrackerShowView.as_view(),
+        name='tracker_show'),
+
+    # ex: ../4/edit
+    url(r'^(?P<pk>\d+)/edit/$',
+        TrackerEditView.as_view(),
+        name='tracker_edit'),
+
+    # ex: ../4/delete
+    url(r'^(?P<pk>\d+)/delete/$',
+        TrackerDeleteView.as_view(),
+        name='tracker_delete'),
+
+    # ex: ../4/data/4/delete
+    url(r'^(?P<tracker_pk>\d+)/data/(?P<pk>\d+)/delete$',
+        DataDeleteView.as_view(),
+        name='data_delete'),
 
     # ex: ../weight/
     url(r'^weight/$',

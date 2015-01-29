@@ -1,6 +1,8 @@
 {% extends 'page.html' %}
 
 {% load icons %}
+{% load crispy_forms_tags %}
+
 
 {% block page_title %}
     {{ object }}
@@ -13,5 +15,52 @@
     <a href="{{ object.get_delete_url }}" class="delete-button btn btn-danger" role="button">{% icon "delete" %}</a>
 {% endblock %}
 
+{% block page_title_extras %}
+    <span class="label label-default">{{ object.get_frequency_display }}</span>
+    {% include "categories/_category_field.html" with category=object.category %}
+{% endblock %}
+
 {% block page_content %}
+    {% crispy form %}
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>{{ type }}</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for data in object_list %}
+                <tr>
+                    <td>
+                        {{ data.date }}
+                    </td>
+                    <td>
+                        {% if type == "Check" %}
+                            {% icon "check" %}
+                        {% elif type == "Number" %}
+                            {{ data.number }}
+                        {% elif type == "Rating" %}
+                            <span data-toggle="tooltip" title="{{ data.rating }}">
+                            {% for s in ""|ljust:data.rating %}
+                                {% icon "star" %}
+                            {% endfor %}
+                            </span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ data.get_delete_url }}"
+                           class="item-delete-button btn btn-danger btn-xs pull-right" role="button">{% icon "delete" %}<span
+                                class="sr-only"> Delete</span></a>
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+    {% include "lib/_pager.html" %}
+
 {% endblock %}
