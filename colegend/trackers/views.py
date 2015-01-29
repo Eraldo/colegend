@@ -1,12 +1,8 @@
-from django.contrib import messages
-from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse_lazy
-from django.db import IntegrityError
-from django.shortcuts import redirect, render
 from django.views.generic import TemplateView, CreateView, ListView, UpdateView, DetailView, DeleteView
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.edit import FormMixin
-from django.views.generic.list import MultipleObjectMixin
+from categories.models import Category
 from lib.views import OwnedItemsMixin, ActiveUserRequiredMixin
 from trackers.forms import WeightForm, SexForm, BookForm, JokeForm, TransactionForm, DreamForm, SleepForm, WalkForm, \
     TrackerForm, CheckDataForm, NumberDataForm, RatingDataForm
@@ -130,6 +126,7 @@ class WeightListView(WeightMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["total_counter"] = self.get_queryset().count()
+        context["category"] = Category.objects.get(pk=1)
         return context
 
 
@@ -175,6 +172,7 @@ class SexListView(SexMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["total_counter"] = self.get_queryset().count()
+        context["category"] = Category.objects.get(pk=2)
         return context
 
 
@@ -220,6 +218,7 @@ class BookListView(BookMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["total_counter"] = self.get_queryset().count()
+        context["category"] = Category.objects.get(pk=6)
         return context
 
 
@@ -257,6 +256,7 @@ class JokeListView(JokeMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["total_counter"] = self.get_queryset().count()
+        context["category"] = Category.objects.get(pk=5)
         return context
 
 
@@ -294,6 +294,7 @@ class TransactionListView(TransactionMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["total_counter"] = self.get_queryset().count()
+        context["category"] = Category.objects.get(pk=3)
         return context
 
 
@@ -331,6 +332,7 @@ class DreamListView(DreamMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["total_counter"] = self.get_queryset().count()
+        context["category"] = Category.objects.get(pk=7)
         return context
 
 
@@ -368,6 +370,7 @@ class SleepListView(SleepMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["total_counter"] = self.get_queryset().count()
+        context["category"] = Category.objects.get(pk=1)
         return context
 
 
@@ -405,6 +408,7 @@ class WalkListView(WalkMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["total_counter"] = self.get_queryset().count()
+        context["category"] = Category.objects.get(pk=4)
         return context
 
 
