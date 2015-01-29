@@ -13,8 +13,9 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "~3.2.0",
-    "jquery-ui": "1.11.1",
+    "bootstrap": "3.3.2",
+    "jquery-ui": "1.11.2",
+    "fontawesome": "4.3.0",
     "smalot-bootstrap-datetimepicker": "2.3.1",
     "mousetrap": "1.4.6"
   }
