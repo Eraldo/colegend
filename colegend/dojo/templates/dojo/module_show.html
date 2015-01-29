@@ -14,6 +14,10 @@
     {% endif %}
 {% endblock %}
 
+{% block page_title_extras %}
+    {% include "categories/_category_field.html" with category=object.category %}
+{% endblock %}
+
 {% block page_content %}
     <div class="well">
         <p class="lead">{{ module.description|linebreaksbr }}</p>
