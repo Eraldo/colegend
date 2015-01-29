@@ -237,6 +237,9 @@ class Dream(OwnedBase, AutoUrlMixin, TimeStampedBase):
     def __str__(self):
         return "{date}: {name}".format(date=self.date, name=self.name)
 
+    class Meta:
+        ordering = ['-date']
+
 
 class Sleep(OwnedBase, AutoUrlMixin, TimeStampedBase):
     start = models.DateTimeField(validators=[validate_datetime_in_past])
