@@ -33,14 +33,16 @@ class TrackerShowView(TrackerMixin, FormMixin, SingleObjectMixin, ListView):
     template_name = "trackers/tracker_show.html"
     paginate_by = 10
 
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object(queryset=Tracker.objects.all())
+    def set_object_and_object_list(self):
+        self.object = self.get_object(queryset=Tracker.objects.owned_by(self.request.user))
         self.object_list = self.get_queryset()
+
+    def get(self, request, *args, **kwargs):
+        self.set_object_and_object_list()
         return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        self.object = self.get_object(queryset=Tracker.objects.all())
-        self.object_list = self.get_queryset()
+        self.set_object_and_object_list()
         form_class = self.get_form_class()
         form = self.get_form(form_class)
         if form.is_valid():
@@ -54,7 +56,6 @@ class TrackerShowView(TrackerMixin, FormMixin, SingleObjectMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         tracker = self.object
-        tracker_type = tracker.tracker_type
         context['tracker'] = tracker
         context["type"] = tracker.get_tracker_type_display()
         context["form"] = self.get_form_class()(self.request.POST or None)
