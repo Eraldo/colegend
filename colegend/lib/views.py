@@ -144,6 +144,16 @@ def get_icon(name):
         "prompt": "chevron-right",
         "quick-command": "asterisk",
         "locked": "lock",
+        # trackers
+        "rating": "star",
+        "number": "slack",
+        "sleep": "bed",
+        "weight": "dashboard",
+        "sex": "user-times",
+        "transaction": "money",
+        "walk": "tree",
+        "joke": "smile-o",
+        "dream": "picture-o",
     }
     if name in icon_map:
         name = icon_map.get(name)

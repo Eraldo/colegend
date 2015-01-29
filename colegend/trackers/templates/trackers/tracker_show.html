@@ -16,7 +16,7 @@
 {% endblock %}
 
 {% block page_title_extras %}
-    <span class="label label-default">{{ object.get_frequency_display }}</span>
+    <span class="label label-default">{% icon object.get_tracker_type_display|lower %} {{ object.get_frequency_display }}</span>
     {% include "categories/_category_field.html" with category=object.category %}
 {% endblock %}
 

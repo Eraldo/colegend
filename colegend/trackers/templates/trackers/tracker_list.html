@@ -18,19 +18,19 @@
     <div class="well">
         <h4>Custom Trackers</h4>
             {% for tracker in user.tracker_set.all %}
-                <a href="{{ tracker.get_show_url }}" class="btn btn-category bg-category-{{ tracker.category.pk }}">{{ tracker }}</a>
+                <a href="{{ tracker.get_show_url }}" class="btn btn-category bg-category-{{ tracker.category.pk }}">{% icon tracker.get_tracker_type_display|lower %} {{ tracker }}</a>
             {% endfor %}
     </div>
     <div class="well">
         <h4>Special Trackers</h4>
-        <a href="{% url "trackers:sleep_list" %}" class="btn btn-category bg-category-1">Sleep</a>
-        <a href="{% url "trackers:weight_list" %}" class="btn btn-category bg-category-1">Weight</a>
-        <a href="{% url "trackers:sex_list" %}" class="btn btn-category bg-category-2">Sex</a>
-        <a href="{% url "trackers:transaction_list" %}" class="btn btn-category bg-category-3">Finances</a>
-        <a href="{% url "trackers:walk_list" %}" class="btn btn-category bg-category-4">Walks</a>
-        <a href="{% url "trackers:joke_list" %}" class="btn btn-category bg-category-5">Jokes</a>
-        <a href="{% url "trackers:book_list" %}" class="btn btn-category bg-category-6">Books</a>
-        <a href="{% url "trackers:dream_list" %}" class="btn btn-category bg-category-7">Dreams</a>
+        <a href="{% url "trackers:sleep_list" %}" class="btn btn-category bg-category-1">{% icon "sleep" %} Sleep</a>
+        <a href="{% url "trackers:weight_list" %}" class="btn btn-category bg-category-1">{% icon "weight" %} Weight</a>
+        <a href="{% url "trackers:sex_list" %}" class="btn btn-category bg-category-2">{% icon "sex" %} Sex</a>
+        <a href="{% url "trackers:transaction_list" %}" class="btn btn-category bg-category-3">{% icon "transaction" %} Finances</a>
+        <a href="{% url "trackers:walk_list" %}" class="btn btn-category bg-category-4">{% icon "walk" %} Walks</a>
+        <a href="{% url "trackers:joke_list" %}" class="btn btn-category bg-category-5">{% icon "joke" %} Jokes</a>
+        <a href="{% url "trackers:book_list" %}" class="btn btn-category bg-category-6">{% icon "book" %} Books</a>
+        <a href="{% url "trackers:dream_list" %}" class="btn btn-category bg-category-7">{% icon "dream" %} Dreams</a>
     </div>
     <div class="well well-sm">
         <h4>Feedback</h4>
