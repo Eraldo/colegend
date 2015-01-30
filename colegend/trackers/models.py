@@ -54,6 +54,27 @@ class Tracker(OwnedBase, AutoUrlMixin, TimeStampedBase):
         if self.tracker_type == self.RATING:
             return self.ratingdata_set.all()
 
+    def get_chain(self, days=7):
+        """
+        Return a series of 'True' and 'False' for the last week.
+        Starting and including today.
+        """
+        chain = []
+        today = timezone.now().date()
+        data = self.data.filter(date__range=[today-timezone.timedelta(days=days), today])
+        if not data:
+            return [False for n in range(7)]
+        dates = data.values_list('date', flat=True)
+        for days_ago in range(0, days):
+            day = today - timezone.timedelta(days=days_ago)
+            if day in dates:
+                chain.append(True)
+            else:
+                chain.append(False)
+        return chain
+
+
+
 
 class BaseData(ValidateModelMixin, models.Model):
     tracker = models.ForeignKey(Tracker)

@@ -1,4 +1,5 @@
 {% load icons %}
+
 <span data-toggle="tooltip" title="{{ category }}">
     <span class="label bg-category-{{ category.pk }}">
         {% with category_pk=category.pk|stringformat:"s" %}{% icon "category-"|add:category_pk %}{% endwith %}
