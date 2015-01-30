@@ -3,6 +3,20 @@
 {% load icons %}
 {% load crispy_forms_tags %}
 
+{% block extra_head %}
+    {{ block.super }}
+    <script type="text/javascript"
+            src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1','packages':['annotationchart']}]}"></script>
+    <style>
+        .fa-chain {
+            -webkit-transform: rotate(-45deg);
+            -moz-transform: rotate(-45deg);
+            -ms-transform: rotate(-45deg);
+            -o-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+        }
+    </style>
+{% endblock %}
 
 {% block page_title %}
     {{ object }}
@@ -23,45 +37,100 @@
 
 {% block page_content %}
     {% crispy form %}
-    <div class="table-responsive">
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th>Date</th>
-                <th>{{ type }}</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for data in object_list %}
-                <tr>
-                    <td>
-                        {{ data.date }}
-                    </td>
-                    <td>
-                        {% if type == "Check" %}
-                            {% icon "check" %}
-                        {% elif type == "Number" %}
-                            {{ data.number }}
-                        {% elif type == "Rating" %}
-                            <span data-toggle="tooltip" title="{{ data.rating }}">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>{{ type }}</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for data in object_list %}
+                        <tr>
+                            <td>
+                                {{ data.date }}
+                            </td>
+                            <td>
+                                {% if type == "Check" %}
+                                    {% icon "check" %}
+                                {% elif type == "Number" %}
+                                    {{ data.number }}
+                                {% elif type == "Rating" %}
+                                    <span data-toggle="tooltip" title="{{ data.rating }}">
                             {% for s in ""|ljust:data.rating %}
                                 {% icon "star" %}
                             {% endfor %}
                             </span>
-                        {% endif %}
-                    </td>
-                    <td>
-                        <a href="{{ data.get_delete_url }}"
-                           class="item-delete-button btn btn-danger btn-xs pull-right" role="button">{% icon "delete" %}<span
-                                class="sr-only"> Delete</span></a>
-                    </td>
-                </tr>
-            {% endfor %}
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{{ data.get_delete_url }}"
+                                   class="item-delete-button btn btn-danger btn-xs pull-right"
+                                   role="button">{% icon "delete" %}<span
+                                        class="sr-only"> Delete</span></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
 
-            </tbody>
-        </table>
+                    </tbody>
+                </table>
+            </div>
+            {% include "lib/_pager.html" %}
+        </div>
+        <script type='text/javascript'>
+            {% if type == "Number" or type == "Rating" %}
+                google.load('visualization', '1', {'packages': ['annotationchart']});
+                google.setOnLoadCallback(drawChart);
+                function drawChart() {
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('date', 'Date');
+                    data.addColumn('number', '{{ type }}');
+                    data.addRows([
+                        {% for data in object_list %}
+                            [new Date({{ data.date.year }}, {{ data.date.month }}, {{ data.date.day }}),
+                                {% if type == "Number" %}{{ data.number}}
+                                {% elif type == "Rating" %}{{ data.rating }}
+                                {% endif %}],
+                        {% endfor %}
+                    ]);
+                    var chart = new google.visualization.AnnotationChart(document.getElementById('chart_div'));
+                    var options = {
+                        displayAnnotations: false
+                    };
+                    chart.draw(data, options);
+                }
+            {% elif type == "Check" %}
+                google.load("visualization", "1.1", {packages: ["calendar"]});
+                google.setOnLoadCallback(drawChart);
+                function drawChart() {
+                    var dataTable = new google.visualization.DataTable();
+                    dataTable.addColumn({ type: 'date', id: 'Date' });
+                    dataTable.addColumn({ type: 'number', id: 'Check' });
+                    dataTable.addRows([
+                        {% for data in object_list %}
+                            [ new Date({{ data.date.year }}, {{ data.date.month }}, {{ data.date.day }}), 1 ],
+                        {% endfor %}
+                    ]);
+                    var chart = new google.visualization.Calendar(document.getElementById('chart_div'));
+                    var options = {
+                        {#                        calendar: { cellSize: 10 },#}
+                        noDataPattern: {
+                            backgroundColor: 'white',
+                            {#                            color: 'orange'#}
+                        },
+                        colorAxis: {colors: ['green', 'green']}
+                    };
+                    chart.draw(dataTable, options);
+                }
+            {% endif %}
+        </script>
+        <div class="col-md-8">
+            <div id='chart_div' style='width: 100%; height: 400px; padding: 0px; '>
+            </div>
+        </div>
     </div>
-    {% include "lib/_pager.html" %}
-
 {% endblock %}
