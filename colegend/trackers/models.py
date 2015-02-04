@@ -356,7 +356,13 @@ class Walk(OwnedBase, AutoUrlMixin, TimeStampedBase):
         if not self.duration:
             return
         return timesince(self.start, self.end)
-        return str(self.duration)[:-3]
+
+    @property
+    def value(self):
+        if self.duration:
+            return self.duration.total_seconds() / 60
+        else:
+            return 0
 
     def clean(self, *args, **kwargs):
         """

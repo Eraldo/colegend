@@ -409,6 +409,21 @@ class DreamDeleteView(DreamMixin, DeleteView):
 
 class DreamChartView(DreamMixin, ListView):
     template_name = "trackers/dream_chart.html"
+    year = None
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        try:
+            year = int(self.request.GET.get("year"))
+        except (ValueError, TypeError):
+            year = timezone.now().year
+        self.year = year
+        return queryset.filter(date__year=year)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["year"] = self.year
+        return context
 
 
 class SleepMixin(TrackerMixin):
@@ -493,3 +508,18 @@ class WalkDeleteView(WalkMixin, DeleteView):
 
 class WalkChartView(WalkMixin, ListView):
     template_name = "trackers/walk_chart.html"
+    year = None
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        try:
+            year = int(self.request.GET.get("year"))
+        except (ValueError, TypeError):
+            year = timezone.now().year
+        self.year = year
+        return queryset.filter(start__year=year)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["year"] = self.year
+        return context
