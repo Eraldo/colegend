@@ -1,4 +1,5 @@
 from django.core.urlresolvers import reverse_lazy
+from django.utils import timezone
 from django.views.generic import TemplateView, CreateView, ListView, UpdateView, DetailView, DeleteView
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.edit import FormMixin
@@ -160,6 +161,10 @@ class WeightDeleteView(WeightMixin, DeleteView):
     template_name = "confirm_delete.html"
 
 
+class WeightChartView(WeightMixin, ListView):
+    template_name = "trackers/weight_chart.html"
+
+
 class SexMixin(TrackerMixin):
     success_url = reverse_lazy("trackers:sex_list")
     model = Sex
@@ -204,6 +209,20 @@ class SexEditView(SexMixin, UpdateView):
 
 class SexDeleteView(SexMixin, DeleteView):
     template_name = "confirm_delete.html"
+
+
+class SexChartView(SexMixin, ListView):
+    template_name = "trackers/sex_chart.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        try:
+            year = int(self.request.GET.get("year"))
+        except (ValueError, TypeError):
+                year = timezone.now().year
+        context["data_list"] = self.get_queryset().filter(date__year=year)
+        context["year"] = year
+        return context
 
 
 class BookMixin(TrackerMixin):
@@ -320,6 +339,36 @@ class TransactionDeleteView(TransactionMixin, DeleteView):
     template_name = "confirm_delete.html"
 
 
+class TransactionChartView(TransactionMixin, ListView):
+    template_name = "trackers/transaction_chart.html"
+    year = None
+    month = None
+
+    def get_queryset(self):
+        try:
+            year = int(self.request.GET.get("year"))
+            month = int(self.request.GET.get("month"))
+        except (ValueError, TypeError):
+                year = timezone.now().year
+                month = timezone.now().month
+        self.year = year
+        self.month = month
+        queryset = super().get_queryset().filter(time__year=year, time__month=month).order_by("time")
+        cumulative = 0
+        for item in queryset:
+            cumulative += item.value
+            item.cumulative = cumulative
+        self.balance = cumulative
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["year"] = self.year
+        context["month"] = self.month
+        context["balance"] = self.balance
+        return context
+
+
 class DreamMixin(TrackerMixin):
     success_url = reverse_lazy("trackers:dream_list")
     model = Dream
@@ -356,6 +405,10 @@ class DreamEditView(DreamMixin, UpdateView):
 
 class DreamDeleteView(DreamMixin, DeleteView):
     template_name = "confirm_delete.html"
+
+
+class DreamChartView(DreamMixin, ListView):
+    template_name = "trackers/dream_chart.html"
 
 
 class SleepMixin(TrackerMixin):
@@ -396,6 +449,10 @@ class SleepDeleteView(SleepMixin, DeleteView):
     template_name = "confirm_delete.html"
 
 
+class SleepChartView(SleepMixin, ListView):
+    template_name = "trackers/sleep_chart.html"
+
+
 class WalkMixin(TrackerMixin):
     success_url = reverse_lazy("trackers:walk_list")
     model = Walk
@@ -433,3 +490,6 @@ class WalkEditView(WalkMixin, UpdateView):
 class WalkDeleteView(WalkMixin, DeleteView):
     template_name = "confirm_delete.html"
 
+
+class WalkChartView(WalkMixin, ListView):
+    template_name = "trackers/walk_chart.html"

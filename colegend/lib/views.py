@@ -80,6 +80,7 @@ def get_icon(name):
         "routine": "stack-overflow",
         "habit": "link",
         "tracker": "line-chart",
+        "chart": "bar-chart",
         # motivator
         "legend": "paw",
         "quote": "quote-left",

@@ -37,6 +37,7 @@ django-autoslug==1.7.2
 ipython==2.1.0 # nice shell
 django-extensions==1.4.0 # useful stuff
 logutils==0.3.3
+pytz==2014.10 # timezone handling
 
 # project specific
 django-bootstrap3==4.8.2

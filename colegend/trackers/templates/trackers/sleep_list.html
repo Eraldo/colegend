@@ -15,43 +15,47 @@
 
 {% block page_controls %}
     <a href="{% url "trackers:sleep_new" %}" class="btn btn-default">{% icon "new" %}</a>
+    <a href="{% url "trackers:sleep_chart" %}" class="btn btn-default">{% icon "chart" %}</a>
 {% endblock %}
 
 {% block page_content %}
     <div class="table-responsive">
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>Start</th>
-            <th>End</th>
-            <th>Duration</th>
-            <th>Notes</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for sleep in sleep_list%}
+        <table class="table table-hover">
+            <thead>
             <tr>
-                <td>
-                    <a href="{{ sleep.get_edit_url }}">{{ sleep.start }}</a><br>
-                </td>
-                <td>
-                    {{ sleep.end|default:"-" }}
-                </td>
-                <td align="right">
-                    {{ sleep.get_duration_display|default:"-" }}
-                </td>
-                <td>
-                    {{ sleep.notes }}
-                </td>
-                <td>
-                    <a href="{{ sleep.get_delete_url }}" class="item-delete-button btn btn-danger btn-xs pull-right" role="button">{% icon "delete" %}<span class="sr-only"> Delete</span></a>
-                </td>
+                <th>Start</th>
+                <th>End</th>
+                <th>Duration</th>
+                <th>Notes</th>
+                <th></th>
             </tr>
-        {% endfor %}
+            </thead>
+            <tbody>
+            {% for sleep in sleep_list %}
+                <tr>
+                    <td>
+                        <a href="{{ sleep.get_edit_url }}">{{ sleep.start }}</a><br>
+                    </td>
+                    <td>
+                        {{ sleep.end|default:"-" }}
+                    </td>
+                    <td align="right">
+                        {{ sleep.get_duration_display|default:"-" }}
+                    </td>
+                    <td>
+                        {{ sleep.notes }}
+                    </td>
+                    <td>
+                        <a href="{{ sleep.get_delete_url }}"
+                           class="item-delete-button btn btn-danger btn-xs pull-right"
+                           role="button">{% icon "delete" %}<span class="sr-only"> Delete</span></a>
+                    </td>
+                </tr>
+            {% endfor %}
 
-        </tbody>
-    </table>
+            </tbody>
+        </table>
     </div>
     {% include "lib/_pager.html" %}
+    </div>
 {% endblock %}

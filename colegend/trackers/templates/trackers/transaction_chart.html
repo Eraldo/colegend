@@ -1,0 +1,55 @@
+{% extends 'page.html' %}
+
+{% load icons %}
+
+{% block page_title %}
+    Transaction Chart
+{% endblock %}
+
+{% block up_url %}{% url "trackers:transaction_list" %}{% endblock %}
+
+{% block extra_head %}
+    {{ block.super }}
+    <script type="text/javascript"
+            src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1','packages':['annotationchart', 'corechart']}]}"></script>
+    <script type='text/javascript'>
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('datetime', 'Time');
+            data.addColumn('number', 'Amount (€)');
+            data.addColumn('number', 'Cumulative Amount (€)');
+            data.addColumn('string', 'Notes');
+            data.addRows([
+                {% for row in object_list %}
+                    [new Date({{ row.time.year }}, {{ row.time.month }}-1, {{ row.time.day }}, {{ row.time.hour }}, {{ row.time.minute }}), {{ row.cumulative }}, {{ row.value }}, '{{ row.notes }}'],
+                {% endfor %}
+            ]);
+            var chart = new google.visualization.AnnotationChart(document.getElementById('timechart'));
+            var options = {
+            };
+            chart.draw(data, options);
+        }
+    </script>
+{% endblock %}
+
+{% block page_content %}
+    <form class="form-inline" method="GET" action=".">
+        <div class="form-group">
+            <label for="year">Year</label>
+            <input id="year" name="year" type="number" min="1900" max="{% now "Y" %}" class="form-control"
+                   value="{{ year }}"/>
+            <label for="month">Month</label>
+            <input id="month" name="month" type="number" min="1" max="12" class="form-control" value="{{ month }}"/>
+            <button class="btn btn-default" type="submit">{% icon "refresh" %}</button>
+        </div>
+    </form>
+    <form class="form-inline">
+        <span class="label label-{% if balance > 0 %}success{% elif balance < 0 %}danger{% else %}default{% endif %}">Balance: € {{ balance|floatformat:2 }}</span>
+    </form>
+    <div class="row">
+        <div class="col-md-12">
+            <div id='timechart' style='width: 100%; height: 400px; padding: 0px;'></div>
+        </div>
+    </div>
+{% endblock %}

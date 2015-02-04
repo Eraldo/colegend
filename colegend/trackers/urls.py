@@ -5,7 +5,8 @@ from trackers.views import TrackerListView, WeightListView, WeightNewView, Weigh
     TransactionListView, TransactionNewView, TransactionShowView, TransactionEditView, TransactionDeleteView, \
     DreamListView, DreamNewView, DreamShowView, DreamEditView, DreamDeleteView, SleepListView, SleepNewView, \
     SleepShowView, SleepEditView, SleepDeleteView, WalkListView, WalkNewView, WalkShowView, WalkEditView, WalkDeleteView, \
-    TrackerShowView, TrackerEditView, TrackerDeleteView, TrackerNewView, DataDeleteView
+    TrackerShowView, TrackerEditView, TrackerDeleteView, TrackerNewView, DataDeleteView, SleepChartView, WeightChartView, \
+    SexChartView, TransactionChartView, DreamChartView, WalkChartView
 
 __author__ = 'eraldo'
 
@@ -41,6 +42,7 @@ urlpatterns = patterns(
         DataDeleteView.as_view(),
         name='data_delete'),
 
+
     # ex: ../weight/
     url(r'^weight/$',
         WeightListView.as_view(),
@@ -65,6 +67,11 @@ urlpatterns = patterns(
     url(r'^weight/(?P<pk>\d+)/delete/$',
         WeightDeleteView.as_view(),
         name='weight_delete'),
+
+    # ex: ..weight/chart/
+    url(r'^weight/chart/$',
+        WeightChartView.as_view(),
+        name='weight_chart'),
 
 
     # ex: ../sex/
@@ -91,6 +98,11 @@ urlpatterns = patterns(
     url(r'^sex/(?P<pk>\d+)/delete/$',
         SexDeleteView.as_view(),
         name='sex_delete'),
+
+    # ex: ..sex/chart/
+    url(r'^sex/chart/$',
+        SexChartView.as_view(),
+        name='sex_chart'),
 
 
     # ex: ../book/
@@ -170,6 +182,11 @@ urlpatterns = patterns(
         TransactionDeleteView.as_view(),
         name='transaction_delete'),
 
+    # ex: ..transaction/chart/
+    url(r'^transaction/chart/$',
+        TransactionChartView.as_view(),
+        name='transaction_chart'),
+
 
     # ex: ../dream/
     url(r'^dream/$',
@@ -195,6 +212,11 @@ urlpatterns = patterns(
     url(r'^dream/(?P<pk>\d+)/delete/$',
         DreamDeleteView.as_view(),
         name='dream_delete'),
+
+    # ex: ..dream/chart/
+    url(r'^dream/chart/$',
+        DreamChartView.as_view(),
+        name='dream_chart'),
 
 
     # ex: ../sleep/
@@ -222,6 +244,11 @@ urlpatterns = patterns(
         SleepDeleteView.as_view(),
         name='sleep_delete'),
 
+    # ex: ..sleep/chart/
+    url(r'^sleep/chart/$',
+        SleepChartView.as_view(),
+        name='sleep_chart'),
+
 
     # ex: ../walk/
     url(r'^walk/$',
@@ -247,4 +274,9 @@ urlpatterns = patterns(
     url(r'^walk/(?P<pk>\d+)/delete/$',
         WalkDeleteView.as_view(),
         name='walk_delete'),
+
+    # ex: ..walk/chart/
+    url(r'^walk/chart/$',
+        WalkChartView.as_view(),
+        name='walk_chart'),
 )

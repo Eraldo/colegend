@@ -91,6 +91,11 @@ class BaseData(ValidateModelMixin, models.Model):
 
 
 class CheckData(BaseData):
+
+    @property
+    def value(self):
+        return "1"
+
     def __str__(self):
         return "{}: ✓".format(self.date)
 
@@ -98,12 +103,20 @@ class CheckData(BaseData):
 class NumberData(BaseData):
     number = models.IntegerField()
 
+    @property
+    def value(self):
+        return self.number
+
     def __str__(self):
         return "{}: {}".format(self.date, self.number)
 
 
 class RatingData(BaseData):
     rating = models.PositiveSmallIntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
+
+    @property
+    def value(self):
+        return self.rating
 
     def __str__(self):
         return "{}: {}".format(self.date, self.rating)
@@ -123,6 +136,10 @@ class Weight(OwnedBase, AutoUrlMixin, TimeStampedBase):
     def __str__(self):
         return "{time}: {weight}kg".format(time=self.time, weight=self.weight)
 
+    @property
+    def value(self):
+        return self.weight
+
 
 class Sex(OwnedBase, AutoUrlMixin, TimeStampedBase):
     date = models.DateField(default=timezone.now)
@@ -138,6 +155,10 @@ class Sex(OwnedBase, AutoUrlMixin, TimeStampedBase):
 
     def __str__(self):
         return "{date}: {amount}x [{person}]".format(date=self.date, amount=self.amount, person=self.person)
+
+    @property
+    def value(self):
+        return self.amount
 
 
 class Book(OwnedBase, AutoUrlMixin, TrackedBase):
@@ -243,8 +264,18 @@ class Transaction(OwnedBase, AutoUrlMixin, TimeStampedBase):
 
     objects = TrackerQuerySet.as_manager()
 
+    class Meta:
+        ordering = ['-time']
+
     def __str__(self):
         return "{time} €{amount}".format(time=self.time, amount=self.amount)
+
+    @property
+    def value(self):
+        if self.transaction_type == Transaction.EXPENSE:
+            return - self.amount
+        elif self.transaction_type == Transaction.INCOME:
+            return self.amount
 
 
 class Dream(OwnedBase, AutoUrlMixin, TimeStampedBase):
@@ -260,6 +291,10 @@ class Dream(OwnedBase, AutoUrlMixin, TimeStampedBase):
 
     class Meta:
         ordering = ['-date']
+
+    @property
+    def value(self):
+        return 1
 
 
 class Sleep(OwnedBase, AutoUrlMixin, TimeStampedBase):
@@ -285,6 +320,10 @@ class Sleep(OwnedBase, AutoUrlMixin, TimeStampedBase):
             return
         return timesince(self.start, self.end)
         return str(self.duration)[:-3]
+
+    @property
+    def value(self):
+        return self.duration.total_seconds() / 3600
 
     def clean(self, *args, **kwargs):
         """

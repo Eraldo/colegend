@@ -15,43 +15,46 @@
 
 {% block page_controls %}
     <a href="{% url "trackers:sex_new" %}" class="btn btn-default">{% icon "new" %}</a>
+    <a href="{% url "trackers:sex_chart" %}" class="btn btn-default">{% icon "chart" %}</a>
 {% endblock %}
 
 {% block page_content %}
     <div class="table-responsive">
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>Date</th>
-            <th>Amount</th>
-            <th>Person</th>
-            <th>Notes</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for sex in sex_list%}
+        <table class="table table-hover">
+            <thead>
             <tr>
-                <td>
-                    <a href="{{ sex.get_edit_url }}">{{ sex.date }}</a><br>
-                </td>
-                <td>
-                    {{ sex.amount }}
-                </td>
-                <td>
-                    {{ sex.person }}
-                </td>
-                <td>
-                    {{ sex.notes }}
-                </td>
-                <td>
-                    <a href="{{ sex.get_delete_url }}" class="item-delete-button btn btn-danger btn-xs pull-right" role="button">{% icon "delete" %}<span class="sr-only"> Delete</span></a>
-                </td>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Person</th>
+                <th>Notes</th>
+                <th></th>
             </tr>
-        {% endfor %}
+            </thead>
+            <tbody>
+            {% for sex in sex_list %}
+                <tr>
+                    <td>
+                        <a href="{{ sex.get_edit_url }}">{{ sex.date }}</a><br>
+                    </td>
+                    <td>
+                        {{ sex.amount }}
+                    </td>
+                    <td>
+                        {{ sex.person }}
+                    </td>
+                    <td>
+                        {{ sex.notes }}
+                    </td>
+                    <td>
+                        <a href="{{ sex.get_delete_url }}"
+                           class="item-delete-button btn btn-danger btn-xs pull-right"
+                           role="button">{% icon "delete" %}<span class="sr-only"> Delete</span></a>
+                    </td>
+                </tr>
+            {% endfor %}
 
-        </tbody>
-    </table>
+            </tbody>
+        </table>
     </div>
     {% include "lib/_pager.html" %}
 {% endblock %}
