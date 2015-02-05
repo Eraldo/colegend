@@ -8,8 +8,7 @@ from django.utils.timesince import timesince
 from markitup.fields import MarkupField
 from categories.models import Category
 from lib.models import OwnedBase, TimeStampedBase, TrackedBase, OwnedQueryMixin, AutoUrlMixin, ValidateModelMixin
-from lib.validators import validate_datetime_in_past, validate_date_today_or_in_past, validate_date_within_days, \
-    validate_date_within_one_week
+from lib.validators import validate_datetime_in_past, validate_date_today_or_in_past, validate_date_within_one_week
 
 
 class TrackerQuerySet(OwnedQueryMixin, QuerySet):
@@ -54,6 +53,18 @@ class Tracker(OwnedBase, AutoUrlMixin, TimeStampedBase):
         if self.tracker_type == self.RATING:
             return self.ratingdata_set.all()
 
+    @property
+    def is_tracked(self):
+        last_data = self.data.first()
+        today = timezone.now().date()
+        days_passed = (timezone.now().date() - last_data.date).days
+        if self.frequency == Tracker.DAILY:
+            return last_data.date == today
+        elif self.frequency == Tracker.WEEKLY:
+            return last_data.date >= today - timezone.timedelta(today.weekday())
+        elif self.frequency == Tracker.MONTHLY:
+            return last_data.date > today - timezone.timedelta(today.day)
+
     def get_chain(self, days=7):
         """
         Return a series of 'True' and 'False' for the last week.
@@ -61,7 +72,7 @@ class Tracker(OwnedBase, AutoUrlMixin, TimeStampedBase):
         """
         chain = []
         today = timezone.now().date()
-        data = self.data.filter(date__range=[today-timezone.timedelta(days=days), today])
+        data = self.data.filter(date__range=[today - timezone.timedelta(days=days), today])
         if not data:
             return [False for n in range(7)]
         dates = data.values_list('date', flat=True)
@@ -72,8 +83,6 @@ class Tracker(OwnedBase, AutoUrlMixin, TimeStampedBase):
             else:
                 chain.append(False)
         return chain
-
-
 
 
 class BaseData(ValidateModelMixin, models.Model):
@@ -91,7 +100,6 @@ class BaseData(ValidateModelMixin, models.Model):
 
 
 class CheckData(BaseData):
-
     @property
     def value(self):
         return "1"

@@ -29,7 +29,11 @@
         </div>
         {% if day_tasks %}
             <div class="col-md-4">
-                <div class="well">
+                <div class="well well-sm">
+                    <h4>Trackers</h4>
+                    {% include "trackers/_daily_trackers.html" %}
+                </div>
+                <div class="well well-sm">
                     {% if scheduled_tasks %}
                         <h4>Scheduled</h4>
                         {% for task in scheduled_tasks %}

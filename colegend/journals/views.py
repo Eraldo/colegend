@@ -7,6 +7,7 @@ from django.views.generic import DetailView, UpdateView, DeleteView, CreateView,
     TemplateView
 from journals.forms import DayEntryForm, JournalForm
 from journals.models import DayEntry, Journal
+from trackers.models import Tracker
 
 __author__ = 'eraldo'
 
@@ -112,6 +113,8 @@ class DayEntryShowView(DayEntryMixin, DetailView):
                 context["created_projects"] = created_projects
             if created_tasks:
                 context["created_tasks"] = created_tasks
+        # TRACKERS
+        context["trackers"] = user.tracker_set.filter(frequency=Tracker.DAILY)
         return context
 
 

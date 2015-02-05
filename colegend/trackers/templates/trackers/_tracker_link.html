@@ -1,0 +1,8 @@
+{% load icons %}
+
+<span data-toggle="tooltip"
+      title="{% if tracker.is_tracked %}Tracked{% endif %}">
+    <a href="{{ tracker.get_show_url }}"
+       class="btn btn-xs btn-{% if tracker.is_tracked%}success{% else %}default{% endif %}" target="_blank">{% icon "tracker" %}</a>
+</span>
+    <a href="{{ tracker.get_show_url }}" target="_blank">{{ tracker }}</a>

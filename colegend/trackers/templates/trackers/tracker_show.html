@@ -29,7 +29,7 @@
 
 {% block page_title_extras %}
     {% include "categories/_category_field.html" with category=object.category %}
-    <span class="label label-default">{% icon object.get_tracker_type_display|lower %} {{ object.get_frequency_display }}</span>
+    <span class="label label-{% if object.is_tracked %}success{% else %}default{% endif %}">{% icon object.get_tracker_type_display|lower %} {{ object.get_frequency_display }}</span>
     {% include "trackers/_chain.html" %}
 {% endblock %}
 
