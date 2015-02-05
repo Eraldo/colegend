@@ -467,6 +467,21 @@ class SleepDeleteView(SleepMixin, DeleteView):
 class SleepChartView(SleepMixin, ListView):
     template_name = "trackers/sleep_chart.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        queryset = self.get_queryset()
+        duration_sum = 0
+        duration_objects = 0
+        for sleep in queryset:
+            duration = sleep.value
+            if duration:
+                duration_sum += duration
+                duration_objects += 1
+        average = duration_sum / duration_objects
+
+        context["average"] = average
+        return context
+
 
 class WalkMixin(TrackerMixin):
     success_url = reverse_lazy("trackers:walk_list")

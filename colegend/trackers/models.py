@@ -327,11 +327,10 @@ class Sleep(OwnedBase, AutoUrlMixin, TimeStampedBase):
         if not self.duration:
             return
         return timesince(self.start, self.end)
-        return str(self.duration)[:-3]
 
     @property
     def value(self):
-        return self.duration.total_seconds() / 3600
+        return round(self.duration.total_seconds() / 3600, 1)
 
     def clean(self, *args, **kwargs):
         """
