@@ -14,13 +14,22 @@
             var data = new google.visualization.DataTable();
             data.addColumn('datetime', 'Time');
             data.addColumn('number', 'Hours');
-            data.addColumn({type: 'string', role: 'annotation'});
+            data.addColumn({type: 'string', role: 'tooltip'});
+            data.addColumn({type: 'string', role: 'style'});
             data.addRows([
                 {% for row in object_list %}
-                    [new Date({{ row.start.year }}, {{ row.start.month }}-1, {{ row.start.day }}, {{ row.start.hour }}, {{ row.start.minute }}), {{ row.value }}, '{{ row.notes }}'],
+                    [new Date({{ row.start.year }}, {{ row.start.month }}-1, {{ row.start.day }}, {{ row.start.hour }}, {{ row.start.minute }}), {{ row.value }}, '{{ row.start }}\n{{ row.value }} h{% if row.notes %}\n{{ row.notes }}{% endif %}', '{% if row.value < 4 %}color: lightblue{% elif row.value < 10 %}color: green{% else %}{% endif %}{% if row.notes %}; stroke-color: black; stroke-width: 2;{% endif %}'],
                 {% endfor %}
             ]);
             var options = {
+                {#                trendlines: { 0: {} }#}
+                vAxis: {
+                    title: 'Hours of sleep'
+                },
+                legend: { position: "none" },
+                trendlines: {
+                    0: {lineWidth: 5, opacity: .3}
+                }
             };
             var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
             chart.draw(data, options);
