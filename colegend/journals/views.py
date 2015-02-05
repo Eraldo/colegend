@@ -114,7 +114,8 @@ class DayEntryShowView(DayEntryMixin, DetailView):
             if created_tasks:
                 context["created_tasks"] = created_tasks
         # TRACKERS
-        context["trackers"] = user.tracker_set.filter(frequency=Tracker.DAILY)
+        if entry.date == timezone.now().date():
+            context["trackers"] = user.tracker_set.filter(frequency=Tracker.DAILY)
         return context
 
 

@@ -16,7 +16,7 @@
 
 {% block page_content %}
     <div class="row">
-        <div class="col-md-{% if day_tasks %}8{% else %}12{% endif %}">
+        <div class="col-md-{% if day_tasks or trackers %}8{% else %}12{% endif %}">
             <div class="well">
                 <div class="pull-right">
                     {% for tag in dayentry.tags.all %}
@@ -27,13 +27,13 @@
                 {{ dayentry.content }}
             </div>
         </div>
-        {% if day_tasks %}
+        {% if day_tasks or trackers %}
             <div class="col-md-4">
                 <div class="well well-sm">
-                    <h4>Trackers</h4>
-                    {% include "trackers/_daily_trackers.html" %}
-                </div>
-                <div class="well well-sm">
+                    {% if trackers %}
+                        <h4>Trackers</h4>
+                        {% include "trackers/_daily_trackers.html" %}
+                    {% endif %}
                     {% if scheduled_tasks %}
                         <h4>Scheduled</h4>
                         {% for task in scheduled_tasks %}
