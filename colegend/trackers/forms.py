@@ -1,5 +1,5 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Field, Row, HTML
+from crispy_forms.layout import Layout, Field, Row, HTML, Column, Div
 from django.forms import ModelForm
 from lib.crispy import SaveButton, CancelButton
 from trackers.models import Weight, Sex, Book, Joke, Transaction, Dream, Sleep, Walk, \
@@ -58,15 +58,21 @@ class RatingDataForm(ModelForm):
 class TrackerForm(ModelForm):
     class Meta:
         model = Tracker
-        fields = ['name', 'description', 'category', 'tracker_type', 'frequency']
+        fields = ['name', 'description', 'category', 'tracker_type', 'frequency', 'chart_type']
 
     helper = FormHelper()
     helper.layout = Layout(
-        Field('name', autofocus='True'),
-        Field('description', rows=2),
-        Field('category'),
-        Field('tracker_type'),
-        Field('frequency'),
+        Row(
+            Div(
+                Field('name', autofocus='True'),
+                Field('description', rows=2),
+                css_class="col-md-6"
+            ),
+            Field('category', wrapper_class="col-md-3"),
+            Field('tracker_type', wrapper_class="col-md-3"),
+            Field('frequency', wrapper_class="col-md-3"),
+            Field('chart_type', wrapper_class="col-md-3"),
+        ),
         SaveButton(),
         CancelButton(),
     )

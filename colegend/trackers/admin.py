@@ -24,25 +24,16 @@ class RatingDataInline(DataInline):
 
 
 class TrackerAdmin(admin.ModelAdmin):
-    list_display = ['name', 'tracker_type', 'frequency', 'owner']
+    list_display = ['name', 'tracker_type', 'frequency', 'chart_type', 'owner']
     list_filter = ['owner']
     readonly_fields = ['creation_date', 'modification_date']
 
     fieldsets = [
         (None, {'fields': ['owner']}),
-        (None, {'fields': ['name', 'description', 'category', 'tracker_type', 'frequency']}),
+        (None, {'fields': ['name', 'description', 'category', 'tracker_type', 'frequency', 'chart_type']}),
         ('history', {'fields': ['creation_date', 'modification_date'], 'classes': ['collapse']}),
     ]
     inlines = [CheckDataInline, NumberDataInline, RatingDataInline]
-    # def get_inline_instances(self, request, obj=None):
-    # inline_map = {
-    #         Tracker.CHECKBOX: CheckboxDataInline,
-    #         Tracker.NUMBER: NumberDataInline,
-    #         Tracker.RATING: RatingDataInline,
-    #     }
-    #     if obj:
-    #         self.inlines = [inline_map[obj.tracker_type]]
-    #     return super().get_inline_instances(request, obj)
 
 
 admin.site.register(Tracker, TrackerAdmin)

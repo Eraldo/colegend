@@ -39,6 +39,16 @@ class Tracker(OwnedBase, AutoUrlMixin, TimeStampedBase):
         (UNKNOWN, "Unknown"),
     )
     frequency = models.PositiveSmallIntegerField(choices=FREQUENCY_CHOICES, default=1)
+    CALENDAR_CHART = 0
+    COLUMN_CHART = 1
+    LINE_CHART = 2
+    CHART_TYPE_CHOICES = (
+        (CALENDAR_CHART, "Calendar Chart"),
+        (COLUMN_CHART, "Column Chart"),
+        (LINE_CHART, "Line Chart"),
+    )
+    chart_type = models.PositiveSmallIntegerField(choices=CHART_TYPE_CHOICES, default=0)
+
     objects = TrackerQuerySet.as_manager()
 
     def __str__(self):

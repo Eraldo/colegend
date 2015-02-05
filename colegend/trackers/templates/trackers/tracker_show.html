@@ -80,12 +80,14 @@
             {% include "lib/_pager.html" %}
         </div>
         <div class="col-md-8">
-        {% if type == "Number" or type == "Rating" %}
-            {% include "trackers/_annotation_chart.html" with data=object_list %}
-        {% elif type == "Check" %}
-            {% include "trackers/_calendar_chart.html" with data=object_list %}
-        {% endif %}
-            </div>
+            {% if chart == "Calendar Chart" %}
+                {% include "trackers/_calendar_chart.html" with data=object_list %}
+            {% elif chart == "Column Chart" %}
+                {% include "trackers/_column_chart.html" with data=object_list %}
+            {% elif chart == "Line Chart" %}
+                {% include "trackers/_line_chart.html" with data=object_list %}
+            {% endif %}
         </div>
+    </div>
     </div>
 {% endblock %}

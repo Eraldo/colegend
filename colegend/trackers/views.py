@@ -59,6 +59,7 @@ class TrackerShowView(TrackerMixin, FormMixin, SingleObjectMixin, ListView):
         tracker = self.object
         context['tracker'] = tracker
         context["type"] = tracker.get_tracker_type_display()
+        context["chart"] = tracker.get_chart_type_display()
         context["form"] = self.get_form_class()(self.request.POST or None)
         return context
 
