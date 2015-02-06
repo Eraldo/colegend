@@ -1,5 +1,4 @@
 from django.core.urlresolvers import reverse_lazy
-from django.db.models import Sum
 from django.utils import timezone
 from django.views.generic import TemplateView, CreateView, ListView, UpdateView, DetailView, DeleteView
 from django.views.generic.detail import SingleObjectMixin
@@ -370,8 +369,9 @@ class TransactionChartView(TransactionMixin, ListView):
         context["year"] = self.year
         context["month"] = self.month
         context["balance"] = self.balance
-        context["expenses"] = queryset.filter(transaction_type=Transaction.EXPENSE).aggregate(Sum('amount')).get("amount__sum")
-        context["income"] = queryset.filter(transaction_type=Transaction.INCOME).aggregate(Sum('amount')).get("amount__sum")
+        context["expenses"] = queryset.expenses().balance
+        context["income"] = queryset.incomes().balance
+        context["categories"] = [(category.name, queryset.category(category).balance) for category in Category.objects.all()]
         return context
 
 

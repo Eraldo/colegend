@@ -2,7 +2,7 @@ from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
-from django.db.models import QuerySet
+from django.db.models import QuerySet, Sum
 from django.utils import timezone
 from django.utils.timesince import timesince
 from markitup.fields import MarkupField
@@ -265,6 +265,22 @@ class Joke(OwnedBase, AutoUrlMixin, TimeStampedBase):
         return self.name
 
 
+class TransactionQueryset(TrackerQuerySet):
+    @property
+    def balance(self):
+        return self.aggregate(Sum('amount')).get("amount__sum")
+
+    def expenses(self):
+        return self.filter(transaction_type=Transaction.EXPENSE)
+
+    def incomes(self):
+        return self.filter(transaction_type=Transaction.INCOME)
+
+    def category(self, category):
+        if isinstance(category, Category):
+            return self.filter(category=category)
+
+
 class Transaction(OwnedBase, AutoUrlMixin, TimeStampedBase):
     time = models.DateTimeField(default=timezone.now)
     amount = models.DecimalField(max_digits=6, decimal_places=2)
@@ -280,7 +296,7 @@ class Transaction(OwnedBase, AutoUrlMixin, TimeStampedBase):
     tags = models.CharField(max_length=100)
     notes = models.TextField(blank=True)
 
-    objects = TrackerQuerySet.as_manager()
+    objects = TransactionQueryset.as_manager()
 
     class Meta:
         ordering = ['-time']
