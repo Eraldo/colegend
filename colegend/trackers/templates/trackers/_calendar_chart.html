@@ -10,15 +10,13 @@
         dataTable.addColumn({ type: 'number', id: '{{ type }}' });
         dataTable.addRows([
             {% for data in object_list %}
-                [ new Date({{ data.date.year }}, {{ data.date.month }}, {{ data.date.day }}), {{ data.value }} ],
+                [ new Date({{ data.date.year }}, {{ data.date.month }}-1, {{ data.date.day }}), {{ data.value }} ],
             {% endfor %}
         ]);
         var chart = new google.visualization.Calendar(document.getElementById('chart_div'));
         var options = {
-            {#                        calendar: { cellSize: 10 },#}
             noDataPattern: {
-                backgroundColor: 'white',
-                {#                            color: 'orange'#}
+                backgroundColor: 'white'
             },
             colorAxis: {colors: ['green', 'darkgreen']}
         };
