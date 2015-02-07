@@ -12,7 +12,29 @@ from lib.validators import validate_datetime_in_past, validate_date_today_or_in_
 
 
 class TrackerQuerySet(OwnedQueryMixin, QuerySet):
-    pass
+    def to_track(self):
+        pks = []
+        for tracker in self.exclude(frequency=Tracker.UNKNOWN):
+            if not tracker.is_tracked:
+                pks.append(tracker.pk)
+        return self.filter(pk__in=pks)
+
+    def tracked(self):
+        pks = []
+        for tracker in self.all():
+            if tracker.is_tracked:
+                pks.append(tracker.pk)
+        return self.filter(pk__in=pks)
+
+    def tracked_on(self, date):
+        pks = []
+        for tracker in self.all():
+            if tracker.data.filter(date=date):
+                pks.append(tracker.pk)
+        return self.filter(pk__in=pks)
+
+    def tracked_today(self):
+        return self.tracked_on(timezone.now().date())
 
 
 class Tracker(OwnedBase, AutoUrlMixin, TimeStampedBase):
@@ -66,8 +88,9 @@ class Tracker(OwnedBase, AutoUrlMixin, TimeStampedBase):
     @property
     def is_tracked(self):
         last_data = self.data.first()
+        if not last_data:
+            return False
         today = timezone.now().date()
-        days_passed = (timezone.now().date() - last_data.date).days
         if self.frequency == Tracker.DAILY:
             return last_data.date == today
         elif self.frequency == Tracker.WEEKLY:
