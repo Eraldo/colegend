@@ -12,9 +12,12 @@
     <a href="{{ vision.get_delete_url }}" class="btn btn-danger" role="button">{% icon "delete" %}</a>
 {% endblock %}
 
+{% block page_title_extras %}
+    <span class="label label-default">Last update: {{ vision.modification_date|timesince }} ago</span>
+{% endblock %}
+
 {% block page_content %}
     <div class="well well-sm">
-<span class="pull-right">Last update: {{ vision.modification_date|timesince }}</span>
     {{ vision.content }}
     </div>
 {% endblock %}
