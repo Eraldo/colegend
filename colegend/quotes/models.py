@@ -38,7 +38,7 @@ class QuoteQuerySet(OwnedQueryMixin, models.QuerySet):
         # If there are no new ones..
         # then use the last used quote.
 
-        today = timezone.datetime.today().date()
+        today = timezone.now().date()
         try:
             current_quote = quotes.get(used_as_daily=today)
         except Quote.DoesNotExist:

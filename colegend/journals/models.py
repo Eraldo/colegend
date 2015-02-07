@@ -48,7 +48,7 @@ class DayEntryQuerySet(models.QuerySet):
     def streak_for(self, user):
         entries = self.owned_by(user)
         dates = entries.dates('date', kind='day', order="DESC")
-        today = timezone.datetime.today().date()
+        today = timezone.now().date()
         counter = 0
         for date in dates:
             if (today - date).days == counter:

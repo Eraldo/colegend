@@ -224,7 +224,7 @@ class Contact(models.Model):
 
     def get_age(self):
         born = self.birthday
-        today = timezone.datetime.today()
+        today = timezone.now().date()
         return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
 
 
