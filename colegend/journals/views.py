@@ -119,9 +119,8 @@ class DayEntryShowView(DayEntryMixin, DetailView):
         # To track
         if entry.date == today:
             context["trackers_to_track"] = trackers.to_track()
-        context["trackers_tracked"] = trackers.tracked_on(entry.date)
         # Tracked that day
-
+        context["trackers_tracked"] = trackers.tracked_on(entry.date)
         return context
 
 
