@@ -4,7 +4,7 @@ from django.utils import timezone
 from lib.views import ActiveUserRequiredMixin
 from django.core.exceptions import ValidationError
 from django.views.generic import DetailView, UpdateView, DeleteView, CreateView, ArchiveIndexView, RedirectView, \
-    TemplateView
+    TemplateView, ListView
 from journals.forms import DayEntryForm, JournalForm
 from journals.models import DayEntry, Journal
 from trackers.models import Tracker
@@ -163,3 +163,7 @@ class MapView(DayEntryMixin, TemplateView):
         message = "Info: The travel map can need quite some time to load."
         messages.add_message(self.request, messages.INFO, message)
         return super().get(self.request, *args, **kwargs)
+
+
+class EntryChartView(DayEntryMixin, ListView):
+    template_name = "journals/entry_chart.html"

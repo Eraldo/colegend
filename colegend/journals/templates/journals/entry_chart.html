@@ -1,0 +1,40 @@
+{% extends 'page.html' %}
+
+{% load icons %}
+
+{% block page_title %}
+    Journal Entry Chart
+{% endblock %}
+
+{% block up_url %}{% url "journals:dayentry_list" %}{% endblock %}
+
+{% block extra_head %}
+    {{ block.super }}
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script>
+        google.load("visualization", "1.1", {packages: ["calendar"]});
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var dataTable = new google.visualization.DataTable();
+            dataTable.addColumn({ type: 'date', id: 'Date' });
+            dataTable.addColumn({ type: 'number', id: 'Entry' });
+            dataTable.addRows([
+                {% for data in object_list %}
+                    [ new Date({{ data.date.year }}, {{ data.date.month }}-1, {{ data.date.day }}), 1],
+                {% endfor %}
+            ]);
+            var chart = new google.visualization.Calendar(document.getElementById('chart_div'));
+            var options = {
+                noDataPattern: {
+                    backgroundColor: 'white'
+                },
+                colorAxis: {colors: ['green', 'darkgreen']}
+            };
+            chart.draw(dataTable, options);
+        }
+    </script>
+{% endblock %}
+
+{% block page_content %}
+    <div id='chart_div' style='width: 100%; height: 400px; padding: 0px;'></div>
+{% endblock %}
