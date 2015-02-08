@@ -27,7 +27,7 @@ class TaskMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
         # limit project choices to owned projects
         projects = form.fields['project'].queryset
         form.fields['project'].queryset = projects.owned_by(self.request.user)
-        # limit tag choices to owned t btnags
+        # limit tag choices to owned tags
         tags = form.fields['tags'].queryset
         form.fields['tags'].queryset = tags.owned_by(self.request.user)
         return form
@@ -91,6 +91,12 @@ class TaskShowView(TaskMixin, DetailView):
 class TaskEditView(TaskMixin, UpdateView):
     success_url = reverse_lazy('tasks:task_list')
 
+    def form_valid(self, form):
+        if "status" in form.changed_data:
+            if form.instance.old_status.open() and form.instance.status.closed():
+                add_task_success_message(self.request, form.instance)
+        return super().form_valid(form)
+
 
 class TaskDeleteView(TaskMixin, DeleteView):
     template_name = "confirm_delete.html"
@@ -103,17 +109,20 @@ def task_complete(request, pk):
     # act
     completed = task.complete()
     if completed:
-        message = """Completed Task: <a href="{url}">{task}</a>.""".format(
-            url=task.get_show_url(), task=escape(task)
-        )
-        if request.user.settings.sound:
-            sound = get_sound("success")
-            if sound:
-                message += sound
-        messages.add_message(request, messages.SUCCESS, mark_safe(message))
+        add_task_success_message(request, task)
     # redirect
     next_url = request.POST.get('next')
     if next_url:
         return redirect(next_url)
     return redirect(task)
 
+
+def add_task_success_message(request, task):
+        message = """{status} Task: <a href="{url}">{task}</a>.""".format(
+            status=str(task.status).capitalize(), url=task.get_show_url(), task=escape(task)
+        )
+        if request.user.settings.sound:
+            sound = get_sound("task-success")
+            if sound:
+                message += sound
+        messages.add_message(request, messages.SUCCESS, mark_safe(message))

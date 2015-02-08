@@ -163,7 +163,8 @@ def get_icon(name):
 
 def get_sound(name):
     sound_map = {
-        "success": "success.wav"
+        "task-success": "task-success.wav",
+        "project-success": "project-success.mp3",
     }
     if name in sound_map:
         context = {"sound": name, "STATIC_URL": settings.STATIC_URL, "file": sound_map[name]}

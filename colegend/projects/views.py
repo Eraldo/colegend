@@ -1,4 +1,7 @@
-from lib.views import ActiveUserRequiredMixin
+from django.contrib import messages
+from django.utils.html import escape
+from django.utils.safestring import mark_safe
+from lib.views import ActiveUserRequiredMixin, get_sound
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
@@ -73,7 +76,24 @@ class ProjectShowView(StatusFilterMixin, ProjectMixin, DetailView):
 class ProjectEditView(ProjectMixin, UpdateView):
     success_url = reverse_lazy('projects:project_list')
 
+    def form_valid(self, form):
+        if "status" in form.changed_data:
+            if form.instance.old_status.open() and form.instance.status.closed():
+                add_project_success_message(self.request, form.instance)
+        return super().form_valid(form)
+
 
 class ProjectDeleteView(ProjectMixin, DeleteView):
     template_name = "confirm_delete.html"
     success_url = reverse_lazy('projects:project_list')
+
+
+def add_project_success_message(request, project):
+        message = """{status} Project: <a href="{url}">{project}</a>.""".format(
+            status=str(project.status).capitalize(), url=project.get_show_url(), project=escape(project)
+        )
+        if request.user.settings.sound:
+            sound = get_sound("project-success")
+            if sound:
+                message += sound
+        messages.add_message(request, messages.SUCCESS, mark_safe(message))

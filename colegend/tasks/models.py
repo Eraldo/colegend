@@ -64,7 +64,6 @@ class Task(ValidateModelMixin, AutoUrlMixin, OwnedBase, StatusTrackedBase, Track
         else:
             return ""
 
-
     @property
     def is_overdue(self):
         date = self.date
