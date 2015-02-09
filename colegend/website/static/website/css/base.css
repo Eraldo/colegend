@@ -130,6 +130,14 @@ div.avatar img {
 
 /* end footer */
 
+#feedback-button {
+    height: 67px;
+    width: 67px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+
 /* django-cirspy-forms */
 .asteriskField {
     color: darkred;
