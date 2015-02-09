@@ -372,6 +372,16 @@ class TransactionChartView(TransactionMixin, ListView):
         context["expenses"] = queryset.expenses().balance
         context["income"] = queryset.incomes().balance
         context["categories"] = [(category.name, queryset.category(category).balance) for category in Category.objects.all()]
+        # Tags
+        tag_set = set()
+        tags_list = queryset.values_list("tags")
+        for tag_tuple in tags_list:
+            for tag_string in tag_tuple:
+                tags = [tag.strip() for tag in tag_string.split(',')]
+                for tag in tags:
+                    if tag:
+                        tag_set.add(tag)
+        context["tags"] = [(tag, queryset.filter(tags__contains=tag).balance) for tag in tag_set]
         return context
 
 
