@@ -41,7 +41,7 @@
             </div>
         {% endblock %}
     </div>
-    <a href="{% url "contact" %}"><img id="feedback-button" src="http://i.stack.imgur.com/pqVbJ.png" alt="Feedback"/></a>
+    <a href="{% url "contact" %}"><img id="feedback-button" src="{{ STATIC_URL }}website/images/feedback.png" alt="Feedback"/></a>
     {% block body_scripts %}
         {% include "website/_body_scripts.html" %}
     {% endblock %}
