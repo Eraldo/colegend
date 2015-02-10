@@ -316,7 +316,7 @@ class Transaction(OwnedBase, AutoUrlMixin, TimeStampedBase):
     transaction_type = models.PositiveSmallIntegerField(verbose_name="Type", choices=TYPE_CHOICES, default=1)
     description = models.TextField(blank=True)
     category = models.ForeignKey(Category)
-    tags = models.CharField(max_length=100)
+    tags = models.CharField(max_length=100, blank=True)
     notes = models.TextField(blank=True)
 
     objects = TransactionQueryset.as_manager()
