@@ -41,7 +41,12 @@
             </div>
         {% endblock %}
     </div>
-    <a href="{% url "contact" %}"><img id="feedback-button" src="{{ STATIC_URL }}website/images/feedback.png" alt="Feedback"/></a>
+    <div class="hidden-xs">
+        <a href="{% url "contact" %}"><img id="feedback-button" src="{{ STATIC_URL }}website/images/feedback.png" alt="Feedback"/></a>
+    </div>
+    <div class="visible-xs-inline">
+        <a href="{% url "contact" %}"><img id="feedback-mobile-button" src="{{ STATIC_URL }}website/images/feedback.png" alt="Feedback"/></a>
+    </div>
     {% block body_scripts %}
         {% include "website/_body_scripts.html" %}
     {% endblock %}

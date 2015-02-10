@@ -137,6 +137,13 @@ div.avatar img {
     bottom: 0;
     right: 0;
 }
+#feedback-mobile-button {
+    height: 33px;
+    width: 33px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
 
 /* django-cirspy-forms */
 .asteriskField {
