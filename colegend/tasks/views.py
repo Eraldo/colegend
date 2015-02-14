@@ -56,8 +56,6 @@ class TaskListView(StatusFilterMixin, TaskMixin, ListView):
 
 
 class TaskNewView(TaskMixin, CreateView):
-    success_url = reverse_lazy('tasks:task_list')
-
     def get_success_url(self):
         next_url = self.request.GET.get('next')
         if next_url:
@@ -81,7 +79,14 @@ class TaskNewView(TaskMixin, CreateView):
     def form_valid(self, form):
         user = self.request.user
         form.instance.owner = user
-        return super(TaskNewView, self).form_valid(form)
+        response = super().form_valid(form)
+        task = self.object
+        if task:
+            message = """Created Task: <a href="{url}">{task}</a>.""".format(
+                url=task.get_show_url(), task=escape(task)
+            )
+            messages.add_message(self.request, messages.SUCCESS, mark_safe(message))
+        return response
 
 
 class TaskShowView(TaskMixin, DetailView):
@@ -89,8 +94,6 @@ class TaskShowView(TaskMixin, DetailView):
 
 
 class TaskEditView(TaskMixin, UpdateView):
-    success_url = reverse_lazy('tasks:task_list')
-
     def form_valid(self, form):
         if "status" in form.changed_data:
             if form.instance.old_status.open() and form.instance.status.closed():
