@@ -1,0 +1,20 @@
+{% extends 'page.html' %}
+{% load icons %}
+
+{% block page_title %}
+    Cards
+{% endblock %}
+
+{% block up_url %}{% url "home" %}{% endblock %}
+
+{% block page_content %}
+    <div class="well">
+        <h4>Genuine Contact Deck</h4>
+        {% for card in object_list %}
+            <a href="{{ card.get_show_url }}">
+                <img src="{{ STATIC_URL }}/cards/card_back.png" alt=""/>
+            </a>
+        {% endfor %}<br/>
+        <small>More card comming soon..</small>
+    </div>
+{% endblock %}

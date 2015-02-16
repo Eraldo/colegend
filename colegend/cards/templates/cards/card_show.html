@@ -1,0 +1,14 @@
+{% extends 'page.html' %}
+{% load icons %}
+
+{% block page_title %}
+    {{ card }}
+{% endblock %}
+
+{% block up_url %}{% url "cards:picker" %}{% endblock %}
+
+{% block page_content %}
+    <div class="well">
+        <img src="{{ MEDIA_URL }}/{{ card.image }}" alt="{{ card }}"/>
+    </div>
+{% endblock %}

@@ -85,6 +85,7 @@ def get_icon(name):
         "legend": "paw",
         "quote": "quote-left",
         "stats": "dashboard",
+        "card": "image",
         # operator
         "contact": "envelope",
         "about": "info-circle",

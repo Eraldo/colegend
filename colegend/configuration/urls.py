@@ -33,6 +33,7 @@ urlpatterns = patterns('',
     url(r'^legend/', include('legend.urls', namespace="legend")),
     url(r'^quotes/', include('quotes.urls', namespace="quotes")),
     url(r'^stats/', include('stats.urls', namespace="stats")),
+    url(r'^cards/', include('cards.urls', namespace="cards")),
     # operator
     url(r'', include('website.urls')),
     url(r'^features/', include('features.urls', namespace="features")),

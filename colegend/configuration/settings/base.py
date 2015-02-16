@@ -240,6 +240,7 @@ PROJECT_APPS = (
     'legend',
     'quotes',
     'stats',
+    'cards',
     # operator
     'users',  # custom users app
     'website',

@@ -195,6 +195,11 @@ BINDINGS = [
         'command': 'stats-menu-item',
         'action': 'link_id'
     },
+    {
+        'keys': 'g C',  # go cards
+        'command': 'cards-menu-item',
+        'action': 'link_id'
+    },
     # {
     #     'keys': 'o down right left down right left',  # Saria's Song!
     #     'command': """alert("Saria's Song!");""",
