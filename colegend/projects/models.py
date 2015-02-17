@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.query import QuerySet
 from markitup.fields import MarkupField
+from categories.models import Category
 from lib.models import TrackedBase, AutoUrlMixin, OwnedBase, OwnedQueryMixin, ValidateModelMixin, StatusTrackedBase
 from statuses.models import Status
 from statuses.utils import StatusQueryMixin
@@ -23,6 +24,8 @@ class Project(ValidateModelMixin, AutoUrlMixin, OwnedBase, StatusTrackedBase, Tr
     description = MarkupField(blank=True)
     status = models.ForeignKey(Status, default=Status.DEFAULT_PK)
     deadline = models.DateField(blank=True, null=True)
+
+    category = models.ForeignKey(Category, blank=True, null=True)
 
     objects = ProjectQuerySet.as_manager()
 

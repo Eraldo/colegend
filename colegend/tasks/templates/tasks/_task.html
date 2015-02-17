@@ -1,6 +1,6 @@
 {% load icons %}
 
-<div id="Task-{{ task.pk }}" class="task nav-item well well-sm" data-url="{{ task.get_show_url }}"
+<div id="Task-{{ task.pk }}" class="task nav-item well well-sm" data-url="{{ task.get_show_url }}" style="text-decoration-color: red;"
      ondblclick="window.location=$(this).attr('data-url');">
     <div class="item-controls pull-right">
         <a href="{{ task.get_edit_url }}" class="item-edit-button btn btn-primary btn-xs" role="button">{% icon "edit" %}<span class="sr-only"> Edit</span></a>
@@ -9,6 +9,7 @@
     <div class="task-line-1">
         <b>{% include "tasks/_task_link.html" %}</b>
         {% include "tags/_tags_field.html" with tags=task.tags.all %}
+        {% include "categories/_category_field.html" with category=task.category %}
     </div>
     <div class="task-context pull-right">
         {% include "lib/_date_field.html" with date=task.date %}

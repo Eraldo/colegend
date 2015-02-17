@@ -11,7 +11,7 @@ __author__ = 'eraldo'
 class TagForm(ModelForm):
     class Meta:
         model = Tag
-        fields = ['name', 'description']
+        fields = ['name', 'description', 'category']
         widgets = {
             'description': MarkItUpWidget(),
         }
@@ -20,6 +20,7 @@ class TagForm(ModelForm):
     helper.layout = Layout(
         Field('name', autofocus='True'),
         Field('description'),
+        Field('category'),
         SaveButton(),
         CancelButton(),
     )

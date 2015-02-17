@@ -3,6 +3,7 @@ from django.db import models
 from django.db.models.query import QuerySet
 from django.utils import timezone
 from markitup.fields import MarkupField
+from categories.models import Category
 from lib.models import TrackedBase, AutoUrlMixin, OwnedBase, OwnedQueryMixin, ValidateModelMixin, StatusTrackedBase
 from projects.models import Project
 from statuses.models import Status
@@ -28,6 +29,8 @@ class Task(ValidateModelMixin, AutoUrlMixin, OwnedBase, StatusTrackedBase, Track
     status = models.ForeignKey(Status, default=Status.DEFAULT_PK)
     date = models.DateField(blank=True, null=True, help_text="When will I start?")
     deadline = models.DateField(blank=True, null=True)
+
+    category = models.ForeignKey(Category, blank=True, null=True)
 
     objects = TaskQuerySet.as_manager()
 

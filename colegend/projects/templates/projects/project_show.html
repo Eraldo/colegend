@@ -8,6 +8,7 @@
 {% block up_url %}{% url "projects:project_list" %}{% endblock %}
 
 {% block page_title_extras %}
+    {% include "categories/_category_field.html" with category=project.category %}
 {% endblock %}
 
 {% block page_controls %}

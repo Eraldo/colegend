@@ -9,6 +9,7 @@
     <div class="task-line-1">
     {% include "projects/_project_link.html" %}
     {% include "tags/_tags_field.html" with tags=project.tags.all %}
+    {% include "categories/_category_field.html" with category=project.category %}
     </div>
     <div class="pull-right" style="margin-right: 2px;">
     {% include "lib/_deadline_field.html" with deadline=project.deadline %}

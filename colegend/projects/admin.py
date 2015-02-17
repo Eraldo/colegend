@@ -6,16 +6,16 @@ __author__ = 'eraldo'
 
 
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ['name', 'status', 'deadline', 'owner']
+    list_display = ['name', 'status', 'deadline', 'category', 'owner']
     search_fields = ['name', 'description']
-    list_filter = ['status', 'tags', 'owner']
+    list_filter = ['status', 'tags', 'category', 'owner']
     filter_horizontal = ['tags']
     readonly_fields = ['creation_date', 'modification_date', 'completion_date', 'history']
 
     fieldsets = [
         (None, {'fields': ['owner']}),
         (None, {'fields': ['name', 'description']}),
-        (None, {'fields': ['status', 'deadline', 'tags']}),
+        (None, {'fields': ['status', 'deadline', 'tags', 'category']}),
         ('history', {'fields': ['creation_date', 'modification_date', 'completion_date', 'history'], 'classes': ['collapse']}),
     ]
     inlines = [TaskInline]

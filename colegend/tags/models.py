@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.query import QuerySet
 from markitup.fields import MarkupField
+from categories.models import Category
 from lib.models import AutoUrlMixin, OwnedBase, TrackedBase, OwnedQueryMixin, ValidateModelMixin
 
 __author__ = 'eraldo'
@@ -18,6 +19,8 @@ class Tag(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, models.Model
     name = models.CharField(max_length=100)
 
     description = MarkupField(blank=True)
+
+    category = models.ForeignKey(Category, blank=True, null=True)
 
     objects = TagQuerySet.as_manager()
 

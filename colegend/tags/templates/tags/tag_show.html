@@ -12,6 +12,10 @@
     <a href="{{ tag.get_delete_url }}" class="btn btn-danger" role="button">{% icon "delete" %}</a>
 {% endblock %}
 
+{% block page_title_extras %}
+    {% include "categories/_category_field.html" with category=object.category %}
+{% endblock %}
+
 {% block page_content %}
     <div class="well">
         {{ tag.description }}
