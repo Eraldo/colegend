@@ -20,6 +20,9 @@
     <div class="project-details well">
     {% include "status/_status_field.html" with status=project.status %}
     {% include "tags/_tags_field.html" with tags=project.tags.all %}
+        <div class="task-context pull-right">
+            {% include "lib/_deadline_field.html" with deadline=project.deadline %}
+        </div>
         {{ project.description }}
     </div>
 

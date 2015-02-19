@@ -1,4 +1,3 @@
-import re
 from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.http import Http404
@@ -6,7 +5,6 @@ from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
 from manager.parser import ManagerCommandParser
-from statuses.models import Status
 from tutorials.models import get_tutorial
 
 __author__ = 'eraldo'
@@ -23,14 +21,23 @@ def _handle_command(request, command):
     if command in ["clear", "-"]:
         return
 
-    parser = ManagerCommandParser(command)
-    data = parser.parse()
-
+    parser = ManagerCommandParser(command, request.user)
+    try:
+        data = parser.parse()
+    except ValueError as error:
+        messages.add_message(request, messages.WARNING, mark_safe(str(error)))
+        return
     # task
     if "task" in data:
         data.pop("task")
         try:
+            tags = data.get("tags")
+            if tags:
+                data.pop("tags")
             task = request.user.tasks.create(**data)
+            if tags:
+                task.tags.add(*tags)
+                task.save()
         except ValidationError as e:
             message = "Error: {}".format(e.messages[0])
             messages.add_message(request, messages.ERROR, message)
@@ -44,7 +51,13 @@ def _handle_command(request, command):
     if "project" in data:
         data.pop("project")
         try:
+            tags = data.get("tags")
+            if tags:
+                data.pop("tags")
             project = request.user.projects.create(**data)
+            if tags:
+                project.tags.add(*tags)
+                project.save()
         except ValidationError as e:
             message = "Error: {}".format(e.messages[0])
             messages.add_message(request, messages.ERROR, message)
