@@ -32,10 +32,15 @@ class ContactView(FormView):
         context = super(ContactView, self).get_context_data(**kwargs)
         user_model = get_user_model()
         try:
-            eraldo = user_model.objects.get(username="Eraldo")
+            eraldo = user_model.objects.get(pk=4)
         except user_model.DoesNotExist:
             eraldo = None
         context['eraldo'] = eraldo
+        try:
+            peter = user_model.objects.get(pk=13)
+        except user_model.DoesNotExist:
+            peter = None
+        context['peter'] = peter
         return context
 
     def get_success_url(self):
