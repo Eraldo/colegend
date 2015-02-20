@@ -147,8 +147,11 @@ class UserManageDetailView(ManagerRequiredMixin, UserManagerMixin, DetailView):
             return redirect("users:manage")
         note = request.POST.get("note")
         if note:
-            user.notes = "{notes}\n\n{date} [{manager}]\n{note}".format(
-                notes=user.notes,
+            notes = user.notes
+            if notes:
+                notes += "\n\n"
+            user.notes = "{notes}{date} [{manager}]\n{note}".format(
+                notes=notes,
                 date=timezone.now().strftime('%Y-%m-%d %H:%M:%S'),
                 manager=request.user,
                 note=note,
