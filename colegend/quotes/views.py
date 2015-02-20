@@ -33,7 +33,7 @@ class QuoteListView(QuoteMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         quotes = self.get_queryset()
-        context['quotes'] = quotes.accepted()
+        context['quotes'] = quotes.accepted().order_by('category')
         context['pending'] = quotes.pending()
         context['total_counter'] = Quote.objects.accepted().count()
         context['share_counter'] = self.request.user.quote_set.count()
@@ -45,14 +45,21 @@ class QuoteManageView(ManagerRequiredMixin, QuoteMixin, ListView):
     template_name = "quotes/quote_manage.html"
 
     def get_queryset(self):
-        return Quote.objects.pending()
+        return Quote.objects.pending().order_by('provider')
+
+    def post(self, request, *args, **kwargs):
+        if "accept" in self.request.POST:
+            quotes = self.get_queryset()
+            for quote in quotes:
+                quote.accept()
+        return redirect("quotes:quote_list")
 
 
 class QuoteShowView(QuoteMixin, DetailView):
     template_name = "quotes/quote_show.html"
 
     def get_queryset(self):
-        return DeleteView.get_queryset(self)
+        return super().get_queryset()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
