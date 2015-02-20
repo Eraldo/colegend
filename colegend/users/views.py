@@ -2,6 +2,7 @@ from braces.views import LoginRequiredMixin
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
+from django.utils import timezone
 from django.views.generic import DetailView, TemplateView
 from django.views.generic import RedirectView
 from django.views.generic import UpdateView
@@ -137,13 +138,24 @@ class UserManageDetailView(ManagerRequiredMixin, UserManagerMixin, DetailView):
         return context
 
     def post(self, request, *args, **kwargs):
-        verify = request.POST.get("verify")
         user = self.get_object()
-        if user.pk == int(verify):
+        verify = request.POST.get("verify")
+        if verify and user.pk == int(verify):
             user.accept(accepter=self.request.user)
             message = '{} is now verified.'.format(user)
             messages.add_message(request, messages.SUCCESS, message)
-        return redirect("users:manage")
+            return redirect("users:manage")
+        note = request.POST.get("note")
+        if note:
+            user.notes = "{notes}\n\n{date} [{manager}]\n{note}".format(
+                notes=user.notes,
+                date=timezone.now().strftime('%Y-%m-%d %H:%M:%S'),
+                manager=request.user,
+                note=note,
+            )
+            user.save()
+            return redirect(".")
+
 
 
 class UserAdminDetailView(AdminRequiredMixin, DetailView):
