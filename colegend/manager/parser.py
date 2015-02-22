@@ -1,5 +1,6 @@
 import re
 from django.utils import timezone
+from categories.models import Category
 from statuses.models import STATUSES, Status
 from tags.models import Tag
 
@@ -30,10 +31,12 @@ class ManagerCommandParser():
 
     @property
     def _context(self):
-        return r"{date}(\s+)?{deadline}(\s+)?{tags}".format(
+        return r"{date}(\s+)?{deadline}(\s+)?{tags}(\s+)?{category}(\s+)?{description}".format(
             date=self._date,
             deadline=self._deadline,
             tags=self._tags,
+            category=self._category,
+            description=self._description,
         )
 
     @property
@@ -48,6 +51,14 @@ class ManagerCommandParser():
     @property
     def _tags(self):
         return r"(\[(?P<tags>.*?)\])?"
+
+    @property
+    def _category(self):
+        return r"({(?P<category>.*?)})?"
+
+    @property
+    def _description(self):
+        return r"(//(\s+)?(?P<description>.*?))?"
 
     @property
     def _tag(self):
@@ -179,6 +190,21 @@ class ManagerCommandParser():
         data["deadline"] = deadline
         return data
 
+    @staticmethod
+    def _update_category(data):
+        if not data:
+            return
+        category_string = data.get('category')
+        if not category_string:
+            return data
+        try:
+            category = Category.objects.get(pk=int(category_string))
+            print(category)
+        except Category.DoesNotExist:
+            raise ValueError("Category: '{}' could not be interpreted. (1-7)".format(category_string))
+        data["category"] = category
+        return data
+
     def parse(self):
         data = {}
         if self.is_project:
@@ -194,4 +220,5 @@ class ManagerCommandParser():
             data = self._update_date(data)
             data = self._update_deadline(data)
             data = self._update_tags(data)
+            data = self._update_category(data)
         return data
