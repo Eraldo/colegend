@@ -122,8 +122,9 @@ def task_complete(request, pk):
 
 
 def add_task_success_message(request, task):
-    message = """{status} Task: <a href="{url}">{task}</a>.""".format(
-        status=str(task.status).capitalize(), url=task.get_show_url(), task=escape(task)
+    message = """{status} Task: {task}.""".format(
+        status=str(task.status).capitalize(),
+        task=render_to_string("tasks/_task_link.html", {"task": task})
     )
     if request.user.settings.sound:
         sound = get_sound("task-success")

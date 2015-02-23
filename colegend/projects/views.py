@@ -97,8 +97,9 @@ class ProjectDeleteView(ProjectMixin, DeleteView):
 
 
 def add_project_success_message(request, project):
-        message = """{status} Project: <a href="{url}">{project}</a>.""".format(
-            status=str(project.status).capitalize(), url=project.get_show_url(), project=escape(project)
+        message = """{status} Project: {project}.""".format(
+            status=str(project.status).capitalize(),
+            project=render_to_string("projects/_project_link.html", {"project": project})
         )
         if request.user.settings.sound:
             sound = get_sound("project-success")
