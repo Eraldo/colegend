@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.template.loader import render_to_string
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from lib.views import ActiveUserRequiredMixin, get_sound
@@ -59,7 +60,14 @@ class ProjectNewView(ProjectMixin, CreateView):
     def form_valid(self, form):
         user = self.request.user
         form.instance.owner = user
-        return super(ProjectNewView, self).form_valid(form)
+        response = super().form_valid(form)
+        project = self.object
+        if project:
+            message = """Created Project: {project}.""".format(
+                project=render_to_string("projects/_project_link.html", {"project": project})
+            )
+            messages.add_message(self.request, messages.SUCCESS, mark_safe(message))
+        return response
 
 
 class ProjectShowView(StatusFilterMixin, ProjectMixin, DetailView):

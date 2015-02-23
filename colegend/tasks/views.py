@@ -1,6 +1,7 @@
 from annoying.functions import get_object_or_None
 from django.contrib import messages
 from django.shortcuts import redirect
+from django.template.loader import render_to_string
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from lib.views import ActiveUserRequiredMixin, get_sound
@@ -82,8 +83,8 @@ class TaskNewView(TaskMixin, CreateView):
         response = super().form_valid(form)
         task = self.object
         if task:
-            message = """Created Task: <a href="{url}">{task}</a>.""".format(
-                url=task.get_show_url(), task=escape(task)
+            message = """Created Task: {task}.""".format(
+                task=render_to_string("tasks/_task_link.html", {"task": task})
             )
             messages.add_message(self.request, messages.SUCCESS, mark_safe(message))
         return response
@@ -121,11 +122,11 @@ def task_complete(request, pk):
 
 
 def add_task_success_message(request, task):
-        message = """{status} Task: <a href="{url}">{task}</a>.""".format(
-            status=str(task.status).capitalize(), url=task.get_show_url(), task=escape(task)
-        )
-        if request.user.settings.sound:
-            sound = get_sound("task-success")
-            if sound:
-                message += sound
-        messages.add_message(request, messages.SUCCESS, mark_safe(message))
+    message = """{status} Task: <a href="{url}">{task}</a>.""".format(
+        status=str(task.status).capitalize(), url=task.get_show_url(), task=escape(task)
+    )
+    if request.user.settings.sound:
+        sound = get_sound("task-success")
+        if sound:
+            message += sound
+    messages.add_message(request, messages.SUCCESS, mark_safe(message))
