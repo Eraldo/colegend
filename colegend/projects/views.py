@@ -82,8 +82,6 @@ class ProjectShowView(StatusFilterMixin, ProjectMixin, DetailView):
 
 
 class ProjectEditView(ProjectMixin, UpdateView):
-    success_url = reverse_lazy('projects:project_list')
-
     def form_valid(self, form):
         if "status" in form.changed_data:
             if form.instance.old_status.open() and form.instance.status.closed():
