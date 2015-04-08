@@ -8,7 +8,7 @@ from django.utils.timesince import timesince
 from markitup.fields import MarkupField
 from categories.models import Category
 from lib.models import OwnedBase, TimeStampedBase, TrackedBase, OwnedQueryMixin, AutoUrlMixin, ValidateModelMixin
-from lib.validators import validate_datetime_in_past, validate_date_today_or_in_past, validate_date_within_one_week
+from lib.validators import validate_datetime_in_past, validate_date_today_or_in_past, validate_date_within_one_month
 
 
 class TrackerQuerySet(OwnedQueryMixin, QuerySet):
@@ -121,7 +121,7 @@ class Tracker(OwnedBase, AutoUrlMixin, TimeStampedBase):
 class BaseData(ValidateModelMixin, models.Model):
     tracker = models.ForeignKey(Tracker)
     date = models.DateField(default=timezone.now,
-                            validators=[validate_date_today_or_in_past, validate_date_within_one_week])
+                            validators=[validate_date_today_or_in_past, validate_date_within_one_month])
 
     class Meta:
         ordering = ['-date']

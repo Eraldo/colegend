@@ -33,6 +33,10 @@ def validate_date_within_one_week(date):
     validate_date_within_days(date, 7)
 
 
+def validate_date_within_one_month(date):
+    validate_date_within_days(date, 30)
+
+
 def validate_datetime_in_past(time):
     if time and time > timezone.now():
         raise ValidationError('Needs to be now or in the past.')
