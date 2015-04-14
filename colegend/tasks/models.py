@@ -92,13 +92,3 @@ class Task(ValidateModelMixin, AutoUrlMixin, OwnedBase, StatusTrackedBase, Track
         # Prevent the creation of a task for a project that is not owned.
         if self.owner and self.project and self.owner != self.project.owner:
             raise SuspiciousOperation("Cannot create a Task for a foreign project.")
-
-        # Prevent duplicate names if the project was not set.
-        if self.owner and not self.project:
-            duplicates = Task.objects.filter(owner=self.owner, name=self.name, project__isnull=True)
-            # Prevent a task from finding itself as a duplicate.
-            if self.pk:
-                duplicates = duplicates.exclude(pk=self.pk)
-            # If a task was still found.. the current one is a duplicate.
-            if duplicates.exists():
-                raise ValidationError("A Task with this name and owner and without a project exists already.")
