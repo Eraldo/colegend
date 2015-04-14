@@ -14,6 +14,9 @@
 {% block page_content %}
     <h1>tests</h1>
     <h2>temp</h2>
+    <h2>Moon</h2>
+    Source: http://www.wdisseny.com/lluna/?lang=en
+    <div id="ex1" align="center"></div>
     <h2>Chart</h2>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
@@ -41,4 +44,65 @@
     </script>
 
     <div id="piechart" style="width: 900px; height: 500px;"></div>
+{% endblock %}
+
+{% block body_scripts %}
+    {{ block.super }}
+    <script type="text/javascript">
+
+var lang  = 'en' // 'ca' , 'es' , 'en'
+var month = new Date().getMonth() + 1 // 1 - 12
+var year  = new Date().getFullYear()
+
+var svgSize        = 50 // pixels
+var svgLightColor  = "#FFFF88"
+var svgShadeColor  = "#111111"
+var svgSizeQuarter = 20 // pixels
+
+$(document).ready(function() {
+	sendAndRead()
+})
+
+function sendAndRead(){
+	$.ajax({
+		type: "GET",
+		url: "http://www.wdisseny.com/lluna/api/",
+		data: {
+			lang : lang,
+			size : svgSize,
+			lightColor : svgLightColor,
+			shadeColor : svgShadeColor,
+			sizeQuarter: svgSizeQuarter,
+			GTM : new Date().getTimezoneOffset(),
+			month :month,
+			year :year
+		}
+	})
+	.done(function( response ) {
+		moon = $.parseJSON( response );
+		if (typeof example_1 == "function")example_1(moon)
+		if (typeof example_2 == "function")example_2(moon)
+		if (typeof example_3 == "function")example_3(moon)
+		$(".moon").css({backgroundColor:"#666666",display:"inline-table",padding:"10px 20px",color:"#FFFFFF",margin:"1px"})
+		$(".phaseLimit").css({position:"absolute",float:"left"})
+	})
+	.fail(function(jqXHR, textStatus) {
+		$("#ex1").html(textStatus)
+	})
+}
+
+</script>
+<script type="text/javascript">
+function example_1(moon){
+	var day = new Date().getDate()
+	var dayWeek=moon.phase[day].dayWeek	/* var dayWeek=(new Date().getDay()+6)%7 */
+	var html="<div class='moon'>"
+	html+="<div>"+moon.nameDay[dayWeek]+"</div>"
+	html+="<div>"+ day + " " + moon ['monthName'] + " "+year +"</div>"
+	html+=moon.phase[day].svg
+	html+="<div>"+moon.phase[day].phaseName + " "+ Math.round(moon.phase[day].lighting)+"%</div>"
+	html+="</div>"
+	$("#ex1").html(html)
+}
+</script>
 {% endblock %}
