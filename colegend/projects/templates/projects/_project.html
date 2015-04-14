@@ -12,6 +12,7 @@
     {% include "categories/_category_field.html" with category=project.category %}
     </div>
     <div class="pull-right" style="margin-right: 2px;">
+    {% include "lib/_date_field.html" with date=project.date %}
     {% include "lib/_deadline_field.html" with deadline=project.deadline %}
     </div>
     {% include "lib/_description_field.html" with description=project.description %}

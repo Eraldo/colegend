@@ -26,7 +26,7 @@
                         <a href="{{ project.get_show_url }}" class="text-warning">Choose a next step!</a><br/>
                     {% endif %}
                 {% empty %}
-                        <a href="{% url "projects:project_list" %}" class="text-warning">Choose a next project!</a><br/>
+                    <a href="{% url "projects:project_list" %}" class="text-warning">Choose a next project!</a><br/>
                 {% endfor %}
             </div>
             <h2><span class="tooltip-text" data-toggle="tooltip" data-placement="right"
@@ -38,26 +38,32 @@
                 {% for task in next_tasks %}
                     {% include "tasks/_task_link.html" %}<br/>
                 {% empty %}
-                    <a href="{% url "tasks:task_list"%}" class="text-warning">Grab some more tasks..</a><br/>
+                    <a href="{% url "tasks:task_list" %}" class="text-warning">Grab some more tasks..</a><br/>
                     <span class="text-success">or celebrate! :D</span>
                 {% endfor %}
             </div>
         </div>
         <div class="col-md-6">
-            {#            {% if scheduled_tasks %}#}
             <h2><span class="tooltip-text" data-toggle="tooltip" data-placement="right"
                       title="Tasks scheduled today or before.">{% icon "date" %} Schedule</span>
             </h2>
 
             <div class="well">
-                {% for task in scheduled_tasks %}
-                    {% ifchanged %}{% include "lib/_date_field.html" with date=task.date %}<br/>{% endifchanged %}
-                    {% include "tasks/_task_link.html" %}<br/>
-                {% empty %}
+                {% if scheduled_projects or scheduled_tasks %}
+                    {% for project in scheduled_projects %}
+                        {% ifchanged %}{% include "lib/_date_field.html" with date=project.date %}<br/>
+                        {% endifchanged %}
+                        {% include "projects/_project_link.html" %}<br/>
+                    {% endfor %}
+                    {% for task in scheduled_tasks %}
+                        {% ifchanged %}{% include "lib/_date_field.html" with date=task.date %}<br/>{% endifchanged %}
+                        {% include "tasks/_task_link.html" %}<br/>
+                    {% endfor %}
+                {% else %}
                     <span class="text-success">I am the master of my time. :D</span>
-                {% endfor %}
+                {% endif %}
             </div>
-            {#            {% endif %}#}
+
             <h2><span class="tooltip-text" data-toggle="tooltip" data-placement="right"
                       title="Top 2 deadlined projects and top 4 deadlined tasks.">{% icon "deadline" %} Deadlines</span>
             </h2>

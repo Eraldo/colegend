@@ -1,6 +1,5 @@
 from django.contrib import messages
 from django.template.loader import render_to_string
-from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from lib.views import ActiveUserRequiredMixin, get_sound
 from django.core.exceptions import ValidationError

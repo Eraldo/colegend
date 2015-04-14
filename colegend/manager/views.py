@@ -11,6 +11,7 @@ class AgendaView(ActiveUserRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user
+        context["scheduled_projects"] = user.projects.open().filter(date__lte=timezone.now()).order_by('date')
         context["scheduled_tasks"] = user.tasks.open().filter(date__lte=timezone.now()).order_by('date')
         context["next_projects"] = user.projects.next()
         context["next_tasks"] = user.tasks.next().filter(project__isnull=True)
