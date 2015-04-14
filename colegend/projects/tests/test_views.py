@@ -37,7 +37,7 @@ class ProjectNewViewTest(LoggedInTestMixin, TestCase):
         self.assertEqual(Project.objects.count(), 1)
         new_project = Project.objects.first()
         self.assertEqual(new_project.name, project_attributes["name"])
-        self.assertRedirects(response, reverse("projects:project_list"))
+        self.assertRedirects(response, new_project.get_show_url())
 
     def test_project_new_view_check_invalid_empty_post_request(self):
         url = reverse("projects:project_new")

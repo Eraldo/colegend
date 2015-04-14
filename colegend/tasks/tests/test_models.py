@@ -54,22 +54,3 @@ class TaskModelTests(TestCase):
             Task.objects.create,
             name="Task", owner=project.owner, project=project
         )
-
-    def test_duplicate_task_creation_without_project(self):
-        """Make sure that creating a duplicate task with the same owner, name and without a project raises an exception."""
-        task = TaskFactory(project=None)
-        self.assertRaisesMessage(
-            ValidationError,
-            "A Task with this name and owner and without a project exists already.",
-            Task.objects.create,
-            name=task.name, owner=task.owner
-        )
-
-    def test_clean_with_duplicate_owner_and_name_and_without_project(self):
-        task1 = TaskFactory(project=None)
-        task2 = TaskFactory.build(name=task1.name, owner=task1.owner, project=None)
-        self.assertRaisesMessage(
-            ValidationError,
-            "A Task with this name and owner and without a project exists already.",
-            task2.clean
-        )

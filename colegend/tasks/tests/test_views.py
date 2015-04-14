@@ -38,7 +38,7 @@ class TaskNewViewTest(LoggedInTestMixin, TestCase):
         self.assertEqual(Task.objects.count(), 1)
         new_task = Task.objects.first()
         self.assertEqual(new_task.name, data["name"])
-        self.assertRedirects(response, reverse("tasks:task_list"))
+        self.assertRedirects(response, new_task.get_show_url())
 
     def test_task_new_view_check_invalid_empty_post_request(self):
         url = reverse("tasks:task_new")
