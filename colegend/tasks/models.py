@@ -27,7 +27,7 @@ class Task(ValidateModelMixin, AutoUrlMixin, OwnedBase, StatusTrackedBase, Track
 
     description = MarkupField(blank=True)
     status = models.ForeignKey(Status, default=Status.DEFAULT_PK)
-    date = models.DateField(blank=True, null=True, help_text="When will I start?")
+    date = models.DateField(blank=True, null=True, help_text="When will I start/continue?")
     deadline = models.DateField(blank=True, null=True)
 
     category = models.ForeignKey(Category, blank=True, null=True)

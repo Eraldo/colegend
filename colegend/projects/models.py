@@ -23,6 +23,7 @@ class Project(ValidateModelMixin, AutoUrlMixin, OwnedBase, StatusTrackedBase, Tr
 
     description = MarkupField(blank=True)
     status = models.ForeignKey(Status, default=Status.DEFAULT_PK)
+    date = models.DateField(blank=True, null=True, help_text="When will I start/continue?")
     deadline = models.DateField(blank=True, null=True)
 
     category = models.ForeignKey(Category, blank=True, null=True)
@@ -30,7 +31,7 @@ class Project(ValidateModelMixin, AutoUrlMixin, OwnedBase, StatusTrackedBase, Tr
     objects = ProjectQuerySet.as_manager()
 
     class Meta:
-        ordering = ["status", "name"]
+        ordering = ["status", "-modification_date"]
         unique_together = ('owner', 'name')
 
     def __str__(self):
