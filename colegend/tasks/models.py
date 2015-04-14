@@ -102,4 +102,3 @@ class Task(ValidateModelMixin, AutoUrlMixin, OwnedBase, StatusTrackedBase, Track
             # If a task was still found.. the current one is a duplicate.
             if duplicates.exists():
                 raise ValidationError("A Task with this name and owner and without a project exists already.")
-

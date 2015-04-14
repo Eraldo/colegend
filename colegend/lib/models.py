@@ -64,8 +64,8 @@ class StatusTrackedBase(models.Model):
             pass
 
     def save(self, *args, **kwargs):
-        # Track status change and add completion date if closing task.
-        if self.old_status.open() and self.status.closed():
+        # Track status change and add completion date if closing a task (or creating a closed task).
+        if self.old_status.open() and self.status.closed() or not self.pk:
             self.completion_date = timezone.now()
         super().save(*args, **kwargs)
         self.old_status = self.status
