@@ -55,8 +55,6 @@ class ProjectListView(StatusFilterMixin, ProjectMixin, ListView):
 
 
 class ProjectNewView(ProjectMixin, CreateView):
-    success_url = reverse_lazy('projects:project_list')
-
     def form_valid(self, form):
         user = self.request.user
         form.instance.owner = user
