@@ -15,6 +15,10 @@ class AgendaView(ActiveUserRequiredMixin, TemplateView):
         context["scheduled_tasks"] = user.tasks.open().filter(date__lte=timezone.now()).order_by('date')
         context["next_projects"] = user.projects.next()
         context["next_tasks"] = user.tasks.next().filter(project__isnull=True)
-        context["top_deadlined_projects"] = user.projects.open().filter(deadline__isnull=False).order_by('deadline')[:2]
-        context["top_deadlined_tasks"] = user.tasks.open().filter(deadline__isnull=False).order_by('deadline')[:4]
+        # Top 2 deadlined projects and top 4 deadlined tasks .. within 30 days.
+        deadline_delta = timezone.now() + timezone.timedelta(days=30)
+        context["top_deadlined_projects"] = user.projects.open().filter(
+            deadline__isnull=False, deadline__lt=deadline_delta).order_by('deadline')[:2]
+        context["top_deadlined_tasks"] = user.tasks.open().filter(
+            deadline__isnull=False, deadline__lt=deadline_delta).order_by('deadline')[:4]
         return context
