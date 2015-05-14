@@ -64,7 +64,7 @@
                     </td>
                     <td>
                         {% if user == gathering.host %}
-                        <a href="{{ book.get_delete_url }}" class="item-delete-button btn btn-danger btn-xs pull-right"
+                        <a href="{{ gathering.get_delete_url }}" class="item-delete-button btn btn-danger btn-xs pull-right"
                            role="button">{% icon "delete" %}<span class="sr-only"> Delete</span></a>
                         {% endif %}
                     </td>
