@@ -4,6 +4,7 @@
 {% block page_title %}{{ dayentry.date }}{% endblock %}
 
 {% block page_title_extras %}
+    <span class="label bg-category-{{ dayentry.date|date:"w" }}">{{ dayentry.date|date:"D" }}</span>
     <small>{% icon "location" %} {{ dayentry.location|default:"?" }}</small>
 {% endblock %}
 

@@ -49,7 +49,9 @@
             {% for dayentry in latest %}
                 <tr>
                     <td>
-                        <a href="{{ dayentry.get_show_url }}">{{ dayentry.date }}</a><br>
+                        <a href="{{ dayentry.get_show_url }}">{{ dayentry.date }}</a>
+                        <span class="label bg-category-{{ dayentry.date|date:"w" }}">{{ dayentry.date|date:"D" }}</span>
+                        <br>
                     </td>
                     <td>
                         {{ dayentry.location }}

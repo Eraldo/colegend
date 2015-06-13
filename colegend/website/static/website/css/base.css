@@ -301,6 +301,11 @@ span.streak {
 .bg-category-1 {
     background-color: crimson;
 }
+/* used for weekdays */
+.bg-category-0 {
+    background-color: darkviolet;
+}
+
 
 .btn.btn-category {
     /* TODO: remove important and replace with specific rules (link rules - hover, etc?) */
