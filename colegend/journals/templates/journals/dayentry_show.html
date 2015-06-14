@@ -13,12 +13,12 @@
 {% block page_controls %}
     <a href="{{ dayentry.get_edit_url }}" class="btn btn-primary" role="button">{% icon "edit" %}</a>
     <a href="{{ dayentry.get_delete_url }}" class="btn btn-danger" role="button">{% icon "delete" %}</a>
-    {% if dayentry.get_previous_by_date %}
+    {% if dayentry.get_previous %}
         <a href="{{ dayentry.get_previous.get_show_url }}" class="btn btn-default"
            data-toggle="tooltip" title="{{ dayentry.get_previous }}"
            role="button">{% icon "chevron-left" %}</a>
     {% endif %}
-    {% if dayentry.get_next_by_date %}
+    {% if dayentry.get_next %}
         <a href="{{ dayentry.get_next.get_show_url }}" class="btn btn-default"
            data-toggle="tooltip" title="{{ dayentry.get_next }}"
            role="button">{% icon "chevron-right" %}</a>
