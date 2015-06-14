@@ -88,3 +88,9 @@ class DayEntry(ValidateModelMixin, AutoUrlMixin, TrackedBase, TaggableBase, mode
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         self.update_streak()
+
+    def get_previous(self):
+        return self.journal.entries.filter(date__lt=self.date).first()
+
+    def get_next(self):
+        return self.journal.entries.filter(date__gt=self.date).last()
