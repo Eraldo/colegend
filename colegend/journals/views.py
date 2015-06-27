@@ -1,13 +1,13 @@
 from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.utils import timezone
+from django.utils.dateparse import parse_date
 from lib.views import ActiveUserRequiredMixin
 from django.core.exceptions import ValidationError
 from django.views.generic import DetailView, UpdateView, DeleteView, CreateView, ArchiveIndexView, RedirectView, \
     TemplateView, ListView
 from journals.forms import DayEntryForm, JournalForm
 from journals.models import DayEntry, Journal
-from trackers.models import Tracker
 
 __author__ = 'eraldo'
 
@@ -78,6 +78,13 @@ class DayEntryNewView(DayEntryMixin, CreateView):
         if entry:
             initial['location'] = entry.location
             initial['tags'] = entry.tags.all()
+        # date
+        try:
+            new_date = self.request.GET.get('date')
+        except ValueError:
+            new_date = None
+        if new_date:
+            initial['date'] = new_date
         return initial
 
 
@@ -121,6 +128,17 @@ class DayEntryShowView(DayEntryMixin, DetailView):
             context["trackers_to_track"] = trackers.to_track()
         # Tracked that day
         context["trackers_tracked"] = trackers.tracked_on(entry.date)
+        # missing date
+        previous_date = entry.get_previous()
+        next_date = entry.get_next()
+        one_day = timezone.timedelta(1)
+        ## next day missing
+        if next_date and next_date.date != entry.date + one_day or \
+                not next_date and entry.date < today:
+            context["missing"] = entry.date + one_day
+        ## previous day missing
+        elif previous_date and previous_date.date != entry.date - one_day:
+            context["missing"] = entry.date - one_day
         return context
 
 

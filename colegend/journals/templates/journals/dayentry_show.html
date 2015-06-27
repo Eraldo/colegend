@@ -18,6 +18,12 @@
            data-toggle="tooltip" title="{{ dayentry.get_previous }}"
            role="button">{% icon "chevron-left" %}</a>
     {% endif %}
+    {% if missing %}
+    <a href="{% url "journals:dayentry_new" %}?date={{ missing|date:"c" }}" class="new-button btn btn-default" role="button" data-toggle="tooltip" title="New Entry: {{ missing }}">
+        {% icon "new" %}
+    </a>
+    {% endif %}
+
     {% if dayentry.get_next %}
         <a href="{{ dayentry.get_next.get_show_url }}" class="btn btn-default"
            data-toggle="tooltip" title="{{ dayentry.get_next }}"
