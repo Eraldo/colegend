@@ -83,12 +83,20 @@ class Task(ValidateModelMixin, AutoUrlMixin, OwnedBase, StatusTrackedBase, Track
 
     def clean(self):
         super(Task, self).clean()
-
         # Check if the instance to clean has an owner.
         # A form can exclude the owner field.. in which case the following checks can be skipped.
-        if not hasattr(self, "owner"):
-            return
+        if hasattr(self, "owner"):
+            # Prevent the creation of a task for a project that is not owned.
+            if self.owner and self.project and self.owner != self.project.owner:
+                raise SuspiciousOperation("Cannot create a Task for a foreign project.")
 
-        # Prevent the creation of a task for a project that is not owned.
-        if self.owner and self.project and self.owner != self.project.owner:
-            raise SuspiciousOperation("Cannot create a Task for a foreign project.")
+    def save(self, *args, **kwargs):
+        # Limit number of maximum "next" tasks.
+        if self.status.name == "next":
+            max = 16
+            current = self.owner.tasks.next().filter(project__isnull=True).count()
+            if current >= max:
+                raise ValidationError(
+                    "You have reached the limit of 'next' tasks! {}/{} Tip: Check if you can set others to 'todo'.".format(
+                        current, "8"))
+        super().save(*args, **kwargs)

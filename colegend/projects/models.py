@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models.query import QuerySet
 from markitup.fields import MarkupField
@@ -62,3 +63,14 @@ class Project(ValidateModelMixin, AutoUrlMixin, OwnedBase, StatusTrackedBase, Tr
             return True
         else:
             return False
+
+    def save(self, *args, **kwargs):
+        # Limit number of maximum "next" projects.
+        if self.status.name == "next":
+            max = 8
+            current = self.owner.projects.next().count()
+            if current >= max:
+                raise ValidationError(
+                    "You have reached the limit of 'next' projects! {}/{} Tip: Check if you can set others to 'todo'.".format(
+                        current, "4"))
+        super().save(*args, **kwargs)
