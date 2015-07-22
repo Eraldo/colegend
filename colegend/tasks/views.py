@@ -1,5 +1,6 @@
 from annoying.functions import get_object_or_None
 from django.contrib import messages
+from django.http import HttpResponseForbidden
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
 from django.utils.html import escape
@@ -65,6 +66,7 @@ class TaskNewView(TaskMixin, CreateView):
 
     def get_initial(self):
         initial = super(TaskNewView, self).get_initial()
+        initial.update({"owner": self.request.user})
         try:
             project_pk = int(self.request.GET.get('project'))
         except TypeError:
@@ -78,8 +80,9 @@ class TaskNewView(TaskMixin, CreateView):
         return initial
 
     def form_valid(self, form):
-        user = self.request.user
-        form.instance.owner = user
+        # Check if the hidden owner was changed. (security check)
+        if form.cleaned_data["owner"] != self.request.user:
+            return HttpResponseForbidden()
         response = super().form_valid(form)
         task = self.object
         if task:

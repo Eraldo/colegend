@@ -32,7 +32,6 @@ class ProjectForm(ModelForm):
                     "You have reached the limit of 'next' projects! {}/{} Tip: Check if you can set others to 'todo'.".format(
                         current, "4"))
 
-
     helper = FormHelper()
     helper.layout = Layout(
         Field('name', autofocus='True'),

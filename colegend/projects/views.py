@@ -56,7 +56,8 @@ class ProjectListView(StatusFilterMixin, ProjectMixin, ListView):
 
 class ProjectNewView(ProjectMixin, CreateView):
     def form_valid(self, form):
-        if form.cleaned_data["owner"] == self.request.user.pk:
+        # Check if the hidden owner was changed. (security check)
+        if form.cleaned_data["owner"] != self.request.user:
             return HttpResponseForbidden()
         response = super().form_valid(form)
         project = self.object
