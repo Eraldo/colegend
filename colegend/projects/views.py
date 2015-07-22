@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.http import HttpResponseForbidden
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
 from lib.views import ActiveUserRequiredMixin, get_sound
@@ -55,16 +56,21 @@ class ProjectListView(StatusFilterMixin, ProjectMixin, ListView):
 
 class ProjectNewView(ProjectMixin, CreateView):
     def form_valid(self, form):
-        user = self.request.user
-        form.instance.owner = user
+        if form.cleaned_data["owner"] == self.request.user.pk:
+            return HttpResponseForbidden()
         response = super().form_valid(form)
         project = self.object
         if project:
-            message = """Created Project: {project}.""".format(
+            message = "Created Project: {project}.".format(
                 project=render_to_string("projects/_project_link.html", {"project": project})
             )
             messages.add_message(self.request, messages.SUCCESS, mark_safe(message))
         return response
+
+    def get_initial(self):
+        initial = super().get_initial()
+        initial.update({"owner": self.request.user})
+        return initial
 
 
 class ProjectShowView(StatusFilterMixin, ProjectMixin, DetailView):
@@ -92,12 +98,12 @@ class ProjectDeleteView(ProjectMixin, DeleteView):
 
 
 def add_project_success_message(request, project):
-        message = """{status} Project: {project}.""".format(
-            status=str(project.status).capitalize(),
-            project=render_to_string("projects/_project_link.html", {"project": project})
-        )
-        if request.user.settings.sound:
-            sound = get_sound("project-success")
-            if sound:
-                message += sound
-        messages.add_message(request, messages.SUCCESS, mark_safe(message))
+    message = """{status} Project: {project}.""".format(
+        status=str(project.status).capitalize(),
+        project=render_to_string("projects/_project_link.html", {"project": project})
+    )
+    if request.user.settings.sound:
+        sound = get_sound("project-success")
+        if sound:
+            message += sound
+    messages.add_message(request, messages.SUCCESS, mark_safe(message))
