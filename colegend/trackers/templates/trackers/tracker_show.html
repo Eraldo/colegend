@@ -43,6 +43,7 @@
                     <tr>
                         <th>Date</th>
                         <th>{{ type }}</th>
+                        <th>Notes</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -64,6 +65,9 @@
                             {% endfor %}
                             </span>
                                 {% endif %}
+                            </td>
+                            <td>
+                                {{ data.notes }}
                             </td>
                             <td>
                                 <a href="{{ data.get_delete_url }}"

@@ -10,17 +10,17 @@ class DataInline(InlineMixin, admin.TabularInline):
 
 class CheckDataInline(DataInline):
     model = CheckData
-    fields = ['date', 'tracker']
+    fields = ['date', 'notes', 'tracker']
 
 
 class NumberDataInline(DataInline):
     model = NumberData
-    fields = ['date', 'number', 'tracker']
+    fields = ['date', 'number', 'notes', 'tracker']
 
 
 class RatingDataInline(DataInline):
     model = RatingData
-    fields = ['date', 'rating', 'tracker']
+    fields = ['date', 'rating', 'notes', 'tracker']
 
 
 class TrackerAdmin(admin.ModelAdmin):
