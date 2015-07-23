@@ -122,6 +122,7 @@ class BaseData(ValidateModelMixin, models.Model):
     tracker = models.ForeignKey(Tracker)
     date = models.DateField(default=timezone.now,
                             validators=[validate_date_today_or_in_past, validate_date_within_one_month])
+    notes = models.CharField(blank=True, max_length=100)
 
     class Meta:
         ordering = ['-date']

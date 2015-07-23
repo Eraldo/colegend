@@ -1,5 +1,5 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Field, Row, HTML, Column, Div
+from crispy_forms.layout import Layout, Field, Row, HTML, Div
 from django.forms import ModelForm
 from lib.crispy import SaveButton, CancelButton
 from trackers.models import Weight, Sex, Book, Joke, Transaction, Dream, Sleep, Walk, \
@@ -11,10 +11,11 @@ __author__ = 'eraldo'
 class CheckDataForm(ModelForm):
     class Meta:
         model = CheckData
-        fields = ['date']
+        fields = ['date', 'notes']
     helper = FormHelper()
     helper.layout = Layout(
         Field('date'),
+        Field('notes', placeholder="Notes"),
         HTML("""<input type="hidden" name="data-type" value="Check">"""),
         HTML("""{% load icons %}<button type="submit" class="btn btn-default">{% icon "check" %}</button>"""),
     )
@@ -26,12 +27,13 @@ class CheckDataForm(ModelForm):
 class NumberDataForm(ModelForm):
     class Meta:
         model = NumberData
-        fields = ['date', 'number']
+        fields = ['date', 'number', 'notes']
 
     helper = FormHelper()
     helper.layout = Layout(
         Field('date'),
         Field('number', placeholder="Number", autofocus='True'),
+        Field('notes', placeholder="Notes"),
         HTML("""<input type="hidden" name="data-type" value="Number">"""),
         HTML("""{% load icons %}<button type="submit" class="btn btn-default">{% icon "check" %}</button>"""),
     )
@@ -42,12 +44,13 @@ class NumberDataForm(ModelForm):
 class RatingDataForm(ModelForm):
     class Meta:
         model = RatingData
-        fields = ['date', 'rating']
+        fields = ['date', 'rating', 'notes']
 
     helper = FormHelper()
     helper.layout = Layout(
         Field('date'),
         Field('rating', placeholder="1-5", autofocus='True'),
+        Field('notes', placeholder="Notes"),
         HTML("""<input type="hidden" name="data-type" value="Rating">"""),
         HTML("""{% load icons %}<button type="submit" class="btn btn-default">{% icon "check" %}</button>"""),
     )
