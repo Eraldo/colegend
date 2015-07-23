@@ -1,4 +1,5 @@
 from annoying.fields import AutoOneToOneField
+from colorful.fields import RGBColorField
 from django.contrib import messages
 from django.contrib.auth.models import PermissionsMixin, AbstractBaseUser
 from django.core import validators
@@ -319,6 +320,7 @@ class Settings(models.Model):
         validators=[MaxValueValidator(24)])
     sound = models.BooleanField(verbose_name="Sound", default=True)
     keyboard = models.BooleanField(verbose_name="Keyboard Control", default=False)
+    background_color = RGBColorField(blank=True)
 
     class Meta:
         verbose_name_plural = "Settings"

@@ -42,6 +42,7 @@ pytz==2014.10 # timezone handling
 # project specific
 django-bootstrap3==4.8.2
 django-autocomplete-light==2.0.4
+django-colorful==1.1.0
 
 # Configuration
 django-secure==1.0

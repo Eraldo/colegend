@@ -184,7 +184,7 @@ class SignUpApplicationForm(ModelForm):
 class SettingsForm(ModelForm):
     class Meta:
         model = Settings
-        fields = ['language', 'day_start', 'keyboard', 'sound']
+        fields = ['language', 'day_start', 'keyboard', 'sound', 'background_color']
 
     helper = FormHelper()
     helper.layout = Layout(
@@ -199,6 +199,7 @@ class SettingsForm(ModelForm):
                 target="_blank" class="help-block" style="position: relative; top: -15px;">
                 {% load icons %}{% icon "tutorial" %} Keyboard Tutorial</a>"""),
             Field("sound"),
+            Field("background_color"),
         ),
         SaveButton(),
     )

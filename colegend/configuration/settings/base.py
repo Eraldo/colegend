@@ -257,6 +257,7 @@ PROJECT_APPS = (
     'crispy_forms',
     'floppyforms',
     'markitup',
+    'colorful',
     # usability
     'keyboard',
     'commands',

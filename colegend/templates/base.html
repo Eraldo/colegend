@@ -14,7 +14,7 @@
         {% block extra_head %}{% endblock %}
     {% endblock %}
 </head>
-<body id="{% block body_id %}body{% endblock %}" class="{% block body_class %}body{% endblock %}">
+<body id="{% block body_id %}body{% endblock %}" class="{% block body_class %}body{% endblock %}" style="background-color: {{ user.settings.background_color|default:"white" }}">
 {% block body %}
     {% block header %}{% endblock %}
     <div id="menu">
