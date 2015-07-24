@@ -10,7 +10,7 @@
 
 {% block page_controls %}
     <form method="POST" class="inline">{% csrf_token %}
-        <button type="submit" name="accept" class="btn btn-warning pull-right" data-toggle="tooltip" title="Accept All">
+        <button type="submit" name="accept" value="all" class="btn btn-warning pull-right" data-toggle="tooltip" title="Accept All">
             {% icon "accept" %}
         </button>
     </form>
@@ -23,9 +23,13 @@
             {% ifchanged quote.provider %}
                 <h4>{% include "users/_user_link.html" with user=quote.provider %}</h4>
             {% endifchanged %}
+            <form method="POST" class="inline">{% csrf_token %}
+                <button type="submit" name="accept" value="{{ quote.pk }}" class="btn btn-warning">{% icon "accept" %}</button>
+            </form>
             <a href="{{ quote.get_show_url }}" class="btn btn-category bg-category-{{ quote.category.pk }}">
                 {{ quote }}
             </a>
+            {% include "quotes/_quote.html" %}
         {% endfor %}
     </div>
 {% endblock %}

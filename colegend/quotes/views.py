@@ -49,17 +49,20 @@ class QuoteManageView(ManagerRequiredMixin, QuoteMixin, ListView):
 
     def post(self, request, *args, **kwargs):
         if "accept" in self.request.POST:
-            quotes = self.get_queryset()
-            for quote in quotes:
-                quote.accept()
+            value = self.request.POST.get("accept")
+            if value == "all":
+                quotes = self.get_queryset()
+                for quote in quotes:
+                    quote.accept()
+            elif value.isdigit():
+                pk = int(value)
+                Quote.objects.get(pk=pk).accept()
+                return redirect("quotes:quote_manage")
         return redirect("quotes:quote_list")
 
 
 class QuoteShowView(QuoteMixin, DetailView):
     template_name = "quotes/quote_show.html"
-
-    def get_queryset(self):
-        return super().get_queryset()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
