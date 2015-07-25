@@ -14,7 +14,7 @@
                 <img src="{{ MEDIA_URL }}{{ card.image }}" alt="{{ card }}" class="img-responsive"/>
             </div>
             <div class="col-md-6">
-                {{ card.text }}
+                {{ card.text|linebreaksbr }}
             </div>
         </div>
     </div>
