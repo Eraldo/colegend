@@ -27,15 +27,8 @@ class ContactView(FormView):
         return super(ContactView, self).form_valid(form)
 
     def get_context_data(self, **kwargs):
-        # TODO: Remove hardcoded username from contact view.
-        # At the moment the user avatar needs this user.
         context = super(ContactView, self).get_context_data(**kwargs)
-        user_model = get_user_model()
-        try:
-            eraldo = user_model.objects.get(username="Eraldo")
-        except user_model.DoesNotExist:
-            eraldo = None
-        context['eraldo'] = eraldo
+        context["managers"] = get_user_model().objects.managers()
         return context
 
     def get_success_url(self):

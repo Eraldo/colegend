@@ -16,33 +16,50 @@
         <legend>Personal Contact</legend>
 
         <div class="row">
-            <div class="col-md-6">
-                <p>
-                    <img id="menu-avatar" src="{% avatar_url eraldo 80 %}" alt="user" class="img-circle"/>
-                    <span style="font-weight: 700">Eraldo Helal</span>
-                </p>
-
-                <p>
+            {% for manager in managers %}
+                <div class="col-md-3 col-sm-6">
+                    <p>
+                        <img id="menu-avatar" src="{% avatar_url manager 80 %}" alt="manager" class="img-circle"/>
+                        <span style="font-weight: 700">{{ manager.get_full_name }}</span>
+                    </p>
+                    {% ifequal manager.pk 4 %}
+                    <p>
                     <span style="color: gray">
-                        <span class="glyphicon glyphicon-phone"></span> mobile
-                    </span><br>
-                    <a href="tel:004369910203039">
-                        +43 699 10 20 30 39</a><br>
-                    <a href="tel:004917697994480">
-                        +49 176 97 99 44 80</a>
-                </p>
+                        <span class="glyphicon glyphicon-phone"></span> mobile</span><br>
+                        <a href="tel:{{ manager.contact.phone_number }}">
+                            {{ manager.contact.phone_number }}</a><br>
+                    </p>
+                    {% endifequal %}
+                    <p>
+                        <span style="color: gray"><span class="glyphicon glyphicon-envelope"></span> email</span><br>
+                        <a href="mailto:{{ manager.first_name.lower }}@colegend.org" target="_blank">
+                            {{ manager.first_name.lower }}@colegend.org</a>
+                    </p>
+                    {% ifequal manager.pk 4 %}
+                    <p>
+                        <span style="color: gray"><span class="glyphicon glyphicon-user"></span> face to face</span><br>
+                        <a href="http://www.eraldo.org/contact/T42/" target="_blank">
+                            project T42</a>
+                    </p>
+                    {% endifequal %}
+                </div>
+            {% endfor %}
 
+            <div class="col-md-3 col-sm-6">
+                <p>
+                    <img id="menu-avatar" src="https://0.gravatar.com/avatar/3eda6fcd3204ef285fa52176c28c4d3e?s=80&d=mm&r=g" alt="user" class="img-circle"/>
+                    <span style="font-weight: 700">You</span>
+                </p>
                 <p>
                     <span style="color: gray"><span class="glyphicon glyphicon-envelope"></span> email</span><br>
-                    <a href="mailto:eraldo@colegend.org" target="_blank">
-                        eraldo@colegend.org</a>
+                    <a href="mailto:connect@colegend.org" target="_blank">
+                        connect@colegend.org</a>
+                    <br/>
+                    <span style="color: gray">
+                        <small>Contact us if you want to join. ;)</small>
+                    </span><br>
                 </p>
 
-                <p>
-                    <span style="color: gray"><span class="glyphicon glyphicon-user"></span> face to face</span><br>
-                    <a href="http://www.eraldo.org/contact/T42/" target="_blank">
-                        project T42</a>
-                </p>
             </div>
         </div>
     </div>
