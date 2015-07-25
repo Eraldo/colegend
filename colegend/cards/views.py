@@ -1,5 +1,6 @@
+from annoying.functions import get_object_or_None
 from django.views.generic import ListView, DetailView
-from cards.models import Card
+from cards.models import Card, Deck
 from lib.views import ActiveUserRequiredMixin
 
 __author__ = 'eraldo'
@@ -13,10 +14,7 @@ class CardMixin(ActiveUserRequiredMixin):
 
 class CardPickerView(CardMixin, ListView):
     template_name = "cards/card_picker.html"
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        return queryset.order_by('?')
+    model = Deck
 
 
 class CardShowView(CardMixin, DetailView):

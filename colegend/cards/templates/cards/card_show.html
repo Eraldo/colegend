@@ -9,6 +9,13 @@
 
 {% block page_content %}
     <div class="well">
-        <img src="{{ MEDIA_URL }}/{{ card.image }}" alt="{{ card }}"/>
+        <div class="row">
+            <div class="col-md-6">
+                <img src="{{ MEDIA_URL }}{{ card.image }}" alt="{{ card }}" class="img-responsive"/>
+            </div>
+            <div class="col-md-6">
+                {{ card.text }}
+            </div>
+        </div>
     </div>
 {% endblock %}

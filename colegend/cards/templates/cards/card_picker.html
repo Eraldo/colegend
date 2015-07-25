@@ -9,12 +9,15 @@
 
 {% block page_content %}
     <div class="well">
-        <h4>Genuine Contact Deck</h4>
-        {% for card in object_list %}
+        {% for deck in object_list %}
+            <h4>{{ deck }}</h4>
+            {% for card in deck.shuffled_cards %}
             <a href="{{ card.get_show_url }}">
-                <img src="{{ STATIC_URL }}/cards/card_back.png" alt=""/>
+                <img src="{{ MEDIA_URL }}{{ deck.image }}" alt=""/>
             </a>
-        {% endfor %}<br/>
+            {% endfor %}
+        {% endfor %}
+        <br/>
         <small>Pick a card..</small>
     </div>
 {% endblock %}
