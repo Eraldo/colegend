@@ -34,7 +34,7 @@ class Tag(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, models.Model
 
 
 class TaggableBase(models.Model):
-    tags = models.ManyToManyField(Tag, blank=True, related_name="%(app_label)s")
+    tags = models.ManyToManyField(Tag, blank=True)
 
     class Meta:
         abstract = True
