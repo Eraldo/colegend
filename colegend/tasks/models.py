@@ -37,6 +37,7 @@ class Task(ValidateModelMixin, AutoUrlMixin, OwnedBase, StatusTrackedBase, Track
     class Meta:
         ordering = ["status", "project", "-modification_date"]
         unique_together = ('owner', 'project', 'name')
+        default_related_name = "tasks"
 
     def __str__(self):
         return self.name

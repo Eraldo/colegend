@@ -27,6 +27,7 @@ class Tag(ValidateModelMixin, AutoUrlMixin, OwnedBase, TrackedBase, models.Model
     class Meta:
         ordering = ["name"]
         unique_together = ('owner', 'name')
+        default_related_name = "tags"
 
     def __str__(self):
         return self.name

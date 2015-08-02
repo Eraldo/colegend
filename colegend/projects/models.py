@@ -34,6 +34,7 @@ class Project(ValidateModelMixin, AutoUrlMixin, OwnedBase, StatusTrackedBase, Tr
     class Meta:
         ordering = ["status", "-modification_date"]
         unique_together = ('owner', 'name')
+        default_related_name = "projects"
 
     def __str__(self):
         return self.name
