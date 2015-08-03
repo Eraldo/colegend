@@ -1,6 +1,6 @@
 from django.test import TestCase
 from users.forms import UserForm, UserCreationForm, SignUpApplicationForm
-from users.tests.test_models import UserFactory, ContactFactory, ProfileFactory
+from users.tests.test_models import UserFactory
 
 __author__ = 'eraldo'
 
@@ -23,24 +23,19 @@ class UserCreationFormTests(TestCase):
         data = {
             "username": "johndoe",
             "password1": "tester",
-            "password2": "tester"
+            "password2": "tester",
         }
         form = UserCreationForm(data=data)
         self.assertTrue(form.is_valid())
 
     def test_invalid_form_with_blank_username(self):
-        data = UserFactory.attributes()
-        data["username"] = ""  # This should be invalid.
+        data = {
+            "username": "",  # This should be invalid.
+            "password1": "tester",
+            "password2": "tester",
+        }
         form = UserCreationForm(data=data)
         self.assertFalse(form.is_valid())
-
-    def test_invalid_form_with_duplicate_username(self):
-        user = UserFactory()
-        data = UserFactory.attributes()
-        data["username"] = user.username  # This should be invalid.
-        form = UserCreationForm(data=data)
-        self.assertFalse(form.is_valid())
-        self.assertIn('duplicate_username', form.error_messages)
 
 
 class SignUpApplicationFormTests(TestCase):
@@ -89,7 +84,6 @@ class SignUpApplicationFormTests(TestCase):
         }
         form = SignUpApplicationForm(data=data, initial={"username": "johndoe"})
         form.is_valid()
-        print(form.errors)
         self.assertTrue(form.is_valid())
 
     def test_invalid_form_without_data(self):

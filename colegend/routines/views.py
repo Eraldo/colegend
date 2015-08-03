@@ -12,7 +12,6 @@ __author__ = 'eraldo'
 class RoutineMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
     model = Routine
     form_class = RoutineForm
-    fields = ['name', 'description', 'type', 'tags']
     icon = "routine"
     tutorial = "Routines"
 
@@ -20,8 +19,8 @@ class RoutineMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
         context = super().get_context_data(**kwargs)
         return context
 
-    def get_form(self, form_class):
-        form = super(RoutineMixin, self).get_form(form_class)
+    def get_form(self):
+        form = super().get_form()
         # limit tag choices to owned tags
         tags = form.fields['tags'].queryset
         form.fields['tags'].queryset = tags.owned_by(self.request.user)

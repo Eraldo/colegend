@@ -23,8 +23,9 @@ class TaskForm(ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
+        status = cleaned_data.get("status")
         # Limit number of maximum "next" tasks.
-        if cleaned_data['status'].name == "next":
+        if status and status.name == "next":
             max = 16
             # number of other tasks with status next
             current = cleaned_data['owner'].tasks.next().filter(project__isnull=True).exclude(pk=self.instance.pk).count()

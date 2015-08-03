@@ -8,26 +8,29 @@ __author__ = 'eraldo'
 
 class ContactViewTests(TestCase):
     def test_get_contact_view_anonymous(self):
-        eraldo = UserFactory(username="Eraldo")
+        eraldo = UserFactory(username="Eraldo", is_manager=True, first_name="Eraldo", last_name="Energy")
         url = reverse("contact")
         response = self.client.get(url)
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(eraldo, response.context['eraldo'])
+        self.assertContains(response, "Eraldo Energy")
 
     def test_get_contact_view(self):
-        eraldo = UserFactory(username="Eraldo", password="tester")
+        eraldo = UserFactory(username="Eraldo", password="tester", is_manager=True, first_name="Eraldo", last_name="Energy")
         self.client.login(username=eraldo.username, password="tester")
         url = reverse("contact")
         response = self.client.get(url)
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(eraldo, response.context['eraldo'])
+        self.assertIn(eraldo, response.context['managers'])
+        self.assertContains(response, "Eraldo Energy")
 
-    def test_raise_error_if_no_eraldo_user(self):
+    def test_has_managers(self):
+        UserFactory(username="Eraldo", password="tester", is_manager=True, first_name="Eraldo", last_name="Energy")
         url = reverse("contact")
+        response = self.client.get(url)
 
-        self.assertRaises(AttributeError, self.client.get, url)
+        self.assertGreater(response.context['managers'].count(), 0)
 
     def test_send_message_anonymous(self):
         url = reverse("contact")

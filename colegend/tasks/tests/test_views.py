@@ -28,13 +28,16 @@ class TaskNewViewTest(LoggedInTestMixin, TestCase):
         self.assertIsInstance(response.context["form"], TaskForm)
 
     def test_task_new_view_saving_a_post_request(self):
-        data = TaskFactory.attributes()
-        data["owner"] = self.user.pk
-        data["status"] = StatusFactory().pk
-        del data["project"]
+        # data = TaskFactory.attributes()
+        # Workaround for https://github.com/rbarrois/factory_boy/issues/198
+        data = {
+            "owner": self.user.pk,
+            "name": "Task1",
+            "status": StatusFactory().pk,
+        }
         url = reverse("tasks:task_new")
         response = self.client.post(url, data=data)
-
+        print(Task.objects.count())
         self.assertEqual(Task.objects.count(), 1)
         new_task = Task.objects.first()
         self.assertEqual(new_task.name, data["name"])
@@ -51,11 +54,15 @@ class TaskNewViewTest(LoggedInTestMixin, TestCase):
 
     def test_duplicate_owner_project_and_name(self):
         task = TaskFactory(owner=self.user, project__owner=self.user)
-        data = TaskFactory.attributes()
-        data["owner"] = task.owner.pk
-        data["name"] = task.name
-        data["project"] = task.project.pk
-        data["status"] = task.status.pk
+        # data = TaskFactory.attributes()
+        # Workaround for https://github.com/rbarrois/factory_boy/issues/198
+        data = {
+            "owner": task.owner.pk,
+            "project": task.project.pk,
+            "name": task.name,
+            "description": TaskFactory.description,
+            "status": task.status.pk,
+        }
         url = reverse("tasks:task_new")
         response = self.client.post(url, data=data)
 

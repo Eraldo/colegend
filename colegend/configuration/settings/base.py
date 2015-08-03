@@ -145,31 +145,32 @@ FIXTURE_DIRS = (
 
 
 ########## TEMPLATE CONFIGURATION
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#template-context-processors
-TEMPLATE_CONTEXT_PROCESSORS = (
-    # default
-    'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.debug',
-    'django.core.context_processors.i18n',
-    'django.core.context_processors.media',
-    'django.core.context_processors.static',
-    'django.core.context_processors.tz',
-    'django.contrib.messages.context_processors.messages',
-    'django.core.context_processors.request',
-    # custom
-    "website.context_processors.menu",
-)
-
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#template-loaders
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-)
-
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
-TEMPLATE_DIRS = (
-    normpath(join(DJANGO_ROOT, 'templates')),
-)
+# See: https://docs.djangoproject.com/en/1.8/ref/templates/upgrading/
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            normpath(join(DJANGO_ROOT, 'templates')),
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                # Django defaults
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
+                'django.contrib.messages.context_processors.messages',
+                # `allauth` needs this from django
+                'django.template.context_processors.request',
+                # custom
+                "website.context_processors.menu",
+            ],
+        },
+    },
+]
 ########## END TEMPLATE CONFIGURATION
 
 
@@ -322,10 +323,10 @@ INSTALLED_APPS += (
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
 )
-TEMPLATE_CONTEXT_PROCESSORS += (
-    "allauth.account.context_processors.account",
-    "allauth.socialaccount.context_processors.socialaccount",
-)
+# TEMPLATE_CONTEXT_PROCESSORS += (
+#     "allauth.account.context_processors.account",
+#     "allauth.socialaccount.context_processors.socialaccount",
+# )
 AUTHENTICATION_BACKENDS = (
       # Needed to login by username in Django admin, regardless of `allauth`
     "django.contrib.auth.backends.ModelBackend",
@@ -338,6 +339,7 @@ ACCOUNT_AUTHENTICATION_METHOD = "username"
 ACCOUNT_USERNAME_MIN_LENGTH = 4
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 ACCOUNT_SIGNUP_FORM_CLASS = "users.forms.SignUpApplicationForm"
 ACCOUNT_ADAPTER = "users.adapters.AccountAdapter"
 # ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"

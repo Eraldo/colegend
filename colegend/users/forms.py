@@ -4,11 +4,11 @@ from django.contrib.auth.forms import UserCreationForm as AuthUserCreationForm, 
 from django.core.urlresolvers import reverse_lazy
 from floppyforms.__future__.models import ModelForm
 import floppyforms as forms
-from markitup.widgets import MarkItUpWidget
 from lib.crispy import CancelButton, SaveButton
 from lib.formfields import PhoneField
 from lib.validators import PhoneValidator, validate_date_in_past
 from users.models import User, Profile, Settings
+from django.utils.translation import ugettext, ugettext_lazy as _
 
 __author__ = 'eraldo'
 
@@ -33,25 +33,8 @@ class UserCreationForm(AuthUserCreationForm):
     """
     Custom user creation form.
     """
-    username = forms.CharField(max_length=30)
-
     class Meta(AuthUserCreationForm.Meta):
         model = User
-
-    def clean_username(self):
-        """
-        Custom username clean method overwrite.
-
-        This is used because django's default implementation hardcodes the auth.user.
-
-        :return: :raise forms.ValidationError:
-        """
-        username = self.cleaned_data['username']
-        try:
-            User.objects.get(username=username)
-        except User.DoesNotExist:
-            return username
-        raise forms.ValidationError(self.error_messages['duplicate_username'])
 
 
 class UserChangeForm(AuthUserChangeForm):

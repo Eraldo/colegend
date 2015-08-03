@@ -22,8 +22,9 @@ class ProjectForm(ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
+        status = cleaned_data.get("status")
         # Limit number of maximum "next" projects.
-        if cleaned_data["status"].name == "next":
+        if status and status.name == "next":
             max = 8
             # number of other projects with status next
             current = cleaned_data["owner"].projects.next().exclude(pk=self.instance.pk).count()
