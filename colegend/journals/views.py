@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
+from django.http import Http404
 from django.utils import timezone
 from django.utils.dateparse import parse_date
 from lib.views import ActiveUserRequiredMixin
@@ -8,6 +9,7 @@ from django.views.generic import DetailView, UpdateView, DeleteView, CreateView,
     TemplateView, ListView
 from journals.forms import DayEntryForm, JournalForm
 from journals.models import DayEntry, Journal
+from django.utils.translation import ugettext as _
 
 __author__ = 'eraldo'
 
@@ -60,6 +62,20 @@ class DayEntryListView(DayEntryMixin, ArchiveIndexView):
         return context
 
 
+# class WeekView(DayEntryMixin, ArchiveIndexView):
+# date_field = "date"
+#     template_name = "journals/dayentry_list.html"
+#     allow_empty = True
+#     paginate_by = 10
+#
+#     def get_context_data(self, **kwargs):
+#         context = super(DayEntryListView, self).get_context_data(**kwargs)
+#         context['total_counter'] = self.get_queryset().count()
+#         context['streak'] = self.request.user.journal.streak
+#         context['topic_of_the_year'] = self.request.user.journal.topic_of_the_year
+#         return context
+
+
 class DayEntryNewView(DayEntryMixin, CreateView):
     def form_valid(self, form):
         user = self.request.user
@@ -91,18 +107,36 @@ class DayEntryNewView(DayEntryMixin, CreateView):
 class DayEntryShowView(DayEntryMixin, DetailView):
     template_name = "journals/dayentry_show.html"
 
+    def get_object(self, queryset=None):
+        # Check if date is provided.. if so use it..
+        date = self.kwargs.get('date')
+        if date:
+            date = parse_date(date)
+            try:
+                return super().get_queryset().get(date=date)
+            except DayEntry.DoesNotExist:
+                return None
+        return super().get_object(queryset)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        date = self.kwargs.get('date')
+        if date:
+            date = parse_date(date)
+        else:
+            date = self.get_object().date
+        context["date"] = date
+        context["previous_date"] = date - timezone.timedelta(1)
+        context["next_date"] = date + timezone.timedelta(1)
         # Get user Tasks for this date.
-        entry = self.get_object()
         user = self.request.user
-        scheduled_tasks = user.tasks.filter(date=entry.date)
-        deadline_projects = user.projects.filter(deadline=entry.date)
-        deadline_tasks = user.tasks.filter(deadline=entry.date)
-        done_projects = user.projects.closed().filter(completion_date__contains=entry.date).order_by('completion_date')
-        done_tasks = user.tasks.closed().filter(completion_date__contains=entry.date).order_by('completion_date')
-        created_projects = user.projects.filter(creation_date__contains=entry.date).order_by('creation_date')
-        created_tasks = user.tasks.filter(creation_date__contains=entry.date).order_by('creation_date')
+        scheduled_tasks = user.tasks.filter(date=date)
+        deadline_projects = user.projects.filter(deadline=date)
+        deadline_tasks = user.tasks.filter(deadline=date)
+        done_projects = user.projects.closed().filter(completion_date__contains=date).order_by('completion_date')
+        done_tasks = user.tasks.closed().filter(completion_date__contains=date).order_by('completion_date')
+        created_projects = user.projects.filter(creation_date__contains=date).order_by('creation_date')
+        created_tasks = user.tasks.filter(creation_date__contains=date).order_by('creation_date')
         day_tasks = scheduled_tasks or deadline_tasks or done_tasks or created_tasks
         if day_tasks:
             context["day_tasks"] = day_tasks
@@ -121,24 +155,13 @@ class DayEntryShowView(DayEntryMixin, DetailView):
             if created_tasks:
                 context["created_tasks"] = created_tasks
         # TRACKERS
-        trackers = user.tracker_set
+        trackers = user.trackers
         today = timezone.localtime(timezone.now()).date()
         # To track
-        if entry.date == today:
+        if date == today:
             context["trackers_to_track"] = trackers.to_track()
         # Tracked that day
-        context["trackers_tracked"] = trackers.tracked_on(entry.date)
-        # missing date
-        previous_date = entry.get_previous()
-        next_date = entry.get_next()
-        one_day = timezone.timedelta(1)
-        ## next day missing
-        if next_date and next_date.date != entry.date + one_day or \
-                not next_date and entry.date < today:
-            context["missing"] = entry.date + one_day
-        ## previous day missing
-        elif previous_date and previous_date.date != entry.date - one_day:
-            context["missing"] = entry.date - one_day
+        context["trackers_tracked"] = trackers.tracked_on(date)
         return context
 
 

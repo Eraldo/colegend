@@ -73,6 +73,9 @@ class Tracker(OwnedBase, AutoUrlMixin, TimeStampedBase):
 
     objects = TrackerQuerySet.as_manager()
 
+    class Meta:
+        default_related_name = "trackers"
+
     def __str__(self):
         return self.name
 

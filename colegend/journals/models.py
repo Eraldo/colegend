@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils import timezone
 from markitup.fields import MarkupField
@@ -154,6 +155,17 @@ class WeekEntry(ValidateModelMixin, AutoUrlMixin, TrackedBase, TaggableBase, mod
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         self.update_streak()
+
+    def clean(self):
+        super().clean()
+        # Check if the date is the only one within that week.
+        date = self.date
+        week_entries = self.journal.week_entries
+        start = self.get_first_day()
+        end = start + timezone.timedelta(8)
+        other_week_entry = week_entries.exclude(pk=self.pk).filter(date__range=(start, end))
+        if other_week_entry.exists():
+            raise ValidationError("There is already a week entry for this week: {}".format(other_week_entry.get()))
 
     def get_previous(self):
         return self.journal.entries.filter(date__lt=self.date).first()

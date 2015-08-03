@@ -24,8 +24,8 @@ class TaskMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
     icon = "task"
     tutorial = "Tasks"
 
-    def get_form(self, form_class):
-        form = super(TaskMixin, self).get_form(form_class)
+    def get_form(self):
+        form = super().get_form()
         # limit project choices to owned projects
         projects = form.fields['project'].queryset
         form.fields['project'].queryset = projects.owned_by(self.request.user)

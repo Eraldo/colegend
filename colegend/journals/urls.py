@@ -26,6 +26,11 @@ urlpatterns = patterns(
         DayEntryShowView.as_view(),
         name='dayentry_show'),
 
+    # ex: ../1985-01-07/
+    url(r'^(?P<date>[0-9]{4}-[0-9]{2}-[0-9]{2})/$',
+        DayEntryShowView.as_view(),
+        name='dayentry_show'),
+
     # ex: ../4/edit/
     url(r'^(?P<pk>\d+)/edit/$',
         DayEntryEditView.as_view(),

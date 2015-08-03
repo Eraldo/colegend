@@ -13,7 +13,7 @@ class DayEntryInline(InlineMixin, admin.TabularInline):
 class DayEntryAdmin(admin.ModelAdmin):
     list_display = ['date', 'location', 'focus', 'journal']
     search_fields = ['focus', 'content']
-    list_filter = ['journal']
+    list_filter = ['journal__owner']
     readonly_fields = ['creation_date', 'modification_date', 'history']
     filter_horizontal = ['tags']
 
@@ -30,7 +30,7 @@ admin.site.register(DayEntry, DayEntryAdmin)
 class WeekEntryAdmin(admin.ModelAdmin):
     list_display = ['date', 'focus', 'journal']
     search_fields = ['focus', 'content']
-    list_filter = ['journal']
+    list_filter = ['journal__owner']
     readonly_fields = ['creation_date', 'modification_date', 'history']
     filter_horizontal = ['tags']
 

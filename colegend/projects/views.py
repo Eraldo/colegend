@@ -24,8 +24,8 @@ class ProjectMixin(ActiveUserRequiredMixin, OwnedItemsMixin):
         context = super().get_context_data(**kwargs)
         return context
 
-    def get_form(self, form_class):
-        form = super(ProjectMixin, self).get_form(form_class)
+    def get_form(self):
+        form = super().get_form()
         # Limit tag choices to owned tags.
         tags = form.fields['tags'].queryset
         form.fields['tags'].queryset = tags.owned_by(self.request.user)
