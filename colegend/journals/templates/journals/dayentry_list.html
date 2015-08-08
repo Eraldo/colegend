@@ -40,8 +40,8 @@
             <thead>
             <tr>
                 <th>Date</th>
-                <th>Location(s)</th>
                 <th>Focus</th>
+                <th>Location(s)</th>
                 <th>Tags</th>
             </tr>
             </thead>
@@ -53,10 +53,10 @@
                         <span class="label bg-category-{{ dayentry.date|date:"w" }}">{{ dayentry.date|date:"D" }}</span>
                         <br>
                     </td>
-                    <td>
-                        {{ dayentry.location }}
-                    </td>
                     <td>{{ dayentry.focus }}</td>
+                    <td>
+                        {{ dayentry.location|truncatechars:70 }}
+                    </td>
                     <td>
                         {% for tag in dayentry.tags.all %}
                             {% include "tags/_tag.html" %}
