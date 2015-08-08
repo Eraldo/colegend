@@ -389,7 +389,7 @@ class Sleep(OwnedBase, AutoUrlMixin, TimeStampedBase):
         """
         Make sure that the end time is after the start time.
         """
-        if self.end and self.end <= self.start:
+        if self.start and self.end and self.end <= self.start:
             raise ValidationError({'end': ["End time needs to be after start time."]})
         super().clean(*args, **kwargs)
 
