@@ -77,7 +77,7 @@ class SocialAccountAdapter(DefaultSocialAccountAdapter):
         last_name = data.get('last_name')
         email = data.get('email')
         name = data.get('name')
-        user = sociallogin.account.user
+        user = sociallogin.user
         user_username(user, username or first_name or last_name or '')
         user_email(user, valid_email_or_none(email) or '')
         name_parts = (name or '').partition(' ')
