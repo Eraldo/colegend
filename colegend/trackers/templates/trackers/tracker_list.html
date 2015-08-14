@@ -30,7 +30,7 @@
 {% block page_content %}
     <div class="well">
         <h4>Custom Trackers</h4>
-            {% for tracker in user.tracker_set.all %}
+            {% for tracker in user.trackers.all %}
                 <a href="{{ tracker.get_show_url }}" class="btn btn-category bg-category-{{ tracker.category.pk }}">{% icon tracker.get_tracker_type_display|lower %} {{ tracker }}
                 <br/>{% include "trackers/_chain.html" %}</a>
             {% endfor %}
