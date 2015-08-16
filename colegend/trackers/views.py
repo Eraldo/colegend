@@ -102,7 +102,7 @@ class DataDeleteView(TrackerMixin, DeleteView):
     def get_tracker(self):
         tracker_pk = self.kwargs.get("tracker_pk", None)
         if tracker_pk:
-            return self.request.user.tracker_set.get(pk=tracker_pk)
+            return self.request.user.trackers.get(pk=tracker_pk)
 
     def get_success_url(self):
         tracker = self.get_tracker()
