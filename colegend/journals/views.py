@@ -1,15 +1,13 @@
 from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.http import Http404
 from django.utils import timezone
 from django.utils.dateparse import parse_date
 from lib.views import ActiveUserRequiredMixin
 from django.core.exceptions import ValidationError
 from django.views.generic import DetailView, UpdateView, DeleteView, CreateView, ArchiveIndexView, RedirectView, \
     TemplateView, ListView
-from journals.forms import DayEntryForm, JournalForm
-from journals.models import DayEntry, Journal
-from django.utils.translation import ugettext as _
+from journals.forms import DayEntryForm, JournalForm, WeekEntryForm
+from journals.models import DayEntry, Journal, WeekEntry
 
 __author__ = 'eraldo'
 
@@ -23,10 +21,6 @@ class JournalMixin(ActiveUserRequiredMixin):
     def get_queryset(self):
         return super().get_queryset().owned_by(self.request.user)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
-
     def form_valid(self, form):
         try:
             return super().form_valid(form)
@@ -37,7 +31,7 @@ class JournalMixin(ActiveUserRequiredMixin):
 
 
 class JournalEditView(JournalMixin, UpdateView):
-    success_url = reverse_lazy('journals:dayentry_list')
+    success_url = reverse_lazy('journals:index')
 
     def get_object(self, queryset=None):
         return self.request.user.journal
@@ -62,20 +56,6 @@ class DayEntryListView(DayEntryMixin, ArchiveIndexView):
         return context
 
 
-# class WeekView(DayEntryMixin, ArchiveIndexView):
-# date_field = "date"
-#     template_name = "journals/dayentry_list.html"
-#     allow_empty = True
-#     paginate_by = 10
-#
-#     def get_context_data(self, **kwargs):
-#         context = super(DayEntryListView, self).get_context_data(**kwargs)
-#         context['total_counter'] = self.get_queryset().count()
-#         context['streak'] = self.request.user.journal.streak
-#         context['topic_of_the_year'] = self.request.user.journal.topic_of_the_year
-#         return context
-
-
 class DayEntryNewView(DayEntryMixin, CreateView):
     def form_valid(self, form):
         user = self.request.user
@@ -86,7 +66,7 @@ class DayEntryNewView(DayEntryMixin, CreateView):
         initial = super(DayEntryNewView, self).get_initial()
         user = self.request.user
         # template
-        template = user.journal.template
+        template = user.journal.day_template
         if template:
             initial['content'] = template
         # location
@@ -170,7 +150,7 @@ class DayEntryEditView(DayEntryMixin, UpdateView):
 
 
 class DayEntryDeleteView(DayEntryMixin, DeleteView):
-    success_url = reverse_lazy('journals:dayentry_list')
+    success_url = reverse_lazy('journals:index')
     template_name = "confirm_delete.html"
 
 
@@ -184,6 +164,108 @@ class DayEntryContinueView(DayEntryMixin, RedirectView):
             return current_entry.get_show_url()
         else:
             return reverse('journals:dayentry_new')
+
+
+class WeekEntryMixin(JournalMixin):
+    model = WeekEntry
+    form_class = WeekEntryForm
+
+    def get_object(self, queryset=None):
+        # Check if date is provided.. if so use it..
+        date = self.kwargs.get('date')
+        if date:
+            date = parse_date(date)
+            try:
+                return super().get_queryset().get(date=date)
+            except WeekEntry.DoesNotExist:
+                return None
+        return super().get_object(queryset)
+
+
+class WeekView(DayEntryMixin, TemplateView):
+    template_name = "journals/week.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # date
+        date = self.kwargs.get('date')
+        if date:
+            date = parse_date(date)
+        else:
+            date = timezone.now().date()
+        context['date'] = date
+
+        # week context
+        week_start = date - timezone.timedelta(days=date.weekday())
+        context['week_start'] = week_start
+        week_end = week_start + timezone.timedelta(days=6)
+        context['week_end'] = week_end
+        # page title extras
+        context['streak'] = self.request.user.journal.streak
+        context['week_streak'] = self.request.user.journal.week_streak
+        context['topic_of_the_year'] = self.request.user.journal.topic_of_the_year
+
+        # week entry
+        week_entry = WeekEntry.objects.owned_by(self.request.user).for_date(date)
+        if week_entry:
+            context['week_entry'] = week_entry
+
+        # day entries
+        day_entries = DayEntry.objects.owned_by(self.request.user).filter(date__range=(week_start, week_end))
+        # add empty values..
+        day_entries_list = []
+        for day in range(0, 7):
+            current_date = week_start+timezone.timedelta(days=day)
+            day_entry = day_entries.filter(date=current_date)
+            if day_entry:
+                day_entries_list.append((current_date, day_entry.get()))
+            else:
+                day_entries_list.append((current_date, None))
+        day_entries = day_entries_list
+        context['day_entries'] = day_entries
+
+        # paginator
+        context['previous_date'] = week_start - timezone.timedelta(days=7)
+        context['next_date'] = week_start + timezone.timedelta(days=7)
+        return context
+
+
+class WeekEntryNewView(WeekEntryMixin, CreateView):
+    def get_initial(self):
+        initial = super(WeekEntryNewView, self).get_initial()
+        user = self.request.user
+        # journal
+        initial['journal'] = user.journal
+        # template
+        template = user.journal.week_template
+        if template:
+            initial['content'] = template
+        # last entry
+        entry = WeekEntry.objects.latest_for(user)
+        if entry:
+            initial['tags'] = entry.tags.all()
+        # date
+        try:
+            new_date = self.request.GET.get('date')
+        except ValueError:
+            new_date = None
+        if new_date:
+            initial['date'] = new_date
+        return initial
+
+
+class WeekEntryShowView(WeekEntryMixin, DetailView):
+    template_name = "journals/weekentry_show.html"
+
+
+class WeekEntryEditView(WeekEntryMixin, UpdateView):
+    pass
+
+
+class WeekEntryDeleteView(WeekEntryMixin, DeleteView):
+    success_url = reverse_lazy('journals:week')
+    template_name = "confirm_delete.html"
 
 
 class MapView(DayEntryMixin, TemplateView):
@@ -206,5 +288,9 @@ class MapView(DayEntryMixin, TemplateView):
         return super().get(self.request, *args, **kwargs)
 
 
-class EntryChartView(DayEntryMixin, ListView):
+class DayEntryChartView(DayEntryMixin, ListView):
+    template_name = "journals/entry_chart.html"
+
+
+class WeekEntryChartView(WeekEntryMixin, ListView):
     template_name = "journals/entry_chart.html"

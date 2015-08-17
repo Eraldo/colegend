@@ -1,12 +1,13 @@
 {% extends 'page.html' %}
 
 {% load icons %}
+{% load model_name %}
 
 {% block page_title %}
-    Journal Entry Chart
+    Journal {{ view.model|verbose_name }} Chart
 {% endblock %}
 
-{% block up_url %}{% url "journals:dayentry_list" %}{% endblock %}
+{% block up_url %}{% url "journals:index" %}{% endblock %}
 
 {% block extra_head %}
     {{ block.super }}

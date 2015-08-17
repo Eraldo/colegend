@@ -1,0 +1,114 @@
+{% extends 'page.html' %}
+
+{% load icons %}
+
+{% block page_title %}
+    Week
+{% endblock %}
+
+{% block up_url %}{% url "journals:week" %}{% endblock %}
+
+{% block page_title_extras %}
+    {{ week_start }} -- {{ week_end }}
+    <span data-toggle="tooltip" title="Streaks">
+        <span class="streak badge">{% icon "streak" %} {{ streak }} day{{ streak|pluralize }}, {{ week_streak }} month{{ week_streak|pluralize }}</span>
+    </span>
+    <span data-toggle="tooltip" title="Topic of the year">
+        <span class="label label-info">{{ topic_of_the_year }}</span>
+    </span>
+{% endblock %}
+
+{% block page_controls %}
+    <a href="{% url "journals:week" date=previous_date %}" class="btn btn-default"
+       data-toggle="tooltip" title="Week starting {{ previous_date }}"
+       role="button">{% icon "chevron-left" %}
+    </a>
+
+    <a href="{% url "journals:week" date=next_date %}" class="btn btn-default"
+       data-toggle="tooltip" title="Week starting {{ next_date }}"
+       role="button">{% icon "chevron-right" %}
+    </a>
+
+    <a href="{% url "journals:dayentry_continue" %}" class="open-button btn btn-default" role="button" data-toggle="tooltip" title="Create/Continue Today's Entry">
+        Today
+    </a>
+    <a href="{% url "journals:dayentry_new" %}" class="new-button btn btn-default" role="button" data-toggle="tooltip" title="New Entry">
+        {% icon "new" %}
+    </a>
+
+<!-- Perspective dropdown -->
+<div class="btn-group" data-toggle="tooltip" title="Perspective">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Week <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a href="{% url 'journals:dayentry_show' date=date %}">Day</a></li>
+    <li class="disabled"><a href="#">Month</a></li>
+    <li class="disabled"><a href="#">Quater</a></li>
+    <li class="disabled"><a href="#">Year</a></li>
+  </ul>
+</div>
+
+    <a href="{% url "journals:map" %}" class="btn btn-default" role="button" data-toggle="tooltip" title="Travel Map">
+        {% icon "location" %}
+    </a>
+    <a href="{% url "journals:weekentry_chart" %}" class="btn btn-default" data-toggle="tooltip" title="Week Entry Chart">{% icon "chart" %}</a>
+    <a href="{% url "journals:journal_edit" %}" class="btn btn-default pull-right" role="button" data-toggle="tooltip" title="Journal Settings">
+        {% icon "setting" %}
+    </a>
+{% endblock %}
+
+{% block page_content %}
+    <div class="well lead">
+    Week Focus:
+    {% if week_entry %}
+        <a href="{% url 'journals:weekentry_show' date=week_entry.date %}">{{ week_entry.focus }}</a>
+        <div class="pull-right">
+            {% for tag in week_entry.tags.all %}
+                {% include "tags/_tag.html" %}
+            {% endfor %}
+        </div>
+
+    {% else %}
+        <a href="{% url "journals:weekentry_new" %}?date={{ date|date:'c' }}" class="new-button btn btn-default" role="button" data-toggle="tooltip" title="New Entry">
+        {% icon "new" %}
+        </a>
+    {% endif %}
+    </div>
+    <div class="dayentry-list">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Focus</th>
+                <th>Location(s)</th>
+                <th>Tags</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for date, dayentry in day_entries %}
+                <tr>
+                    <td>
+                        <a href="{% url "journals:dayentry_show" date=date %}">{{ date }}</a>
+                        <span class="label bg-category-{{ date|date:"w" }}">{{ date|date:"D" }}</span>
+                        <br>
+                    </td>
+                    <td>
+                        {{ dayentry.focus }}
+                    </td>
+                    <td>
+                        {{ dayentry.location|truncatechars:70 }}
+                    </td>
+                    <td>
+                        {% for tag in dayentry.tags.all %}
+                            {% include "tags/_tag.html" %}
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    {% include "lib/_pager.html" %}
+    </div>
+{% endblock %}

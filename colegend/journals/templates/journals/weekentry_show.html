@@ -1,0 +1,33 @@
+{% extends 'page.html' %}
+{% load icons %}
+
+{% block page_title %}{{ weekentry }}{% endblock %}
+
+{% block page_title_extras %}
+    <span class="label bg-category-{{ date|date:"w" }}">{{ date|date:"D" }}</span>
+{% endblock %}
+
+{% block up_url %}{% url "journals:week" %}{% endblock %}
+
+{% block page_controls %}
+    {% if weekentry %}
+    <a href="{% url 'journals:weekentry_edit' date=weekentry.date %}" class="btn btn-primary" role="button">{% icon "edit" %}</a>
+    <a href="{% url 'journals:weekentry_delete' date=weekentry.date %}" class="btn btn-danger pull-right" role="button">{% icon "delete" %}</a>
+    {% else %}
+    <a href="{% url "journals:weekentry_new" %}?date={{ date|date:"c" }}" class="new-button btn btn-default" role="button" data-toggle="tooltip" title="New Entry: {{ date }}">
+        {% icon "new" %}
+    </a>
+    {% endif %}
+{% endblock %}
+
+{% block page_content %}
+    <div class="well">
+        <div class="pull-right">
+            {% for tag in weekentry.tags.all %}
+                {% include "tags/_tag.html" %}
+            {% endfor %}
+        </div>
+        <h4>{{ weekentry.focus }}</h4>
+        {{ weekentry.content }}
+    </div>
+{% endblock %}

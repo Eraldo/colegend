@@ -1,4 +1,5 @@
 from django.core.exceptions import ValidationError
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import timezone
 from markitup.fields import MarkupField
@@ -20,9 +21,14 @@ class Journal(AutoOwnedBase, models.Model):
     # > owner (pk)
     # > entries
     topic_of_the_year = models.CharField(max_length=100, blank=True)
-    template = models.TextField(
+    day_template = models.TextField(
         blank=True,
-        help_text="The default text to be used as a basis when creating a new journal entry.")
+        help_text="The default text to be used as a basis when creating a new journal day entry.",
+    )
+    week_template = models.TextField(
+        blank=True,
+        help_text="The default text to be used as a basis when creating a new journal week entry.",
+    )
     max_streak = models.IntegerField(default=0)
     max_week_streak = models.IntegerField(default=0)
 
@@ -34,6 +40,10 @@ class Journal(AutoOwnedBase, models.Model):
     @property
     def streak(self):
         return DayEntry.objects.streak_for(self.owner)
+
+    @property
+    def week_streak(self):
+        return WeekEntry.objects.streak_for(self.owner)
 
 
 class DayEntryQuerySet(models.QuerySet):
@@ -110,6 +120,19 @@ class WeekEntryQuerySet(models.QuerySet):
             latest = None
         return latest
 
+    def for_date(self, date):
+        """
+        Return the week entry object belonging to that date.
+        If none is found, nothing is returned.
+
+        :date datetime object
+        """
+        week_start = date - timezone.timedelta(days=date.weekday())
+        week_end = week_start + timezone.timedelta(days=6)
+        queryset = self.filter(date__range=(week_start, week_end))
+        if queryset:
+            return queryset.get()
+
     def streak_for(self, user):
         entries = self.owned_by(user)
         dates = entries.dates('date', kind='day', order="DESC")
@@ -144,7 +167,10 @@ class WeekEntry(ValidateModelMixin, AutoUrlMixin, TrackedBase, TaggableBase, mod
         default_related_name = "week_entries"
 
     def __str__(self):
-        return "{}".format(self.date)
+        return "{} -- {}".format(self.get_first_day(), self.get_last_day())
+
+    def get_absolute_url(self):
+        return reverse('journals:weekentry_show', kwargs={'date':self.date})
 
     def update_streak(self):
         streak = WeekEntry.objects.streak_for(self.journal.owner)
@@ -162,7 +188,7 @@ class WeekEntry(ValidateModelMixin, AutoUrlMixin, TrackedBase, TaggableBase, mod
         date = self.date
         week_entries = self.journal.week_entries
         start = self.get_first_day()
-        end = start + timezone.timedelta(8)
+        end = start + timezone.timedelta(6)
         other_week_entry = week_entries.exclude(pk=self.pk).filter(date__range=(start, end))
         if other_week_entry.exists():
             raise ValidationError("There is already a week entry for this week: {}".format(other_week_entry.get()))
@@ -175,3 +201,10 @@ class WeekEntry(ValidateModelMixin, AutoUrlMixin, TrackedBase, TaggableBase, mod
 
     def get_first_day(self):
         return self.date - timezone.timedelta(days=self.date.weekday())
+
+    def get_last_day(self):
+        return self.get_first_day() + timezone.timedelta(days=6)
+
+    @property
+    def day_entries(self):
+        return self.journal.entries.filter(date__range=(self.get_first_day(), self.get_last_day()))

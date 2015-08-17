@@ -3,6 +3,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, Row
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm, HiddenInput
+from django.utils import timezone
 from django.utils.datetime_safe import datetime
 from markitup.widgets import MarkItUpWidget
 from journals.models import DayEntry, Journal, WeekEntry
@@ -14,15 +15,16 @@ __author__ = 'eraldo'
 class JournalForm(ModelForm):
     class Meta:
         model = Journal
-        fields = ['template', 'topic_of_the_year']
+        fields = ['day_template', 'week_template', 'topic_of_the_year']
         widgets = {
-            'template': MarkItUpWidget(),
+            'day_template': MarkItUpWidget(),
         }
 
     helper = FormHelper()
     helper.layout = Layout(
         Field('topic_of_the_year', autofocus='True'),
-        Field('template'),
+        Field('day_template'),
+        Field('week_template'),
         SaveButton(),
         CancelButton(),
     )
@@ -65,9 +67,10 @@ class WeekEntryForm(ModelForm):
         cleaned_data = super().clean()
         # Check if there is not yet another entry for this week.
         date = cleaned_data["date"]
+        # raise Exception(date)
         # # first/last day of that week
-        first_day = date - datetime.timedelta(days=date.weekday())
-        last_day = first_day + datetime.timedelta(days=7)
+        first_day = date - timezone.timedelta(days=date.weekday())
+        last_day = first_day + timezone.timedelta(days=6)
         other = cleaned_data["journal"].week_entries.filter(
             date__range=(first_day, last_day)).exclude(pk=self.instance.pk)
         if other.exists():

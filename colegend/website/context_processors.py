@@ -24,7 +24,7 @@ def menu(request):
     """A context processor that provides menu_items."""
     menu_items = {
         'mentor': [
-            MenuItem("Journal", url="journals:dayentry_list", icon="journal", keyboard_shortcut='g j'),
+            MenuItem("Journal", url="journals:index", icon="journal", keyboard_shortcut='g j'),
             MenuItem("Gatherings", url="gatherings:home", icon="gathering", keyboard_shortcut='g g'),
             MenuItem("Challenges", url="challenges:challenge_list", icon="challenge", keyboard_shortcut='g c'),
             MenuItem("Dojo", url="dojo:home", icon="dojo", keyboard_shortcut='g d'),

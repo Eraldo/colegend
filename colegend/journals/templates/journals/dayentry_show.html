@@ -8,7 +8,7 @@
     <small>{% icon "location" %} {{ dayentry.location|default:"?" }}</small>
 {% endblock %}
 
-{% block up_url %}{% url "journals:dayentry_list" %}{% endblock %}
+{% block up_url %}{% url "journals:index" %}{% endblock %}
 
 {% block page_controls %}
 
@@ -28,6 +28,22 @@
     <a href="{% url "journals:dayentry_show" date=next_date %}" class="btn btn-default"
        data-toggle="tooltip" title="{{ next_date }}"
        role="button">{% icon "chevron-right" %}</a>
+
+    <!-- Perspective dropdown -->
+    <div class="btn-group" data-toggle="tooltip" title="Perspective">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Day <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a href="{% url 'journals:week' date=date %}">Week</a></li>
+        <li class="disabled"><a href="#">Month</a></li>
+        <li class="disabled"><a href="#">Quater</a></li>
+        <li class="disabled"><a href="#">Year</a></li>
+      </ul>
+    </div>
+
+    <a href="{% url "journals:dayentry_chart" %}" class="btn btn-default"  data-toggle="tooltip" title="Day Entry Chart">{% icon "chart" %}</a>
+
 {% endblock %}
 
 {% block page_content %}
