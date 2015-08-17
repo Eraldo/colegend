@@ -31,7 +31,7 @@ def menu(request):
         MenuItem("Dojo", url="dojo:home", icon="dojo", keyboard_shortcut='g d'),
         MenuItem("Life Vision", url="visions:vision_list", icon="vision", keyboard_shortcut='g v'),
     ]
-    if user.is_tester:
+    if user.is_authenticated() and user.is_tester:
         menu_items['mentor_extra'] = [
         ]
     menu_items['manager'] = [
@@ -41,7 +41,7 @@ def menu(request):
         MenuItem("Tags", url="tags:tag_list", icon="tag", keyboard_shortcut='g x'),
         MenuItem("Trackers", url="trackers:tracker_list", icon="tracker", keyboard_shortcut='g r'),
     ]
-    if user.is_tester:
+    if user.is_authenticated() and user.is_tester:
         menu_items['manager_extra'] = [
             MenuItem("Routines", url="routines:routine_list", icon="routine"),
             MenuItem("Habits", url="habits:habit_list", icon="habit"),
@@ -52,7 +52,7 @@ def menu(request):
         MenuItem("Stats", url="stats:home", icon="stats", keyboard_shortcut='g S'),
         MenuItem("Cards", url="cards:picker", icon="card", keyboard_shortcut='g C'),
     ]
-    if user.is_tester:
+    if user.is_authenticated() and user.is_tester:
         menu_items['motivator_extra'] = [
         ]
     menu_items['operator'] = [
@@ -64,18 +64,18 @@ def menu(request):
         MenuItem("Home", url="home", icon="home", keyboard_shortcut='g h'),
         MenuItem("Features", url="features:feature_list", icon="feature"),
     ]
-    if user.is_tester:
+    if user.is_authenticated() and user.is_tester:
         menu_items['operator_extra'] = [
         ]
     menu_items['account'] = [
         MenuItem("Profile", url="users:detail", arg=request.user, icon="profile", keyboard_shortcut='g u'),
         MenuItem("Settings", url="users:settings", icon="setting", keyboard_shortcut='g *'),
     ]
-    if user.is_manager:
+    if user.is_authenticated() and user.is_manager:
         menu_items['manage'] = [
             MenuItem("Users", url="users:manage", icon="usermanager"),
         ]
-    if user.is_superuser:
+    if user.is_authenticated() and user.is_superuser:
         menu_items['admin'] = [
             MenuItem("Backend", url="admin:index", icon="backend", keyboard_shortcut='g %'),
             MenuItem("Test", url="test", icon="test"),
