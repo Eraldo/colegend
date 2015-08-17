@@ -23,6 +23,11 @@ class AboutView(TemplateView):
         return context
 
 
+class MapView(ActiveUserRequiredMixin, TemplateView):
+    template_name = "website/map.html"
+    icon = "map"
+    tutorial = "Map"
+
 class HomeView(ActiveUserRequiredMixin, TemplateView):
     template_name = "website/home.html"
     login_url = reverse_lazy('about')

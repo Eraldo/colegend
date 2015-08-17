@@ -28,7 +28,7 @@ class ActiveUserRequiredMixin(AccessMixin):
                                          self.get_redirect_field_name())
 
         if not request.user.is_accepted:
-            return redirect("users:inactive")
+            return redirect('users:inactive')
         return super().dispatch(
             request, *args, **kwargs)
 
@@ -65,109 +65,110 @@ class OwnedItemsMixin:
 def get_icon(name):
     icon_map = {
         # mentor
-        "journal": "book",
-        "gathering": "comments-o",
-        "chat": "wechat",
-        "virtual-room": "cube",  # Alternative icons: group cube video-camera
-        "challenge": "star",
-        "dojo": "university",
-        "vision": "eye",
+        'journal': 'book',
+        'gathering': 'comments-o',
+        'chat': 'wechat',
+        'virtual-room': 'cube',  # Alternative icons: group cube video-camera
+        'challenge': 'star',
+        'dojo': 'university',
+        'vision': 'eye',
         # manager
-        "agenda": "crosshairs",
-        "project": "sitemap",
-        "task": "check",
-        "tag": "tag",
-        "routine": "stack-overflow",
-        "habit": "link",
-        "tracker": "line-chart",
-        "chart": "bar-chart",
+        'agenda': 'crosshairs',
+        'project': 'sitemap',
+        'task': 'check',
+        'tag': 'tag',
+        'routine': 'stack-overflow',
+        'habit': 'link',
+        'tracker': 'line-chart',
+        'chart': 'bar-chart',
         # motivator
-        "legend": "paw",
-        "quote": "quote-left",
-        "stats": "dashboard",
-        "card": "image",
+        'map': 'map',
+        'legend': 'paw',
+        'quote': 'quote-left',
+        'stats': 'dashboard',
+        'card': 'image',
         # operator
-        "contact": "envelope",
-        "about": "info-circle",
-        "feature": "road",
-        "home": "home",
-        "news": "newspaper-o",
-        "tutorial": "question-circle",
-        "profile": "user",
-        "setting": "wrench",
-        "usermanager": "user-md",
-        "backend": "database",
-        "test": "code",
-        "search": "search",
-        "info": "info",
-        "avatar": "camera",
-        "email": "at",
-        "social-accounts": "cloud",
-        "password": "lock",
-        "sign-out": "sign-out",
-        "signup": "sign-in",
+        'contact': 'envelope',
+        'about': 'info-circle',
+        'feature': 'road',
+        'home': 'home',
+        'news': 'newspaper-o',
+        'tutorial': 'question-circle',
+        'profile': 'user',
+        'setting': 'wrench',
+        'usermanager': 'user-md',
+        'backend': 'database',
+        'test': 'code',
+        'search': 'search',
+        'info': 'info',
+        'avatar': 'camera',
+        'email': 'at',
+        'social-accounts': 'cloud',
+        'password': 'lock',
+        'sign-out': 'sign-out',
+        'signup': 'sign-in',
         # notifications
-        "notification-unread": "bell",
-        "notification": "bell-o",
-        "mark_read": "bell-slash",
+        'notification-unread': 'bell',
+        'notification': 'bell-o',
+        'mark_read': 'bell-slash',
         # controls
-        "back": "arrow-left",
-        "new": "plus",
-        "edit": "pencil",
-        "delete": "trash",
-        "cancel": "times",
-        "remove": "remove",
-        "manage": "asterisk",
-        "accept": "check-circle",
+        'back': 'arrow-left',
+        'new': 'plus',
+        'edit': 'pencil',
+        'delete': 'trash',
+        'cancel': 'times',
+        'remove': 'remove',
+        'manage': 'asterisk',
+        'accept': 'check-circle',
         # fields
-        "location": "map-marker",
-        "date": "calendar",
-        "deadline": "calendar-o",
-        "description": "file-text-o",
+        'location': 'map-marker',
+        'date': 'calendar',
+        'deadline': 'calendar-o',
+        'description': 'file-text-o',
         # statuses
-        "next": "dot-circle-o",
-        "todo": "circle-o",
-        "waiting": "clock-o",
-        "someday": "circle-o-notch",
-        "maybe": "circle-thin",
-        "done": "check-circle-o",
-        "canceled": "times-circle-o",
+        'next': 'dot-circle-o',
+        'todo': 'circle-o',
+        'waiting': 'clock-o',
+        'someday': 'circle-o-notch',
+        'maybe': 'circle-thin',
+        'done': 'check-circle-o',
+        'canceled': 'times-circle-o',
         # categories
-        "category-7": "moon-o",
-        "category-6": "graduation-cap",  # alternatives: lightbulb-o",
-        "category-5": "child",
-        "category-4": "leaf",
-        "category-3": "credit-card",
-        "category-2": "film",  # alternatives: gamepad
-        "category-1": "heart-o",  # alternatives: cutlery
+        'category-7': 'moon-o',
+        'category-6': 'graduation-cap',  # alternatives: lightbulb-o',
+        'category-5': 'child',
+        'category-4': 'leaf',
+        'category-3': 'credit-card',
+        'category-2': 'film',  # alternatives: gamepad
+        'category-1': 'heart-o',  # alternatives: cutlery
         # other
-        "streak": "link",
-        "share": "share",
-        "prompt": "chevron-right",
-        "quick-command": "asterisk",
-        "locked": "lock",
+        'streak': 'link',
+        'share': 'share',
+        'prompt': 'chevron-right',
+        'quick-command': 'asterisk',
+        'locked': 'lock',
         # trackers
-        "rating": "star",
-        "number": "slack",
-        "sleep": "bed",
-        "weight": "dashboard",
-        "sex": "user-times",
-        "transaction": "money",
-        "walk": "tree",
-        "joke": "smile-o",
-        "dream": "picture-o",
+        'rating': 'star',
+        'number': 'slack',
+        'sleep': 'bed',
+        'weight': 'dashboard',
+        'sex': 'user-times',
+        'transaction': 'money',
+        'walk': 'tree',
+        'joke': 'smile-o',
+        'dream': 'picture-o',
     }
     if name in icon_map:
         name = icon_map.get(name)
-    return mark_safe("""<i class="fa fa-{}"></i>""".format(name))
+    return mark_safe("""<i class='fa fa-{}'></i>""".format(name))
 
 
 def get_sound(name):
     sound_map = {
-        "task-success": "task-success.wav",
-        "project-success": "project-success.mp3",
+        'task-success': 'task-success.wav',
+        'project-success': 'project-success.mp3',
     }
     if name in sound_map:
-        context = {"sound": name, "STATIC_URL": settings.STATIC_URL, "file": sound_map[name]}
-        return render_to_string("lib/_audio.html", dictionary=context)
+        context = {'sound': name, 'STATIC_URL': settings.STATIC_URL, 'file': sound_map[name]}
+        return render_to_string('lib/_audio.html', dictionary=context)
 
