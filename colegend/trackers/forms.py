@@ -1,3 +1,4 @@
+from crispy_forms.bootstrap import AppendedText
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, Row, HTML, Div
 from django.forms import ModelForm
@@ -89,7 +90,7 @@ class WeightForm(ModelForm):
     helper = FormHelper()
     helper.layout = Layout(
         Field('time'),
-        Field('weight', autofocus='True'),
+        AppendedText('weight', 'kg', autofocus='True', help_text=''),
         Field('notes', rows=2),
         SaveButton(),
         CancelButton(),
