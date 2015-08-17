@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError, SuspiciousOperation
 from django.db import models
+from django.db.models import DurationField
 from django.db.models.query import QuerySet
 from django.utils import timezone
 from markitup.fields import MarkupField
@@ -29,6 +30,7 @@ class Task(ValidateModelMixin, AutoUrlMixin, OwnedBase, StatusTrackedBase, Track
     status = models.ForeignKey(Status, default=Status.DEFAULT_PK)
     date = models.DateField(blank=True, null=True, help_text="When will I start/continue?")
     deadline = models.DateField(blank=True, null=True)
+    time_estimate = DurationField(blank=True, null=True, help_text='DD HH:MM:SS')
 
     category = models.ForeignKey(Category, blank=True, null=True)
 

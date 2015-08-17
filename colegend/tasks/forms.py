@@ -13,7 +13,9 @@ __author__ = 'eraldo'
 class TaskForm(ModelForm):
     class Meta:
         model = Task
-        fields = ['owner', 'project', 'name', 'description', 'status', 'date', 'deadline', 'tags', 'category']
+        fields = ['owner', 'project',
+                  'name', 'description',
+                  'status', 'date', 'deadline', 'time_estimate', 'category', 'tags']
         widgets = {
             'description': MarkItUpWidget(),
             'tags': MultipleChoiceWidget(autocomplete="TagAutocomplete"),
@@ -43,8 +45,9 @@ class TaskForm(ModelForm):
         Field('description'),
         Row(
             Field('status', wrapper_class="col-md-3"),
-            Field('date', wrapper_class="col-md-3"),
-            Field('deadline', wrapper_class="col-md-3"),
+            Field('date', wrapper_class="col-md-2"),
+            Field('deadline', wrapper_class="col-md-2"),
+            Field('time_estimate', wrapper_class="col-md-2"),
             Field('category', wrapper_class="col-md-3"),
         ),
         Field('tags'),

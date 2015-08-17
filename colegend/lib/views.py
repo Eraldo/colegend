@@ -124,6 +124,7 @@ def get_icon(name):
         'location': 'map-marker',
         'date': 'calendar',
         'deadline': 'calendar-o',
+        'time-estimate': 'clock-o',
         'description': 'file-text-o',
         # statuses
         'next': 'dot-circle-o',

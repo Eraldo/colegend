@@ -14,6 +14,7 @@
     <div class="task-context pull-right">
         {% include "lib/_date_field.html" with date=task.date %}
         {% include "lib/_deadline_field.html" with deadline=task.deadline %}
+        {% include "lib/_time_estimate_field.html" with time_estimate=task.time_estimate %}
         {% include "projects/_project_field.html" with project=task.project %}
     </div>
     {% include "lib/_description_field.html" with description=task.description %}
