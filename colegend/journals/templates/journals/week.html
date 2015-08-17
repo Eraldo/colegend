@@ -32,7 +32,7 @@
     <a href="{% url "journals:dayentry_continue" %}" class="open-button btn btn-default" role="button" data-toggle="tooltip" title="Create/Continue Today's Entry">
         Today
     </a>
-    <a href="{% url "journals:dayentry_new" %}" class="new-button btn btn-default" role="button" data-toggle="tooltip" title="New Entry">
+    <a href="{% url "journals:dayentry_new" %}" class="new-button btn btn-default" role="button" data-toggle="tooltip" title="New Day Entry">
         {% icon "new" %}
     </a>
 
@@ -70,7 +70,7 @@
         </div>
 
     {% else %}
-        <a href="{% url "journals:weekentry_new" %}?date={{ date|date:'c' }}" class="new-button btn btn-default" role="button" data-toggle="tooltip" title="New Entry">
+        <a href="{% url "journals:weekentry_new" %}?date={{ date|date:'c' }}" class="new-button btn btn-default" role="button" data-toggle="tooltip" title="New Week Entry">
         {% icon "new" %}
         </a>
     {% endif %}
