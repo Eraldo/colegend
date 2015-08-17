@@ -169,7 +169,7 @@ class RatingData(BaseData):
 
 class Weight(OwnedBase, AutoUrlMixin, TimeStampedBase):
     time = models.DateTimeField(default=timezone.now)
-    weight = models.PositiveSmallIntegerField()
+    weight = models.DecimalField(max_digits=5, decimal_places=2, help_text="Weight in kilograms.")
     notes = models.TextField(blank=True)
 
     objects = TrackerQuerySet.as_manager()
