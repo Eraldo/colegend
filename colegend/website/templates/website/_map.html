@@ -4,7 +4,7 @@
             {% if menu_items %}
                 {% for menu_item in menu_items %}
                         <div class="col-xs-3">
-                        <a id="{{ menu_item|slugify }}-menu-item" href="
+                        <a id="{{ menu_item|slugify }}-map-item" href="
                                 {% if menu_item.arg %}
                                     {% url menu_item.url menu_item.arg %}
                                 {% else %}
