@@ -57,7 +57,7 @@ function keyboard_refresh() {
 function keyboard_menu(target) {
     switch(target) {
     case 'map':
-        document.getElementById('map').click();
+        $('#map-modal').modal('toggle');
         break;
     case 'menu':
         // focus the main menu
