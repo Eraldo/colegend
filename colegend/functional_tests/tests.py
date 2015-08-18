@@ -12,7 +12,7 @@ class ViewTests(LiveServerTestCase):
     def setUpClass(cls):
         cls.browser = WebDriver()
         # TODO: remove
-        cls.browser.implicitly_wait(6)
+        # cls.browser.implicitly_wait(6)
         super().setUpClass()
 
     @classmethod
