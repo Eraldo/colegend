@@ -20,7 +20,6 @@ class ViewTests(LiveServerTestCase):
 
     def setUp(self):
         self.user = UserFactory(is_superuser=True, is_staff=True)
-        self.browser.maximize_window()
 
     def login_user(self, username, password):
         browser = self.browser
@@ -68,6 +67,9 @@ class ViewTests(LiveServerTestCase):
 
         ## He clicks clicks on the area which says "Nope, I am new here ..."
         browser.find_element_by_id("signup_choice").click()
+
+        # Page load can take some time.
+        browser.implicitly_wait(2)
 
         ## He clicks clicks on the button which says "How can I join?"
         browser.find_element_by_id("signup").click()
