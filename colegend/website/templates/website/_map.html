@@ -3,22 +3,26 @@
         {% for menu_type, menu_items in menu_items.items %}
             {% if menu_items %}
                 {% for menu_item in menu_items %}
-                    <div class="col-xs-3">
+                        <div class="col-xs-3">
                         <a id="{{ menu_item|slugify }}-menu-item" href="
-                            {% if menu_item.arg %}
-                                {% url menu_item.url menu_item.arg %}
-                            {% else %}
-                                {% url menu_item.url %}
-                            {% endif %}"
-                                {% if user.settings.keyboard and menu_item.keyboard_shortcut %}
-                           data-toggle="tooltip" title="Shortcut: {{ menu_item.keyboard_shortcut }}"
-                                {% endif %}>
+                                {% if menu_item.arg %}
+                                    {% url menu_item.url menu_item.arg %}
+                                {% else %}
+                                    {% url menu_item.url %}
+                                {% endif %}">
                             {% if menu_item.icon %}
-                                <h1>{{ menu_item.icon }}</h1>
+                                <h1>
+                                    <span class="label label-default bg-{{ menu_type }}"
+                                        {% if user.settings.keyboard and menu_item.keyboard_shortcut %}
+                                            data-toggle="tooltip" title="Shortcut: {{ menu_item.keyboard_shortcut }}"
+                                        {% endif %}>
+                                        {{ menu_item.icon }}
+                                    </span>
+                                </h1>
                             {% endif %}
                             <span style="white-space: nowrap">{{ menu_item }}</span>
                         </a>
-                    </div>
+                        </div>
                 {% endfor %}
             {% endif %}
         {% endfor %}

@@ -14,28 +14,7 @@
     <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
     <div class="well text-center">
         <div class="row">
-        {% for menu_type, menu_items in menu_items.items %}
-            {% if menu_items %}
-                {% for menu_item in menu_items %}
-                        <div class="col-xs-3">
-                        <a id="{{ menu_item|slugify }}-menu-item" href="
-                                {% if menu_item.arg %}
-                                    {% url menu_item.url menu_item.arg %}
-                                {% else %}
-                                    {% url menu_item.url %}
-                                {% endif %}"
-                            {% if user.settings.keyboard and menu_item.keyboard_shortcut %}
-                                data-toggle="tooltip" title="Shortcut: {{ menu_item.keyboard_shortcut }}"
-                            {% endif %}>
-                            {% if menu_item.icon %}
-                                <h1>{{ menu_item.icon }}</h1>
-                            {% endif %}
-                            <span style="white-space: nowrap">{{ menu_item }}</span>
-                        </a>
-                        </div>
-                {% endfor %}
-            {% endif %}
-        {% endfor %}
+            {% include "website/_map.html" %}
         </div>
     </div>
     </div>
