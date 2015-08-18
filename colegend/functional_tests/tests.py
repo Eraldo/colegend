@@ -11,7 +11,6 @@ class ViewTests(LiveServerTestCase):
     @classmethod
     def setUpClass(cls):
         cls.browser = WebDriver()
-        cls.browser.maximize_window()
         super().setUpClass()
 
     @classmethod
@@ -21,6 +20,7 @@ class ViewTests(LiveServerTestCase):
 
     def setUp(self):
         self.user = UserFactory(is_superuser=True, is_staff=True)
+        self.browser.maximize_window()
 
     def login_user(self, username, password):
         browser = self.browser
