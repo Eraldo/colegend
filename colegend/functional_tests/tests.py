@@ -64,12 +64,10 @@ class ViewTests(LiveServerTestCase):
 
         ## Max opens his browser and goes to the login page.
         browser.get(self.live_server_url + reverse("account_login"))
+        browser.maximize_window()
 
         ## He clicks clicks on the area which says "Nope, I am new here ..."
         browser.find_element_by_id("signup_choice").click()
-
-        # Page load can take some time.
-        browser.implicitly_wait(2)
 
         ## He clicks clicks on the button which says "How can I join?"
         browser.find_element_by_id("signup").click()
