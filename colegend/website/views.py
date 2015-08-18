@@ -24,7 +24,7 @@ class AboutView(TemplateView):
 
 
 class MapView(ActiveUserRequiredMixin, TemplateView):
-    template_name = "website/map.html"
+    template_name = "website/_map.html"
     icon = "map"
     tutorial = "Map"
 

@@ -38,8 +38,7 @@ function _click_selected_or_global_button(button_class) {
 }
 
 function keyboard_help() {
-    // Redirect to the keyboard tutorial.
-    window.open(keyboard_tutorial_url); // This variable needs to be set before this script.
+    $('#keyboard-modal').modal('toggle').find('.modal-body').load(keyboard_tutorial_url)
 }
 function keyboard_deselect() {
     // Deselect currently selected item.
@@ -55,16 +54,22 @@ function keyboard_deselect() {
 function keyboard_refresh() {
     location.reload();
 }
-function keyboard_menu(main) {
-    if (main) {
+function keyboard_menu(target) {
+    switch(target) {
+    case 'map':
+        document.getElementById('map').click();
+        break;
+    case 'menu':
         // focus the main menu
         $("#menu a")[0].focus();
-    } else {
+        break;
+    case 'page':
         // focus the page menu
         var page_menu = $("#page-menu .btn")[0];
         if (page_menu) {
             page_menu.focus();
         }
+        break;
     }
 }
 

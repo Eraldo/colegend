@@ -24,11 +24,15 @@ BINDINGS = [
     },
     {
         'keys': 'm',
-        'command': 'keyboard_menu()',
+        'command': 'keyboard_menu(target="map")',
     },
     {
         'keys': 'M',
-        'command': 'keyboard_menu(main=true)',
+        'command': 'keyboard_menu(target="menu")',
+    },
+    {
+        'keys': 'p',
+        'command': 'keyboard_menu(target="page")',
     },
 
     {

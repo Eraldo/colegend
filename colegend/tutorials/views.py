@@ -57,3 +57,9 @@ class TutorialRedirectView(RedirectView):
         except Tutorial.DoesNotExist:
             raise Http404
 
+
+class KeyboardTutorialView(DetailView):
+    template_name = "tutorials/_tutorial.html"
+
+    def get_object(self, queryset=None):
+        return Tutorial.objects.get(name="Keyboard")

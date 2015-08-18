@@ -1,9 +1,6 @@
 from django.conf.urls import patterns, url
-from django.core.urlresolvers import reverse_lazy
-from django.views.generic import RedirectView
-from tutorials.models import Tutorial
 from tutorials.views import TutorialListView, TutorialCreateView, TutorialShowView, TutorialEditView, \
-    TutorialDeleteView, TutorialRedirectView
+    TutorialDeleteView, TutorialRedirectView, KeyboardTutorialView
 
 __author__ = 'eraldo'
 
@@ -38,7 +35,7 @@ urlpatterns = patterns(
 
     # ex: ../keyboard/
     url(r'^keyboard/$',
-        TutorialRedirectView.as_view(name="Keyboard"),
+        KeyboardTutorialView.as_view(),
         name='keyboard'),
 
     # ex: ../quick-commands/

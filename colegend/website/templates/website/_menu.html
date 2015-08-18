@@ -1,6 +1,25 @@
 {% load bootstrap3 %}
 {% load avatar_tags %}
 {% load icons %}
+<!-- Map Modal -->
+<div class="modal fade" id="map-modal" tabindex="-1" role="dialog" aria-labelledby="map-modal-label">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-body" style="max-height: calc(100vh - 60px); overflow-y: auto;">
+        </div>
+    </div>
+  </div>
+</div>
+<!-- Keyboard Modal -->
+<div class="modal fade" id="keyboard-modal" tabindex="-1" role="dialog" aria-labelledby="keyboard-modal-label">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+        <div class="modal-body" style="max-height: calc(100vh - 60px); overflow-y: auto;">
+        </div>
+    </div>
+  </div>
+</div>
+
 <!-- Fixed navbar -->
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
@@ -22,7 +41,8 @@
                     {% include 'website/_menu_item.html' %}
                 {% endfor %}
 
-                <li><a href="{% url 'map' %}">{% icon "map" %}&nbsp;Map</a></li>
+                <!-- Map button trigger modal -->
+                <li><a id="map" href="{% url 'map' %}" data-toggle="modal" data-target="#map-modal">{% icon "map" %}&nbsp;Map</a></li>
 
                 <li class="dropdown" data-placement="bottom" data-toggle="tooltip" title="Mentor Menu">
                     <a id="mentor-menu" href="#" class="dropdown-toggle" data-toggle="dropdown"><i
