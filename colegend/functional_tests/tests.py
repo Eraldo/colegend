@@ -11,6 +11,7 @@ class ViewTests(LiveServerTestCase):
     @classmethod
     def setUpClass(cls):
         cls.browser = WebDriver()
+        cls.browser.maximize_window()
         super().setUpClass()
 
     @classmethod
