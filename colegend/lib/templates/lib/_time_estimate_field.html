@@ -1,10 +1,11 @@
 {% load icons %}
+{% load intuitive_duration %}
 
 <div class="time-estimate-field inline {% if not time_estimate %}field-placeholder{% endif %}">
     {% icon "time-estimate" %}
     {% if time_estimate %}
-        <span class="time-estimate" data-toggle="tooltip" title="Estimated Time: {{ time_estimate }}">
-            {{ time_estimate }}
+        <span class="time-estimate" data-toggle="tooltip" title="Estimated Time: {{ time_estimate|intuitive_duration }}">
+            {{ time_estimate|intuitive_duration }}
         </span>
     {% endif %}
 </div>
