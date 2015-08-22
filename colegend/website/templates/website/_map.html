@@ -12,7 +12,7 @@
                                 {% endif %}">
                                 <span class="text-category-{{ menu_item.category }}"
                                         {% if user.settings.keyboard and menu_item.keyboard_shortcut %}
-                                      data-toggle="tooltip" data-placement="bottom" title="Shortcut: {{ menu_item.keyboard_shortcut }}"
+                                      data-toggle="tooltip" title="Shortcut: {{ menu_item.keyboard_shortcut }}"
                                         {% endif %}>
                                     {% if menu_item.icon %}
                                         <h4>
