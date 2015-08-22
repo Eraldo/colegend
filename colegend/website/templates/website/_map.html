@@ -9,11 +9,11 @@
                                     {% url menu_item.url menu_item.arg %}
                                 {% else %}
                                     {% url menu_item.url %}
-                                {% endif %}">
-                                <span class="text-category-{{ menu_item.category }}"
-                                        {% if user.settings.keyboard and menu_item.keyboard_shortcut %}
-                                      data-toggle="tooltip" title="Shortcut: {{ menu_item.keyboard_shortcut }}"
-                                        {% endif %}>
+                                {% endif %}"
+                                {% if user.settings.keyboard and menu_item.keyboard_shortcut %}
+                                    data-toggle="tooltip" data-placement="bottom" title="Shortcut: {{ menu_item.keyboard_shortcut }}"
+                                {% endif %}>
+                                <span class="text-category-{{ menu_item.category }}">
                                     {% if menu_item.icon %}
                                         <h4>
                                         <span class="fa-stack fa-lg">
