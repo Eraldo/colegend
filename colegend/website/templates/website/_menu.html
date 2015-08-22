@@ -3,22 +3,22 @@
 {% load icons %}
 <!-- Map Modal -->
 <div class="modal fade" id="map-modal" tabindex="-1" role="dialog" aria-labelledby="map-modal-label">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-body">
-        {% include "website/_map.html" %}
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div id='map' class="modal-body">
+                {% include "website/_map.html" %}
+            </div>
         </div>
     </div>
-  </div>
 </div>
 <!-- Keyboard Modal -->
 <div class="modal fade" id="keyboard-modal" tabindex="-1" role="dialog" aria-labelledby="keyboard-modal-label">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-        <div class="modal-body" style="max-height: calc(100vh - 60px); overflow-y: auto;">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body" style="max-height: calc(100vh - 60px); overflow-y: auto;">
+            </div>
         </div>
     </div>
-  </div>
 </div>
 
 <!-- Fixed navbar -->
@@ -44,96 +44,13 @@
 
                 <!-- Map button trigger modal -->
                 <li><a id="map" href="#" data-toggle="modal" data-target="#map-modal">{% icon "map" %}&nbsp;Map</a></li>
-
-                <li class="dropdown" data-placement="bottom" data-toggle="tooltip" title="Mentor Menu">
-                    <a id="mentor-menu" href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="fa fa-rocket"></i> Mentor</a>
-                    <ul class="dropdown-menu">
-                        {% for menu_item in menu_items.mentor %}
-                            {% include 'website/_menu_item.html' %}
-                        {% endfor %}
-                        {% if user.is_tester and menu_items.mentor_extra %}
-                            <li class="divider"></li>
-                            <li class="dropdown-header">Experimental</li>
-                            {% for menu_item in menu_items.mentor_extra %}
-                                {% include 'website/_menu_item.html' %}
-                            {% endfor %}
-                        {% endif %}
-
-                    </ul>
-                </li>
-                <li class="dropdown" data-placement="bottom" data-toggle="tooltip" title="Manager Menu">
-                    <a id="manager-menu" href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="fa fa-briefcase"></i> Manager</a>
-                    <ul class="dropdown-menu">
-                        {% for menu_item in menu_items.manager %}
-                            {% include 'website/_menu_item.html' %}
-                        {% endfor %}
-                        {% if user.is_tester and menu_items.manager_extra %}
-                            <li class="divider"></li>
-                            <li class="dropdown-header">Experimental</li>
-                            {% for menu_item in menu_items.manager_extra %}
-                                {% include 'website/_menu_item.html' %}
-                            {% endfor %}
-                        {% endif %}
-
-                    </ul>
-                </li>
-                <li class="dropdown" data-placement="bottom" data-toggle="tooltip" title="Motivator Menu">
-                    <a id="motivator-menu" href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="fa fa-smile-o"></i>
-                        Motivator</a>
-                    <ul class="dropdown-menu">
-                        {% for menu_item in menu_items.motivator %}
-                            {% include 'website/_menu_item.html' %}
-                        {% endfor %}
-                        {% if user.is_tester and menu_items.motivator_extra %}
-                            <li class="divider"></li>
-                            <li class="dropdown-header">Experimental</li>
-                            {% for menu_item in menu_items.motivator_extra %}
-                                {% include 'website/_menu_item.html' %}
-                            {% endfor %}
-                        {% endif %}
-                    </ul>
-                </li>
-                <li class="dropdown" data-placement="bottom" data-toggle="tooltip" title="Operator Menu">
-                    <a id="operator-menu" href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="fa fa-desktop"></i>
-                        Operator</a>
-                    <ul class="dropdown-menu">
-                        {% for menu_item in menu_items.operator %}
-                            {% include 'website/_menu_item.html' %}
-                        {% endfor %}
-                        {% if user.is_tester and menu_items.operator_extra %}
-                            <li class="divider"></li>
-                            <li class="dropdown-header">Experimental</li>
-                            {% for menu_item in menu_items.operator_extra %}
-                                {% include 'website/_menu_item.html' %}
-                            {% endfor %}
-                        {% endif %}
-                        {% if user.is_manager %}
-                            <li class="divider"></li>
-                            <li class="dropdown-header">Manage</li>
-                            {% for menu_item in menu_items.manage %}
-                                {% include 'website/_menu_item.html' %}
-                            {% endfor %}
-                        {% endif %}
-                        {% if user.is_superuser %}
-                            <li class="divider"></li>
-                            <li class="dropdown-header">Admin</li>
-                            {% for menu_item in menu_items.admin %}
-                                {% include 'website/_menu_item.html' %}
-                            {% endfor %}
-                        {% endif %}
-                    </ul>
-                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
 
                 <li class="dropdown" data-placement="bottom" data-toggle="tooltip" title="Search">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
                             class="glyphicon glyphicon-search"></i></a>
-                    <ul id="global-search-box" class="dropdown-menu" style="padding:12px;">
+                    <ul id="global-search-box" class="dropdown-menu">
 
                         <form id="global-search" action="{% url 'search' %}" method="GET">
                             <div class="input-group">

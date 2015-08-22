@@ -91,11 +91,18 @@ input#global-search-input {
 
 #global-search-box {
     position: fixed;
+    top: inherit;
+    padding:12px;
 }
 
 #menu .dropdown-menu {
     /* place drowdown over the tooltip */
     z-index: 1100;
+}
+
+.map-item.active {
+    background: lightgrey;
+    border-radius: 20px;
 }
 
 /* end menu */

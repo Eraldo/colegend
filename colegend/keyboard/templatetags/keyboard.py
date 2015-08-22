@@ -79,44 +79,44 @@ BINDINGS = [
     # Operator
     {
         'keys': 'g m',  # go contact
-        'command': 'contact-menu-item',
+        'command': 'contact-map-item',
         'action': 'link_id'
     },
     {
         'keys': 'g n',  # go news
-        'command': 'news-menu-item',
+        'command': 'news-map-item',
         'action': 'link_id'
     },
     {
         'keys': 'g ?',  # go tutorials
-        'command': 'tutorials-menu-item',
+        'command': 'tutorials-map-item',
         'action': 'link_id'
     },
     {
         'keys': 'g s',  # go search
-        'command': 'search-menu-item',
+        'command': 'search-map-item',
         'action': 'link_id'
     },
     {
         'keys': 'g h',  # go home
-        'command': 'home-menu-item',
+        'command': 'home-map-item',
         'action': 'link_id'
     },
     {
         'keys': 'g %',  # go backend
-        'command': 'backend-menu-item',
+        'command': 'backend-map-item',
         'action': 'link_id'
     },
 
 
     {
         'keys': 'g u',  # go profile
-        'command': 'profile-menu-item',
+        'command': 'profile-map-item',
         'action': 'link_id'
     },
     {
         'keys': 'g *',  # go settings
-        'command': 'settings-menu-item',
+        'command': 'settings-map-item',
         'action': 'link_id'
     },
     {
@@ -132,76 +132,76 @@ BINDINGS = [
     # Mentor
     {
         'keys': 'g j',  # go journal
-        'command': 'journal-menu-item',
+        'command': 'journal-map-item',
         'action': 'link_id'
     },
     {
         'keys': 'g g',  # go gatherings
-        'command': 'gatherings-menu-item',
+        'command': 'gatherings-map-item',
         'action': 'link_id'
     },
     {
         'keys': 'g c',  # go challenges
-        'command': 'challenges-menu-item',
+        'command': 'challenges-map-item',
         'action': 'link_id'
     },
     {
         'keys': 'g d',  # go dojo
-        'command': 'dojo-menu-item',
+        'command': 'dojo-map-item',
         'action': 'link_id'
     },
     {
         'keys': 'g v',  # go vision
-        'command': 'life-vision-menu-item',
+        'command': 'life-vision-map-item',
         'action': 'link_id'
     },
 
     # Manager
     {
         'keys': 'g a',  # go agenda
-        'command': 'agenda-menu-item',
+        'command': 'agenda-map-item',
         'action': 'link_id'
     },
     {
         'keys': 'g p',  # go projects
-        'command': 'projects-menu-item',
+        'command': 'projects-map-item',
         'action': 'link_id'
     },
     {
         'keys': 'g t',  # go tasks
-        'command': 'tasks-menu-item',
+        'command': 'tasks-map-item',
         'action': 'link_id'
     },
     {
         'keys': 'g x',  # go tags
-        'command': 'tags-menu-item',
+        'command': 'tags-map-item',
         'action': 'link_id'
     },
     {
         'keys': 'g r',  # go trackers
-        'command': 'trackers-menu-item',
+        'command': 'trackers-map-item',
         'action': 'link_id'
     },
 
     # Motivator
     {
         'keys': 'g l',  # go legend
-        'command': 'legend-menu-item',
+        'command': 'legend-map-item',
         'action': 'link_id'
     },
     {
         'keys': 'g q',  # go quotes
-        'command': 'quotes-menu-item',
+        'command': 'quotes-map-item',
         'action': 'link_id'
     },
     {
         'keys': 'g S',  # go quotes
-        'command': 'stats-menu-item',
+        'command': 'stats-map-item',
         'action': 'link_id'
     },
     {
         'keys': 'g C',  # go cards
-        'command': 'cards-menu-item',
+        'command': 'cards-map-item',
         'action': 'link_id'
     },
     # {

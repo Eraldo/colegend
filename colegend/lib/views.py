@@ -62,7 +62,7 @@ class OwnedItemsMixin:
         return super(OwnedItemsMixin, self).get_queryset().owned_by(self.request.user)
 
 
-def get_icon(name):
+def get_icon(name, raw=False):
     icon_map = {
         # mentor
         'journal': 'book',
@@ -161,6 +161,8 @@ def get_icon(name):
     }
     if name in icon_map:
         name = icon_map.get(name)
+    if raw:
+        return name
     return mark_safe("""<i class='fa fa-{}'></i>""".format(name))
 
 
