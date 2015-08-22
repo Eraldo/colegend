@@ -8,7 +8,7 @@
 # ignore local files
 local
 local.*
-local_*.*
+local_*
 
 # ignore virtual environment
 env
