@@ -122,12 +122,7 @@ def update_bower():
 
 @task
 def backup():
-    if env['local']:
-        print_command('backup')
-        from local_scripts.db_backup import run as backup_task
-        backup_task()
-    else:
-        run('python ../local/db_backup.py')
+    run('python ../local/db_backup.py')
 
 
 @task
@@ -151,6 +146,7 @@ def deploy():
     migrate()
     restart()
     print_command("Done")
+
 
 # SCRIPT START
 
