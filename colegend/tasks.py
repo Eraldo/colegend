@@ -136,6 +136,11 @@ def shell():
     run('./manage.py shell_plus --settings=configuration.settings.{}'.format(env['domain']))
 
 
+def db_pull():
+    if env['local']:
+        run('python ../local/db_pull.py')
+
+
 # TASKS
 
 @task

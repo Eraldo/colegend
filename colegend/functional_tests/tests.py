@@ -70,6 +70,7 @@ class ViewTests(LiveServerTestCase):
         browser.find_element_by_id("signup_choice").click()
 
         ## He clicks clicks on the button which says "How can I join?"
+        browser.maximize_window() # bug?
         browser.find_element_by_id("signup").click()
 
         # Preparing data for Max.
