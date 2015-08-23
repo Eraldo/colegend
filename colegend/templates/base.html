@@ -19,9 +19,7 @@
     {% block header %}{% endblock %}
     <div id="menu">
         {% block menu %}
-            {% if user.is_authenticated %}
                 {% include "website/_menu.html" %}
-            {% endif %}
         {% endblock %}
     </div>
     <div id="messages">
