@@ -207,9 +207,9 @@ class WeekView(DayEntryMixin, TemplateView):
         context['topic_of_the_year'] = self.request.user.journal.topic_of_the_year
 
         # week entry
-        week_entry = WeekEntry.objects.owned_by(self.request.user).for_date(date)
-        if week_entry:
-            context['week_entry'] = week_entry
+        weekentry = WeekEntry.objects.owned_by(self.request.user).for_date(date)
+        if weekentry:
+            context['weekentry'] = weekentry
 
         # day entries
         day_entries = DayEntry.objects.owned_by(self.request.user).filter(date__range=(week_start, week_end))
