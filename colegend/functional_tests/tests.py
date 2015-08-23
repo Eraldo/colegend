@@ -1,4 +1,3 @@
-from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.core import mail
 from django.core.urlresolvers import reverse
 from django.test import LiveServerTestCase
@@ -21,8 +20,7 @@ class ViewTests(LiveServerTestCase):
 
     def setUp(self):
         self.user = UserFactory(is_superuser=True, is_staff=True)
-        self.browser.implicitly_wait(10)
-        self.browser.maximize_window()
+        # self.browser.implicitly_wait(10)
 
     def login_user(self, username, password):
         browser = self.browser
