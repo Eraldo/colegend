@@ -1,16 +1,17 @@
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.core import mail
 from django.core.urlresolvers import reverse
-from django.test import LiveServerTestCase
 from selenium.webdriver.firefox.webdriver import WebDriver
 from users.tests.test_models import UserFactory
 
 __author__ = 'eraldo'
 
 
-class ViewTests(LiveServerTestCase):
+class ViewTests(StaticLiveServerTestCase):
     @classmethod
     def setUpClass(cls):
         cls.browser = WebDriver()
+        cls.browser.implicitly_wait(1)
         super().setUpClass()
 
     @classmethod
@@ -42,7 +43,7 @@ class ViewTests(LiveServerTestCase):
 
         ## The user goes to the logout page.
         browser.get(self.live_server_url + reverse("account_logout"))
-        self.assertEqual("Sign Out", browser.title)
+        self.assertEqual("Goodbye", browser.title)
 
         ## He logs out.
         browser.find_element_by_id("sign_out").click()
@@ -70,7 +71,6 @@ class ViewTests(LiveServerTestCase):
         browser.find_element_by_id("signup_choice").click()
 
         ## He clicks clicks on the button which says "How can I join?"
-        browser.maximize_window() # bug?
         browser.find_element_by_id("signup").click()
 
         # Preparing data for Max.
@@ -155,11 +155,11 @@ class ViewTests(LiveServerTestCase):
         ## Huge is now on his welcome page.
         self.assertIn("Welcome Hugodoe", browser.title)
 
-        ## He clicks on the operator dropdown menu.
-        browser.find_element_by_id("operator-menu").click()
+        ## He clicks on the map menu.
+        browser.find_element_by_id('map-toggle').click()
 
         ## He clicks on the manage users sub-menu.
-        browser.find_element_by_id("users-menu-item").click()
+        browser.find_element_by_id("users-map-item").click()
 
         ## He sees a pending user and clicks on the link.
         browser.find_element_by_id("pending-user-{}".format(new_user.get("username"))).click()

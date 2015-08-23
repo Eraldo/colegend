@@ -37,7 +37,7 @@ class TagNewViewTest(LoggedInTestMixin, TestCase):
         self.assertEqual(Tag.objects.count(), 1)
         new_tag = Tag.objects.first()
         self.assertEqual(new_tag.name, tag_attributes["name"])
-        self.assertRedirects(response, reverse("tags:tag_list"))
+        self.assertRedirects(response, new_tag.get_show_url())
 
     def test_duplicate_owner_and_name(self):
         tag_attributes = TagFactory.attributes()
