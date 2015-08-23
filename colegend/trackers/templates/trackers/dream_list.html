@@ -19,40 +19,44 @@
 {% endblock %}
 
 {% block page_content %}
-    <div class="table-responsive">
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>Date</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Symbols</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for dream in dream_list%}
-            <tr>
-                <td>
-                    <a href="{{ dream.get_edit_url }}">{{ dream.date }}</a><br>
-                </td>
-                <td>
-                    {{ dream.name }}
-                </td>
-                <td>
-                    {{ dream.description.raw|truncatechars:50 }}
-                </td>
-                <td>
-                    {{ dream.symbols }}
-                </td>
-                <td>
-                    <a href="{{ dream.get_delete_url }}" class="item-delete-button btn btn-danger btn-xs pull-right" role="button">{% icon "delete" %}<span class="sr-only"> Delete</span></a>
-                </td>
-            </tr>
-        {% endfor %}
+    <div class="well well-sm">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Symbols</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for dream in dream_list %}
+                    <tr>
+                        <td>
+                            <a href="{{ dream.get_edit_url }}">{{ dream.date }}</a><br>
+                        </td>
+                        <td>
+                            {{ dream.name }}
+                        </td>
+                        <td>
+                            {{ dream.description.raw|truncatechars:50 }}
+                        </td>
+                        <td>
+                            {{ dream.symbols }}
+                        </td>
+                        <td>
+                            <a href="{{ dream.get_delete_url }}"
+                               class="item-delete-button btn btn-danger btn-xs pull-right"
+                               role="button">{% icon "delete" %}<span class="sr-only"> Delete</span></a>
+                        </td>
+                    </tr>
+                {% endfor %}
 
-        </tbody>
-    </table>
+                </tbody>
+            </table>
+        </div>
+        {% include "lib/_pager.html" %}
     </div>
-    {% include "lib/_pager.html" %}
 {% endblock %}

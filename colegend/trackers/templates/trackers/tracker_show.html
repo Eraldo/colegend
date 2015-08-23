@@ -34,63 +34,65 @@
 {% endblock %}
 
 {% block page_content %}
-    {% crispy form %}
-    <div class="row">
-        <div class="col-md-4">
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>{{ type }}</th>
-                        <th>Notes</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for data in object_list %}
+    <div class="well well-sm">
+        {% crispy form %}
+        <div class="row">
+            <div class="col-md-4">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
                         <tr>
-                            <td>
-                                {{ data.date }}
-                            </td>
-                            <td>
-                                {% if type == "Check" %}
-                                    {% icon "check" %}
-                                {% elif type == "Number" %}
-                                    {{ data.number }}
-                                {% elif type == "Rating" %}
-                                    <span data-toggle="tooltip" title="{{ data.rating }}">
+                            <th>Date</th>
+                            <th>{{ type }}</th>
+                            <th>Notes</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for data in object_list %}
+                            <tr>
+                                <td>
+                                    {{ data.date }}
+                                </td>
+                                <td>
+                                    {% if type == "Check" %}
+                                        {% icon "check" %}
+                                    {% elif type == "Number" %}
+                                        {{ data.number }}
+                                    {% elif type == "Rating" %}
+                                        <span data-toggle="tooltip" title="{{ data.rating }}">
                             {% for s in ""|ljust:data.rating %}
                                 {% icon "star" %}
                             {% endfor %}
                             </span>
-                                {% endif %}
-                            </td>
-                            <td>
-                                {{ data.notes }}
-                            </td>
-                            <td>
-                                <a href="{{ data.get_delete_url }}"
-                                   class="item-delete-button btn btn-danger btn-xs pull-right"
-                                   role="button">{% icon "delete" %}<span
-                                        class="sr-only"> Delete</span></a>
-                            </td>
-                        </tr>
-                    {% endfor %}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {{ data.notes }}
+                                </td>
+                                <td>
+                                    <a href="{{ data.get_delete_url }}"
+                                       class="item-delete-button btn btn-danger btn-xs pull-right"
+                                       role="button">{% icon "delete" %}<span
+                                            class="sr-only"> Delete</span></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
+                {% include "lib/_pager.html" %}
             </div>
-            {% include "lib/_pager.html" %}
-        </div>
-        <div class="col-md-8">
-            {% if chart == "Calendar Chart" %}
-                {% include "trackers/_calendar_chart.html" with data=object_list %}
-            {% elif chart == "Column Chart" %}
-                {% include "trackers/_column_chart.html" with data=object_list %}
-            {% elif chart == "Line Chart" %}
-                {% include "trackers/_line_chart.html" with data=object_list %}
-            {% endif %}
+            <div class="col-md-8">
+                {% if chart == "Calendar Chart" %}
+                    {% include "trackers/_calendar_chart.html" with data=object_list %}
+                {% elif chart == "Column Chart" %}
+                    {% include "trackers/_column_chart.html" with data=object_list %}
+                {% elif chart == "Line Chart" %}
+                    {% include "trackers/_line_chart.html" with data=object_list %}
+                {% endif %}
+            </div>
         </div>
     </div>
     </div>

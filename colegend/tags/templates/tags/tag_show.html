@@ -17,28 +17,29 @@
 {% endblock %}
 
 {% block page_content %}
-    <div class="well">
+    <div class="well well-sm">
         {{ tag.description }}
-    </div>
-    <h2>Items</h2>
-    <div class="row">
-        <div class="col-md-4">
-            <h3>Projects</h3>
-            {% for project in tag.projects.all %}
-                {% include "projects/_project_link.html" %}<br/>
-            {% endfor %}
-        </div>
-        <div class="col-md-4">
-            <h3>Tasks</h3>
-            {% for task in tag.tasks.all %}
-                {% include "tasks/_task_link.html" %}<br/>
-            {% endfor %}
-        </div>
-        <div class="col-md-4">
-            <h3>Journal Entries</h3>
-            {% for dayentry in tag.journals.all %}
-                {% include "journals/_dayentry_link.html" %}<br/>
-            {% endfor %}
+        <h2>Items</h2>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Projects</h3>
+                {% for project in tag.projects.all %}
+                    {% include "projects/_project_link.html" %}<br/>
+                {% endfor %}
+            </div>
+            <div class="col-md-4">
+                <h3>Tasks</h3>
+                {% for task in tag.tasks.all %}
+                    {% include "tasks/_task_link.html" %}<br/>
+                {% endfor %}
+            </div>
+            <div class="col-md-4">
+                <h3>Journal Entries</h3>
+                {% for dayentry in tag.journals.all %}
+                    {% include "journals/_dayentry_link.html" %}<br/>
+                {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock %}

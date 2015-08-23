@@ -11,13 +11,12 @@
 {% block page_content %}
     <div class="row">
         <div class="col-md-6">
-            <h2><span class="tooltip-text" data-toggle="tooltip" data-placement="right"
-                      title="Next Projects and one next step.">{% icon "project" %} Project Focus</span>
-                {% include "status/_next_counter.html" with next_counter=next_projects.count next_counter_max=4 %}
-
-            </h2>
-
             <div class="well">
+                <h2 class="well-headline">
+                <span class="tooltip-text" data-toggle="tooltip" data-placement="right"
+                      title="Next Projects and one next step.">{% icon "project" %} Project Focus</span>
+                    {% include "status/_next_counter.html" with next_counter=next_projects.count next_counter_max=4 %}
+                </h2>
                 {% for project in next_projects %}
                     <span class="lead">{% include "projects/_project_field.html" %}</span><br/>
                     {% if project.next_step %}
@@ -29,12 +28,14 @@
                     <a href="{% url "projects:project_list" %}" class="text-warning">Choose a next project!</a><br/>
                 {% endfor %}
             </div>
-            <h2><span class="tooltip-text" data-toggle="tooltip" data-placement="right"
-                      title="Next tasks without a project.">{% icon "task" %} Task Focus</span>
-                {% include "status/_next_counter.html" with next_counter=next_tasks.count next_counter_max=8 %}
-            </h2>
 
             <div class="well">
+                <h2 class="well-headline">
+                <span class="tooltip-text" data-toggle="tooltip" data-placement="right"
+                      title="Next tasks without a project.">{% icon "task" %} Task Focus</span>
+                    {% include "status/_next_counter.html" with next_counter=next_tasks.count next_counter_max=8 %}
+                </h2>
+
                 {% for task in next_tasks %}
                     {% include "tasks/_task_link.html" %}<br/>
                 {% empty %}
@@ -44,11 +45,12 @@
             </div>
         </div>
         <div class="col-md-6">
-            <h2><span class="tooltip-text" data-toggle="tooltip" data-placement="right"
-                      title="Tasks scheduled today or before.">{% icon "date" %} Schedule</span>
-            </h2>
-
             <div class="well">
+                <h2 class="well-headline">
+                <span class="tooltip-text" data-toggle="tooltip" data-placement="right"
+                      title="Tasks scheduled today or before.">{% icon "date" %} Schedule</span>
+                </h2>
+
                 {% if scheduled_projects or scheduled_tasks %}
                     {% for project in scheduled_projects %}
                         {% ifchanged %}{% include "lib/_date_field.html" with date=project.date %}<br/>
@@ -64,11 +66,12 @@
                 {% endif %}
             </div>
 
-            <h2><span class="tooltip-text" data-toggle="tooltip" data-placement="right"
-                      title="Top 2 deadlined projects and top 4 deadlined tasks.">{% icon "deadline" %} Deadlines</span>
-            </h2>
-
             <div class="well">
+                <h2 class="well-headline">
+                <span class="tooltip-text" data-toggle="tooltip" data-placement="right"
+                      title="Top 2 deadlined projects and top 4 deadlined tasks.">{% icon "deadline" %} Deadlines</span>
+                </h2>
+
                 {% if top_deadlined_projects or top_deadlined_tasks %}
                     {% if top_deadlined_projects %}
                         {% for project in top_deadlined_projects %}

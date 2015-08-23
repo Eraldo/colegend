@@ -18,44 +18,48 @@
 {% endblock %}
 
 {% block page_content %}
-    <div class="table-responsive">
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Rating</th>
-            <th>Notes</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for joke in joke_list%}
-            <tr>
-                <td>
-                    <a href="{{ joke.get_edit_url }}">{{ joke.name }}</a><br>
-                </td>
-                <td>
-                    {{ joke.description|truncatechars:80 }}
-                </td>
-                <td>
+    <div class="well well-sm">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Rating</th>
+                    <th>Notes</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for joke in joke_list %}
+                    <tr>
+                        <td>
+                            <a href="{{ joke.get_edit_url }}">{{ joke.name }}</a><br>
+                        </td>
+                        <td>
+                            {{ joke.description|truncatechars:80 }}
+                        </td>
+                        <td>
                 <span data-toggle="tooltip" title="{{ joke.rating }}">
                 {% for s in ""|ljust:joke.rating %}
                     {% icon "star" %}
                 {% endfor %}
                 </span>
-                </td>
-                <td>
-                    {{ joke.notes }}
-                </td>
-                <td>
-                    <a href="{{ joke.get_delete_url }}" class="item-delete-button btn btn-danger btn-xs pull-right" role="button">{% icon "delete" %}<span class="sr-only"> Delete</span></a>
-                </td>
-            </tr>
-        {% endfor %}
+                        </td>
+                        <td>
+                            {{ joke.notes }}
+                        </td>
+                        <td>
+                            <a href="{{ joke.get_delete_url }}"
+                               class="item-delete-button btn btn-danger btn-xs pull-right"
+                               role="button">{% icon "delete" %}<span class="sr-only"> Delete</span></a>
+                        </td>
+                    </tr>
+                {% endfor %}
 
-        </tbody>
-    </table>
+                </tbody>
+            </table>
+        </div>
+        {% include "lib/_pagination.html" %}
     </div>
-    {% include "lib/_pagination.html" %}
 {% endblock %}

@@ -17,8 +17,8 @@
        role="button">{% icon "chevron-left" %}</a>
 
     {% if dayentry %}
-    <a href="{{ dayentry.get_edit_url }}" class="btn btn-primary" role="button">{% icon "edit" %}</a>
-    <a href="{{ dayentry.get_delete_url }}" class="btn btn-danger pull-right" role="button">{% icon "delete" %}</a>
+    <a href="{{ dayentry.get_edit_url }}" class="edit-button btn btn-primary" role="button">{% icon "edit" %}</a>
+    <a href="{{ dayentry.get_delete_url }}" class="delete-button btn btn-danger pull-right" role="button">{% icon "delete" %}</a>
     {% else %}
     <a href="{% url "journals:dayentry_new" %}?date={{ date|date:"c" }}" class="new-button btn btn-default" role="button" data-toggle="tooltip" title="New Entry: {{ date }}">
         {% icon "new" %}

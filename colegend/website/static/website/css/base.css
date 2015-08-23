@@ -92,7 +92,7 @@ input#global-search-input {
 #global-search-box {
     position: fixed;
     top: inherit;
-    padding:12px;
+    padding: 12px;
 }
 
 #menu .dropdown-menu {
@@ -308,11 +308,11 @@ span.streak {
 .bg-category-1 {
     background-color: crimson;
 }
+
 /* used for weekdays */
 .bg-category-0 {
     background-color: darkviolet;
 }
-
 
 .btn.btn-category {
     /* TODO: remove important and replace with specific rules (link rules - hover, etc?) */
@@ -435,3 +435,9 @@ span.streak {
 }
 
 /* end challenges */
+
+/* content */
+.well-headline {
+    margin-top: 0;
+}
+/* end content */

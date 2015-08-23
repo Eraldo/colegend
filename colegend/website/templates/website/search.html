@@ -17,6 +17,7 @@
 {% endblock %}
 
 {% block page_content %}
+    <div class="well well-sm">
     <h2>projects</h2>
     {% include 'projects/_project_list.html' with menu="True" %}
     <h2>tasks</h2>
@@ -27,4 +28,5 @@
     {% include 'habits/_habit_list.html' %}
     <h2>tags</h2>
     {% include 'tags/_tag_list.html' with menu="True" %}
+    </div>
 {% endblock %}

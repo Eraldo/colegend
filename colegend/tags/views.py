@@ -33,8 +33,6 @@ class TagListView(TagMixin, ListView):
 
 
 class TagNewView(TagMixin, CreateView):
-    success_url = reverse_lazy('tags:tag_list')
-
     def form_valid(self, form):
         user = self.request.user
         form.instance.owner = user
@@ -46,8 +44,6 @@ class TagShowView(TagMixin, DetailView):
 
 
 class TagEditView(TagMixin, UpdateView):
-    success_url = reverse_lazy('tags:tag_list')
-
     def get_context_data(self, **kwargs):
         context = super(TagEditView, self).get_context_data(**kwargs)
         # The context variable 'tag' conflicts with the crispy form template

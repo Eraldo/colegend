@@ -7,7 +7,7 @@
 {% block menu %}{{ block.super }}{% endblock %}
 
 {% block content %}
-    <div class="page-head">
+    <div class="page-head well well-sm">
         <div class="tutorial pull-right">
             {% block page_tutorial %}
                 {% if view.tutorial %}
@@ -36,14 +36,13 @@
                 {% block page_title_extras %}{% endblock %}
             </div>
         </div>
+        {% block page_controls_container %}
+            <div style="padding-bottom: 6px;"></div>
+            <div id="page-menu" class="list-controls clearfix">
+                {% block page_controls %}{% endblock %}
+            </div>
+        {% endblock %}
     </div>
-    {% block page_controls_container %}
-        <div class="container-fluid well well-sm">
-        <div id="page-menu" class="list-controls ">
-            {% block page_controls %}{% endblock %}
-        </div>
-        </div>
-    {% endblock %}
     {% block page_content %}
     {% endblock %}
 {% endblock %}

@@ -15,5 +15,7 @@
 {% endblock %}
 
 {% block page_content %}
-    {% include 'tags/_tag_list.html' with tags=object_list %}
+    <div class="well well-sm">
+        {% include 'tags/_tag_list.html' with tags=object_list %}
+    </div>
 {% endblock %}

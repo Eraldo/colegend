@@ -59,7 +59,7 @@
 {% endblock %}
 
 {% block page_content %}
-    <div class="well lead">
+    <div class="well well-sm">
     Week Focus:
     {% if week_entry %}
         <a href="{% url 'journals:weekentry_show' date=week_entry.date %}">{{ week_entry.focus }}</a>
@@ -75,7 +75,9 @@
         </a>
     {% endif %}
     </div>
-    <div class="dayentry-list">
+
+    <div class="dayentry-list well well-sm">
+
         <table class="table table-hover">
             <thead>
             <tr>
