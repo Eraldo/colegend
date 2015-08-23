@@ -20,7 +20,7 @@ class ViewTests(LiveServerTestCase):
 
     def setUp(self):
         self.user = UserFactory(is_superuser=True, is_staff=True)
-        # self.browser.implicitly_wait(10)
+        self.browser.implicitly_wait(10)
 
     def login_user(self, username, password):
         browser = self.browser
