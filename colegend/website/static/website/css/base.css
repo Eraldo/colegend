@@ -123,7 +123,7 @@ div.avatar img {
 }
 
 #footer-content {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
 
@@ -438,6 +438,12 @@ span.streak {
 /* end challenges */
 
 /* content */
+
+#content {
+    /* Used to show footer if window is not full size. */
+    margin-bottom: 20px;
+}
+
 .well-headline {
     margin-top: 0;
 }
