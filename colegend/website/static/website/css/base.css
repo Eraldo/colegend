@@ -117,21 +117,22 @@ div.avatar img {
 
 /* footer */
 #footer:hover div#footer-content {
-    visibility: visible;
     /* for animation (transition) */
     opacity: 1;
     transition-delay: 0s;
-
 }
 
 #footer-content {
-    border-top: solid 1px #e7e7e7;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+
+    margin: 0;
+    padding: 0;
+
     text-align: center;
     color: #777;
-    margin-top: 10px;
-    /* hidden by default */
-    visibility: hidden;
-    /* for animation (transition) */
+
     opacity: 0;
     transition: visibility 0s linear 0.5s, opacity 0.5s linear;
 }
@@ -440,4 +441,5 @@ span.streak {
 .well-headline {
     margin-top: 0;
 }
+
 /* end content */
