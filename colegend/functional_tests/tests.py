@@ -12,7 +12,8 @@ class ViewTests(LiveServerTestCase):
     @classmethod
     def setUpClass(cls):
         cls.browser = WebDriver()
-        cls.browser.implicitly_wait(4)
+        cls.browser.maximize_window()
+        cls.browser.implicitly_wait(10)
         super().setUpClass()
 
     @classmethod
@@ -66,7 +67,6 @@ class ViewTests(LiveServerTestCase):
 
         ## Max opens his browser and goes to the login page.
         browser.get(self.live_server_url + reverse("account_login"))
-        browser.maximize_window()
 
         ## He clicks clicks on the area which says "Nope, I am new here ..."
         browser.find_element_by_id("signup_choice").click()
