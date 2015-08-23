@@ -44,6 +44,27 @@
 
                 <!-- Map button trigger modal -->
                 <li><a id="map" href="#" data-toggle="modal" data-target="#map-modal">{% icon "map" %}&nbsp;Map</a></li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">{% icon "new" %}&nbsp;New <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'tasks:task_new' %}">{% icon 'task' %} Task</a></li>
+                        <li><a href="{% url 'projects:project_new' %}">{% icon 'project' %} Project</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="{% url 'journals:dayentry_new' %}">{% icon 'journal' %} Journal Day Entry</a></li>
+                        <li><a href="{% url 'journals:weekentry_new' %}">{% icon 'journal' %} Journal Week Entry</a></li>
+                        {% if user.is_manager %}
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{% url 'gatherings:gathering_new' %}">{% icon 'gathering' %} Gathering</a></li>
+                        {% endif %}
+                        <li role="separator" class="divider"></li>
+                        <li><a href="{% url 'quotes:quote_new' %}">{% icon 'quote' %} Quote</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="{% url 'dojo:module_new' %}">{% icon 'dojo' %} Module</a></li>
+                    </ul>
+                </li>
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
 
