@@ -43,11 +43,13 @@
                 {% endfor %}
 
                 <!-- Map button trigger modal -->
-                <li><a id="map" href="#" data-toggle="modal" data-target="#map-modal">{% icon "map" %}&nbsp;Map</a></li>
+                <li data-placement="bottom" data-toggle="tooltip" title="Map">
+                    <a id="map" href="#" data-toggle="modal" data-target="#map-modal">{% icon "map" %}</a>
+                </li>
 
-                <li class="dropdown">
+                <li class="dropdown" data-placement="bottom" data-toggle="tooltip" title="New Item">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">{% icon "new" %}&nbsp;New <span class="caret"></span></a>
+                       aria-expanded="false">{% icon "new" %}</a>
                     <ul class="dropdown-menu">
                         <li><a href="{% url 'tasks:task_new' %}">{% icon 'task' %} Task</a></li>
                         <li><a href="{% url 'projects:project_new' %}">{% icon 'project' %} Project</a></li>
@@ -109,7 +111,7 @@
                     </ul>
                 </li>
                 <li class="dropdown" data-placement="bottom" data-toggle="tooltip" title="Quick Command">
-                    <a id="quick-command-toggle" href="javascript:keyboard_quick_command();" class="extra-menu">
+                    <a id="quick-command-toggle" data-toggle="modal" data-target="#quickCommandModal" href="#" class="extra-menu">
                         {% icon "quick-command" %}
                     </a>
                 </li>
@@ -124,11 +126,7 @@
                             <div style="text-align: center">{{ user }}</div>
                         </a>
                         <li class="divider"></li>
-                        {% for menu_item in menu_items.account %}
-                            {% include 'website/_menu_item.html' %}
-                        {% endfor %}
-                        <li class="divider"></li>
-                        <li><a href="{% url "account_logout" %}"><i class="fa fa-sign-out"></i> Sign out</a></li>
+                        <li><a href="{% url "account_logout" %}"><i class="fa fa-sign-out"></i> Goodbye</a></li>
                     </ul>
                 </li>
             </ul>
