@@ -1,13 +1,13 @@
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.core import mail
 from django.core.urlresolvers import reverse
-from django.test import LiveServerTestCase
 from selenium.webdriver.firefox.webdriver import WebDriver
 from users.tests.test_models import UserFactory
 
 __author__ = 'eraldo'
 
 
-class ViewTests(LiveServerTestCase):
+class ViewTests(StaticLiveServerTestCase):
     @classmethod
     def setUpClass(cls):
         cls.browser = WebDriver()
