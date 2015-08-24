@@ -11,6 +11,8 @@ class ViewTests(StaticLiveServerTestCase):
     @classmethod
     def setUpClass(cls):
         cls.browser = WebDriver()
+        cls.browser.implicitly_wait(10)
+        cls.browser.maximize_window()
         super().setUpClass()
 
     @classmethod
@@ -20,8 +22,6 @@ class ViewTests(StaticLiveServerTestCase):
 
     def setUp(self):
         self.user = UserFactory(is_superuser=True, is_staff=True)
-        self.browser.implicitly_wait(10)
-        self.browser.maximize_window()
 
     def login_user(self, username, password):
         browser = self.browser
@@ -92,11 +92,11 @@ class ViewTests(StaticLiveServerTestCase):
         browser.find_element_by_id("id_other").send_keys("some other")
 
         ## Max agrees to the guidelines.
-        browser.find_element_by_name("stop").click()
-        browser.find_element_by_name("responsibility").click()
-        browser.find_element_by_name("discretion").click()
-        browser.find_element_by_name("appreciation").click()
-        browser.find_element_by_name("terms").click()
+        browser.find_element_by_id("id_stop").click()
+        browser.find_element_by_id("id_responsibility").click()
+        browser.find_element_by_id("id_discretion").click()
+        browser.find_element_by_id("id_appreciation").click()
+        browser.find_element_by_id("id_terms").click()
 
         ## He enters his contact data.
         browser.find_element_by_id("id_first_name").send_keys("FirstName")

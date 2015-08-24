@@ -37,7 +37,6 @@ class TaskNewViewTest(LoggedInTestMixin, TestCase):
         }
         url = reverse("tasks:task_new")
         response = self.client.post(url, data=data)
-        print(Task.objects.count())
         self.assertEqual(Task.objects.count(), 1)
         new_task = Task.objects.first()
         self.assertEqual(new_task.name, data["name"])
