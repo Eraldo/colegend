@@ -25,14 +25,15 @@
             <div class="well lead text-center">
 
                 <h2>Next Gathering</h2>
-                {% if start %}
-                    <span class="label bg-category-{{ start.date|date:"w" }}">{{ start.date|date:"D" }}</span>
-                    {{ start }} - {{ end }}<br/>
+                {% if gathering %}
+                    <span class="label bg-category-{{ gathering.start.date|date:"w" }}">{{ gathering.start.date|date:"D" }}</span>
+                    {{ gathering.start }} - {{ end }}<br/>
                     Gathering {% if current %}NOW{% else %}in {{ counter }}{% endif %}<br/>
+                    {% if gathering.topic %}<b>{{ gathering.topic }}</b><br>{% endif %}
                     <img src="{{ STATIC_URL }}website/images/CoSpace_circle.png" alt="CoSpace"
                          class="center-block img-circle img-responsive" style="max-height: 200px;">
-                    <a href="{% if online %}{% url "gatherings:room" %}?next={{ url }}{% endif %}" target="_blank" class="btn btn-default">»
-                        {% if online %}{% icon "virtual-room" %}{% else %}{% icon "location" %}{% endif %} {{ location }}</a>
+                    <a href="{% if gathering.online %}{% url "gatherings:room" %}?next={{ url }}{% endif %}" target="_blank" class="btn btn-default">»
+                        {% if gathering.online %}{% icon "virtual-room" %}{% else %}{% icon "location" %}{% endif %} {{ location }}</a>
                 {% else %}
                     Currently there are no planned gatherings.
                 {% endif %}

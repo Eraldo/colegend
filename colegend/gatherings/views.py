@@ -29,13 +29,12 @@ class GatheringsView(ActiveUserRequiredMixin, GatheringMixin, TemplateView):
         # Get next gathering.
         gathering = Gathering.objects.next()
         if gathering:
-            context['start'] = gathering.start
+            context['gathering'] = gathering
             if gathering.end.date() == gathering.start.date():
                 end = timezone.localtime(gathering.end).time()
             else:
                 end = gathering.end
             context['end'] = end
-            context['online'] = gathering.online
             if gathering.online:
                 location = "Virtual Room"
                 url = gathering.location
@@ -45,9 +44,6 @@ class GatheringsView(ActiveUserRequiredMixin, GatheringMixin, TemplateView):
             context['location'] = location
             context['url'] = url
             context['counter'] = timeuntil(gathering.start, now)
-            context['host'] = gathering.host
-            context['topic'] = gathering.topic
-            context['notes'] = gathering.notes
             # scheduled gatherings
             context['future_gatherings'] = Gathering.objects.filter(start__gt=gathering.start)
         return context
