@@ -11,8 +11,6 @@
 {% block page_controls %}
     <a href="{% url "gatherings:room" %}" target="_blank" class="open-button btn btn-default">
                         {% icon "virtual-room" %} Virtual Room</a>
-    <a href="{% url "chat" %}" target="_blank" class="open-button btn btn-default">
-                       {% icon "chat" %} Chat Room</a>
     <a href="{% url "users:map" %}" class="open-button btn btn-default">
                        {% icon "users" %} Member Map</a>
     {% if user.is_manager %}
