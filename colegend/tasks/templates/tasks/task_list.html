@@ -13,9 +13,13 @@
 {% endblock %}
 
 {% block page_controls %}
+    <a href="{% url 'tasks:task_kanban' %}" class="new-button btn btn-default pull-right" data-toggle="tooltip"
+            title="Statuses Overview">{% icon "eye" %}</a>
     {% include "tasks/_task_list_controls.html" %}
 {% endblock %}
 
 {% block page_content %}
-    {% include 'tasks/_task_list.html' with tasks=task_list next=task.get_list_view %}
+    <div class="well well-sm">
+        {% include 'tasks/_task_list.html' with tasks=task_list next=task.get_list_view %}
+    </div>
 {% endblock %}

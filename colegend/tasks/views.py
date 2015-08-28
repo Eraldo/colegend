@@ -8,7 +8,7 @@ from django.utils.safestring import mark_safe
 from lib.views import ActiveUserRequiredMixin, get_sound
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView, TemplateView
 from lib.views import OwnedItemsMixin
 from projects.models import Project
 from statuses.utils import StatusFilterMixin
@@ -47,13 +47,31 @@ class TaskListView(StatusFilterMixin, TaskMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        queryset = super(TaskListView, self).get_queryset()
+        queryset = super().get_queryset()
         return self.filter_status(queryset)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['total_counter'] = self.get_queryset().count()
         context['next_counter'] = self.request.user.tasks.next().filter(project__isnull=True).count()
+        return context
+
+
+class TaskKanbanView(StatusFilterMixin, TaskMixin, TemplateView):
+    template_name = 'tasks/task_kanban.html'
+    paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        queryset = Task.objects.owned_by(self.request.user)
+        context['total_counter'] = queryset.count()
+        context['next_counter'] = self.request.user.tasks.next().filter(project__isnull=True).count()
+        context['tasks_todo'] = queryset.status('todo')[:10]
+        context['tasks_next'] = queryset.status('next')[:10]
+        context['tasks_closed'] = queryset.filter(status__name__in=['done', 'canceled'])[:10]
+        context['tasks_waiting'] = queryset.status('waiting')[:10]
+        context['tasks_someday'] = queryset.status('someday')[:10]
+        context['tasks_maybe'] = queryset.status('maybe')[:10]
         return context
 
 

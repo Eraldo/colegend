@@ -7,7 +7,11 @@
         </div>
     {% endif %}
     {% for task in tasks %}
-        {% include "tasks/_task.html" %}
+        {% if task_links %}
+            {% include "tasks/_task_link.html" %}<br>
+        {% else %}
+            {% include "tasks/_task.html" %}
+        {% endif %}
     {% endfor %}
     {% include "lib/_pagination.html" %}
 </div>

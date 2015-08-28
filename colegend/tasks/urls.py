@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, url
-from tasks.views import TaskListView, TaskNewView, TaskShowView, TaskEditView, TaskDeleteView, task_complete
+from tasks.views import TaskListView, TaskNewView, TaskShowView, TaskEditView, TaskDeleteView, task_complete, \
+    TaskKanbanView
 
 __author__ = 'eraldo'
 
@@ -9,6 +10,11 @@ urlpatterns = patterns(
     url(r'^$',
         TaskListView.as_view(),
         name='task_list'),
+
+    # ex: ../
+    url(r'^statuses/$',
+        TaskKanbanView.as_view(),
+        name='task_kanban'),
 
     # ex: ../new/
     url(r'^new/$',

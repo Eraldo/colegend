@@ -1,0 +1,85 @@
+{% extends 'page.html' %}
+{% load icons %}
+
+{% block page_title %}
+    Tasks
+{% endblock %}
+
+{% block up_url %}{% url "tasks:task_list" %}{% endblock %}
+
+{% block page_title_extras %}
+    {% include "lib/_total_counter.html" %}
+    {% include "status/_next_counter.html" with count_next=count_next count_next_max=8 %}
+{% endblock %}
+
+{% block page_controls %}
+    <a href="{% url 'tasks:task_list' %}" class="new-button btn btn-default pull-right" data-toggle="tooltip"
+       title="Task List">{% icon "list" %}</a>
+    {% include "tasks/_task_list_controls.html" with no_filters='True' %}
+{% endblock %}
+
+{% block page_content %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-4">
+                    <span class="label status status-todo">{% icon 'todo' %} TODO</span>
+                    <span class="label label-default pull-right">Top {{ tasks_todo.count }}</span>
+                </div>
+                <div class="col-xs-4">
+                    <span class="label status status-next">{% icon 'next' %} NEXT</span>
+                    <span class="label label-default pull-right">Top {{ tasks_next.count }}</span>
+                </div>
+                <div class="col-xs-4">
+                    <span class="label status status-done">{% icon 'done' %} DONE</span> /
+                    <span class="label status status-canceled">{% icon 'canceled' %} CANCELED</span>
+                    <span class="label label-default pull-right">Top {{ tasks_closed.count }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-4">
+                    {% include 'tasks/_task_list.html' with tasks=tasks_todo task_links="True" %}
+                </div>
+                <div class="col-xs-4">
+                    {% include 'tasks/_task_list.html' with tasks=tasks_next task_links="True" %}
+                </div>
+                <div class="col-xs-4">
+                    {% include 'tasks/_task_list.html' with tasks=tasks_closed task_links="True" %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row" style="font-weight: bold">
+                <div class="col-xs-4">
+                    <span class="label status status-waiting">{% icon 'waiting' %} WAITING</span>
+                    <span class="label label-default pull-right">Top {{ tasks_waiting.count }}</span>
+                </div>
+                <div class="col-xs-4">
+                    <span class="label status status-someday">{% icon 'someday' %} SOMEDAY</span>
+                    <span class="label label-default pull-right">Top {{ tasks_someday.count }}</span>
+                </div>
+                <div class="col-xs-4">
+                    <span class="label status status-maybe">{% icon 'maybe' %} MAYBE</span>
+                    <span class="label label-default pull-right">Top {{ tasks_maybe.count }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-4">
+                    {% include 'tasks/_task_list.html' with tasks=tasks_waiting task_links="True" %}
+                </div>
+                <div class="col-xs-4">
+                    {% include 'tasks/_task_list.html' with tasks=tasks_someday task_links="True" %}
+                </div>
+                <div class="col-xs-4">
+                    {% include 'tasks/_task_list.html' with tasks=tasks_maybe task_links="True" %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
