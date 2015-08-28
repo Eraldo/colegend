@@ -67,11 +67,12 @@ class TaskKanbanView(StatusFilterMixin, TaskMixin, TemplateView):
         context['total_counter'] = queryset.count()
         context['next_counter'] = self.request.user.tasks.next().filter(project__isnull=True).count()
         context['tasks_todo'] = queryset.status('todo')[:10]
+        context['tasks_someday'] = queryset.status('someday')[:3]
+        context['tasks_maybe'] = queryset.status('maybe')[:2]
         context['tasks_next'] = queryset.status('next')[:10]
-        context['tasks_closed'] = queryset.filter(status__name__in=['done', 'canceled'])[:10]
         context['tasks_waiting'] = queryset.status('waiting')[:10]
-        context['tasks_someday'] = queryset.status('someday')[:10]
-        context['tasks_maybe'] = queryset.status('maybe')[:10]
+        context['tasks_done'] = queryset.status('done')[:10]
+        context['tasks_canceled'] = queryset.status('canceled')[:10]
         return context
 
 
