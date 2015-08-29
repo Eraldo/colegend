@@ -1,6 +1,7 @@
 {% extends 'page.html' %}
 {% load crispy_forms_tags %}
 {% load avatar_tags %}
+{% load icons %}
 
 {% block up_url %}{% url "contact" %}{% endblock %}
 
@@ -9,8 +10,25 @@
 {% endblock %}
 
 {% block page_content %}
-    <div class="well">
-        {% crispy form %}
+    <div class="row">
+        <div class="visible-lg col-lg-2">
+            <div class="well">
+                <p>We <span style="color: red;">{% icon 'heart' %}</span> feedback!</p>
+                <p>We really do! ;)</p>
+                <p>Feel free to share your feelings and whatever it is, that is on your mind.</p>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="well">
+                {% crispy form %}
+            </div>
+        </div>
+        <div class="visible-lg col-lg-2">
+            <div class="well">
+                <p>{% icon 'user' %} Personal contact..</p>
+                <p>We are humans here at CoLegend. As such you can reach the team in person. Via phone or by arranging a meetup face to face.</p>
+            </div>
+        </div>
     </div>
     <div class="well">
         <legend>Personal Contact</legend>
@@ -23,12 +41,12 @@
                         <span style="font-weight: 700">{{ manager.get_full_name }}</span>
                     </p>
                     {% ifequal manager.pk 4 %}
-                    <p>
+                        <p>
                     <span style="color: gray">
                         <span class="glyphicon glyphicon-phone"></span> mobile</span><br>
-                        <a href="tel:{{ manager.contact.phone_number }}">
-                            {{ manager.contact.phone_number }}</a><br>
-                    </p>
+                            <a href="tel:{{ manager.contact.phone_number }}">
+                                {{ manager.contact.phone_number }}</a><br>
+                        </p>
                     {% endifequal %}
                     <p>
                         <span style="color: gray"><span class="glyphicon glyphicon-envelope"></span> email</span><br>
@@ -36,20 +54,23 @@
                             {{ manager.first_name.lower }}@colegend.org</a>
                     </p>
                     {% ifequal manager.pk 4 %}
-                    <p>
-                        <span style="color: gray"><span class="glyphicon glyphicon-user"></span> face to face</span><br>
-                        <a href="http://www.eraldo.org/contact/T42/" target="_blank">
-                            project T42</a>
-                    </p>
+                        <p>
+                            <span style="color: gray"><span class="glyphicon glyphicon-user"></span> face to face</span><br>
+                            <a href="http://www.eraldo.org/contact/T42/" target="_blank">
+                                project T42</a>
+                        </p>
                     {% endifequal %}
                 </div>
             {% endfor %}
 
             <div class="col-md-3 col-sm-6">
                 <p>
-                    <img id="menu-avatar" src="https://0.gravatar.com/avatar/3eda6fcd3204ef285fa52176c28c4d3e?s=80&d=mm&r=g" alt="user" class="img-circle"/>
+                    <img id="menu-avatar"
+                         src="https://0.gravatar.com/avatar/3eda6fcd3204ef285fa52176c28c4d3e?s=80&d=mm&r=g" alt="user"
+                         class="img-circle"/>
                     <span style="font-weight: 700">You</span>
                 </p>
+
                 <p>
                     <span style="color: gray"><span class="glyphicon glyphicon-envelope"></span> email</span><br>
                     <a href="mailto:connect@colegend.org" target="_blank">
