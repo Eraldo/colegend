@@ -19,5 +19,7 @@
 {% endblock %}
 
 {% block page_content %}
-    {% include "projects/_project_list.html" with projects=project_list %}
+    <div class="well well-sm">
+        {% include "projects/_project_list.html" with projects=project_list %}
+    </div>
 {% endblock %}
