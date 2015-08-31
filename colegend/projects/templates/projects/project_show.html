@@ -13,13 +13,14 @@
 
 {% block page_controls %}
     <a href="{{ project.get_edit_url }}" class="edit-button btn btn-primary btn-sm" role="button">{% icon "edit" %}</a>
-    <a href="{{ project.get_delete_url }}" class="delete-button btn btn-danger btn-sm" role="button">{% icon "delete" %}</a>
+    <a href="{{ project.get_delete_url }}" class="delete-button btn btn-danger btn-sm"
+       role="button">{% icon "delete" %}</a>
 {% endblock %}
 
 {% block page_content %}
     <div class="project-details well">
-    {% include "status/_status_field.html" with status=project.status %}
-    {% include "tags/_tags_field.html" with tags=project.tags.all %}
+        {% include "status/_status_field.html" with status=project.status %}
+        {% include "tags/_tags_field.html" with tags=project.tags.all %}
         <div class="task-context pull-right">
             {% include "lib/_date_field.html" with date=project.date %}
             {% include "lib/_deadline_field.html" with deadline=project.deadline %}
@@ -28,7 +29,13 @@
     </div>
 
     <div class="project-tasks">
-        <h2>Tasks</h2>
-        {% include 'tasks/_task_list.html' with menu="True" %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Tasks
+            </div>
+            <div class="panel-body">
+                {% include 'tasks/_task_list.html' with menu="True" %}
+            </div>
+        </div>
     </div>
 {% endblock %}
