@@ -45,6 +45,7 @@ class UserInactiveView(LoginRequiredMixin, TemplateView):
 
 class UserDetailView(UserMixin, DetailView):
     model = User
+    context_object_name = "profile_user"
     # These next two lines tell the view to index lookups by username
     slug_field = "username"
     slug_url_kwarg = "username"
