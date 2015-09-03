@@ -190,11 +190,13 @@ class WeekView(DayEntryMixin, TemplateView):
 
         # date
         date = self.kwargs.get('date')
+        today = timezone.now().date()
         if date:
             date = parse_date(date)
         else:
-            date = timezone.now().date()
+            date = today
         context['date'] = date
+        context['today'] = today
 
         # week context
         week_start = date - timezone.timedelta(days=date.weekday())

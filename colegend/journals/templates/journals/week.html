@@ -99,11 +99,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for date, dayentry in day_entries %}
-                    <tr>
+                {% for entry_date, dayentry in day_entries %}
+                    <tr{% ifequal entry_date today %} class="success"{% endifequal %}>
                         <td>
-                            <a href="{% url "journals:dayentry_show" date=date %}">{{ date }}</a>
-                            <span class="label bg-category-{{ date|date:"w" }}">{{ date|date:"D" }}</span>
+                            <a href="{% url "journals:dayentry_show" date=entry_date %}">{{ entry_date }}</a>
+                            <span class="label bg-category-{{ entry_date|date:"w" }}">{{ entry_date|date:"D" }}</span>
                             <br>
                         </td>
                         <td>
