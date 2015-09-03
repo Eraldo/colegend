@@ -1,5 +1,7 @@
 from collections import OrderedDict
+from random import randint
 from lib.views import get_icon
+from quotes.models import Quote
 
 __author__ = 'eraldo'
 
@@ -73,3 +75,12 @@ def menu(request):
             MenuItem("Test", url="test", icon="test", category=1),
         ]
     return {'menu_items': menu_items}
+
+
+def menu_feed(request):
+    if randint(0, 1):
+        quote = Quote.objects.daily_quote()
+        return {'daily_quote_feed': quote}
+    else:
+        topic_of_the_year = request.user.journal.topic_of_the_year
+        return {'topic_of_the_year_feed': topic_of_the_year}

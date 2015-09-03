@@ -42,10 +42,6 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 {% if user.is_authenticated %}
-                    {% for menu_item in menu_items.main %}
-                        {% include 'website/_menu_item.html' %}
-                    {% endfor %}
-
                     <!-- Map button trigger modal -->
                     <li data-placement="bottom" data-toggle="tooltip" title="Map">
                         <a id="map-toggle" href="#" data-toggle="modal" data-target="#map-modal">{% icon "map" %}</a>
@@ -75,6 +71,30 @@
                     </li>
                 {% endif %}
             </ul>
+            {% if daily_quote_feed %}
+                <div id="daily-quote-feed" class="hidden-xs">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="{{ quote.get_absolute_url }}" data-toggle="tooltip"
+                               title="{{ daily_quote_feed.text }} &mdash; by {{ daily_quote_feed.author }}, shared by {{ daily_quote_feed.provider }}"
+                               data-placement="bottom">
+                                <small>{% icon 'quote' %} {{ daily_quote_feed.text|truncatechars:70 }}</small>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            {% endif %}
+            {% if topic_of_the_year_feed %}
+                <div id="topic_of_the_year_feed" class="hidden-xs">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="#" data-toggle="tooltip" title="Topic of the year" data-placement="bottom">
+                                <small>{% icon 'bullseye' %} {{ topic_of_the_year_feed|truncatechars:70 }}</small>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            {% endif %}
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
                     <li class="dropdown" data-placement="bottom" data-toggle="tooltip" title="Search">

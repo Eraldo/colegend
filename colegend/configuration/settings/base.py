@@ -167,6 +167,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 # custom
                 "website.context_processors.menu",
+                "website.context_processors.menu_feed",
             ],
         },
     },
