@@ -1,13 +1,13 @@
 from autocomplete_light import MultipleChoiceWidget
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, Row
+from django import forms
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm, HiddenInput
 from django.utils import timezone
-from django.utils.datetime_safe import datetime
 from markitup.widgets import MarkItUpWidget
 from journals.models import DayEntry, Journal, WeekEntry
-from lib.crispy import CancelButton, SaveButton
+from lib.crispy import CancelButton, SaveButton, IconButton
 
 __author__ = 'eraldo'
 
@@ -85,5 +85,23 @@ class WeekEntryForm(ModelForm):
         Field('content', rows="20"),
         Field('tags'),
         SaveButton(),
+        CancelButton(),
+    )
+
+
+class ImportForm(forms.Form):
+    text = forms.CharField(
+        label="Journal entry/entries to import",
+        widget=forms.Textarea,
+        help_text="Date format: YYYY-MM-DD or DD.MM.YYYY, Tags are comma separated, Content may have ",
+    )
+
+    def import_entries(self):
+        print(self.cleaned_data["text"])
+
+    helper = FormHelper()
+    helper.layout = Layout(
+        Field('text', rows="20"),
+        IconButton("import", "Import", "import", input_type="submit", css_class="btn-primary"),
         CancelButton(),
     )

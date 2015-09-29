@@ -1,10 +1,7 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Field, Fieldset, Submit, HTML, Button
+from crispy_forms.layout import Layout, Field, Fieldset
 from django import forms
 from django.core.mail import EmailMessage
-from django.template.loader import render_to_string
-from django.utils.html import escape
-from django.utils.safestring import mark_safe
 from lib.crispy import IconButton
 from notifications.models import Notification
 from users.models import User

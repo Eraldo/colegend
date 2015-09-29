@@ -1,12 +1,13 @@
 from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
+from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.dateparse import parse_date
 from lib.views import ActiveUserRequiredMixin
 from django.core.exceptions import ValidationError
 from django.views.generic import DetailView, UpdateView, DeleteView, CreateView, ArchiveIndexView, RedirectView, \
     TemplateView, ListView, FormView
-from journals.forms import DayEntryForm, JournalForm, WeekEntryForm
+from journals.forms import DayEntryForm, JournalForm, WeekEntryForm, ImportForm
 from journals.models import DayEntry, Journal, WeekEntry
 
 __author__ = 'eraldo'
@@ -300,3 +301,19 @@ class WeekEntryChartView(WeekEntryMixin, ListView):
 
 class ImportView(DayEntryMixin, FormView):
     template_name = "journals/import.html"
+    form_class = ImportForm
+    success_url = reverse_lazy('journals:index')
+
+    def get_initial(self):
+        """
+        Returns the initial data to use for forms on this view.
+        """
+        initial = super().get_initial()
+        initial['text'] = render_to_string('journals/journal_import_template.txt')
+        return initial
+
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        form.import_entries()
+        return super().form_valid(form)
