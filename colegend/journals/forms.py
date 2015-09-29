@@ -101,7 +101,7 @@ class ImportForm(forms.Form):
     def import_entries(self, user):
         texts = re.split(r'\n(?=Date:)', self.cleaned_data["text"])
         pattern = re.compile(
-            r"^(Date: (?P<date>\d{4}-\d{2}-\d{2})\s\nLocation: (?P<location>.*)\s\nFocus: (?P<focus>.*)\s\nTags: (?P<tags>.*)\s\nContent: (?P<content>.*))+",
+            r"^(Date:(\s+)?(?P<date>\d{4}-\d{2}-\d{2})(\s+)?(\w+)?(\s+)?\nLocation:(\s+)?(?P<location>.*)(\s+)?\nFocus:(\s+)?(?P<focus>.*)(\s+)?\nTags:(\s+)?(?P<tags>.*)(\s+)?\nContent:(\s+)?(?P<content>.*))+",
             re.MULTILINE | re.DOTALL)
 
         for text in texts:
