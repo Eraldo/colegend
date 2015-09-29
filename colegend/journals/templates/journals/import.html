@@ -1,0 +1,134 @@
+{% extends 'page.html' %}
+
+{% load icons %}
+
+{% block page_title %}
+    Import
+{% endblock %}
+
+{% block up_url %}{% url "journals:week" %}{% endblock %}
+
+{#{% block page_title_extras %}#}
+{#    {{ week_start }} -- {{ week_end }}#}
+{#    <span data-toggle="tooltip" title="Streaks" data-container="body">#}
+{#        <span class="streak badge">{% icon "streak" %} {{ streak }} day{{ streak|pluralize }}, {{ week_streak }} month{{ week_streak|pluralize }}</span>#}
+{#    </span>#}
+{#    <span data-toggle="tooltip" title="Topic of the year" data-container="body">#}
+{#        <span class="label label-info">{{ topic_of_the_year }}</span>#}
+{#    </span>#}
+{#{% endblock %}#}
+
+{#{% block page_controls %}#}
+{#    <div class="btn-toolbar">#}
+{#        {% if weekentry %}#}
+{#            <a href="{% url 'journals:weekentry_edit' date=weekentry.date %}" class="edit-button btn btn-primary"#}
+{#               role="button" data-toggle="tooltip" title="Edit" data-container="body">#}
+{#                {% icon "edit" %}#}
+{#            </a>#}
+{#            <a href="{% url 'journals:weekentry_delete' date=weekentry.date %}"#}
+{#               class="delete-button btn btn-danger pull-right" role="button"#}
+{#               data-toggle="tooltip" title="Delete" data-container="body">#}
+{#                {% icon "delete" %}#}
+{#            </a>#}
+{#        {% else %}#}
+{#            <a href="{% url "journals:weekentry_new" %}?date={{ date|date:"c" }}" class="new-button btn btn-default"#}
+{#               role="button" data-toggle="tooltip" title="New Entry: {{ date }}" data-container="body">#}
+{#                {% icon "new" %}#}
+{#            </a>#}
+{#        {% endif %}#}
+{##}
+{#        <div class="btn-group">#}
+{#            <a href="{% url "journals:week" date=previous_date %}" class="btn btn-default"#}
+{#               data-toggle="tooltip" title="Previous week" data-container="body"#}
+{#               role="button">{% icon "chevron-left" %}#}
+{#            </a>#}
+{##}
+{#            <a href="{% url "journals:week" date=next_date %}" class="btn btn-default"#}
+{#               data-toggle="tooltip" title="Next week" data-container="body"#}
+{#               role="button">{% icon "chevron-right" %}#}
+{#            </a>#}
+{#        </div>#}
+{##}
+{#        <!-- Perspective dropdown -->#}
+{#        <div class="btn-group" data-toggle="tooltip" title="Perspective" data-container="body">#}
+{#            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"#}
+{#                    aria-expanded="false">#}
+{#                Week <span class="caret"></span>#}
+{#            </button>#}
+{#            <ul class="dropdown-menu">#}
+{#                <li><a href="{% url 'journals:dayentry_show' date=date %}">Day</a></li>#}
+{#                <li class="disabled"><a href="#">Month</a></li>#}
+{#                <li class="disabled"><a href="#">Quater</a></li>#}
+{#                <li class="disabled"><a href="#">Year</a></li>#}
+{#            </ul>#}
+{#        </div>#}
+{##}
+{#        <a href="{% url "journals:map" %}" class="btn btn-default" role="button" data-toggle="tooltip"#}
+{#           title="Travel Map" data-container="body">#}
+{#            {% icon "location" %}#}
+{#        </a>#}
+{#        <a href="{% url "journals:weekentry_chart" %}" class="btn btn-default" data-toggle="tooltip"#}
+{#           title="Week Entry Chart" data-container="body">{% icon "chart" %}</a>#}
+{#        <a href="{% url "journals:journal_edit" %}" class="btn btn-default pull-right" role="button"#}
+{#           data-toggle="tooltip"#}
+{#           title="Journal Settings" data-container="body">#}
+{#            {% icon "setting" %}#}
+{#        </a>#}
+{#        <a href="{% url "journals:import" %}" class="btn btn-default pull-right" role="button"#}
+{#           data-toggle="tooltip"#}
+{#           title="Import" data-container="body">#}
+{#            {% icon "import" %}#}
+{#        </a>#}
+{#    </div>#}
+{#{% endblock %}#}
+
+{% block page_content %}
+    <div class="well well-sm">
+    Import template.
+{#        <span class="lead">{{ weekentry.focus }}</span>#}
+{##}
+{#        <div class="pull-right">#}
+{#            {% for tag in weekentry.tags.all %}#}
+{#                {% include "tags/_tag.html" %}#}
+{#            {% endfor %}#}
+{#        </div>#}
+{##}
+{#        <div class="dayentry-list">#}
+{##}
+{#            <table class="table table-hover">#}
+{#                <thead>#}
+{#                <tr>#}
+{#                    <th>Date</th>#}
+{#                    <th>Focus</th>#}
+{#                    <th>Location(s)</th>#}
+{#                    <th>Tags</th>#}
+{#                </tr>#}
+{#                </thead>#}
+{#                <tbody>#}
+{#                {% for entry_date, dayentry in day_entries %}#}
+{#                    <tr{% ifequal entry_date today %} class="success"{% endifequal %}>#}
+{#                        <td>#}
+{#                            <a href="{% url "journals:dayentry_show" date=entry_date %}">{{ entry_date }}</a>#}
+{#                            <span class="label bg-category-{{ entry_date|date:"w" }}">{{ entry_date|date:"D" }}</span>#}
+{#                            <br>#}
+{#                        </td>#}
+{#                        <td>#}
+{#                            {{ dayentry.focus }}#}
+{#                        </td>#}
+{#                        <td>#}
+{#                            {{ dayentry.location|truncatechars:70 }}#}
+{#                        </td>#}
+{#                        <td>#}
+{#                            {% for tag in dayentry.tags.all %}#}
+{#                                {% include "tags/_tag.html" %}#}
+{#                            {% endfor %}#}
+{#                        </td>#}
+{#                    </tr>#}
+{#                {% endfor %}#}
+{##}
+{#                </tbody>#}
+{#            </table>#}
+{#            {% include "lib/_pager.html" %}#}
+{#        </div>#}
+    </div>
+{% endblock %}

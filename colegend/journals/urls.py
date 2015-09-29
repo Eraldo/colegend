@@ -2,7 +2,7 @@ from django.conf.urls import patterns, url
 from django.views.generic import RedirectView
 from journals.views import DayEntryShowView, DayEntryNewView, DayEntryEditView, DayEntryDeleteView, DayEntryListView, \
     DayEntryContinueView, MapView, JournalEditView, WeekView, WeekEntryNewView, WeekEntryShowView, \
-    WeekEntryEditView, WeekEntryDeleteView, DayEntryChartView, WeekEntryChartView
+    WeekEntryEditView, WeekEntryDeleteView, DayEntryChartView, WeekEntryChartView, ImportView
 
 __author__ = 'eraldo'
 
@@ -99,4 +99,9 @@ urlpatterns = patterns(
     url(r'^week/chart/$',
         WeekEntryChartView.as_view(),
         name='weekentry_chart'),
+
+    # ex: ../import/
+    url(r'^import/$',
+        ImportView.as_view(),
+        name='import'),
 )

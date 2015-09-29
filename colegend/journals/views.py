@@ -5,7 +5,7 @@ from django.utils.dateparse import parse_date
 from lib.views import ActiveUserRequiredMixin
 from django.core.exceptions import ValidationError
 from django.views.generic import DetailView, UpdateView, DeleteView, CreateView, ArchiveIndexView, RedirectView, \
-    TemplateView, ListView
+    TemplateView, ListView, FormView
 from journals.forms import DayEntryForm, JournalForm, WeekEntryForm
 from journals.models import DayEntry, Journal, WeekEntry
 
@@ -296,3 +296,7 @@ class DayEntryChartView(DayEntryMixin, ListView):
 
 class WeekEntryChartView(WeekEntryMixin, ListView):
     template_name = "journals/entry_chart.html"
+
+
+class ImportView(DayEntryMixin, FormView):
+    template_name = "journals/import.html"

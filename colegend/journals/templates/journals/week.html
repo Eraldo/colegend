@@ -74,6 +74,11 @@
            title="Journal Settings" data-container="body">
             {% icon "setting" %}
         </a>
+        <a href="{% url "journals:import" %}" class="btn btn-default pull-right" role="button"
+           data-toggle="tooltip"
+           title="Import" data-container="body">
+            {% icon "import" %}
+        </a>
     </div>
 {% endblock %}
 

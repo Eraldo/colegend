@@ -148,6 +148,8 @@ def get_icon(name, raw=False):
         'prompt': 'chevron-right',
         'quick-command': 'asterisk',
         'locked': 'lock',
+        'import': 'level-down',
+        'export': 'level-up',
         # trackers
         'rating': 'star',
         'number': 'slack',
