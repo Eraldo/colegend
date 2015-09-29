@@ -1,4 +1,11 @@
-Date: 
+Date:
+Location:
+Focus:
+Tags:
+Content:
+...
+
+Date:
 Location:
 Focus:
 Tags:

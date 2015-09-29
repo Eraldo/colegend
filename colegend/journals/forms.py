@@ -93,11 +93,18 @@ class ImportForm(forms.Form):
     text = forms.CharField(
         label="Journal entry/entries to import",
         widget=forms.Textarea,
-        help_text="Date format: YYYY-MM-DD or DD.MM.YYYY, Tags are comma separated, Content may have ",
+        help_text="Date format: YYYY-MM-DD or DD.MM.YYYY, Tags are comma separated.",
     )
 
     def import_entries(self):
-        print(self.cleaned_data["text"])
+        text = self.cleaned_data["text"]
+
+        # Split journal entries
+        # import re
+        # re.findall('^.*?the', text, re.DOTALL)
+        #
+        print(text.split("Date:"))
+
 
     helper = FormHelper()
     helper.layout = Layout(
