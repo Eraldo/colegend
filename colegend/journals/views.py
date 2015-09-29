@@ -9,6 +9,7 @@ from django.views.generic import DetailView, UpdateView, DeleteView, CreateView,
     TemplateView, ListView, FormView
 from journals.forms import DayEntryForm, JournalForm, WeekEntryForm, ImportForm
 from journals.models import DayEntry, Journal, WeekEntry
+from tags.models import Tag
 
 __author__ = 'eraldo'
 
@@ -313,7 +314,9 @@ class ImportView(DayEntryMixin, FormView):
         return initial
 
     def form_valid(self, form):
-        # This method is called when valid form data has been POSTed.
-        # It should return an HttpResponse.
-        form.import_entries()
+        try:
+            form.import_entries(self.request.user)
+        except (ValidationError or Tag.DoesNotExist) as error:
+            form.add_error(None, error)
+            return super().form_invalid(form)
         return super().form_valid(form)

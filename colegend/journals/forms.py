@@ -1,3 +1,4 @@
+import re
 from autocomplete_light import MultipleChoiceWidget
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, Row
@@ -8,6 +9,7 @@ from django.utils import timezone
 from markitup.widgets import MarkItUpWidget
 from journals.models import DayEntry, Journal, WeekEntry
 from lib.crispy import CancelButton, SaveButton, IconButton
+from tags.models import Tag
 
 __author__ = 'eraldo'
 
@@ -93,18 +95,34 @@ class ImportForm(forms.Form):
     text = forms.CharField(
         label="Journal entry/entries to import",
         widget=forms.Textarea,
-        help_text="Date format: YYYY-MM-DD or DD.MM.YYYY, Tags are comma separated.",
+        help_text="Date format: YYYY-MM-DD, Tags are comma separated.",
     )
 
-    def import_entries(self):
-        text = self.cleaned_data["text"]
+    def import_entries(self, user):
+        texts = re.split(r'\n(?=Date:)', self.cleaned_data["text"])
+        pattern = re.compile(
+            r"^(Date: (?P<date>\d{4}-\d{2}-\d{2})\s\nLocation: (?P<location>.*)\s\nFocus: (?P<focus>.*)\s\nTags: (?P<tags>.*)\s\nContent: (?P<content>.*))+",
+            re.MULTILINE | re.DOTALL)
 
-        # Split journal entries
-        # import re
-        # re.findall('^.*?the', text, re.DOTALL)
-        #
-        print(text.split("Date:"))
+        for text in texts:
+            match = pattern.match(text)
+            if match:
+                data = match.groupdict()
+                # Handle tags after entry creation
+                tags = data.pop('tags')
+                try:
+                    entry = user.journal.entries.create(**data)
+                except ValidationError as error:
+                    raise ValidationError("{}: {}".format(data.get('date'), error))
 
+                tags = [tag.strip() for tag in tags.split(',')]
+                for tag in tags:
+                    if not tag:
+                        continue
+                    try:
+                        entry.tags.add(user.tags.get(name=tag))
+                    except Tag.DoesNotExist as error:
+                        raise ValidationError("Tag '{}' for '{}' does not exist.".format(tag, entry))
 
     helper = FormHelper()
     helper.layout = Layout(
