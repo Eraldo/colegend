@@ -78,9 +78,9 @@ def menu(request):
 
 
 def menu_feed(request):
-    if randint(0, 1):
+    if randint(0, 1) or not request.user.is_authenticated():
         quote = Quote.objects.daily_quote()
         return {'daily_quote_feed': quote}
-    else:
+    elif request.user.is_authenticated():
         topic_of_the_year = request.user.journal.topic_of_the_year
         return {'topic_of_the_year_feed': topic_of_the_year}
