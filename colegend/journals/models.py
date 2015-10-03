@@ -61,13 +61,16 @@ class DayEntryQuerySet(models.QuerySet):
         entries = self.owned_by(user)
         dates = entries.dates('date', kind='day', order="DESC")
         today = timezone.now().date()
+        if not dates or (today - dates[0]).days > 1:  # first date needs to be today or yesterday
+            return 0
         counter = 0
+        preday = dates[0] + timezone.timedelta(1)
         for date in dates:
-            if (today - date).days == counter:
+            if (preday - date).days == 1:
                 counter += 1
+                preday = date
             else:
                 return counter
-        # no dates found..
         return counter
 
 

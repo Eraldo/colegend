@@ -20,10 +20,10 @@ class DayEntryDayEntryNewViewTest(LoggedInTestMixin, TestCase):
         get loaded as the initial text when creating a new journal entry.
         """
         # Setup: Define Journal Template.
-        settings = self.user.settings
         template = "Some Template"
-        settings.journal_entry_template = template
-        settings.save()
+        journal = self.user.journal
+        journal.day_template = template
+        journal.save()
         # Get page.
         url = reverse("journals:dayentry_new")
         response = self.client.get(url)
