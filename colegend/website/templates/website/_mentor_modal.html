@@ -1,4 +1,5 @@
 {% extends "website/_modal.html" %}
+{% load icons %}
 
 {% block lauch_button %}{% endblock %}
 
@@ -13,33 +14,33 @@
     </p>
     <ul class="list-group">
         <li class="list-group-item">
+            {% icon 'gathering' %}
             <b>Gatherings</b><br/>
-            <i class="fa fa-2x fa-microphone-slash pull-left fa-border"></i>
             A space to make room for your biggest challenges and strongest feelings and emotions.
         </li>
         <li class="list-group-item">
+            {% icon 'challenge' %}
             <b>Challenges</b><br/>
-            <i class="fa fa-2x fa-microphone-slash pull-left fa-border"></i>
             Take on challenges that help you expand your comfort zone and bring adventures to your everyday life.
         </li>
         <li class="list-group-item">
+            {% icon 'journal' %}
             <b>Smart Journal</b><br/>
-            <i class="fa fa-2x fa-microphone-slash pull-left fa-border"></i>
             Become more aware of your current life by reflecting on it in a smart and personalized way.
         </li>
         <li class="list-group-item">
+            {% icon 'dojo' %}
             <b>Dojo</b><br/>
-            <i class="fa fa-2x fa-microphone-slash pull-left fa-border"></i>
             Learn and practise to express your desires more clearly to get what you want.
         </li>
         <li class="list-group-item">
+            {% icon 'tutorial' %}
             <b>Personal Feedback</b><br/>
-            <i class="fa fa-2x fa-microphone-slash pull-left fa-border"></i>
             Ask any question that you have in your live! You will get a personal answer.
         </li>
         <li class="list-group-item">
+            {% icon 'eye' %}
             <b>Coaching</b><br/>
-            <i class="fa fa-2x fa-microphone-slash pull-left fa-border"></i>
             Direct one-on-one coaching.
         </li>
     </ul>

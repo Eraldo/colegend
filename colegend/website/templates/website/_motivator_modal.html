@@ -1,4 +1,5 @@
 {% extends "website/_modal.html" %}
+{% load icons %}
 
 {% block lauch_button %}{% endblock %}
 
@@ -24,13 +25,13 @@
 
     <ul class="list-group">
         <li class="list-group-item">
+            {% icon 'legend' %}
             <b>Story</b><br/>
-            <i class="fa fa-2x fa-microphone-slash pull-left fa-border"></i>
             Become part of a legendary story!
         </li>
         <li class="list-group-item">
+            {% icon 'quote' %}
             <b>Quotes and Inspiration</b><br/>
-            <i class="fa fa-2x fa-clock-o pull-left fa-border"></i>
             Quotes and other sources of inspiration that may help you stay on track.
         </li>
     </ul>
