@@ -245,6 +245,7 @@ PROJECT_APPS = (
     'cards',
     # operator
     'users',  # custom users app
+    'about',
     'website',
     'contact',
     'features',
