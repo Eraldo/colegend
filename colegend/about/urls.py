@@ -5,7 +5,7 @@ __author__ = 'eraldo'
 
 urlpatterns = patterns(
     '',
-    url(r'^about/2/$',
+    url(r'^about/$',
         IndexView.as_view(),
-        name='index'),
+        name='about'),
 )

@@ -5,9 +5,9 @@ __author__ = 'eraldo'
 
 urlpatterns = patterns(
     '',
-    url(r'^about/$',
+    url(r'^about/old$',
         AboutView.as_view(),
-        name='about'),
+        name='about-old'),
     url(r'^$',
         HomeView.as_view(),
         name='home'),
