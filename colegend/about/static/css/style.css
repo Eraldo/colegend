@@ -1337,9 +1337,5 @@ section.comments {
 }
 
 #login {
-    margin-left: 10px;
-    background: transparent;
-}
-#login-url {
-    /*color: white;*/
+    margin: 18px 10px 0px 20px;
 }

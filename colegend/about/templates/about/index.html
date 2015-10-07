@@ -47,13 +47,7 @@
                 <a class="navbar-brand" href="#">
                     <img id="logo" class="img-responsive" src="{{ STATIC_URL }}website/images/Co_100x50.png"
                          style="max-height: 18px; display: inline;">
-                    {#                    CoLegend#}
                 </a>
-                <div id="login" class="navbar-brand">
-                    <a id="login-link" class="btn btn-default btn-xs" href="{% url "account_login" %}?next=/">Login</a>
-                </div>
-{#                <a class="navbar-brand" href="{% url "account_login" %}?next=/">Login</a>#}
-{#                <a class="btn btn-default pull-left" style="margin: 15px;" href="{% url "account_login" %}?next=/">Login</a>#}
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -63,6 +57,7 @@
                     <li><a class="page-scroll" href="#testimonials">Testimonials</a></li>
                     <li><a class="page-scroll" href="#pricing">Pricing</a></li>
                     <li><a class="page-scroll" href="#contact">Contact</a></li>
+                    <a id="login" href="{% url "account_login" %}?next=/" class="btn btn-info pull-right">Login</a>
                 </ul>
             </div>
         </div>
