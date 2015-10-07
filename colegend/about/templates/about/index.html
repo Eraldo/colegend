@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Add Your favicon here -->
-    <!--<link rel="icon" href="{{ STATIC_URL }}img/favicon.ico">-->
+    <link rel="shortcut icon" href="{{ STATIC_URL }}favicon.ico">
 
     <title>CoLegend - About</title>
 
@@ -46,9 +46,14 @@
                 </button>
                 <a class="navbar-brand" href="#">
                     <img id="logo" class="img-responsive" src="{{ STATIC_URL }}website/images/Co_100x50.png"
-                         style="max-height: 20px; display: inline;">
+                         style="max-height: 18px; display: inline;">
                     {#                    CoLegend#}
                 </a>
+                <div id="login" class="navbar-brand">
+                    <a id="login-link" class="btn btn-default btn-xs" href="{% url "account_login" %}?next=/">Login</a>
+                </div>
+{#                <a class="navbar-brand" href="{% url "account_login" %}?next=/">Login</a>#}
+{#                <a class="btn btn-default pull-left" style="margin: 15px;" href="{% url "account_login" %}?next=/">Login</a>#}
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">

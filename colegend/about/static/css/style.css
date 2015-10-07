@@ -1335,3 +1335,11 @@ section.comments {
     -webkit-transform: rotate(2deg); /* Chrome, Safari, Opera */
     transform: rotate(2deg);
 }
+
+#login {
+    margin-left: 10px;
+    background: transparent;
+}
+#login-url {
+    /*color: white;*/
+}
