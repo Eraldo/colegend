@@ -44,20 +44,19 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">
-                    <img id="logo" class="img-responsive" src="{{ STATIC_URL }}website/images/Co_100x50.png"
-                         style="max-height: 18px; display: inline;">
+                <a class="navbar-brand" href="#page-top">
+                    <img id="logo" class="img-responsive" src="{{ STATIC_URL }}img/CoLegendLogo_86x18.png">
                 </a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
+                    <a id="login" href="{% url "account_login" %}?next=/" class="btn btn-info pull-right">Login</a>
                     <li><a class="page-scroll" href="#page-top">Home</a></li>
                     <li><a class="page-scroll" href="#features">Features</a></li>
                     <li><a class="page-scroll" href="#team">Team</a></li>
-                    <li><a class="page-scroll" href="#testimonials">Testimonials</a></li>
+{#                    <li><a class="page-scroll" href="#testimonials">Testimonials</a></li>#}
                     <li><a class="page-scroll" href="#pricing">Pricing</a></li>
                     <li><a class="page-scroll" href="#contact">Contact</a></li>
-                    <a id="login" href="{% url "account_login" %}?next=/" class="btn btn-info pull-right">Login</a>
                 </ul>
             </div>
         </div>
@@ -77,17 +76,20 @@
             <div class="container">
                 <div class="carousel-caption tilted">
                     <h1>
-                        CoLegend
+                        Personal Development
+{#                        <img src="{{ STATIC_URL }}img/CoLegendLogo-white.png" class="img-responsive" alt="logo" style="max-height: 100px;"/>#}
                     </h1>
-                    <p class="back-tilted"><i>Personal Development Platform</i></p>
+
+                    <p class=""><i>Socially Intelligent Platform</i></p>
+
                     <p>Once upon a time.. is now!<br/>join the circle of real life legends!</p>
 
                     <p><a class="btn btn-lg btn-primary page-scroll" href="#" onclick="playintro();" role="button">Start
                         Video</a></p>
                 </div>
-                <div class="carousel-image wow zoomIn">
+                <div class="carousel-image wow zoomIn back-tilted">
                     <a href="#">
-                        <img class="transparent-box" src="{{ STATIC_URL }}website/images/CoLegendLogo.png" alt="logo"/>
+                        <img src="{{ STATIC_URL }}website/images/CoLegendLogo.png" alt="logo"/>
                     </a>
                 </div>
             </div>
@@ -154,7 +156,8 @@
 </div>
 <section id="intro" class="container services">
     <div class="row">
-        <div class="col-sm-6 col-sm-offset-3 text-center">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6 text-center">
             <div id="intro-video-container" class="embed-responsive embed-responsive-16by9 col-xs-12">
                 <div style="padding-top: 10px; color: white">..video is loading..</div>
                 <iframe id="intro-video" class="embed-responsive-item" allowfullscreen
@@ -166,15 +169,18 @@
                 </script>
             </div>
         </div>
+        <div class="col-sm-3"></div>
     </div>
 
 </section>
 <section id="features" class="container services">
     <div class="row text-center">
         <div class="col-sm-4">
-{#            <img class="img-circle" src="{{ STATIC_URL }}website/images/mentor_140x140.jpg" alt="Mentor"/>#}
+            {#            <img class="img-circle" src="{{ STATIC_URL }}website/images/mentor_140x140.jpg" alt="Mentor"/>#}
 
-            <h2>Conscious<br/><small>Coaching Mentoring Visioning</small></h2>
+            <h2>Conscious<br/>
+                <small>Coaching Mentoring Visioning</small>
+            </h2>
 
             <p class="text-left">
                 Uncover your <u>deep desires</u> and explore your legendary <b style="display:inline-block;">life
@@ -186,25 +192,32 @@
             {#            <p><a class="navy-link" href="#" role="button">Details &raquo;</a></p>#}
         </div>
         <div class="col-sm-4">
-{#            <img class="img-circle" src="{{ STATIC_URL }}website/images/manager_140x140.jpg" alt="Manager"/>#}
+            {#            <img class="img-circle" src="{{ STATIC_URL }}website/images/manager_140x140.jpg" alt="Manager"/>#}
 
-            <h2>Connected<br/><small>Community Sharing Groups</small></h2>
+            <h2>Connected<br/>
+                <small>Community Sharing Groups</small>
+            </h2>
 
             <p class="text-left">
-                Feel connected and get <u>active support</u> by being part of a larger <b>community</b> of benevolent fellows called "<i>legends</i>" who share the journey of living up to your <u>full potential</u> and making <u>dreams come true</u>.
+                Feel connected and get <u>active support</u> by being part of a larger <b>community</b> of benevolent
+                fellows called "<i>legends</i>" who share the journey of living up to your <u>full potential</u> and
+                making <u>dreams come true</u>.
 
             </p>
 
             {#            <p><a class="navy-link" href="#" role="button">Details &raquo;</a></p>#}
         </div>
         <div class="col-sm-4">
-{#            <img class="img-circle" src="{{ STATIC_URL }}website/images/motivator_140x140.jpg" alt="Motivator"/>#}
+            {#            <img class="img-circle" src="{{ STATIC_URL }}website/images/motivator_140x140.jpg" alt="Motivator"/>#}
 
-            <h2>Continuous<br/><small>Challenges Habits Play</small></h2>
+            <h2>Continuous<br/>
+                <small>Challenges Habits Play</small>
+            </h2>
 
             <p class="text-left">
                 We know how to <u>challenge and surprise</u> you while keeping a fun <b style="display: inline-block">playful
-                attitude</b>. Build <u>lasting relationships</u> and prevent being stuck by getting <u>personal coaching sessions</u>.
+                attitude</b>. Build <u>lasting relationships</u> and prevent being stuck by getting <u>personal coaching
+                sessions</u>.
 
             </p>
 
@@ -215,13 +228,16 @@
         <div class="col-lg-12 text-center">
             <div class="navy-line"></div>
             <h1>A community of awesome people<br/>
-                <small>+</small><br/>
+                <small>+</small>
+                <br/>
                 <span class="navy"> A collection of useful tools</span></h1>
             <p style="position: relative; top: -10px; height: 0px;">for your personal development</p>
+
             <h1>
-                <small>=</small><br>
+                <small>=</small>
+                <br>
                 L E G E N D A R Y
-                </h1>
+            </h1>
         </div>
     </div>
 </section>
@@ -273,7 +289,8 @@
             <p>
                 According to an old legend, some people choose to live an awesome life.
                 They break out of the typical
-                life and transform into ..well.. legends - unleashing their full potential - feeling vibrant charged and energetic.
+                life and transform into ..well.. legends - unleashing their full potential - feeling vibrant charged and
+                energetic.
                 The interesting question here is:
                 Are you one of them?
                 - Well, let us find it out..
@@ -281,16 +298,19 @@
         </div>
     </div>
     <div class="row features-block">
-        <div class="col-lg-6 features-text wow fadeInLeft">
+        <div class="col-lg-4 text-right wow fadeInRight">
+            <img src="{{ STATIC_URL }}img/seminar.png" alt="agenda" class="img-responsive pull-left">
+        </div>
+        <div class="col-lg-4 features-text text-center wow fadeInLeft">
             <small>CoLegend</small>
             <h2>Once upon a time.. is now!</h2>
 
             <p>
-                <a href="{% url "account_login" %}?next=/" class="btn btn-primary">join the circle</a>
+                <a href="{% url "account_login" %}?next=/" class="btn btn-primary">join the circle</a><br/>
                 <i>of real life legends!</i>
             </p>
         </div>
-        <div class="col-lg-6 text-right wow fadeInRight">
+        <div class="col-lg-4 text-right wow fadeInRight">
             <img src="{{ STATIC_URL }}img/agenda.png" alt="agenda" class="img-responsive pull-right">
         </div>
     </div>
@@ -759,7 +779,7 @@
     </div>
 </section>
 
-<div id="audio-box" style="position: fixed; bottom: -0; right: 0; z-index: 10000">
+<div class="hidden-xs" id="audio-box" style="position: fixed; bottom: -0; right: 0; z-index: 10000">
     <audio id="audioplayer" src="{{ STATIC_URL }}website/audio/colegend_song.mp3" controls loop></audio>
 </div>
 
