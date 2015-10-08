@@ -166,7 +166,7 @@ INSTALLED_APPS = INSTALLED_APPS + PRODUCTION_APPS
 ########## SENTRY CONFIGURATION
 import raven
 RAVEN_CONFIG = {
-    'dsn': 'https://cb116b74706f4bc8a01a4fec07ce5613:6e65b02071534833989c5a98098f8d6d@app.getsentry.com/54372',
+    'dsn': 'https://12f207e3921b4208a8843ce00641431b:89dcd43e10d24937b19545bc1dbd909b@app.getsentry.com/54381',
     # If you are using git, you can also automatically configure the
     # release based on the git info.
     'release': raven.fetch_git_sha(PROJECT_ROOT),
