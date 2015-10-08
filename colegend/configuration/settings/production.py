@@ -154,3 +154,21 @@ ADMIN_URL_BASE = r"^admin/"
 CSRF_COOKIE_SECURE = get_setting('CSRF_COOKIE_SECURE', default=True, conversion_type=bool)
 SESSION_COOKIE_SECURE = get_setting('SESSION_COOKIE_SECURE', default=True, conversion_type=bool)
 ########## END SECURITY CONFIGURATION
+
+
+PRODUCTION_APPS = (
+    # error logging (sentry)
+    'raven.contrib.django.raven_compat',
+)
+INSTALLED_APPS = INSTALLED_APPS + PRODUCTION_APPS
+
+
+########## SENTRY CONFIGURATION
+import raven
+RAVEN_CONFIG = {
+    'dsn': 'https://cb116b74706f4bc8a01a4fec07ce5613:6e65b02071534833989c5a98098f8d6d@app.getsentry.com/54372',
+    # If you are using git, you can also automatically configure the
+    # release based on the git info.
+    'release': raven.fetch_git_sha(PROJECT_ROOT),
+}
+########## END SENTRY CONFIGURATION

@@ -4,3 +4,7 @@
 
 # Webserver
 gunicorn==19.0.0
+
+
+# Error logging sentry
+raven==5.7.2
