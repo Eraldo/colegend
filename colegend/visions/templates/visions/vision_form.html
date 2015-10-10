@@ -1,9 +1,0 @@
-{% extends 'form.html' %}
-{% block form_title %}Life Vision{% endblock %}
-
-{% block up_url %}{% url "visions:vision_list" %}{% endblock %}
-
-{% block page_content %}
-    {{ form.media }}
-    {{ block.super }}
-{% endblock %}

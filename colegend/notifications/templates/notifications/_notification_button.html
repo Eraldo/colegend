@@ -1,5 +1,0 @@
-{% load icons %}
-<span data-toggle="tooltip" title="{{ notification.creation_date|default:"" }}">
-<a href="#" class="btn btn-{{ button_size|default:"xs" }} btn-default">
-    {% if notification.read %}{% icon "notification" %}{% else %}{% icon "notification-unread" %}{% endif %}</a>
-</span>

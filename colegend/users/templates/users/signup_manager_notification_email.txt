@@ -1,5 +1,0 @@
-A new user has signed up:
-Username: {{ username }}
-Email: {{ email }}
-
-Sent by CoLegend: www.colegend.org

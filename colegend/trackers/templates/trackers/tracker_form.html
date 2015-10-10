@@ -1,6 +1,0 @@
-{% extends 'form.html' %}
-{% load model_name %}
-
-{% block form_title %}{{ view.model|model_name }}{% endblock %}
-
-{% block up_url %}{% url "trackers:tracker_list" %}{% endblock %}
