@@ -13,5 +13,9 @@ install:
   - "pip install hitch"
   - "cd tests"
   - "hitch init"
+before_script:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3 # give xvfb some time to start
 script:
   - "hitch test . --extra '{\"xvfb\":true, \"pause_on_failure\":false}'"
