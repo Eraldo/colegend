@@ -18,4 +18,4 @@ before_script:
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3 # give xvfb some time to start
 script:
-  - "hitch test . --extra '{\"xvfb\":true, \"pause_on_failure\":false}'"
+  - "hitch test . --settings ci.yml"

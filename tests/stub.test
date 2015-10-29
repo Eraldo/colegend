@@ -6,5 +6,5 @@
     python_version: "{{ python_version }}"
   scenario:
     - Load website
-    - Pause
+#   - Pause
 {% endblock %}
