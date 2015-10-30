@@ -34,6 +34,9 @@ pip-log.txt
 nosetests.xml
 htmlcov
 
+# Hitch tests
+.hitch
+
 # Translations
 *.mo
 *.pot
