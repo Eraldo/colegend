@@ -28,7 +28,7 @@ class CeleryConfig(AppConfig):
             # Celery signal registration
             from raven import Client
             from raven.contrib.celery import register_signal
-            client = Client(dsn=settings.RAVEN_CONFIG['dsn'])
+            client = Client(dsn=settings.RAVEN_CONFIG['DSN'])
             register_signal(client)
 
 
