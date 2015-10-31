@@ -63,4 +63,4 @@ node_modules/
 colegend/media/
 
 # Browser components (bower)
-colegend/static/components/
+# colegend/static/components/
