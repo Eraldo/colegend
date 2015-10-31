@@ -1,0 +1,148 @@
+{% load staticfiles i18n %}<!DOCTYPE html>
+
+
+<html lang="en" ng-app>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block title %}coLegend{% endblock title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    {% block css %}
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="{% static 'components/bootstrap/dist/css/bootstrap.min.css' %}">
+
+        <!-- Your stuff: Third-party css libraries go here -->
+
+        <!-- Fontawesome CSS -->
+        <link href="{% static 'components/fontawesome/css/font-awesome.min.css' %}" rel="stylesheet">
+
+        <!-- This file store project specific CSS -->
+        <link href="{% static 'css/colegend.css' %}" rel="stylesheet">
+    {% endblock %}
+
+    {% block angular %}
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+    {% endblock %}
+
+</head>
+
+<body>
+
+<div class="m-b">
+    <nav class="navbar navbar-static-top navbar-light bg-faded">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img id="navbar-brand-logo" src="{% static 'img/CoLegendLogo_86x18.png' %}" alt="coLegend logo">
+            </a>
+            <button type="button" class="navbar-toggler hidden-sm-up pull-right" data-toggle="collapse"
+                    data-target="#bs-navbar-collapse-1">
+                &#9776;
+            </button>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-toggleable-xs" id="bs-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">
+                            <span class="text-primary">
+                                <i class="fa fa-graduation-cap"></i> conscious
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'users:list' %}">
+                            <span class="text-success">
+                                <i class="fa fa-heart"></i> connected
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'users:list' %}">
+                            <span class="text-warning">
+                                <i class="fa fa-paw"></i> continuous
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav pull-right">
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'about' %}"><i class="fa fa-info-circle"></i> About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               href="{% url 'users:detail' request.user.username %}"><i
+                                    class="fa fa-user"></i> {% trans "Profile" %}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'account_logout' %}"><i
+                                    class="fa fa-sign-out"></i> {% trans "Logout" %}</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'account_login' %}">{% trans "Log In" %}</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<div class="container">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    {% block breadcrumbs %}
+        <ol class="breadcrumb">
+            {% block breadcrumbs_path %}
+                <li><a href="{% url 'home' %}"><i class="fa fa-home"></i> Home</a></li>
+            {% endblock %}
+            <li class="active">{% block breadcrumb_active %}{% endblock %}</li>
+        </ol>
+    {% endblock %}
+
+    {% block content %}
+        <p>Basic content.</p>
+    {% endblock content %}
+
+</div>
+<!-- /container -->
+
+{% block modal %}{% endblock modal %}
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+{% block javascript %}
+    <!-- Latest JQuery -->
+    <script src="{% static 'components/jquery/dist/jquery.min.js' %}"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="{% static 'components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+
+    <!-- Your stuff: Third-party javascript libraries go here -->
+
+    <!-- place project specific Javascript in this file -->
+    <script src="{% static 'js/project.js' %}"></script>
+{% endblock javascript %}
+</body>
+</html>
+
