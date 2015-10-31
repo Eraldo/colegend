@@ -25,4 +25,19 @@
 #navbar-brand-logo {
   padding-top: 0.425rem; }
 
+#colegend-menubar {
+  background-color: #f7f7f7; }
+
+.breadcrumb {
+  background-color: transparent; }
+
+.text-conscious {
+  color: blue; }
+
+.text-connected {
+  color: green; }
+
+.text-continuous {
+  color: orange; }
+
 /*# sourceMappingURL=colegend.css.map */
