@@ -19,7 +19,7 @@
 
   .nav.navbar-nav.pull-right {
     float: none !important; } }
-[hidden][style="display: block;"] {
+[hidden="hidden"][style*="display: block;"] {
   display: block !important; }
 
 /*# sourceMappingURL=colegend.css.map */
