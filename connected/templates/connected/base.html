@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block breadcrumbs_path %}
+    {{ block.super }}
+    <li>
+        <a href="{% url 'connected:index' %}">
+            <span class="text-success">
+            <i class="fa fa-heart"></i> connected
+            </span>
+        </a>
+    </li>
+{% endblock %}
+
+{% block title %}connected{% endblock %}

@@ -46,6 +46,9 @@ LOCAL_APPS = (
     'colegend.users',  # custom users app
     # Your stuff: custom apps go here
     'about',
+    'conscious',
+    'connected',
+    'continuous',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

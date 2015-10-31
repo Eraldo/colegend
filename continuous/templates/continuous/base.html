@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block breadcrumbs_path %}
+    {{ block.super }}
+    <li>
+        <a href="{% url 'continuous:index' %}">
+            <span class="text-warning">
+            <i class="fa fa-paw"></i> continuous
+            </span>
+        </a>
+    </li>
+{% endblock %}
+
+{% block title %}continuous{% endblock %}

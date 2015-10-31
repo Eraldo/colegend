@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from django.views.generic import TemplateView
 
-# Create your views here.
+__author__ = 'Eraldo Energy'
+
+
+class ContinuousView(TemplateView):
+    template_name = 'continuous/index.html'

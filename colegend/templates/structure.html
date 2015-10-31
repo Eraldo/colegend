@@ -1,5 +1,5 @@
-{% load staticfiles i18n %}<!DOCTYPE html>
-
+{% load staticfiles i18n %}
+<!DOCTYPE html>
 
 <html lang="en" ng-app>
 <head>
@@ -39,68 +39,7 @@
 <body>
 
 <div class="m-b">
-    <nav class="navbar navbar-static-top navbar-light bg-faded">
-        <div class="container">
-            <a class="navbar-brand" href="{% url 'home' %}">
-                <img id="navbar-brand-logo" src="{% static 'img/CoLegendLogo_86x18.png' %}" alt="coLegend logo">
-            </a>
-            <button type="button" class="navbar-toggler hidden-sm-up pull-right" data-toggle="collapse"
-                    data-target="#bs-navbar-collapse-1">
-                &#9776;
-            </button>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-toggleable-xs" id="bs-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'home' %}">
-                            <span class="text-primary">
-                                <i class="fa fa-graduation-cap"></i> conscious
-                            </span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'users:list' %}">
-                            <span class="text-success">
-                                <i class="fa fa-heart"></i> connected
-                            </span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'users:list' %}">
-                            <span class="text-warning">
-                                <i class="fa fa-paw"></i> continuous
-                            </span>
-                        </a>
-                    </li>
-                </ul>
-
-                <ul class="nav navbar-nav pull-right">
-                    {% if request.user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'about' %}"><i class="fa fa-info-circle"></i> About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link"
-                               href="{% url 'users:detail' request.user.username %}"><i
-                                    class="fa fa-user"></i> {% trans "Profile" %}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'account_logout' %}"><i
-                                    class="fa fa-sign-out"></i> {% trans "Logout" %}</a>
-                        </li>
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'account_login' %}">{% trans "Log In" %}</a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
-    </nav>
+    {% include '_menu.html' %}
 </div>
 
 <div class="container">
@@ -113,7 +52,13 @@
     {% block breadcrumbs %}
         <ol class="breadcrumb">
             {% block breadcrumbs_path %}
-                <li><a href="{% url 'home' %}"><i class="fa fa-home"></i> Home</a></li>
+                <li>
+                    <a href="{% url 'home' %}">
+                        <span class="text-info">
+                        <i class="fa fa-home"></i> Home
+                        </span>
+                    </a>
+                </li>
             {% endblock %}
             <li class="active">{% block breadcrumb_active %}{% endblock %}</li>
         </ol>

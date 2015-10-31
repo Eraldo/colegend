@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from django.views.generic import TemplateView
 
-# Create your views here.
+__author__ = 'Eraldo Energy'
+
+
+class ConnectedView(TemplateView):
+    template_name = 'connected/index.html'
