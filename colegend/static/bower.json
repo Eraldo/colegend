@@ -1,0 +1,20 @@
+{
+  "name": "colegend",
+  "version": "0.0.0",
+  "authors": [
+    "Eraldo Helal <eraldo@eraldo.org>"
+  ],
+  "license": "copyright",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "4.0.0-alpha",
+    "jquery-ui": "1.11.4",
+    "fontawesome": "4.4.0"
+  }
+}
