@@ -34,7 +34,7 @@
   <body>
 
     <div class="m-b">
-      <nav class="navbar navbar-dark navbar-static-top bg-inverse">
+      <nav class="navbar navbar-static-top navbar-light bg-faded">
         <div class="container">
           <a class="navbar-brand" href="/">coLegend</a>
           <button type="button" class="navbar-toggler hidden-sm-up pull-right" data-toggle="collapse" data-target="#bs-navbar-collapse-1">
@@ -75,7 +75,6 @@
     </div>
 
     <div class="container">
-
       {% if messages %}
           {% for message in messages %}
               <div class="alert {% if message.tags %}alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
