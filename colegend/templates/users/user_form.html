@@ -3,6 +3,8 @@
 
 {% block title %}{{ user.username }}{% endblock %}
 
+{% block breadcrumb_active %}Update User{% endblock %}
+
 {% block content %}
     <h1>{{ user.username }}</h1>
     <form class="form-horizontal" method="post" action="{% url 'users:update' %}">
@@ -10,7 +12,7 @@
         {{ form|crispy }}
         <div class="control-group">
           <div class="controls">
-            <button type="submit" class="btn">Update</button>
+            <button type="submit" class="btn btn-primary">Update</button>
           </div>
         </div>
     </form>
