@@ -22,4 +22,7 @@
 [hidden="hidden"][style*="display: block;"] {
   display: block !important; }
 
+#navbar-brand-logo {
+  padding-top: 0.425rem; }
+
 /*# sourceMappingURL=colegend.css.map */

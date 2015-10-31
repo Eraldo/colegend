@@ -38,7 +38,10 @@
 <div class="m-b">
     <nav class="navbar navbar-static-top navbar-light bg-faded">
         <div class="container">
-            <a class="navbar-brand" href="/">coLegend</a>
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img id="navbar-brand-logo" src="{% static 'img/CoLegendLogo_86x18.png' %}" alt="coLegend logo">
+            </a>
+{#            <a class="navbar-brand" href="{% url 'home' %}">coLegend</a>#}
             <button type="button" class="navbar-toggler hidden-sm-up pull-right" data-toggle="collapse"
                     data-target="#bs-navbar-collapse-1">
                 &#9776;
@@ -48,15 +51,21 @@
             <div class="collapse navbar-toggleable-xs" id="bs-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'home' %}">Home</a>
+                        <a class="nav-link" href="{% url 'home' %}"><span class="text-primary">conscious</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'about' %}">About</a>
+                        <a class="nav-link" href="{% url 'home' %}"><span class="text-success">connected</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}"><span class="text-warning">continuous</span></a>
                     </li>
                 </ul>
 
                 <ul class="nav navbar-nav pull-right">
                     {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'about' %}">About</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link"
                                href="{% url 'users:detail' request.user.username %}">{% trans "Profile" %}</a>
