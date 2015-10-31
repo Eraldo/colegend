@@ -3,6 +3,5 @@
 {% block breadcrumbs_path %}
     {{ block.super }}
 {% endblock %}
-{% block breadcrumb_active %}
-    Profile
-{% endblock %}
+
+{% block breadcrumb_active %}{% block title %}{% endblock title %}{% endblock %}

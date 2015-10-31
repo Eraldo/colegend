@@ -1,9 +1,7 @@
 {% extends "users/base.html" %}
 {% load static %}
 
-{% block title %}User: {{ object.username }}{% endblock %}
-
-{% block breadcrumb_active %}User{% endblock %}
+{% block title %}{{ object.username|title }}{% endblock %}
 
 {% block content %}
 <div class="container">

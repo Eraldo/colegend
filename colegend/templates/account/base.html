@@ -2,11 +2,7 @@
 
 {% block breadcrumbs_path %}
     {{ block.super }}
-    {% if user.is_authenticated %}
-        <li><a href="{% url 'users:detail' request.user.username %}">Account</a></li>
-    {% else %}
-        <li class="active">Account</li>
-    {% endif %}
+    <li><a href="{% url 'users:redirect' %}">Account</a></li>
 {% endblock %}
 
 
