@@ -10,6 +10,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
+from django_slack import slack_message
 
 
 @python_2_unicode_compatible
@@ -36,4 +37,7 @@ def new_user_manager_notification(sender, instance, created, **kwargs):
         username = str(instance.username).title()
         subject = "{}New user: {}".format(settings.EMAIL_SUBJECT_PREFIX, username)
         message = "Hurray! {} has joined the circle of legends.".format(username)
+
         send_mail(subject, message, None, managers, fail_silently=False)
+
+        slack_message('slack/message.slack', {'message': '@channel: {}'.format(message),})
