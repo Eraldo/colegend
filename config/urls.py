@@ -17,7 +17,6 @@ BACKEND_NAME = 'coLegend backend'
 admin.site.site_header = BACKEND_NAME
 admin.site.site_title = BACKEND_NAME
 
-print(settings.ADMIN_URL)
 urlpatterns = [
     url(r'^favicon\.ico$', RedirectView.as_view(url=settings.STATIC_URL + 'images/favicon.ico', permanent=True)),
 
