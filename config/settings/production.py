@@ -105,8 +105,6 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 # EMAIL
 # ------------------------------------------------------------------------------
-DEFAULT_FROM_EMAIL = env('DJANGO_DEFAULT_FROM_EMAIL',
-                         default='coLegend <noreply@colegend.org>')
 EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
 MAILGUN_ACCESS_KEY = env('DJANGO_MAILGUN_API_KEY')
 MAILGUN_SERVER_NAME = env('DJANGO_MAILGUN_SERVER_NAME')
