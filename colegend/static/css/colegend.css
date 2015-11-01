@@ -34,7 +34,40 @@
   text-decoration: none; }
 
 body {
-  background-color: lightgrey; }
+  background-image: url(http://webapplayers.com/inspinia_admin-v2.3/css/patterns/shattered.png); }
+
+.overlay.conscious:before {
+  position: absolute;
+  content: " ";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 0;
+  background: rgba(18, 62, 171, 0.3); }
+
+.overlay.connected:before {
+  position: absolute;
+  content: " ";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 0;
+  background: rgba(0, 155, 10, 0.3); }
+
+.overlay.continuous:before {
+  position: absolute;
+  content: " ";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 0;
+  background: rgba(197, 91, 0, 0.3); }
 
 .bg-content {
   background-color: white; }
