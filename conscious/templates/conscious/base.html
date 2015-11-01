@@ -1,14 +1,7 @@
 {% extends 'base.html' %}
 
-{% block breadcrumbs_path %}
+{% block title %}Conscious{% endblock %}
+{% block breadcrumbs %}
     {{ block.super }}
-    <li>
-        <a href="{% url 'conscious:index' %}">
-            <span class="text-conscious">
-            <i class="fa fa-graduation-cap"></i> conscious
-            </span>
-        </a>
-    </li>
+    {% include '_breadcrumb.html' with url='conscious:index' icon='graducation-cap' title='conscious' %}
 {% endblock %}
-
-{% block title %}conscious{% endblock %}

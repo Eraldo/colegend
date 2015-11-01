@@ -1,3 +1,8 @@
 {% extends "structure.html" %}
 
-{% block breadcrumb_active %}{% block title %}{% endblock %}{% endblock %}
+{% block meta_title %}
+    {% block page_title %}
+        {% block title %}
+        {% endblock %}
+    {% endblock %}
+{% endblock %}

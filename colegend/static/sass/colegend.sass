@@ -2,13 +2,7 @@
 
 // coLegend colors
 
-$menubar-color: #f7f7f7
-
-$conscious: blue
-$connected: green
-$contiuous: orange
-
-// Alert colors
+@import colors
 
 $white: white
 $mint-green: #d6e9c6
@@ -16,6 +10,17 @@ $black: black
 $pink: #f2dede
 $dark-pink: #eed3d7
 $red: #b94a48
+
+$background-color: lightgrey
+
+$site-menu-color: $white
+
+$conscious: $color-secondary-1-0
+$connected: $color-secondary-2-3
+$contiuous: $color-primary-3
+
+// Alert colors
+
 
 // bootstrap alert CSS, translated to the django-standard levels of
 // debug, info, success, warning, error
@@ -52,11 +57,27 @@ $red: #b94a48
 #navbar-brand-logo
   padding-top: .425rem
 
-#colegend-menubar
-  background-color: $menubar-color
+#site-menu
+  background-color: $site-menu-color
 
-.breadcrumb
-  background-color: transparent
+.breadcrumbs
+  a
+    color: #818a91
+    font-size: small
+    text-decoration: none
+
+body
+  background-color: $background-color
+
+.bg-content
+  background-color: $white
+
+.breadcrumbs>a+a:before
+  content: '/ '
+  color: #ccc
+
+#page-title
+  margin: 0
 
 //  coLegend text
 

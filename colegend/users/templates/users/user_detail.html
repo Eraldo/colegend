@@ -1,36 +1,35 @@
 {% extends "users/base.html" %}
 {% load static %}
 
+{% block breadcrumbs %}{% endblock %}
+
 {% block title %}{{ object.username|title }}{% endblock %}
 
 {% block content %}
-<div class="container">
+    <div class="container">
 
-  <div class="row">
-    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-12">
+                {% if object.name %}
+                    <p>{{ object.name }}</p>
+                {% endif %}
+            </div>
+        </div>
 
-      <h2>{{ object.username }}</h2>
-      {% if object.name %}
-        <p>{{ object.name }}</p>
-      {% endif %}
+        {% if object == request.user %}
+            <!-- Action buttons -->
+            <div class="row">
+
+                <div class="col-sm-12 ">
+                    <a class="btn btn-primary" href="{% url 'users:update' %}">My Info</a>
+                    <a class="btn btn-primary" href="{% url 'account_email' %}">E-Mail</a>
+                    <!-- Your Stuff: Custom user template urls -->
+                </div>
+
+            </div>
+            <!-- End Action buttons -->
+        {% endif %}
+
     </div>
-  </div>
-
-{% if object == request.user %}
-<!-- Action buttons -->
-<div class="row">
-
-  <div class="col-sm-12 ">
-    <a class="btn btn-primary" href="{% url 'users:update' %}">My Info</a>
-    <a class="btn btn-primary" href="{% url 'account_email' %}">E-Mail</a>
-    <!-- Your Stuff: Custom user template urls -->
-  </div>
-
-</div>
-<!-- End Action buttons -->
-{% endif %}
-
-
-</div>
 {% endblock content %}
 

@@ -1,10 +1,7 @@
 {% extends "base.html" %}
 
-{% block breadcrumbs_path %}
+{% block title %}Account{% endblock %}
+{% block breadcrumbs %}
     {{ block.super }}
-    <li><a href="{% url 'users:redirect' %}">Account</a></li>
+    {% include '_breadcrumb.html' with url='users:redirect' icon='gear' title='account' %}
 {% endblock %}
-
-
-{% block breadcrumb_active %}{% block title %}{% block head_title %}{% endblock head_title %}
-{% endblock title %}{% endblock %}

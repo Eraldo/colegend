@@ -25,19 +25,34 @@
 #navbar-brand-logo {
   padding-top: 0.425rem; }
 
-#colegend-menubar {
-  background-color: #f7f7f7; }
+#site-menu {
+  background-color: white; }
 
-.breadcrumb {
-  background-color: transparent; }
+.breadcrumbs a {
+  color: #818a91;
+  font-size: small;
+  text-decoration: none; }
+
+body {
+  background-color: lightgrey; }
+
+.bg-content {
+  background-color: white; }
+
+.breadcrumbs > a + a:before {
+  content: "/ ";
+  color: #ccc; }
+
+#page-title {
+  margin: 0; }
 
 .text-conscious {
-  color: blue; }
+  color: #123eab; }
 
 .text-connected {
-  color: green; }
+  color: #009b0a; }
 
 .text-continuous {
-  color: orange; }
+  color: #c55b00; }
 
 /*# sourceMappingURL=colegend.css.map */

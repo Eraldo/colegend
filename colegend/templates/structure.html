@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>{% block title %}coLegend{% endblock title %}</title>
+    <title>{% block meta_title %}coLegend{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -17,7 +17,7 @@
       <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    {% block css %}
+    {% block page_css %}
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="{% static 'components/bootstrap/dist/css/bootstrap.min.css' %}">
 
@@ -30,44 +30,39 @@
         <link href="{% static 'css/colegend.css' %}" rel="stylesheet">
     {% endblock %}
 
-    {% block angular %}
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
-    {% endblock %}
-
 </head>
 
 <body>
 
-<div class="m-b">
+<div id="site-menu-container">
     {% include '_menu.html' %}
 </div>
 
 <div class="container">
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert {% if message.tags %}alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
-        {% endfor %}
-    {% endif %}
-
-    {% block breadcrumbs %}
-        <ol class="breadcrumb">
-            {% block breadcrumbs_path %}
-                <li>
-                    <a href="{% url 'home' %}">
-                        <span class="text-info">
-                        <i class="fa fa-home"></i> Home
-                        </span>
-                    </a>
-                </li>
-            {% endblock %}
-            <li class="active">{% block breadcrumb_active %}{% endblock %}</li>
-        </ol>
+    {% block site_messages %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
+            {% endfor %}
+        {% endif %}
     {% endblock %}
 
-    {% block content %}
-        <p>Basic content.</p>
-    {% endblock content %}
+    {% block page_header %}
+        <div class="card card-block bg-content">
+            <h1 id="page-title" class="card-title">{% block page_title %}{% endblock %}</h1>
 
+            <div class="breadcrumbs">
+                {% block breadcrumbs %}
+                {% endblock %}
+            </div>
+
+        </div>
+    {% endblock %}
+
+    <div id="content" class="card card-block bg-content">
+        {% block content %}
+        {% endblock content %}
+    </div>
 </div>
 <!-- /container -->
 
