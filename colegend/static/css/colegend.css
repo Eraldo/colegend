@@ -34,7 +34,7 @@
   text-decoration: none; }
 
 body {
-  background-image: url(http://webapplayers.com/inspinia_admin-v2.3/css/patterns/shattered.png); }
+  background-image: url(../images/shattered.png); }
 
 .overlay.conscious:before {
   position: absolute;
