@@ -19,7 +19,7 @@ admin.site.site_title = BACKEND_NAME
 
 print(settings.ADMIN_URL)
 urlpatterns = [
-    url(r'^favicon\.ico$', RedirectView.as_view(url=settings.STATIC_URL + 'images/favicon.ico')),
+    url(r'^favicon\.ico$', RedirectView.as_view(url=settings.STATIC_URL + 'images/favicon.ico', permanent=True)),
 
     # Django Admin, use {% url 'admin:index' %}
     url(r'^{}/'.format(settings.ADMIN_URL), include(admin.site.urls)),
