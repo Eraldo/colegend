@@ -6,7 +6,6 @@ django-environ==0.4.0
 django-secure==1.0.1
 whitenoise==2.0.4
 
-
 # Forms
 django-braces==1.8.1
 django-crispy-forms==1.5.2
@@ -22,7 +21,6 @@ Pillow==3.0.0
 # Well-built with regular release cycles!
 django-allauth==0.23.0
 
-
 # Python-PostgreSQL Database Adapter
 psycopg2==2.6.1
 
@@ -37,8 +35,13 @@ pytz==2015.6
 django-redis==4.2.0
 redis>=2.10.0
 
-
 celery==3.1.18
 
 
 # Your custom requirements go here
+
+# slack IM
+# django-slack==4.1.1
+# Using from pull request (to make it compatible with python3)
+# https://github.com/lamby/django-slack/pull/20
+-e git+git://github.com/Eraldo/django-slack.git@python3-support-eraldo#egg=django-slack

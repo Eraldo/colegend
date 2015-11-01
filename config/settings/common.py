@@ -242,3 +242,13 @@ BROKER_URL = env("CELERY_BROKER_URL", default='django://')
 ADMIN_URL = env('DJANGO_ADMIN_URL', default='admin')
 
 # Your common stuff: Below this line define 3rd party library settings
+
+# SLACK IM
+# ------------------------------------------------------------------------------
+INSTALLED_APPS += ('django_slack', )
+SLACK_TOKEN = 'xoxp-7590691991-7590881985-13615726690-065713fdcc'
+SLACK_CHANNEL = 'core'
+SLACK_BACKEND = 'django_slack.backends.Urllib2Backend'
+SLACK_USERNAME = 'coLegend'
+SLACK_ICON_EMOJI = ':co:'
+SLACK_LINK_NAMES = '1'
