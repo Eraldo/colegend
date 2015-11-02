@@ -1,3 +1,25 @@
 {% extends "base.html" %}
 
 {% block title %}Home{% endblock %}
+
+{% block content %}
+
+    <div class="card">
+        <img class="card-img-top"
+             src="http://onis.ro/images/blog/relaunch.png"
+             data-src="http://onis.ro/images/blog/relaunch.png"
+             alt="Card image cap"
+             width="100%">
+
+        <div class="card-block">
+            <h4 class="card-title">Relaunch!</h4>
+
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+                content. This content is a little bit longer.</p>
+
+            <p class="card-text">
+                <small class="text-muted">Last updated {% now "jS F Y H:i" %}</small>
+            </p>
+        </div>
+    </div>
+{% endblock %}
