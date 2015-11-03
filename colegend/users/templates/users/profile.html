@@ -14,14 +14,28 @@
 {% block content %}
     <div class="container">
 
-        <div class="row">
-            <div class="col-sm-12">
-                <h1>{{ object.username|title }}</h1>
-                <img src="http://www.x4fleet.com/Content/images/icons/shadow_man_big.png" alt="user avatar">
+        <div class="card">
+            <img class="card-img-top" src="http://www.x4fleet.com/Content/images/icons/shadow_man_big.png"
+                 alt="legend avatar">
+
+            <div class="card-block">
+                <h4 class="card-title">Eraldo
+                    {% if object.get_full_name %}
+                        <small class="text-muted">({{ object.get_full_name|title }})</small>
+                    {% endif %}
+                </h4>
 
                 <p>
-                    Name: <b>{{ object.get_full_name|title }}</b>
+                    <i class="fa fa-map-marker"></i> Berlin, Germany<br>
+                    <i class="fa fa-external-link"></i> <a href="http://www.eraldo.org">www.eraldo.org</a>
                 </p>
+
+                <p class="card-text">
+                <u>About me</u><br>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.
+                </p>
+                <a href="#" class="btn btn-primary"><i class="fa fa-send"></i> Send message</a>
             </div>
         </div>
 
