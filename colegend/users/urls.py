@@ -2,35 +2,41 @@
 from __future__ import absolute_import, unicode_literals
 
 from django.conf.urls import url
-
-from . import views
+from .views import UserListView, UserRedirectView, SettingsView, ProfileView, UserUpdateView
 
 urlpatterns = [
     # URL pattern for the UserListView
     url(
         regex=r'^$',
-        view=views.UserListView.as_view(),
+        view=UserListView.as_view(),
         name='list'
     ),
 
     # URL pattern for the UserRedirectView
     url(
         regex=r'^~redirect/$',
-        view=views.UserRedirectView.as_view(),
+        view=UserRedirectView.as_view(),
         name='redirect'
     ),
 
-    # URL pattern for the UserDetailView
+    # URL pattern for the SettingsView
     url(
-        regex=r'^(?P<username>[\w.@+-]+)/$',
-        view=views.UserDetailView.as_view(),
-        name='detail'
+        regex=r'^settings/$',
+        view=SettingsView.as_view(),
+        name='settings'
+    ),
+
+    # URL pattern for the ProfileView
+    url(
+        regex=r'^profile/(?P<username>[\w.@+-]+)/$',
+        view=ProfileView.as_view(),
+        name='profile'
     ),
 
     # URL pattern for the UserUpdateView
     url(
         regex=r'^~update/$',
-        view=views.UserUpdateView.as_view(),
+        view=UserUpdateView.as_view(),
         name='update'
     ),
 ]

@@ -9,19 +9,29 @@ from braces.views import LoginRequiredMixin
 from .models import User
 
 
-class UserDetailView(LoginRequiredMixin, DetailView):
+class ProfileView(LoginRequiredMixin, DetailView):
     model = User
-    # These next two lines tell the view to index lookups by username
     slug_field = "username"
     slug_url_kwarg = "username"
+    template_name = 'users/profile.html'
+
+    # TODO: Write custom get_object method
+    # redirecting if no slug is given and otherwise using the slug
+
+
+class SettingsView(LoginRequiredMixin, DetailView):
+    model = User
+    template_name = 'users/settings.html'
+
+    def get_object(self, queryset=None):
+        return self.request.user
 
 
 class UserRedirectView(LoginRequiredMixin, RedirectView):
     permanent = False
 
     def get_redirect_url(self):
-        return reverse("users:detail",
-                       kwargs={"username": self.request.user.username})
+        return reverse("users:settings")
 
 
 class UserUpdateView(LoginRequiredMixin, UpdateView):

@@ -48,14 +48,22 @@
     {% endblock %}
 
     {% block page_header %}
-        <div class="card card-block bg-content">
-            <h1 id="page-title" class="card-title">{% block page_title %}{% endblock %}</h1>
+        <div class="card bg-content">
+            <div class="card-block">
 
-            <div class="breadcrumbs">
-                {% block breadcrumbs %}
-                {% endblock %}
+                <div class="breadcrumbs">
+                    {% block breadcrumbs %}
+                    {% endblock %}
+                </div>
+
+                <h1 id="page-title" class="card-title">{% block page_title %}{% endblock %}</h1>
+
             </div>
 
+            <div class="card-footer">
+                {% block page_links %}
+                {% endblock %}
+            </div>
         </div>
     {% endblock %}
 

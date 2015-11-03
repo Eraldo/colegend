@@ -1,7 +1,7 @@
-{% extends "users/base.html" %}
+{% extends "account/base.html" %}
 {% load crispy_forms_tags %}
 
-{% block title %}{{ user.username|title }}{% endblock %}
+{% block title %}Username{% endblock %}
 
 {% block content %}
     <h1>{{ user.username }}</h1>

@@ -1,0 +1,33 @@
+{% extends "users/base.html" %}
+{% load static %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block title %}Settings{% endblock %}
+
+{% block page_links %}
+    <a href="{% url 'users:profile' object.username %}" class="btn btn-default btn-sm">Profile</a>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        <div class="row">
+            <div class="col-sm-12">
+                {% if object.name %}
+                    <p>{{ object.name }}</p>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if object == request.user %}
+            <!-- Action buttons -->
+            <a class="btn btn-primary" href="{% url 'users:update' %}">Username</a>
+            <a class="btn btn-primary" href="{% url 'account_email' %}">E-Mail</a>
+            <!-- Your Stuff: Custom user template urls -->
+            <!-- End Action buttons -->
+        {% endif %}
+
+    </div>
+{% endblock content %}
+

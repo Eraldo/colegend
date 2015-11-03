@@ -1,0 +1,30 @@
+{% extends "users/base.html" %}
+{% load static %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block title %}Profile{% endblock %}
+
+{% block page_links %}
+    {% if object == request.user %}
+        <a href="{% url 'users:settings' %}" class="btn btn-default btn-sm">Settings</a>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        <div class="row">
+            <div class="col-sm-12">
+                <h1>{{ object.username|title }}</h1>
+                <img src="http://www.x4fleet.com/Content/images/icons/shadow_man_big.png" alt="user avatar">
+
+                <p>
+                    Name: <b>{{ object.get_full_name|title }}</b>
+                </p>
+            </div>
+        </div>
+
+    </div>
+{% endblock content %}
+
