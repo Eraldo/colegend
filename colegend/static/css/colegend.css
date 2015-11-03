@@ -88,4 +88,15 @@ body {
 .text-continuous {
   color: #c55b00; }
 
+#feedback-button, #feedback-button-mobile {
+  height: 67px;
+  width: 67px;
+  position: fixed;
+  bottom: 0;
+  right: 0; }
+
+#feedback-button-mobile {
+  height: 33px;
+  width: 33px; }
+
 /*# sourceMappingURL=colegend.css.map */
