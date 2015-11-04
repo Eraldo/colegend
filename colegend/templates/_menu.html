@@ -13,42 +13,130 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-toggleable-xs" id="bs-navbar-collapse-1">
             <ul class="nav navbar-nav">
+
+                {# CONSCIOUS MENU #}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'conscious:index' %}">
+                    <div class="dropdown">
+                        <button class="btn btn-link nav-link" type="button" id="menu-button-conscious"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="text-conscious">
                                 <i class="fa fa-graduation-cap"></i> conscious
                             </span>
-                    </a>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="menu-button-conscious">
+                            <a class="dropdown-item" href="{% url 'conscious:index' %}">
+                                Dashboard
+                            </a>
+                            <a class="dropdown-item disabled" href="#">
+                                Journal
+{#                                <small class="pull-right">level 2</small>#}
+                            </a>
+                            <a class="dropdown-item disabled" href="#">
+                                Manager
+{#                                <small class="pull-right">level 3</small>#}
+                            </a>
+                            <a class="dropdown-item disabled" href="#">
+                                Tracker
+{#                                <small class="pull-right">level 4</small>#}
+                            </a>
+                        </div>
+                    </div>
                 </li>
+
+                {# CONNECTED MENU #}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'connected:index' %}">
+                    <div class="dropdown">
+                        <button class="btn btn-link nav-link" type="button" id="menu-button-connected"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="text-connected">
                                 <i class="fa fa-heart"></i> connected
                             </span>
-                    </a>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="menu-button-connected">
+                            <a class="dropdown-item" href="{% url 'connected:index' %}">
+                                Dashboard
+                            </a>
+                            <a class="dropdown-item" href="{% url 'connected:index' %}">
+                                Chat
+                            </a>
+                            <a class="dropdown-item disabled" href="#">
+                                Cloud Guide
+{#                                <small class="pull-right">level 2</small>#}
+                            </a>
+                            <a class="dropdown-item disabled" href="#">
+                                Dream Team
+{#                                <small class="pull-right">level 3</small>#}
+                            </a>
+                            <a class="dropdown-item disabled" href="#">
+                                Tribe
+{#                                <small class="pull-right">level 4</small>#}
+                            </a>
+                            <a class="dropdown-item disabled" href="#">
+                                Circle
+{#                                <small class="pull-right">level 5</small>#}
+                            </a>
+                        </div>
+                    </div>
                 </li>
+
+                {# CONTINUOUS MENU #}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'continuous:index' %}">
+                    <div class="dropdown">
+                        <button class="btn btn-link nav-link" type="button" id="menu-button-continuous"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="text-continuous">
                                 <i class="fa fa-paw"></i> continuous
                             </span>
-                    </a>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="menu-button-continuous">
+                            <a class="dropdown-item" href="{% url 'continuous:index' %}">
+                                Dashboard
+                            </a>
+                            <a class="dropdown-item disabled" href="#" data-toggle="tooltip" title="Tooltip on top">
+                                Success Stream
+{#                                <small class="pull-right">level 2</small>#}
+                            </a>
+                            <a class="dropdown-item disabled" href="#">
+                                Personal Story
+{#                                <small class="pull-right">level 3</small>#}
+                            </a>
+                            <a class="dropdown-item disabled" href="#">
+                                Tribe Story
+{#                                <small class="pull-right">level 4</small>#}
+                            </a>
+                            <a class="dropdown-item disabled" href="#">
+                                coLegend Story
+{#                                <small class="pull-right">level 5</small>#}
+                            </a>
+                        </div>
+                    </div>
                 </li>
             </ul>
-
             <ul class="nav navbar-nav pull-right">
                 {% if request.user.is_authenticated %}
+
+
+                    {# ACCOUNT MENU #}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'about' %}"><i class="fa fa-info-circle"></i> About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link"
-                           href="{% url 'users:profile' request.user.username %}"><i
-                                class="fa fa-user"></i> {% trans "Profile" %}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_logout' %}"><i
-                                class="fa fa-sign-out"></i> {% trans "Logout" %}</a>
+                        <div class="dropdown">
+                            <button class="btn btn-link nav-link" type="button" id="menu-button-account"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="text-account">
+                                <i class="fa fa-user"></i> Account
+                            </span>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="menu-button-account">
+                                <a class="dropdown-item" href="{% url 'users:profile' request.user.username %}">
+                                    <i class="fa fa-user"></i> Profile
+                                </a>
+                                <a class="dropdown-item" href="{% url 'users:settings' %}">
+                                    <i class="fa fa-wrench"></i> Settings
+                                </a>
+                                <a class="dropdown-item" href="{% url 'account_logout' %}">
+                                    <i class="fa fa-sign-out"></i> Logout
+                                </a>
+                            </div>
+                        </div>
                     </li>
                 {% else %}
                     <li class="nav-item">
