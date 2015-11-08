@@ -109,6 +109,12 @@ EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
 MAILGUN_ACCESS_KEY = env('DJANGO_MAILGUN_API_KEY')
 MAILGUN_SERVER_NAME = env('DJANGO_MAILGUN_SERVER_NAME')
 
+
+# MONITORING
+# ------------------------------------------------------------------------------
+NEW_RELIC_LICENSE_KEY = env('NEW_RELIC_LICENSE_KEY')
+NEW_RELIC_APP_NAME = env('NEW_RELIC_APP_NAME', default='coLegend')
+
 # TEMPLATE CONFIGURATION
 # ------------------------------------------------------------------------------
 # See:

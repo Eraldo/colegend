@@ -10,7 +10,7 @@
 
 python_versions:
   - 3.4.1
-django_version: 1.8.5
+django_version: 1.8.6
 postgres_version: 9.3.9
 redis_version: 2.8.4
 celery_version: 3.1.18

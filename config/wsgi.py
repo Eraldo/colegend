@@ -15,6 +15,10 @@ framework.
 """
 import os
 
+if os.environ.get("DJANGO_SETTINGS_MODULE") == "config.settings.production":
+    import newrelic.agent
+    newrelic.agent.initialize()
+
 from django.core.wsgi import get_wsgi_application
 from whitenoise.django import DjangoWhiteNoise
 if os.environ.get("DJANGO_SETTINGS_MODULE") == "config.settings.production":
@@ -36,6 +40,9 @@ application = get_wsgi_application()
 application = DjangoWhiteNoise(application)
 if os.environ.get("DJANGO_SETTINGS_MODULE") == "config.settings.production":
     application = Sentry(application)
+
+if os.environ.get("DJANGO_SETTINGS_MODULE") == "config.settings.production":
+    application = newrelic.agent.WSGIApplicationWrapper(application)
 
 # Apply WSGI middleware here.
 # from helloworld.wsgi import HelloWorldApplication
