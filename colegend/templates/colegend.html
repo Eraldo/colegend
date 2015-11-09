@@ -42,7 +42,14 @@
     {% block site_messages %}
         {% if messages %}
             {% for message in messages %}
-                <div class="alert {% if message.tags %}alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
+                <div class="alert{% if message.tags %} alert-{{ message.tags }} alert-dismissible fade in"{% endif %}
+                     role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    {{ message }}
+                </div>
             {% endfor %}
         {% endif %}
     {% endblock %}
@@ -76,10 +83,14 @@
 
 <div class="feedback-button-container">
     <div class="hidden-xs">
-        <a href="mailto:connect@colegend.org" target="_blank"><img id="feedback-button" src="{% static 'images/feedback.png' %}" alt="Feedback"/></a>
+        <a href="mailto:connect@colegend.org" target="_blank"><img id="feedback-button"
+                                                                   src="{% static 'images/feedback.png' %}"
+                                                                   alt="Feedback"/></a>
     </div>
     <div class="visible-xs-inline">
-        <a href="mailto:connect@colegend.org" target="_blank"><img id="feedback-button-mobile" src="{% static 'images/feedback.png' %}" alt="Feedback"/></a>
+        <a href="mailto:connect@colegend.org" target="_blank"><img id="feedback-button-mobile"
+                                                                   src="{% static 'images/feedback.png' %}"
+                                                                   alt="Feedback"/></a>
     </div>
 
 </div>
