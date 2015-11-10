@@ -13,7 +13,7 @@
 {% block content %}
 
       <div id="holder">
-          <span id="story"></span>
+          <span id="story" class="lead"></span>
           <div id="kick"></div>
       </div>
 
@@ -47,7 +47,7 @@
             }
             // make conversation
             $('#story').typed({
-                strings: ["Well, here we are.^2000 <br>Ain't much to look at, is it?^2000 <br>Came here on a " + dayOfWeekPast + " night once.^1000 <br>It was actually pretty crowded.^1000 <br>But on a " + dayOfWeek + " " + timeOfDay + " .^300 .^300 .^1000 <br>I guess it's just you^1000 and me.^3000 <br>Your legend has started!"],
+                strings: ["<span class='legend-initial-letter'>O</span>nce upon a time .^300 .^300 .^1000", "...is now", "Well, here we are.^2000 <br>Ain't much to look at, is it?^2000 <br>Came here on a " + dayOfWeekPast + " night once.^1000 <br>It was actually pretty crowded.^1000 <br>But on a " + dayOfWeek + " " + timeOfDay + " .^300 .^300 .^1000 <br>I guess it's just you^1000 and me.^3000 <br>Your legend has started!"],
                 typeSpeed: 20,
                 backDelay: 500,
                 loop: false,
