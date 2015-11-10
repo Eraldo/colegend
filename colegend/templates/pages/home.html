@@ -2,35 +2,47 @@
 
 {% block title %}Home{% endblock %}
 
+
 {% block page_links %}
     <a href="#" class="btn btn-default btn-sm disabled">News</a>
-{#    <a href="#" class="btn btn-default btn-sm">Announcements</a>#}
+    <a href="#" class="btn btn-default btn-sm disabled">Events</a>
+    <a href="#" class="btn btn-default btn-sm disabled">Story</a>
+    <a href="#" class="btn btn-default btn-sm disabled">Quotes</a>
+    <a href="#" class="btn btn-default btn-sm disabled">Features</a>
+    <a href="#" class="btn btn-default btn-sm disabled">Tools</a>
+    <a href="#" class="btn btn-default btn-sm disabled">Legends</a>
     <a href="#" class="btn btn-default btn-sm disabled">FAQ</a>
-    <a href="#" class="btn btn-default btn-sm disabled">Roles</a>
+    <a href="#" class="btn btn-default btn-sm disabled">Documentation</a>
 {% endblock %}
 
 
 {% block content %}
 
-    <div class="card">
-        <img class="card-img-top"
-             src="http://onis.ro/images/blog/relaunch.png"
-             data-src="http://onis.ro/images/blog/relaunch.png"
-             alt="Card image cap"
-             width="100%">
+    <div class="row">
 
-        <div class="card-block">
-            <h4 class="card-title">Relaunch!</h4>
+        <div id="conscious-update" class="col-sm-4">
 
-            <p class="card-text">
-                We decided to take what we learned and create a new experience.
-                I am happy to share this journey with my team members and hope to get in touch with all of you soon.
-                Take a look at the <a href="{% url 'connected:index' %}">connected page</a> and join our slack chat if you have not already done that. ;)
-            </p>
+            {% include "cards/_news_card.html" %}
+            {% include "cards/_tool_card.html" %}
+            {% include "cards/_feature_card.html" %}
 
-            <p class="card-text">
-                <small class="text-muted"><a href="#">Eraldo</a> - 1st November 2015 22:04</small>
-            </p>
         </div>
+
+        <div id="connected-updates" class="col-sm-4">
+
+            {% include "cards/_legend_card.html" %}
+            {% include "cards/_event_card.html" %}
+            {% include "cards/_role_card.html" %}
+
+        </div>
+
+        <div id="continuous-updates" class="col-sm-4">
+
+            {% include "cards/_quote_card.html" %}
+            {% include "cards/_story_card.html" %}
+
+        </div>
+
     </div>
+
 {% endblock %}

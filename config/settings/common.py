@@ -49,6 +49,9 @@ LOCAL_APPS = (
     'conscious',
     'connected',
     'continuous',
+
+    # helpers
+    'django.contrib.webdesign',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
