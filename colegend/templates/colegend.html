@@ -38,7 +38,13 @@
 <body id="body" class="overlay {% block page_color %}{% endblock %}">
 
 <div id="site-menu-container">
-    {% include '_menu.html' %}
+    {% block site_menu %}
+        {% if user.is_authenticated %}
+            {% include '_menu.html' %}
+        {% else %}
+            {% include '_menu_anonymous.html' %}
+        {% endif %}
+    {% endblock %}
 </div>
 
 <div class="container">
