@@ -1,3 +1,4 @@
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:400,500);
 .alert-debug {
   background-color: white;
   border-color: #d6e9c6;
@@ -34,7 +35,8 @@
   text-decoration: none; }
 
 body {
-  background-image: url(../images/shattered.png); }
+  background-image: url(../images/shattered.png);
+  font: 100% "Ubuntu", Helvetica, sans-serif; }
 
 .overlay.conscious:before {
   position: absolute;
