@@ -3,12 +3,20 @@
 {% block title %}Continuous{% endblock %}
 {% block page_color %}continuous{% endblock %}
 
+{% block page_links %}
+{% endblock %}
+
+
 {% block content %}
 
     <blockquote class="blockquote">
         <p>Once upon a time starts now!</p>
         <footer>coLegend <cite title="Source Title">..stay tuned</cite></footer>
     </blockquote>
+    <p>
+        <a href="{% url 'continuous:legend:chapter1' %}" class="btn btn-default bg-inverse bg-continuous" style="color: white;">Chapter 1</a>
+    </p>
     Next level:
     <progress class="progress progress-striped progress-success" value="60" max="100">60%</progress>
+
 {% endblock %}

@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import patterns, url, include
 
 from .views import ContinuousView
 
@@ -10,4 +10,5 @@ urlpatterns = patterns(
     url(r'^$',
         ContinuousView.as_view(),
         name='index'),
+    url(r'^legend/', include('continuous.legend.urls', namespace='legend')),
 )

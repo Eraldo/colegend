@@ -5,4 +5,4 @@ __author__ = 'Eraldo Energy'
 
 
 class ContinuousView(LoginRequiredMixin, TemplateView):
-    template_name = 'continuous/index.html'
+    template_name = 'continuous/continuous.html'

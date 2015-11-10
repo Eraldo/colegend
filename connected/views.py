@@ -5,4 +5,4 @@ __author__ = 'Eraldo Energy'
 
 
 class ConnectedView(LoginRequiredMixin, TemplateView):
-    template_name = 'connected/index.html'
+    template_name = 'connected/connected.html'

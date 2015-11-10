@@ -90,6 +90,15 @@ body {
 .text-continuous {
   color: #c55b00; }
 
+.bg-conscious {
+  background-color: #123eab; }
+
+.bg-connected {
+  background-color: #009b0a; }
+
+.bg-continuous {
+  background-color: #c55b00; }
+
 #feedback-button, #feedback-button-mobile {
   height: 67px;
   width: 67px;

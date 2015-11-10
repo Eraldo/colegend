@@ -1,8 +1,40 @@
 {% extends "base.html" %}
 
+{% load static %}
+
+{% block extra_head %}
+{{ block.super }}
+    <link href="{% static 'legend/css/legend.css' %}" rel="stylesheet">
+{% endblock %}
+
 {% block title %}Test{% endblock %}
 
 {% block breadcrumbs %}
     {{ block.super }}
     {% include '_breadcrumb.html' with url='test' icon='eye' title='test' %}
+{% endblock %}
+
+{% block content %}
+
+    <div id="typed-strings" class="invisible">
+        <p>
+            Typed.js ^3000 is a <strong>jQuery</strong> plugin.
+        </p>
+
+        <p>It <em>types</em> out sentences.</p>
+    </div>
+    <span id="typed"></span>
+
+{% endblock %}
+
+{% block extra_script %}
+    {{ block.super }}
+    <script src="{% static 'components/typed.js/dist/typed.min.js' %}"></script>
+    <script>
+        $(function () {
+            $("#typed").typed({
+                stringsElement: $('#typed-strings')
+            });
+        });
+    </script>
 {% endblock %}

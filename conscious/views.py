@@ -5,4 +5,4 @@ __author__ = 'Eraldo Energy'
 
 
 class ConsciousView(LoginRequiredMixin, TemplateView):
-    template_name = 'conscious/index.html'
+    template_name = 'conscious/conscious.html'
