@@ -25,5 +25,10 @@
     opacity: 0; }
   100% {
     opacity: 1; } }
+@font-face {
+  font-family: preciosa;
+  src: url("../fonts/PRECIOSA.TTF"); }
+.legend-initial-letter {
+  font: 400% preciosa; }
 
 /*# sourceMappingURL=legend.css.map */
