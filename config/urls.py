@@ -8,7 +8,7 @@ from django.contrib import admin
 from django.views import defaults as default_views
 from django.views.generic import RedirectView
 
-from colegend.views import TestView, HomeView
+from home.views import TestView, HomeView
 
 __author__ = 'Eraldo Energy'
 

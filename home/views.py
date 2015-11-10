@@ -6,7 +6,7 @@ __author__ = 'eraldo'
 
 
 class HomeView(TemplateView):
-    template_name = "pages/home.html"
+    template_name = "home/home.html"
 
     def get(self, request, *args, **kwargs):
         if not request.user.is_authenticated():

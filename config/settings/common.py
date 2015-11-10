@@ -46,6 +46,7 @@ LOCAL_APPS = (
     'colegend.users',  # custom users app
     # Your stuff: custom apps go here
     'about',
+    'home',
     'conscious',
     'connected',
     'continuous',
