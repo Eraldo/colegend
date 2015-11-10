@@ -14,6 +14,10 @@ class HomeView(TemplateView):
         return super().get(request, *args, **kwargs)
 
 
+class JoinView(TemplateView):
+    template_name = "home/join.html"
+
+
 class TestView(TemplateView):
     template_name = "pages/test.html"
 

@@ -8,7 +8,7 @@ from django.contrib import admin
 from django.views import defaults as default_views
 from django.views.generic import RedirectView
 
-from home.views import TestView, HomeView
+from home.views import TestView, HomeView, JoinView
 
 __author__ = 'Eraldo Energy'
 
@@ -26,6 +26,7 @@ urlpatterns = [
     # User management
     url(r'^users/', include('colegend.users.urls', namespace='users')),
     url(r'^accounts/', include('allauth.urls')),
+    url(r'^join/$', JoinView.as_view(), name='join'),
 
     # Your stuff: custom urls includes go here
     url(r'^$', HomeView.as_view(), name='home'),

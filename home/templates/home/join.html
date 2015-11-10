@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% load url from future %}
+{% load static i18n %}
+{% load crispy_forms_tags %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block title %}{% trans "Join" %}{% endblock title %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="media">
+                <a class="media-left">
+                    <img class="media-object" src="{% static 'images/coralina.png' %}" alt="Coralina avatar">
+
+                    <div class="text-center bg-success"><strong>Coralina</strong></div>
+                </a>
+
+                <div class="media-body card card-block">
+                    <h4 class="media-heading">Hi there stranger!</h4>
+                    Welcome to <i>coLegend</i>. My name is <i>Coralina</i>. I am glad you found your way here and I can
+                    imagine you are already eager to get in.
+                    Let us start by creating your own account and verifying your email, then your personal legendary
+                    story will begin.
+                    What do you say?
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p></p>
+
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-4">
+
+            <div class="col-xs-4 col-xs-push-8">
+
+                <div class="">
+                    <img class="img-responsive center-block" src="{% static 'images/anonymous.png' %}"
+                         alt="Your avatar">
+
+                    <div class="text-center bg-inverse">
+                        <strong>You</strong>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xs-8  col-xs-pull-4">
+                <div class="media">
+                    <div class="media-body">
+                        <div class="card">
+
+                            <div class="card-header">
+                                Choose your answer:
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <a href="{% url 'account_signup' %}">
+                                    <li class="list-group-item">
+                                        Hello Coralina! Okay let's go..
+                                    </li>
+                                </a>
+                                <a href="{% url 'about' %}">
+                                    <li class="list-group-item">
+                                        Err, I want to go back and look at the about page once more first
+                                    </li>
+                                </a>
+                                <a href="{% url 'account_login' %}">
+                                    <li class="list-group-item">
+                                        I forgot.. I already have an account
+                                    </li>
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+
+                    {#                    <a class="media-right">#}
+                    {#                        <img class="media-object" src="{% static 'images/anonymous.png' %}" alt="Your avatar">#}
+                    {##}
+                    {#                        <div class="text-center bg-inverse"><strong>You</strong></div>#}
+                    {#                    </a>#}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {#    <div class="row">#}
+    {#        <div class="col-lg-8 col-lg-offset-4">#}
+    {##}
+    {#            <div class="media">#}
+    {#                <div class="media-body">#}
+    {#                    <div class="card">#}
+    {##}
+    {#                        <div class="card-header">#}
+    {#                            Choose your answer:#}
+    {#                        </div>#}
+    {#                        <ul class="list-group list-group-flush">#}
+    {#                            <a href="{% url 'account_signup' %}">#}
+    {#                                <li class="list-group-item">#}
+    {#                                    Hello Coralina! Okay let's go..#}
+    {#                                </li>#}
+    {#                            </a>#}
+    {#                            <a href="{% url 'about' %}">#}
+    {#                                <li class="list-group-item">#}
+    {#                                    Err, I want to go back and look at the about page once more first#}
+    {#                                </li>#}
+    {#                            </a>#}
+    {#                            <a href="{% url 'account_login' %}">#}
+    {#                                <li class="list-group-item">#}
+    {#                                    I forgot.. I already have an account#}
+    {#                                </li>#}
+    {#                            </a>#}
+    {#                        </ul>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {##}
+    {#                <a class="media-right">#}
+    {#                    <img class="media-object" src="{% static 'images/anonymous.png' %}" alt="Your avatar">#}
+    {##}
+    {#                    <div class="text-center bg-primary"><strong>You</strong></div>#}
+    {#                </a>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
+
+{% endblock content %}
+
+
+
