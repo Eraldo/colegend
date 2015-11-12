@@ -190,3 +190,7 @@ class ExecutionEngine(hitchtest.ExecutionEngine):
     def click_submit(self):
         """Click on a submit button if it exists."""
         self.driver.find_element_by_css_selector("button[type=\"submit\"]").click()
+
+    def page_title(self, title):
+        """Check if the browser page title matches the given title."""
+        assert title in self.driver.title, "foo bar"
