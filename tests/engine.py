@@ -8,7 +8,6 @@ import hitchredis
 import hitchtest
 import hitchsmtp
 
-
 # Get directory above this file
 PROJECT_DIRECTORY = path.abspath(path.join(path.dirname(__file__), '..'))
 
@@ -110,7 +109,7 @@ class ExecutionEngine(hitchtest.ExecutionEngine):
         )
 
         self.click = self.webapp.click
-        # self.wait_to_appear = self.webapp.wait_to_appear
+        self.wait_to_appear = self.webapp.wait_to_appear
         self.wait_to_contain = self.webapp.wait_to_contain
         self.wait_for_any_to_contain = self.webapp.wait_for_any_to_contain
         self.click_and_dont_wait_for_page_load = self.webapp.click_and_dont_wait_for_page_load
@@ -194,3 +193,10 @@ class ExecutionEngine(hitchtest.ExecutionEngine):
     def page_title(self, title):
         """Check if the browser page title matches the given title."""
         assert title in self.driver.title, "foo bar"
+
+    def find_text(self, text):
+        """Find the text within the dom."""
+        assert self.driver.find_element_by_xpath("//*[contains(.,'{}')]".format(text))
+
+    def scroll_to(self, id):
+        self.driver.execute_script('$("#{}").get(0).scrollIntoView();'.format(id))
