@@ -18,5 +18,4 @@
     # She finds the join button and clicks it:
     - Scroll to: join-explorer
     - Click: join-explorer
-    - Wait to appear: join-explorer
 {% endblock %}
