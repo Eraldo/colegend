@@ -33,15 +33,17 @@
                                 Welcome Adventurer!
                             </h4>
 
-                            <p class="card-text">
-                            <blockquote>The first step to getting anywhere is deciding you’re not going to stay where
-                                you are.
-                            </blockquote>
-                            I am Coraline by the way. I like to greet new people.
-                            I am happy to see that you’re already on your way.<br>
+                            <div class="card-text">
+                                <p><i>The first step to getting anywhere is deciding you’re not going to stay where
+                                    you are.
+                                </i></p>
 
-                            Okay How do you want to join?
-                            </p>
+                                <p>I am happy to see that you’re already on your way.</p>
+
+                                <p>I am Coralina by the way.</p>
+
+                                <p>Okay, how do you want to join?</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -77,16 +79,25 @@
                         <ul class="list-group list-group-flush">
                             <a href="{% url 'account_signup' %}">
                                 <li class="list-group-item">
-                                    Hello Coralina! Okay let's go..
+                                    <i class="fa fa-key fa-fw"></i>
+                                    I want a regular signup form.
                                 </li>
                             </a>
-                            <a href="{% url 'about' %}">
-                                <li class="list-group-item">
-                                    Err, I want to go back and look at the about page once more first
+                            <a href="#">
+                                <li class="list-group-item disabled">
+                                    <i class="fa fa-google-plus fa-fw"></i>
+                                    I love my big brother Google, he will help me join.
+                                </li>
+                            </a>
+                            <a href="#">
+                                <li class="list-group-item disabled">
+                                    <i class="fa fa-facebook fa-fw"></i>
+                                    I like to collect friends, I choose facebook.
                                 </li>
                             </a>
                             <a href="{% url 'account_login' %}">
                                 <li class="list-group-item">
+                                    <i class="fa fa-sign-in fa-fw"></i>
                                     I forgot.. I already have an account
                                 </li>
                             </a>
