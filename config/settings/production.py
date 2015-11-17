@@ -8,6 +8,7 @@ Production Configurations
 - Use Redis on Heroku
 
 - Use sentry for error logging
+- Use opbeat for error reporting
 
 '''
 from __future__ import absolute_import, unicode_literals
@@ -43,6 +44,20 @@ RAVEN_MIDDLEWARE = ('raven.contrib.django.raven_compat.middleware.Sentry404Catch
                     'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',)
 MIDDLEWARE_CLASSES = SECURITY_MIDDLEWARE + \
     RAVEN_MIDDLEWARE + MIDDLEWARE_CLASSES
+
+
+# opbeat integration
+# ------------------------------------------------------------------------------
+# See https://opbeat.com/languages/django/
+INSTALLED_APPS += ('opbeat.contrib.django',)
+OPBEAT = {
+    'ORGANIZATION_ID': env('DJANGO_OPBEAT_ORGANIZATION_ID'),
+    'APP_ID': env('DJANGO_OPBEAT_APP_ID'),
+    'SECRET_TOKEN': env('DJANGO_OPBEAT_SECRET_TOKEN')
+}
+MIDDLEWARE_CLASSES = (
+    'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
+) + MIDDLEWARE_CLASSES
 
 
 # set this to 60 seconds and then to 518400 when you can prove it works

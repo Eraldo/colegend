@@ -26,3 +26,7 @@ raven
 # Newrelic agent for performance monitoring
 # -----------------------------------------
 newrelic
+
+# Opbeat agent for performance monitoring
+# -----------------------------------------
+opbeat
