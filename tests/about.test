@@ -1,21 +1,30 @@
 {% extends "base.yml" %}
+
 {% block test %}
+
 - engine: engine.py:ExecutionEngine
   name: About {{ python_version }}
   preconditions:
     python_version: "{{ python_version }}"
+
   scenario:
+
     # Coralina heard about "coLegend" her friend Corinna.
     # She remebers the name of the project, googles it and clicks on it's link:
     - Load website
+
     # She checks her browser title to make sure she is at the right place:
     - Page title: "coLegend - About"
+
     # She looks for the name of her friend who happens to be part of the team.
-    # Now she is certain, she hit the right page.
     - Find text: "Corinna"
+    # Now she is certain, she hit the right page.
+
     # She continues to brows and reads about the pricing model:
     - Find text: "Pricing"
+
     # She finds the join button and clicks it:
     - Scroll to: join-explorer
     - Click: join-explorer
+
 {% endblock %}
