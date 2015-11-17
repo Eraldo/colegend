@@ -13,6 +13,12 @@
             <div class="col-md-5">
                 {#                <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>#}
                 {#                    .{% endblocktrans %}</p>#}
+                    {% load socialaccount %}
+{#                    {% providers_media_js %}#}
+{#                    <a href="{% provider_login_url "facebook" method="js_sdk" %}">Facebook Connect</a>#}
+                    <a href="{% provider_login_url "facebook" method="oauth2" %}">Facebook</a>
+                    <a href="{% provider_login_url "google" %}">Google</a>
+
 
                 <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
                     {% csrf_token %}
