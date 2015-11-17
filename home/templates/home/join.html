@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
-{% load url from future %}
 {% load static i18n %}
 {% load crispy_forms_tags %}
+{% load socialaccount %}
 
 {% block breadcrumbs %}{% endblock %}
 
@@ -83,14 +83,14 @@
                                     I want a regular signup form.
                                 </li>
                             </a>
-                            <a href="#">
-                                <li class="list-group-item disabled">
+                            <a href="{% provider_login_url "google" %}">
+                                <li class="list-group-item">
                                     <i class="fa fa-google-plus fa-fw"></i>
                                     I love my big brother Google, he will help me join.
                                 </li>
                             </a>
-                            <a href="#">
-                                <li class="list-group-item disabled">
+                            <a href="{% provider_login_url "facebook" method="oauth2" %}">
+                                <li class="list-group-item">
                                     <i class="fa fa-facebook fa-fw"></i>
                                     I like to collect friends, I choose facebook.
                                 </li>
