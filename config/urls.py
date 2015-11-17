@@ -6,8 +6,7 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.views import defaults as default_views
-from django.views.generic import RedirectView
-
+from django.views.generic import RedirectView, TemplateView
 from home.views import TestView, HomeView, JoinView
 
 __author__ = 'Eraldo Energy'
@@ -18,6 +17,7 @@ admin.site.site_header = BACKEND_NAME
 admin.site.site_title = BACKEND_NAME
 
 urlpatterns = [
+    # Favicon
     url(r'^favicon\.ico$', RedirectView.as_view(url=settings.STATIC_URL + 'images/favicon.ico', permanent=True)),
 
     # Django Admin, use {% url 'admin:index' %}
@@ -35,6 +35,10 @@ urlpatterns = [
     url(r'^connected/', include('connected.urls', namespace='connected')),
     url(r'^continuous/', include('continuous.urls', namespace='continuous')),
     url(r'^test/$', TestView.as_view(), name='test'),
+
+    # Added robots.txt file for crawlers (google/etc)
+    (r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
