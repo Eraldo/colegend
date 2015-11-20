@@ -45,3 +45,7 @@ celery==3.1.19
 # Using from pull request (to make it compatible with python3)
 # https://github.com/lamby/django-slack/pull/20
 -e git+git://github.com/Eraldo/django-slack.git@python3-support-eraldo#egg=django-slack
+
+# Prologue (conscious/legend/prologue)
+# WAITING: Replace with geoip2 in django 1.9 https://docs.djangoproject.com/en/1.9/ref/contrib/gis/geoip2/
+pygeoip==0.3.2

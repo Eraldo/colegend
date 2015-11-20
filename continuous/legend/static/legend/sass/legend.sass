@@ -24,12 +24,25 @@
   +keyframes-blink
 
 
-// Legend font
+// Legend initial font
 @font-face
   font-family: preciosa
   src: url('../fonts/PRECIOSA.TTF')
 
 $legend-initial-font: preciosa
 
+// Legend text font
+@font-face
+  font-family: specialelite
+  src: url('../fonts/special-elite/SpecialElite.ttf')
+
+$legend-text-font: specialelite
+
 .legend-initial-letter
   font: 400% $legend-initial-font
+
+#typed-strings, .after-typed
+  display: none
+
+#typed
+  font-family: $legend-text-font

@@ -1,7 +1,32 @@
 {% extends "continuous/base.html" %}
 
+{% load static %}
+
+{% block extra_head %}
+    {{ block.super }}
+    <link href="{% static 'legend/css/legend.css' %}" rel="stylesheet">
+{% endblock %}
+
 {% block breadcrumbs %}
     {{ block.super }}
     {% include '_breadcrumb.html' with url='continuous:index' title='Legend' %}
 {% endblock %}
 
+{% block extra_script %}
+    {{ block.super }}
+    <script src="{% static 'components/typed.js/dist/typed.min.js' %}"></script>
+    <script>
+        function typed_callback() {
+            $('.after-typed').show()
+        }
+        $(function () {
+            $("#typed").typed({
+                typeSpeed: 10,
+                callback: function () {
+                    typed_callback();
+                },
+                stringsElement: $('#typed-strings')
+            });
+        });
+    </script>
+{% endblock %}

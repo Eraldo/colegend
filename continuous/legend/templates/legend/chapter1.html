@@ -1,64 +1,28 @@
 {% extends "legend/base.html" %}
 
-{% load static %}
-
-
-{% block extra_head %}
-{{ block.super }}
-    <link href="{% static 'legend/css/legend.css' %}" rel="stylesheet">
-{% endblock %}
-
 {% block title %}Chapter 1{% endblock %}
 
 {% block content %}
 
-      <div id="holder">
-          <span id="story" class="lead"></span>
-          <div id="kick"></div>
-      </div>
+    <div id="typed-strings">
+        <p>
+            <span class='legend-initial-letter'>O</span>nce upon a time .^300 .^300 .^1000
+        </p>
 
-{% endblock %}
+        <p>
+            ...is now
+        </p>
 
-{% block extra_script %}
-    {{ block.super }}
-    <script src="{% static 'components/typed.js/dist/typed.min.js' %}"></script>
-    <script>
-        $(function () {
-            var weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-            var dayOfWeekIndex = (new Date()).getDay();
-            var dayOfWeek = weekdays[dayOfWeekIndex];
-            var dayOfWeekPastIndex = Math.floor(weekdays.length * Math.random());
-            var dayOfWeekPast;
-            var hourOfDay = new Date().getHours();
-            var timeOfDay;
-            // choose day of week other than current one
-            if (dayOfWeekPastIndex == dayOfWeekIndex) {
-                dayOfWeekPast = weekdays[(dayOfWeekPastIndex + 1) % weekdays.length];
-            } else {
-                dayOfWeekPast = weekdays[dayOfWeekPastIndex];
-            }
-            // assign time of day to the hour
-            if ((hourOfDay >= 4) && (hourOfDay <= 11)) {
-                timeOfDay = "morning";
-            } else if ((hourOfDay >= 12) && (hourOfDay <= 16)) {
-                timeOfDay = "afternoon";
-            } else {
-                timeOfDay = "evening";
-            }
-            // make conversation
-            $('#story').typed({
-                strings: ["<span class='legend-initial-letter'>O</span>nce upon a time .^300 .^300 .^1000", "...is now", "Well, here we are.^2000 <br>Ain't much to look at, is it?^2000 <br>Came here on a " + dayOfWeekPast + " night once.^1000 <br>It was actually pretty crowded.^1000 <br>But on a " + dayOfWeek + " " + timeOfDay + " .^300 .^300 .^1000 <br>I guess it's just you^1000 and me.^3000 <br>Your legend has started!"],
-                typeSpeed: 20,
-                backDelay: 500,
-                loop: false,
-                loopCount: false,
-            });
-        });
-        $(document).ready(function () {
-            setTimeout(function () {
-                // send 'em packing
-                $('#kick').append('<a href="{% url 'continuous:index' %}">Continue</a>');
-            }, 30000);
-        });
-    </script>
+        <p>
+            Well, here we are.^2000 <br>
+            Ain't much to look at, is it?^2000 <br>
+            Came here on a {{ dayOfWeekPast }} night once.^1000 <br>
+            It was actually pretty crowded.^1000 <br>
+            But on a {{ dayOfWeek }} {{ timeOfDay }} .^300 .^300 .^1000 <br>
+            I guess it's just you^1000 and me.^3000 <br>
+            Your legend has started!
+        </p>
+    </div>
+    <span id="typed" class="lead"></span>
+
 {% endblock %}

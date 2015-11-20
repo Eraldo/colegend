@@ -28,7 +28,16 @@
 @font-face {
   font-family: preciosa;
   src: url("../fonts/PRECIOSA.TTF"); }
+@font-face {
+  font-family: specialelite;
+  src: url("../fonts/special-elite/SpecialElite.ttf"); }
 .legend-initial-letter {
   font: 400% preciosa; }
+
+#typed-strings, .after-typed {
+  display: none; }
+
+#typed {
+  font-family: specialelite; }
 
 /*# sourceMappingURL=legend.css.map */
