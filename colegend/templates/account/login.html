@@ -1,50 +1,124 @@
 {% extends "account/base.html" %}
 
-{% load i18n %}
+{% load static i18n %}
+{% load crispy_forms_tags %}
 {% load account %}
 {% load socialaccount %}
-{% load crispy_forms_tags %}
 
 {% block breadcrumbs %}{% endblock %}
 
-{% block title %}{% trans "Sign In" %}{% endblock %}
+{% block title %}{% trans "Enter" %}{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-5">
-                <h2>{% trans "Sign In" %}</h2>
-                {% get_providers as socialaccount_providers %}
-                {% if socialaccount_providers %}
-                    <p>{% blocktrans with site.name as site_name %}Please sign in with one
-                        of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-                        for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
-                    <div class="socialaccount_ballot">
+    <div class="row">
+        <div class="col-lg-8">
 
-                        <ul class="socialaccount_providers">
-                            {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-                        </ul>
+            <div class="row">
 
-                        <div class="login-or">{% trans 'or' %}</div>
+                <div class="col-sm-4">
+                    <div>
+                        <img class="img-responsive center-block" src="{% static 'images/coralina.png' %}"
+                             alt="Coralina avatar">
 
+                        <div class="text-center bg-success">
+                            <strong>Coralina</strong>
+                        </div>
                     </div>
+                </div>
 
-                    {% include "socialaccount/snippets/login_extra.html" %}
+                <div class="col-sm-8">
+                    <div class="card">
+                        <div class="card-block">
+                            <h4 class="card-title">
+                                Welcome Back!
+                            </h4>
 
-                {% endif %}
+                            <div class="card-text">
+                                <p>
+                                    <i>
+                                        Home is where the heart is.
+                                    </i>
+                                </p>
 
-                <form class="login" method="POST" action="{% url 'account_login' %}">
-                    {% csrf_token %}
-                    {{ form|crispy }}
-                    {% if redirect_field_value %}
-                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
-                    {% endif %}
-                    <button class="btn btn-primary" type="submit">{% trans "Sign In" %}</button>
-                    <a class="button secondaryAction"
-                       href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-                </form>
+                                <p>It seems you have not yet fully manifested in a way that I can recognize.</p>
+
+                                <p>Now, who exactly are you?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
+
+        </div>
+    </div>
+
+    <p></p>
+
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-4">
+
+            <div class="row">
+
+                <div class="col-sm-4 col-sm-push-8">
+                    <div class="">
+                        <img class="img-responsive center-block" src="{% static 'images/anonymous.png' %}"
+                             alt="Your avatar">
+
+                        <div class="text-center bg-inverse">
+                            <strong>You</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-8  col-sm-pull-4">
+                    <div class="card">
+                        <div class="card-header">
+                            Choose your answer:
+                        </div>
+                        <ul class="list-group list-group-flush">
+
+
+                            <li class="list-group-item">
+                                <form class="login" method="POST" action="{% url 'account_login' %}">
+                                    {% csrf_token %}
+                                    {{ form|crispy }}
+                                    {% if redirect_field_value %}
+                                        <input type="hidden" name="{{ redirect_field_name }}"
+                                               value="{{ redirect_field_value }}"/>
+                                    {% endif %}
+                                    <button class="btn btn-primary" type="submit">{% trans "Answer" %}</button>
+                                    <a class="button secondaryAction"
+                                       href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+                                </form>
+                            </li>
+
+                            <a href="{% provider_login_url "google" %}">
+                                <li class="list-group-item">
+                                    <i class="fa fa-google-plus fa-fw"></i>
+                                    My big brother will tell you who I am.
+                                </li>
+                            </a>
+                            <a href="{% provider_login_url "facebook" method="oauth2" %}">
+                                <li class="list-group-item">
+                                    <i class="fa fa-facebook fa-fw"></i>
+                                    My friends will tell you.
+                                </li>
+                            </a>
+                            <a href="{% url 'join' %}">
+                                <li class="list-group-item">
+                                    <i class="fa fa-sign-in fa-fw"></i>
+                                    Err, I am new here.. Where can I join?
+                                </li>
+                            </a>
+
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
     </div>
 {% endblock %}
