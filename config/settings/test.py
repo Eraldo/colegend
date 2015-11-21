@@ -3,6 +3,9 @@
 Test settings
 '''
 
+# noinspection PyUnresolvedReferences
+from .common import *  # noqa
+
 # Mail settings
 # ------------------------------------------------------------------------------
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

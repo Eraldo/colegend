@@ -8,6 +8,7 @@ Local settings
 - Add django-extensions as app
 '''
 
+# noinspection PyUnresolvedReferences
 from .common import *  # noqa
 
 # DEBUG
