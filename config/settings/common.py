@@ -47,6 +47,7 @@ THIRD_PARTY_APPS = (
 LOCAL_APPS = (
     'users',  # custom users app
     # Your stuff: custom apps go here
+    'core',  # common code
     'about',
     'home',
     'conscious',
