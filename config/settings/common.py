@@ -257,7 +257,7 @@ ADMIN_URL = env('DJANGO_ADMIN_URL', default='admin')
 # ------------------------------------------------------------------------------
 INSTALLED_APPS += ('django_slack', )
 SLACK_TOKEN = 'xoxp-7590691991-7590881985-13615726690-065713fdcc'
-SLACK_CHANNEL = 'core'
+SLACK_CHANNEL = env.bool("SLACK_CHANNEL", 'core')
 SLACK_BACKEND = 'django_slack.backends.Urllib2Backend'
 SLACK_USERNAME = 'coLegend'
 SLACK_ICON_EMOJI = ':co:'
