@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
 
+from braces.views import LoginRequiredMixin
 from django.core.urlresolvers import reverse
 from django.views.generic import DetailView, ListView, RedirectView, UpdateView
-
-from braces.views import LoginRequiredMixin
 
 from .models import User
 
@@ -31,6 +30,10 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
     permanent = False
 
     def get_redirect_url(self):
+        # TODO: Change to real user chapter
+        chapter = 0
+        if chapter < 1:
+            return reverse("continuous:legend:prologue")
         return reverse("home")
 
 

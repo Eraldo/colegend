@@ -1,0 +1,54 @@
+{% extends "base.yml" %}
+
+{% block test %}
+
+- engine: engine.py:ExecutionEngine
+  name: Join {{ python_version }}
+  preconditions:
+    python_version: "{{ python_version }}"
+
+  scenario:
+
+    # Carolina looked at the landing page and now wants to join coLegend.
+    # She opens the site, scrolls down and clicks on the join button:
+    - Load website
+    - Scroll to: join-explorer
+    - Click: join-explorer
+
+    # She comes to a chat page were she is greeted and asked how she wants to join:
+    - Find text: Welcome
+    - Find text: How do you want to join?
+
+    # She chooses a regular signup:
+    - Click: regular-signup
+
+    # She fills in the form with her desired credentials:
+    - Fill form:
+        id_username: Carolina
+        id_email: carolina@example.com
+        id_password1: carolina
+    - Click submit
+
+    # She gets promted to verify her email address:
+    - Find text: Verify Your E-mail Address
+
+    # She checks her email and finds one from coLegend asking her to confirm her email address:
+    - Wait for email:
+        Containing: Please Confirm Your E-mail Address
+
+    # She clicks on the confirm link in that email:
+    - Click email link:
+        Containing: Confirm
+
+    # She is now on a page where she is asked to confirm her email address for her user.
+    # She clicks on the confirm button:
+    - Click: confirm-email
+
+    # She is presented with a prologue story:
+    - Page title: "Prologue"
+
+    # She reads the story and clicks on the link to the Poetree:
+    - Execute: typed_callback();  # [Immediately show the link]
+    - Click: continue-to-poetree
+
+{% endblock %}

@@ -80,25 +80,25 @@
                             Choose your answer:
                         </div>
                         <ul class="list-group list-group-flush">
-                            <a href="{% url 'account_signup' %}">
+                            <a id="regular-signup" href="{% url 'account_signup' %}">
                                 <li class="list-group-item">
                                     <i class="fa fa-key fa-fw"></i>
                                     I want a regular signup form.
                                 </li>
                             </a>
-                            <a href="{% provider_login_url "google" %}">
+                            <a id="google-signup" href="{% provider_login_url "google" %}">
                                 <li class="list-group-item">
                                     <i class="fa fa-google-plus fa-fw"></i>
                                     I love my big brother Google, he will help me join.
                                 </li>
                             </a>
-                            <a href="{% provider_login_url "facebook" method="oauth2" %}">
+                            <a id="facebook-signup" href="{% provider_login_url "facebook" method="oauth2" %}">
                                 <li class="list-group-item">
                                     <i class="fa fa-facebook fa-fw"></i>
                                     I like to collect friends, I choose facebook.
                                 </li>
                             </a>
-                            <a href="{% url 'account_login' %}">
+                            <a id="login-redirect" href="{% url 'account_login' %}">
                                 <li class="list-group-item">
                                     <i class="fa fa-sign-in fa-fw"></i>
                                     I forgot.. I already have an account

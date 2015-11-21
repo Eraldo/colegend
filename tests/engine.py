@@ -1,12 +1,13 @@
-from hitchserve import ServiceBundle
-from subprocess import call
 from os import path
+from subprocess import call
+
 import hitchpostgres
-import hitchselenium
 import hitchpython
 import hitchredis
-import hitchtest
+import hitchselenium
 import hitchsmtp
+import hitchtest
+from hitchserve import ServiceBundle
 
 # Get directory above this file
 PROJECT_DIRECTORY = path.abspath(path.join(path.dirname(__file__), '..'))
@@ -71,7 +72,7 @@ class ExecutionEngine(hitchtest.ExecutionEngine):
             python=python_package.python,
             port=8800,
             version=str(self.settings.get("django_version")),
-            settings="config.settings.local",
+            settings="config.settings.test",
             needs=[self.services['Postgres'], ],
             env_vars=self.settings['environment_variables'],
         )
@@ -139,6 +140,10 @@ class ExecutionEngine(hitchtest.ExecutionEngine):
         """Navigate to website in Firefox."""
         self.driver.get(self.services['Django'].url())
 
+    def load_page(self, page):
+        """Navigate to website page in Firefox."""
+        self.driver.get(self.services['Django'].url() + page)
+
     def wait_for_email(self, containing=None):
         """Wait for, and return email."""
         self.services['HitchSMTP'].logs.out.tail.until_json(
@@ -192,11 +197,42 @@ class ExecutionEngine(hitchtest.ExecutionEngine):
 
     def page_title(self, title):
         """Check if the browser page title matches the given title."""
-        assert title in self.driver.title, "foo bar"
+        assert title in self.driver.title
 
     def find_text(self, text):
         """Find the text within the dom."""
         assert self.driver.find_element_by_xpath("//*[contains(.,'{}')]".format(text))
 
     def scroll_to(self, id):
+        """Scroll to an element."""
         self.driver.execute_script('$("#{}").get(0).scrollIntoView();'.format(id))
+
+    def click_email_link(self, containing=None, link_text=None):
+        """
+        Click on a link in an email.
+        :param containing: Text to search for to find the correct email.
+        :param link_text: A text to be found in that link. [optional]
+        :return:
+        """
+        email = self.services['HitchSMTP'].logs.out.tail.until_json(
+            lambda email: containing in email['payload'] or containing in email['subject'],
+            timeout=25,
+            lines_back=1,
+        )
+        links = email['links']
+        if link_text:
+            for link in links:
+                if link_text in link:
+                    url = link
+                    break
+        else:
+            url = links[0]
+        self.driver.get(url)
+
+    def execute(self, script):
+        """
+        Execute the javascript on the current page.
+        :param script:
+        :return:
+        """
+        self.driver.execute_script(script)

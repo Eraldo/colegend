@@ -2,6 +2,8 @@
 
 {% block title %}Prologue{% endblock %}
 
+{% block site_messages %}{% endblock %}
+
 {% block site_menu %}{% endblock %}
 
 {% block breadcrumbs %}{% endblock %}
@@ -38,10 +40,12 @@
             You stand in a forst at a clearing and right in the middle of it,
             you see a marvelously growing tree.^300 .^300 .^1000 <br>
             <br>
-            <a href="{% url 'continuous:legend:poetree' %}">Walk to Poetree</a>
         </p>
-
-
     </div>
     <span id="typed" class="lead"></span>
+    <div class="after-typed">
+        <span class="lead">
+            <a id="continue-to-poetree" href="{% url 'continuous:legend:poetree' %}">Walk to Poetree</a>
+        </span>
+    </div>
 {% endblock %}

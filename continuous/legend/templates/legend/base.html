@@ -17,7 +17,8 @@
     <script src="{% static 'components/typed.js/dist/typed.min.js' %}"></script>
     <script>
         function typed_callback() {
-            $('.after-typed').show()
+            $('.typed-cursor').hide();
+            $('.after-typed').show();
         }
         $(function () {
             $("#typed").typed({
