@@ -1,13 +1,12 @@
-from os import path
+from hitchserve import ServiceBundle
 from subprocess import call
-
+from os import path
 import hitchpostgres
+import hitchselenium
 import hitchpython
 import hitchredis
-import hitchselenium
-import hitchsmtp
 import hitchtest
-from hitchserve import ServiceBundle
+import hitchsmtp
 
 # Get directory above this file
 PROJECT_DIRECTORY = path.abspath(path.join(path.dirname(__file__), '..'))

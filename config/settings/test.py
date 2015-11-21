@@ -4,7 +4,7 @@ Test settings
 '''
 
 # noinspection PyUnresolvedReferences
-from .common import *  # noqa
+from .local import *  # noqa
 
 # Mail settings
 # ------------------------------------------------------------------------------
