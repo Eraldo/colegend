@@ -16,8 +16,6 @@
     - Click: join-explorer
 
     # She comes to a chat page were she is greeted and asked how she wants to join:
-    - Wait:
-        Seconds: 4
     - Page title: Join
     - Find text: Welcome
     - Find text: How do you want to join?
