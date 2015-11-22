@@ -16,6 +16,7 @@
     - Click: join-explorer
 
     # She comes to a chat page were she is greeted and asked how she wants to join:
+    - Page title: Join
     - Find text: Welcome
     - Find text: How do you want to join?
 
@@ -45,7 +46,7 @@
     - Click: confirm-email
 
     # She is presented with a prologue story:
-    - Page title: "Prologue"
+    - Page title: Prologue
 
     # She reads the story and clicks on the link to the Poetree:
     - Execute: typed_callback();  # [Immediately show the link]
