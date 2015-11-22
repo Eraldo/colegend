@@ -1,6 +1,5 @@
 from os import path
 from subprocess import call
-
 import hitchpostgres
 import hitchpython
 import hitchredis
@@ -155,7 +154,9 @@ class ExecutionEngine(hitchtest.ExecutionEngine):
 
     def confirm_emails_sent(self, number):
         """Count number of emails sent by app."""
-        assert len(self.services['HitchSMTP'].logs.json()) == int(number)
+        emails = len(self.services['HitchSMTP'].logs.json())
+        expected_emails = int(number)
+        assert emails == expected_emails, "expected {} emails - got {}".format(expected_emails, emails)
 
     def time_travel(self, days=""):
         """Make all services think that time has skipped forward."""
@@ -201,11 +202,13 @@ class ExecutionEngine(hitchtest.ExecutionEngine):
 
     def page_title(self, title):
         """Check if the browser page title matches the given title."""
-        assert title in self.driver.title
+        current_title = self.driver.title
+        assert title in current_title, "expected title '{}' - title was '{}'".format(title, current_title)
 
     def find_text(self, text):
         """Find the text within the dom."""
-        assert self.driver.find_element_by_xpath("//*[contains(.,'{}')]".format(text))
+        assert self.driver.find_element_by_xpath(
+            "//*[contains(.,'{}')]".format(text)), "text '{}' was not found".format(text)
 
     def scroll_to(self, id):
         """Scroll to an element."""
