@@ -1,10 +1,7 @@
 coLegend
 ==============================
 
-[![GitHub version](https://badge.fury.io/gh/Eraldo%2Fcolegend.svg)](http://badge.fury.io/gh/Eraldo%2Fcolegend)
-[![Build Status](https://travis-ci.org/Eraldo/colegend.svg?branch=master)](https://travis-ci.org/Eraldo/colegend)
-[![Coverage Status](https://img.shields.io/coveralls/Eraldo/colegend.svg)](https://coveralls.io/r/Eraldo/colegend)
-[![Documentation Status](https://readthedocs.org/projects/colegend/badge/?version=latest)](https://readthedocs.org/projects/colegend/?badge=latest)
+|GitHub version| |Build Status| |Coverage Status| |Documentation Status|
 
 Personal Development Platform
 
@@ -13,7 +10,18 @@ Personal Development Platform
 * GitHub: https://github.com/Eraldo/colegend
 * Social: https://www.facebook.com/colegend.org
 
-[![CoLegend Logo](https://www.colegend.org/static/website/images/CoLegendLogo.png)](https://www.colegend.org)
+|CoLegend Logo|
+
+.. |GitHub version| image:: https://badge.fury.io/gh/Eraldo%2Fcolegend.svg
+:target: http://badge.fury.io/gh/Eraldo%2Fcolegend
+.. |Build Status| image:: https://travis-ci.org/Eraldo/colegend.svg?branch=master
+:target: https://travis-ci.org/Eraldo/colegend
+.. |Coverage Status| image:: https://img.shields.io/coveralls/Eraldo/colegend.svg
+:target: https://coveralls.io/r/Eraldo/colegend
+.. |Documentation Status| image:: https://readthedocs.org/projects/colegend/badge/?version=latest
+:target: https://readthedocs.org/projects/colegend/?badge=latest
+.. |CoLegend Logo| image:: https://www.colegend.org/static/website/images/CoLegendLogo.png
+:target: https://www.colegend.org
 
 
 Donations
