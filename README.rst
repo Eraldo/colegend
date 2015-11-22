@@ -1,10 +1,30 @@
 coLegend
 ==============================
 
+[![GitHub version](https://badge.fury.io/gh/Eraldo%2Fcolegend.svg)](http://badge.fury.io/gh/Eraldo%2Fcolegend)
+[![Build Status](https://travis-ci.org/Eraldo/colegend.svg?branch=master)](https://travis-ci.org/Eraldo/colegend)
+[![Coverage Status](https://img.shields.io/coveralls/Eraldo/colegend.svg)](https://coveralls.io/r/Eraldo/colegend)
+[![Documentation Status](https://readthedocs.org/projects/colegend/badge/?version=latest)](https://readthedocs.org/projects/colegend/?badge=latest)
+
 Personal Development Platform
 
+* Website: https://www.colegend.org
+* Documentation: http://colegend.readthedocs.org
+* GitHub: https://github.com/Eraldo/colegend
+* Social: https://www.facebook.com/colegend.org
 
-LICENSE: BSD
+[![CoLegend Logo](https://www.colegend.org/static/website/images/CoLegendLogo.png)](https://www.colegend.org)
+
+
+Donations
+=========
+
+Paypal:
+[![Paypal](https://www.paypalobjects.com/en_US/DE/i/btn/btn_donateCC_LG.gif "Paypal")](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=eraldo%40eraldo%2eorg&lc=DE&item_name=CoLegend&item_number=colegend&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted "Paypal")
+
+Gratipay:
+[![Gratipay](http://img.shields.io/gratipay/Eraldo.svg)](https://www.gittip.com/Eraldo)
+
 
 Settings
 ------------
@@ -13,8 +33,10 @@ Moved to settings_.
 
 .. _settings: http://cookiecutter-django.readthedocs.org/en/latest/settings.html
 
+
 Basic Commands
 --------------
+
 
 Setting Up Your Users
 ^^^^^^^^^^^^^^^^^^^^^
@@ -27,6 +49,7 @@ To create an **superuser account**, use this command::
 
 For convenience, you can keep your normal user logged in on Chrome and your superuser logged in on Firefox (or similar), so that you can see how the site behaves for both kinds of users.
 
+
 Test coverage
 ^^^^^^^^^^^^^
 
@@ -36,13 +59,13 @@ To run the tests, check your test coverage, and generate an HTML coverage report
     $ coverage html
     $ open htmlcov/index.html
 
+
 Live reloading and Sass CSS compilation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Moved to `Live reloading and SASS compilation`_.
 
 .. _`Live reloading and SASS compilation`: http://cookiecutter-django.readthedocs.org/en/latest/live-reloading-and-sass-compilation.html
-
 
 
 Celery
@@ -58,9 +81,6 @@ To run a celery worker:
     celery -A colegend.taskapp worker -l info
 
 Please note: For Celerys import magic to work, it is important *where* the celery commands are run. If you are in the same folder with *manage.py*, you should be right.
-
-
-
 
 
 Email Server
@@ -85,9 +105,6 @@ To stop the email server::
 The email server listens on 127.0.0.1:1025
 
 
-
-
-
 Sentry
 ^^^^^^
 
@@ -95,8 +112,6 @@ Sentry is an error logging aggregator service. You can sign up for a free accoun
 The system is setup with reasonable defaults, including 404 logging and integration with the WSGI application.
 
 You must set the DSN url in production.
-
-
 
 It's time to write the code!!!
 
@@ -130,6 +145,7 @@ Deployment
 
 We providing tools and instructions for deploying using Docker and Heroku.
 
+
 Heroku
 ^^^^^^
 
@@ -139,6 +155,7 @@ Heroku
 See detailed `cookiecutter-django Heroku documentation`_.
 
 .. _`cookiecutter-django Heroku documentation`: http://cookiecutter-django.readthedocs.org/en/latest/deployment-on-heroku.html
+
 
 Docker
 ^^^^^^
