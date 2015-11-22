@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
         google_app = SocialApp.objects.create(
             provider='google',
             name='Google',
-            client_id=env("GOOGLE_ID", default='862909939438.apps.googleusercontent.com'),
+            client_id=env("GOOGLE_ID"),
             secret=env("GOOGLE_KEY")
         )
         # print(site, google_app)
@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
         facebook_app = SocialApp.objects.create(
             provider='facebook',
             name='Facebook',
-            client_id=env("FACEBOOK_ID", default='173658052814028'),
+            client_id=env("FACEBOOK_ID"),
             secret=env("FACEBOOK_KEY")
         )
         site.socialapp_set.add(facebook_app)
