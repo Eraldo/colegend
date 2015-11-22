@@ -26,6 +26,10 @@ environment_variables:
   DATABASE_URL: postgres://colegend:password@127.0.0.1:15432/colegend
   SECRET_KEY: cj5^uos4tfCdfghjkf5hq$9$(@-79^e9&x$3vyf#igvsfm4d=+
   CELERY_BROKER_URL: redis://localhost:16379
+  GOOGLE_ID: 862909939438-153p4kv8b8e0dlcs7bchltqmfojs3pch.apps.googleusercontent.com
+  GOOGLE_KEY: uCvO06JwtyuihJHajiOlxFmB
+  FACEBOOK_ID: 516534458526384
+  FACEBOOK_KEY: 7993ec52596a0aa80aa71664b7865db5
 screen_resolution:
   width: 1024
   height: 768

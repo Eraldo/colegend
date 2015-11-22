@@ -30,10 +30,6 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
     permanent = False
 
     def get_redirect_url(self):
-        # TODO: Change to real user chapter
-        chapter = 0
-        if chapter < 1:
-            return reverse("continuous:legend:prologue")
         return reverse("home")
 
 

@@ -9,7 +9,7 @@
 
   scenario:
 
-    # Carolina looked at the landing page and now wants to join coLegend.
+    # Fiona looked at the landing page and now wants to join coLegend.
     # She opens the site, scrolls down and clicks on the join button:
     - Load website
     - Scroll to: join-explorer
@@ -21,14 +21,12 @@
 
     # She chooses a facebook signup:
     - Click: facebook-signup
-    - Pause
 
-#    # She fills in the form with her desired credentials:
-#    - Fill form:
-#        id_username: Carolina
-#        id_email: carolina@example.com
-#        id_password1: carolina
-#    - Click submit
+    # She fills in the form with her facebook credentials:
+    - Fill form:
+        email: fiona_ebxqvbb_facebook@tfbnw.net
+        pass: tester
+    - Click: loginbutton
 
     # She gets promted to verify her email address:
     - Find text: Verify Your E-mail Address

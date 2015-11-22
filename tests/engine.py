@@ -1,12 +1,14 @@
-from hitchserve import ServiceBundle
-from subprocess import call
 from os import path
+from subprocess import call
+
 import hitchpostgres
-import hitchselenium
 import hitchpython
 import hitchredis
-import hitchtest
+import hitchselenium
 import hitchsmtp
+import hitchtest
+from hitchserve import ServiceBundle
+from time import sleep
 
 # Get directory above this file
 PROJECT_DIRECTORY = path.abspath(path.join(path.dirname(__file__), '..'))
@@ -188,7 +190,10 @@ class ExecutionEngine(hitchtest.ExecutionEngine):
     def fill_form(self, **kwargs):
         """Fill in a form with id=value."""
         for element, text in kwargs.items():
-            self.driver.find_element_by_id(element).send_keys(text)
+            try:
+                self.driver.find_element_by_id(element).send_keys(text)
+            except:
+                self.driver.find_element_by_id(element.title()).send_keys(text)
 
     def click_submit(self):
         """Click on a submit button if it exists."""
@@ -235,3 +240,11 @@ class ExecutionEngine(hitchtest.ExecutionEngine):
         :return:
         """
         self.driver.execute_script(script)
+
+    def wait(self, seconds=1):
+        """
+        Wait for a given amout of seconds.
+        :param seconds: The amount of seconds to wait. [default=1]
+        :return:
+        """
+        sleep(seconds)

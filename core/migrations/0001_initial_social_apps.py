@@ -15,6 +15,8 @@ class Migration(migrations.Migration):
         """
         Site = apps.get_model("sites", "Site")
         site = Site.objects.first()
+        if not site:
+            site = Site.objects.create(domain='localhost:8000', name='localhost')
         SocialApp = apps.get_model("socialaccount", "SocialApp")
         env = environ.Env()
 
@@ -22,19 +24,21 @@ class Migration(migrations.Migration):
         google_app = SocialApp.objects.create(
             provider='google',
             name='Google',
-            client_id='862909939438.apps.googleusercontent.com',
-            secret=env("GOOGLE_KEY", default='insert your key here')
+            client_id=env("GOOGLE_ID", default='862909939438.apps.googleusercontent.com'),
+            secret=env("GOOGLE_KEY")
         )
+        # print(site, google_app)
         site.socialapp_set.add(google_app)
 
         # Facebook app
         facebook_app = SocialApp.objects.create(
             provider='facebook',
             name='Facebook',
-            client_id='173658052814028',
-            secret=env("FACEBOOK_KEY", default='insert your key here')
+            client_id=env("FACEBOOK_ID", default='173658052814028'),
+            secret=env("FACEBOOK_KEY")
         )
         site.socialapp_set.add(facebook_app)
+        print(facebook_app.secret)
 
     dependencies = [
         ('sites', '0001_initial'),

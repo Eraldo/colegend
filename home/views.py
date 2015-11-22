@@ -11,6 +11,10 @@ class HomeView(TemplateView):
     def get(self, request, *args, **kwargs):
         if not request.user.is_authenticated():
             return redirect("about")
+        # TODO: Change to real user chapter
+        if not request.session.get('onboarded'):
+            request.session['onboarded'] = True
+            return redirect("continuous:legend:prologue")
         return super().get(request, *args, **kwargs)
 
 
