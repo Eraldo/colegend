@@ -12,17 +12,6 @@ Personal Development Platform
 
 |CoLegend Logo|
 
-.. |GitHub version| image:: https://badge.fury.io/gh/Eraldo%2Fcolegend.svg
-:target: http://badge.fury.io/gh/Eraldo%2Fcolegend
-.. |Build Status| image:: https://travis-ci.org/Eraldo/colegend.svg?branch=master
-:target: https://travis-ci.org/Eraldo/colegend
-.. |Coverage Status| image:: https://img.shields.io/coveralls/Eraldo/colegend.svg
-:target: https://coveralls.io/r/Eraldo/colegend
-.. |Documentation Status| image:: https://readthedocs.org/projects/colegend/badge/?version=latest
-:target: https://readthedocs.org/projects/colegend/?badge=latest
-.. |CoLegend Logo| image:: https://www.colegend.org/static/website/images/CoLegendLogo.png
-:target: https://www.colegend.org
-
 
 Donations
 =========
@@ -171,3 +160,14 @@ Docker
 See detailed `cookiecutter-django Docker documentation`_.
 
 .. _`cookiecutter-django Docker documentation`: http://cookiecutter-django.readthedocs.org/en/latest/deployment-with-docker.html
+
+.. |GitHub version| image:: https://badge.fury.io/gh/Eraldo%2Fcolegend.svg
+:target: http://badge.fury.io/gh/Eraldo%2Fcolegend
+.. |Build Status| image:: https://travis-ci.org/Eraldo/colegend.svg?branch=master
+:target: https://travis-ci.org/Eraldo/colegend
+.. |Coverage Status| image:: https://img.shields.io/coveralls/Eraldo/colegend.svg
+:target: https://coveralls.io/r/Eraldo/colegend
+.. |Documentation Status| image:: https://readthedocs.org/projects/colegend/badge/?version=latest
+:target: https://readthedocs.org/projects/colegend/?badge=latest
+.. |CoLegend Logo| image:: https://www.colegend.org/static/website/images/CoLegendLogo.png
+:target: https://www.colegend.org
