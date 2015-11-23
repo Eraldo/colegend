@@ -30,7 +30,7 @@ class TestUserRedirectView(BaseUserTestCase):
         #   self.make_user()
         self.assertEqual(
             view.get_redirect_url(),
-            '/users/profile/testuser/'
+            '/'
         )
 
 

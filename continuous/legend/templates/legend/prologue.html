@@ -13,7 +13,7 @@
         <p>
             <span class='legend-initial-letter'>O</span>nce upon a time .^500 .^500 .^1000 <br>
             somewhere {% if country %}in {{ country }}{% else %}on planet earth{% endif %} ^500
-            on a <i>special</i> ^200{% now "l" %} {{ time_of_day }}...^1000
+            on a <i>special</i> ^200{{ weekday }} {{ time_of_day }}...^1000
             <br>
             Not knowing what exactly to expect,^200 a courageous person has decided to take action and leap into^500
             a new world. <br>
@@ -43,9 +43,13 @@
         </p>
     </div>
     <span id="typed" class="lead"></span>
-    <div class="after-typed">
+    <div class="after-typedx">
         <span class="lead">
-            <a id="continue-to-poetree" href="{% url 'continuous:legend:poetree' %}">Walk to Poetree</a>
+            <form action="" method="post">{% csrf_token %}
+                <button id="continue-to-poetree" name="poetree" type="submit" class="btn btn-primary">Walk to Poetree
+                </button>
+            </form>
+{#            <a id="continue-to-poetree" href="{% url 'continuous:legend:poetree' %}">Walk to Poetree</a>#}
         </span>
     </div>
 {% endblock %}

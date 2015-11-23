@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 import environ
+from django.conf import settings
 from django.db import migrations
 
 
@@ -24,8 +25,8 @@ class Migration(migrations.Migration):
         google_app = SocialApp.objects.create(
             provider='google',
             name='Google',
-            client_id=env("GOOGLE_ID"),
-            secret=env("GOOGLE_KEY")
+            client_id=settings.GOOGLE_ID,
+            secret=settings.GOOGLE_KEY
         )
         # print(site, google_app)
         site.socialapp_set.add(google_app)
@@ -34,8 +35,8 @@ class Migration(migrations.Migration):
         facebook_app = SocialApp.objects.create(
             provider='facebook',
             name='Facebook',
-            client_id=env("FACEBOOK_ID"),
-            secret=env("FACEBOOK_KEY")
+            client_id=settings.FACEBOOK_ID,
+            secret=settings.FACEBOOK_KEY
         )
         site.socialapp_set.add(facebook_app)
         print(facebook_app.secret)

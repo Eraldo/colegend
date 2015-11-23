@@ -239,6 +239,12 @@ AUTH_USER_MODEL = 'users.User'
 LOGIN_REDIRECT_URL = 'users:redirect'
 LOGIN_URL = 'account_login'
 
+# Provider settings
+GOOGLE_ID = env('GOOGLE_ID')
+GOOGLE_KEY = env('GOOGLE_KEY')
+FACEBOOK_ID = env('FACEBOOK_ID')
+FACEBOOK_KEY = env('FACEBOOK_KEY')
+
 # SLUGLIFIER
 AUTOSLUG_SLUGIFY_FUNCTION = 'slugify.slugify'
 

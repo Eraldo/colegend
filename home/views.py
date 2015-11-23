@@ -9,11 +9,12 @@ class HomeView(TemplateView):
     template_name = "home/home.html"
 
     def get(self, request, *args, **kwargs):
-        if not request.user.is_authenticated():
+        user = request.user
+        # Redirect anonymous users to the about page.
+        if not user.is_authenticated():
             return redirect("about")
-        # TODO: Change to real user chapter
-        if not request.session.get('onboarded'):
-            request.session['onboarded'] = True
+        # Redirect if prologue is not completed.
+        if not user.legend.prologue:
             return redirect("continuous:legend:prologue")
         return super().get(request, *args, **kwargs)
 

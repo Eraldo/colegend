@@ -1,4 +1,5 @@
 from braces.views import LoginRequiredMixin
+from django.shortcuts import redirect
 from django.utils import timezone
 from django.views.generic import TemplateView
 
@@ -11,10 +12,21 @@ class PrologueView(LoginRequiredMixin, TemplateView):
     template_name = "legend/prologue.html"
 
     def get_context_data(self, **kwargs):
+        user = self.request.user
         context = super().get_context_data(**kwargs)
-        context['country'] = self.get_client_country()
-        context['typed_username'] = self.get_typed_username()
-        context['time_of_day'] = self.get_time_of_day()
+
+        country = self.get_client_country()
+        context['country'] = country
+
+        weekday = user.date_joined.strftime('%A')
+        context['weekday'] = weekday
+
+        time_of_day = self.get_time_of_day(time=user.date_joined)
+        context['time_of_day'] = time_of_day
+
+        typed_username = self.get_typed_username()
+        context['typed_username'] = typed_username
+
         return context
 
     def get_client_ip(self):
@@ -28,7 +40,8 @@ class PrologueView(LoginRequiredMixin, TemplateView):
     def get_client_country(self):
         import pygeoip
         gi = pygeoip.GeoIP('continuous/legend/static/legend/GeoIP.dat')
-        country = gi.country_name_by_addr(self.get_client_ip())
+        ip = self.get_client_ip()
+        country = gi.country_name_by_addr(ip)
         return country
 
     def get_typed_username(self):
@@ -49,6 +62,12 @@ class PrologueView(LoginRequiredMixin, TemplateView):
         else:  # 23-4 (6h)
             return 'night'
 
+    def post(self, request, *args, **kwargs):
+        if 'poetree' in request.POST:
+            legend = request.user.legend
+            legend.prologue = True
+            legend.save()
+            return redirect('continuous:legend:poetree')
 
 
 class PoetreeView(LoginRequiredMixin, TemplateView):
