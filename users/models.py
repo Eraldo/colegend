@@ -41,27 +41,3 @@ def new_user_manager_notification(sender, instance, created, **kwargs):
         send_mail(subject, message, None, managers, fail_silently=False)
 
         slack_message('slack/message.slack', {'message': '@channel: {}'.format(message),})
-
-# class Settings(models.Model):
-#     owner = AutoOneToOneField(User, primary_key=True)
-#     # ISO 639-1
-#     ENGLISH = "EN"
-#     LANGUAGE_CHOICES = (
-#         (ENGLISH, 'English'),
-#     )
-#     language = models.CharField(max_length=2,
-#                                 choices=LANGUAGE_CHOICES,
-#                                 default=ENGLISH)
-#     day_start = models.PositiveSmallIntegerField(
-#         verbose_name="Day start time", default=0,
-#         help_text="When does your day start? Enter number between 0 and 24 (24h clock).",
-#         validators=[MaxValueValidator(24)])
-#     sound = models.BooleanField(verbose_name="Sound", default=True)
-#     keyboard = models.BooleanField(verbose_name="Keyboard Control", default=False)
-#     background_color = RGBColorField(blank=True)
-#
-#     class Meta:
-#         verbose_name_plural = "Settings"
-#
-#     def __str__(self):
-#         return "{}'s Settings".format(self.owner)
