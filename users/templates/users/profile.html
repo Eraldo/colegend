@@ -5,12 +5,6 @@
 
 {% block title %}Profile{% endblock %}
 
-{% block page_links %}
-    {% if object == request.user %}
-        <a href="{% url 'users:settings' %}" class="btn btn-default btn-sm">Settings</a>
-    {% endif %}
-{% endblock %}
-
 {% block content %}
     <div class="container">
 
@@ -19,9 +13,9 @@
                  alt="legend avatar">
 
             <div class="card-block">
-                <h4 class="card-title">{{ object.username|title }}
-                    {% if object.get_full_name %}
-                        <small class="text-muted">({{ object.get_full_name|title }})</small>
+                <h4 class="card-title">{{ user.username|title }}
+                    {% if user.get_full_name %}
+                        <small class="text-muted">({{ user.get_full_name|title }})</small>
                     {% endif %}
                 </h4>
 
@@ -31,11 +25,16 @@
                 </p>
 
                 <p class="card-text">
-                <u>About me</u><br>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.
+                    <u>About me</u><br>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                    et
+                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.
                 </p>
-                <a href="#" class="btn btn-primary"><i class="fa fa-send"></i> Send message</a>
+                {% if user != request.user %}
+                    <a href="mailto:{{ user.email }}" class="btn btn-primary">
+                        <i class="fa fa-send"></i> Send message
+                    </a>
+                {% endif %}
             </div>
         </div>
 
