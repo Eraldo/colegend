@@ -9,6 +9,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+
+    {# open graph: http://ogp.me/ #}
+    <meta property="og:image"
+          content="{% block og_image %}{% static 'images/coLegend_screenshot_small.png' %}{% endblock %}"/>
+    <meta property="og:site_name" content="coLegend' %}"/>
+    <meta property="og:description"
+          content="A Person Development Platform built around the values of 'conscious' 'connected' and 'continuous'."/>
     <!-- Add Your favicon here -->
     <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
 
