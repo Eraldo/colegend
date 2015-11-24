@@ -15,7 +15,8 @@
   "dependencies": {
     "bootstrap": "4.0.0-alpha",
     "jquery-ui": "1.11.4",
-    "fontawesome": "4.4.0",
+    "fontawesome": "4.5.0",
     "typed.js": "master"
-  }
+  },
+  "private": true
 }
