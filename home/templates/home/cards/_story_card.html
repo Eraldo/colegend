@@ -11,9 +11,7 @@
             <i class="fa fa-paw"></i>
             Story
         </a>
-        <a href="#" onclick="$(this).closest('.card').hide('slow');" class="card-close-button close">
-            <small><i class="fa fa-close pull-right"></i></small>
-        </a>
+        {% include 'home/cards/_card_close_button.html' %}
     </div>
     <img class="card-img-top img-responsive center-block"
          src="http://goo.gl/nv9JR7"
@@ -24,7 +22,8 @@
         <h4 class="card-title">Bear is preparing for wintertime</h4>
 
         <p class="card-text">
-            <span class="legend-initial-letter">T</span>he bear was looking out of his cave, sniffing the fresh autumn air. It was surprisingly warm for this time
+            <span class="legend-initial-letter">T</span>he bear was looking out of his cave, sniffing the fresh autumn
+            air. It was surprisingly warm for this time
             of the year but he knew that winter would come soon enough. He was already deep in preparations for this
             cold and dark time of the year – making his cave warm and cozy and full of memories of the last year and
             anticipations for the coming year. He had learned over time that in order for him to enjoy his winter
