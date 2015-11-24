@@ -1,5 +1,4 @@
-coLegend
-========
+# [![coLegend](https://www.colegend.org/static/website/images/CoLegendLogo.png)](https://www.colegend.org)
 
 [![GitHub version](https://badge.fury.io/gh/Eraldo%2Fcolegend.svg)](http://badge.fury.io/gh/Eraldo%2Fcolegend)
 [![Build Status](https://travis-ci.org/Eraldo/colegend.svg?branch=master)](https://travis-ci.org/Eraldo/colegend)
@@ -13,10 +12,8 @@ Personal Development Platform
 -   GitHub: <https://github.com/Eraldo/colegend>
 -   Social: <https://www.facebook.com/colegend.org>
 
-[![CoLegend Logo](https://www.colegend.org/static/website/images/CoLegendLogo.png)](https://www.colegend.org)
 
-Donations
-=========
+## Donations
 
 Paypal:
 [![Paypal](https://www.paypalobjects.com/en_US/DE/i/btn/btn_donateCC_LG.gif "Paypal")](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=eraldo%40eraldo%2eorg&lc=DE&item_name=CoLegend&item_number=colegend&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted "Paypal")
@@ -24,14 +21,37 @@ Paypal:
 Gratipay:
 [![Gratipay](http://img.shields.io/gratipay/Eraldo.svg)](https://www.gittip.com/Eraldo)
 
-Settings
---------
+
+## Installation
+
+
+### Local Setup
+
+    $ git clone https://github.com/Eraldo/colegend.git
+	$ cd colegend
+
+
+### Virtual Environment
+
+	$ mkvirtualenv --python=python3.5 colegend
+	$ workon colegend
+	$ pip install -r requirements/local.txt
+
+
+### Database (PostgreSQL)
+
+    $ createdb colegend
+    $ python manage.py migrate
+
+
+## Settings
 
 Moved to
 [settings](http://cookiecutter-django.readthedocs.org/en/latest/settings.html).
 
-Basic Commands
---------------
+
+## Basic Commands
+
 
 ### Setting Up Your Users
 
@@ -49,6 +69,7 @@ For convenience, you can keep your normal user logged in on Chrome and
 your superuser logged in on Firefox (or similar), so that you can see
 how the site behaves for both kinds of users.
 
+
 ### Test coverage
 
 To run the tests, check your test coverage, and generate an HTML
@@ -58,10 +79,12 @@ coverage report:
     $ coverage html
     $ open htmlcov/index.html
 
+
 ### Live reloading and Sass CSS compilation
 
 Moved to [Live reloading and SASS
 compilation](http://cookiecutter-django.readthedocs.org/en/latest/live-reloading-and-sass-compilation.html).
+
 
 ### Celery
 
@@ -78,26 +101,6 @@ Please note: For Celerys import magic to work, it is important *where*
 the celery commands are run. If you are in the same folder with
 *manage.py*, you should be right.
 
-### Email Server
-
-In development, it is often nice to be able to see emails that are being
-sent from your application. For this purpose, a Grunt task exists to
-start an instance of [maildump](https://github.com/ThiefMaster/maildump)
-which is a local SMTP server with an online interface.
-
-Make sure you have nodejs installed, and then type the following:
-
-    $ grunt start-email-server
-
-This will start an email server. The project is setup to deliver to the
-email server by default. To view messages that are sent by your
-application, open your browser to <http://127.0.0.1:1080>
-
-To stop the email server:
-
-    $ grunt stop-email-server
-
-The email server listens on 127.0.0.1:1025
 
 ### Sentry
 
@@ -110,8 +113,8 @@ You must set the DSN url in production.
 
 It's time to write the code!!!
 
-Running end to end integration tests
-------------------------------------
+
+## Running end to end integration tests
 
 N.B. The integration tests will not run on Windows.
 
@@ -126,7 +129,7 @@ following commands:
 
 Then run the stub test:
 
-    $ hitch test stub.test
+    $ hitch test scenarios/stub.test
 
 This will download and compile python, postgres and redis and install
 all python requirements so the first time it runs it may take a while.
@@ -136,8 +139,8 @@ Subsequent test runs will be much quicker.
 The testing framework runs Django, Celery (if enabled), Postgres,
 HitchSMTP (a mock SMTP server), Firefox/Selenium and Redis.
 
-Deployment
-----------
+
+## Deployment
 
 We providing tools and instructions for deploying using Docker and
 Heroku.
