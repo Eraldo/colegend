@@ -7,10 +7,10 @@
 
 Personal Development Platform
 
--   Website: <https://www.colegend.org>
--   Documentation: <http://colegend.readthedocs.org>
--   GitHub: <https://github.com/Eraldo/colegend>
--   Social: <https://www.facebook.com/colegend.org>
++   Website: <https://www.colegend.org>
++   Documentation: <http://colegend.readthedocs.org>
++   GitHub: <https://github.com/Eraldo/colegend>
++   Social: <https://www.facebook.com/colegend.org>
 
 
 ## Donations
