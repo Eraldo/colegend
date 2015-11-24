@@ -31,7 +31,7 @@ Gratipay:
 	$ cd colegend
 
 
-### Virtual Environment
+### Virtual Environment (using `virtualenvwrapper`)
 
 	$ mkvirtualenv --python=python3.5 colegend
 	$ workon colegend
@@ -48,6 +48,15 @@ Gratipay:
 
 Moved to
 [settings](http://cookiecutter-django.readthedocs.org/en/latest/settings.html).
+
+Additional settings:
+
+    GOOGLE_ID
+    GOOGLE_KEY
+    FACEBOOK_ID
+    FACEBOOK_KEY
+    
+You need to be set as variables in your virtual environment.
 
 
 ## Basic Commands
