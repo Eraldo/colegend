@@ -89,7 +89,7 @@
     {% endblock %}
 
     {% block content_container %}
-    <div id="content" class="card card-block bg-content">
+        <div id="content" class="{% block content_class %}card card-block bg-content{% endblock %}">
         {% block content %}
         {% endblock content %}
     </div>
