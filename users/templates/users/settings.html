@@ -8,18 +8,20 @@
 {% block page_links %}
     <a href="{% url 'users:update' %}" class="btn btn-default btn-sm">Username</a>
     <a href="{% url 'account_email' %}" class="btn btn-default btn-sm">Email</a>
+    <a href="{% url 'socialaccount_connections' %}" class="btn btn-default btn-sm">Social Accounts</a>
 {% endblock %}
 
-{% block content %}
-    <div class="container">
-
-        <div class="row">
-            <div class="col-sm-12">
-                {% if user.get_full_name %}
-                    <p>{{ user.get_full_name }}</p>
-                {% endif %}
-            </div>
-        </div>
-
-    </div>
-{% endblock content %}
+{% block content_container %}{% endblock %}
+{#{% block content %}#}
+{#    <div class="container">#}
+{##}
+{#        <div class="row">#}
+{#            <div class="col-sm-12">#}
+{#                {% if user.get_full_name %}#}
+{#                    <p>{{ user.get_full_name }}</p>#}
+{#                {% endif %}#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#    </div>#}
+{#{% endblock content %}#}

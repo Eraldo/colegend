@@ -88,10 +88,12 @@
         </div>
     {% endblock %}
 
+    {% block content_container %}
     <div id="content" class="card card-block bg-content">
         {% block content %}
         {% endblock content %}
     </div>
+    {% endblock %}
 </div>
 <!-- /container -->
 
