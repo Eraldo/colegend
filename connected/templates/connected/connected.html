@@ -3,9 +3,38 @@
 {% block title %}Connected{% endblock %}
 {% block page_color %}connected{% endblock %}
 
+{% block page_links %}
+    <a href="https://colegend.slack.com" target="_blank" class="btn btn-default btn-sm">Chat</a>
+    <a href="{% url 'connected:virtual-room' %}" target="_blank" class="btn btn-default btn-sm">Virtual Room</a>
+{% endblock %}
+
 {% block content %}
-    <a href="https://plus.google.com/hangouts/_/colegend42g3psmu3okj5ym27qa" target="_blank"
-       class="btn btn-primary">Virtual Room</a><br>
-    <iframe src="https://slack.colegend.org/" frameborder="0" width="316" height="380" scrolling="no"
-            style="overflow-y:hidden;"></iframe>
+    Chapter 1:
+    <progress class="progress progress-striped progress-success" value="40" max="100">40%</progress>
+
+    <blockquote class="blockquote">
+        <p>A dream you dream alone is only a dream. A dream you dream together is reality.</p>
+        <footer>Caring Kangaroo Mother<cite title="Source Title">[inspired by John Lennon]</cite></footer>
+    </blockquote>
+
+    <p>
+        <a href="{% url 'connected:guidelines' %}" class="btn btn-primary">
+            Guidelines
+        </a>
+        <a href="#" class="btn btn-primary disabled">
+            Cloud Guide
+        </a>
+    </p>
+    <hr>
+    <p>
+        <a href="#" class="btn btn-primary disabled">
+            <i class="fa fa-lock"></i> Tribe
+        </a>
+    </p>
+    <hr>
+    <p>
+        <a href="#" class="btn btn-primary disabled">
+            <i class="fa fa-lock"></i> Circle
+        </a>
+    </p>
 {% endblock %}

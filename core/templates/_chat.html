@@ -1,0 +1,81 @@
+{% load static %}
+
+<div class="row">
+    <div class="col-lg-8">
+
+        <div class="row">
+
+            <div class="col-sm-4">
+                <div>
+                    <img class="img-responsive center-block"
+                         src="{% block chat_avatar_image %}{% static 'images/coralina.png' %}{% endblock %}"
+                         alt="Coralina avatar">
+
+                    <div class="text-center bg-success">
+                        <strong>{% block chat_avatar_name %}Coralina{% endblock %}</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-8">
+                <div class="card">
+                    <div class="card-block">
+                        <h4 class="card-title">
+                            {% block chat_title %}
+                                Title!
+                            {% endblock %}
+                        </h4>
+
+                        <div class="card-text">
+                            {% block chat_content %}
+                                <p>
+                                    Some text.
+                                </p>
+                            {% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-4">
+
+        <div class="row">
+
+            <div class="col-sm-4 col-sm-push-8">
+                <div class="">
+                    <img class="img-responsive center-block" src="{% static 'images/anonymous.png' %}"
+                         alt="Your avatar">
+
+                    <div class="text-center bg-inverse">
+                        <strong>You</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-8  col-sm-pull-4">
+                <div class="card">
+                    <div class="card-header">
+                        Your answer:
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        {% block chat_answers %}
+                            <a href="#">
+                                <li class="list-group-item">
+                                    {% block chat_answer %}Some answer.{% endblock %}
+                                </li>
+                            </a>
+                        {% endblock %}
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

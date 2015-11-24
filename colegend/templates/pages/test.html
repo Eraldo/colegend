@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block extra_head %}
-{{ block.super }}
+    {{ block.super }}
     <link href="{% static 'legend/css/legend.css' %}" rel="stylesheet">
 {% endblock %}
 
@@ -15,6 +15,8 @@
 {% endblock %}
 
 {% block content %}
+
+    {% include '_chat.html' %}
 
     <div id="typed-strings" class="invisible">
         <p>

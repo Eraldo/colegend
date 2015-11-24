@@ -1,0 +1,31 @@
+{% extends '_chat.html' %}
+
+{% block chat_title %}
+    Respeeect!
+{% endblock %}
+
+{% block chat_content %}
+    <p>
+        So what can you do - right here, right now? <br>
+        … Good that you asked ;-)
+    </p>
+    <p>
+        First, you can get ready for a new experience of community and already contribute to it by reading through and
+        accepting our community guidelines.
+    </p>
+{% endblock %}
+
+{% block chat_answers %}
+    <a href="#">
+        <li class="list-group-item">
+            Sure, let's go.
+        </li>
+    </a>
+    <a href="#"
+       onclick="alert('In case you did not know: That answer is the kind of communication we do not value here. I guess and hope you know that and were curious what would happen.');">
+        <li class="list-group-item">
+            What the fuck are you talking about, bitch!
+        </li>
+    </a>
+
+{% endblock %}

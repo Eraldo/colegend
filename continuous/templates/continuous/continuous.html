@@ -8,32 +8,40 @@
 
 
 {% block content %}
+    Chapter 1:
+    <progress class="progress progress-striped progress-success" value="60" max="100">60%</progress>
 
     <blockquote class="blockquote">
         <p>Once upon a time starts now!</p>
         <footer>coLegend <cite title="Source Title">..stay tuned</cite></footer>
     </blockquote>
     <p>
-        <a href="#" class="btn btn-secondary disabled"><i class="fa fa-lock"></i> Chapter 2</a>
+        <a href="{% url 'continuous:legend:prologue' %}" class="btn btn-primary">
+            Prologue
+        </a>
+        <a href="{% url 'continuous:legend:poetree' %}" class="btn btn-primary">
+            Poetree
+        </a>
     </p>
+    <hr>
     <p>
-        <a href="#" class="btn btn-default bg-inverse bg-continuous disabled" style="color: white;">
+        <a href="#" class="btn btn-primary disabled">
             <i class="fa fa-lock"></i>
             Chapter 1
         </a>
-        <span class="text-warning">You need to complete <i>Chapter 1</i> Conscious and Connected first.</span>
-        Chapter 1:
-        <progress class="progress progress-striped progress-success" value="60" max="100">60%</progress>
-
-        {#        <a href="{% url 'continuous:legend:chapter1' %}" class="btn btn-default bg-inverse bg-continuous" style="color: white;">Chapter 1</a>#}
+        <span class="text-info">
+            You still have things to complete in
+            <a href="{% url 'conscious:index' %}">Conscious</a>
+            and
+            <a href="{% url 'connected:index' %}">Connected</a>
+            first
+        </span>
     </p>
+    <hr>
     <p>
-        <a href="{% url 'continuous:legend:poetree' %}" class="btn btn-default bg-inverse bg-default"
-           style="color: white;">Poetree</a>
-    </p>
-    <p>
-        <a href="{% url 'continuous:legend:prologue' %}" class="btn btn-default bg-inverse bg-continuous"
-           style="color: white;">Prologue</a>
+        <a href="#" class="btn btn-primary disabled">
+            <i class="fa fa-lock"></i> Chapter 2
+        </a>
     </p>
 
 {% endblock %}

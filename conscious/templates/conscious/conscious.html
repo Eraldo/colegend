@@ -4,14 +4,26 @@
 {% block page_color %}conscious{% endblock %}
 
 {% block content %}
-    What do you really want right now?
+    Chapter 1:
+    <progress class="progress progress-striped progress-success" value="10" max="100">10%</progress>
+
+    <blockquote class="blockquote">
+        <p>What do you really want right now?</p>
+        <footer>Light Phoenix Oracle</footer>
+    </blockquote>
 
     <div class="alert alert-warning" role="alert">
         <strong>Warning!</strong> Your life <a href="#" class="alert-link">could change</a> any moment.
     </div>
-    <span data-toggle="tooltip" data-placement="top" title="Tooltip on top">foo</span>
+    <p>
+        <a href="#" class="btn btn-primary">Outer Call</a>
+        <a href="#" class="btn btn-primary disabled">Inner Call</a>
+    </p>
+    <hr>
+    <p>
+        <a href="#" class="btn btn-primary disabled">
+            <i class="fa fa-lock"></i> Journal
+        </a>
+    </p>
 
-    <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
-  Tooltip on top
-</button>
 {% endblock %}
