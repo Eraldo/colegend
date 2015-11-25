@@ -20,13 +20,27 @@
             <span class="pull-right">shared by Dance Monkey Comedian</span>
         </footer>
     </blockquote>
+
+    <p>
+        {% include 'continuous/_continuous_chat.html' %}
+    </p>
+
     <p>
         <a href="{% url 'continuous:legend:prologue' %}" class="btn btn-primary">
             Prologue
         </a>
-        <a href="{% url 'continuous:legend:poetree' %}" class="btn btn-primary">
-            Poetree
-        </a>
+
+        {% if user.continuous.prologue %}
+            <a href="{% url 'continuous:legend:poetree' %}" class="btn btn-primary">
+                Poetree
+            </a>
+        {% else %}
+            <a href="#" class="btn btn-primary disabled">
+                <i class="fa fa-lock"></i>
+                Poetree
+            </a>
+
+        {% endif %}
     </p>
     <hr>
     <p>

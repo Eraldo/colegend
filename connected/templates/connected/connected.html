@@ -21,15 +21,36 @@
     </blockquote>
 
     <p>
+        {% include 'connected/_connected_chat.html' %}
+    </p>
+
+    <p>
         <a href="{% url 'connected:guidelines-introduction' %}" class="btn btn-primary">
             Guidelines
         </a>
-        <a href="#" class="btn btn-primary disabled">
-            <i class="fa fa-lock"></i> Chat
-        </a>
-        <a href="#" class="btn btn-primary disabled">
-            <i class="fa fa-lock"></i> Guide
-        </a>
+
+        {% if user.connected.guidelines %}
+            <a href="{% url 'connected:chat-introduction' %}" class="btn btn-primary">
+                Chat
+            </a>
+        {% else %}
+            <a href="#" class="btn btn-primary disabled">
+                <i class="fa fa-lock"></i>
+                Chat
+            </a>
+        {% endif %}
+
+        {% if user.connected.chat %}
+            <a href="#" class="btn btn-primary">
+                Guide
+            </a>
+        {% else %}
+            <a href="#" class="btn btn-primary disabled">
+                <i class="fa fa-lock"></i>
+                Guide
+            </a>
+        {% endif %}
+
     </p>
     <hr>
     <p>

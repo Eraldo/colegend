@@ -1,4 +1,5 @@
 from braces.views import LoginRequiredMixin
+from django.shortcuts import redirect
 from django.views.generic import TemplateView, RedirectView
 
 __author__ = 'Eraldo Energy'
@@ -22,6 +23,13 @@ class ChatIntroductionView(LoginRequiredMixin, TemplateView):
 
 class ChatInvitationView(LoginRequiredMixin, TemplateView):
     template_name = 'connected/chat_invitation.html'
+
+    def post(self, request, *args, **kwargs):
+        if 'success' in request.POST:
+            user = request.user
+            user.connected.chat = True
+            user.connected.save()
+            return redirect('connected:index')
 
 
 class ChatView(LoginRequiredMixin, RedirectView):
