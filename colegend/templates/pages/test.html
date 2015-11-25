@@ -16,8 +16,6 @@
 
 {% block content %}
 
-    {% include '_chat.html' %}
-
     <div id="typed-strings" class="invisible">
         <p>
             Hello..^3000 dear stranger, I am <strong>the coLegend spirit</strong>.
@@ -38,5 +36,8 @@
                 stringsElement: $('#typed-strings')
             });
         });
+    </script>
+    <script>
+        $("#testLoad").load("https://colegend.slack.com/messages/general/");
     </script>
 {% endblock %}

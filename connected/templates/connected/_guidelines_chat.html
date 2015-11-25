@@ -1,22 +1,22 @@
 {% extends '_chat.html' %}
 
 {% block chat_title %}
-    Respeeect!
+    Hello fellow..
 {% endblock %}
 
 {% block chat_content %}
     <p>
-        So what can you do - right here, right now? <br>
+        What can you do - right here, right now? <br>
         … Good that you asked ;-)
     </p>
     <p>
-        First, you can get ready for a new experience of community and already contribute to it by reading through and
-        accepting our community guidelines.
+        First, you can get ready for a new experience of community and already contribute to it by reading through our
+        community guidelines.
     </p>
 {% endblock %}
 
 {% block chat_answers %}
-    <a href="#">
+    <a href="{% url 'connected:guidelines' %}">
         <li class="list-group-item">
             Sure, let's go.
         </li>

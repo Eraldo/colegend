@@ -4,7 +4,7 @@
 {% block page_color %}connected{% endblock %}
 
 {% block page_links %}
-    <a href="https://colegend.slack.com" target="_blank" class="btn btn-default btn-sm">Chat</a>
+    <a href="{% url 'connected:chat' %}" target="_blank" class="btn btn-default btn-sm">Chat</a>
     <a href="{% url 'connected:virtual-room' %}" target="_blank" class="btn btn-default btn-sm">Virtual Room</a>
 {% endblock %}
 
@@ -18,11 +18,14 @@
     </blockquote>
 
     <p>
-        <a href="{% url 'connected:guidelines' %}" class="btn btn-primary">
+        <a href="{% url 'connected:guidelines-introduction' %}" class="btn btn-primary">
             Guidelines
         </a>
         <a href="#" class="btn btn-primary disabled">
-            Cloud Guide
+            <i class="fa fa-lock"></i> Chat
+        </a>
+        <a href="#" class="btn btn-primary disabled">
+            <i class="fa fa-lock"></i> Cloud Guide
         </a>
     </p>
     <hr>
