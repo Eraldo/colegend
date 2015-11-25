@@ -5,10 +5,6 @@
 {% block content %}
     <div class="row">
         <div class="col-lg-6">
-            <iframe src="https://slack.colegend.org/" frameborder="0" width="316" height="380" scrolling="no"
-                    style="overflow-y:hidden;"></iframe>
-        </div>
-        <div class="col-lg-6">
             <p>
             <h4>NEXT STEPS</h4>
             </p>
@@ -17,19 +13,23 @@
                     <strong>{{ user.email }}</strong>
                 </li>
                 <br>
-                <li>Check you email account for the registration link and click it.
+                <li>Check your email account for the registration link and click it.
                 </li>
                 <br>
                 <li>Register with your username: <br>
                     <strong>{{ user.username }}</strong>
                 </li>
                 <br>
-                <li>Get a <i>chat user</i> to verify your profile: <br>
-                    <a href="{% url 'users:profile' username=user.username %}" target="_blank">
-                        https://{{ request.META.HTTP_HOST }}{% url 'users:profile' username=user.username %}
-                    </a>
+                <li>Tell us when you are done: <br>
+
+                    <form action="" method="post">{% csrf_token %}
+                        <button id="chat-invitation-success" name="success" type="submit" class="btn btn-success">
+                            Done
+                        </button>
+                    </form>
                 </li>
             </ol>
+            <hr>
             <p>
                 Have fun chatting. :D
             </p>
@@ -42,5 +42,10 @@
                 If you can't get there - please <a href="mailto:connect@colegend.org">contact us</a>.
             </p>
         </div>
+        <div class="col-lg-6">
+            <iframe src="https://slack.colegend.org/" frameborder="0" width="316" height="380" scrolling="no"
+                    style="overflow-y:hidden;"></iframe>
+        </div>
+
     </div>
 {% endblock %}

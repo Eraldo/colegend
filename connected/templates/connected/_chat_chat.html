@@ -12,17 +12,7 @@
         Okay, here is the deal:
     </p>
     <p>
-        I'll show you a page where you can send yourself an invitation for our legend chat.
-    </p>
-    <p>
-        Do that and then get one of the users there to go to your profile and complete your chat registration.
-        They will know what to do. <br>
-    </p>
-    <p>
-        Oh.. I nearly forgot - here is your link:
-        <a href="{% url 'users:profile' username=request.user.username %}" target="_blank">
-            https://{{ request.META.HTTP_HOST }}{% url 'users:profile' username=request.user.username %}
-        </a>
+        I'll show you a page where you can send yourself an invitation for our <i>legend chat</i>.
     </p>
 {% endblock %}
 
