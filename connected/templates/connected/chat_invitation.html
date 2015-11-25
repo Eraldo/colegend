@@ -1,14 +1,46 @@
 {% extends 'connected/base.html' %}
 
-{% block title %}Slack invitation{% endblock %}
+{% block title %}Slack Invitation{% endblock %}
 
 {% block content %}
-    <p>
-        Finally.. let's start chatting. :D
-    </p>
-    <p>
+    <div class="row">
+        <div class="col-lg-6">
+            <iframe src="https://slack.colegend.org/" frameborder="0" width="316" height="380" scrolling="no"
+                    style="overflow-y:hidden;"></iframe>
+        </div>
+        <div class="col-lg-6">
+            <p>
+            <h4>NEXT STEPS</h4>
+            </p>
+            <ol>
+                <li>Send yourself a chat invitation to: <br>
+                    <strong>{{ user.email }}</strong>
+                </li>
+                <br>
+                <li>Check you email account for the registration link and click it.
+                </li>
+                <br>
+                <li>Register with your username: <br>
+                    <strong>{{ user.username }}</strong>
+                </li>
+                <br>
+                <li>Get a <i>chat user</i> to verify your profile: <br>
+                    <a href="{% url 'users:profile' username=user.username %}" target="_blank">
+                        https://{{ request.META.HTTP_HOST }}{% url 'users:profile' username=user.username %}
+                    </a>
+                </li>
+            </ol>
+            <p>
+                Have fun chatting. :D
+            </p>
 
-    </p>
-    <iframe src="https://slack.colegend.org/" frameborder="0" width="316" height="380" scrolling="no"
-            style="overflow-y:hidden;"></iframe>
+            <p>
+                In case you need anything: There is also a <i>support channel</i> in the chat.
+            </p>
+
+            <p>
+                If you can't get there - please <a href="mailto:connect@colegend.org">contact us</a>.
+            </p>
+        </div>
+    </div>
 {% endblock %}

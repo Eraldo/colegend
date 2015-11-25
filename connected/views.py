@@ -16,6 +16,14 @@ class GuidelinesView(LoginRequiredMixin, TemplateView):
     template_name = 'connected/guidelines.html'
 
 
+class ChatIntroductionView(LoginRequiredMixin, TemplateView):
+    template_name = 'connected/chat_introduction.html'
+
+
+class ChatInvitationView(LoginRequiredMixin, TemplateView):
+    template_name = 'connected/chat_invitation.html'
+
+
 class ChatView(LoginRequiredMixin, RedirectView):
     permanent = False
     url = 'https://colegend.slack.com'

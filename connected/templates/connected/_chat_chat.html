@@ -1,0 +1,41 @@
+{% extends '_chat.html' %}
+
+{% block chat_title %}
+    Hello fellow..
+{% endblock %}
+
+{% block chat_content %}
+    <p>
+        TODO: Chat introduction text.
+    </p>
+    <p>
+        Okay, here is the deal:
+    </p>
+    <p>
+        I'll show you a page where you can send yourself an invitation for our legend chat.
+    </p>
+    <p>
+        Do that and then get one of the users there to go to your profile and complete your chat registration.
+        They will know what to do. <br>
+    </p>
+    <p>
+        Oh.. I nearly forgot - here is your link:
+        <a href="{% url 'users:profile' username=request.user.username %}" target="_blank">
+            https://{{ request.META.HTTP_HOST }}{% url 'users:profile' username=request.user.username %}
+        </a>
+    </p>
+{% endblock %}
+
+{% block chat_answers %}
+    <a href="{% url 'connected:chat-invitation' %}">
+        <li class="list-group-item">
+            Okay, let's go.
+        </li>
+    </a>
+    <a href="#">
+        <li class="list-group-item">
+            TODO: Alternative answer
+        </li>
+    </a>
+
+{% endblock %}
