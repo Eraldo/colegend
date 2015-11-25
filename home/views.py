@@ -14,7 +14,7 @@ class HomeView(TemplateView):
         if not user.is_authenticated():
             return redirect("about")
         # Redirect if prologue is not completed.
-        if not user.legend.prologue:
+        if not user.continuous.prologue:
             return redirect("continuous:legend:prologue")
         return super().get(request, *args, **kwargs)
 

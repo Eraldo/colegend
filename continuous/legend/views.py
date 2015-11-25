@@ -64,9 +64,9 @@ class PrologueView(LoginRequiredMixin, TemplateView):
 
     def post(self, request, *args, **kwargs):
         if 'poetree' in request.POST:
-            legend = request.user.legend
-            legend.prologue = True
-            legend.save()
+            user = request.user
+            user.continuous.prologue = True
+            user.continuous.save()
             return redirect('continuous:legend:poetree')
 
 

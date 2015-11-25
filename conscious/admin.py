@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import Conscious
 
-# Register your models here.
+
+@admin.register(Conscious)
+class ConsciousAdmin(admin.ModelAdmin):
+    pass

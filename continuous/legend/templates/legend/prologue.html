@@ -4,9 +4,17 @@
 
 {% block site_messages %}{% endblock %}
 
-{% block site_menu %}{% endblock %}
+{% block site_menu %}
+    {% if user.continuous.prologue %}
+        {{ block.super }}
+    {% endif %}
+{% endblock %}
 
-{% block breadcrumbs %}{% endblock %}
+{% block breadcrumbs %}
+    {% if user.continuous.prologue %}
+        {{ block.super }}
+    {% endif %}
+{% endblock %}
 
 {% block content %}
     <div id="typed-strings">
@@ -43,13 +51,12 @@
         </p>
     </div>
     <span id="typed" class="lead"></span>
-    <div class="after-typedx">
+    <div class="after-typed">
         <span class="lead">
             <form action="" method="post">{% csrf_token %}
                 <button id="continue-to-poetree" name="poetree" type="submit" class="btn btn-primary">Walk to Poetree
                 </button>
             </form>
-{#            <a id="continue-to-poetree" href="{% url 'continuous:legend:poetree' %}">Walk to Poetree</a>#}
         </span>
     </div>
 {% endblock %}
