@@ -1,0 +1,55 @@
+{% extends '_chat.html' %}
+
+{% block chat_title %}
+    A guide on your side..
+{% endblock %}
+
+{% block chat_content %}
+    <p>
+        Already thought of some crazy possibilites what a Cloud Guide could be? ;-) Well, let me enlighten you…
+    </p>
+    <p>
+        A Cloud Guide is another legend like you and me who will help you make your first steps in coLegend. He or she
+        will be there for you during your first one to two weeks, answering all your questions and making sure that
+        you’re feeling well.
+    </p>
+    <p>
+        Right now your Cloud Guide is already on the lookout for you and will contact you very soon through our chat.
+        So are you ready to be found?
+    </p>
+{% endblock %}
+
+{% block chat_answers %}
+    <a href="{% url 'connected:guide' %}">
+        <li class="list-group-item">
+            Sure! I’m ready to be found by my <i>Cloud Guide</i>.
+        </li>
+    </a>
+    <a href="#" data-toggle="modal" data-target="#questionsModal">
+        <li class="list-group-item">
+            Wait - I already have questions!
+        </li>
+    </a>
+
+    <!-- Modal -->
+    <div class="modal fade" id="questionsModal" tabindex="-1" role="dialog" aria-labelledby="questionsModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="questionsModalLabel">Questions</h4>
+                </div>
+                <div class="modal-body">
+                    Feel free to ask your questions in the general or support channel until your guide has found you.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

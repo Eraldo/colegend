@@ -37,6 +37,14 @@ class ChatView(LoginRequiredMixin, RedirectView):
     url = 'https://colegend.slack.com'
 
 
+class GuideIntroductionView(LoginRequiredMixin, TemplateView):
+    template_name = 'connected/guide_introduction.html'
+
+
+class GuideView(LoginRequiredMixin, TemplateView):
+    template_name = 'connected/guide.html'
+
+
 class VirtualRoomView(LoginRequiredMixin, RedirectView):
     permanent = False
     url = 'https://plus.google.com/hangouts/_/colegend42g3psmu3okj5ym27qa'

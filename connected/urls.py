@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 from .views import ConnectedView, VirtualRoomView, GuidelinesView, GuidelinesIntroductionView, ChatView, \
-    ChatIntroductionView, ChatInvitationView
+    ChatIntroductionView, ChatInvitationView, GuideIntroductionView, GuideView
 
 __author__ = 'eraldo'
 
@@ -24,6 +24,12 @@ urlpatterns = patterns(
     url(r'^chat/$',
         ChatView.as_view(),
         name='chat'),
+    url(r'^guide/introduction/$',
+        GuideIntroductionView.as_view(),
+        name='guide-introduction'),
+    url(r'^guide/$',
+        GuideView.as_view(),
+        name='guide'),
     url(r'^virtual-room/$',
         VirtualRoomView.as_view(),
         name='virtual-room'),
