@@ -66,7 +66,7 @@
                     <li><a class="page-scroll" href="#page-top">About</a></li>
                     <li><a class="page-scroll" href="#features">Features</a></li>
                     <li><a class="page-scroll" href="#team">Team</a></li>
-{#                    <li><a class="page-scroll" href="#testimonials">Testimonials</a></li>#}
+                    {#                    <li><a class="page-scroll" href="#testimonials">Testimonials</a></li>#}
                     <li><a class="page-scroll" href="#pricing">Pricing</a></li>
                     <li><a class="page-scroll" href="#contact">Contact</a></li>
                 </ul>
@@ -299,7 +299,8 @@
             <p>
                 According to an old legend, some people choose to live an awesome life.
                 They break out of the typical
-                life and transform into ..well.. legends - unleashing their full potential - feeling vibrant, charged and
+                life and transform into ..well.. legends - unleashing their full potential - feeling vibrant, charged
+                and
                 energetic.
                 The interesting question here is:
                 Are you one of them?
@@ -526,95 +527,98 @@
         </div>
         <div class="row">
             <div class="col-lg-4">
-                {#            <div class="col-lg-4 wow zoomIn">#}
-                <ul class="pricing-plan list-unstyled">
-                    <li class="pricing-title">
-                        Explorer
-                    </li>
-                    <li class="pricing-desc">
-                        Explore all the legendary features.<br/>
-                        Your first month is free of charge.
-                    </li>
-                    <li class="pricing-price">
-                        <span>free!</span>
-                    </li>
-                    <li>
-                        <i class="fa fa-check"></i> All "<b>Legend</b>" features
-                    </li>
-                    <li>
-                        <a id="join-explorer" class="btn btn-info btn-lg" href="{% url "join" %}?next=/">Join</a>
-                    </li>
-                </ul>
-            </div>
+                <div class="col-lg-4 wow zoomIn">
+                    <ul class="pricing-plan list-unstyled">
+                        <li class="pricing-title">
+                            Explorer
+                        </li>
+                        <li class="pricing-desc">
+                            Explore all the legendary features.<br/>
+                            Your first month is free of charge.
+                        </li>
+                        <li class="pricing-price">
+                            <span>free!</span>
+                        </li>
+                        <li>
+                            <i class="fa fa-check"></i> All "<b>Legend</b>" features
+                        </li>
+                        <li>
+                            <a id="join-explorer" class="btn btn-info btn-lg" href="{% url "join" %}?next=/">Join</a>
+                        </li>
+                    </ul>
+                </div>
 
-            <div class="col-lg-4 wow zoomIn">
-                <ul class="pricing-plan list-unstyled selected">
-                    <li class="pricing-title">
-                        Legend
-                    </li>
-                    <li class="pricing-desc">
-                        Access to the community and all the features and resources.
-                    </li>
-                    <li class="pricing-price">
-                        <span>42€</span> / month
-                    </li>
-                    <li>
-                        <i class="fa fa-check"></i> Social Gatherings
-                    </li>
-                    <li>
-                        <i class="fa fa-check"></i> Comfort Challenges
-                    </li>
-                    <li>
-                        <i class="fa fa-check"></i> Smart Journal
-                    </li>
-                    <li>
-                        <i class="fa fa-check"></i> Self-Management System
-                    </li>
-                    <li>
-                        <i class="fa fa-check"></i> Support
-                    </li>
-                    <li>
-                        <i class="fa fa-check"></i> ...more!
-                    </li>
-                    <li class="plan-action">
-                        <a id="join-legend" class="btn btn-info btn-lg" href="{% url "join" %}?next=/">Join</a>
-                    </li>
-                </ul>
-            </div>
+                <div class="col-lg-4 wow zoomIn">
+                    <ul class="pricing-plan list-unstyled selected">
+                        <li class="pricing-title">
+                            Legend
+                        </li>
+                        <li class="pricing-desc">
+                            Access to the community and all the features and resources.
+                        </li>
+                        <li class="pricing-price">
+                            <span>42€</span> / month
+                        </li>
+                        <li>
+                            <i class="fa fa-check"></i> Social Gatherings
+                        </li>
+                        <li>
+                            <i class="fa fa-check"></i> Comfort Challenges
+                        </li>
+                        <li>
+                            <i class="fa fa-check"></i> Smart Journal
+                        </li>
+                        <li>
+                            <i class="fa fa-check"></i> Self-Management System
+                        </li>
+                        <li>
+                            <i class="fa fa-check"></i> Support
+                        </li>
+                        <li>
+                            <i class="fa fa-check"></i> ...more!
+                        </li>
+                        <li class="plan-action">
+                            <a id="join-legend" class="btn btn-info btn-lg" href="{% url "join" %}?next=/">Join</a>
+                        </li>
+                    </ul>
+                </div>
 
-            <div class="col-lg-4 wow zoomIn">
-                <ul class="pricing-plan list-unstyled">
-                    <li class="pricing-title">
-                        Premium Legend
-                    </li>
-                    <li class="pricing-desc">
-                        As a premium member you will get personal special coaching and support on top of all the other
-                        features.
-                    </li>
-                    <li class="pricing-price">
-                        <span>420€</span> / month
-                    </li>
-                    <li>
-                        <i class="fa fa-check"></i> All "<b>Legend</b>" features
-                    </li>
-                    <li>
-                        <i class="fa fa-check"></i> <strong>Personal Coaching</strong>
-                    </li>
-                    <li>
-                        <i class="fa fa-check"></i> <strong>Priority Support</strong>
-                    </li>
-                    <li class="plan-action">
-                        <a id="join-premium-legend" class="btn btn-info btn-lg" href="{% url "join" %}?next=/">Join</a>
-                    </li>
-                </ul>
+                <div class="col-lg-4 wow zoomIn">
+                    <ul class="pricing-plan list-unstyled">
+                        <li class="pricing-title">
+                            Premium Legend
+                        </li>
+                        <li class="pricing-desc">
+                            As a premium member you will get personal special coaching and support on top of all the
+                            other
+                            features.
+                        </li>
+                        <li class="pricing-price">
+                            <span>420€</span> / month
+                        </li>
+                        <li>
+                            <i class="fa fa-check"></i> All "<b>Legend</b>" features
+                        </li>
+                        <li>
+                            <i class="fa fa-check"></i> <strong>Personal Coaching</strong>
+                        </li>
+                        <li>
+                            <i class="fa fa-check"></i> <strong>Priority Support</strong>
+                        </li>
+                        <li class="plan-action">
+                            <a id="join-premium-legend" class="btn btn-info btn-lg"
+                               href="{% url "join" %}?next=/">Join</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row m-t-lg">
+                <div class="col-lg-8 col-lg-offset-2 text-center m-t-lg">
+                    <p>* If you really can't afford 42€ / month then your account is <span class="navy">free</span> -
+                        period.</p>
+                </div>
             </div>
         </div>
-        <div class="row m-t-lg">
-            <div class="col-lg-8 col-lg-offset-2 text-center m-t-lg">
-                <p>* If you really can't afford 42€ / month then your account is <span class="navy">free</span> - period.</p>
-            </div>
-        </div>
-    </div>
 
 </section>
 
@@ -625,12 +629,13 @@
                 <div class="navy-line"></div>
                 <h1>Contact Us</h1>
 
-{#                <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod.</p>#}
+                {#                <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod.</p>#}
             </div>
         </div>
         <div class="row m-b-lg">
             <div class="col-lg-3 col-lg-offset-2 text-left">
-                <p class="text-color"><span style="color: blue;"><i class="fa fa-user"></i></span> Personal contact..</p>
+                <p class="text-color"><span style="color: blue;"><i class="fa fa-user"></i></span> Personal contact..
+                </p>
 
                 <p class="text-color">We are humans here at coLegend. As such you can <a href="#team">reach the team</a>
                     in person. Via phone or by arranging a meetup face to face.</p>
@@ -677,7 +682,8 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 text-center m-t-lg m-b-lg">
                 <p><strong>&copy; 2014 - {% now "Y" %} coLegend</strong><br/>
-                    <a href="mailto:connect@colegend.org" class="text-muted" target="_blank">Impressum</a> | Designed by <a
+                    <a href="mailto:connect@colegend.org" class="text-muted" target="_blank">Impressum</a> | Designed by
+                    <a
                             href="http://www.eraldo.org" class="text-muted" target="_blank">Eraldo Webdesign</a> |
                     Crafted with <span style="color: red">♥</span>
                 </p>
