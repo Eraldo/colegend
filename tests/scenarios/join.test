@@ -12,6 +12,8 @@
     # Carolina looked at the landing page and now wants to join coLegend.
     # She opens the site, scrolls down and clicks on the join button:
     - Load website
+    - Wait: 4
+    - Find text: "Pricing"
     - Scroll to: join-explorer
     - Click: join-explorer
 
