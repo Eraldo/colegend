@@ -12,13 +12,11 @@
     # Carolina looked at the landing page and now wants to join coLegend.
     # She opens the site, scrolls down and clicks on the join button:
     - Load website
-    - Wait: 4
     - Find text: "Pricing"
     - Scroll to: join-explorer
     - Click: join-explorer
 
     # She comes to a chat page were she is greeted and asked how she wants to join:
-    - Wait to appear: regular-signup
     - Page title: Join
     - Find text: Welcome
     - Find text: How do you want to join?
