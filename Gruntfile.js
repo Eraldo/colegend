@@ -22,7 +22,6 @@ module.exports = function (grunt) {
       images: this.app + '/static/images',
       js: this.app + '/static/js',
       manageScript: 'manage.py',
-      mailserverpid: 'mailserver.pid',
     }
   };
 
@@ -79,7 +78,7 @@ module.exports = function (grunt) {
           },
       }
     },
-    
+
     //see https://github.com/nDmitry/grunt-postcss
     postcss: {
       options: {
@@ -113,12 +112,6 @@ module.exports = function (grunt) {
       runDjango: {
         cmd: 'python <%= paths.manageScript %> runserver'
       },
-      runMailDump: {
-        cmd: 'maildump -p <%= paths.mailserverpid %>'
-      },
-      stopMailDump: {
-        cmd: 'maildump -p <%= paths.mailserverpid %> --stop'
-      },
     }
   });
 
@@ -134,12 +127,5 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', [
     'build'
-  ]);
-  grunt.registerTask('start-email-server', [
-      'bgShell:runMailDump'
-  ]);
-
-  grunt.registerTask('stop-email-server', [
-      'bgShell:stopMailDump'
   ]);
 };

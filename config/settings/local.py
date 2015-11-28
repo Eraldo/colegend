@@ -25,7 +25,6 @@ SECRET_KEY = env("DJANGO_SECRET_KEY", default='CHANGEME!!!yxmo^0oxyt2sdw*fb%)&-s
 # Mail settings
 # ------------------------------------------------------------------------------
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# WAITING: Maildump is not working with python 3 as of 2015-10-12.
 # EMAIL_HOST = 'localhost'
 # EMAIL_PORT = 1025
 

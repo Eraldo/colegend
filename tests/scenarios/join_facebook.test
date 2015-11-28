@@ -1,14 +1,7 @@
-{% extends "base.yml" %}
-
+{% extends "base.test" %}
 {% block test %}
-
-- engine: engine.py:ExecutionEngine
-  name: Join with facebook {{ python_version }}
-  preconditions:
-    python_version: "{{ python_version }}"
-
+- name: Join with facebook
   scenario:
-
     # Fiona looked at the landing page and now wants to join coLegend.
     # She opens the site, scrolls down and clicks on the join button:
     - Load website
@@ -49,5 +42,4 @@
     # She reads the story and clicks on the link to the Poetree:
     - Execute: typed_callback();  # [Immediately show the link]
     - Click: continue-to-poetree
-
 {% endblock %}

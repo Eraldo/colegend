@@ -1,12 +1,12 @@
-from os import path
 from subprocess import call
+from os import path
 import hitchpostgres
-import hitchpython
-import hitchredis
 import hitchselenium
-import hitchsmtp
+import hitchpython
+import hitchserve
+import hitchredis
 import hitchtest
-from hitchserve import ServiceBundle
+import hitchsmtp
 from time import sleep
 
 # Get directory above this file
@@ -19,29 +19,22 @@ class ExecutionEngine(hitchtest.ExecutionEngine):
     def set_up(self):
         """Ensure virtualenv present, then run all services."""
         python_package = hitchpython.PythonPackage(
-            python_version=self.preconditions['python_version']
+            python_version=self.settings['python_version']
         )
         python_package.build()
-        python_package.verify()
 
         call([
             python_package.pip, "install", "-r",
             path.join(PROJECT_DIRECTORY, "requirements/local.txt")
         ])
 
-        postgres_package = hitchpostgres.PostgresPackage(
-            version=self.settings["postgres_version"],
-        )
+        postgres_package = hitchpostgres.PostgresPackage()
         postgres_package.build()
-        postgres_package.verify()
 
-        redis_package = hitchredis.RedisPackage(
-            version=self.settings.get("redis_version")
-        )
+        redis_package = hitchredis.RedisPackage()
         redis_package.build()
-        redis_package.verify()
 
-        self.services = ServiceBundle(
+        self.services = hitchserve.ServiceBundle(
             project_directory=PROJECT_DIRECTORY,
             startup_timeout=float(self.settings["startup_timeout"]),
             shutdown_timeout=float(self.settings["shutdown_timeout"]),
@@ -71,24 +64,23 @@ class ExecutionEngine(hitchtest.ExecutionEngine):
         self.services['Django'] = hitchpython.DjangoService(
             python=python_package.python,
             port=8800,
-            version=str(self.settings.get("django_version")),
             settings="config.settings.test",
             needs=[self.services['Postgres'], ],
             env_vars=self.settings['environment_variables'],
         )
 
-        # Docs : https://hitchtest.readthedocs.org/en/latest/plugins/hitchpython.html
         # self.services['Celery'] = hitchpython.CeleryService(
         #     python=python_package.python,
-        #     app="colegend", loglevel="INFO",
+        #     app="{{cookiecutter.repo_name}}.taskapp", loglevel="INFO",
         #     needs=[
-        #         self.services['Redis'], self.services['Postgres'],
+        #         self.services['Redis'], self.services['Django'],
         #     ],
+        #     env_vars=self.settings['environment_variables'],
         # )
 
         # Docs : https://hitchtest.readthedocs.org/en/latest/plugins/hitchselenium.html
         self.services['Firefox'] = hitchselenium.SeleniumService(
-            xvfb=self.settings.get("xvfb", False) or self.settings.get("quiet", False),
+            xvfb=self.settings.get("xvfb", False),
             no_libfaketime=True,
         )
 
@@ -116,12 +108,7 @@ class ExecutionEngine(hitchtest.ExecutionEngine):
         self.click_and_dont_wait_for_page_load = self.webapp.click_and_dont_wait_for_page_load
 
         # Configure selenium driver
-        screen_res = self.settings.get(
-            "screen_resolution", {"width": 1024, "height": 768, }
-        )
-        self.driver.set_window_size(
-            int(screen_res['width']), int(screen_res['height'])
-        )
+        self.driver.set_window_size(self.settings['window_size']['height'], self.settings['window_size']['width'])
         self.driver.set_window_position(0, 0)
         self.driver.implicitly_wait(2.0)
         self.driver.accept_next_alert = True
@@ -140,9 +127,25 @@ class ExecutionEngine(hitchtest.ExecutionEngine):
         """Navigate to website in Firefox."""
         self.driver.get(self.services['Django'].url())
 
-    def load_page(self, page):
-        """Navigate to website page in Firefox."""
-        self.driver.get(self.services['Django'].url() + page)
+    def fill_form(self, **kwargs):
+        """Fill in a form with id=value."""
+        for element, text in kwargs.items():
+            try:
+                self.driver.find_element_by_id(element).send_keys(text)
+            except:  # Added to find case sensitive ids like "Email".
+                self.driver.find_element_by_id(element.title()).send_keys(text)
+
+    def confirm_emails_sent(self, number):
+        """Count number of emails sent by app."""
+        emails = len(self.services['HitchSMTP'].logs.json())
+        expected_emails = int(number)
+        assert emails == expected_emails, "expected {} emails - got {}".format(expected_emails, emails)
+
+    def click_on_link_in_last_email(self, which=1):
+        """Click on the nth link in the last email sent."""
+        self.driver.get(
+            self.services['HitchSMTP'].logs.json()[-1]['links'][which - 1]
+        )
 
     def wait_for_email(self, containing=None):
         """Wait for, and return email."""
@@ -152,19 +155,9 @@ class ExecutionEngine(hitchtest.ExecutionEngine):
             lines_back=1,
         )
 
-    def confirm_emails_sent(self, number):
-        """Count number of emails sent by app."""
-        emails = len(self.services['HitchSMTP'].logs.json())
-        expected_emails = int(number)
-        assert emails == expected_emails, "expected {} emails - got {}".format(expected_emails, emails)
-
     def time_travel(self, days=""):
         """Make all services think that time has skipped forward."""
         self.services.time_travel(days=int(days))
-
-    def connect_to_kernel(self, service_name):
-        """Connect to IPython kernel embedded in service_name."""
-        self.services.connect_to_ipykernel(service_name)
 
     def on_failure(self):
         """Runs if there is a test failure. Stop and IPython."""
@@ -184,17 +177,13 @@ class ExecutionEngine(hitchtest.ExecutionEngine):
 
     # EXTRA METHODS
 
-    def click(self, on):
-        """Click on HTML id."""
-        self.driver.find_element_by_id(on).click()
+    def connect_to_kernel(self, service_name):
+        """Connect to IPython kernel embedded in service_name."""
+        self.services.connect_to_ipykernel(service_name)
 
-    def fill_form(self, **kwargs):
-        """Fill in a form with id=value."""
-        for element, text in kwargs.items():
-            try:
-                self.driver.find_element_by_id(element).send_keys(text)
-            except:
-                self.driver.find_element_by_id(element.title()).send_keys(text)
+    def load_page(self, page):
+        """Navigate to website page in Firefox."""
+        self.driver.get(self.services['Django'].url() + page)
 
     def click_submit(self):
         """Click on a submit button if it exists."""
@@ -212,7 +201,7 @@ class ExecutionEngine(hitchtest.ExecutionEngine):
 
     def scroll_to(self, id):
         """Scroll to an element."""
-        self.driver.execute_script('$("#{}").get(0).scrollIntoView();'.format(id))
+        self.driver.execute_script('$("#{}").get(0).scrollIntoView(false);'.format(id))
 
     def click_email_link(self, containing=None, link_text=None):
         """

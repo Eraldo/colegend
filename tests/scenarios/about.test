@@ -1,14 +1,7 @@
-{% extends "base.yml" %}
-
+{% extends "base.test" %}
 {% block test %}
-
-- engine: engine.py:ExecutionEngine
-  name: About {{ python_version }}
-  preconditions:
-    python_version: "{{ python_version }}"
-
+- name: About {{ python_version }}
   scenario:
-
     # Coralina heard about "coLegend" her friend Corinna.
     # She remebers the name of the project, googles it and clicks on it's link:
     - Load website
@@ -26,5 +19,4 @@
     # She finds the join button and clicks it:
     - Scroll to: join-explorer
     - Click: join-explorer
-
 {% endblock %}

@@ -1,7 +1,0 @@
-# Test description language documentation:
-#   https://hitchtest.readthedocs.org/en/latest/api/engine_api.html
-
-{% for python_version in python_versions %}
-{% block test scoped %}
-{% endblock %}
-{% endfor %}
