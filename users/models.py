@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals, absolute_import
+
+from allauth.account.signals import user_signed_up
 from django.conf import settings
 
 from django.contrib.auth.models import AbstractUser, Group
@@ -27,17 +29,25 @@ class User(AbstractUser):
         return reverse('users:profile', kwargs={'username': self.username})
 
 
-@receiver(post_save, sender=User)
-def new_user_manager_notification(sender, instance, created, **kwargs):
-    if created:
-        # manager_group, created_group = Group.objects.get_or_create(name="managers")
-        # managers = [user.email for user in manager_group.user_set.all()]
-        # TODO: Switch to managers group as soon as it is stable
-        managers = ['connect@colegend.org']
-        username = str(instance.username).title()
-        subject = "{}New user: {}".format(settings.EMAIL_SUBJECT_PREFIX, username)
-        message = "Hurray! {} has joined the circle of legends.".format(username)
+@receiver(user_signed_up)
+def new_user_manager_notification(request, user, **kwargs):
+    """
+    Sends an email notification and a slack message upon successful user signup.
+    The Email is sent to the site managers.
+    The slack message is sent to the default slack channel from the project settings.
+    :param request:
+    :param user:
+    :param kwargs:
+    :return:
+    """
+    # manager_group, created_group = Group.objects.get_or_create(name="managers")
+    # managers = [user.email for user in manager_group.user_set.all()]
+    # TODO: Switch to managers group as soon as it is stable
+    managers = ['connect@colegend.org']
+    username = str(user.username)
+    subject = "{}New user: {}".format(settings.EMAIL_SUBJECT_PREFIX, username)
+    message = "Hurray! {} has joined the circle of legends.".format(username)
 
-        send_mail(subject, message, None, managers, fail_silently=False)
+    send_mail(subject, message, None, managers, fail_silently=False)
 
-        slack_message('slack/message.slack', {'message': '@channel: {}'.format(message),})
+    slack_message('slack/message.slack', {'message': '@channel: {}'.format(message), })
