@@ -16,6 +16,15 @@ class GuidelinesIntroductionView(LoginRequiredMixin, TemplateView):
 class GuidelinesView(LoginRequiredMixin, TemplateView):
     template_name = 'connected/guidelines.html'
 
+    def post(self, request, *args, **kwargs):
+        if 'accept' in request.POST:
+            user = request.user
+            if not user.connected.guidelines:
+                user.connected.guidelines = True
+                user.connected.save()
+            return redirect('connected:index')
+        return self.get(request, *args, **kwargs)
+
 
 class ChatIntroductionView(LoginRequiredMixin, TemplateView):
     template_name = 'connected/chat_introduction.html'
@@ -27,8 +36,9 @@ class ChatInvitationView(LoginRequiredMixin, TemplateView):
     def post(self, request, *args, **kwargs):
         if 'success' in request.POST:
             user = request.user
-            user.connected.chat = True
-            user.connected.save()
+            if not user.connected.chat:
+                user.connected.chat = True
+                user.connected.save()
             return redirect('connected:index')
 
 

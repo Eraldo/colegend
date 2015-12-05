@@ -24,7 +24,7 @@
 
                     <form action="" method="post">{% csrf_token %}
                         <button id="chat-invitation-success" name="success" type="submit" class="btn btn-success">
-                            Done
+                            I'm done
                         </button>
                     </form>
                 </li>
@@ -43,8 +43,12 @@
             </p>
         </div>
         <div class="col-lg-6">
-            <iframe src="https://slack.colegend.org/" frameborder="0" width="316" height="380" scrolling="no"
-                    style="overflow-y:hidden;"></iframe>
+            <div class="text-center">
+                <div id="load-text"><i class="fa fa-spinner fa-pulse"></i></div>
+                <iframe src="https://slack.colegend.org/" frameborder="0" width="316" height="380" scrolling="no"
+                        style="overflow-y:hidden; position: relative; top: 0;" onload="$('#load-text').text('');">
+                </iframe>
+            </div>
         </div>
 
     </div>

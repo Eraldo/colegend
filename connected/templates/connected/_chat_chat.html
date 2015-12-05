@@ -6,26 +6,19 @@
 
 {% block chat_content %}
     <p>
-        TODO: Chat introduction text.
+        It’s time to get you into contact with other fellow legends. For this we have Slack. It’s a chat with topic
+        specific channels - for example to ask questions about coLegend in the Support Channel - and private
+        conversation options.
     </p>
     <p>
-        Okay, here is the deal:
-    </p>
-    <p>
-        I'll show you a page where you can send yourself an invitation for our <i>legend chat</i>.
+        So on the next page just follow the steps and you’re ready to go ;-)
     </p>
 {% endblock %}
 
 {% block chat_answers %}
     <a href="{% url 'connected:chat-invitation' %}">
         <li class="list-group-item">
-            Okay, let's go.
+            Yes, let’s get it started!
         </li>
     </a>
-    <a href="#">
-        <li class="list-group-item">
-            TODO: Alternative answer
-        </li>
-    </a>
-
 {% endblock %}

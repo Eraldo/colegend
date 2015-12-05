@@ -25,12 +25,18 @@
     </p>
 
     <p>
-        <a href="{% url 'connected:guidelines-introduction' %}" class="btn btn-primary">
+        <a href="
+
+                {% if user.connected.guidelines %}{% url 'connected:guidelines' %}{% else %}{% url 'connected:guidelines-introduction' %}{% endif %}"
+           class="btn btn-primary">
             Guidelines
         </a>
 
         {% if user.connected.guidelines %}
-            <a href="{% url 'connected:chat-introduction' %}" class="btn btn-primary">
+            <a href="
+
+                    {% if user.connected.chat %}{% url 'connected:chat' %}{% else %}{% url 'connected:chat-introduction' %}{% endif %}"
+               class="btn btn-primary">
                 Chat
             </a>
         {% else %}
@@ -41,7 +47,9 @@
         {% endif %}
 
         {% if user.connected.chat %}
-            <a href="{% url 'connected:guide-introduction' %}" class="btn btn-primary">
+            <a href="
+                    {% if user.connected.guide %}{% url 'connected:guide' %}{% else %}{% url 'connected:guide-introduction' %}{% endif %}"
+               class="btn btn-primary">
                 Cloud Guide
             </a>
         {% else %}
