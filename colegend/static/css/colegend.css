@@ -110,4 +110,10 @@ body {
   height: 33px;
   width: 33px; }
 
+.chapter-marker {
+  position: relative;
+  top: -1rem;
+  color: #c55b00;
+  float: right !important; }
+
 /*# sourceMappingURL=colegend.css.map */
