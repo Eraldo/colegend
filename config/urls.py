@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^{}/'.format(settings.ADMIN_URL), include(admin.site.urls)),
 
     # User management
-    url(r'^users/', include('users.urls', namespace='users')),
+                  url(r'^legends/', include('users.urls', namespace='legends')),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^join/$', JoinView.as_view(), name='join'),
 

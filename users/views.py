@@ -41,7 +41,7 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
 
     # send the user back to their own page after a successful update
     def get_success_url(self):
-        return reverse("users:profile",
+        return reverse("legends:profile",
                        kwargs={"username": self.request.user.username})
 
     def get_object(self):

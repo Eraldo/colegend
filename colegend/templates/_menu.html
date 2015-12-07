@@ -60,7 +60,7 @@
                             </a>
 
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item disabled" href="#">
+                            <a class="dropdown-item" href="{% url 'legends:profile' user.username %}">
                                 Legend
                             </a>
                             <a class="dropdown-item disabled" href="#">
@@ -141,10 +141,10 @@
                             </span>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="menu-button-account">
-                                <a class="dropdown-item" href="{% url 'users:profile' request.user.username %}">
+                                <a class="dropdown-item" href="{% url 'legends:profile' request.user.username %}">
                                     <i class="fa fa-user"></i> Legend
                                 </a>
-                                <a class="dropdown-item" href="{% url 'users:settings' %}">
+                                <a class="dropdown-item" href="{% url 'legends:settings' %}">
                                     <i class="fa fa-wrench"></i> Settings
                                 </a>
                                 <a class="dropdown-item" href="{% url 'account_logout' %}">

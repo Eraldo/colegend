@@ -49,9 +49,9 @@
     <div class="chapter-marker">Chapter 1</div>
     <p>
         <a href="{% if user.connected.legend %}
-                {% url 'users:profile' user.username %}
+                {% url 'legends:profile' user.username %}
                 {% else %}
-                {% url 'users:profile' user.username %}
+                {% url 'legends:profile' user.username %}
                 {% endif %}"
            class="btn btn-primary">
             Legend Profile

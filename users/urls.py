@@ -14,7 +14,7 @@ urlpatterns = [
 
     # URL pattern for the UserRedirectView
     url(
-        regex=r'^~redirect/$',
+        regex=r'^redirect/$',
         view=UserRedirectView.as_view(),
         name='redirect'
     ),
@@ -26,17 +26,17 @@ urlpatterns = [
         name='settings'
     ),
 
-    # URL pattern for the ProfileView
-    url(
-        regex=r'^profile/(?P<username>[\w.@+-]+)/$',
-        view=ProfileView.as_view(),
-        name='profile'
-    ),
-
     # URL pattern for the UserUpdateView
     url(
-        regex=r'^~update/$',
+        regex=r'^update/$',
         view=UserUpdateView.as_view(),
         name='update'
+    ),
+
+    # URL pattern for the ProfileView
+    url(
+        regex=r'^(?P<username>[\w.@+-]+)/$',
+        view=ProfileView.as_view(),
+        name='profile'
     ),
 ]
