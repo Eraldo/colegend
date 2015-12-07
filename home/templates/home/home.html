@@ -6,21 +6,12 @@
 {% block content_class %}{% endblock %}
 
 {% block page_links %}
-    <a href="#" class="btn btn-default btn-sm disabled">News</a>
-    <a href="#" class="btn btn-default btn-sm disabled">Events</a>
-    <a href="#" class="btn btn-default btn-sm disabled">Story</a>
-    <a href="#" class="btn btn-default btn-sm disabled">Quotes</a>
-    <a href="#" class="btn btn-default btn-sm disabled">Features</a>
-    <a href="#" class="btn btn-default btn-sm disabled">Tools</a>
-    <a href="#" class="btn btn-default btn-sm disabled">Legends</a>
-    <a href="#" class="btn btn-default btn-sm disabled">FAQ</a>
-    <a href="https://trello.com/b/bdLJMvHs/documentation" target="_blank"
-       class="btn btn-default btn-sm">Documentation</a>
-    <a href="{% url 'about' %}" class="btn btn-default btn-sm">About</a>
 {% endblock %}
 
 
 {% block content %}
+
+    {% include "home/cards/_links_card.html" %}
 
     <div class="row">
 

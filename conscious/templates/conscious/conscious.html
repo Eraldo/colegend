@@ -4,9 +4,6 @@
 {% block page_color %}conscious{% endblock %}
 
 {% block content %}
-    Chapter 1:
-    <progress class="progress progress-striped progress-success" value="10" max="100">10%</progress>
-
     <blockquote class="blockquote">
         <p>If you really want to do something, you'll find a way. If you don't, you'll find an excuse.</p>
         <footer>
@@ -18,26 +15,4 @@
     <p>
         {% include 'conscious/_conscious_chat.html' %}
     </p>
-
-    <hr>
-    <div class="chapter-marker">Chapter 1</div>
-    <p>
-        <a href="#" class="btn btn-primary">
-            Outer Call
-        </a>
-        <a href="#" class="btn btn-primary disabled">
-            <i class="fa fa-lock"></i> Inner Call
-        </a>
-        <a href="#" class="btn btn-primary disabled">
-            <i class="fa fa-lock"></i> Biography
-        </a>
-    </p>
-    <hr>
-    <div class="chapter-marker">Chapter 2</div>
-    <p>
-        <a href="#" class="btn btn-primary disabled">
-            <i class="fa fa-lock"></i> Journal
-        </a>
-    </p>
-
 {% endblock %}

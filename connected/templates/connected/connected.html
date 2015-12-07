@@ -3,15 +3,7 @@
 {% block title %}Connected{% endblock %}
 {% block page_color %}connected{% endblock %}
 
-{% block page_links %}
-    <a href="{% url 'connected:chat' %}" target="_blank" class="btn btn-default btn-sm">Chat</a>
-    <a href="{% url 'connected:virtual-room' %}" target="_blank" class="btn btn-default btn-sm">Virtual Room</a>
-{% endblock %}
-
 {% block content %}
-    Chapter 1:
-    <progress class="progress progress-striped progress-success" value="40" max="100">40%</progress>
-
     <blockquote class="blockquote">
         <p>A dream you dream alone is only a dream. A dream you dream together is reality.</p>
         <footer>
@@ -22,65 +14,5 @@
 
     <p>
         {% include 'connected/_connected_chat.html' %}
-    </p>
-
-    <hr>
-    <div class="chapter-marker">Chapter 1</div>
-    <p>
-        <a href="
-
-                {% if user.connected.guidelines %}{% url 'connected:guidelines' %}{% else %}{% url 'connected:guidelines-introduction' %}{% endif %}"
-           class="btn btn-primary">
-            Guidelines
-        </a>
-
-        {% if user.connected.guidelines %}
-            <a href="
-
-                    {% if user.connected.chat %}{% url 'connected:chat' %}{% else %}{% url 'connected:chat-introduction' %}{% endif %}"
-               class="btn btn-primary">
-                Chat
-            </a>
-        {% else %}
-            <a href="#" class="btn btn-primary disabled">
-                <i class="fa fa-lock"></i>
-                Chat
-            </a>
-        {% endif %}
-
-        {% if user.connected.chat %}
-            <a href="
-                    {% if user.connected.guide %}{% url 'connected:guide' %}{% else %}{% url 'connected:guide-introduction' %}{% endif %}"
-               class="btn btn-primary">
-                Cloud Guide
-            </a>
-        {% else %}
-            <a href="#" class="btn btn-primary disabled">
-                <i class="fa fa-lock"></i>
-                Cloud Guide
-            </a>
-        {% endif %}
-
-    </p>
-    <hr>
-    <div class="chapter-marker">Chapter 2</div>
-    <p>
-        <a href="#" class="btn btn-primary disabled">
-            <i class="fa fa-lock"></i> Dream Team
-        </a>
-    </p>
-    <hr>
-    <div class="chapter-marker">Chapter 3</div>
-    <p>
-        <a href="#" class="btn btn-primary disabled">
-            <i class="fa fa-lock"></i> Tribe
-        </a>
-    </p>
-    <hr>
-    <div class="chapter-marker">Chapter 4</div>
-    <p>
-        <a href="#" class="btn btn-primary disabled">
-            <i class="fa fa-lock"></i> Circle
-        </a>
     </p>
 {% endblock %}

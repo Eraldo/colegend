@@ -12,7 +12,7 @@ class ProfileView(LoginRequiredMixin, DetailView):
     model = User
     slug_field = "username"
     slug_url_kwarg = "username"
-    template_name = 'users/profile.html'
+    template_name = 'users/legend.html'
 
     # TODO: Write custom get_object method
     # redirecting if no slug is given and otherwise using the slug

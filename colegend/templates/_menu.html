@@ -37,10 +37,8 @@
                                 Manager
                                 {#                                <small class="pull-right">level 3</small>#}
                             </a>
-
-                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item disabled" href="#">
-                                Tracker
+                                Habits
                                 {#                                <small class="pull-right">level 4</small>#}
                             </a>
                         </div>
@@ -63,20 +61,19 @@
 
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item disabled" href="#">
+                                Legend
+                            </a>
+                            <a class="dropdown-item disabled" href="#">
                                 Cloud Guide
-                                {#                                <small class="pull-right">level 2</small>#}
                             </a>
                             <a class="dropdown-item disabled" href="#">
                                 Dream Team
-                                {#                                <small class="pull-right">level 3</small>#}
                             </a>
                             <a class="dropdown-item disabled" href="#">
                                 Tribe
-                                {#                                <small class="pull-right">level 4</small>#}
                             </a>
                             <a class="dropdown-item disabled" href="#">
                                 Circle
-                                {#                                <small class="pull-right">level 5</small>#}
                             </a>
 
                             <div class="dropdown-divider"></div>
@@ -85,6 +82,9 @@
                             </a>
                             <a class="dropdown-item" href="{% url 'connected:virtual-room' %}" target="_blank">
                                 Virtual Room
+                            </a>
+                            <a class="dropdown-item" href="{% url 'connected:guidelines' %}" target="_blank">
+                                Guidelines
                             </a>
                         </div>
                     </div>
@@ -142,7 +142,7 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="menu-button-account">
                                 <a class="dropdown-item" href="{% url 'users:profile' request.user.username %}">
-                                    <i class="fa fa-user"></i> Profile
+                                    <i class="fa fa-user"></i> Legend
                                 </a>
                                 <a class="dropdown-item" href="{% url 'users:settings' %}">
                                     <i class="fa fa-wrench"></i> Settings
