@@ -22,7 +22,7 @@ class GuidelinesView(LoginRequiredMixin, TemplateView):
             if not user.connected.guidelines:
                 user.connected.guidelines = True
                 user.connected.save()
-            return redirect('connected:index')
+            return redirect('connected:guidelines')
         return self.get(request, *args, **kwargs)
 
 

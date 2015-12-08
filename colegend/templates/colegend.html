@@ -43,7 +43,7 @@
 
 </head>
 
-<body id="body" class="overlay {% block page_color %}{% endblock %}">
+<body id="body" class="{% block body_class %}{% endblock %}">
 
 <div id="site-menu-container">
     {% block site_menu %}
@@ -91,6 +91,7 @@
         </div>
     {% endblock %}
 
+    {% block pre_content %}{% endblock %}
     {% block content_container %}
         <div id="content" class="{% block content_class %}card card-block bg-content{% endblock %}">
         {% block content %}

@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Ubuntu:400,500);
+@import url("http://fonts.googleapis.com/css?family=Ubuntu:400,500");
 .alert-debug {
   background-color: white;
   border-color: #d6e9c6;
@@ -35,41 +35,17 @@
   text-decoration: none; }
 
 body {
-  background-image: url(../images/shattered.png);
+  background-image: url(../images/shattered.jpg);
   font: 100% "Ubuntu", Helvetica, sans-serif; }
 
-.overlay.conscious:before {
-  position: absolute;
-  content: " ";
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  z-index: 0;
-  background: rgba(18, 62, 171, 0.3); }
+body.conscious {
+  background-image: url(../images/shattered-conscious.jpg); }
 
-.overlay.connected:before {
-  position: absolute;
-  content: " ";
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  z-index: 0;
-  background: rgba(0, 155, 10, 0.3); }
+body.connected {
+  background-image: url(../images/shattered-connected.jpg); }
 
-.overlay.continuous:before {
-  position: absolute;
-  content: " ";
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  z-index: 0;
-  background: rgba(197, 91, 0, 0.3); }
+body.continuous {
+  background-image: url(../images/shattered-continuous.jpg); }
 
 .bg-content {
   background-color: white; }
@@ -115,5 +91,39 @@ body {
   top: -1rem;
   color: #c55b00;
   float: right !important; }
+
+.btn-conscious, .btn-conscious.active, .btn-conscious.focus, .btn-conscious:active, .btn-conscious:focus, .btn-conscious:hover, .open > .btn-conscious.dropdown-toggle {
+  color: white;
+  background-color: #123eab;
+  border-color: #123eab; }
+
+.btn-connected, .btn-connected.active, .btn-connected.focus, .btn-connected:active, .btn-connected:focus, .btn-connected:hover, .open > .btn-connected.dropdown-toggle {
+  color: white;
+  background-color: #009b0a;
+  border-color: #009b0a; }
+
+.btn-continuous, .btn-continuous.active, .btn-continuous.focus, .btn-continuous:active, .btn-continuous:focus, .btn-continuous:hover, .open > .btn-continuous.dropdown-toggle {
+  color: white;
+  background-color: #c55b00;
+  border-color: #c55b00; }
+
+.chat-bubble, .chat-bubble::before, .chat-bubble::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-bottom: 20px solid transparent;
+  border-right: 20px solid transparent; }
+
+.chat-bubble::before {
+  border-right-color: #e5e5e5; }
+
+.chat-bubble::after {
+  top: 1px;
+  left: 2px;
+  border-right-color: white;
+  z-index: 1; }
 
 /*# sourceMappingURL=colegend.css.map */

@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 
 {% block title %}Conscious{% endblock %}
-{% block page_color %}conscious{% endblock %}
 
-{% block content %}
-    <blockquote class="blockquote">
+{% block body_class %}conscious{% endblock %}
+
+{% block pre_content %}
+    <blockquote class="blockquote bg-content">
         <p>If you really want to do something, you'll find a way. If you don't, you'll find an excuse.</p>
         <footer>
             <cite title="Source Title">by Jim Rohn</cite>
@@ -15,4 +16,7 @@
     <p>
         {% include 'conscious/_conscious_chat.html' %}
     </p>
+{% endblock %}
+
+{% block content_container %}
 {% endblock %}

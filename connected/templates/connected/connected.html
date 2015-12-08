@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
 
 {% block title %}Connected{% endblock %}
-{% block page_color %}connected{% endblock %}
 
-{% block content %}
-    <blockquote class="blockquote">
+{% block content_class %}{% endblock %}
+
+{% block body_class %}connected{% endblock %}
+
+{% block pre_content %}
+    <blockquote class="blockquote bg-content">
         <p>A dream you dream alone is only a dream. A dream you dream together is reality.</p>
         <footer>
             <cite title="Source Title">by John Lennon</cite>
@@ -15,4 +18,30 @@
     <p>
         {% include 'connected/_connected_chat.html' %}
     </p>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+
+        <div class="col-lg-4">
+            {% include "connected/cards/_legend_card.html" %}
+        </div>
+
+        <div class="col-lg-4">
+            {% include "connected/cards/_guide_card.html" %}
+        </div>
+
+        <div class="col-lg-4">
+            {% include "connected/cards/_team_card.html" %}
+        </div>
+
+        <div class="col-lg-4">
+            {% include "connected/cards/_tribe_card.html" %}
+        </div>
+
+        <div class="col-lg-4">
+            {% include "connected/cards/_circle_card.html" %}
+        </div>
+
+    </div>
 {% endblock %}

@@ -2,17 +2,11 @@
 {% load static %}
 
 {% block title %}Continuous{% endblock %}
-{% block page_color %}continuous{% endblock %}
 
-{% block page_links %}
-{% endblock %}
+{% block body_class %}continuous{% endblock %}
 
-
-{% block content %}
-    Chapter 1:
-    <progress class="progress progress-striped progress-success" value="60" max="100">60%</progress>
-
-    <blockquote class="blockquote">
+{% block pre_content %}
+    <blockquote class="blockquote bg-content">
         <p>
             Every story I create, creates me. I write to create myself.
         </p>
@@ -26,124 +20,135 @@
         {% include 'continuous/_continuous_chat.html' %}
     </p>
 
-    <hr>
-    <div class="chapter-marker">Prologue</div>
-    <p>
-        <a href="{% url 'continuous:legend:prologue' %}" class="btn btn-primary">
-            Prologue
-        </a>
-
-        {% if user.continuous.prologue %}
-            <a href="{% url 'continuous:legend:poetree' %}" class="btn btn-primary">
-                Poetree
-            </a>
-        {% else %}
-            <a href="#" class="btn btn-primary disabled">
-                <i class="fa fa-lock"></i>
-                Poetree
+{% endblock %}
+{% block content %}
+    <div id="game-board">
+        Chapter 1:
+        <progress class="progress progress-striped progress-success" value="60" max="100">60%</progress>
+        <hr>
+        <div class="chapter-marker">Prologue</div>
+        <p>
+            <a href="{% url 'continuous:legend:prologue' %}" class="btn btn-continuous">
+                Prologue
             </a>
 
-        {% endif %}
-    </p>
-    <hr>
-    <div class="chapter-marker">Chapter 1</div>
-    <p>
-        <a href="{% if user.connected.legend %}
+            {% if user.continuous.prologue %}
+                <a href="{% url 'continuous:legend:poetree' %}" class="btn btn-continuous">
+                    Poetree
+                </a>
+            {% else %}
+                <a href="#" class="btn btn-continuousdisabled">
+                    <i class="fa fa-lock"></i>
+                    Poetree
+                </a>
+
+            {% endif %}
+        </p>
+        <hr>
+        <div class="chapter-marker">Chapter 1</div>
+        <p>
+            <a href="{% if user.connected.legend %}
                 {% url 'legends:profile' user.username %}
                 {% else %}
                 {% url 'legends:profile' user.username %}
                 {% endif %}"
-           class="btn btn-primary">
-            Legend Profile
-        </a>
+               class="btn btn-conscious">
+                Legend Profile
+            </a>
 
-        <a href="#" class="btn btn-primary">
-            Outer Call
-        </a>
-        <a href="#" class="btn btn-primary disabled">
-            <i class="fa fa-lock"></i> Inner Call
-        </a>
-        <a href="#" class="btn btn-primary disabled">
-            <i class="fa fa-lock"></i> Biography
-        </a>
+            <a href="#" class="btn btn-conscious disabled">
+                Outer Call
+            </a>
+            <a href="#" class="btn btn-conscious disabled">
+                <i class="fa fa-lock"></i> Inner Call
+            </a>
+            <a href="#" class="btn btn-conscious disabled">
+                <i class="fa fa-lock"></i> Biography
+            </a>
+        </p>
 
-        <a href="{% if user.connected.guidelines %}
+        <p>
+            <a href="{% if user.connected.guidelines %}
                 {% url 'connected:guidelines' %}
                 {% else %}
                 {% url 'connected:guidelines-introduction' %}
                 {% endif %}"
-           class="btn btn-primary">
-            Guidelines
-        </a>
+               class="btn btn-connected">
+                Guidelines
+            </a>
 
-        {% if user.connected.guidelines %}
-            <a href="{% if user.connected.chat %}
+            {% if user.connected.guidelines %}
+                <a href="{% if user.connected.chat %}
             {% url 'connected:chat' %}
             {% else %}
             {% url 'connected:chat-introduction' %}
             {% endif %}"
-               class="btn btn-primary">
-                Chat
-            </a>
-        {% else %}
-            <a href="#" class="btn btn-primary disabled">
-                <i class="fa fa-lock"></i>
-                Chat
-            </a>
-        {% endif %}
+                   class="btn btn-connected">
+                    Chat
+                </a>
+            {% else %}
+                <a href="#" class="btn btn-connected disabled">
+                    <i class="fa fa-lock"></i>
+                    Chat
+                </a>
+            {% endif %}
 
-        {% if user.connected.chat %}
-            <a href="{% if user.connected.guide %}
+            {% if user.connected.chat %}
+                <a href="{% if user.connected.guide %}
             {% url 'connected:guide' %}
             {% else %}
             {% url 'connected:guide-introduction' %}
             {% endif %}"
-               class="btn btn-primary">
-                Cloud Guide
-            </a>
-        {% else %}
-            <a href="#" class="btn btn-primary disabled">
+                   class="btn btn-connected">
+                    Cloud Guide
+                </a>
+            {% else %}
+                <a href="#" class="btn btn-connected disabled">
+                    <i class="fa fa-lock"></i>
+                    Cloud Guide
+                </a>
+            {% endif %}
+        </p>
+
+        <p>
+
+            <a href="#" class="btn btn-continuous disabled">
                 <i class="fa fa-lock"></i>
-                Cloud Guide
+                Chapter 1
             </a>
-        {% endif %}
+        </p>
+        <hr>
+        <div class="chapter-marker">Chapter 2</div>
+        <p>
+            <a href="#" class="btn btn-continuous disabled">
+                <i class="fa fa-lock"></i> Dream Team
+            </a>
+        </p>
 
-
-        <a href="#" class="btn btn-primary disabled">
-            <i class="fa fa-lock"></i>
-            Chapter 1
-        </a>
-    </p>
-    <hr>
-    <div class="chapter-marker">Chapter 2</div>
-    <p>
-        <a href="#" class="btn btn-primary disabled">
-            <i class="fa fa-lock"></i> Dream Team
-        </a>
-
-        <a href="#" class="btn btn-primary disabled">
-            <i class="fa fa-lock"></i> Chapter 2
-        </a>
-    </p>
-    <hr>
-    <div class="chapter-marker">Chapter 3</div>
-    <p>
-        <a href="#" class="btn btn-primary disabled">
-            <i class="fa fa-lock"></i> Tribe
-        </a>
-    </p>
-    <hr>
-    <div class="chapter-marker">Chapter 4</div>
-    <p>
-        <a href="#" class="btn btn-primary disabled">
-            <i class="fa fa-lock"></i> Circle
-        </a>
-    </p>
-
+        <p>
+            <a href="#" class="btn btn-continuous disabled">
+                <i class="fa fa-lock"></i> Chapter 2
+            </a>
+        </p>
+        <hr>
+        <div class="chapter-marker">Chapter 3</div>
+        <p>
+            <a href="#" class="btn btn-primary disabled">
+                <i class="fa fa-lock"></i> Tribe
+            </a>
+        </p>
+        <hr>
+        <div class="chapter-marker">Chapter 4</div>
+        <p>
+            <a href="#" class="btn btn-primary disabled">
+                <i class="fa fa-lock"></i> Circle
+            </a>
+        </p>
+    </div>
 {% endblock %}
 
 {% block extra_script %}
     {{ block.super }}
     <!-- Snow! :D -->
-    <script type="text/javascript" src="{% static "components/snowstorm/snowstorm-min.js" %}"></script>
+    {#    <script type="text/javascript" src="{% static "components/snowstorm/snowstorm-min.js" %}"></script>#}
 {% endblock %}
