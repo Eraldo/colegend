@@ -53,7 +53,7 @@ class TestUserUpdateView(BaseUserTestCase):
         #   self.make_user()
         self.assertEqual(
             self.view.get_success_url(),
-            '/users/profile/testuser/'
+            '/legends/testuser/'
         )
 
     def test_get_object(self):
