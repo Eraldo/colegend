@@ -30,14 +30,17 @@
 
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item disabled" href="#">
+                                <i class="fa fa-lock"></i>
                                 Journal
                                 {#                                <small class="pull-right">level 2</small>#}
                             </a>
                             <a class="dropdown-item disabled" href="#">
+                                <i class="fa fa-lock"></i>
                                 Manager
                                 {#                                <small class="pull-right">level 3</small>#}
                             </a>
                             <a class="dropdown-item disabled" href="#">
+                                <i class="fa fa-lock"></i>
                                 Habits
                                 {#                                <small class="pull-right">level 4</small>#}
                             </a>
@@ -64,25 +67,46 @@
                                 Legend
                             </a>
                             <a class="dropdown-item disabled" href="#">
+                                <i class="fa fa-lock"></i>
                                 Cloud Guide
                             </a>
                             <a class="dropdown-item disabled" href="#">
+                                <i class="fa fa-lock"></i>
                                 Dream Team
                             </a>
                             <a class="dropdown-item disabled" href="#">
+                                <i class="fa fa-lock"></i>
                                 Tribe
                             </a>
                             <a class="dropdown-item disabled" href="#">
+                                <i class="fa fa-lock"></i>
                                 Circle
                             </a>
 
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{% url 'connected:chat' %}" target="_blank">
-                                Chat
-                            </a>
+
+                            {% if user.connected.chat %}
+                                <a class="dropdown-item" href="{% url 'connected:chat' %}" target="_blank">
+                                    Chat
+                                </a>
+                            {% else %}
+                                <a class="dropdown-item disabled" href="#">
+                                    <i class="fa fa-lock"></i>
+                                    Chat
+                                </a>
+                            {% endif %}
+
+                            {% if user.connected.virtual_room %}
                             <a class="dropdown-item" href="{% url 'connected:virtual-room' %}" target="_blank">
                                 Virtual Room
                             </a>
+                            {% else %}
+                                <a class="dropdown-item disabled" href="#">
+                                    <i class="fa fa-lock"></i>
+                                    Virtual Room
+                                </a>
+                            {% endif %}
+
                             {% if user.connected.guidelines %}
                                 <a class="dropdown-item" href="{% url 'connected:guidelines' %}">
                                     Guidelines
@@ -108,22 +132,22 @@
 
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item disabled" href="#">
+                                <i class="fa fa-lock"></i>
                                 Personal Story
-                                {#                                <small class="pull-right">level 3</small>#}
                             </a>
                             <a class="dropdown-item disabled" href="#">
+                                <i class="fa fa-lock"></i>
                                 Tribe Story
-                                {#                                <small class="pull-right">level 4</small>#}
                             </a>
                             <a class="dropdown-item disabled" href="#">
+                                <i class="fa fa-lock"></i>
                                 coLegend Story
-                                {#                                <small class="pull-right">level 5</small>#}
                             </a>
 
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item disabled" href="#" data-toggle="tooltip" title="Tooltip on top">
+                                <i class="fa fa-lock"></i>
                                 Success Stream
-                                {#                                <small class="pull-right">level 2</small>#}
                             </a>
                         </div>
                     </div>
