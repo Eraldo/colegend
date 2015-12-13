@@ -7,6 +7,7 @@ class Continuous(AutoOwnedBase, TimeStampedBase):
     """
     A django model representing the 'continuous' path of the user.
     """
+    prologue_country = models.CharField(max_length=255, blank=True)
     prologue = models.BooleanField(default=False)
 
     class Meta:

@@ -29,18 +29,43 @@ class PrologueView(LoginRequiredMixin, TemplateView):
 
         return context
 
-    def get_client_ip(self):
-        x_forwarded_for = self.request.META.get('HTTP_X_FORWARDED_FOR')
+    def get_prologue_country(self):
+        user = self.request.user
+        country = user.continuous.prologue_country
+        if not country:
+            country = self.get_client_country()
+            if country:
+                user.continuous.prologue_country = country
+                user.continuous.save()
+        return country
+
+    @staticmethod
+    def get_client_ip(request):
+        """
+        Reads the ip from the request object and returns it.
+        :return: client ip address string
+            Example: '89.204.139.76'
+
+        """
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
         if x_forwarded_for:
             ip = x_forwarded_for.split(',')[0]
         else:
-            ip = self.request.META.get('REMOTE_ADDR')
+            ip = request.META.get('REMOTE_ADDR')
         return ip
 
     def get_client_country(self):
+        """
+        Gets the client ip address and returns the corresponding country string.
+        :return: Country string
+            Example:
+            Assumption: ip = '89.204.139.76'
+            => 'Germany'
+        """
         import pygeoip
         gi = pygeoip.GeoIP('continuous/legend/static/legend/GeoIP.dat')
-        ip = self.get_client_ip()
+        request = self.request
+        ip = self.get_client_ip(request)
         country = gi.country_name_by_addr(ip)
         return country
 
