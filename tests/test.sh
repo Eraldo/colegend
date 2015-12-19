@@ -6,4 +6,4 @@ else
 	FILE='.'
 fi
 
-hitch test -s local.yml $FILE
+hitch test -s tdd.settings $FILE
