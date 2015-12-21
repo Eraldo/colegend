@@ -6,6 +6,18 @@ from django.utils.translation import ugettext as _
 from core.models import AutoOwnedBase, TimeStampedBase
 
 
+class GuideRelationQuerySet(models.QuerySet):
+    def active(self):
+        return self.filter(done=False)
+
+    def passive(self):
+        return self.filter(done=True)
+
+    def searching(self):
+        return self.filter(guide__isnull=True)
+
+
+
 class GuideRelation(AutoOwnedBase, TimeStampedBase):
     """
     A django model representing the relation between a user and his guide.
@@ -28,9 +40,27 @@ class GuideRelation(AutoOwnedBase, TimeStampedBase):
     guiding_checked = models.BooleanField(
         verbose_name=_("Talked about becoming a Guide"),
         default=False)
+    done = models.BooleanField(
+        verbose_name=_("Guiding process is done"),
+        default=False)
+
+    objects = GuideRelationQuerySet.as_manager()
 
     def __str__(self):
         return "Guide relation: {} - {}".format(self.owner, self.guide)
 
     def get_absolute_url(self):
         return reverse('guides:detail', kwargs={'owner': self.owner.username})
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        # Check if the guide did all tasks with his guidee.
+        if not self.done:
+            connected = self.owner.connected
+            if all(
+                [self.guide, self.outer_call_checked, self.inner_call_checked,
+                 self.coLegend_checked, self.guiding_checked]):
+                self.done = True
+                connected.guide = True
+                connected.save()
+        super().save(force_insert, force_update, using, update_fields)

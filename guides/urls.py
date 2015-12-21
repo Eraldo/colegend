@@ -2,7 +2,7 @@ from django.conf.urls import patterns, url
 from django.views.generic import RedirectView
 
 from .views import GuideIntroductionView, GuideManageView, GuideDetailView, GuideListView, PersonalGuideView, \
-    GuideSupportView
+    GuideesView, GuideActionView
 
 __author__ = 'eraldo'
 
@@ -20,13 +20,16 @@ urlpatterns = patterns(
     url(r'^personal$',
         PersonalGuideView.as_view(),
         name='personal'),
+    url(r'^guidees$',
+        GuideesView.as_view(),
+        name='guidees'),
     url(r'^(?P<owner>[\w.@+-]+)$',
         GuideDetailView.as_view(),
         name='detail'),
     url(r'^(?P<owner>[\w.@+-]+)/manage$',
         GuideManageView.as_view(),
         name='manage'),
-    url(r'^(?P<owner>[\w.@+-]+)/support$',
-        GuideSupportView.as_view(),
-        name='support'),
+    url(r'^(?P<owner>[\w.@+-]+)/guide$',
+        GuideActionView.as_view(),
+        name='guide-action'),
 )

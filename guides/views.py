@@ -28,9 +28,27 @@ class GuideListView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # TODO: Refactor to QuerySet method
-        context['pending_relations'] = GuideRelation.objects.filter(guide__isnull=True)
-        context['found_relations'] = GuideRelation.objects.filter(guide__isnull=False)
+        relations = self.get_queryset()
+        context['searching_relations'] = relations.searching()
+        context['active_relations'] = relations.active()
+        context['passive_relations'] = relations.passive()
+        return context
+
+
+class GuideesView(LoginRequiredMixin, ListView):
+    template_name = 'guides/guidees.html'
+    model = GuideRelation
+
+    def get_queryset(self):
+        user = self.request.user
+        queryset = super().get_queryset()
+        return queryset.filter(guide=user)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        relations = self.get_queryset()
+        context['active_relations'] = relations.active()
+        context['passive_relations'] = relations.passive()
         return context
 
 
@@ -38,13 +56,22 @@ class GuideDetailView(LoginRequiredMixin, DetailView):
     template_name = 'guides/detail.html'
     model = GuideRelation
 
+    def get(self, request, *args, **kwargs):
+        user = request.user
+        relation = self.get_object()
+        if user == relation.owner:
+            return redirect('guides:personal')
+        elif user == relation.guide:
+            return redirect('guides:manage', relation.owner)
+        return super().get(request, *args, **kwargs)
+
     def get_object(self, queryset=None):
         owner = self.kwargs.get('owner')
         return GuideRelation.objects.get(owner__username=owner)
 
 
 class PersonalGuideView(LoginRequiredMixin, DetailView):
-    template_name = 'guides/personal.html'
+    template_name = 'guides/guide.html'
     model = GuideRelation
 
     def get_object(self, queryset=None):
@@ -71,7 +98,7 @@ class GuideManageView(LoginRequiredMixin, UpdateView):
         return reverse('guides:detail', kwargs={'owner': relation.owner})
 
 
-class GuideSupportView(LoginRequiredMixin, RedirectView):
+class GuideActionView(LoginRequiredMixin, RedirectView):
     permanent = False
 
     def get_redirect_url(self, *args, **kwargs):
