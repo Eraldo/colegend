@@ -33,13 +33,13 @@
             </a>
 
             {% if user.continuous.prologue %}
-                <a href="{% url 'continuous:legend:poetree' %}" class="btn btn-continuous">
-                    Poetree
+                <a href="{% url 'continuous:legend:welcome-tree' %}" class="btn btn-continuous">
+                    Welcome Tree
                 </a>
             {% else %}
                 <a href="#" class="btn btn-continuousdisabled">
                     {% icon 'locked' %}
-                    Poetree
+                    Welcome Tree
                 </a>
 
             {% endif %}

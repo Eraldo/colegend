@@ -1,3 +1,5 @@
+import random
+
 from braces.views import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.utils import timezone
@@ -88,12 +90,26 @@ class PrologueView(LoginRequiredMixin, TemplateView):
             return 'night'
 
     def post(self, request, *args, **kwargs):
-        if 'poetree' in request.POST:
+        if 'welcome-tree' in request.POST:
             user = request.user
             user.continuous.prologue = True
             user.continuous.save()
-            return redirect('continuous:legend:poetree')
+            return redirect('continuous:legend:welcome-tree')
 
 
-class PoetreeView(LoginRequiredMixin, TemplateView):
-    template_name = "legend/poetree.html"
+class WelcomeTreeView(LoginRequiredMixin, TemplateView):
+    template_name = "legend/welcome-tree.html"
+
+
+class TreeMessageWidgetView(LoginRequiredMixin, TemplateView):
+    template_name = 'legend/widgets/message.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        messages = [
+            'Welcome dude. :D',
+            'Yeah.. adventure ahead of you!',
+            'If it is true, then share it.',
+            'Trust your heart']
+        context['message'] = random.choice(messages)
+        return context

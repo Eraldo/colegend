@@ -29,7 +29,7 @@
     # She is presented with a prologue story:
     - Page title: "Prologue"
 
-    # She reads the story and clicks on the link to the Poetree:
+    # She reads the story and clicks on the link to the Welcome Tree:
     - Execute: typed_callback();  # [Immediately show the link]
-    - Click: continue-to-poetree
+    - Click: continue-to-welcome-tree
 {% endblock %}
