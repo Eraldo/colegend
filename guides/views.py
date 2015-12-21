@@ -70,7 +70,7 @@ class GuideDetailView(LoginRequiredMixin, DetailView):
         return GuideRelation.objects.get(owner__username=owner)
 
 
-class PersonalGuideView(LoginRequiredMixin, DetailView):
+class GuideView(LoginRequiredMixin, DetailView):
     template_name = 'guides/guide.html'
     model = GuideRelation
 

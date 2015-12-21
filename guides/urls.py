@@ -1,8 +1,8 @@
 from django.conf.urls import patterns, url
 from django.views.generic import RedirectView
 
-from .views import GuideIntroductionView, GuideManageView, GuideDetailView, GuideListView, PersonalGuideView, \
-    GuideesView, GuideActionView
+from .views import GuideIntroductionView, GuideManageView, GuideDetailView, GuideListView, \
+    GuideesView, GuideActionView, GuideView
 
 __author__ = 'eraldo'
 
@@ -17,9 +17,9 @@ urlpatterns = patterns(
     url(r'^introduction$',
         GuideIntroductionView.as_view(),
         name='introduction'),
-    url(r'^personal$',
-        PersonalGuideView.as_view(),
-        name='personal'),
+    url(r'^guide$',
+        GuideView.as_view(),
+        name='guide'),
     url(r'^guidees$',
         GuideesView.as_view(),
         name='guidees'),
