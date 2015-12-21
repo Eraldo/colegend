@@ -1,4 +1,4 @@
-{% load static %}
+{% load static icons %}
 {#{% load avatar_tags %}#}
 
 <!DOCTYPE html>
@@ -256,14 +256,14 @@
     <div class="row">
         <div class="col-md-3 text-center wow fadeInLeft">
             <div>
-                <i class="fa fa-comments-o features-icon"></i>
+                {% icon 'gatherings' classes='features-icon' %}
 
                 <h2>Social Gatherings</h2>
 
                 <p>A space to make room for your biggest challenges, strongest feelings and emotions.</p>
             </div>
             <div class="m-t-lg">
-                <i class="fa fa-star features-icon"></i>
+                {% icon 'challenges' classes='features-icon' %}
 
                 <h2>Comfort Challenges</h2>
 
@@ -276,14 +276,15 @@
         </div>
         <div class="col-md-3 text-center wow fadeInRight">
             <div>
-                <i class="fa fa-book features-icon"></i>
+                {% icon 'journal' classes='features-icon' %}
 
                 <h2>Smart Journal</h2>
 
                 <p>Become more aware of your current life by reflecting on it in a smart and personalized way.</p>
             </div>
             <div class="m-t-lg">
-                <i class="fa fa-check features-icon"></i>
+
+                {% icon 'manager' classes='features-icon' %}
 
                 <h2>Self-Management System</h2>
 
@@ -346,10 +347,10 @@
 
                     <p>Happiness Manager. Right Hand. Guide. Support Fairy. </p>
                     <ul class="list-inline social-icon">
-                        <li><a href="http://www.google.com/profiles/107120626707532567348" target="_blank"><i
-                                class="fa fa-google-plus"></i></a>
+                        <li><a href="http://www.google.com/profiles/107120626707532567348" target="_blank">
+                            {% icon 'google-plus' %}</a>
                         </li>
-                        <li><a href="https://www.facebook.com/CorinnaS91" target="_blank"><i class="fa fa-facebook"></i></a>
+                        <li><a href="https://www.facebook.com/CorinnaS91" target="_blank">{% icon 'facebook' %}</a>
                         </li>
                     </ul>
                 </div>
@@ -363,10 +364,10 @@
                     <p>Left Hand. Meeting Master. Gamification Guru. Resource Juggler. Coin Master. Presenter. Champion.
                         Webster. CoNerd. Styler. Robot. John Doe. Guide.</p>
                     <ul class="list-inline social-icon">
-                        <li><a href="http://www.google.com/profiles/108330741006963499878" target="_blank"><i
-                                class="fa fa-google-plus"></i></a>
+                        <li><a href="http://www.google.com/profiles/108330741006963499878" target="_blank">
+                            {% icon 'google-plus' %}</a>
                         </li>
-                        <li><a href="https://www.facebook.com/Eraldo" target="_blank"><i class="fa fa-facebook"></i></a>
+                        <li><a href="https://www.facebook.com/Eraldo" target="_blank">{% icon 'facebook' %}</a>
                         </li>
                     </ul>
                 </div>
@@ -379,14 +380,12 @@
 
                     <p>Gatherer. Left Hand. Happiness Manager. Meeting Master. Wise One. Blog Buster. Guide.</p>
                     <ul class="list-inline social-icon">
-                        <li><a href="http://www.google.com/profiles/115716934713164087185" target="_blank"><i
-                                class="fa fa-google-plus"></i></a>
+                        <li><a href="http://www.google.com/profiles/115716934713164087185" target="_blank">
+                            {% icon 'google-plus' %}</a>
                         </li>
-                        <li><a href="http://wakasawakasa.tumblr.com" target="_blank"><i
-                                class="fa fa-tumblr"></i></a>
+                        <li><a href="http://wakasawakasa.tumblr.com" target="_blank">
+                            {% icon 'tumblr' %}</a>
                         </li>
-                        {#                        <li><a href="#" target="_blank"><i class="fa fa-facebook"></i></a>#}
-                        {#                        </li>#}
                     </ul>
                 </div>
             </div>
@@ -444,7 +443,7 @@
 {#                <div id="vertical-timeline" class="vertical-container light-timeline center-orientation">#}
 {#                    <div class="vertical-timeline-block">#}
 {#                        <div class="vertical-timeline-icon navy-bg">#}
-{#                            <i class="fa fa-briefcase"></i>#}
+{#                            {% icon 'briefcase' %}#}
 {#                        </div>#}
 {##}
 {#                        <div class="vertical-timeline-content">#}
@@ -458,7 +457,7 @@
 {##}
 {#                    <div class="vertical-timeline-block">#}
 {#                        <div class="vertical-timeline-icon navy-bg">#}
-{#                            <i class="fa fa-file-text"></i>#}
+{#                            {% icon 'file-text %}#}
 {#                        </div>#}
 {##}
 {#                        <div class="vertical-timeline-content">#}
@@ -471,7 +470,7 @@
 {##}
 {#                    <div class="vertical-timeline-block">#}
 {#                        <div class="vertical-timeline-icon navy-bg">#}
-{#                            <i class="fa fa-cogs"></i>#}
+{#                            {% icon 'congs' %}#}
 {#                        </div>#}
 {##}
 {#                        <div class="vertical-timeline-content">#}
@@ -495,7 +494,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center wow zoomIn">
-                <i class="fa fa-comment big-icon"></i>
+                {% icon 'comment' classes='big-icon' %}
 
                 <h1>
                     What our users say
@@ -539,7 +538,7 @@
                         <span>free!</span>
                     </li>
                     <li>
-                        <i class="fa fa-check"></i> All "<b>Legend</b>" features
+                        {% icon 'check' %} All "<b>Legend</b>" features
                     </li>
                     <li>
                         <a id="join-explorer" class="btn btn-info btn-lg" href="{% url "join" %}?next=/">Join</a>
@@ -559,22 +558,22 @@
                         <span>42€</span> / month
                     </li>
                     <li>
-                        <i class="fa fa-check"></i> Social Gatherings
+                        {% icon 'check' %} </i> Social Gatherings
                     </li>
                     <li>
-                        <i class="fa fa-check"></i> Comfort Challenges
+                        {% icon 'check' %} </i> Comfort Challenges
                     </li>
                     <li>
-                        <i class="fa fa-check"></i> Smart Journal
+                        {% icon 'check' %} </i> Smart Journal
                     </li>
                     <li>
-                        <i class="fa fa-check"></i> Self-Management System
+                        {% icon 'check' %} </i> Self-Management System
                     </li>
                     <li>
-                        <i class="fa fa-check"></i> Support
+                        {% icon 'check' %} </i> Support
                     </li>
                     <li>
-                        <i class="fa fa-check"></i> ...more!
+                        {% icon 'check' %} </i> ...more!
                     </li>
                     <li class="plan-action">
                         <a id="join-legend" class="btn btn-info btn-lg" href="{% url "join" %}?next=/">Join</a>
@@ -596,13 +595,13 @@
                         <span>420€</span> / month
                     </li>
                     <li>
-                        <i class="fa fa-check"></i> All "<b>Legend</b>" features
+                        {% icon 'check' %} </i> All "<b>Legend</b>" features
                     </li>
                     <li>
-                        <i class="fa fa-check"></i> <strong>Personal Coaching</strong>
+                        {% icon 'check' %} </i> <strong>Personal Coaching</strong>
                     </li>
                     <li>
-                        <i class="fa fa-check"></i> <strong>Priority Support</strong>
+                        {% icon 'check' %} </i> <strong>Priority Support</strong>
                     </li>
                     <li class="plan-action">
                         <a id="join-premium-legend" class="btn btn-info btn-lg"
@@ -632,7 +631,7 @@
         </div>
         <div class="row m-b-lg">
             <div class="col-lg-3 col-lg-offset-2 text-left">
-                <p class="text-color"><span style="color: blue;"><i class="fa fa-user"></i></span> Personal contact..
+                <p class="text-color">{% icon 'legend' color="blue" %} Personal contact..
                 </p>
 
                 <p class="text-color">We are humans here at coLegend. As such you can <a href="#team">reach the team</a>
@@ -647,7 +646,7 @@
                 </address>
             </div>
             <div class="col-lg-3 text-right">
-                <p class="text-color">We love feedback! <span style="color: red;"><i class="fa fa-heart"></i></span></p>
+                <p class="text-color">We love feedback! {% icon 'heart' color="red" %}</p>
 
                 <p class="text-color">We really do! ;)<br/>
                     Feel free to share your feelings and whatever it is, that is on your mind.</p>
@@ -668,11 +667,11 @@
                     Or follow us on social platforms
                 </p>
                 <ul class="list-inline social-icon">
-                    <li><a href="https://plus.google.com/+ColegendOrgPage" target="_blank"><i
-                            class="fa fa-google-plus"></i></a>
+                    <li><a href="https://plus.google.com/+ColegendOrgPage" target="_blank">
+                        {% icon 'google-plus' %}</a>
                     </li>
-                    <li><a href="https://www.facebook.com/colegend.org" target="_blank"><i
-                            class="fa fa-facebook"></i></a>
+                    <li><a href="https://www.facebook.com/colegend.org" target="_blank">
+                        {% icon 'facebook' %}</a>
                     </li>
                 </ul>
             </div>

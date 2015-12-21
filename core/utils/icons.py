@@ -3,7 +3,6 @@ from django.template.loader import render_to_string
 __author__ = 'Eraldo Energy'
 
 icon_dict = {
-    # TODO: Update map for relaunch version
     # conscious
     'conscious': 'graduation-cap',
     # connected
@@ -14,6 +13,12 @@ icon_dict = {
     # orga
     'settings': 'wrench',
     'sign-out': 'sign-out',
+    'locked': 'lock',
+
+    'gatherings': 'comments-o',
+    'challenges': 'star',
+    'journal': 'book',
+    'manager': 'check',
 }
 
 
@@ -119,8 +124,21 @@ def get_icon_name(name):
     return icon_dict.get(name, name)
 
 
-def get_icon(name, raw=False):
+def get_icon(name, large=False, fixed=False, spin=False, li=False, rotate=False, border=False, color=False,
+             classes=None, raw=False):
     name = get_icon_name(name)
     if raw:
         return name
-    return render_to_string('widgets/icon.html', context={'name': name})
+    context = {
+        'prefix': 'fa',
+        'name': name,
+        'large': large,
+        'fixed': fixed,
+        'spin': spin,
+        'li': li,
+        'rotate': rotate,
+        'border': border,
+        'color': color,
+        'classes': classes,
+    }
+    return render_to_string('widgets/icon.html', context=context)

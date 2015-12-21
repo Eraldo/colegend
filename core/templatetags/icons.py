@@ -8,5 +8,7 @@ __author__ = 'Eraldo Energy'
 
 
 @register.simple_tag
-def icon(name):
-    return get_icon(name)
+def icon(name, large=False, fixed=False, spin=False, li=False,
+         rotate=False, border=False, color=False, classes=None):
+    return get_icon(name, large=large, fixed=fixed, spin=spin, li=li, rotate=rotate, border=border, color=color,
+                    classes=classes)

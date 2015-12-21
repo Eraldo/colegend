@@ -1,1 +1,3 @@
-<i class="fa fa-{{ name }}"></i>
+<i class="
+        {% if prefix %}{{ prefix }} {{ prefix }}-{% endif %}{{ name }}{% if large %} fa-lg{% endif %}{% if fixed %} fa-fw{% endif %}{% if sping %} fa-spin{% endif %}{% if li %} fa-li{% endif %}{% if rotate %} fa-rotate-{{ rotate }}{% endif %}{% if border %} fa-border{% endif %}{% if classes %} {{ classes }}{% endif %}"
+        {% if color %} style="color: {{ color }};"{% endif %}></i>
