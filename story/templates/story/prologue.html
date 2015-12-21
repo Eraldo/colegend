@@ -1,0 +1,66 @@
+{% extends "story/base.html" %}
+
+{% block title %}Prologue{% endblock %}
+
+{% block site_messages %}{% endblock %}
+
+{% block site_menu %}
+    {% if user.continuous.prologue %}
+        {{ block.super }}
+    {% endif %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    {% if user.continuous.prologue %}
+        {{ block.super }}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% if user.continuous.prologue %}
+        <a href="#" onclick="typed_skip()" class="pull-right">Skip</a>
+    {% endif %}
+    <div id="typed-strings">
+        <p>
+            <span class='story-initial-letter'>O</span>nce upon a time .^500 .^500 .^1000 <br>
+            somewhere {% if country %}in {{ country }}{% else %}on planet earth{% endif %} ^500
+            on a <i>special</i> ^200{{ weekday }} {{ time_of_day }}...^1000
+            <br>
+            Not knowing what exactly to expect,^200 a courageous person has decided to take action and leap into^500
+            a new world. <br>
+            A magical one it turns out...^500 <br>
+            Where^400 both <i>heroes</i> and <i>demons</i> can celebrate.^400 <br>
+            Where^400 matters of right or wrong are cast aside in favor of mutual interest.^400 <br>
+            Where^400 instead of defending their point of view, they name their needs and ask for support.^400 <br>
+            Where^400 loneliness is merely an option that can be chosen at will.^400 <br>
+            Where^400 every person is a designer and author of life.^400 <br>
+            <br>
+            The time has come to open eyes and heart to a new life experience^500 and a new way of community. <br>
+            <br>
+            Our fellowship started out small: First there was the seed of an idea, slowly becoming a small plant,
+            stretching and drinking in the sunlight.^400 <br>
+            With every member that joins,^500 we grow into a bigger tree with even more delicious "fruit". <br>
+            We already thank you for^300 your courage and energy^300 and wish you,
+            <strong>{{ typed_username }}</strong>, a happy harvest. <br>
+            <br>
+            <span class="text-info">
+            [You start to wonder^100 what^200 he^100?^200 or^100 she^100?^200 is talking about.]^300 <br>
+            [Feeling as if you open your eyes for the first time,^300 you take a look around.]^600 <br>
+            </span>
+            <br>
+            You stand in a forst at a clearing and right in the middle of it,
+            you see a marvelously growing tree.^300 .^300 .^1000 <br>
+            <br>
+        </p>
+    </div>
+    <span id="typed" class="lead"></span>
+    <div class="after-typed">
+        <span class="lead">
+            <form action="" method="post">{% csrf_token %}
+                <button id="continue-to-welcome-tree" name="welcome-tree" type="submit" class="btn btn-primary">Walk to
+                    Welcome Tree
+                </button>
+            </form>
+        </span>
+    </div>
+{% endblock %}

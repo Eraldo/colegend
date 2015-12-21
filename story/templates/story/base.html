@@ -1,0 +1,44 @@
+{% extends "continuous/base.html" %}
+
+{% load static %}
+
+{% block extra_head %}
+    {{ block.super }}
+    <link href="{% static 'story/css/story.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% include '_breadcrumb.html' with url='continuous:index' title='Story' %}
+{% endblock %}
+
+{% block extra_script %}
+    {{ block.super }}
+    <script src="{% static 'components/typed.js/dist/typed.min.js' %}"></script>
+    <script>
+        function typed_callback() {
+            $('.typed-cursor').hide();
+            $('.after-typed').show();
+        }
+        function typed_skip() {
+            // stop the writer and it's timeout
+            clearTimeout($('#typed').data('typed').timeout);
+            $('#typed').data('typed').stop = true;
+            // get the html content without pauses
+            var content = $('#typed-strings p').last().html().replace(/\^\d+/g, '');
+            // replace the typed content the full html content to be typed
+            $('#typed').html(content);
+            // call the end hook
+            typed_callback();
+        }
+        $(function () {
+            $("#typed").typed({
+                typeSpeed: 10,
+                callback: function () {
+                    typed_callback();
+                },
+                stringsElement: $('#typed-strings')
+            });
+        });
+    </script>
+{% endblock %}

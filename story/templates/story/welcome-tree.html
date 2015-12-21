@@ -1,0 +1,63 @@
+{% extends "story/base.html" %}
+{% load static %}
+
+{% block title %}Welcome Tree{% endblock %}
+
+{% block site_messages %}{% endblock %}
+
+{% block content %}
+    {% if user.continuous.prologue %}
+        <a href="#" onclick="typed_skip()" class="pull-right">Skip</a>
+    {% endif %}
+
+    <div id="typed-strings">
+        <p>
+            <span class='story-initial-letter'>Y</span>ou^400 slowly^400 get^100 closer^100 to^100 the^100
+            tree^100.^100 <br>
+            In doing so,^200 you realize^200 that its leaves carry messages^200 from other legends^200 to make the
+            newest member^100 feel welcome:^1000
+        </p>
+    </div>
+    <span id="typed" class="lead"></span>
+    <div class="after-typed">
+
+        <a href="#" data-toggle="modal" data-target="#treeModal" onclick="get_message()">
+            <img src="{% static 'story/images/welcome-tree.jpg' %}" class="img-responsive" alt="Welcome Tree">
+        </a>
+        <small>Click on the tree to see it's messages.</small>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="treeModal" tabindex="-1" role="dialog" aria-labelledby="treeModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="questionsModalLabel">Leaf</h4>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button id="tree-next-message" name="next" type="submit" class="btn btn-primary"
+                            onclick="get_message()">
+                        Next
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_script %}
+    {{ block.super }}
+    <script>
+        function get_message() {
+            $('#treeModal .modal-body').load('{% url 'story:tree-message' %}');
+        }
+    </script>
+{% endblock %}
