@@ -2,7 +2,7 @@
 from __future__ import absolute_import, unicode_literals
 
 from django.conf.urls import url
-from .views import UserListView, UserRedirectView, SettingsView, ProfileView, UserUpdateView
+from .views import UserListView, UserRedirectView, SettingsView, ProfileView, UserUpdateView, UserIntroductionView
 
 urlpatterns = [
     # URL pattern for the UserListView
@@ -10,6 +10,13 @@ urlpatterns = [
         regex=r'^$',
         view=UserListView.as_view(),
         name='list'
+    ),
+
+    # URL pattern for the UserListView
+    url(
+        regex=r'^introduction$',
+        view=UserIntroductionView.as_view(),
+        name='introduction'
     ),
 
     # URL pattern for the UserRedirectView

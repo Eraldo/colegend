@@ -47,10 +47,10 @@
         <hr>
         <div class="chapter-marker">Chapter 1</div>
         <p>
-            <a href="{% if user.connected.legend %}
+            <a href="{% if user.connected.legend_introduction %}
                 {% url 'legends:profile' user.username %}
                 {% else %}
-                {% url 'legends:profile' user.username %}
+                {% url 'legends:introduction' %}
                 {% endif %}"
                class="btn btn-conscious">
                 Legend Profile

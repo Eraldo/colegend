@@ -1,0 +1,19 @@
+{% extends '_chat.html' %}
+
+{% block chat_title %}
+    A legendary profile
+{% endblock %}
+
+{% block chat_content %}
+    <p>
+        TODO: Write legend profile chat text
+    </p>
+{% endblock %}
+
+{% block chat_answers %}
+    <form action="" method="post">{% csrf_token %}
+        <button id="legend-introduction-success" name="success" type="submit" class="list-group-item">
+            Ok
+        </button>
+    </form>
+{% endblock %}

@@ -3,8 +3,8 @@ from __future__ import absolute_import, unicode_literals
 
 from braces.views import LoginRequiredMixin
 from django.core.urlresolvers import reverse
-from django.views.generic import DetailView, ListView, RedirectView, UpdateView
-
+from django.shortcuts import redirect
+from django.views.generic import DetailView, ListView, RedirectView, UpdateView, TemplateView
 from .models import User
 
 
@@ -54,3 +54,17 @@ class UserListView(LoginRequiredMixin, ListView):
     # These next two lines tell the view to index lookups by username
     slug_field = "username"
     slug_url_kwarg = "username"
+
+
+class UserIntroductionView(LoginRequiredMixin, TemplateView):
+    template_name = 'users/introduction.html'
+
+    def post(self, request, *args, **kwargs):
+        if 'success' in request.POST:
+            # update connected path
+            user = request.user
+            user.connected.legend_introduction = True
+            user.connected.save()
+            # redirect to profile
+            return redirect('legends:profile', user.username)
+        return self.get(request, *args, **kwargs)
