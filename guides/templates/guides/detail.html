@@ -2,13 +2,13 @@
 
 {% load static %}
 
-{% block title %}Guide Relation{% endblock %}
+{% block title %}Guide Pair{% endblock %}
 
 {% block content %}
     <p>
-        Guidee: {{ guiderelation.owner }}
+        Guidee: {% include 'users/widgets/legend.html' with legend=guiderelation.owner %}
     </p>
     <p>
-        Guide: {{ guiderelation.guide }}
+        Guide: {% include 'users/widgets/legend.html' with legend=guiderelation.guide %}
     </p>
 {% endblock %}

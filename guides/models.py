@@ -1,7 +1,10 @@
+from allauth.account.signals import user_signed_up
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.dispatch import receiver
 from django.utils.translation import ugettext as _
+from django_slack import slack_message
 
 from core.models import AutoOwnedBase, TimeStampedBase
 
@@ -64,3 +67,14 @@ class GuideRelation(AutoOwnedBase, TimeStampedBase):
                 connected.guide = True
                 connected.save()
         super().save(force_insert, force_update, using, update_fields)
+
+
+@receiver(user_signed_up)
+def start_guiding_process(request, user, **kwargs):
+    # Create a new guide relation
+    relation = user.guiderelation
+    # Notify potential guides
+    username = user.username
+    url = reverse('guides:list')
+    message = "{} is looking for a guide: {}".format(username, url)
+    slack_message('slack/message.slack', {'message': '@channel: {}'.format(message), 'channel': 'cloudguide'})
