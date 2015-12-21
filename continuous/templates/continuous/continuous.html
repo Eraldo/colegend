@@ -28,12 +28,12 @@
         <hr>
         <div class="chapter-marker">Prologue</div>
         <p>
-            <a href="{% url 'continuous:legend:prologue' %}" class="btn btn-continuous">
+            <a href="{% url 'story:prologue' %}" class="btn btn-continuous">
                 Prologue
             </a>
 
             {% if user.continuous.prologue %}
-                <a href="{% url 'continuous:legend:welcome-tree' %}" class="btn btn-continuous">
+                <a href="{% url 'story:welcome-tree' %}" class="btn btn-continuous">
                     Welcome Tree
                 </a>
             {% else %}

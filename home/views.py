@@ -15,7 +15,7 @@ class HomeView(TemplateView):
             return redirect("about")
         # Redirect if prologue is not completed.
         if not user.continuous.prologue:
-            return redirect("continuous:legend:prologue")
+            return redirect("story:prologue")
         return super().get(request, *args, **kwargs)
 
 

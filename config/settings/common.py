@@ -53,7 +53,7 @@ LOCAL_APPS = (
     'conscious',
     'connected',
     'continuous',
-    'continuous.legend',
+    'story',
     'guides',
 
     # helpers
