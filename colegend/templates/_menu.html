@@ -63,17 +63,40 @@
                             </a>
 
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{% url 'legends:profile' user.username %}">
-                                Legend
-                            </a>
-                            <a class="dropdown-item disabled" href="#">
-                                <i class="fa fa-lock"></i>
-                                Cloud Guide
-                            </a>
-                            <a class="dropdown-item disabled" href="#">
-                                <i class="fa fa-lock"></i>
-                                Dream Team
-                            </a>
+
+                            {% if user.connected.legend_introduction %}
+                                <a class="dropdown-item" href="{% url 'legends:profile' user.username %}">
+                                    Legend
+                                </a>
+                            {% else %}
+                                <a class="dropdown-item disabled" href="#">
+                                    <i class="fa fa-lock"></i>
+                                    Legend
+                                </a>
+                            {% endif %}
+
+                            {% if user.connected.guide_introduction %}
+                                <a class="dropdown-item" href="{% url 'guides:personal' %}">
+                                    Cloud Guide
+                                </a>
+                            {% else %}
+                                <a class="dropdown-item disabled" href="#">
+                                    <i class="fa fa-lock"></i>
+                                    Cloud Guide
+                                </a>
+                            {% endif %}
+
+                            {% if user.connected.team_introduction %}
+                                <a class="dropdown-item" href="#">
+                                    Dream Team
+                                </a>
+                            {% else %}
+                                <a class="dropdown-item disabled" href="#">
+                                    <i class="fa fa-lock"></i>
+                                    Dream Team
+                                </a>
+                            {% endif %}
+
                             <a class="dropdown-item disabled" href="#">
                                 <i class="fa fa-lock"></i>
                                 Tribe
@@ -97,9 +120,9 @@
                             {% endif %}
 
                             {% if user.connected.virtual_room %}
-                            <a class="dropdown-item" href="{% url 'connected:virtual-room' %}" target="_blank">
-                                Virtual Room
-                            </a>
+                                <a class="dropdown-item" href="{% url 'connected:virtual-room' %}" target="_blank">
+                                    Virtual Room
+                                </a>
                             {% else %}
                                 <a class="dropdown-item disabled" href="#">
                                     <i class="fa fa-lock"></i>
