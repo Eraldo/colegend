@@ -5,20 +5,18 @@ from django.db import models
 from django.dispatch import receiver
 from django.utils.translation import ugettext as _
 from django_slack import slack_message
-
 from core.models import AutoOwnedBase, TimeStampedBase
 
 
 class GuideRelationQuerySet(models.QuerySet):
-    def active(self):
-        return self.filter(done=False)
-
-    def passive(self):
-        return self.filter(done=True)
-
     def searching(self):
         return self.filter(guide__isnull=True)
 
+    def active(self):
+        return self.filter(done=False, guide__isnull=False)
+
+    def passive(self):
+        return self.filter(done=True)
 
 
 class GuideRelation(AutoOwnedBase, TimeStampedBase):

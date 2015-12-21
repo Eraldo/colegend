@@ -6,7 +6,9 @@
 
 {% block page_links %}
     <a href="{% url 'guides:guide' %}" class="btn btn-link btn-sm">My Guide</a>
-    <a href="{% url 'guides:guidees' %}" class="btn btn-link btn-sm">My Guidees</a>
+    {% if user.connected.guide %}
+        <a href="{% url 'guides:guidees' %}" class="btn btn-link btn-sm">My Guidees</a>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -43,7 +45,7 @@
         <p></p>
     {% endif %}
 
-    <h4>Guide Pairs</h4>
+    <h4>Guided Pairs</h4>
     <ul class="list-group">
         {% for relation in passive_relations %}
             <li class="list-group-item">
