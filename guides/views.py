@@ -1,6 +1,7 @@
 from braces.views import LoginRequiredMixin
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import Http404
+from django.shortcuts import redirect
 from django.views.generic import TemplateView, UpdateView, DetailView, ListView, RedirectView
 
 from guides.models import GuideRelation
@@ -9,6 +10,16 @@ from .forms import GuideManageForm
 
 class GuideIntroductionView(LoginRequiredMixin, TemplateView):
     template_name = 'guides/introduction.html'
+
+    def post(self, request, *args, **kwargs):
+        if 'success' in request.POST:
+            # update connected path
+            user = request.user
+            user.connected.guide_introduction = True
+            user.connected.save()
+            # redirect to profile
+            return redirect('guides:personal')
+        return self.get(request, *args, **kwargs)
 
 
 class GuideListView(LoginRequiredMixin, ListView):

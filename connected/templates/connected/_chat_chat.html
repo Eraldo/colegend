@@ -16,9 +16,9 @@
 {% endblock %}
 
 {% block chat_answers %}
-    <a href="{% url 'connected:chat-invitation' %}">
-        <li class="list-group-item">
+    <form action="" method="post">{% csrf_token %}
+        <button id="chat-introduction-success" name="success" type="submit" class="list-group-item">
             Yes, let’s get it started!
-        </li>
-    </a>
+        </button>
+    </form>
 {% endblock %}

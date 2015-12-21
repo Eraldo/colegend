@@ -37,6 +37,14 @@ class GuidelinesView(LoginRequiredMixin, TemplateView):
 class ChatIntroductionView(LoginRequiredMixin, TemplateView):
     template_name = 'connected/chat_introduction.html'
 
+    def post(self, request, *args, **kwargs):
+        if 'success' in request.POST:
+            user = request.user
+            user.connected.chat_introduction = True
+            user.connected.save()
+            return redirect('connected:chat-invitation')
+        return self.get(request, *args, **kwargs)
+
 
 class ChatInvitationView(LoginRequiredMixin, TemplateView):
     template_name = 'connected/chat_invitation.html'

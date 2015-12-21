@@ -68,7 +68,7 @@
         </p>
 
         <p>
-            <a href="{% if user.connected.guidelines %}
+            <a href="{% if user.connected.guidelines_introduction %}
                 {% url 'connected:guidelines' %}
                 {% else %}
                 {% url 'connected:guidelines-introduction' %}
@@ -78,11 +78,11 @@
             </a>
 
             {% if user.connected.guidelines %}
-                <a href="{% if user.connected.chat %}
-            {% url 'connected:chat' %}
-            {% else %}
-            {% url 'connected:chat-introduction' %}
-            {% endif %}"
+                <a href="{% if user.connected.chat_introduction %}
+                {% url 'connected:chat' %}
+                {% else %}
+                {% url 'connected:chat-introduction' %}
+                {% endif %}"
                    class="btn btn-connected">
                     Chat
                 </a>
