@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^about/', include('about.urls')),
     url(r'^conscious/', include('conscious.urls', namespace='conscious')),
     url(r'^connected/', include('connected.urls', namespace='connected')),
+                  url(r'^guides/', include('guides.urls', namespace='guides')),
     url(r'^continuous/', include('continuous.urls', namespace='continuous')),
     url(r'^test/$', TestView.as_view(), name='test'),
 

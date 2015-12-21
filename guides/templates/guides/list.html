@@ -1,0 +1,37 @@
+{% extends 'guides/base.html' %}
+
+{% load static %}
+
+{% block title %}Cloud Guides{% endblock %}
+
+{% block content %}
+    {% if user.connected.guide %}
+        <h4>Searching for Guide</h4>
+        <ul class="list-group">
+            {% for relation in pending_relations %}
+                <li class="list-group-item">
+                    {% include 'users/widgets/legend.html' with legend=relation.owner %}
+                    <form action="{% url 'guides:support' owner=relation.owner %}" method="post"
+                          style="display: inline-block">{% csrf_token %}
+                        <button id="guidee-support" name="support" type="submit" class="btn btn-primary btn-sm">
+                            Support
+                        </button>
+                    </form>
+                </li>
+                {% empty %}
+                All legends have a guide. :)
+            {% endfor %}
+        </ul>
+        <p></p>
+    {% endif %}
+
+    <h4>Guide Relations</h4>
+    <ul class="list-group">
+        {% for relation in found_relations %}
+            <li class="list-group-item">
+                {% include 'guides/widgets/relation.html' with guidee=relation.owner guide=relation.guide url=relation.get_absolute_url %}
+            </li>
+        {% endfor %}
+    </ul>
+    <p></p>
+{% endblock %}

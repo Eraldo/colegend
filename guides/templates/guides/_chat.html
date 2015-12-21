@@ -20,7 +20,7 @@
 {% endblock %}
 
 {% block chat_answers %}
-    <a href="{% url 'connected:guide' %}">
+    <a href="{% url 'guides:personal' %}">
         <li class="list-group-item">
             Sure! I’m ready to be found by my <i>Cloud Guide</i>.
         </li>
@@ -47,7 +47,7 @@
                     Feel free to ask your questions in the general or support channel until your guide has found you.
                 </div>
                 <div class="modal-footer">
-                    <a href="{% url 'connected:guide' %}" class="btn btn-success">Ok</a>
+                    <a href="{% url 'guides:personal' %}" class="btn btn-success">Ok</a>
                 </div>
             </div>
         </div>

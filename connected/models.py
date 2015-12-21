@@ -10,6 +10,7 @@ class Connected(AutoOwnedBase, TimeStampedBase):
     guidelines = models.BooleanField(default=False)
     chat = models.BooleanField(default=False)
     guide = models.BooleanField(default=False)
+    virtual_room = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = _('connected path')

@@ -1,4 +1,4 @@
-{% extends 'connected/base.html' %}
+{% extends 'guides/base.html' %}
 
 {% load static %}
 {% load crispy_forms_tags %}
@@ -13,30 +13,23 @@
                  alt="Cloud Guide">
         </div>
         <div class="col-sm-8">
-            {% if user.connected.guide %}
+            {% if guiderelation.owner.connected.guide %}
                 <p>
-                    Your cloud guide was: {{ guide }}
+                    I was cloud guide for: {{ guiderelation.owner }}
                 </p>
                 <p>
                     You met on the: {{ guide_date }}
                 </p>
-            {% elif user.connected.guide_found %}
+            {% else %}
                 <p>
-                    Your cloud guide is: {{ guide }}
+                    Your guidee: {{ guiderelation.owner }}
                 </p>
                 <p>
                     You will meet on the: {{ guide_date }}
-                </p>
-            {% else %}
-                <p>
-                    Looks like your Cloud Guide is still on the lookout for you… <br>
-                    Don’t worry - he or she will find you soon enough! :)
                 </p>
             {% endif %}
         </div>
     </div>
     <p></p>
-    {% if user.connected.guide_found %}
-        {% crispy form %}
-    {% endif %}
+    {% crispy form %}
 {% endblock %}

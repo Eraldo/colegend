@@ -95,9 +95,9 @@
 
             {% if user.connected.chat %}
                 <a href="{% if user.connected.guide %}
-            {% url 'connected:guide' %}
+            {% url 'guides:personal' %}
             {% else %}
-            {% url 'connected:guide-introduction' %}
+            {% url 'guides:introduction' %}
             {% endif %}"
                    class="btn btn-connected">
                     Cloud Guide

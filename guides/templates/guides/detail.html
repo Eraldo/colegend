@@ -1,0 +1,14 @@
+{% extends 'guides/base.html' %}
+
+{% load static %}
+
+{% block title %}Guide Relation{% endblock %}
+
+{% block content %}
+    <p>
+        Guidee: {{ guiderelation.owner }}
+    </p>
+    <p>
+        Guide: {{ guiderelation.guide }}
+    </p>
+{% endblock %}

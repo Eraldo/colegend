@@ -54,6 +54,7 @@ LOCAL_APPS = (
     'connected',
     'continuous',
     'continuous.legend',
+    'guides',
 
     # helpers
     'django.contrib.webdesign',
