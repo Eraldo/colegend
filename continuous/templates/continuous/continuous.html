@@ -95,7 +95,7 @@
 
             {% if user.connected.chat %}
                 <a href="{% if user.connected.guide_introduction %}
-            {% url 'guides:personal' %}
+            {% url 'guides:guide' %}
             {% else %}
             {% url 'guides:introduction' %}
             {% endif %}"

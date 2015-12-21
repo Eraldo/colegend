@@ -18,7 +18,7 @@ class GuideIntroductionView(LoginRequiredMixin, TemplateView):
             user.connected.guide_introduction = True
             user.connected.save()
             # redirect to profile
-            return redirect('guides:personal')
+            return redirect('guides:guide')
         return self.get(request, *args, **kwargs)
 
 
@@ -60,7 +60,7 @@ class GuideDetailView(LoginRequiredMixin, DetailView):
         user = request.user
         relation = self.get_object()
         if user == relation.owner:
-            return redirect('guides:personal')
+            return redirect('guides:guide')
         elif user == relation.guide:
             return redirect('guides:manage', relation.owner)
         return super().get(request, *args, **kwargs)
