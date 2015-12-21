@@ -12,6 +12,14 @@ class ConnectedView(LoginRequiredMixin, TemplateView):
 class GuidelinesIntroductionView(LoginRequiredMixin, TemplateView):
     template_name = 'connected/guidelines_introduction.html'
 
+    def post(self, request, *args, **kwargs):
+        if 'success' in request.POST:
+            user = request.user
+            user.connected.guidelines_introduction = True
+            user.connected.save()
+            return redirect('connected:guidelines')
+        return self.get(request, *args, **kwargs)
+
 
 class GuidelinesView(LoginRequiredMixin, TemplateView):
     template_name = 'connected/guidelines.html'

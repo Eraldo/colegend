@@ -16,16 +16,14 @@
 {% endblock %}
 
 {% block chat_answers %}
-    <a href="{% url 'connected:guidelines' %}">
-        <li class="list-group-item">
+    <form action="" method="post">{% csrf_token %}
+        <button id="guidelines-introduction-success" name="success" type="submit" class="list-group-item">
             Sure, let's go.
-        </li>
-    </a>
-    <a href="#"
+        </button>
+    </form>
+    <a href="#" class="list-group-item"
        onclick="alert('Our community guidelines are not rules. They are best practises of ways of communication and interaction. We have experienced them to be especially valuable for creating a safe space for personal development. You might find out why by taking a look at them.');">
-        <li class="list-group-item">
-            Not interested - the only rules I care about are my own!
-        </li>
+        Not interested - the only rules I care about are my own!
     </a>
 
 {% endblock %}
