@@ -1,4 +1,4 @@
-{% load socialaccount %}
+{% load socialaccount icons %}
 
 {% get_providers as socialaccount_providers %}
 
@@ -14,6 +14,6 @@
     {% endif %}
     <a title="{{ provider.name }}" class="btn btn-primary socialaccount_provider {{ provider.id }}"
        href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">
-        <i class="fa fa-{{ provider.id }}"></i> {{ provider.name }}
+        {% icon provider.id %} {{ provider.name }}
     </a>
 {% endfor %}

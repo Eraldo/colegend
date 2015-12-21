@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static icons %}
 
 {% block title %}Continuous{% endblock %}
 
@@ -38,7 +38,7 @@
                 </a>
             {% else %}
                 <a href="#" class="btn btn-continuousdisabled">
-                    <i class="fa fa-lock"></i>
+                    {% icon 'locked' %}
                     Poetree
                 </a>
 
@@ -57,13 +57,13 @@
             </a>
 
             <a href="#" class="btn btn-conscious disabled">
-                <i class="fa fa-lock"></i> Outer Call
+                {% icon 'locked' %} Outer Call
             </a>
             <a href="#" class="btn btn-conscious disabled">
-                <i class="fa fa-lock"></i> Inner Call
+                {% icon 'locked' %} Inner Call
             </a>
             <a href="#" class="btn btn-conscious disabled">
-                <i class="fa fa-lock"></i> Biography
+                {% icon 'locked' %} Biography
             </a>
         </p>
 
@@ -88,7 +88,7 @@
                 </a>
             {% else %}
                 <a href="#" class="btn btn-connected disabled">
-                    <i class="fa fa-lock"></i>
+                    {% icon 'locked' %}
                     Chat
                 </a>
             {% endif %}
@@ -104,7 +104,7 @@
                 </a>
             {% else %}
                 <a href="#" class="btn btn-connected disabled">
-                    <i class="fa fa-lock"></i>
+                    {% icon 'locked' %}
                     Cloud Guide
                 </a>
             {% endif %}
@@ -112,7 +112,7 @@
 
         <p>
             <a href="#" class="btn btn-continuous disabled">
-                <i class="fa fa-lock"></i>
+                {% icon 'locked' %}
                 Chapter 1
             </a>
         </p>
@@ -120,27 +120,27 @@
         <div class="chapter-marker">Chapter 2</div>
         <p>
             <a href="#" class="btn btn-continuous disabled">
-                <i class="fa fa-lock"></i> Dream Team
+                {% icon 'locked' %} Dream Team
             </a>
         </p>
 
         <p>
             <a href="#" class="btn btn-continuous disabled">
-                <i class="fa fa-lock"></i> Chapter 2
+                {% icon 'locked' %} Chapter 2
             </a>
         </p>
         <hr>
         <div class="chapter-marker">Chapter 3</div>
         <p>
             <a href="#" class="btn btn-primary disabled">
-                <i class="fa fa-lock"></i> Tribe
+                {% icon 'locked' %} Tribe
             </a>
         </p>
         <hr>
         <div class="chapter-marker">Chapter 4</div>
         <p>
             <a href="#" class="btn btn-primary disabled">
-                <i class="fa fa-lock"></i> Circle
+                {% icon 'locked' %} Circle
             </a>
         </p>
     </div>

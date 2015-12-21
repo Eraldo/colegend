@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load static i18n %}
+{% load static i18n icons %}
 {% load crispy_forms_tags %}
 {% load socialaccount %}
 
@@ -82,25 +82,25 @@
                         <ul class="list-group list-group-flush">
                             <a id="regular-signup" href="{% url 'account_signup' %}">
                                 <li class="list-group-item">
-                                    <i class="fa fa-key fa-fw"></i>
+                                    {% icon 'key' fixed=True %}
                                     I want a regular signup form.
                                 </li>
                             </a>
                             <a id="google-signup" href="{% provider_login_url "google" %}">
                                 <li class="list-group-item">
-                                    <i class="fa fa-google-plus fa-fw"></i>
+                                    {% icon 'google-plus' fixed=True %}
                                     I love my big brother Google, he will help me join.
                                 </li>
                             </a>
                             <a id="facebook-signup" href="{% provider_login_url "facebook" method="oauth2" %}">
                                 <li class="list-group-item">
-                                    <i class="fa fa-facebook fa-fw"></i>
+                                    {% icon 'facebook' fixed=True %}
                                     I like to collect friends, I choose facebook.
                                 </li>
                             </a>
                             <a id="login-redirect" href="{% url 'account_login' %}">
                                 <li class="list-group-item">
-                                    <i class="fa fa-sign-in fa-fw"></i>
+                                    {% icon 'sign-in' fixed=True %}
                                     I forgot.. I already have an account
                                 </li>
                             </a>

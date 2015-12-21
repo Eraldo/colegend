@@ -4,6 +4,7 @@
 {% load crispy_forms_tags %}
 {% load account %}
 {% load socialaccount %}
+{% load icons %}
 
 {% block breadcrumbs %}{% endblock %}
 
@@ -96,19 +97,19 @@
 
                             <a href="{% provider_login_url "google" %}">
                                 <li class="list-group-item">
-                                    <i class="fa fa-google-plus fa-fw"></i>
+                                    {% icon 'google-plus' fixed=True %}
                                     My big brother will tell you who I am.
                                 </li>
                             </a>
                             <a href="{% provider_login_url "facebook" method="oauth2" %}">
                                 <li class="list-group-item">
-                                    <i class="fa fa-facebook fa-fw"></i>
+                                    {% icon 'facebook' fixed=True %}
                                     My friends will tell you who I am.
                                 </li>
                             </a>
                             <a href="{% url 'join' %}">
                                 <li class="list-group-item">
-                                    <i class="fa fa-sign-in fa-fw"></i>
+                                    {% icon 'sign-in' fixed=True %}
                                     Err, I am new here.. Where can I join?
                                 </li>
                             </a>

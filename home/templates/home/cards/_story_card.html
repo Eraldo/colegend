@@ -1,4 +1,4 @@
-{% load static %}
+{% load static icons %}
 
 {% block extra_head %}
     {{ super.block }}
@@ -8,7 +8,7 @@
 <div class="card bg-content">
     <div class="card-header">
         <a href="#" class="">
-            <i class="fa fa-paw"></i>
+            {% icon 'story' %}
             Story
         </a>
         {% include 'home/cards/_card_close_button.html' %}

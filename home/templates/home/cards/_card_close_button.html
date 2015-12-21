@@ -1,4 +1,5 @@
+{% load icons %}
 <a href="#" onclick="$(this).closest('.card').hide('blind', {direction: 'up'});"
    class="card-close-button close">
-    <small><i class="fa fa-close pull-right"></i></small>
+    <small>{% icon 'close' classes='pull-right' %}</small>
 </a>

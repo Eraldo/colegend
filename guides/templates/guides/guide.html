@@ -1,6 +1,6 @@
 {% extends 'guides/base.html' %}
 
-{% load static %}
+{% load static icons %}
 
 {% block title %}Cloud Guide{% endblock %}
 
@@ -36,33 +36,33 @@
         <ul class="list-group">
             <li class="list-group-item">
                 {% if user.guiderelation.outer_call_checked %}
-                    <i class="fa fa-check-square-o"></i>
+                    {% icon 'checked' fixed=True %}
                 {% else %}
-                    <i class="fa fa-square-o"></i>
+                    {% icon 'unchecked' fixed=True %}
                 {% endif %}
                 Talked about outer call
             </li>
             <li class="list-group-item">
                 {% if user.guiderelation.inner_call_checked %}
-                    <i class="fa fa-check-square-o"></i>
+                    {% icon 'checked' fixed=True %}
                 {% else %}
-                    <i class="fa fa-square-o"></i>
+                    {% icon 'unchecked' fixed=True %}
                 {% endif %}
                 Talked about inner call
             </li>
             <li class="list-group-item">
                 {% if user.guiderelation.coLegend_checked %}
-                    <i class="fa fa-check-square-o"></i>
+                    {% icon 'checked' fixed=True %}
                 {% else %}
-                    <i class="fa fa-square-o"></i>
+                    {% icon 'unchecked' fixed=True %}
                 {% endif %}
                 Answered any questions about coLegend
             </li>
             <li class="list-group-item">
                 {% if user.guiderelation.guiding_checked %}
-                    <i class="fa fa-check-square-o"></i>
+                    {% icon 'checked' fixed=True %}
                 {% else %}
-                    <i class="fa fa-square-o"></i>
+                    {% icon 'unchecked' fixed=True %}
                 {% endif %}
                 Talked about becoming a Guide
             </li>

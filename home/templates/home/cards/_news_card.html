@@ -1,7 +1,8 @@
+{% load icons %}
 <div id="news-card" class="card bg-content">
     <div class="card-header">
         <a href="#" class="">
-            <i class="fa fa-newspaper-o"></i>
+            {% icon 'news' %}
             News
         </a>
         {% include 'home/cards/_card_close_button.html' %}

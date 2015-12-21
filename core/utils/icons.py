@@ -19,6 +19,17 @@ icon_dict = {
     'challenges': 'star',
     'journal': 'book',
     'manager': 'check',
+
+    'checked': 'check-square-o',
+    'unchecked': 'square-o',
+
+    'event': 'calendar',
+    'feature': 'road',
+    'news': 'newspaper-o',
+    'quote': 'quote-left',
+    'role': 'user-md',
+    'story': 'paw',
+    'tool': 'gavel',
 }
 
 
@@ -124,7 +135,7 @@ def get_icon_name(name):
     return icon_dict.get(name, name)
 
 
-def get_icon(name, large=False, fixed=False, spin=False, li=False, rotate=False, border=False, color=False,
+def get_icon(name, large=False, fixed=False, spin=False, pulse=False, li=False, rotate=False, border=False, color=False,
              classes=None, raw=False):
     name = get_icon_name(name)
     if raw:
@@ -135,6 +146,7 @@ def get_icon(name, large=False, fixed=False, spin=False, li=False, rotate=False,
         'large': large,
         'fixed': fixed,
         'spin': spin,
+        'pulse': pulse,
         'li': li,
         'rotate': rotate,
         'border': border,

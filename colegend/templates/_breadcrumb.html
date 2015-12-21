@@ -1,1 +1,2 @@
-<a href="{% url url %}" class="breadcrumb-link"><i class="fa fa-{{ icon }}"></i> {{ title|title }}</a>
+{% load icons %}
+<a href="{% url url %}" class="breadcrumb-link">{% icon icon %} {{ title|title }}</a>
