@@ -31,15 +31,17 @@
         <p></p>
     {% endif %}
 
-    <h4>Active Guide Pairs</h4>
-    <ul class="list-group">
-        {% for relation in active_relations %}
-            <li class="list-group-item">
-                {% include 'guides/widgets/relation.html' with guidee=relation.owner guide=relation.guide url=relation.get_absolute_url %}
-            </li>
-        {% endfor %}
-    </ul>
-    <p></p>
+    {% if active_relations %}
+        <h4>Active Guide Pairs</h4>
+        <ul class="list-group">
+            {% for relation in active_relations %}
+                <li class="list-group-item">
+                    {% include 'guides/widgets/relation.html' with guidee=relation.owner guide=relation.guide url=relation.get_absolute_url %}
+                </li>
+            {% endfor %}
+        </ul>
+        <p></p>
+    {% endif %}
 
     <h4>Guide Pairs</h4>
     <ul class="list-group">
