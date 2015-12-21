@@ -9,7 +9,7 @@ urlpatterns = patterns(
     url(r'^chapter-1$',
         Chapter1View.as_view(),
         name='chapter1'),
-    url(r'^welcome-tree',
+    url(r'^welcome-tree$',
         WelcomeTreeView.as_view(),
         name='welcome-tree'),
     url(r'^prologue$',

@@ -6,6 +6,9 @@
 {% block site_messages %}{% endblock %}
 
 {% block content %}
+    {% if user.continuous.prologue %}
+        <a href="#" onclick="typed_callback()" class="pull-right">Skip</a>
+    {% endif %}
 
     <div id="typed-strings">
         <p>
@@ -18,7 +21,7 @@
     <span id="typed" class="lead"></span>
     <div class="after-typed">
 
-        <a href="" data-toggle="modal" data-target="#treeModal" onclick="get_message()">
+        <a href="#" data-toggle="modal" data-target="#treeModal" onclick="get_message()">
             <img src="{% static 'legend/images/welcome-tree.jpg' %}" class="img-responsive" alt="Welcome Tree">
         </a>
         <small>Click on the tree to see it's messages.</small>
