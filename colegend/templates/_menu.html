@@ -1,4 +1,4 @@
-{% load staticfiles i18n %}
+{% load staticfiles i18n icons %}
 
 <nav id="site-menu" class="navbar navbar-static-top navbar-light">
     <div class="container">
@@ -20,7 +20,7 @@
                         <button class="btn btn-link nav-link" type="button" id="menu-button-conscious"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="text-conscious">
-                                <i class="fa fa-graduation-cap"></i> conscious
+                                {% icon 'conscious' %} conscious
                             </span>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="menu-button-conscious">
@@ -30,17 +30,17 @@
 
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item disabled" href="#">
-                                <i class="fa fa-lock"></i>
+                                {% icon 'locked' %}
                                 Journal
                                 {#                                <small class="pull-right">level 2</small>#}
                             </a>
                             <a class="dropdown-item disabled" href="#">
-                                <i class="fa fa-lock"></i>
+                                {% icon 'locked' %}
                                 Manager
                                 {#                                <small class="pull-right">level 3</small>#}
                             </a>
                             <a class="dropdown-item disabled" href="#">
-                                <i class="fa fa-lock"></i>
+                                {% icon 'locked' %}
                                 Habits
                                 {#                                <small class="pull-right">level 4</small>#}
                             </a>
@@ -54,7 +54,7 @@
                         <button class="btn btn-link nav-link" type="button" id="menu-button-connected"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="text-connected">
-                                <i class="fa fa-heart"></i> connected
+                                {% include 'widgets/icon.html' with name='heart' %} connected
                             </span>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="menu-button-connected">
@@ -70,7 +70,7 @@
                                 </a>
                             {% else %}
                                 <a class="dropdown-item disabled" href="#">
-                                    <i class="fa fa-lock"></i>
+                                    {% icon 'locked' %}
                                     Legend
                                 </a>
                             {% endif %}
@@ -81,7 +81,7 @@
                                 </a>
                             {% else %}
                                 <a class="dropdown-item disabled" href="#">
-                                    <i class="fa fa-lock"></i>
+                                    {% icon 'locked' %}
                                     Cloud Guide
                                 </a>
                             {% endif %}
@@ -92,17 +92,17 @@
                                 </a>
                             {% else %}
                                 <a class="dropdown-item disabled" href="#">
-                                    <i class="fa fa-lock"></i>
+                                    {% icon 'locked' %}
                                     Dream Team
                                 </a>
                             {% endif %}
 
                             <a class="dropdown-item disabled" href="#">
-                                <i class="fa fa-lock"></i>
+                                {% icon 'locked' %}
                                 Tribe
                             </a>
                             <a class="dropdown-item disabled" href="#">
-                                <i class="fa fa-lock"></i>
+                                {% icon 'locked' %}
                                 Circle
                             </a>
 
@@ -114,7 +114,7 @@
                                 </a>
                             {% else %}
                                 <a class="dropdown-item disabled" href="#">
-                                    <i class="fa fa-lock"></i>
+                                    {% icon 'locked' %}
                                     Chat
                                 </a>
                             {% endif %}
@@ -125,7 +125,7 @@
                                 </a>
                             {% else %}
                                 <a class="dropdown-item disabled" href="#">
-                                    <i class="fa fa-lock"></i>
+                                    {% icon 'locked' %}
                                     Virtual Room
                                 </a>
                             {% endif %}
@@ -145,7 +145,7 @@
                         <button class="btn btn-link nav-link" type="button" id="menu-button-continuous"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="text-continuous">
-                                <i class="fa fa-paw"></i> continuous
+                                {% icon 'continuous' %} continuous
                             </span>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="menu-button-continuous">
@@ -155,21 +155,21 @@
 
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item disabled" href="#">
-                                <i class="fa fa-lock"></i>
+                                {% icon 'locked' %}
                                 Personal Story
                             </a>
                             <a class="dropdown-item disabled" href="#">
-                                <i class="fa fa-lock"></i>
+                                {% icon 'locked' %}
                                 Tribe Story
                             </a>
                             <a class="dropdown-item disabled" href="#">
-                                <i class="fa fa-lock"></i>
+                                {% icon 'locked' %}
                                 coLegend Story
                             </a>
 
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item disabled" href="#" data-toggle="tooltip" title="Tooltip on top">
-                                <i class="fa fa-lock"></i>
+                                {% icon 'locked' %}
                                 Success Stream
                             </a>
                         </div>
@@ -186,18 +186,18 @@
                             <button class="btn btn-link nav-link" type="button" id="menu-button-account"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="text-account">
-                                <i class="fa fa-user"></i> {{ user.username|default:"Account" }}
+                                {% icon 'legend' %} {{ user.username|default:"Account" }}
                             </span>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="menu-button-account">
                                 <a class="dropdown-item" href="{% url 'legends:profile' request.user.username %}">
-                                    <i class="fa fa-user"></i> Legend
+                                    {% icon 'legend' %} Legend
                                 </a>
                                 <a class="dropdown-item" href="{% url 'legends:settings' %}">
-                                    <i class="fa fa-wrench"></i> Settings
+                                    {% icon 'settings' %} Settings
                                 </a>
                                 <a class="dropdown-item" href="{% url 'account_logout' %}">
-                                    <i class="fa fa-sign-out"></i> Logout
+                                    {% icon 'sign-out' %} Logout
                                 </a>
                             </div>
                         </div>
