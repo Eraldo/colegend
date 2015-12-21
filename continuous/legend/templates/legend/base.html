@@ -20,6 +20,17 @@
             $('.typed-cursor').hide();
             $('.after-typed').show();
         }
+        function typed_skip() {
+            // stop the writer and it's timeout
+            clearTimeout($('#typed').data('typed').timeout);
+            $('#typed').data('typed').stop = true;
+            // get the html content without pauses
+            var content = $('#typed-strings p').last().html().replace(/\^\d+/g, '');
+            // replace the typed content the full html content to be typed
+            $('#typed').html(content);
+            // call the end hook
+            typed_callback();
+        }
         $(function () {
             $("#typed").typed({
                 typeSpeed: 10,

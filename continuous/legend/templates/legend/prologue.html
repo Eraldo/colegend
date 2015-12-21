@@ -17,6 +17,9 @@
 {% endblock %}
 
 {% block content %}
+    {% if user.continuous.prologue %}
+        <a href="#" onclick="typed_skip()" class="pull-right">Skip</a>
+    {% endif %}
     <div id="typed-strings">
         <p>
             <span class='legend-initial-letter'>O</span>nce upon a time .^500 .^500 .^1000 <br>
