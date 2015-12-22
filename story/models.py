@@ -6,11 +6,10 @@ __author__ = 'Eraldo Energy'
 
 
 class WelcomeTreeLeaf(SingleOwnedBase, TimeStampedBase):
-    name = models.CharField(max_length=255)
     content = models.TextField()
 
     def __str__(self):
-        return self.name
+        return "{}'s welcome leaf".format(self.owner)
 
     class Meta:
         verbose_name_plural = "Welcome tree leaves"

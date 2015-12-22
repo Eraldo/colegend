@@ -3,7 +3,9 @@ import random
 from braces.views import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.utils import timezone
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, DetailView
+
+from .models import WelcomeTreeLeaf
 
 
 class Chapter1View(LoginRequiredMixin, TemplateView):
@@ -102,14 +104,16 @@ class WelcomeTreeView(LoginRequiredMixin, TemplateView):
 
 
 class WelcomeTreeLeafWidgetView(LoginRequiredMixin, TemplateView):
-    template_name = 'story/widgets/message.html'
+    template_name = 'story/widgets/leaf.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        legend_leaves = WelcomeTreeLeaf.objects.all()
         messages = [
             'Welcome dude. :D',
             'Yeah.. adventure ahead of you!',
             'If it is true, then share it.',
             'Trust your heart']
-        context['message'] = random.choice(messages)
+        messages += [leaf.content for leaf in legend_leaves]
+        context['text'] = random.choice(messages)
         return context
