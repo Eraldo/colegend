@@ -1,5 +1,5 @@
 {% extends "story/base.html" %}
-{% load static %}
+{% load static icons %}
 
 {% block title %}Welcome Tree{% endblock %}
 
@@ -30,24 +30,17 @@
     <!-- Modal -->
     <div class="modal fade" id="treeModal" tabindex="-1" role="dialog" aria-labelledby="treeModalLabel"
          aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        <span class="sr-only">Close</span>
-                    </button>
-                    <h4 class="modal-title" id="questionsModalLabel">Leaf</h4>
+        <div class="modal-dialog" role="document">
+            <div id="paper-scroll">
+                <button id="close-button" type="button" class="btn btn-link btn-sm" data-dismiss="modal">
+                    {% icon 'close' color='black' %}
+                </button>
+                <div id="leaf" class="handwritten-font">
                 </div>
-                <div class="modal-body">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button id="tree-next-message" name="next" type="submit" class="btn btn-primary"
-                            onclick="get_message()">
-                        Next
-                    </button>
-                </div>
+                <button id="next-button" name="next" type="submit" class="btn btn-link btn-sm"
+                        onclick="get_message()">
+                    {% icon 'rotate-right' color='black' %}
+                </button>
             </div>
         </div>
     </div>
@@ -57,7 +50,7 @@
     {{ block.super }}
     <script>
         function get_message() {
-            $('#treeModal .modal-body').load('{% url 'story:tree-leaf' %}');
+            $('#treeModal #leaf').load('{% url 'story:tree-leaf' %}');
         }
     </script>
 {% endblock %}

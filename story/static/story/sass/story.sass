@@ -27,15 +27,13 @@
 @font-face
   font-family: preciosa
   src: url('../fonts/PRECIOSA.TTF')
-
 $story-initial-font: preciosa
 
 // Story text font
 @font-face
   font-family: specialelite
   src: url('../fonts/special-elite/SpecialElite.ttf')
-
-$story-text-font: specialelite
+$story-font: specialelite
 
 .story-initial-letter
   font: 400% $story-initial-font
@@ -43,5 +41,32 @@ $story-text-font: specialelite
 #typed-strings, .after-typed
   display: none
 
-#typed
-  font-family: $story-text-font
+#typed, .typed
+  font-family: $story-font
+
+// Handwritten font
+@font-face
+  font-family: journal
+  src: url('../fonts/Journal/journal.ttf')
+$handwritten-font: journal
+
+.handwritten-font
+  font-family: $handwritten-font
+
+#paper-scroll
+  background-image: url('http://www.amyelizabethpromotions.com/Princess_Parties_files/Blank%20Scroll-filtered_1.png')
+  min-height: 400px
+  background-size: 100% 100%
+  padding: 60px 50px
+  #leaf
+    font-size: 2em
+    overflow: scroll
+    max-height: 400px
+  #next-button
+    position: absolute
+    top: 10px
+    left: 20px
+  #close-button
+    position: absolute
+    top: 0
+    right: 5px
