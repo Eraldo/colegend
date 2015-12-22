@@ -101,7 +101,7 @@ class WelcomeTreeView(LoginRequiredMixin, TemplateView):
     template_name = "story/welcome-tree.html"
 
 
-class TreeMessageWidgetView(LoginRequiredMixin, TemplateView):
+class WelcomeTreeLeafWidgetView(LoginRequiredMixin, TemplateView):
     template_name = 'story/widgets/message.html'
 
     def get_context_data(self, **kwargs):

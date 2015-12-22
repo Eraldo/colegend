@@ -57,7 +57,7 @@
     {{ block.super }}
     <script>
         function get_message() {
-            $('#treeModal .modal-body').load('{% url 'story:tree-message' %}');
+            $('#treeModal .modal-body').load('{% url 'story:tree-leaf' %}');
         }
     </script>
 {% endblock %}

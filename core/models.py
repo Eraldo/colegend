@@ -18,6 +18,13 @@ class OwnedBase(models.Model):
         abstract = True
 
 
+class SingleOwnedBase(models.Model):
+    owner = models.OneToOneField(settings.AUTH_USER_MODEL)
+
+    class Meta:
+        abstract = True
+
+
 class AutoOwnedBase(models.Model):
     owner = AutoOneToOneField(settings.AUTH_USER_MODEL, primary_key=True)
 
