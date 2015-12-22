@@ -49,5 +49,6 @@ def new_user_manager_notification(request, user, **kwargs):
     message = "Hurray! {} has joined the circle of legends.".format(username)
 
     send_mail(subject, message, None, managers, fail_silently=False)
-
-    slack_message('slack/message.slack', {'message': '@channel: {}'.format(message), })
+    # TODO: Fix backend isse: https://app.getsentry.com/eraldo/colegend-staging/issues/102969964/
+    # Then remove fail_silently
+    slack_message('slack/message.slack', {'message': '@channel: {}'.format(message), }, fail_silently=True)

@@ -75,4 +75,7 @@ def start_guiding_process(request, user, **kwargs):
     username = user.username
     url = reverse('guides:list')
     message = "{} is looking for a guide: {}".format(username, url)
-    slack_message('slack/message.slack', {'message': '@channel: {}'.format(message), 'channel': 'cloudguide'})
+    # TODO: Fix backend isse: https://app.getsentry.com/eraldo/colegend-staging/issues/102969964/
+    # Then remove fail_silently
+    slack_message('slack/message.slack', {'message': '@channel: {}'.format(message), 'channel': 'cloudguide'},
+                  fail_silently=True)
