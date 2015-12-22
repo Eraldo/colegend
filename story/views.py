@@ -1,10 +1,8 @@
 import random
-
 from braces.views import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.utils import timezone
 from django.views.generic import TemplateView, DetailView
-
 from .models import WelcomeTreeLeaf
 
 
@@ -109,11 +107,18 @@ class WelcomeTreeLeafWidgetView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         legend_leaves = WelcomeTreeLeaf.objects.all()
-        messages = [
-            'Welcome dude. :D',
-            'Yeah.. adventure ahead of you!',
-            'If it is true, then share it.',
-            'Trust your heart']
+        messages = greetings
         messages += [leaf.content for leaf in legend_leaves]
         context['text'] = random.choice(messages)
         return context
+
+
+greetings = [
+    'Thank you for having the courage to take your story into your own hands.',
+    'This world needs people like you, who are willing to go and look for the roots instead of just complaining about the sickened leaves.',
+    'I welcome you into the circle of Legends.',
+    'I am grateful for everything that has happened so far, as every step has led me to this very moment where you decided to join this community.',
+    'To be alive and aware are two of the most wonderful gifts I have ever received.',
+    'What can I possibly tell you to make you feel welcome in this space that is as much yours as it is mine? How do we shift the paradigm from either or, to and? I hope you will help us find out…',
+    'I was not sent to this world by an unknown force, nor was I born for a greater reason, I have and always will be part of this ecosystem we call earth, galaxy, universe. For this time of a human specimen I decide to work hard to remind ourselves that we were not, are not and never will be, disconnected.',
+]
