@@ -62,13 +62,12 @@
   font-family: journal;
   src: url("../fonts/Journal/journal.ttf");
 }
-
 .handwritten-font {
   font-family: journal;
 }
 
 #paper-scroll {
-  background-image: url("http://www.amyelizabethpromotions.com/Princess_Parties_files/Blank%20Scroll-filtered_1.png");
+  background-image: url("../images/paper-scroll.png");
   min-height: 400px;
   background-size: 100% 100%;
   padding: 60px 50px;
