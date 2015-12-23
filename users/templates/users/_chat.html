@@ -6,14 +6,22 @@
 
 {% block chat_content %}
     <p>
-        TODO: Write legend profile chat text
+        So we meet again :)
+    </p>
+    <p>
+        For your next step we have prepared <b>a few questions</b> that you can answer for yourself to become conscious
+        of how
+        you got here, why you want to be here and who you are.
+    </p>
+    <p>
+        Ready to start digging deeper?
     </p>
 {% endblock %}
 
 {% block chat_answers %}
     <form action="" method="post">{% csrf_token %}
         <button id="legend-introduction-success" name="success" type="submit" class="list-group-item">
-            Ok
+            Yes, I’m ready! Show me those questions.
         </button>
     </form>
 {% endblock %}
