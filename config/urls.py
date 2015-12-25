@@ -31,9 +31,14 @@ urlpatterns = patterns(
     # Your stuff: custom urls includes go here
     url(r'^$', HomeView.as_view(), name='home'),
     url(r'^about/', include('about.urls')),
+
     url(r'^conscious/', include('conscious.urls', namespace='conscious')),
+    url(r'^outer-call/', include('outercall.urls', namespace='outer-call')),
+    url(r'^inner-call/', include('innercall.urls', namespace='inner-call')),
+
     url(r'^connected/', include('connected.urls', namespace='connected')),
     url(r'^guides/', include('guides.urls', namespace='guides')),
+
     url(r'^continuous/', include('continuous.urls', namespace='continuous')),
     url(r'^story/', include('story.urls', namespace='story')),
     url(r'^test/$', TestView.as_view(), name='test'),

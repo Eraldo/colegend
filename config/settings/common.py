@@ -50,11 +50,16 @@ LOCAL_APPS = (
     'core',  # common code
     'about',
     'home',
+
     'conscious',
+    'outercall',
+    'innercall',
+
     'connected',
+    'guides',
+
     'continuous',
     'story',
-    'guides',
 
     # helpers
     'django.contrib.webdesign',

@@ -47,35 +47,56 @@
         <hr>
         <div class="chapter-marker">Chapter 1</div>
         <p>
+
+            <a href="{% url 'outer-call:create' %}" class="btn btn-conscious">
+                Outer Call
+            </a>
+            {% if user.conscious.outer_call %}
+                <a href="{% url 'inner-call:create' %}" class="btn btn-conscious">
+                    Inner Call
+                </a>
+            {% else %}
+                <a href="#" class="btn btn-conscious disabled">
+                    {% icon 'locked' %} Inner Call
+                </a>
+            {% endif %}
+            {% if user.conscious.inner_call %}
+                <a href="#" class="btn btn-conscious">
+                    Biography
+                </a>
+            {% else %}
+                <a href="#" class="btn btn-conscious disabled">
+                    {% icon 'locked' %} Biography
+                </a>
+            {% endif %}
+        </p>
+
+        <p>
             <a href="{% if user.connected.legend_introduction %}
                 {% url 'legends:profile' user.username %}
                 {% else %}
                 {% url 'legends:introduction' %}
                 {% endif %}"
-               class="btn btn-conscious">
+               class="btn btn-connected">
                 Legend Profile
             </a>
 
-            <a href="#" class="btn btn-conscious disabled">
-                {% icon 'locked' %} Outer Call
-            </a>
-            <a href="#" class="btn btn-conscious disabled">
-                {% icon 'locked' %} Inner Call
-            </a>
-            <a href="#" class="btn btn-conscious disabled">
-                {% icon 'locked' %} Biography
-            </a>
-        </p>
-
-        <p>
-            <a href="{% if user.connected.guidelines_introduction %}
+            {% if user.connected.legend %}
+                <a href="{% if user.connected.guidelines_introduction %}
                 {% url 'connected:guidelines' %}
                 {% else %}
                 {% url 'connected:guidelines-introduction' %}
                 {% endif %}"
-               class="btn btn-connected">
-                Guidelines
-            </a>
+                   class="btn btn-connected">
+                    Guidelines
+                </a>
+            {% else %}
+                <a href="#" class="btn btn-connected disabled">
+                    {% icon 'locked' %}
+                    Guidelines
+                </a>
+
+            {% endif %}
 
             {% if user.connected.guidelines %}
                 <a href="{% if user.connected.chat_introduction %}
