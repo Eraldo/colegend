@@ -31,7 +31,6 @@
             <a href="{% url 'story:prologue' %}" class="btn btn-continuous">
                 Prologue
             </a>
-
             {% if user.continuous.prologue %}
                 <a href="{% url 'story:welcome-tree' %}" class="btn btn-continuous">
                     Welcome Tree
@@ -41,7 +40,6 @@
                     {% icon 'locked' %}
                     Welcome Tree
                 </a>
-
             {% endif %}
         </p>
         <hr>
