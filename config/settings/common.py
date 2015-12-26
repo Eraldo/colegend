@@ -56,6 +56,7 @@ LOCAL_APPS = (
     'innercall',
 
     'connected',
+    'legends',
     'guides',
 
     'continuous',

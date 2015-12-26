@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block title %}Legends{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% include '_breadcrumb.html' with url='legends:index' icon='user' title='legends' %}
+{% endblock %}

@@ -65,7 +65,7 @@
                             <div class="dropdown-divider"></div>
 
                             {% if user.connected.legend_introduction %}
-                                <a class="dropdown-item" href="{% url 'legends:profile' user.username %}">
+                                <a class="dropdown-item" href="{% url 'users:profile' user.username %}">
                                     Legend
                                 </a>
                             {% else %}
@@ -190,10 +190,10 @@
                             </span>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="menu-button-account">
-                                <a class="dropdown-item" href="{% url 'legends:profile' request.user.username %}">
+                                <a class="dropdown-item" href="{% url 'users:profile' request.user.username %}">
                                     {% icon 'legend' %} Legend
                                 </a>
-                                <a class="dropdown-item" href="{% url 'legends:settings' %}">
+                                <a class="dropdown-item" href="{% url 'users:settings' %}">
                                     {% icon 'settings' %} Settings
                                 </a>
                                 <a class="dropdown-item" href="{% url 'account_logout' %}">

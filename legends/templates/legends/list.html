@@ -1,0 +1,9 @@
+{% extends 'legends/base.html' %}
+
+{% block title %}Legends{% endblock %}
+
+{% block content %}
+    {% for legend in legends %}
+        {% include 'legends/widgets/legend.html' with name=legend url=legend.get_absolute_url %}
+    {% endfor %}
+{% endblock %}
