@@ -14,8 +14,18 @@ class ProfileView(LoginRequiredMixin, DetailView):
     slug_url_kwarg = "username"
     template_name = 'users/legend.html'
 
-    # TODO: Write custom get_object method
-    # redirecting if no slug is given and otherwise using the slug
+    def get(self, request, *args, **kwargs):
+        connected = request.user.connected
+        if not connected.legend_introduction:
+            return redirect('legends:introduction')
+        return super().get(request, *args, **kwargs)
+
+    def get_object(self, queryset=None):
+        username = self.kwargs.get('username')
+        if username:
+            return super().get_object(queryset)
+        else:
+            return self.request.user
 
 
 class SettingsView(LoginRequiredMixin, DetailView):
