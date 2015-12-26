@@ -24,6 +24,12 @@ class GuidelinesIntroductionView(LoginRequiredMixin, TemplateView):
 class GuidelinesView(LoginRequiredMixin, TemplateView):
     template_name = 'connected/guidelines.html'
 
+    def get(self, request, *args, **kwargs):
+        connected = request.user.connected
+        if not connected.guidelines_introduction:
+            return redirect('connected:guidelines-introduction')
+        return super().get(request, *args, **kwargs)
+
     def post(self, request, *args, **kwargs):
         if 'accept' in request.POST:
             user = request.user
