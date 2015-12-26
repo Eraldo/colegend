@@ -8,7 +8,6 @@ from django.contrib.auth.models import AbstractUser, Group
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.db import models
-from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
@@ -27,6 +26,10 @@ class User(AbstractUser):
 
     def get_absolute_url(self):
         return reverse('legends:profile', kwargs={'username': self.username})
+
+    class Meta:
+        verbose_name = "Legend"
+        verbose_name_plural = "Legends"
 
 
 @receiver(user_signed_up)
