@@ -9,7 +9,7 @@ urlpatterns = [
     # URL pattern for the UserListView
     url(
         regex=r'^$',
-        view=RedirectView.as_view(url='profile', permanent=False),
+        view=RedirectView.as_view(url='profile/', permanent=False),
         name='index'
     ),
 

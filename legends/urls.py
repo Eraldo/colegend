@@ -7,7 +7,7 @@ __author__ = 'Eraldo Energy'
 urlpatterns = patterns(
     '',
     url(r'^$',
-        RedirectView.as_view(url='list', permanent=False),
+        RedirectView.as_view(url='list/', permanent=False),
         name='index'),
     url(r'^list/$',
         LegendListView.as_view(),
