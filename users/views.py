@@ -12,12 +12,12 @@ class ProfileView(LoginRequiredMixin, DetailView):
     model = User
     slug_field = "username"
     slug_url_kwarg = "username"
-    template_name = 'users/legend.html'
+    template_name = 'users/profile.html'
 
     def get(self, request, *args, **kwargs):
         connected = request.user.connected
         if not connected.legend_introduction:
-            return redirect('legends:introduction')
+            return redirect('users:introduction')
         return super().get(request, *args, **kwargs)
 
     def get_object(self, queryset=None):
@@ -29,21 +29,15 @@ class ProfileView(LoginRequiredMixin, DetailView):
 
 
 class SettingsView(LoginRequiredMixin, DetailView):
-    model = User
     template_name = 'users/settings.html'
+    model = User
 
     def get_object(self, queryset=None):
         return self.request.user
 
 
-class UserRedirectView(LoginRequiredMixin, RedirectView):
-    permanent = False
-
-    def get_redirect_url(self):
-        return reverse("home")
-
-
 class UserUpdateView(LoginRequiredMixin, UpdateView):
+    template_name = 'users/update.html'
     fields = ['first_name', 'last_name']
 
     # we already imported User in the view code above, remember?
@@ -51,7 +45,7 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
 
     # send the user back to their own page after a successful update
     def get_success_url(self):
-        return reverse("legends:profile",
+        return reverse("users:profile",
                        kwargs={"username": self.request.user.username})
 
     def get_object(self):
@@ -60,6 +54,7 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
 
 
 class UserListView(LoginRequiredMixin, ListView):
+    template_name = 'users/list.html'
     model = User
     # These next two lines tell the view to index lookups by username
     slug_field = "username"
@@ -76,5 +71,5 @@ class UserIntroductionView(LoginRequiredMixin, TemplateView):
             user.connected.legend_introduction = True
             user.connected.save()
             # redirect to profile
-            return redirect('legends:profile', user.username)
+            return redirect('users:profile', user.username)
         return self.get(request, *args, **kwargs)

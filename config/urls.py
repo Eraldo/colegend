@@ -30,7 +30,9 @@ urlpatterns = patterns(
     url(r'^legends/', include('legends.urls', namespace='legends')),
 
     # Your stuff: custom urls includes go here
-    url(r'^$', HomeView.as_view(), name='home'),
+    url(r'^$', RedirectView.as_view(url='home/', permanent=False), name='index'),
+
+    url(r'^home/$', HomeView.as_view(), name='home'),
     url(r'^about/', include('about.urls')),
 
     url(r'^conscious/', include('conscious.urls', namespace='conscious')),
