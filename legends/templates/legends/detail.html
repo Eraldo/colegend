@@ -3,9 +3,17 @@
 
 {% block title %}Legend{% endblock %}
 
+{% block page_links %}
+    <div class="pull-right">
+        <a href="{% url 'legends:update' owner=legend.owner.username %}" class="btn btn-primary btn-sm">edit</a>
+
+    </div>
+    <div class="clearfix"></div>
+{% endblock %}
+
 {% block content %}
     <p>
-        <img src="{{ legend.avatar.url }}" alt="avatar">
+        <img src="{{ legend.avatar.url }}" class="avatar" alt="avatar">
         {{ legend.owner }}
     </p>
 {% endblock %}
