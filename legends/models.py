@@ -11,6 +11,7 @@ class Legend(AutoOwnedBase, TimeStampedBase):
     + hero profile
     + demon profile
     """
+    avatar = models.ImageField(blank=True)
 
     def __str__(self):
         return "Legend {}".format(self.owner)

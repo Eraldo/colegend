@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 from django.views.generic import RedirectView
-from .views import LegendDetailView, LegendListView
+from .views import LegendDetailView, LegendListView, LegendUpdateView
 
 __author__ = 'Eraldo Energy'
 
@@ -18,4 +18,7 @@ urlpatterns = patterns(
     url(r'^(?P<owner>[\w.@+-]+)/$',
         LegendDetailView.as_view(),
         name='detail'),
+    url(r'^(?P<owner>[\w.@+-]+)/update/$',
+        LegendUpdateView.as_view(),
+        name='update'),
 )

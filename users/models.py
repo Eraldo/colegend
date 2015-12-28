@@ -27,10 +27,6 @@ class User(AbstractUser):
     def get_absolute_url(self):
         return reverse('users:profile', kwargs={'username': self.username})
 
-    class Meta:
-        verbose_name = "Legend"
-        verbose_name_plural = "Legends"
-
 
 @receiver(user_signed_up)
 def new_user_manager_notification(request, user, **kwargs):
