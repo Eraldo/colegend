@@ -21,20 +21,15 @@
 {% block content %}
     <div class="row">
         <div class="col-md-3 text-center">
-            <img src="{% static 'legends/images/coLegend-hero.png' %}" class="avatar hero" alt="avatar hero"> <br>
-            Hero
+            {% static 'legends/images/coLegend-hero.png' as hero_avatar_url %}
+            {% include 'legends/widgets/avatar.html' with source=hero_avatar_url name='Hero' class='hero' %}
         </div>
         <div class="col-md-6 text-center">
-            {% if legend.avatar %}
-                <img src="{{ legend.avatar.url }}" class="avatar img-circle" alt="avatar"> <br>
-            {% else %}
-                <img src="{% static 'images/anonymous.png' %}" class="avatar img-circle" alt="avatar"> <br>
-            {% endif %}
-            {{ legend.owner }}
+            {% include 'legends/widgets/avatar.html' with source=legend.avatar.url name=legend.owner url=legend.get_absolute_url %}
         </div>
         <div class="col-md-3 text-center">
-            <img src="{% static 'legends/images/coLegend-demon.png' %}" class="avatar demon" alt="avatar demon"> <br>
-            Demon
+            {% static 'legends/images/coLegend-demon.png' as demon_avatar_url %}
+            {% include 'legends/widgets/avatar.html' with source=demon_avatar_url name='Demon' class='demon' %}
         </div>
     </div>
     <p></p>

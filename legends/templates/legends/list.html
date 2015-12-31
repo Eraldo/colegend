@@ -4,6 +4,8 @@
 
 {% block content %}
     {% for legend in legends %}
-        {% include 'legends/widgets/legend.html' with name=legend url=legend.get_absolute_url %}
+        {% include 'legends/widgets/avatar.html' with name=legend.owner.username source=legend.avatar.url url=legend.get_absolute_url %}
+        {% include 'legends/widgets/avatar.html' with name=legend.owner.username source=legend.avatar.url url=legend.get_absolute_url %}
+        {#        {% include 'legends/widgets/legend.html' with name=legend url=legend.get_absolute_url %}#}
     {% endfor %}
 {% endblock %}
