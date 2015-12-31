@@ -1,9 +1,15 @@
 {% extends 'legends/base.html' %}
-{% load static %}
+{% load static icons %}
 
 {% block title %}Legend{% endblock %}
 
 {% block page_links %}
+    <a href="#" class="btn btn-link btn-sm">Contact</a>
+    <a href="#" class="btn btn-link btn-sm">Hero</a>
+    <a href="#" class="btn btn-link btn-sm">Demon</a>
+    <a href="#" class="btn btn-link btn-sm">Inner Call</a>
+    <a href="#" class="btn btn-link btn-sm">Outer Call</a>
+    <a href="#" class="btn btn-link btn-sm">Biography</a>
     <div class="pull-right">
         <a href="{% url 'legends:update' owner=legend.owner.username %}" class="btn btn-primary btn-sm">edit</a>
 
@@ -12,8 +18,103 @@
 {% endblock %}
 
 {% block content %}
-    <p>
-        <img src="{{ legend.avatar.url }}" class="avatar" alt="avatar">
-        {{ legend.owner }}
-    </p>
+    <div class="row">
+        <div class="col-md-3 text-center">
+            <img src="{% static 'legends/images/coLegend-hero.png' %}" class="avatar hero" alt="avatar hero"> <br>
+            Hero
+        </div>
+        <div class="col-md-6 text-center">
+            <img src="{{ legend.avatar.url }}" class="avatar" alt="avatar"> <br>
+            {{ legend.owner }}
+        </div>
+        <div class="col-md-3 text-center">
+            <img src="{% static 'legends/images/coLegend-demon.png' %}" class="avatar demon" alt="avatar demon"> <br>
+            Demon
+        </div>
+    </div>
+    <p></p>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header">
+                    Contact
+                </div>
+                <div class="card-block">
+                    <p>
+                        {% icon 'birthday-cake' fixed=True %} 1991-01-25
+                    </p>
+
+                    <p>
+                        {% icon 'map-marker' fixed=True %} Berlin
+                    </p>
+                    <a href="#" class="btn btn-primary btn-sm">Send Message</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    Relations
+                </div>
+                <div class="card-block">
+                    ...
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Badges
+                </div>
+                <div class="card-block">
+                    <img src="{% static 'legends/images/badges/Core_Team_Badge.png' %}" class="badge team"
+                         alt="badge team">
+                    <img src="{% static 'legends/images/badges/Cloud_Guide_Badge.png' %}" class="badge guide"
+                         alt="badge guide">
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    Story Update
+                </div>
+                <div class="card-block">
+                    ...
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    Latest Activities
+                </div>
+                <div class="card-block">
+                    ...
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header">
+                    Status
+                </div>
+                <div class="card-block">
+                    <p># Legend days</p>
+
+                    <p>Chapter #</p>
+
+                    <p>--Animal--</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    Biography
+                </div>
+                <div class="card-block">
+                    ...
+                </div>
+            </div>
+
+        </div>
+    </div>
 {% endblock %}
