@@ -17,6 +17,7 @@ django-annoying==0.8.4
 
 # Images
 Pillow==3.0.0
+easy-thumbnails==2.3
 
 # For user registration, either via email or social
 # Well-built with regular release cycles!

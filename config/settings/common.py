@@ -41,6 +41,7 @@ THIRD_PARTY_APPS = (
     'allauth.socialaccount',  # registration
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
+    'easy_thumbnails',
 )
 
 # Apps specific for this project go here.
@@ -277,3 +278,11 @@ SLACK_BACKEND = 'django_slack.backends.Urllib2Backend'
 SLACK_USERNAME = 'coLegend'
 SLACK_ICON_EMOJI = ':co:'
 SLACK_LINK_NAMES = '1'
+
+# EASY THUMBNAILS
+# ------------------------------------------------------------------------------
+THUMBNAIL_ALIASES = {
+    '': {
+        'avatar': {'size': (50, 50), 'crop': True},
+    },
+}
