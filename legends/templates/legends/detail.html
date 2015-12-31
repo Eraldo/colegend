@@ -1,5 +1,6 @@
 {% extends 'legends/base.html' %}
 {% load static icons %}
+{% load thumbnail %}
 
 {% block title %}Legend{% endblock %}
 
@@ -24,7 +25,11 @@
             Hero
         </div>
         <div class="col-md-6 text-center">
-            <img src="{{ legend.avatar.url }}" class="avatar" alt="avatar"> <br>
+            {% if legend.avatar %}
+                <img src="{{ legend.avatar.url }}" class="avatar img-circle" alt="avatar"> <br>
+            {% else %}
+                <img src="{% static 'images/anonymous.png' %}" class="avatar img-circle" alt="avatar"> <br>
+            {% endif %}
             {{ legend.owner }}
         </div>
         <div class="col-md-3 text-center">
