@@ -59,7 +59,7 @@ node_modules/
 .env
 
 # User-uploaded media
-colegend/media/
+media/
 
 # Browser components (bower)
 # colegend/static/components/
