@@ -1,13 +1,13 @@
 from django.conf.urls import patterns, url
 from django.views.generic import RedirectView
-from .views import LegendDetailView, LegendListView, LegendUpdateView, MeUpdateView
+from .views import LegendDetailView, LegendListView, LegendUpdateView, MeUpdateView, BiographyUpdateView
 
 __author__ = 'Eraldo Energy'
 
 urlpatterns = patterns(
     '',
     url(r'^$',
-        RedirectView.as_view(url='list/', permanent=False),
+        RedirectView.as_view(url='legend/', permanent=False),
         name='index'),
     url(r'^list/$',
         LegendListView.as_view(),
@@ -18,6 +18,9 @@ urlpatterns = patterns(
     url(r'^me/$',
         MeUpdateView.as_view(),
         name='me'),
+    url(r'^biography/$',
+        BiographyUpdateView.as_view(),
+        name='biography'),
     url(r'^(?P<owner>[\w.@+-]+)/$',
         LegendDetailView.as_view(),
         name='detail'),

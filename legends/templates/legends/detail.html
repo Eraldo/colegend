@@ -3,16 +3,24 @@
 
 {% block title %}Legend{% endblock %}
 
+{% block breadcrumbs %}
+    {% include '_breadcrumb.html' with url='legends:list' icon='users' title='legends' %}
+{% endblock %}
+
 {% block page_links %}
-    <a href="#" class="btn btn-link btn-sm">Contact</a>
-    <a href="#" class="btn btn-link btn-sm">Hero</a>
-    <a href="#" class="btn btn-link btn-sm">Demon</a>
-    <a href="#" class="btn btn-link btn-sm">Inner Call</a>
-    <a href="#" class="btn btn-link btn-sm">Outer Call</a>
-    <a href="#" class="btn btn-link btn-sm">Biography</a>
+    <a href="#" class="btn btn-link btn-sm disabled">{% icon 'locked' %} Hero</a>
+    <a href="#" class="btn btn-link btn-sm disabled">{% icon 'locked' %} Demon</a>
+    {% if legend.owner.outercall %}
+        <a href="{% url 'outer-call:create' %}" class="btn btn-link btn-sm">Outer Call</a>
+    {% endif %}
+    {% if legend.owner.innercall %}
+        <a href="{% url 'inner-call:create' %}" class="btn btn-link btn-sm">Inner Call</a>
+    {% endif %}
+    {% if legend.biography %}
+        <a href="{% url 'legends:biography' %}" class="btn btn-link btn-sm">Biography</a>
+    {% endif %}
     <div class="pull-right">
         <a href="{% url 'legends:update' owner=legend.owner.username %}" class="btn btn-primary btn-sm">edit</a>
-
     </div>
     <div class="clearfix"></div>
 {% endblock %}
@@ -129,7 +137,7 @@
                     Biography
                 </div>
                 <div class="card-block">
-                    ...
+                    {{ legend.biography }}
                 </div>
             </div>
 

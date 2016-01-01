@@ -43,16 +43,16 @@
             {% url 'inner-call:create' as url %}
             {% include 'continuous/widgets/button.html' with name="Inner Call" url=url condition=user.conscious.outer_call kind='conscious' %}
 
-            {% url 'test' as url %}
+            {% url 'legends:biography' as url %}
             {% include 'continuous/widgets/button.html' with name="Biography" url=url condition=user.conscious.inner_call kind='conscious' %}
         </p>
 
         <p>
-            {% url 'legends:profile' as url %}
-            {% include 'continuous/widgets/button.html' with name="Me" url=url condition=True kind='connected' %}
+            {% url 'legends:me' as url %}
+            {% include 'continuous/widgets/button.html' with name="Me" url=url condition=user.legend.biography kind='connected' %}
 
             {% url 'connected:guidelines' as url %}
-            {% include 'continuous/widgets/button.html' with name="Guidelines" url=url condition=user.connected.legend kind='connected' %}
+            {% include 'continuous/widgets/button.html' with name="Guidelines" url=url condition=user.connected.me kind='connected' %}
 
             {% url 'connected:chat' as url %}
             {% include 'continuous/widgets/button.html' with name="Chat" url=url condition=user.connected.guidelines kind='connected' %}

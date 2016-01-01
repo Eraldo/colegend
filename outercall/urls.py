@@ -13,7 +13,7 @@ urlpatterns = patterns(
     url(r'^create/$',
         OuterCallCreateView.as_view(),
         name='create'),
-    url(r'^update$',
+    url(r'^update/$',
         OuterCallUpdateView.as_view(),
         name='update'),
 )

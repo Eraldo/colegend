@@ -30,6 +30,14 @@ icon_dict = {
     'role': 'user-md',
     'story': 'paw',
     'tool': 'gavel',
+
+    'address': 'map-marker',
+    'occupation': 'briefcase',
+    'phone': 'phone-square',
+    'birthday': 'birthday-cake',
+    'gender': 'transgender-alt',
+    'name': 'user',
+    'avatar': 'camera',
 }
 
 

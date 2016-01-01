@@ -50,6 +50,8 @@ class Legend(AutoOwnedBase, TimeStampedBase):
 
     avatar = ThumbnailerImageField(upload_to=UploadToOwnedDirectory('legend'))
 
+    biography = models.TextField(blank=True)
+
     @property
     def legend_days(self):
         date_joined = self.owner.date_joined

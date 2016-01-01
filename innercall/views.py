@@ -1,6 +1,8 @@
 from braces.views import LoginRequiredMixin
+from django.contrib import messages
 from django.shortcuts import redirect
 from django.views.generic import CreateView, UpdateView
+from django.utils.translation import ugettext as _
 
 from .models import InnerCall
 from .forms import InnerCallForm
@@ -28,6 +30,8 @@ class InnerCallCreateView(LoginRequiredMixin, CreateView):
         conscious = self.request.user.conscious
         conscious.inner_call = True
         conscious.save()
+        message = _('inner call completed')
+        messages.success(self.request, message)
         return super().form_valid(form)
 
 
@@ -39,3 +43,8 @@ class InnerCallUpdateView(LoginRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
         user = self.request.user
         return user.innercall
+
+    def form_valid(self, form):
+        message = _('changes saved')
+        messages.success(self.request, message)
+        return super().form_valid(form)
