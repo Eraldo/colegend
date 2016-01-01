@@ -45,9 +45,9 @@
                 </div>
                 <div class="card-block">
                     {% if legend.birthday %}
-                    <p>
-                        {% icon 'birthday-cake' fixed=True %} {{ legend.birthday }}
-                    </p>
+                        <p>
+                            {% icon 'birthday-cake' fixed=True %} {{ legend.birthday }}
+                        </p>
                     {% endif %}
                     {% if legend.address %}
                         <p>
@@ -65,7 +65,16 @@
                     Relations
                 </div>
                 <div class="card-block">
-                    ...
+                    {% if legend.owner.guiderelation.guide %}
+                        <p class="center-block">
+                            Cloud guide:
+                            {% with guide=legend.owner.guiderelation.guide %}
+                                {% include 'legends/widgets/avatar_small.html' with name=guide source=guide.legend.avatar.small.url url=guide.get_absolute_url %}
+                            {% endwith %}
+                        </p>
+                    {% else %}
+                        No relations yet.
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -110,9 +119,9 @@
                 <div class="card-block">
                     <p>{{ legend.legend_days }} Legend days</p>
 
-                    <p>Chapter #</p>
+                    <p>Chapter {{ legend.chapter }}</p>
 
-                    <p>--Animal--</p>
+                    <p class="text-muted">Animal</p>
                 </div>
             </div>
 

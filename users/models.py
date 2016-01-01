@@ -14,7 +14,7 @@ class User(AbstractUser):
         return self.username
 
     def get_absolute_url(self):
-        return reverse('users:profile', kwargs={'username': self.username})
+        return reverse('legends:detail', kwargs={'owner': self.username})
 
 
 @receiver(user_signed_up)

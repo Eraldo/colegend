@@ -56,6 +56,11 @@ class Legend(AutoOwnedBase, TimeStampedBase):
         now = timezone.now()
         return (now - date_joined).days
 
+    @property
+    def chapter(self):
+        chapter = 1
+        return chapter
+
     def __str__(self):
         return "Legend {}".format(self.owner)
 
