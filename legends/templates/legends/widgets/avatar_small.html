@@ -1,0 +1,15 @@
+{% load static %}
+
+<div class="legend-avatar" style="word-wrap: break-word">
+    <a {% if url %}href="{{ url }}"{% endif %}>
+        {% if source %}
+            <img class="avatar avatar-small {{ class }} img-responsive img-circle center-block" src="{{ source }}"
+                 alt="{{ name }}">
+        {% else %}
+            <img class="avatar avatar-small img-responsive img-circle center-block"
+                 src="{% static 'images/anonymous.png' %}"
+                 alt="Your avatar">
+        {% endif %}
+        {{ name|default:"You" }}
+    </a>
+</div>
