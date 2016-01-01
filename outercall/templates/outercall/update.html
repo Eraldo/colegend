@@ -3,6 +3,10 @@
 
 {% block title %}Outer Call{% endblock %}
 
+{% block pre_content %}
+    {% include 'outercall/chats/introduction.html' %}
+{% endblock %}
+
 {% block content %}
     <img src="http://helmutheim.de/wp-content/uploads/2014/08/beziehungskompetenz-1024x8261.png"
          class="img-responsive" style="max-height: 200px;" alt="chatting">

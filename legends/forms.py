@@ -79,4 +79,5 @@ class BiographyForm(forms.ModelForm):
         self.helper.layout = Layout(
             Field('biography'),
         )
-        self.helper.add_input(Submit('save', 'Save'))
+        self.helper.add_input(Submit('save', 'Save', css_class='pull-right'))
+        self.helper.form_show_labels = False
