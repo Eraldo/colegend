@@ -25,7 +25,11 @@
             {% include 'legends/widgets/avatar.html' with source=hero_avatar_url name='Hero' class='hero' %}
         </div>
         <div class="col-md-6 text-center">
-            {% include 'legends/widgets/avatar.html' with source=legend.avatar.url name=legend.owner url=legend.get_absolute_url %}
+            {% if legend.avatar %}
+                {% include 'legends/widgets/avatar.html' with source=legend.avatar.url name=legend.owner url=legend.get_absolute_url %}
+            {% else %}
+                {% include 'legends/widgets/avatar.html' with name=legend.owner url=legend.get_absolute_url %}
+            {% endif %}
         </div>
         <div class="col-md-3 text-center">
             {% static 'legends/images/coLegend-demon.png' as demon_avatar_url %}
@@ -40,14 +44,20 @@
                     Contact
                 </div>
                 <div class="card-block">
+                    {% if legend.birthday %}
                     <p>
-                        {% icon 'birthday-cake' fixed=True %} 1991-01-25
+                        {% icon 'birthday-cake' fixed=True %} {{ legend.birthday }}
                     </p>
-
-                    <p>
-                        {% icon 'map-marker' fixed=True %} Berlin
-                    </p>
-                    <a href="#" class="btn btn-primary btn-sm">Send Message</a>
+                    {% endif %}
+                    {% if legend.address %}
+                        <p>
+                            {% icon 'map-marker' fixed=True %}
+                            {{ legend.city }}
+                        </p>
+                    {% endif %}
+                    <a href="mailto:{{ legend.owner.email }}" target="_blank" class="btn btn-primary btn-sm">
+                        {% icon 'send' %} Send Message
+                    </a>
                 </div>
             </div>
             <div class="card">
@@ -98,7 +108,7 @@
                     Status
                 </div>
                 <div class="card-block">
-                    <p># Legend days</p>
+                    <p>{{ legend.legend_days }} Legend days</p>
 
                     <p>Chapter #</p>
 
