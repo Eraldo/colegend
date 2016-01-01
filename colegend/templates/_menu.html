@@ -187,8 +187,8 @@
                             <button class="btn btn-link nav-link" type="button" id="menu-button-account"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                     style="padding: 0;">
-                                {% if legend.avatar %}
-                                    <img src="{{ legend.avatar|thumbnail_url:'avatar' }}" class="avatar img-circle"
+                                {% if user.legend.avatar %}
+                                    <img src="{{ user.legend.avatar|thumbnail_url:'avatar' }}" class="avatar img-circle"
                                          height="38px" alt="avatar"/>
                                 {% else %}
                                     <img src="{% static 'images/anonymous.png' %}" class="avatar img-circle"
