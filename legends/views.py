@@ -34,3 +34,16 @@ class LegendListView(LoginRequiredMixin, ListView):
     template_name = 'legends/list.html'
     model = Legend
     context_object_name = 'legends'
+
+
+class MeUpdateView(LoginRequiredMixin, UpdateView):
+    template_name = 'legends/me.html'
+    model = Legend
+    form_class = LegendForm
+
+    def get_object(self, queryset=None):
+        owner = self.kwargs.get('owner')
+        if owner:
+            return Legend.objects.get(owner__username=owner)
+        else:
+            return self.request.user.legend

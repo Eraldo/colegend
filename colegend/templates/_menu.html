@@ -1,5 +1,4 @@
 {% load staticfiles i18n icons %}
-{% load thumbnail %}
 
 <nav id="site-menu" class="navbar navbar-static-top navbar-light">
     <div class="container">
@@ -188,7 +187,7 @@
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                     style="padding: 0;">
                                 {% if user.legend.avatar %}
-                                    <img src="{{ user.legend.avatar|thumbnail_url:'avatar' }}" class="avatar img-circle"
+                                    <img src="{{ user.legend.avatar.small.url }}" class="avatar img-circle"
                                          height="38px" alt="avatar"/>
                                 {% else %}
                                     <img src="{% static 'images/anonymous.png' %}" class="avatar img-circle"

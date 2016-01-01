@@ -49,7 +49,7 @@
 
         <p>
             {% url 'legends:profile' as url %}
-            {% include 'continuous/widgets/button.html' with name="Legend Profile" url=url condition=True kind='connected' %}
+            {% include 'continuous/widgets/button.html' with name="Me" url=url condition=True kind='connected' %}
 
             {% url 'connected:guidelines' as url %}
             {% include 'continuous/widgets/button.html' with name="Guidelines" url=url condition=user.connected.legend kind='connected' %}

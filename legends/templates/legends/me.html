@@ -1,0 +1,12 @@
+{% extends 'legends/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Me{% endblock %}
+
+{% block pre_content %}
+    {% include 'legends/chats/me.html' %}
+{% endblock %}
+
+{% block content %}
+    {% crispy form %}
+{% endblock %}
