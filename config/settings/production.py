@@ -222,3 +222,7 @@ RAVEN_CONFIG = {
 # ALLAUTH
 # ------------------------------------------------------------------------------
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
+
+# EASY THUMBNAILS
+# ------------------------------------------------------------------------------
+THUMBNAIL_DEFAULT_STORAGE = DEFAULT_FILE_STORAGE
