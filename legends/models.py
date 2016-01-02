@@ -40,12 +40,11 @@ class Legend(AutoOwnedBase, TimeStampedBase):
     @property
     def city(self):
         address = self.address
+        city = ''
         if address:
             parts = address.splitlines()
             if len(parts) >= 2:
                 city = parts[1]
-            else:
-                city = ''
         return city
 
     phone = PhoneNumberField(blank=True)
