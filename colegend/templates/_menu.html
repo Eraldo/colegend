@@ -64,16 +64,9 @@
 
                             <div class="dropdown-divider"></div>
 
-                            {% if user.connected.legend_introduction %}
-                                <a class="dropdown-item" href="{% url 'legends:legend' %}">
-                                    Legend
-                                </a>
-                            {% else %}
-                                <a class="dropdown-item disabled" href="#">
-                                    {% icon 'locked' %}
-                                    Legend
-                                </a>
-                            {% endif %}
+                            <a class="dropdown-item" href="{% url 'legends:legend' %}">
+                                Legend
+                            </a>
 
                             {% if user.connected.guide_introduction %}
                                 <a class="dropdown-item" href="{% url 'guides:guide' %}">
@@ -193,9 +186,6 @@
                                     <img src="{% static 'images/anonymous.png' %}" class="avatar img-circle"
                                          height="38px" alt="avatar"/>
                                 {% endif %}
-                                {#                            <span class="text-account">#}
-                                {#                                {% icon 'legend' %} {{ user.username|default:"Account" }}#}
-                                {#                            </span>#}
                             </button>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="menu-button-account">
                                 <a class="dropdown-item" href="{% url 'legends:legend' %}">
