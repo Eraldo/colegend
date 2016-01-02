@@ -47,7 +47,7 @@ class LegendForm(forms.ModelForm):
             IconField('name', 'name'),
             IconField('gender', 'gender'),
             IconField('occupation', 'occupation'),
-            IconField('birthday', 'birthday'),
+            IconField('birthday', 'birthday', placeholder="YYYY-MM-DD"),
             IconField('address', 'address', rows=3),
             IconField('phone', 'phone'),
         )
@@ -78,7 +78,7 @@ class MeForm(forms.ModelForm):
             IconField('name', 'name'),
             IconField('gender', 'gender'),
             IconField('occupation', 'occupation'),
-            IconField('birthday', 'birthday'),
+            IconField('birthday', 'birthday', placeholder="YYYY-MM-DD"),
             IconField('address', 'address', rows=3),
             IconField('phone', 'phone'),
             IconField('avatar', 'avatar'),
