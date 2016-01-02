@@ -1,5 +1,5 @@
 {% extends "story/base.html" %}
-{% load icons %}
+{% load static icons %}
 
 {% block title %}Entering Leyenda{% endblock %}
 
@@ -20,11 +20,12 @@
     <span id="typed" class="lead"></span>
     <p></p>
     <div class="after-typed">
+
         <div class="lead">
-            <button id="listen" name="listen" type="submit" class="btn btn-primary disabled">
-                {% icon 'locked' %}
-                Listen
-            </button>
+            <audio controls>
+                <source src="{% static 'story/audio/leyenda.mp3' %}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
             <p></p>
 
             <p>
