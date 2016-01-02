@@ -1,5 +1,7 @@
 from django.conf.urls import patterns, url
-from .views import Chapter1View, PrologueView, WelcomeTreeView, WelcomeTreeLeafWidgetView
+
+from .views import Chapter1View, PrologueView, WelcomeTreeView, WelcomeTreeLeafWidgetView, \
+    PioneerJournalView, YourJournalView, LeyendaView
 
 __author__ = 'eraldo'
 
@@ -17,4 +19,13 @@ urlpatterns = patterns(
     url(r'^welcome-tree/leaf/$',
         WelcomeTreeLeafWidgetView.as_view(),
         name='tree-leaf'),
+    url(r'^leyenda/$',
+        LeyendaView.as_view(),
+        name='leyenda'),
+    url(r'^poineer-journal/$',
+        PioneerJournalView.as_view(),
+        name='poineer-journal'),
+    url(r'^your-journal/$',
+        YourJournalView.as_view(),
+        name='your-journal'),
 )

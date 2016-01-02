@@ -123,3 +123,42 @@ greetings = [
     'What can I possibly tell you to make you feel welcome in this space that is as much yours as it is mine? How do we shift the paradigm from either or, to and? I hope you will help us find out…',
     'I was not sent to this world by an unknown force, nor was I born for a greater reason, I have and always will be part of this ecosystem we call earth, galaxy, universe. For this time of a human specimen I decide to work hard to remind ourselves that we were not, are not and never will be, disconnected.',
 ]
+
+
+class LeyendaView(LoginRequiredMixin, TemplateView):
+    template_name = 'story/leyenda.html'
+
+    def post(self, request, *args, **kwargs):
+        post = request.POST
+        if 'success' in post:
+            continuous = request.user.continuous
+            if not continuous.leyenda:
+                continuous.leyenda = True
+                continuous.save()
+            return redirect('story:poineer-journal')
+
+
+class PioneerJournalView(LoginRequiredMixin, TemplateView):
+    template_name = 'story/poineer_journal.html'
+
+    def post(self, request, *args, **kwargs):
+        if 'success' in request.POST:
+            continuous = request.user.continuous
+            if not continuous.pioneer_journal:
+                continuous.pioneer_journal = True
+                continuous.save()
+            return redirect('story:your-journal')
+
+
+class YourJournalView(LoginRequiredMixin, TemplateView):
+    template_name = 'story/your_journal.html'
+
+    def post(self, request, *args, **kwargs):
+        if 'success' in request.POST:
+            continuous = request.user.continuous
+            if not continuous.your_journal:
+                continuous.your_journal = True
+                continuous.chapter = 2
+                continuous.save()
+            return redirect('continuous:index')
+            # return redirect('journal:index')

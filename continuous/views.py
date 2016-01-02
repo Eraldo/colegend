@@ -14,7 +14,7 @@ class ContinuousView(LoginRequiredMixin, TemplateView):
         if user.continuous.chapter == 1:
             progress = self.get_chapter_1_progress()
         else:
-            progress = '10'
+            progress = '4'
         context['progress'] = progress
 
         return context

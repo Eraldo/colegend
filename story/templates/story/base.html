@@ -31,14 +31,20 @@
             // call the end hook
             typed_callback();
         }
-        $(function () {
+        function typed_start() {
             $("#typed").typed({
                 typeSpeed: 10,
                 callback: function () {
                     typed_callback();
                 },
                 stringsElement: $('#typed-strings')
+
             });
-        });
+        }
+        {% block autostart %}
+            $(function () {
+                typed_start();
+            });
+        {% endblock %}
     </script>
 {% endblock %}

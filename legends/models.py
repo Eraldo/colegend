@@ -62,7 +62,7 @@ class Legend(AutoOwnedBase, TimeStampedBase):
 
     @property
     def chapter(self):
-        chapter = 1
+        chapter = self.owner.continuous.chapter
         return chapter
 
     def __str__(self):

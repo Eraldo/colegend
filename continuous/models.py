@@ -7,9 +7,12 @@ class Continuous(AutoOwnedBase, TimeStampedBase):
     """
     A django model representing the 'continuous' path of the user.
     """
+    chapter = models.PositiveSmallIntegerField(default=0)
     prologue_country = models.CharField(max_length=255, blank=True)
     prologue = models.BooleanField(default=False)
-    chapter = models.PositiveSmallIntegerField(default=0)
+    leyenda = models.BooleanField(default=False)
+    pioneer_journal = models.BooleanField(default=False)
+    your_journal = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = _('continuous path')
