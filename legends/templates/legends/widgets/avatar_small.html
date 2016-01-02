@@ -10,6 +10,8 @@
                  src="{% static 'images/anonymous.png' %}"
                  alt="Your avatar">
         {% endif %}
-        {{ name|default:"You" }}
+        <div class="text-center">
+            {{ name|default:"You" }}
+        </div>
     </a>
 </div>
