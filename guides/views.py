@@ -74,6 +74,12 @@ class GuideView(LoginRequiredMixin, DetailView):
     template_name = 'guides/guide.html'
     model = GuideRelation
 
+    def get(self, request, *args, **kwargs):
+        connected = request.user.connected
+        if not connected.guide_introduction:
+            return redirect('guides:introduction')
+        return super().get(request, *args, **kwargs)
+
     def get_object(self, queryset=None):
         user = self.request.user
         return user.guiderelation

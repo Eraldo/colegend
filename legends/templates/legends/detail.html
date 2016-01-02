@@ -19,9 +19,6 @@
     {% if legend.biography %}
         <a href="{% url 'legends:biography' %}" class="btn btn-link btn-sm">Biography</a>
     {% endif %}
-    <div class="pull-right">
-        <a href="{% url 'legends:update' owner=legend.owner.username %}" class="btn btn-primary btn-sm">edit</a>
-    </div>
     <div class="clearfix"></div>
 {% endblock %}
 
@@ -33,7 +30,8 @@
         </div>
         <div class="col-md-6 text-center">
             {% if legend.avatar %}
-                {% include 'legends/widgets/avatar.html' with source=legend.avatar.url name=legend.owner url=legend.get_absolute_url %}
+                {% url 'legends:avatar' owner=legend.owner.username as legend_avatar_url %}
+                {% include 'legends/widgets/avatar.html' with source=legend.avatar.url name=legend.owner url=legend_avatar_url %}
             {% else %}
                 {% include 'legends/widgets/avatar.html' with name=legend.owner url=legend.get_absolute_url %}
             {% endif %}
@@ -48,15 +46,24 @@
         <div class="col-md-3">
             <div class="card">
                 <div class="card-header">
-                    Contact
+                    About
+                    <a href="{% url 'legends:update' owner=legend.owner.username %}" class="pull-right">
+                        {% icon 'edit' %}
+                    </a>
                 </div>
                 <div class="card-block">
+                    {% if legend.name %}
+                        <p>
+                            {% icon 'legend' fixed=True %}
+                            {{ legend.name }}
+                        </p>
+                    {% endif %}
                     {% if legend.birthday %}
                         <p>
                             {% icon 'birthday-cake' fixed=True %} {{ legend.birthday }}
                         </p>
                     {% endif %}
-                    {% if legend.address %}
+                    {% if legend.city %}
                         <p>
                             {% icon 'map-marker' fixed=True %}
                             {{ legend.city }}

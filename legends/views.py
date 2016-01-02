@@ -4,7 +4,7 @@ from django.views.generic import DetailView, UpdateView, ListView
 from django.utils.translation import ugettext as _
 
 from .models import Legend
-from .forms import LegendForm, BiographyForm, MeForm
+from .forms import LegendForm, BiographyForm, AvatarForm, MeForm
 
 
 class LegendDetailView(LoginRequiredMixin, DetailView):
@@ -31,6 +31,26 @@ class LegendUpdateView(LoginRequiredMixin, UpdateView):
         else:
             return self.request.user.legend
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        fields = self.request.GET.get('fields')
+        if fields:
+            kwargs['fields'] = fields
+        return kwargs
+
+    def get_initial(self):
+        initial = super().get_initial()
+        legend = self.get_object()
+        name = legend.name
+        if not name:
+            initial['name'] = legend.owner.get_full_name()
+        return initial
+
+
+class LegendAvatarView(LegendUpdateView):
+    template_name = 'legends/avatar.html'
+    form_class = AvatarForm
+
 
 class LegendListView(LoginRequiredMixin, ListView):
     template_name = 'legends/list.html'
@@ -38,25 +58,9 @@ class LegendListView(LoginRequiredMixin, ListView):
     context_object_name = 'legends'
 
 
-class MeUpdateView(LoginRequiredMixin, UpdateView):
+class MeUpdateView(LegendUpdateView):
     template_name = 'legends/me.html'
-    model = Legend
     form_class = MeForm
-
-    def get_object(self, queryset=None):
-        owner = self.kwargs.get('owner')
-        if owner:
-            return Legend.objects.get(owner__username=owner)
-        else:
-            return self.request.user.legend
-
-    def get_initial(self):
-        initial = super().get_initial()
-        name = initial.get('name')
-        if not name:
-            owner = self.get_object().owner
-            initial['name'] = owner.get_full_name()
-        return initial
 
     def form_valid(self, form):
         connected = self.get_object().owner.connected

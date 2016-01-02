@@ -14,9 +14,9 @@ class GuidelinesIntroductionView(LoginRequiredMixin, TemplateView):
 
     def post(self, request, *args, **kwargs):
         if 'success' in request.POST:
-            user = request.user
-            user.connected.guidelines_introduction = True
-            user.connected.save()
+            connected = request.user.connected
+            connected.guidelines_introduction = True
+            connected.save()
             return redirect('connected:guidelines')
         return self.get(request, *args, **kwargs)
 
@@ -32,10 +32,10 @@ class GuidelinesView(LoginRequiredMixin, TemplateView):
 
     def post(self, request, *args, **kwargs):
         if 'accept' in request.POST:
-            user = request.user
-            if not user.connected.guidelines:
-                user.connected.guidelines = True
-                user.connected.save()
+            connected = request.user.connected
+            if not connected.guidelines:
+                connected.guidelines = True
+                connected.save()
             return redirect('connected:guidelines')
         return self.get(request, *args, **kwargs)
 
@@ -45,9 +45,9 @@ class ChatIntroductionView(LoginRequiredMixin, TemplateView):
 
     def post(self, request, *args, **kwargs):
         if 'success' in request.POST:
-            user = request.user
-            user.connected.chat_introduction = True
-            user.connected.save()
+            connected = request.user.connected
+            connected.chat_introduction = True
+            connected.save()
             return redirect('connected:chat-invitation')
         return self.get(request, *args, **kwargs)
 
@@ -55,18 +55,30 @@ class ChatIntroductionView(LoginRequiredMixin, TemplateView):
 class ChatInvitationView(LoginRequiredMixin, TemplateView):
     template_name = 'connected/chat_invitation.html'
 
+    def get(self, request, *args, **kwargs):
+        connected = request.user.connected
+        if not connected.chat_introduction:
+            return redirect('connected:chat-introduction')
+        return super().get(request, *args, **kwargs)
+
     def post(self, request, *args, **kwargs):
         if 'success' in request.POST:
-            user = request.user
-            if not user.connected.chat:
-                user.connected.chat = True
-                user.connected.save()
+            connected = request.user.connected
+            if not connected.chat:
+                connected.chat = True
+                connected.save()
             return redirect('connected:index')
 
 
 class ChatView(LoginRequiredMixin, RedirectView):
     permanent = False
     url = 'https://colegend.slack.com'
+
+    def get(self, request, *args, **kwargs):
+        connected = request.user.connected
+        if not connected.chat:
+            return redirect('connected:chat-invitation')
+        return super().get(request, *args, **kwargs)
 
 
 class VirtualRoomView(LoginRequiredMixin, RedirectView):

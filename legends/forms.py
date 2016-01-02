@@ -8,6 +8,22 @@ from .models import Legend
 __author__ = 'Eraldo Energy'
 
 
+class AvatarForm(forms.ModelForm):
+    class Meta:
+        model = Legend
+        fields = [
+            'avatar',
+        ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            IconField('avatar', 'avatar'),
+        )
+        self.helper.add_input(Submit('save', 'Save'))
+
+
 class LegendForm(forms.ModelForm):
     class Meta:
         model = Legend
@@ -18,22 +34,22 @@ class LegendForm(forms.ModelForm):
             'birthday',
             'address',
             'phone',
-            'avatar',
-            'biography',
         ]
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, fields=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        if fields:
+            for field in self.Meta.fields:
+                if field not in fields:
+                    del self.fields[field]
         self.helper = FormHelper()
         self.helper.layout = Layout(
-            Field('name'),
-            Field('gender'),
-            Field('occupation'),
-            Field('birthday'),
-            Field('address', rows=3),
-            Field('phone'),
-            Field('avatar'),
-            Field('biography'),
+            IconField('name', 'name'),
+            IconField('gender', 'gender'),
+            IconField('occupation', 'occupation'),
+            IconField('birthday', 'birthday'),
+            IconField('address', 'address', rows=3),
+            IconField('phone', 'phone'),
         )
         self.helper.add_input(Submit('save', 'Save'))
 
@@ -51,8 +67,12 @@ class MeForm(forms.ModelForm):
             'avatar',
         ]
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, fields=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        if fields:
+            for field in self.Meta.fields:
+                if field not in fields:
+                    del self.fields[field]
         self.helper = FormHelper()
         self.helper.layout = Layout(
             IconField('name', 'name'),

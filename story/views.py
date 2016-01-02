@@ -91,9 +91,10 @@ class PrologueView(LoginRequiredMixin, TemplateView):
 
     def post(self, request, *args, **kwargs):
         if 'welcome-tree' in request.POST:
-            user = request.user
-            user.continuous.prologue = True
-            user.continuous.save()
+            continuous = request.user.continuous
+            continuous.prologue = True
+            continuous.chapter = 1
+            continuous.save()
             return redirect('story:welcome-tree')
 
 

@@ -9,6 +9,7 @@ class Continuous(AutoOwnedBase, TimeStampedBase):
     """
     prologue_country = models.CharField(max_length=255, blank=True)
     prologue = models.BooleanField(default=False)
+    chapter = models.PositiveSmallIntegerField(default=0)
 
     class Meta:
         verbose_name = _('continuous path')

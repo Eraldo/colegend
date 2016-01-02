@@ -23,8 +23,8 @@
 {% endblock %}
 {% block content %}
     <div id="game-board">
-        Chapter 1:
-        <progress class="progress progress-striped progress-success" value="60" max="100">60%</progress>
+        Chapter {{ user.continuous.chapter }}:
+        <progress class="progress progress-striped progress-success" value="{{ progress }}" max="100">60%</progress>
         <hr>
         <div class="chapter-marker">Prologue</div>
         <p>
