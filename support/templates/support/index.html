@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Support{% endblock %}
+
+{% block pre_content %}
+    <blockquote class="blockquote bg-content">
+        <p>
+            A hero is someone who is willing to help others in his or her best capacity.
+        </p>
+        <footer>
+            <cite title="Source Title">by Ricky Martin</cite>
+            <span class="pull-right">shared by Cooking Kangaroo Mother</span>
+        </footer>
+        <div class="clearfix"></div>
+    </blockquote>
+
+    <p>
+        {% include 'support/chats/introduction.html' %}
+    </p>
+{% endblock %}
+
+{% block page_links %}
+    <a href="{% url 'support:faq' %}" class="btn btn-link btn-sm">FAQ</a>
+    <a href="{% url 'support:documentation' %}" class="btn btn-link btn-sm">Documentation</a>
+{% endblock %}
+
+{% block content_class %}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6">
+            {% include 'support/cards/faq.html' %}
+        </div>
+        <div class="col-md-6">
+            {% include 'support/cards/documentation.html' %}
+        </div>
+    </div>
+{% endblock %}

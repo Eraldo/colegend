@@ -38,6 +38,10 @@ icon_dict = {
     'gender': 'transgender-alt',
     'name': 'user',
     'avatar': 'camera',
+
+    'support': 'question-circle',
+    'faq': 'question',
+    'documentation': 'file-text-o',
 }
 
 

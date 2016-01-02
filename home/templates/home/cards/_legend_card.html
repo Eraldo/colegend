@@ -1,7 +1,7 @@
 {% load icons %}
 <div class="card bg-content">
     <div class="card-header">
-        <a href="#" class="">
+        <a href="{% url 'legends:list' %}">
             {% icon 'legend' %}
             Legends
         </a>
@@ -16,7 +16,7 @@
         <h4 class="card-title">Legendary Birthday</h4>
 
         <p class="card-text">
-            Today is <a href="#">Coralina</a>'s birthday!
+            January 7<sup>th</sup>: <a href="{% url 'legends:detail' owner='eraldo' %}">Eraldo</a>'s bithday!
         </p>
     </div>
 </div>

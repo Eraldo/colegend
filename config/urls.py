@@ -34,6 +34,7 @@ urlpatterns = patterns(
 
     url(r'^home/$', HomeView.as_view(), name='home'),
     url(r'^about/', include('about.urls')),
+    url(r'^support/', include('support.urls', namespace='support')),
 
     url(r'^conscious/', include('conscious.urls', namespace='conscious')),
     url(r'^outer-call/', include('outercall.urls', namespace='outer-call')),

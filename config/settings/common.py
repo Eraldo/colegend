@@ -51,6 +51,7 @@ LOCAL_APPS = (
     'core',  # common code
     'about',
     'home',
+    'support',
 
     'conscious',
     'outercall',
