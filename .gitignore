@@ -63,3 +63,6 @@ media/
 
 # Browser components (bower)
 # colegend/static/components/
+
+# local files
+local/
