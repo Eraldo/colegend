@@ -1,0 +1,51 @@
+{% extends '_chat.html' %}
+
+{% load static i18n icons %}
+{% load socialaccount %}
+
+{% block chat_title %}
+    Welcome Adventurer!
+{% endblock %}
+
+{% block chat_content %}
+    <p><i>The first step to getting anywhere is deciding you’re not going to stay where
+        you are.
+    </i></p>
+
+    <p>I am happy to see that you’re already on your way.</p>
+
+    <p>I am Coralina by the way.</p>
+
+    <p>
+        Okay, let's talk details... <br>
+        How do you want to join?
+    </p>
+{% endblock %}
+
+{% block chat_answers %}
+    <a id="regular-signup" href="{% url 'account_signup' %}">
+        <li class="list-group-item">
+            {% icon 'key' fixed=True %}
+            I want a regular signup form.
+        </li>
+    </a>
+    <a id="google-signup" href="{% provider_login_url "google" %}">
+        <li class="list-group-item">
+            {% icon 'google-plus' fixed=True %}
+            I love my big brother Google, he will help me join.
+        </li>
+    </a>
+    <a id="facebook-signup" href="{% provider_login_url "facebook" method="oauth2" %}">
+        <li class="list-group-item">
+            {% icon 'facebook' fixed=True %}
+            I like to collect friends, I choose facebook.
+        </li>
+    </a>
+    <a id="login-redirect" href="{% url 'account_login' %}">
+        <li class="list-group-item">
+            {% icon 'sign-in' fixed=True %}
+            I forgot.. I already have an account
+        </li>
+    </a>
+
+{% endblock %}

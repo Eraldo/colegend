@@ -285,5 +285,7 @@ SLACK_LINK_NAMES = '1'
 THUMBNAIL_ALIASES = {
     '': {
         'small': {'size': (50, 50), 'crop': True},
+        'medium': {'size': (100, 100), 'crop': True},
+        'large': {'size': (200, 200), 'crop': True},
     },
 }

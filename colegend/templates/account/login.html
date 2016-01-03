@@ -1,126 +1,13 @@
 {% extends "account/base.html" %}
 
-{% load static i18n %}
-{% load crispy_forms_tags %}
-{% load account %}
-{% load socialaccount %}
-{% load icons %}
+{% load i18n %}
 
 {% block breadcrumbs %}{% endblock %}
 
 {% block title %}{% trans "Enter" %}{% endblock %}
 
+{% block content_class %}{% endblock %}
+
 {% block content %}
-
-    <div class="row">
-        <div class="col-lg-8">
-
-            <div class="row">
-
-                <div class="col-sm-4">
-                    <div>
-                        <img class="img-responsive center-block" src="{% static 'images/coralina.png' %}"
-                             alt="Coralina avatar">
-
-                        <div class="text-center bg-success">
-                            <strong>Coralina</strong>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-8">
-                    <div class="card">
-                        <div class="card-block">
-                            <h4 class="card-title">
-                                Welcome Back!
-                            </h4>
-
-                            <div class="card-text">
-                                <p>
-                                    <i>
-                                        Home is where the heart is.
-                                    </i>
-                                </p>
-
-                                <p>It seems you have not yet fully manifested in a way that I can recognize you.</p>
-
-                                <p>Now, who exactly are you?</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-
-    <p></p>
-
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-4">
-
-            <div class="row">
-
-                <div class="col-sm-4 col-sm-push-8">
-                    <div class="">
-                        <img class="img-responsive center-block" src="{% static 'images/anonymous.png' %}"
-                             alt="Your avatar">
-
-                        <div class="text-center bg-inverse">
-                            <strong>You</strong>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-8  col-sm-pull-4">
-                    <div class="card">
-                        <div class="card-header">
-                            Choose your answer:
-                        </div>
-                        <ul class="list-group list-group-flush">
-
-
-                            <li class="list-group-item">
-                                <form class="login" method="POST" action="{% url 'account_login' %}">
-                                    {% csrf_token %}
-                                    {{ form|crispy }}
-                                    {% if redirect_field_value %}
-                                        <input type="hidden" name="{{ redirect_field_name }}"
-                                               value="{{ redirect_field_value }}"/>
-                                    {% endif %}
-                                    <button class="btn btn-primary" type="submit">{% trans "Answer" %}</button>
-                                    <a class="button secondaryAction"
-                                       href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-                                </form>
-                            </li>
-
-                            <a href="{% provider_login_url "google" %}">
-                                <li class="list-group-item">
-                                    {% icon 'google-plus' fixed=True %}
-                                    My big brother will tell you who I am.
-                                </li>
-                            </a>
-                            <a href="{% provider_login_url "facebook" method="oauth2" %}">
-                                <li class="list-group-item">
-                                    {% icon 'facebook' fixed=True %}
-                                    My friends will tell you who I am.
-                                </li>
-                            </a>
-                            <a href="{% url 'join' %}">
-                                <li class="list-group-item">
-                                    {% icon 'sign-in' fixed=True %}
-                                    Err, I am new here.. Where can I join?
-                                </li>
-                            </a>
-
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
+    {% include 'account/chats/login.html' %}
 {% endblock %}
-
