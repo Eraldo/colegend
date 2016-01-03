@@ -15,12 +15,12 @@
             {% if user.connected.guide %}
                 <p>
                     Your cloud guide was:
-                    {% include 'users/widgets/legend.html' with legend=user.guiderelation.guide %}
+                    {% include 'legends/widgets/legend.html' with name=user.guiderelation.guide url=user.guiderelation.guide.get_absolute_url %}
                 </p>
             {% elif user.guiderelation.guide %}
                 <p>
                     Your cloud guide:
-                    {% include 'users/widgets/legend.html' with legend=user.guiderelation.guide %}
+                    {% include 'legends/widgets/legend.html' with name=user.guiderelation.guide url=user.guiderelation.guide.get_absolute_url %}
                 </p>
             {% else %}
                 <p>

@@ -17,7 +17,7 @@
         <ul class="list-group">
             {% for relation in searching_relations %}
                 <li class="list-group-item">
-                    {% include 'users/widgets/legend.html' with legend=relation.owner %}
+                    {% include 'legends/widgets/legend.html' with name=relation.owner url=relation.owner.get_absolute_url %}
                     <form action="{% url 'guides:guide-action' owner=relation.owner.username %}" method="post"
                           style="display: inline-block">{% csrf_token %}
                         <button id="guidee-guide-action" name="guide-action" type="submit"

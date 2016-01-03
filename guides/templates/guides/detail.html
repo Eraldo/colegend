@@ -6,9 +6,9 @@
 
 {% block content %}
     <p>
-        Guidee: {% include 'users/widgets/legend.html' with legend=guiderelation.owner %}
+        Guidee: {% include 'legends/widgets/legend.html' with url=guiderelation.owner.get_absolute_url name=guiderelation.owner %}
     </p>
     <p>
-        Guide: {% include 'users/widgets/legend.html' with legend=guiderelation.guide %}
+        Guide: {% include 'legends/widgets/legend.html' with url=guiderelation.guide.get_absolute_url name=guiderelation.guide %}
     </p>
 {% endblock %}
