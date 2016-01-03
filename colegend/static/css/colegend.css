@@ -126,20 +126,14 @@ body.continuous {
   border-right-color: white;
   z-index: 1; }
 
-.avatar {
-  max-height: 200px;
-}
-
-.avatar-small {
+.image-small {
   max-height: 50px; }
 
-.avatar.hero {
-  max-height: 100px;
-}
+.image-medium {
+  max-height: 100px; }
 
-.avatar.demon {
-  max-height: 100px;
-}
+.image-large {
+  max-height: 200px; }
 
 .badge {
   max-height: 6em; }

@@ -4,10 +4,14 @@
     <a {% if url %}href="{{ url }}"{% endif %}>
         <div style="display: inline-block;">
             {% if source %}
-                <img class="avatar {{ class }} img-responsive img-circle center-block" src="{{ source }}"
+                <img class="
+                        {% if class %}{{ class }}{% else %}image-large{% endif %} img-responsive img-circle center-block"
+                     src="{{ source }}"
                      alt="{{ name }}">
             {% else %}
-                <img class="avatar img-responsive img-circle center-block" src="{% static 'images/anonymous.png' %}"
+                <img class="
+                        {% if class %}{{ class }}{% else %}image-large{% endif %} img-responsive img-circle center-block"
+                     src="{% static 'images/anonymous.png' %}"
                      alt="Your avatar">
             {% endif %}
             <div style="position: relative;">

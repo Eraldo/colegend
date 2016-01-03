@@ -43,19 +43,19 @@
     <div class="row">
         <div class="col-md-3 text-center">
             {% static 'legends/images/coLegend-hero.png' as hero_avatar_url %}
-            {% include 'legends/widgets/avatar.html' with source=hero_avatar_url name='Hero' class='hero' %}
+            {% include 'legends/widgets/avatar.html' with source=hero_avatar_url name='Hero' class='image-medium' %}
         </div>
         <div class="col-md-6 text-center">
             {% if legend.avatar %}
                 {% url 'legends:avatar' owner=legend.owner.username as legend_avatar_url %}
-                {% include 'legends/widgets/avatar.html' with source=legend.avatar.url name=legend.owner url=legend_avatar_url %}
+                {% include 'legends/widgets/avatar.html' with source=legend.avatar.url name=legend.owner url=legend_avatar_url class='image-large' %}
             {% else %}
-                {% include 'legends/widgets/avatar.html' with name=legend.owner url=legend.get_absolute_url %}
+                {% include 'legends/widgets/avatar.html' with name=legend.owner url=legend.get_absolute_url class='image-large' %}
             {% endif %}
         </div>
         <div class="col-md-3 text-center">
             {% static 'legends/images/coLegend-demon.png' as demon_avatar_url %}
-            {% include 'legends/widgets/avatar.html' with source=demon_avatar_url name='Demon' class='demon' %}
+            {% include 'legends/widgets/avatar.html' with source=demon_avatar_url name='Demon' class='image-medium' %}
         </div>
     </div>
     <p></p>
