@@ -48,6 +48,7 @@ THIRD_PARTY_APPS = (
 LOCAL_APPS = (
     'users',  # custom users app
     # Your stuff: custom apps go here
+    'roles',
     'core',  # common code
     'about',
     'home',
@@ -63,6 +64,7 @@ LOCAL_APPS = (
 
     'continuous',
     'story',
+    'game',
 
     # helpers
     'django.contrib.webdesign',

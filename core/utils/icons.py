@@ -42,6 +42,8 @@ icon_dict = {
     'support': 'question-circle',
     'faq': 'question',
     'documentation': 'file-text-o',
+
+    'game': 'trophy',
 }
 
 

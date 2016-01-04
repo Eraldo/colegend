@@ -28,6 +28,7 @@ urlpatterns = patterns(
     url(r'^accounts/', include('allauth.urls')),
     url(r'^join/$', JoinView.as_view(), name='join'),
     url(r'^legends/', include('legends.urls', namespace='legends')),
+    url(r'^roles/', include('roles.urls', namespace='roles')),
 
     # Your stuff: custom urls includes go here
     url(r'^$', RedirectView.as_view(url='home/', permanent=False), name='index'),
@@ -44,7 +45,9 @@ urlpatterns = patterns(
     url(r'^guides/', include('guides.urls', namespace='guides')),
 
     url(r'^continuous/', include('continuous.urls', namespace='continuous')),
+    url(r'^game/', include('game.urls', namespace='game')),
     url(r'^story/', include('story.urls', namespace='story')),
+
     url(r'^test/$', TestView.as_view(), name='test'),
 
     # Added robots.txt file for crawlers (google/etc)
