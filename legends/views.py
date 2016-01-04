@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.views.generic import DetailView, UpdateView, ListView
 from django.utils.translation import ugettext as _
 
+from users.models import User
 from .models import Legend
 from .forms import LegendForm, BiographyForm, AvatarForm, MeForm
 
@@ -14,9 +15,9 @@ class LegendDetailView(LoginRequiredMixin, DetailView):
     def get_object(self, queryset=None):
         owner = self.kwargs.get('owner')
         if owner:
-            return Legend.objects.get(owner__username=owner)
-        else:
-            return self.request.user.legend
+            user = User.objects.get(username=owner)
+            return user.legend
+        return self.request.user.legend
 
 
 class LegendUpdateView(LoginRequiredMixin, UpdateView):
