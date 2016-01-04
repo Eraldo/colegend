@@ -149,6 +149,14 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item disabled" href="#">
                                 {% icon 'locked' %}
+                                Game
+                            </a>
+                            <a class="dropdown-item" href="{% url 'story:index' %}">
+                                {% icon 'story' %}
+                                Story
+                            </a>
+                            <a class="dropdown-item disabled" href="#">
+                                {% icon 'locked' %}
                                 Personal Story
                             </a>
                             <a class="dropdown-item disabled" href="#">
@@ -158,12 +166,6 @@
                             <a class="dropdown-item disabled" href="#">
                                 {% icon 'locked' %}
                                 coLegend Story
-                            </a>
-
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item disabled" href="#" data-toggle="tooltip" title="Tooltip on top">
-                                {% icon 'locked' %}
-                                Success Stream
                             </a>
                         </div>
                     </div>

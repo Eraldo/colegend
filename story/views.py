@@ -2,8 +2,12 @@ import random
 from braces.views import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.utils import timezone
-from django.views.generic import TemplateView, DetailView
+from django.views.generic import TemplateView
 from .models import WelcomeTreeLeaf
+
+
+class StoryView(LoginRequiredMixin, TemplateView):
+    template_name = "story/index.html"
 
 
 class Chapter1View(LoginRequiredMixin, TemplateView):

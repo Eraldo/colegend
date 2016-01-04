@@ -1,4 +1,4 @@
-{% extends "continuous/base.html" %}
+{% extends "base.html" %}
 
 {% load static %}
 
@@ -9,7 +9,7 @@
 
 {% block breadcrumbs %}
     {{ block.super }}
-    {% include '_breadcrumb.html' with url='continuous:index' title='Story' %}
+    {% include '_breadcrumb.html' with url='story:index' title='Story' icon='story' %}
 {% endblock %}
 
 {% block extra_script %}

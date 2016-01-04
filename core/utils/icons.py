@@ -28,7 +28,7 @@ icon_dict = {
     'news': 'newspaper-o',
     'quote': 'quote-left',
     'role': 'user-md',
-    'story': 'paw',
+    'story': 'magic',
     'tool': 'gavel',
 
     'address': 'map-marker',
