@@ -16,8 +16,9 @@ class LegendDetailView(LoginRequiredMixin, DetailView):
         owner = self.kwargs.get('owner')
         if owner:
             user = User.objects.get(username=owner)
-            return user.legend
-        return self.request.user.legend
+        else:
+            user = self.request.user
+        return user.legend
 
 
 class LegendUpdateView(LoginRequiredMixin, UpdateView):
