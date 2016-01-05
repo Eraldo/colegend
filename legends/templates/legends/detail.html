@@ -99,7 +99,7 @@
                 </div>
                 <div class="card-block">
                     {% if legend.owner.guiderelation.guide %}
-                        <p class="center-block">
+                        <p>
                             Cloud guide:
                             {% with guide=legend.owner.guiderelation.guide %}
                                 {% include 'legends/widgets/avatar_small.html' with name=guide source=guide.legend.avatar.small.url url=guide.get_absolute_url %}
