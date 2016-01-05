@@ -48,7 +48,7 @@
         <div class="col-md-6 text-center">
             {% if legend.avatar %}
                 {% url 'legends:avatar' owner=legend.owner.username as legend_avatar_url %}
-                {% include 'legends/widgets/avatar.html' with source=legend.avatar.url name=legend.owner url=legend_avatar_url class='image-large' %}
+                {% include 'legends/widgets/avatar.html' with source=legend.avatar.large.url name=legend.owner url=legend_avatar_url class='image-large' %}
             {% else %}
                 {% include 'legends/widgets/avatar.html' with name=legend.owner url=legend.get_absolute_url class='image-large' %}
             {% endif %}
