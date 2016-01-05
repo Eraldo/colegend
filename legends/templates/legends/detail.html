@@ -86,9 +86,11 @@
                             {{ legend.city }}
                         </p>
                     {% endif %}
+                    {% if legend.owner != user %}
                     <a href="mailto:{{ legend.owner.email }}" target="_blank" class="btn btn-primary btn-sm">
                         {% icon 'send' %} Send Message
                     </a>
+                    {% endif %}
                 </div>
             </div>
             <div class="card">
@@ -148,7 +150,7 @@
                     Status
                 </div>
                 <div class="card-block">
-                    <p>{{ legend.legend_days }} Legend days</p>
+                    <p>{{ legend.legend_days|default:"first" }} Legend day{{ legend.legend_days|pluralize }}</p>
 
                     <p>Chapter {{ legend.chapter }}</p>
 
