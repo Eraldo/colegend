@@ -6,9 +6,9 @@
 
 {% block content %}
     <p>
-        Guidee: {% legend_link guiderelation.owner.legend %}
+        Guidee: {% legend guiderelation.owner.legend size='small' %}
     </p>
     <p>
-        Guide: {% legend_link guiderelation.guide.legend %}
+        Guide: {% legend guiderelation.guide.legend size='small' %}
     </p>
 {% endblock %}

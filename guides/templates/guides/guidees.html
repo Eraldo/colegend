@@ -1,6 +1,6 @@
 {% extends 'guides/base.html' %}
 
-{% load static %}
+{% load legends_tags %}
 
 {% block title %}My Guidees{% endblock %}
 
@@ -8,8 +8,12 @@
     <h4>Active Guidees</h4>
     <ul class="list-group">
         {% for relation in active_relations %}
-            <a href="{% url 'guides:manage' relation.owner.username %}"
-               class="list-group-item">{{ relation.owner.username }}</a>
+            <li class="list-group-item">
+                {% legend relation.owner.legend 'small' %}
+                <a href="{% url 'guides:manage' relation.owner.username %}" class="btn btn-primary btn-sm">
+                    Checklist
+                </a>
+            </li>
             {% empty %}
             You do not have guidees yet.
         {% endfor %}
@@ -18,8 +22,12 @@
     <h4>Guidees</h4>
     <ul class="list-group">
         {% for relation in passive_relations %}
-            <a href="{% url 'guides:manage' relation.owner.username %}"
-               class="list-group-item">{{ relation.owner.username }}</a>
+            <li class="list-group-item">
+                {% legend relation.owner.legend 'small' %}<br>
+                <a href="{% url 'guides:manage' relation.owner.username %}" class="btn btn-primary btn-sm">
+                    Checklist
+                </a>
+            </li>
             {% empty %}
             You do not have guidees yet.
         {% endfor %}

@@ -43,19 +43,14 @@
     <div class="row">
         <div class="col-md-3 text-center">
             {% static 'legends/images/coLegend-hero.png' as hero_avatar_url %}
-            {% include 'legends/widgets/avatar.html' with source=hero_avatar_url name='Hero' class='image-medium' %}
+            {% include 'legends/widgets/legend.html' with source=hero_avatar_url name='Hero' size='medium' %}
         </div>
         <div class="col-md-6 text-center">
-            {% if legend.avatar %}
-                {% url 'legends:avatar' owner=legend.owner.username as legend_avatar_url %}
-                {% include 'legends/widgets/avatar.html' with source=legend.avatar.large.url name=legend.owner url=legend_avatar_url class='image-large' %}
-            {% else %}
-                {% include 'legends/widgets/avatar.html' with name=legend.owner url=legend.get_absolute_url class='image-large' %}
-            {% endif %}
+            {% legend size='large' %}
         </div>
         <div class="col-md-3 text-center">
             {% static 'legends/images/coLegend-demon.png' as demon_avatar_url %}
-            {% include 'legends/widgets/avatar.html' with source=demon_avatar_url name='Demon' class='image-medium' %}
+            {% include 'legends/widgets/legend.html' with source=demon_avatar_url name='Demon' size='medium' %}
         </div>
     </div>
     <p></p>
@@ -101,7 +96,7 @@
                     {% if legend.owner.guiderelation.guide %}
                         <p>
                             Cloud guide:
-                            {% legend_small legend.owner.guiderelation.guide.legend %}
+                            {% legend legend.owner.guiderelation.guide.legend 'small' %}
                         </p>
                     {% else %}
                         No relations yet.

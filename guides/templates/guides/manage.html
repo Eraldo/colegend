@@ -1,6 +1,6 @@
 {% extends 'guides/base.html' %}
 
-{% load static %}
+{% load static legends_tags %}
 {% load crispy_forms_tags %}
 
 {% block title %}Cloud Guide{% endblock %}
@@ -15,11 +15,11 @@
         <div class="col-sm-8">
             {% if guiderelation.owner.connected.guide %}
                 <p>
-                    I was cloud guide for: {{ guiderelation.owner }}
+                    I was cloud guide for: {% legend guiderelation.owner.legend 'small' %}
                 </p>
             {% else %}
                 <p>
-                    Your guidee: {{ guiderelation.owner }}
+                    Your guidee: {% legend guiderelation.owner.legend 'small' %}
                 </p>
             {% endif %}
         </div>

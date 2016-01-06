@@ -1,0 +1,29 @@
+{% load static %}
+
+<div class="legend-avatar legend-avatar-{{ size }} text-center" style="word-wrap: break-word; display: inline-block;">
+    <a {% if url %}href="{{ url }}"{% endif %}>
+        <div style="display: inline-block;">
+            {% if source %}
+                <img class="image-{{ size }} img-responsive img-circle center-block"
+                     src="{{ source }}"
+                     alt="{{ name }}">
+            {% else %}
+                <img class="image-{{ size }} img-responsive img-circle center-block"
+                     src="{% static 'legends/images/anonymous.png' %}"
+                     alt="Your avatar">
+            {% endif %}
+            <div style="position: relative;">
+                {% if size == 'small' %}
+                    <div class="text-center">
+                        {{ name|default:"You" }}
+                    </div>
+                {% else %}
+                    <div class="text-center bg-inverse bg-connected"
+                         style="border-radius: 1em 1em 0 0; position: absolute; bottom: 0em; width: 100%;">
+                        <strong>{{ name|default:"You" }}</strong>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </a>
+</div>

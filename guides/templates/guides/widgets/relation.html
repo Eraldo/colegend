@@ -1,3 +1,4 @@
-<a href="{{ url }}">
-    {{ guidee }} - {{ guide }}
-</a>
+{% load legends_tags %}
+<div class="guide-relation">
+    {% legend guidee.legend 'small' %} - {% legend guide.legend 'small' %}<br>
+</div>

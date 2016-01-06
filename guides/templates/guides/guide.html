@@ -1,6 +1,6 @@
 {% extends 'guides/base.html' %}
 
-{% load static icons %}
+{% load static legends_tags icons %}
 
 {% block title %}Cloud Guide{% endblock %}
 
@@ -12,22 +12,18 @@
                  alt="Cloud Guide">
         </div>
         <div class="col-sm-8">
-            {% if user.connected.guide %}
-                <p>
+            <p>
+                {% if user.connected.guide %}
                     Your cloud guide was:
-                    {% include 'legends/widgets/avatar_small.html' with name=user.guiderelation.guide url=user.guiderelation.guide.get_absolute_url source=user.guiderelation.guide.legend.avatar.small.url %}
-                </p>
-            {% elif user.guiderelation.guide %}
-                <p>
+                    {% legend user.guiderelation.guide.legend size='small' %}
+                {% elif user.guiderelation.guide %}
                     Your cloud guide:
-                    {% include 'legends/widgets/avatar_small.html' with name=user.guiderelation.guide url=user.guiderelation.guide.get_absolute_url source=user.guiderelation.guide.legend.avatar.small.url %}
-                </p>
-            {% else %}
-                <p>
+                    {% legend user.guiderelation.guide.legend size='small' %}
+                {% else %}
                     Looks like your Cloud Guide is still on the lookout for you… <br>
                     Don’t worry - he or she will find you soon enough! :)
-                </p>
-            {% endif %}
+                {% endif %}
+            </p>
         </div>
     </div>
     <p></p>
