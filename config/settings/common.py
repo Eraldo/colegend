@@ -42,6 +42,7 @@ THIRD_PARTY_APPS = (
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
     'easy_thumbnails',
+    'django_gravatar',
 )
 
 # Apps specific for this project go here.

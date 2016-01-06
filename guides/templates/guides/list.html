@@ -1,6 +1,6 @@
 {% extends 'connected/base.html' %}
 
-{% load static %}
+{% load static legends_tags %}
 
 {% block title %}Cloud Guides{% endblock %}
 
@@ -17,7 +17,7 @@
         <ul class="list-group">
             {% for relation in searching_relations %}
                 <li class="list-group-item">
-                    {% include 'legends/widgets/legend.html' with name=relation.owner url=relation.owner.get_absolute_url %}
+                    {% legend_link relation.owner.legend %}
                     <form action="{% url 'guides:guide-action' owner=relation.owner.username %}" method="post"
                           style="display: inline-block">{% csrf_token %}
                         <button id="guidee-guide-action" name="guide-action" type="submit"

@@ -19,6 +19,7 @@ django-phonenumber-field==1.0.0
 # Images
 Pillow==3.0.0
 easy-thumbnails==2.3
+django-gravatar2==1.4.0
 
 # For user registration, either via email or social
 # Well-built with regular release cycles!

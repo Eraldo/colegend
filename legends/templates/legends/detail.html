@@ -1,5 +1,5 @@
 {% extends 'legends/base.html' %}
-{% load static icons %}
+{% load static icons legends_tags %}
 
 {% block title %}Legend{% endblock %}
 
@@ -87,9 +87,9 @@
                         </p>
                     {% endif %}
                     {% if legend.owner != user %}
-                    <a href="mailto:{{ legend.owner.email }}" target="_blank" class="btn btn-primary btn-sm">
-                        {% icon 'send' %} Send Message
-                    </a>
+                        <a href="mailto:{{ legend.owner.email }}" target="_blank" class="btn btn-primary btn-sm">
+                            {% icon 'send' %} Send Message
+                        </a>
                     {% endif %}
                 </div>
             </div>
@@ -101,9 +101,7 @@
                     {% if legend.owner.guiderelation.guide %}
                         <p>
                             Cloud guide:
-                            {% with guide=legend.owner.guiderelation.guide %}
-                                {% include 'legends/widgets/avatar_small.html' with name=guide source=guide.legend.avatar.small.url url=guide.get_absolute_url %}
-                            {% endwith %}
+                            {% legend_small legend.owner.guiderelation.guide.legend %}
                         </p>
                     {% else %}
                         No relations yet.

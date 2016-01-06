@@ -1,6 +1,7 @@
-from django.utils import timezone
 from easy_thumbnails.fields import ThumbnailerImageField
 from phonenumber_field.modelfields import PhoneNumberField
+from django.utils import timezone
+from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -50,6 +51,9 @@ class Legend(AutoOwnedBase, TimeStampedBase):
     phone = PhoneNumberField(blank=True)
 
     avatar = ThumbnailerImageField(upload_to=UploadToOwnedDirectory('legend'))
+
+    def get_avatar(self, size='medium'):
+        return self.avatar[size]
 
     biography = models.TextField(blank=True)
 

@@ -1,3 +1,4 @@
+{% load legends_tags %}
 <div class="card bg-content">
     <div class="card-header">
         <a href="{% url 'legends:legend' %}">
@@ -5,6 +6,6 @@
         </a>
     </div>
     <div class="card-block">
-        {% include 'legends/widgets/avatar_small.html' with name=user.username url=user.get_absolute_url source=user.legend.avatar.url %}
+        {% legend user.legend size='medium' %}
     </div>
 </div>

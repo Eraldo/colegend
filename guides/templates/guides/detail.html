@@ -1,14 +1,14 @@
 {% extends 'guides/base.html' %}
 
-{% load static %}
+{% load static legends_tags %}
 
 {% block title %}Guide Pair{% endblock %}
 
 {% block content %}
     <p>
-        Guidee: {% include 'legends/widgets/legend.html' with url=guiderelation.owner.get_absolute_url name=guiderelation.owner %}
+        Guidee: {% legend_link guiderelation.owner.legend %}
     </p>
     <p>
-        Guide: {% include 'legends/widgets/legend.html' with url=guiderelation.guide.get_absolute_url name=guiderelation.guide %}
+        Guide: {% legend_link guiderelation.guide.legend %}
     </p>
 {% endblock %}

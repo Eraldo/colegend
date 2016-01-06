@@ -1,4 +1,4 @@
-{% load static %}
+{% load legends_tags %}
 
 <div class="row">
     <div class="col-lg-8">
@@ -6,10 +6,7 @@
         <div class="row">
 
             <div class="col-sm-4">
-                <div>
-                    {% static 'images/coralina.png' as avatar_url %}
-                    {% include 'legends/widgets/avatar.html' with name='Coralina' source=avatar_url %}
-                </div>
+                {% npc 'Coralina' %}
             </div>
 
             <div class="col-sm-8">
@@ -38,34 +35,34 @@
     </div>
 </div>
 {% block chat_response %}
-<div class="row">
-    <div class="col-lg-8 col-lg-offset-4">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-4">
 
-        <div class="row">
+            <div class="row">
 
-            <div class="col-sm-4 col-sm-push-8">
-                {% include 'legends/widgets/avatar.html' %}
-            </div>
-
-            <div class="col-sm-8  col-sm-pull-4">
-                <div class="card">
-                    <div class="card-header">
-                        Your answer:
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        {% block chat_answers %}
-                            <a href="#">
-                                <li class="list-group-item">
-                                    {% block chat_answer %}Some answer.{% endblock %}
-                                </li>
-                            </a>
-                        {% endblock %}
-                    </ul>
+                <div class="col-sm-4 col-sm-push-8">
+                    {% include 'legends/widgets/avatar.html' %}
                 </div>
+
+                <div class="col-sm-8  col-sm-pull-4">
+                    <div class="card">
+                        <div class="card-header">
+                            Your answer:
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            {% block chat_answers %}
+                                <a href="#">
+                                    <li class="list-group-item">
+                                        {% block chat_answer %}Some answer.{% endblock %}
+                                    </li>
+                                </a>
+                            {% endblock %}
+                        </ul>
+                    </div>
+                </div>
+
             </div>
 
         </div>
-
     </div>
-</div>
 {% endblock %}
