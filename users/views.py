@@ -4,7 +4,7 @@ from __future__ import absolute_import, unicode_literals
 from braces.views import LoginRequiredMixin
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
-from django.views.generic import DetailView, ListView, RedirectView, UpdateView, TemplateView
+from django.views.generic import DetailView, ListView, UpdateView, TemplateView
 from .models import User
 
 
@@ -13,12 +13,6 @@ class ProfileView(LoginRequiredMixin, DetailView):
     slug_field = "username"
     slug_url_kwarg = "username"
     template_name = 'users/profile.html'
-
-    def get(self, request, *args, **kwargs):
-        connected = request.user.connected
-        if not connected.legend_introduction:
-            return redirect('users:introduction')
-        return super().get(request, *args, **kwargs)
 
     def get_object(self, queryset=None):
         username = self.kwargs.get('username')

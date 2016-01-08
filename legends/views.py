@@ -29,9 +29,10 @@ class LegendUpdateView(LoginRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
         owner = self.kwargs.get('owner')
         if owner:
-            return Legend.objects.get(owner__username=owner)
+            user = User.objects.get(username=owner)
         else:
-            return self.request.user.legend
+            user = self.request.user
+        return user.legend
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -85,9 +86,10 @@ class BiographyUpdateView(LoginRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
         owner = self.kwargs.get('owner')
         if owner:
-            return Legend.objects.get(owner__username=owner)
+            user = User.objects.get(username=owner)
         else:
-            return self.request.user.legend
+            user = self.request.user
+        return user.legend
 
     def form_valid(self, form):
         message = _('changes saved')
