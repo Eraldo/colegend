@@ -13,7 +13,10 @@
     - Find text: "Corinna"
     # Now she is certain, she hit the right page.
 
-    # She continues to brows and reads about the pricing model:
+    # Now she wants to know more and finds a section giving 7 reasons to join coLegend.
+    - Find text: "7 reasons"
+
+    # She is now convinced and wants to join, so she checks out the pricing model:
     - Find text: "Pricing"
 
     # She finds the join button and clicks it:

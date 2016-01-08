@@ -43,6 +43,7 @@ THIRD_PARTY_APPS = (
     'allauth.socialaccount.providers.facebook',
     'easy_thumbnails',
     'django_gravatar',
+    'orderable',
 )
 
 # Apps specific for this project go here.
@@ -54,6 +55,9 @@ LOCAL_APPS = (
     'about',
     'home',
     'support',
+
+    # common
+    'categories',
 
     'conscious',
     'outercall',

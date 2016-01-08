@@ -27,15 +27,11 @@
         <div class="col-lg-3 col-sm-6">
             {% include 'game/widgets/deck.html' with covered=True %}
         </div>
-        <div class="col-lg-3 col-sm-6">
-            {% include 'game/widgets/card.html' with title="Card 1" content="Some text." %}
-        </div>
-        <div class="col-lg-3 col-sm-6">
-            {% include 'game/widgets/card.html' with title="Card 2" content="Some more text." %}
-        </div>
-        <div class="col-lg-3 col-sm-6">
-            {% include 'game/widgets/card.html' with title="Card 3" content="Some even longer text. Some even longer text. Some even longer text. Some even longer text." %}
-        </div>
+        {% for card in cards %}
+            <div class="col-lg-3 col-sm-6">
+                {{ card }}
+            </div>
+        {% endfor %}
     </div>
     </div>
     </div>

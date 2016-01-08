@@ -15,6 +15,7 @@ django-floppyforms==1.5.2
 django-model-utils==2.3.1
 django-annoying==0.8.4
 django-phonenumber-field==1.0.0
+django-orderable==4.0.1
 
 # Images
 Pillow==3.0.0
