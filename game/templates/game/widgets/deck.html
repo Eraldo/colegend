@@ -1,23 +1,25 @@
 {% load static %}
 <div id="deck" style="position: relative; height: 20em; margin-bottom: .75rem;">
-    <div class="wrapper" style="position: absolute; top: -0.75rem; width: 100%;">
-        <div class="card bg-content"
-             style="border-radius: 10%; height: 20em; border: solid 0.1rem; position: absolute; width: 100%;">
-            <div class="card-block text-center">
-                <img class="img-responsive" src="{% static 'images/coLegendLogo.png' %}"
-                     alt="Card image cap"
-                     style="padding-top: 20%;">
-                DECK
+    <a href="javascript: alert('picked');" style="color: black;">
+        <div class="wrapper" style="position: absolute; top: -0.75rem; width: 100%;">
+            <div class="card bg-content"
+                 style="border-radius: 10%; height: 20em; border: solid 0.1rem; position: absolute; width: 100%;">
+                <div class="card-block text-center">
+                    <img class="img-responsive" src="{% static 'images/coLegendLogo.png' %}"
+                         alt="Card image cap"
+                         style="padding-top: 20%;">
+                    DECK
+                </div>
+            </div>
+            <div class="card bg-content"
+                 style="border-radius: 10%; height: 20em; border: solid 0.1rem; position: absolute; top: 0.25rem; width: 100%; z-index: -1;">
+            </div>
+            <div class="card bg-content"
+                 style="border-radius: 10%; height: 20em; border: solid 0.1rem; position: absolute; top: 0.50rem; width: 100%; z-index: -2;">
+            </div>
+            <div class="card bg-content"
+                 style="border-radius: 10%; height: 20em; border: solid 0.1rem; position: absolute; top: 0.75rem; width: 100%; z-index: -3;">
             </div>
         </div>
-        <div class="card bg-content"
-             style="border-radius: 10%; height: 20em; border: solid 0.1rem; position: absolute; top: 0.25rem; width: 100%; z-index: -1;">
-        </div>
-        <div class="card bg-content"
-             style="border-radius: 10%; height: 20em; border: solid 0.1rem; position: absolute; top: 0.50rem; width: 100%; z-index: -2;">
-        </div>
-        <div class="card bg-content"
-             style="border-radius: 10%; height: 20em; border: solid 0.1rem; position: absolute; top: 0.75rem; width: 100%; z-index: -3;">
-        </div>
-    </div>
+    </a>
 </div>
