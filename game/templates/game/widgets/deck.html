@@ -1,6 +1,12 @@
 {% load static %}
 <div id="deck" style="position: relative; height: 20em; margin-bottom: .75rem;">
-    <a href="javascript: alert('picked');" style="color: black;">
+    {% if can_draw %}
+        <form id="draw-deck" action="." method="post">{% csrf_token %}
+            <input type="hidden" name="draw">
+        </form>
+    {% endif %}
+    <a {% if can_draw %}href="javascript: $('#draw-deck').submit();"{% endif %} style="color: black;">
+        {#            <button type="button" class="btn btn-link">#}
         <div class="wrapper" style="position: absolute; top: -0.75rem; width: 100%;">
             <div class="card bg-content"
                  style="border-radius: 10%; height: 20em; border: solid 0.1rem; position: absolute; width: 100%;">
@@ -21,5 +27,6 @@
                  style="border-radius: 10%; height: 20em; border: solid 0.1rem; position: absolute; top: 0.75rem; width: 100%; z-index: -3;">
             </div>
         </div>
+        {#            </button>#}
     </a>
 </div>
