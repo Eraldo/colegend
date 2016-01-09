@@ -5,17 +5,17 @@ from core.models import AutoOwnedBase
 from cards.models import Card
 
 
-class Checkpoint(models.Model):
-    name = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.name
+class Deck(object):
+    """
+    TODO: create deck class to use in game
+    """
 
 
 class Game(AutoOwnedBase):
     hand = models.ManyToManyField(Card, related_name='games_hand', blank=True)
     completed = models.ManyToManyField(Card, related_name='games_completed', blank=True)
-    checkpoints = models.ManyToManyField(Checkpoint, blank=True)
+
+    # checkpoints = models.ManyToManyField(Checkpoint, related_name='games', blank=True)
 
     @property
     def deck(self):
