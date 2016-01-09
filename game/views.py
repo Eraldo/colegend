@@ -18,6 +18,8 @@ class GameIndexView(LoginRequiredMixin, TemplateView):
                 'title': card.name,
                 'content': card.content,
                 'source': card.image.url if card.image else '',
+                'id': card.id,
+                'details': card.details,
             }
             rendered_card = render_to_string(card_template, card_context)
             rendered_cards.append(rendered_card)
