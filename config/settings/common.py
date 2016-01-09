@@ -68,8 +68,9 @@ LOCAL_APPS = (
     'guides',
 
     'continuous',
-    'story',
     'game',
+    'cards',
+    'story',
 
     # helpers
     'django.contrib.webdesign',

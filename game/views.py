@@ -1,6 +1,5 @@
 from braces.views import LoginRequiredMixin
 from django.shortcuts import redirect
-from django.template.loader import render_to_string
 from django.views.generic import TemplateView
 
 
@@ -11,19 +10,7 @@ class GameIndexView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         user = self.request.user
         game = user.game
-        rendered_cards = []
-        card_template = 'game/widgets/card.html'
-        for card in game.hand.all():
-            card_context = {
-                'title': card.name,
-                'content': card.content,
-                'source': card.image.url if card.image else '',
-                'id': card.id,
-                'details': card.details,
-            }
-            rendered_card = render_to_string(card_template, card_context)
-            rendered_cards.append(rendered_card)
-        context['cards'] = rendered_cards
+        context['cards'] = game.hand.all()
         context['can_draw'] = game.can_draw
         return context
 

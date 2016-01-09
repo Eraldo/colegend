@@ -1,11 +1,5 @@
 from django.contrib import admin
-from orderable.admin import OrderableAdmin
-from .models import Card, Checkpoint, Game
-
-
-@admin.register(Card)
-class CardAdmin(OrderableAdmin):
-    pass
+from .models import Checkpoint, Game
 
 
 @admin.register(Checkpoint)

@@ -46,6 +46,7 @@ urlpatterns = patterns(
 
     url(r'^continuous/', include('continuous.urls', namespace='continuous')),
     url(r'^game/', include('game.urls', namespace='game')),
+    url(r'^cards/', include('cards.urls', namespace='cards')),
     url(r'^story/', include('story.urls', namespace='story')),
 
     url(r'^test/$', TestView.as_view(), name='test'),

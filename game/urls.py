@@ -9,3 +9,5 @@ urlpatterns = patterns(
         GameIndexView.as_view(),
         name='index'),
 )
+
+card_urls = urlpatterns
