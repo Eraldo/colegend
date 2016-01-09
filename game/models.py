@@ -29,7 +29,10 @@ class Game(AutoOwnedBase):
 
     @property
     def deck(self):
-        return Card.objects.exclude(id__in=[self.completed, self.hand])
+        completed = [card.id for card in self.completed.all()]
+        hand = [card.id for card in self.hand.all()]
+        excluded = completed + hand
+        return Card.objects.exclude(id__in=excluded)
 
     def __str__(self):
         return "{}'s game".format(self.owner)
