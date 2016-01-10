@@ -17,6 +17,8 @@ class LegendDetailView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         user = self.request.user
         context['can_edit_about'] = user.game.has_card('about')
+        context['outercall'] = user.game.has_card('outer call')
+        context['innercall'] = user.game.has_card('inner call')
         return context
 
     def get_object(self, queryset=None):

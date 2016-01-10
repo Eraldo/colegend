@@ -47,15 +47,27 @@ class Game(AutoOwnedBase):
         self.hand.add(card)
         return card
 
+    def get_card(self, name):
+        try:
+            return Card.objects.get(name__iexact=name)
+        except Card.DoesNotExist:
+            return False
+
     def has_card(self, card):
         if isinstance(card, str):
-            try:
-                card = Card.objects.get(name__iexact=card)
-            except Card.DoesNotExist:
-                return False
+            card = self.get_card(card)
         if card in self.completed.all():
             return True
         if card in self.hand.all():
+            return True
+        return False
+
+    def complete_card(self, card):
+        if isinstance(card, str):
+            card = self.get_card(card)
+        if card in self.hand.all():
+            self.hand.remove(card)
+            self.completed.add(card)
             return True
         return False
 
