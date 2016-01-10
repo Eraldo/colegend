@@ -4,7 +4,7 @@ from categories.models import Category
 
 
 class Card(Orderable):
-    image = models.ImageField(upload_to='game/cards/', blank=True)
+    image = models.ImageField(upload_to='games/cards/', blank=True)
     name = models.CharField(max_length=255)
     content = models.TextField(blank=True)
     details = models.TextField(blank=True)

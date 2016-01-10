@@ -1,5 +1,6 @@
 from braces.views import LoginRequiredMixin
 from django.contrib import messages
+from django.shortcuts import redirect
 from django.views.generic import DetailView, UpdateView, ListView
 from django.utils.translation import ugettext as _
 
@@ -11,6 +12,12 @@ from .forms import LegendForm, BiographyForm, AvatarForm, MeForm
 class LegendDetailView(LoginRequiredMixin, DetailView):
     template_name = 'legends/detail.html'
     model = Legend
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        context['can_edit_about'] = user.game.has_card('about')
+        return context
 
     def get_object(self, queryset=None):
         owner = self.kwargs.get('owner')
@@ -25,6 +32,11 @@ class LegendUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'legends/update.html'
     model = Legend
     form_class = LegendForm
+
+    def get(self, request, *args, **kwargs):
+        user = request.user
+        if not user.game.has_card('about'):
+            return redirect('games:index')
 
     def get_object(self, queryset=None):
         owner = self.kwargs.get('owner')

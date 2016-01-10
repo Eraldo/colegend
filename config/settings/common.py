@@ -68,7 +68,7 @@ LOCAL_APPS = (
     'guides',
 
     'continuous',
-    'game',
+    'games',
     'cards',
     'story',
 

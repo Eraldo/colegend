@@ -4,7 +4,7 @@ from django.views.generic import TemplateView
 
 
 class GameIndexView(LoginRequiredMixin, TemplateView):
-    template_name = 'game/index.html'
+    template_name = 'games/index.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -19,4 +19,4 @@ class GameIndexView(LoginRequiredMixin, TemplateView):
         if 'draw' in post:
             game = request.user.game
             game.draw()
-            return redirect('game:index')
+            return redirect('games:index')

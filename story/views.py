@@ -1,5 +1,6 @@
 import random
 from braces.views import LoginRequiredMixin
+from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.utils import timezone
 from django.views.generic import TemplateView
@@ -9,6 +10,41 @@ from .models import WelcomeTreeLeaf
 class StoryView(LoginRequiredMixin, TemplateView):
     template_name = "story/index.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        prologue_buttons = [
+            {
+                'name': 'Prologue',
+                'url': reverse('story:prologue'),
+                'condition': True,
+            },
+            {
+                'name': 'Welcome Tree',
+                'url': reverse('story:welcome-tree'),
+                'condition': user.continuous.prologue,
+            },
+        ]
+        context['prologue_buttons'] = prologue_buttons
+        chapter1_buttons = [
+            {
+                'name': 'Entering Leyenda',
+                'url': reverse('story:leyenda'),
+                'condition': user.game.has_card('Storytime'),
+            },
+            {
+                'name': 'Pioneer Journal',
+                'url': reverse('story:poineer-journal'),
+                'condition': user.continuous.leyenda,
+            },
+            {
+                'name': 'The Journal',
+                'url': reverse('story:your-journal'),
+                'condition': user.continuous.pioneer_journal,
+            },
+        ]
+        context['chapter1_buttons'] = chapter1_buttons
+        return context
 
 class Chapter1View(LoginRequiredMixin, TemplateView):
     template_name = "story/chapter1.html"

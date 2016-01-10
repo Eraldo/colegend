@@ -8,7 +8,7 @@ from django.conf import settings
 class Migration(migrations.Migration):
     dependencies = [
         ('users', '0005_remove_user_name'),
-        ('game', '0002_auto_20160109_0033'),
+        ('games', '0002_auto_20160109_0033'),
     ]
 
     operations = [
@@ -24,9 +24,9 @@ class Migration(migrations.Migration):
             fields=[
                 ('owner',
                  annoying.fields.AutoOneToOneField(serialize=False, primary_key=True, to=settings.AUTH_USER_MODEL)),
-                ('checkpoints', models.ManyToManyField(to='game.Checkpoint', blank=True)),
-                ('completed', models.ManyToManyField(to='game.Card', related_name='games_completed', blank=True)),
-                ('hand', models.ManyToManyField(to='game.Card', related_name='games_hand', blank=True)),
+                ('checkpoints', models.ManyToManyField(to='games.Checkpoint', blank=True)),
+                ('completed', models.ManyToManyField(to='games.Card', related_name='games_completed', blank=True)),
+                ('hand', models.ManyToManyField(to='games.Card', related_name='games_hand', blank=True)),
             ],
             options={
                 'abstract': False,

@@ -59,9 +59,11 @@
             <div class="card">
                 <div class="card-header">
                     About
+                    {% if can_edit_about %}
                     <a href="{% url 'legends:update' owner=legend.owner.username %}" class="pull-right">
                         {% icon 'edit' %}
                     </a>
+                    {% endif %}
                 </div>
                 <div class="card-block">
                     {% if legend.name %}

@@ -14,23 +14,16 @@
     <hr>
     <div class="chapter-marker">Prologue</div>
     <p>
-        {% url 'story:prologue' as url %}
-        {% include 'continuous/widgets/button.html' with name="Prologue" url=url condition=True kind='continuous' %}
-
-        {% url 'story:welcome-tree' as url %}
-        {% include 'continuous/widgets/button.html' with name="Welcome Tree" url=url condition=user.continuous.prologue kind='continuous' %}
+        {% for button in prologue_buttons %}
+            {% include 'continuous/widgets/button.html' with name=button.name url=button.url condition=button.condition kind='continuous' %}
+        {% endfor %}
     </p>
     <hr>
     <div class="chapter-marker">Chapter 1</div>
     <p>
-        {% url 'story:leyenda' as url %}
-        {% include 'continuous/widgets/button.html' with name="Entering Leyenda" url=url condition=user.connected.guide kind='continuous' %}
-
-        {% url 'story:poineer-journal' as url %}
-        {% include 'continuous/widgets/button.html' with name="Pioneer Journal" url=url condition=user.continuous.leyenda kind='continuous' %}
-
-        {% url 'story:your-journal' as url %}
-        {% include 'continuous/widgets/button.html' with name="The Journal" url=url condition=user.continuous.pioneer_journal kind='continuous' %}
+        {% for button in chapter1_buttons %}
+            {% include 'continuous/widgets/button.html' with name=button.name url=button.url condition=button.condition kind='continuous' %}
+        {% endfor %}
     </p>
 
 {% endblock %}

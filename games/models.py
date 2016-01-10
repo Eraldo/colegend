@@ -47,5 +47,17 @@ class Game(AutoOwnedBase):
         self.hand.add(card)
         return card
 
+    def has_card(self, card):
+        if isinstance(card, str):
+            try:
+                card = Card.objects.get(name__iexact=card)
+            except Card.DoesNotExist:
+                return False
+        if card in self.completed.all():
+            return True
+        if card in self.hand.all():
+            return True
+        return False
+
     def __str__(self):
         return "{}'s game".format(self.owner)

@@ -45,7 +45,7 @@ urlpatterns = patterns(
     url(r'^guides/', include('guides.urls', namespace='guides')),
 
     url(r'^continuous/', include('continuous.urls', namespace='continuous')),
-    url(r'^game/', include('game.urls', namespace='game')),
+    url(r'^games/', include('games.urls', namespace='games')),
     url(r'^cards/', include('cards.urls', namespace='cards')),
     url(r'^story/', include('story.urls', namespace='story')),
 

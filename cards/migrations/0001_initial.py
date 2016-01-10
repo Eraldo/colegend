@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, verbose_name='ID', primary_key=True, serialize=False)),
                 ('sort_order', models.IntegerField(blank=True, db_index=True)),
-                ('image', models.ImageField(upload_to='game/cards/', blank=True)),
+                ('image', models.ImageField(upload_to='games/cards/', blank=True)),
                 ('name', models.CharField(max_length=255)),
                 ('content', models.TextField(blank=True)),
                 ('details', models.TextField(blank=True)),

@@ -5,7 +5,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('game', '0003_checkpoint_game'),
+        ('games', '0003_checkpoint_game'),
     ]
 
     operations = [
