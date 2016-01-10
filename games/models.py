@@ -34,7 +34,7 @@ class Game(AutoOwnedBase):
         """
         hand = self.hand
         deck = self.deck
-        if hand.count() >= 3:
+        if hand.count() >= 1:
             return False
         if not deck.count():
             return False
