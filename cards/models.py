@@ -1,6 +1,5 @@
 from django.core.urlresolvers import reverse
 from django.db import models
-from django.template.defaultfilters import slugify
 from orderable.models import Orderable
 from categories.models import Category
 
