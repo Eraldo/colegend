@@ -5,12 +5,6 @@ from core.models import AutoOwnedBase
 from cards.models import Card
 
 
-class Deck(object):
-    """
-    TODO: create deck class to use in game
-    """
-
-
 class Game(AutoOwnedBase):
     hand = models.ManyToManyField(Card, related_name='games_hand', blank=True)
     completed = models.ManyToManyField(Card, related_name='games_completed', blank=True)
@@ -70,6 +64,10 @@ class Game(AutoOwnedBase):
             self.completed.add(card)
             return True
         return False
+
+    @property
+    def last_completed_card(self):
+        return self.completed.last()
 
     def __str__(self):
         return "{}'s game".format(self.owner)
