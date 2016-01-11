@@ -14,6 +14,7 @@ class GameIndexView(LoginRequiredMixin, TemplateView):
         game = user.game
         context['cards'] = game.hand.all()
         context['can_draw'] = game.can_draw
+        context['completed'] = game.completed.count()
         return context
 
     def post(self, request, *args, **kwargs):
