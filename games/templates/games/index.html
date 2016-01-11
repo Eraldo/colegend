@@ -6,6 +6,10 @@
 {% block content_class %}
 {% endblock %}
 
+{% block page_links %}
+    <a href="{% url 'games:completed' %}" class="btn btn-default btn-sm">Completed</a>
+{% endblock %}
+
 {% block pre_content %}
     <blockquote class="blockquote bg-content">
         <p>

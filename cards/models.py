@@ -1,4 +1,6 @@
+from django.core.urlresolvers import reverse
 from django.db import models
+from django.template.defaultfilters import slugify
 from orderable.models import Orderable
 from categories.models import Category
 
@@ -12,3 +14,6 @@ class Card(Orderable):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('cards:detail', kwargs={'pk': self.pk})

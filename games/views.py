@@ -1,6 +1,8 @@
 from braces.views import LoginRequiredMixin
 from django.shortcuts import redirect
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
+
+from cards.models import Card
 
 
 class GameIndexView(LoginRequiredMixin, TemplateView):
@@ -20,3 +22,13 @@ class GameIndexView(LoginRequiredMixin, TemplateView):
             game = request.user.game
             game.draw()
             return redirect('games:index')
+
+
+class CompletedView(LoginRequiredMixin, ListView):
+    template_name = 'games/completed.html'
+    model = Card
+    context_object_name = 'cards'
+
+    def get_queryset(self):
+        user = self.request.user
+        return user.game.completed.all().reverse()
