@@ -40,6 +40,10 @@
             <div class="col-lg-3 col-sm-6">
                 {% card %}
             </div>
+            {% empty %}
+            <div class="col-lg-3 col-sm-6">
+                {% include 'cards/widgets/placeholder.html' %}
+            </div>
         {% endfor %}
     </div>
     </div>
