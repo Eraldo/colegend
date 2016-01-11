@@ -41,7 +41,11 @@
             <div class="row">
 
                 <div class="col-sm-4 col-sm-push-8">
-                    {% legend user.legend size='large' %}
+                    {% if user.is_authenticated %}
+                        {% legend user.legend size='large' %}
+                    {% else %}
+                        {% include 'legends/widgets/legend.html' %}
+                    {% endif %}
                 </div>
 
                 <div class="col-sm-8  col-sm-pull-4">
