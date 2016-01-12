@@ -21,63 +21,6 @@
     </p>
 
 {% endblock %}
-{% block content %}
-    <div id="game-board">
-        Chapter {{ user.continuous.chapter }}:
-        <progress class="progress progress-striped progress-success" value="{{ progress }}" max="100">{{ progress }}%
-        </progress>
-        <hr>
-        <div class="chapter-marker">Chapter 1</div>
-        <p>
-            {% url 'outer-call:create' as url %}
-            {% include 'continuous/widgets/button.html' with name="Outer Call" url=url condition=user.continuous.prologue kind='conscious' %}
 
-            {% url 'inner-call:create' as url %}
-            {% include 'continuous/widgets/button.html' with name="Inner Call" url=url condition=user.conscious.outer_call kind='conscious' %}
-
-            {% url 'legends:biography' as url %}
-            {% include 'continuous/widgets/button.html' with name="Biography" url=url condition=user.conscious.inner_call kind='conscious' %}
-        </p>
-
-        <p>
-            {% url 'connected:guidelines' as url %}
-            {% include 'continuous/widgets/button.html' with name="Guidelines" url=url condition=user.connected.me kind='connected' %}
-
-            {% url 'connected:chat' as url %}
-            {% include 'continuous/widgets/button.html' with name="Chat" url=url condition=user.connected.guidelines kind='connected' %}
-
-            {% url 'guides:guide' as url %}
-            {% include 'continuous/widgets/button.html' with name="Cloud Guide" url=url condition=user.connected.chat kind='connected' %}
-        </p>
-
-        <hr>
-        <div class="chapter-marker">Chapter 2</div>
-        <p>
-            {% url 'test' as url %}
-            {% include 'continuous/widgets/button.html' with name="Dream Team" url=url condition=False kind='connected' %}
-        </p>
-
-        <p>
-            {% url 'test' as url %}
-            {% include 'continuous/widgets/button.html' with name="Chapter 2" url=url condition=False kind='continuous' %}
-        </p>
-        <hr>
-        <div class="chapter-marker">Chapter 3</div>
-        <p>
-            {% url 'test' as url %}
-            {% include 'continuous/widgets/button.html' with name="Tribe" url=url condition=False kind='connected' %}
-        </p>
-        <hr>
-        <div class="chapter-marker">Chapter 4</div>
-        <p>
-            {% url 'test' as url %}
-            {% include 'continuous/widgets/button.html' with name="Circle" url=url condition=False kind='connected' %}
-        </p>
-    </div>
-{% endblock %}
-
-{% block extra_script %}
-    {{ block.super }}
-    <!-- Snow! :D -->
-    {#    <script type="text/javascript" src="{% static "components/snowstorm/snowstorm-min.js" %}"></script>#}
+{% block content_container %}
 {% endblock %}

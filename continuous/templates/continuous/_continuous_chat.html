@@ -25,4 +25,10 @@
     </p>
 {% endblock %}
 
-{% block chat_response %}{% endblock %}
+{% block chat_answers %}
+    <a href="{% url 'games:index' %}">
+        <li class="list-group-item">
+            Okay.. take me to the game
+        </li>
+    </a>
+{% endblock %}
