@@ -7,7 +7,9 @@ class Connected(AutoOwnedBase, TimeStampedBase):
     """
     A django model representing the 'connected' path of the user.
     """
-    me = models.BooleanField(default=False)
+    biography = models.BooleanField(default=False)
+
+    about = models.BooleanField(default=False)
 
     guidelines_introduction = models.BooleanField(default=False)
     guidelines = models.BooleanField(default=False)

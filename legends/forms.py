@@ -54,38 +54,6 @@ class LegendForm(forms.ModelForm):
         self.helper.add_input(Submit('save', 'Save'))
 
 
-class MeForm(forms.ModelForm):
-    class Meta:
-        model = Legend
-        fields = [
-            'name',
-            'gender',
-            'occupation',
-            'birthday',
-            'address',
-            'phone',
-            'avatar',
-        ]
-
-    def __init__(self, fields=None, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        if fields:
-            for field in self.Meta.fields:
-                if field not in fields:
-                    del self.fields[field]
-        self.helper = FormHelper()
-        self.helper.layout = Layout(
-            IconField('name', 'name'),
-            IconField('gender', 'gender'),
-            IconField('occupation', 'occupation'),
-            IconField('birthday', 'birthday', placeholder="YYYY-MM-DD"),
-            IconField('address', 'address', rows=3),
-            IconField('phone', 'phone'),
-            IconField('avatar', 'avatar'),
-        )
-        self.helper.add_input(Submit('save', 'Save'))
-
-
 class BiographyForm(forms.ModelForm):
     class Meta:
         model = Legend

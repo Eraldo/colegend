@@ -4,9 +4,10 @@ from django.shortcuts import redirect
 from django.views.generic import DetailView, UpdateView, ListView
 from django.utils.translation import ugettext as _
 
+from games.views import complete_card
 from users.models import User
 from .models import Legend
-from .forms import LegendForm, BiographyForm, AvatarForm, MeForm
+from .forms import LegendForm, BiographyForm, AvatarForm
 
 
 class LegendDetailView(LoginRequiredMixin, DetailView):
@@ -19,6 +20,7 @@ class LegendDetailView(LoginRequiredMixin, DetailView):
         context['can_edit_about'] = user.game.has_card('about')
         context['outercall'] = user.game.has_card('outer call')
         context['innercall'] = user.game.has_card('inner call')
+        context['biography'] = user.game.has_card('biography')
         return context
 
     def get_object(self, queryset=None):
@@ -37,7 +39,11 @@ class LegendUpdateView(LoginRequiredMixin, UpdateView):
 
     def get(self, request, *args, **kwargs):
         user = request.user
-        if not user.game.has_card('about'):
+        connected = user.connected
+        if connected.about or user.game.has_card('about'):
+            return super().get(request, *args, **kwargs)
+        else:
+            messages.warning(request, 'You need to unlock this feature first.')
             return redirect('games:index')
 
     def get_object(self, queryset=None):
@@ -63,6 +69,19 @@ class LegendUpdateView(LoginRequiredMixin, UpdateView):
             initial['name'] = legend.owner.get_full_name()
         return initial
 
+    def form_valid(self, form):
+        request = self.request
+        connected = request.user.connected
+        if not connected.about:
+            connected.about = True
+            connected.save()
+            # update game
+            complete_card(request, 'about')
+        else:
+            message = _('changes saved')
+            messages.success(self.request, message)
+        return super().form_valid(form)
+
 
 class LegendAvatarView(LegendUpdateView):
     template_name = 'legends/avatar.html'
@@ -73,23 +92,6 @@ class LegendListView(LoginRequiredMixin, ListView):
     template_name = 'legends/list.html'
     model = Legend
     context_object_name = 'legends'
-
-
-class MeUpdateView(LegendUpdateView):
-    template_name = 'legends/me.html'
-    form_class = MeForm
-
-    def form_valid(self, form):
-        connected = self.get_object().owner.connected
-        if not connected.me:
-            connected.me = True
-            connected.save()
-            message = _('biography completed')
-            messages.success(self.request, message)
-        else:
-            message = _('changes saved')
-            messages.success(self.request, message)
-        return super().form_valid(form)
 
 
 class BiographyUpdateView(LoginRequiredMixin, UpdateView):
@@ -106,6 +108,14 @@ class BiographyUpdateView(LoginRequiredMixin, UpdateView):
         return user.legend
 
     def form_valid(self, form):
-        message = _('changes saved')
-        messages.success(self.request, message)
+        request = self.request
+        connected = request.user.connected
+        if not connected.biography:
+            connected.biography = True
+            connected.save()
+            # update game
+            complete_card(request, 'biography')
+        else:
+            message = _('changes saved')
+            messages.success(self.request, message)
         return super().form_valid(form)
