@@ -1,8 +1,13 @@
 from braces.views import LoginRequiredMixin
 from django.contrib import messages
+from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
+from django.template.loader import render_to_string
+from django.utils.safestring import mark_safe
 from django.views.generic import UpdateView, CreateView
 from django.utils.translation import ugettext as _
+
+from games.views import complete_card
 from .models import OuterCall
 from .forms import OuterCallForm
 
@@ -26,11 +31,13 @@ class OuterCallCreateView(LoginRequiredMixin, CreateView):
         return initial
 
     def form_valid(self, form):
-        conscious = self.request.user.conscious
+        user = self.request.user
+        # update the user path
+        conscious = user.conscious
         conscious.outer_call = True
         conscious.save()
-        message = _('outer call completed')
-        messages.success(self.request, message)
+        # update the game
+        complete_card(self.request, 'outer call')
         return super().form_valid(form)
 
 

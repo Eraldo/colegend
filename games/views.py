@@ -1,6 +1,11 @@
 from braces.views import LoginRequiredMixin
+from django.contrib import messages
+from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
+from django.template.loader import render_to_string
+from django.utils.safestring import mark_safe
 from django.views.generic import TemplateView, ListView
+from django.utils.translation import ugettext as _
 
 from cards.models import Card
 
@@ -33,3 +38,16 @@ class CompletedView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         user = self.request.user
         return user.game.completed.all().reverse()
+
+
+def complete_card(request, card):
+    game = request.user.game
+    if isinstance(card, str):
+        card = game.get_card(card)
+    game.complete_card(card)
+    game.save()
+
+    context = {'name': card, 'url': reverse('games:completed')}
+    card_link = render_to_string('cards/widgets/link.html', context=context)
+    message = _('card {} completed').format(card_link)
+    messages.success(request, mark_safe(message))

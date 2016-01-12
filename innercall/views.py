@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 from django.views.generic import CreateView, UpdateView
 from django.utils.translation import ugettext as _
 
+from games.views import complete_card
 from .models import InnerCall
 from .forms import InnerCallForm
 
@@ -30,8 +31,8 @@ class InnerCallCreateView(LoginRequiredMixin, CreateView):
         conscious = self.request.user.conscious
         conscious.inner_call = True
         conscious.save()
-        message = _('inner call completed')
-        messages.success(self.request, message)
+        # update the game
+        complete_card(self.request, 'inner call')
         return super().form_valid(form)
 
 
