@@ -8,21 +8,22 @@
 {% endblock %}
 
 {% block page_links %}
+    {% if user == legend.owner %}
+        {% url 'outer-call:create' as url %}
+        {% include 'core/widgets/button.html' with name='Outer Call' url=url kind='link btn-sm' condition=outercall %}
 
-    {% url 'outer-call:create' as url %}
-    {% include 'core/widgets/button.html' with name='Outer Call' url=url kind='link btn-sm' condition=outercall %}
+        {% url 'inner-call:create' as url %}
+        {% include 'core/widgets/button.html' with name='Inner Call' url=url kind='link btn-sm' condition=innercall %}
 
-    {% url 'inner-call:create' as url %}
-    {% include 'core/widgets/button.html' with name='Inner Call' url=url kind='link btn-sm' condition=innercall %}
+        {% url 'legends:biography' as url %}
+        {% include 'core/widgets/button.html' with name='Biography' url=url kind='link btn-sm' condition=biography %}
 
-    {% url 'legends:biography' as url %}
-    {% include 'core/widgets/button.html' with name='Biography' url=url kind='link btn-sm' condition=biography %}
+        {% include 'core/widgets/button.html' with name='Hero' kind='link btn-sm' locked=True %}
 
-    {% include 'core/widgets/button.html' with name='Hero' kind='link btn-sm' locked=True %}
+        {% include 'core/widgets/button.html' with name='Demon' kind='link btn-sm' locked=True %}
 
-    {% include 'core/widgets/button.html' with name='Demon' kind='link btn-sm' locked=True %}
-
-    <div class="clearfix"></div>
+        <div class="clearfix"></div>
+    {% endif %}
 {% endblock %}
 
 {% block pre_content %}
@@ -63,9 +64,9 @@
                 <div class="card-header">
                     About
                     {% if can_edit_about %}
-                    <a href="{% url 'legends:update' owner=legend.owner.username %}" class="pull-right">
-                        {% icon 'edit' %}
-                    </a>
+                        <a href="{% url 'legends:update' owner=legend.owner.username %}" class="pull-right">
+                            {% icon 'edit' %}
+                        </a>
                     {% endif %}
                 </div>
                 <div class="card-block">
