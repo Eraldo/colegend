@@ -25,11 +25,11 @@ def legend(context, legend=None, size=None):
     return render_to_string(template, context=context)
 
 
-@register.simple_tag
+@register.simple_tag()
 def npc(name):
     template = 'legends/widgets/legend.html'
     context = {
         'name': name,
-        'source': static('legends/images/npc/{name}.png'.format(name=name)),
+        # 'source': static('legends/images/npc/{name}.png'.format(name=name)),
     }
     return render_to_string(template, context)
