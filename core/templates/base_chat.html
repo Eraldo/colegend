@@ -42,7 +42,7 @@ test
 
                 <div class="col-sm-4 col-sm-push-8">
                     {% if user.is_authenticated %}
-                        {#                        {% legend user.legend size='large' %}#}
+                        {% legend user.legend size='large' %}
                     {% else %}
                         {% include 'legends/widgets/legend.html' %}
                     {% endif %}
