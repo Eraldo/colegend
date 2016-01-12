@@ -4,6 +4,7 @@ from django.http import Http404
 from django.shortcuts import redirect
 from django.views.generic import TemplateView, UpdateView, DetailView, ListView, RedirectView
 
+from games.views import complete_card
 from guides.models import GuideRelation
 from .forms import GuideManageForm
 
@@ -98,6 +99,21 @@ class GuideManageView(LoginRequiredMixin, UpdateView):
             return relation
         except GuideRelation.DoesNotExist:
             raise Http404
+
+    def form_valid(self, form):
+        request = self.request
+        user = self.request.user
+        connected = user.connected
+        if not connected.guide:
+            # Check if the guide did all tasks with his guidee.
+            instance = form.instance
+            if all(
+                [instance.guide, instance.outer_call_checked, instance.inner_call_checked,
+                 instance.coLegend_checked, instance.guiding_checked]):
+                connected.guide = True
+                connected.save()
+                complete_card(request, 'cloud guide')
+        return super().form_valid(form)
 
     def get_success_url(self):
         relation = self.get_object()

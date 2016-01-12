@@ -40,9 +40,6 @@
         </p>
 
         <p>
-            {% url 'legends:me' as url %}
-            {% include 'continuous/widgets/button.html' with name="Me" url=url condition=user.legend.biography kind='connected' %}
-
             {% url 'connected:guidelines' as url %}
             {% include 'continuous/widgets/button.html' with name="Guidelines" url=url condition=user.connected.me kind='connected' %}
 

@@ -4,6 +4,8 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.utils import timezone
 from django.views.generic import TemplateView
+
+from games.views import complete_card
 from .models import WelcomeTreeLeaf
 
 
@@ -45,6 +47,7 @@ class StoryView(LoginRequiredMixin, TemplateView):
         ]
         context['chapter1_buttons'] = chapter1_buttons
         return context
+
 
 class Chapter1View(LoginRequiredMixin, TemplateView):
     template_name = "story/chapter1.html"
@@ -200,5 +203,5 @@ class YourJournalView(LoginRequiredMixin, TemplateView):
                 continuous.your_journal = True
                 continuous.chapter = 2
                 continuous.save()
-            return redirect('continuous:index')
-            # return redirect('journal:index')
+                complete_card(request, 'storytime')
+            return redirect('story:index')

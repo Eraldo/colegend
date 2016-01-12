@@ -2,6 +2,8 @@ from braces.views import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.views.generic import TemplateView, RedirectView
 
+from games.views import complete_card
+
 __author__ = 'Eraldo Energy'
 
 
@@ -36,6 +38,7 @@ class GuidelinesView(LoginRequiredMixin, TemplateView):
             if not connected.guidelines:
                 connected.guidelines = True
                 connected.save()
+                complete_card(request, 'guidelines')
             return redirect('connected:guidelines')
         return self.get(request, *args, **kwargs)
 
@@ -67,6 +70,7 @@ class ChatInvitationView(LoginRequiredMixin, TemplateView):
             if not connected.chat:
                 connected.chat = True
                 connected.save()
+                complete_card(request, 'chat')
             return redirect('connected:index')
 
 

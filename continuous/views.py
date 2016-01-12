@@ -26,7 +26,6 @@ class ContinuousView(LoginRequiredMixin, TemplateView):
             hasattr(user, 'outercall'),
             hasattr(user, 'innercall'),
             user.legend.biography,
-            user.connected.me,
             user.connected.guidelines,
             user.connected.chat,
             user.connected.guide,

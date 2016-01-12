@@ -1,5 +1,4 @@
 {% load staticfiles i18n icons %}
-
 <nav id="site-menu" class="navbar navbar-static-top navbar-light">
     <div class="container">
         <a class="navbar-brand" href="{% url 'home' %}">
@@ -32,17 +31,14 @@
                             <a class="dropdown-item disabled" href="#">
                                 {% icon 'locked' %}
                                 Journal
-                                {#                                <small class="pull-right">level 2</small>#}
                             </a>
                             <a class="dropdown-item disabled" href="#">
                                 {% icon 'locked' %}
                                 Manager
-                                {#                                <small class="pull-right">level 3</small>#}
                             </a>
                             <a class="dropdown-item disabled" href="#">
                                 {% icon 'locked' %}
                                 Habits
-                                {#                                <small class="pull-right">level 4</small>#}
                             </a>
                         </div>
                     </div>
@@ -68,7 +64,7 @@
                                 Legend
                             </a>
 
-                            {% if user.connected.guide_introduction %}
+                            {% if cloud_guide %}
                                 <a class="dropdown-item" href="{% url 'guides:guide' %}">
                                     Cloud Guide
                                 </a>
@@ -79,7 +75,7 @@
                                 </a>
                             {% endif %}
 
-                            {% if user.connected.team_introduction %}
+                            {% if dream_team %}
                                 <a class="dropdown-item" href="#">
                                     Dream Team
                                 </a>
@@ -101,8 +97,9 @@
 
                             <div class="dropdown-divider"></div>
 
-                            {% if user.connected.chat %}
-                                <a class="dropdown-item" href="{% url 'connected:chat' %}" target="_blank">
+                            {% if chat %}
+                                <a class="dropdown-item" href="{% url 'connected:chat' %}"{% if user.connected.chat %}
+                                   target="_blank"{% endif %}>
                                     Chat
                                 </a>
                             {% else %}
@@ -112,7 +109,7 @@
                                 </a>
                             {% endif %}
 
-                            {% if user.connected.virtual_room %}
+                            {% if virtual_room %}
                                 <a class="dropdown-item" href="{% url 'connected:virtual-room' %}" target="_blank">
                                     Virtual Room
                                 </a>
@@ -123,7 +120,7 @@
                                 </a>
                             {% endif %}
 
-                            {% if user.connected.guidelines %}
+                            {% if guidelines %}
                                 <a class="dropdown-item" href="{% url 'connected:guidelines' %}">
                                     Guidelines
                                 </a>
@@ -170,47 +167,36 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav pull-right">
-                {% if request.user.is_authenticated %}
-
-
-                    {# ACCOUNT MENU #}
-                    <li class="nav-item">
-                        <div class="dropdown">
-                            <button class="btn btn-link nav-link" type="button" id="menu-button-account"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                    style="padding: 0;">
-                                {% if user.legend.avatar %}
-                                    <img src="{{ user.legend.avatar.small.url }}" class="avatar img-circle"
-                                         height="38px" alt="avatar"/>
-                                {% else %}
-                                    <img src="{% static 'images/anonymous.png' %}" class="avatar img-circle"
-                                         height="38px" alt="avatar"/>
-                                {% endif %}
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="menu-button-account">
-                                <a class="dropdown-item" href="{% url 'legends:legend' %}">
-                                    {% icon 'legend' %} Legend
-                                </a>
-                                <a class="dropdown-item" href="{% url 'support:index' %}">
-                                    {% icon 'support' %} Support
-                                </a>
-                                <a class="dropdown-item" href="{% url 'users:settings' %}">
-                                    {% icon 'settings' %} Settings
-                                </a>
-                                <a class="dropdown-item" href="{% url 'account_logout' %}">
-                                    {% icon 'sign-out' %} Logout
-                                </a>
-                            </div>
+                {# ACCOUNT MENU #}
+                <li class="nav-item">
+                    <div class="dropdown">
+                        <button class="btn btn-link nav-link" type="button" id="menu-button-account"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                style="padding: 0;">
+                            {% if user.legend.avatar %}
+                                <img src="{{ user.legend.avatar.small.url }}" class="avatar img-circle"
+                                     height="38px" alt="avatar"/>
+                            {% else %}
+                                <img src="{% static 'images/anonymous.png' %}" class="avatar img-circle"
+                                     height="38px" alt="avatar"/>
+                            {% endif %}
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="menu-button-account">
+                            <a class="dropdown-item" href="{% url 'legends:legend' %}">
+                                {% icon 'legend' %} Legend
+                            </a>
+                            <a class="dropdown-item" href="{% url 'support:index' %}">
+                                {% icon 'support' %} Support
+                            </a>
+                            <a class="dropdown-item" href="{% url 'users:settings' %}">
+                                {% icon 'settings' %} Settings
+                            </a>
+                            <a class="dropdown-item" href="{% url 'account_logout' %}">
+                                {% icon 'sign-out' %} Logout
+                            </a>
                         </div>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'join' %}">{% trans "Join" %}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_login' %}">{% trans "Log In" %}</a>
-                    </li>
-                {% endif %}
+                    </div>
+                </li>
             </ul>
         </div>
     </div>

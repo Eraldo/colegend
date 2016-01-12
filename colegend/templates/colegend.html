@@ -1,4 +1,4 @@
-{% load staticfiles i18n %}
+{% load staticfiles i18n menus %}
 <!DOCTYPE html>
 
 <html lang="en" ng-app>
@@ -47,11 +47,7 @@
 
 <div id="site-menu-container">
     {% block site_menu %}
-        {% if user.is_authenticated %}
-            {% include '_menu.html' %}
-        {% else %}
-            {% include '_menu_anonymous.html' %}
-        {% endif %}
+        {% menu %}
     {% endblock %}
 </div>
 
