@@ -8,8 +8,9 @@
 
 {% block page_links %}
     {% if completed %}
-        <a href="{% url 'games:completed' %}" class="btn btn-default btn-sm">Completed
-            <small class="text-success">({{ completed }})</small>
+        <a href="{% url 'games:completed' %}" class="btn btn-default btn-sm">
+            <span class="text-success">{{ completed }}</span>
+            Completed
         </a>
     {% endif %}
 {% endblock %}

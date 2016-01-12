@@ -142,4 +142,13 @@ body.continuous {
   max-height: 6rem;
   max-width: 6rem; }
 
+.game-card-block {
+  padding: 1rem;
+}
+
+.game-card-image {
+  max-height: 6rem;
+  margin: auto;
+}
+
 /*# sourceMappingURL=colegend.css.map */
