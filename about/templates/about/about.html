@@ -21,7 +21,6 @@
     <title>coLegend - About</title>
 
     <!-- Bootstrap core CSS -->
-    {#    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">#}
     <link rel="stylesheet" href="{% static 'components/bootstrap/dist/css/bootstrap.min.css' %}">
 
 
@@ -39,6 +38,7 @@
 
     <!-- Custom styles for this template -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/about.css' %}" rel="stylesheet">
     <link href="{% static 'css/colegend.css' %}" rel="stylesheet">
 
 
@@ -47,14 +47,6 @@
 <div class="navbar-wrapper">
     <nav class="navbar navbar-default bg-faded navbar-fixed-top" role="navigation" style="padding: 0;">
         <div class="container" style="padding: 0">
-            {#            <div class="navbar-header page-scroll">#}
-            {#                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"#}
-            {#                        aria-expanded="false" aria-controls="navbar">#}
-            {#                    <span class="sr-only">Toggle navigation</span>#}
-            {#                    <span class="icon-bar"></span>#}
-            {#                    <span class="icon-bar"></span>#}
-            {#                    <span class="icon-bar"></span>#}
-            {#                </button>#}
             <a class="navbar-brand" href="#page-top">
                 <img id="logo" class="img-responsive" src="{% static 'images/coLegendLogo_86x18.png' %}">
             </a>
@@ -83,7 +75,7 @@
     </nav>
 
 </div>
-<div id="inSlider" class="carousel carousel-fade" data-ride="carousel">
+<div id="inSlider" class="carousel slide carousel-fade" data-ride="carousel">
     <div id="indicator-box">
         <ol class="carousel-indicators">
             <li data-target="#inSlider" data-slide-to="0" class="active"></li>
@@ -93,7 +85,7 @@
         </ol>
     </div>
     <div class="carousel-inner" role="listbox">
-        <div class="item active">
+        <div class="carousel-item item active">
             <div class="container">
                 <div class="carousel-caption tilted">
                     <h1>
@@ -116,7 +108,7 @@
             <!-- Set background for slide in css -->
             <div class="header-back zero"></div>
         </div>
-        <div class="item">
+        <div class="carousel-item item">
             <div class="container">
                 <div class="carousel-caption blank tilted">
                     <h1>
@@ -132,7 +124,7 @@
             <!-- Set background for slide in css -->
             <div class="header-back one"></div>
         </div>
-        <div class="item">
+        <div class="carousel-item item">
             <div class="container">
                 <div class="carousel-caption blank tilted">
                     <h1>
@@ -148,7 +140,7 @@
             <!-- Set background for slide in css -->
             <div class="header-back two"></div>
         </div>
-        <div class="item">
+        <div class="carousel-item item">
             <div class="container">
                 <div class="carousel-caption blank tilted">
                     <h1>
@@ -193,6 +185,7 @@
     </div>
 
 </section>
+
 <section id="features" class="container services">
     <div class="row text-center">
         <div class="col-sm-4">
@@ -230,7 +223,6 @@
         <div class="col-sm-4">
             {#            <img class="img-circle" src="{% static 'website/images/motivator_140x140.jpg' %}" alt="Motivator"/>#}
 
-            <h2>Continuous<br/>
                 <small>Story Challenge Support</small>
             </h2>
 
@@ -243,6 +235,24 @@
             {#            <p><a class="navy-link" href="#" role="button">Details &raquo;</a></p>#}
         </div>
     </div>
+</section>
+
+<section id="reasons" class="reasons bg-inverse">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="navy-line"></div>
+                <h1>7 reasons to join coLegend</h1>
+                <br>
+                {% for reason in reasons %}
+                    {% include 'widgets/chat.html' with npc=reason.npc content=reason.text %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="more-features" class="container more-features">
     <div class="row">
         <div class="col-lg-12 text-center">
             <div class="navy-line"></div>
@@ -299,13 +309,6 @@
 
                 <p>Organic Project Management. Projects start small and may grow bigger with time.</p>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12 text-center">
-            <div class="navy-line"></div>
-            <h1>7 reasons to join coLegend</h1>
-            {% include 'widgets/chat.html' with npc='Coralina' content='foo bar\n asdfasdfasd asdfasdf asdf asdf asdf asdfasdf asd fasdf asdf asd fasdf asdf asdf asdf asf adsf asdf asd fasdf asdf asdf asd f' %}
         </div>
     </div>
     <div class="row">

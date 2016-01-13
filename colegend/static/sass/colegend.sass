@@ -151,7 +151,7 @@ body.continuous
   background-color: $continuous
   border-color: $continuous
 
-.chat-bubble
+.speech-bubble-arrow
   content: ""
   position: absolute
   top: 0
@@ -161,12 +161,12 @@ body.continuous
   border-bottom: 20px solid transparent
   border-right: 20px solid transparent
 
-.chat-bubble::before
-  @extend .chat-bubble
+.speech-bubble-arrow::before
+  @extend .speech-bubble-arrow
   border-right-color: #e5e5e5
 
-.chat-bubble::after
-  @extend .chat-bubble
+.speech-bubble-arrow::after
+  @extend .speech-bubble-arrow
   top: 1px
   left: 2px
   border-right-color: white
@@ -198,16 +198,23 @@ body.continuous
   max-height: 6rem
   margin: auto
 
-// Fixing the navigation for bootstrap 4
+.phoenix-avatar
+  background-color: purple
 
-.nav .nav-item
-  display: flex
+.eagle-avatar
+  background-color: blue
 
-.navbar-divider, .navbar-nav .nav-item + .nav-item, .navbar-nav .nav-link + .nav-link
-  margin-left: 0
+.parrot-avatar
+  background-color: cyan
 
-.nav .nav-item a:focus, .nav .nav-item a:hover
-  text-decoration: none
+.monkey-avatar
+  background-color: green
 
-.navbar-wrapper
-  font-size: 88%
+.tiger-avatar
+  background-color: yellow
+
+.dolphin-avatar
+  background-color: orange
+
+.bear-avatar
+  background-color: red

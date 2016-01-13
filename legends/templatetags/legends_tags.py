@@ -28,8 +28,29 @@ def legend(context, legend=None, size=None):
 @register.simple_tag()
 def npc(name):
     template = 'legends/widgets/legend.html'
+    images = {
+        'coralina': 'Coralina.png',
+        'phoenix': 'phoenix.png',
+        'eagle': 'eagle.png',
+        'parrot': 'parrot.png',
+        'monkey': 'monkey.png',
+        'tiger': 'tiger.png',
+        'dolphin': 'cangaroo.png',
+        'bear': 'bear.png',
+    }
+    names = {
+        'coralina': 'Coralina',
+        'phoenix': 'phoenix.png',
+        'eagle': 'eagle.png',
+        'parrot': 'parrot.png',
+        'monkey': 'monkey.png',
+        'tiger': 'tiger.png',
+        'dolphin': 'cangaroo.png',
+        'bear': 'bear.png',
+    }
+    image_name = images.get(name) or images.get(name.lower())
     context = {
         'name': name,
-        'source': static('legends/images/npc/{name}.png'.format(name=name)),
+        'source': static('legends/images/npc/{image_name}'.format(image_name=image_name)),
     }
     return render_to_string(template, context)

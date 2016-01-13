@@ -107,7 +107,7 @@ body.continuous {
   background-color: #c55b00;
   border-color: #c55b00; }
 
-.chat-bubble, .chat-bubble::before, .chat-bubble::after {
+.speech-bubble-arrow, .speech-bubble-arrow::before, .speech-bubble-arrow::after {
   content: "";
   position: absolute;
   top: 0;
@@ -117,10 +117,10 @@ body.continuous {
   border-bottom: 20px solid transparent;
   border-right: 20px solid transparent; }
 
-.chat-bubble::before {
+.speech-bubble-arrow::before {
   border-right-color: #e5e5e5; }
 
-.chat-bubble::after {
+.speech-bubble-arrow::after {
   top: 1px;
   left: 2px;
   border-right-color: white;
@@ -155,20 +155,32 @@ body.continuous {
   margin: auto;
 }
 
-.nav .nav-item {
-  display: flex;
+.phoenix-avatar {
+  background-color: purple;
 }
 
-.navbar-divider, .navbar-nav .nav-item + .nav-item, .navbar-nav .nav-link + .nav-link {
-  margin-left: 0;
+.eagle-avatar {
+  background-color: blue;
 }
 
-.nav .nav-item a:focus, .nav .nav-item a:hover {
-  text-decoration: none;
+.parrot-avatar {
+  background-color: cyan;
 }
 
-.navbar-wrapper {
-  font-size: 88%;
+.monkey-avatar {
+  background-color: green;
+}
+
+.tiger-avatar {
+  background-color: yellow;
+}
+
+.dolphin-avatar {
+  background-color: orange;
+}
+
+.bear-avatar {
+  background-color: red;
 }
 
 /*# sourceMappingURL=colegend.css.map */
