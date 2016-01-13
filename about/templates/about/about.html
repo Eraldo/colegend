@@ -94,7 +94,9 @@
 
                     <p class=""><i>Socially Intelligent Platform</i></p>
 
-                    <p>Once upon a time.. is now!<br/>join the circle of real life legends!</p>
+                    <p>
+                        Once upon a time.. is now!
+                    </p>
 
                     <p><a class="btn btn-lg btn-primary page-scroll" href="#" onclick="playintro();" role="button">Start
                         Video</a></p>
@@ -186,7 +188,7 @@
 
 </section>
 
-<section id="features" class="container services">
+<section id="services" class="container services">
     <div class="row text-center">
         <div class="col-sm-4">
             {#            <img class="img-circle" src="{% static 'website/images/mentor_140x140.jpg' %}" alt="Mentor"/>#}
@@ -222,7 +224,7 @@
         </div>
         <div class="col-sm-4">
             {#            <img class="img-circle" src="{% static 'website/images/motivator_140x140.jpg' %}" alt="Motivator"/>#}
-
+            <h2>continuous<br/>
                 <small>Story Challenge Support</small>
             </h2>
 
@@ -237,22 +239,7 @@
     </div>
 </section>
 
-<section id="reasons" class="reasons bg-inverse">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <div class="navy-line"></div>
-                <h1>7 reasons to join coLegend</h1>
-                <br>
-                {% for reason in reasons %}
-                    {% include 'widgets/chat.html' with npc=reason.npc content=reason.text %}
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="more-features" class="container more-features">
+<section id="features" class="container features">
     <div class="row">
         <div class="col-lg-12 text-center">
             <div class="navy-line"></div>
@@ -269,9 +256,6 @@
             </h1>
         </div>
     </div>
-</section>
-
-<section class="container features">
     <div class="row">
         <div class="col-md-3 text-center wow fadeInLeft">
             <div>
@@ -311,6 +295,26 @@
             </div>
         </div>
     </div>
+</section>
+<section id="reasons" class="reasons default-pattern">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="navy-line"></div>
+                <h1>7 reasons to join coLegend</h1>
+                <br>
+                {% for reason in reasons %}
+                    <div class="wow zoomIn" style="text-align: left;">
+                        {% include 'widgets/chat.html' with npc=reason.npc content=reason.text %}
+                        <br>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="explore" class="container explore">
     <div class="row">
         <div class="col-lg-12 text-center">
             <div class="navy-line"></div>
@@ -716,7 +720,7 @@
 <script src="{% static 'js/jquery-2.1.1.js' %}"></script>
 <script src="{% static 'components/jquery/dist/jquery.min.js' %}"></script>
 <script src="{% static 'js/pace.min.js' %}"></script>
-<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/classie.js' %}"></script>
 <script src="{% static 'js/cbpAnimatedHeader.js' %}"></script>
 <script src="{% static 'js/wow.min.js' %}"></script>

@@ -4,7 +4,8 @@
     <a {% if url %}href="{{ url }}"{% endif %}>
         <div style="display: inline-block;">
             {% if source %}
-                <img class="{{ name|slugify }}-avatar image-{{ size }} img-responsive img-circle center-block"
+                <img class="
+                        {% if id %}{{ id }}{% else %}{{ name|slugify }}{% endif %}-avatar image-{{ size }} img-responsive img-circle center-block"
                      src="{{ source }}"
                      alt="{{ name }}">
             {% else %}

@@ -35,22 +35,24 @@ def npc(name):
         'parrot': 'parrot.png',
         'monkey': 'monkey.png',
         'tiger': 'tiger.png',
-        'dolphin': 'cangaroo.png',
+        'dolphin': 'dolphin.png',
         'bear': 'bear.png',
     }
     names = {
         'coralina': 'Coralina',
-        'phoenix': 'phoenix.png',
-        'eagle': 'eagle.png',
-        'parrot': 'parrot.png',
-        'monkey': 'monkey.png',
-        'tiger': 'tiger.png',
-        'dolphin': 'cangaroo.png',
-        'bear': 'bear.png',
+        'phoenix': 'Light Phoenix Oracle',
+        'eagle': 'Professor Eagle Scientist',
+        'parrot': 'Moderating Parrot Poet',
+        'monkey': 'Caring Monkey Mother',
+        'tiger': 'Trillionaire Tiger Entrepreneur',
+        'dolphin': 'Playful Dolphin Dancer',
+        'bear': 'Healthy Bear Athlete',
     }
     image_name = images.get(name) or images.get(name.lower())
+    full_name = names.get(name, name)
     context = {
-        'name': name,
+        'name': full_name,
         'source': static('legends/images/npc/{image_name}'.format(image_name=image_name)),
+        'id': name,
     }
     return render_to_string(template, context)

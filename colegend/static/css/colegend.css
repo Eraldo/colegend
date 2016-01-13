@@ -34,17 +34,20 @@
   font-size: small;
   text-decoration: none; }
 
-body.default {
-  background-image: url(../images/shattered.jpg);
+body {
   font: 100% "Ubuntu", Helvetica, sans-serif; }
 
-body.conscious {
+.default-pattern {
+  background-image: url(../images/shattered.jpg);
+}
+
+.conscious-pattern {
   background-image: url(../images/shattered-conscious.jpg); }
 
-body.connected {
+.connected-pattern {
   background-image: url(../images/shattered-connected.jpg); }
 
-body.continuous {
+.continuous-pattern {
   background-image: url(../images/shattered-continuous.jpg); }
 
 .bg-content {
@@ -114,14 +117,14 @@ body.continuous {
   left: 0;
   width: 0;
   height: 0;
-  border-bottom: 20px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-top: 20px solid transparent;
   border-right: 20px solid transparent; }
 
 .speech-bubble-arrow::before {
   border-right-color: #e5e5e5; }
 
 .speech-bubble-arrow::after {
-  top: 1px;
   left: 2px;
   border-right-color: white;
   z-index: 1; }
