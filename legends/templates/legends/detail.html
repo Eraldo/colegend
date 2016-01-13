@@ -27,16 +27,7 @@
 {% endblock %}
 
 {% block pre_content %}
-    <blockquote class="blockquote bg-content">
-        <p>
-            Accept no one's definition of your life, but define yourself.
-        </p>
-        <footer>
-            <cite title="Source Title">by Harvey Fierstein</cite>
-            <span class="pull-right">shared by Millionaire Tiger Entrepreneur</span>
-        </footer>
-        <div class="clearfix"></div>
-    </blockquote>
+    {% include 'widgets/quote.html' with author='Harvey Fierstein' sharer='Millionaire Tiger Entrepreneur' text="Accept no one's definition of your life, but define yourself." %}
 
     <p>
         {% include 'legends/chats/introduction.html' %}

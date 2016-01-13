@@ -3,17 +3,7 @@
 {% block title %}Support{% endblock %}
 
 {% block pre_content %}
-    <blockquote class="blockquote bg-content">
-        <p>
-            A hero is someone who is willing to help others in his or her best capacity.
-        </p>
-        <footer>
-            <cite title="Source Title">by Ricky Martin</cite>
-            <span class="pull-right">shared by Cooking Kangaroo Mother</span>
-        </footer>
-        <div class="clearfix"></div>
-    </blockquote>
-
+    {% include 'widgets/quote.html' with author='Ricky Martin' sharer='Cooking Kangaroo Mother' text="A hero is someone who is willing to help others in his or her best capacity." %}
     <p>
         {% include 'support/chats/introduction.html' %}
     </p>

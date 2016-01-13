@@ -22,7 +22,8 @@
     <div class="after-typed">
 
         <a href="#" data-toggle="modal" data-target="#treeModal" onclick="get_message()">
-            <img src="{% static 'story/images/welcome-tree.jpg' %}" class="img-responsive" alt="Welcome Tree">
+            <img id="welcome-tree" src="{% static 'story/images/welcome-tree.jpg' %}" class="img-responsive"
+                 alt="Welcome Tree">
         </a>
         <small>Click on the tree to see its messages.</small>
         <p></p>
@@ -30,7 +31,7 @@
         <p>
             You can read as many welcome leaves as you want. <br>
             As soon as you are done... <br>
-            <a href="{% url 'games:index' %}" class="btn btn-primary">continue</a>
+            <a id="success-button" href="{% url 'games:index' %}" class="btn btn-primary">continue</a>
         </p>
     </div>
 
@@ -42,7 +43,7 @@
                 <button id="close-button" type="button" class="btn btn-link btn-sm" data-dismiss="modal">
                     {% icon 'close' color='black' %}
                 </button>
-                <div id="leaf" class="handwritten-font">
+                <div id="welcome-tree-leaf" class="handwritten-font">
                 </div>
                 <button id="next-button" name="next" type="submit" class="btn btn-link btn-sm"
                         onclick="get_message()">
@@ -57,7 +58,7 @@
     {{ block.super }}
     <script>
         function get_message() {
-            $('#treeModal #leaf').load('{% url 'story:tree-leaf' %}');
+            $('#welcome-tree-leaf').load('{% url 'story:tree-leaf' %}');
         }
     </script>
 {% endblock %}

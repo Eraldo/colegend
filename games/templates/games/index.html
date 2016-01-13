@@ -16,16 +16,7 @@
 {% endblock %}
 
 {% block pre_content %}
-    <blockquote class="blockquote bg-content">
-        <p>
-            Life is not a game. Still, in this life, we choose the games we live to play.
-        </p>
-        <footer>
-            <cite title="Source Title">by J. R. Rim</cite>
-            <span class="pull-right">shared by Dancing Monkey Comedian</span>
-        </footer>
-        <div class="clearfix"></div>
-    </blockquote>
+    {% include 'widgets/quote.html' with author='J. R. Rim' sharer='Dance Monkey Comedian' text="Life is not a game. Still, in this life, we choose the games we live to play." %}
 
     <p>
         {% include 'games/chats/introduction.html' %}

@@ -5,14 +5,7 @@
 {% block body_class %}conscious{% endblock %}
 
 {% block pre_content %}
-    <blockquote class="blockquote bg-content">
-        <p>If you really want to do something, you'll find a way. If you don't, you'll find an excuse.</p>
-        <footer>
-            <cite title="Source Title">by Jim Rohn</cite>
-            <span class="pull-right">shared by Professor Eagle Scientist</span>
-        </footer>
-        <div class="clearfix"></div>
-    </blockquote>
+    {% include 'widgets/quote.html' with author='Jim Rohn' sharer='Professor Eagle Scientist' text="If you really want to do something, you'll find a way. If you don't, you'll find an excuse." %}
 
     <p>
         {% include 'conscious/_conscious_chat.html' %}

@@ -6,15 +6,8 @@
 {% block body_class %}continuous{% endblock %}
 
 {% block pre_content %}
-    <blockquote class="blockquote bg-content">
-        <p>
-            Every story I create, creates me. I write to create myself.
-        </p>
-        <footer>
-            <cite title="Source Title">by Octavia E. Butler</cite>
-            <span class="pull-right">shared by Dance Monkey Comedian</span>
-        </footer>
-    </blockquote>
+
+    {% include 'widgets/quote.html' with author='Octavia E. Butler' sharer='Dance Monkey Comedian' text="Every story I create, creates me. I write to create myself." %}
 
     <p>
         {% include 'continuous/_continuous_chat.html' %}

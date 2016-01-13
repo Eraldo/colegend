@@ -7,13 +7,7 @@
 {% block body_class %}connected{% endblock %}
 
 {% block pre_content %}
-    <blockquote class="blockquote bg-content">
-        <p>A dream you dream alone is only a dream. A dream you dream together is reality.</p>
-        <footer>
-            <cite title="Source Title">by John Lennon</cite>
-            <span class="pull-right">shared by Cooking Kangaroo Mother</span>
-        </footer>
-    </blockquote>
+    {% include 'widgets/quote.html' with author='John Lennon' sharer='Cooking Kangaroo Mother' text='A dream you dream alone is only a dream. A dream you dream together is reality.' %}
 
     <p>
         {% include 'connected/_connected_chat.html' %}
