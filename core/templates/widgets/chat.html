@@ -1,0 +1,57 @@
+{% load legends_tags %}
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="row">
+            <div class="col-sm-4 text-center">
+                {% npc npc|default:'Coralina' %}
+            </div>
+            <div class="col-sm-8">
+                <div class="chat-bubble hidden-xs-down"></div>
+                <div class="card bg-content">
+                    <div class="card-block">
+                        <h4 class="card-title">
+                            {{ title }}
+                        </h4>
+                        <div class="card-text">
+                            <p>
+                                {{ content }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% if answers %}
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-4">
+            <div class="row">
+                <div class="col-sm-4 col-sm-push-8 text-center">
+                    {% if user.is_authenticated %}
+                        {% legend user.legend size='large' %}
+                    {% else %}
+                        {% include 'legends/widgets/legend.html' %}
+                    {% endif %}
+                </div>
+                <div class="col-sm-8  col-sm-pull-4">
+                    <div class="card">
+                        <div class="card-header">
+                            Your answer:
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            {% for answer in answers %}
+                                <a href="{{ answer.url }}">
+                                    <li class="list-group-item">
+                                        {{ answer.text }}
+                                    </li>
+                                </a>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

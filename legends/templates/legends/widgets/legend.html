@@ -14,11 +14,11 @@
             {% endif %}
             <div style="position: relative;">
                 {% if size == 'small' %}
-                    <div class="text-center">
+                    <div class="legend-name text-center">
                         {{ name|default:"You" }}
                     </div>
                 {% else %}
-                    <div class="text-center bg-inverse bg-connected"
+                    <div class="legend-name text-center bg-inverse bg-connected"
                          style="border-radius: 1em 1em 0 0; position: absolute; bottom: 0em; width: 100%;">
                         <strong>{{ name|default:"You" }}</strong>
                     </div>

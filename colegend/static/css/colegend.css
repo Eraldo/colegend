@@ -34,7 +34,7 @@
   font-size: small;
   text-decoration: none; }
 
-body {
+body.default {
   background-image: url(../images/shattered.jpg);
   font: 100% "Ubuntu", Helvetica, sans-serif; }
 
@@ -125,6 +125,10 @@ body.continuous {
   left: 2px;
   border-right-color: white;
   z-index: 1; }
+
+.legend-name {
+  color: white;
+}
 
 .image-small {
   max-height: 50px;
