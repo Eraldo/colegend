@@ -194,6 +194,14 @@ class ExecutionEngine(hitchtest.ExecutionEngine):
         current_title = self.driver.title
         assert title in current_title, "expected title '{}' - title was '{}'".format(title, current_title)
 
+    def find_element(self, name):
+        """Find the element id or class within the dom."""
+        try:
+            element = self.driver.find_element_by_id(name)
+        except:
+            element = self.driver.find_element_by_css_selector('.{}'.format(name))
+        assert element, "text '{}' was not found".format(text)
+
     def find_text(self, text):
         """Find the text within the dom."""
         assert self.driver.find_element_by_xpath(
