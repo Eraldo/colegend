@@ -16,5 +16,5 @@ def button(context, button=None):
         'kind': button.kind,
         'locked': button.locked,
     }
-    template = 'core/widgets/button.html'
+    template = 'widgets/button.html'
     return render_to_string(template, context=context)
