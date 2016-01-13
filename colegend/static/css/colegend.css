@@ -155,4 +155,20 @@ body.continuous {
   margin: auto;
 }
 
+.nav .nav-item {
+  display: flex;
+}
+
+.navbar-divider, .navbar-nav .nav-item + .nav-item, .navbar-nav .nav-link + .nav-link {
+  margin-left: 0;
+}
+
+.nav .nav-item a:focus, .nav .nav-item a:hover {
+  text-decoration: none;
+}
+
+.navbar-wrapper {
+  font-size: 88%;
+}
+
 /*# sourceMappingURL=colegend.css.map */
