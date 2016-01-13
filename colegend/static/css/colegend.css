@@ -166,7 +166,7 @@ body {
   border-right-color: #e5e5e5; }
 
 .speech-bubble-arrow::after {
-  left: 2px;
+  left: 1px;
   border-right-color: white;
   z-index: 1; }
 
