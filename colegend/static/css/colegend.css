@@ -1,4 +1,46 @@
 @import url("https://fonts.googleapis.com/css?family=Ubuntu:400,500");
+.text-category-7 {
+  color: darkviolet; }
+
+.text-category-6 {
+  color: indigo; }
+
+.text-category-5 {
+  color: dodgerblue; }
+
+.text-category-4 {
+  color: green; }
+
+.text-category-3 {
+  color: green; }
+
+.text-category-2 {
+  color: darkorange; }
+
+.text-category-1 {
+  color: crimson; }
+
+.bg-category-7, .phoenix-avatar {
+  background-color: darkviolet; }
+
+.bg-category-6, .eagle-avatar {
+  background-color: indigo; }
+
+.bg-category-5, .parrot-avatar {
+  background-color: dodgerblue; }
+
+.bg-category-4, .monkey-avatar {
+  background-color: green; }
+
+.bg-category-3, .tiger-avatar {
+  background-color: gold; }
+
+.bg-category-2, .dolphin-avatar {
+  background-color: darkorange; }
+
+.bg-category-1, .bear-avatar {
+  background-color: crimson; }
+
 .alert-debug {
   background-color: white;
   border-color: #d6e9c6;
@@ -38,8 +80,7 @@ body {
   font: 100% "Ubuntu", Helvetica, sans-serif; }
 
 .default-pattern {
-  background-image: url(../images/shattered.jpg);
-}
+  background-image: url(../images/shattered.jpg); }
 
 .conscious-pattern {
   background-image: url(../images/shattered-conscious.jpg); }
@@ -130,8 +171,7 @@ body {
   z-index: 1; }
 
 .legend-name {
-  color: white;
-}
+  color: white; }
 
 .image-small {
   max-height: 50px;
@@ -150,40 +190,10 @@ body {
   max-width: 6rem; }
 
 .game-card-block {
-  padding: 1rem;
-}
+  padding: 1rem; }
 
 .game-card-image {
   max-height: 6rem;
-  margin: auto;
-}
-
-.phoenix-avatar {
-  background-color: purple;
-}
-
-.eagle-avatar {
-  background-color: blue;
-}
-
-.parrot-avatar {
-  background-color: cyan;
-}
-
-.monkey-avatar {
-  background-color: green;
-}
-
-.tiger-avatar {
-  background-color: yellow;
-}
-
-.dolphin-avatar {
-  background-color: orange;
-}
-
-.bear-avatar {
-  background-color: red;
-}
+  margin: auto; }
 
 /*# sourceMappingURL=colegend.css.map */

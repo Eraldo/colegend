@@ -2,8 +2,10 @@
 
 
 // base font
+
 @import url('https://fonts.googleapis.com/css?family=Ubuntu:400,500')
 $font-stack: "Ubuntu", Helvetica, sans-serif
+
 
 // coLegend colors
 
@@ -16,16 +18,65 @@ $pink: #f2dede
 $dark-pink: #eed3d7
 $red: #b94a48
 
-$background-color: indigo
-
 $site-menu-color: $white
 
 $conscious: $color-secondary-1-0
 $connected: $color-secondary-2-3
 $continuous: $color-primary-3
 
-// Alert colors
+// category colors
 
+$category-7: darkviolet
+$category-6: indigo
+$category-5: dodgerblue
+$category-4: green
+$category-3: gold
+$category-2: darkorange
+$category-1: crimson
+
+.text-category-7
+  color: $category-7
+
+.text-category-6
+  color: $category-6
+
+.text-category-5
+  color: $category-5
+
+.text-category-4
+  color: $category-4
+
+.text-category-3
+  color: $category-4
+
+.text-category-2
+  color: $category-2
+
+.text-category-1
+  color: $category-1
+
+.bg-category-7
+  background-color: $category-7
+
+.bg-category-6
+  background-color: $category-6
+
+.bg-category-5
+  background-color: $category-5
+
+.bg-category-4
+  background-color: $category-4
+
+.bg-category-3
+  background-color: $category-3
+
+.bg-category-2
+  background-color: $category-2
+
+.bg-category-1
+  background-color: $category-1
+
+// Alert colors
 
 // bootstrap alert CSS, translated to the django-standard levels of
 // debug, info, success, warning, error
@@ -40,6 +91,7 @@ $continuous: $color-primary-3
   border-color: $dark-pink
   color: $red
 
+
 // This is a fix for the bootstrap4 alpha release
 
 @media (max-width: 47.9em)
@@ -51,6 +103,7 @@ $continuous: $color-primary-3
     margin-left: 0
   .nav.navbar-nav.pull-right
     float: none !important
+
 
 // Display django-debug-toolbar.
 // See https://github.com/django-debug-toolbar/django-debug-toolbar/issues/742
@@ -96,6 +149,7 @@ body
 #page-title
   margin: 0
 
+
 //  coLegend text
 
 .text-conscious
@@ -107,6 +161,7 @@ body
 .text-continuous
   color: $continuous
 
+
 //  coLegend background
 
 .bg-conscious
@@ -117,6 +172,7 @@ body
 
 .bg-continuous
   background-color: $continuous
+
 
 // feedback button
 
@@ -200,23 +256,25 @@ body
   max-height: 6rem
   margin: auto
 
+// story animals
+
 .phoenix-avatar
-  background-color: purple
+  @extend .bg-category-7
 
 .eagle-avatar
-  background-color: blue
+  @extend .bg-category-6
 
 .parrot-avatar
-  background-color: cyan
+  @extend .bg-category-5
 
 .monkey-avatar
-  background-color: green
+  @extend .bg-category-4
 
 .tiger-avatar
-  background-color: yellow
+  @extend .bg-category-3
 
 .dolphin-avatar
-  background-color: orange
+  @extend .bg-category-2
 
 .bear-avatar
-  background-color: red
+  @extend .bg-category-1
