@@ -1,0 +1,26 @@
+{% load legends_tags %}
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="row">
+            <div class="col-sm-4 text-center">
+                {% npc npc|default:'coralina' %}
+            </div>
+            <div class="col-sm-8">
+                <div class="speech-bubble-arrow hidden-xs-down"></div>
+                <div class="speech-bubble card bg-content">
+                    <div class="card-block">
+                        <h4 class="card-title">
+                            {{ title }}
+                        </h4>
+                        <div class="card-text">
+                            <p>
+                                {{ content }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

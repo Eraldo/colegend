@@ -26,15 +26,12 @@
     {% endif %}
 {% endblock %}
 
-{% block pre_content %}
+{% block content_container %}
     {% include 'widgets/quote.html' with author='Harvey Fierstein' sharer='Millionaire Tiger Entrepreneur' text="Accept no one's definition of your life, but define yourself." %}
 
     <p>
         {% include 'legends/chats/introduction.html' %}
     </p>
-{% endblock %}
-
-{% block content %}
     <div class="row">
         <div class="col-md-3 text-center">
             {% static 'legends/images/coLegend-hero.png' as hero_avatar_url %}
@@ -51,7 +48,7 @@
     <p></p>
     <div class="row">
         <div class="col-md-3">
-            <div class="card">
+            <div class="card bg-content">
                 <div class="card-header">
                     About
                     {% if can_edit_about %}
@@ -85,7 +82,7 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="card">
+            <div class="card bg-content">
                 <div class="card-header">
                     Relations
                 </div>
@@ -102,7 +99,7 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="card">
+            <div class="card bg-content">
                 <div class="card-header">
                     Badges
                 </div>
@@ -114,7 +111,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card bg-content">
                 <div class="card-header">
                     Story Update
                 </div>
@@ -123,7 +120,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card bg-content">
                 <div class="card-header">
                     Latest Activities
                 </div>
@@ -135,7 +132,7 @@
 
         </div>
         <div class="col-md-3">
-            <div class="card">
+            <div class="card bg-content">
                 <div class="card-header">
                     Status
                 </div>
@@ -148,7 +145,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card bg-content">
                 <div class="card-header">
                     Biography
                 </div>
