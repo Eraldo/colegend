@@ -60,7 +60,7 @@ class PrologueView(LoginRequiredMixin, TemplateView):
         user = self.request.user
         context = super().get_context_data(**kwargs)
 
-        country = self.get_client_country()
+        country = self.get_prologue_country()
         context['country'] = country
 
         weekday = user.date_joined.strftime('%A')
