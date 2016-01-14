@@ -15,7 +15,8 @@
             <p class="card-text">
                 {{ content|linebreaks }}
                 {% if details %}
-                    <a href="" data-toggle="modal" data-target="#card-{{ id }}-modal">
+                    <a id="card-{{ title|slugify }}-details" href="" data-toggle="modal"
+                       data-target="#card-{{ id }}-modal">
                         details
                     </a>
                 {% endif %}
@@ -41,7 +42,9 @@
                             {{ details|linebreaksbr }}
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-success" data-dismiss="modal">Ok</button>
+                            <button id="card-{{ title|slugify }}-details-success" type="button" class="btn btn-success"
+                                    data-dismiss="modal">Ok
+                            </button>
                         </div>
                     </div>
                 </div>

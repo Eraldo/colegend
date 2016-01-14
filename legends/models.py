@@ -50,7 +50,10 @@ class Legend(AutoOwnedBase, TimeStampedBase):
 
     phone = PhoneNumberField(blank=True)
 
-    avatar = ThumbnailerImageField(upload_to=UploadToOwnedDirectory('legend'))
+    avatar = ThumbnailerImageField(
+        upload_to=UploadToOwnedDirectory('legend'),
+        resize_source=dict(size=(400, 400)),
+    )
 
     def get_avatar(self, size='medium'):
         return self.avatar[size]

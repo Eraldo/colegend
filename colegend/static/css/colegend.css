@@ -166,7 +166,7 @@ body {
   border-right-color: #e5e5e5; }
 
 .speech-bubble-arrow::after {
-  left: 1px;
+  left: -4px;
   border-right-color: white;
   z-index: 1; }
 
@@ -187,7 +187,7 @@ body {
 }
 
 .speech-bubble-arrow-right::after {
-  right: 1px;
+  right: -4px;
   border-left-color: white;
   z-index: 1;
 }
@@ -217,5 +217,11 @@ body {
 .game-card-image {
   max-height: 6rem;
   margin: auto; }
+
+form.list-group-item:focus, form.list-group-item:hover {
+  color: #555;
+  text-decoration: none;
+  background-color: #f5f5f5;
+}
 
 /*# sourceMappingURL=colegend.css.map */

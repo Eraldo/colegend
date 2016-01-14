@@ -20,8 +20,8 @@
 {% endblock %}
 
 {% block chat_answers %}
-    <li class="list-group-item">
-        <form class="login" method="POST" action="{% url 'account_login' %}">
+    <div class="">
+        <form class="login list-group-item" method="POST" action="{% url 'account_login' %}">
             {% csrf_token %}
             {{ form|crispy }}
             {% if redirect_field_value %}
@@ -32,24 +32,18 @@
             <a class="button secondaryAction"
                href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
         </form>
-    </li>
+    </div>
 
-    <a href="{% provider_login_url "google" %}">
-        <li class="list-group-item">
-            {% icon 'google-plus' fixed=True %}
-            My big brother will tell you who I am.
-        </li>
+    <a href="{% provider_login_url "google" %}" class="list-group-item">
+        {% icon 'google-plus' fixed=True %}
+        My big brother will tell you who I am.
     </a>
-    <a href="{% provider_login_url "facebook" method="oauth2" %}">
-        <li class="list-group-item">
-            {% icon 'facebook' fixed=True %}
-            My friends will tell you who I am.
-        </li>
+    <a href="{% provider_login_url "facebook" method="oauth2" %}" class="list-group-item">
+        {% icon 'facebook' fixed=True %}
+        My friends will tell you who I am.
     </a>
-    <a href="{% url 'join' %}">
-        <li class="list-group-item">
-            {% icon 'sign-in' fixed=True %}
-            Err, I am new here.. Where can I join?
-        </li>
+    <a href="{% url 'join' %}" class="list-group-item">
+        {% icon 'sign-in' fixed=True %}
+        Err, I am new here.. Where can I join?
     </a>
 {% endblock %}

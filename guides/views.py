@@ -110,6 +110,7 @@ class GuideManageView(LoginRequiredMixin, UpdateView):
             if all(
                 [instance.guide, instance.outer_call_checked, instance.inner_call_checked,
                  instance.coLegend_checked, instance.guiding_checked]):
+                instance.done = True
                 connected.guide = True
                 connected.save()
                 complete_card(request, 'cloud guide')

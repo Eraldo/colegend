@@ -11,13 +11,13 @@
                     <div class="speech-bubble-arrow hidden-xs-down"></div>
                     <div class="speech-bubble card bg-content">
                         <div class="card-block">
-                            <h4 class="card-title">
-                                {{ title }}
-                            </h4>
+                            {% if title %}
+                                <h4 class="card-title">
+                                    {{ title }}
+                                </h4>
+                            {% endif %}
                             <div class="card-text">
-                                <p>
-                                    {{ content }}
-                                </p>
+                                {{ content }}
                             </div>
                         </div>
                     </div>
@@ -36,13 +36,13 @@
                     <div class="speech-bubble-arrow-right hidden-xs-down"></div>
                     <div class="speech-bubble card bg-content">
                         <div class="card-block">
-                            <h4 class="card-title">
-                                {{ title }}
-                            </h4>
+                            {% if title %}
+                                <h4 class="card-title">
+                                    {{ title }}
+                                </h4>
+                            {% endif %}
                             <div class="card-text">
-                                <p>
-                                    {{ content }}
-                                </p>
+                                {{ content }}
                             </div>
                         </div>
                     </div>

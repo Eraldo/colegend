@@ -69,13 +69,14 @@
     # She wants to continue discovering the coLegend site and looks for a button to continue.
     # She finds the button and clicks on it.
     - Find text: continue
-    - Click: success-button               # needs ID
+    - Click: close-button
+    - Click: success-button
 
     # She gets prompted to the continuous game page where she gets welcomed by Coralina who explains the content of the page to her.
     - Page title: Game
     - Find element: coralina-avatar  # still needs Coralina picture ID
     - Find text: Coralina   # name of Coralina picture
-    - Find element: chat-bubble  # still needs ID “chat box of Coralina”
+    - Find element: speech-bubble
     - Find element: blockquote  # still needs ID for quote-box
     - Find element: quote-author  # quote author
     - Find text : shared by  # quote sharer (animal)
@@ -83,39 +84,40 @@
     # In the introduction she reads about the coLegend card game and is now intrigued. She
     # wants to find out what it is about, looks at it and clicks on the deck.
     - Find element: deck                # still needs ID
-    # TODO: Implement cards for testing!
     - Click: deck                         # still needs ID
 
     # After clicking on the deck a first card appears to the right of the deck: The Outer Call card.
     # She reads through the card and clicks on the details-link to learn more about how to do it.
     - Find element: card                # still needs ID
     - Find text: Outer Call
-    - Click: details-link             # still needs ID
-    - Click: close-button             # the “ok” on the details pop-up
+    - Click: card-outer-call-details
+    - Click: card-outer-call-details-success  # the “ok” on the details pop-up
+    - Wait: 1
 
     # After having read through the detailed instructions on the card she now knows what to do
     # and navigates to the Legend Page and from there to the unlocked Outer Call link.
     - Click: menu-button-connected
-    - Click: menu-button-legend           # still needs ID
-    - Click: Outer-Call-button-create     # still needs ID
+    - Click: menu-button-legend
+    - Click: outer-call-button
 
     # She gets transferred to the “Outer Call”-Page and is introduced by Coralina.
-    - Find element: coralina.png          # still needs Coralina picture ID
+    - Find element: coralina-avatar          # still needs Coralina picture ID
     - Find text: Coralina                 # name of Coralina picture
-    - Find element: Coralina-chat         # still needs ID “chat box of Coralina”
-    - Find element: outer-call.png            # still needs Outer Call picture ID
+    - Find element: speech-bubble         # still needs ID “chat box of Coralina”
+#    - Find element: outer-call.png            # still needs Outer Call picture ID
     - Find text: How did you find out about coLegend?
     - Find text: Who was your contact person?
 
     # She fills in the entry field and submits it
     - Fill form:
-        id_OC-findout: internet     # still needs ID
-        id_OC-contact: Eraldo       # still needs ID
-    - Click: success
+        id_trigger: internet     # still needs ID
+        id_referrer: Eraldo       # still needs ID
+    - Click: success-button
 
     # She sees a notification that she has successfully accomplished the Outer-Call-Card. The
     # notification also tells her to go back to the deck of cards if she wants to continue playing
     # the game; there also is a link that prompts her back to the game. She clicks it.
+    # TODO: Continue
     - Find text: Congratulations
     - Find text: If you want to continue to play the game, go back to the Game
     - Click: game-button              # link back to Game page; still needs ID

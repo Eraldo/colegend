@@ -226,7 +226,7 @@ body
 
 .speech-bubble-arrow::after
   @extend .speech-bubble-arrow
-  left: 1px
+  left: -4px
   border-right-color: white
   z-index: 1
 
@@ -247,7 +247,7 @@ body
 
 .speech-bubble-arrow-right::after
   @extend .speech-bubble-arrow-right
-  right: 1px
+  right: -4px
   border-left-color: white
   z-index: 1
 
@@ -299,3 +299,9 @@ body
 
 .bear-avatar
   @extend .bg-category-1
+
+// Used for forms in speech bubble responses
+form.list-group-item:focus, form.list-group-item:hover
+  color: #555
+  text-decoration: none
+  background-color: #f5f5f5

@@ -41,6 +41,9 @@ class GuideRelation(AutoOwnedBase, TimeStampedBase):
     guiding_checked = models.BooleanField(
         verbose_name=_("Talked about becoming a Guide"),
         default=False)
+    done = models.BooleanField(
+        verbose_name=_("Guiding is done"),
+        default=False)
 
     objects = GuideRelationQuerySet.as_manager()
 
