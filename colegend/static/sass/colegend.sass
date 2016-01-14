@@ -230,6 +230,27 @@ body
   border-right-color: white
   z-index: 1
 
+.speech-bubble-arrow-right
+  content: ""
+  position: absolute
+  top: 0
+  right: 0
+  width: 0
+  height: 0
+  border-bottom: 10px solid transparent
+  border-top: 20px solid transparent
+  border-left: 20px solid transparent
+
+.speech-bubble-arrow-right::before
+  @extend .speech-bubble-arrow-right
+  border-left-color: #e5e5e5
+
+.speech-bubble-arrow-right::after
+  @extend .speech-bubble-arrow-right
+  right: 1px
+  border-left-color: white
+  z-index: 1
+
 .legend-name
   color: white
 

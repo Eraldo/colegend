@@ -305,7 +305,8 @@
                 <br>
                 {% for reason in reasons %}
                     <div class="wow zoomIn" style="text-align: left;">
-                        {% include 'widgets/speech.html' with npc=reason.npc content=reason.text %}
+                        <span style="display: none;">{% cycle 'left' 'right' as direction %}</span>
+                        {% include 'widgets/speech.html' with npc=reason.npc content=reason.text direction=direction %}
                         <br>
                     </div>
                 {% endfor %}
