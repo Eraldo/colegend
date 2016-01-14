@@ -60,7 +60,8 @@ def start_guiding_process(request, user, **kwargs):
     relation = user.guiderelation
     # Notify potential guides
     username = user.username
-    url = reverse('guides:list')
+    location = reverse('guides:list')
+    url = request.build_absolute_uri(location)
     message = "{} is looking for a guide: {}".format(username, url)
     # TODO: Fix backend isse: https://app.getsentry.com/eraldo/colegend-staging/issues/102969964/
     # Then remove fail_silently
