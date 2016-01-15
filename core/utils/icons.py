@@ -33,7 +33,7 @@ icon_dict = {
 
     'address': 'map-marker',
     'occupation': 'briefcase',
-    'phone': 'phone-square',
+    'phone': 'phone',
     'birthday': 'birthday-cake',
     'gender': 'transgender-alt',
     'name': 'user',
