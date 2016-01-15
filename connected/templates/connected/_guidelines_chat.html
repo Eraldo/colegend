@@ -21,7 +21,8 @@
             Sure, let's go.
         </button>
     </form>
-    <a href="" data-toggle="modal" data-target="#answerModal" class="list-group-item">
+    <a id="not-interested-answer-guidelines" href="" data-toggle="modal" data-target="#answerModal"
+       class="list-group-item">
         Not interested - the only rules I care about are my own!
     </a>
 
@@ -45,7 +46,7 @@
                 </div>
                 <div class="modal-footer">
                     <form action="" method="post">{% csrf_token %}
-                        <button id="guidelines-introduction-success" name="success" type="submit"
+                        <button id="not-interested-answer-guidelines-success" name="success" type="submit"
                                 class="btn btn-success">
                             Ok
                         </button>

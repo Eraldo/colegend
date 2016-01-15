@@ -52,7 +52,8 @@
                 <div class="card-header">
                     About
                     {% if can_edit_about %}
-                        <a href="{% url 'legends:update' owner=legend.owner.username %}" class="pull-right">
+                        <a id="legend-about-edit" href="{% url 'legends:update' owner=legend.owner.username %}"
+                           class="pull-right">
                             {% icon 'edit' %}
                         </a>
                     {% endif %}
@@ -99,7 +100,7 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="card bg-content">
+            <div id="legend-badges" class="card bg-content">
                 <div class="card-header">
                     Badges
                 </div>
@@ -137,7 +138,8 @@
                     Status
                 </div>
                 <div class="card-block">
-                    <p>{{ legend.legend_days|default:"first" }} Legend day{{ legend.legend_days|pluralize }}</p>
+                    <p id="legend-days">{{ legend.legend_days|default:"first" }} Legend
+                        day{{ legend.legend_days|pluralize }}</p>
 
                     <p>Chapter {{ legend.chapter }}</p>
 

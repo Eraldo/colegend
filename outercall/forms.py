@@ -23,4 +23,4 @@ class OuterCallForm(forms.ModelForm):
             Field('trigger', rows=2),
             Field('referrer'),
         )
-        self.helper.add_input(Submit('save', 'Save', css_id='success-button'))
+        self.helper.add_input(Submit('save', 'Save', css_id='save-button'))

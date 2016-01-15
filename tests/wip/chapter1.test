@@ -98,13 +98,29 @@
     # and navigates to the Legend Page and from there to the unlocked Outer Call link.
     - Click: menu-button-connected
     - Click: menu-button-legend
+
+    # This is the first time she sees her legend page, so she takes a look.
+    # She is introduced by Coralina and scans the page to see what is there.
+    - Page title: Legend
+    - Find element: coralina-avatar  # still needs Coralina picture ID
+    - Find text: Coralina   # name of Coralina picture
+    - Find element: speech-bubble
+    - Find element: blockquote  # still needs ID for quote-box
+    - Find element: quote-author  # quote author
+    - Find text : shared by  # quote sharer (animal)
+
+    # She wants to see if she already has a badge and how many legend days she has already spent in coLegend.
+    - Find element: legend-badges     # still needs ID
+    - Find element: legend-days           # still needs ID
+
+    # She remembers the card and clicks on the outer call button
     - Click: outer-call-button
 
     # She gets transferred to the “Outer Call”-Page and is introduced by Coralina.
     - Find element: coralina-avatar          # still needs Coralina picture ID
     - Find text: Coralina                 # name of Coralina picture
     - Find element: speech-bubble         # still needs ID “chat box of Coralina”
-#    - Find element: outer-call.png            # still needs Outer Call picture ID
+    - Find element: outer-call-image
     - Find text: How did you find out about coLegend?
     - Find text: Who was your contact person?
 
@@ -112,36 +128,36 @@
     - Fill form:
         id_trigger: internet     # still needs ID
         id_referrer: Eraldo       # still needs ID
-    - Click: success-button
+    - Click: save-button
 
     # She sees a notification that she has successfully accomplished the Outer-Call-Card. The
     # notification also tells her to go back to the deck of cards if she wants to continue playing
     # the game; there also is a link that prompts her back to the game. She clicks it.
-    # TODO: Continue
     - Find text: Congratulations
-    - Find text: If you want to continue to play the game, go back to the Game
-    - Click: game-button              # link back to Game page; still needs ID
+    - Find text: If you want you can continue to play the game
 
     # Back on the Game page the former Outer-Call card has disappeared. She clicks on the
     # deck again to draw another card. The card appearing is the Inner-Call-Card.
     # She reads through the card and clicks on the details-link to learn more about how to do it.
-    - Find element: card              # still needs ID
+    - Click: continue-game-button              # link back to Game page; still needs ID
+    - Click: deck                         # still needs ID
     - Find text: Inner Call
-    - Click: details-link             # still needs ID
-    - Click: close-button             # “ok” on detail pop-up
+    - Click: card-inner-call-details
+    - Click: card-inner-call-details-success  # the “ok” on the details pop-up
+    - Wait: 1
 
     # After having read through the detailed instructions on the card she now knows what to do
     # and navigates to the Legend Page and from there to the unlocked Outer Call link.
     - Click: menu-button-connected
     - Click: menu-button-legend           # still needs ID
-    - Click: inner-call-button-create         # still needs ID
+    - Click: inner-call-button
 
     # She gets transferred to the “Inner Call”-Page, is introduced by Coralina and reads through the questions.
     - Page title: Inner Call
-    - Find element: coralina.png          # still needs Coralina picture ID
+    - Find element: coralina-avatar          # still needs Coralina picture ID
     - Find text: Coralina                 # name of Coralina picture
-    - Find element: Coralina-chat         # still needs ID “chat box of Coralina”
-    - Find element: inner-call.png            # still needs Inner Call picture ID
+    - Find element: speech-bubble         # still needs ID “chat box of Coralina”
+    - Find element: inner-call-image            # still needs Inner Call picture ID
     - Find text: What was your motivation to join coLegend?
     - Find text: What do you want to change in your life?
     - Find text: How strong is your drive to get there?
@@ -150,209 +166,246 @@
 
     # She fills in the entry field and submits it.
     - Fill form:
-        id_IC-motivation: change life       # still needs ID
-        id_IC-change: more time for myself  # still needs ID
-        id_IC-drive: 9              # still needs ID
-        id_IC-wishes: useful tools      # still needs ID
-        #id_IC-share: [empty]           # still needs ID
-    - Click: success-button
+        id_motivation: change life       # still needs ID
+        id_change: more time for myself  # still needs ID
+        id_drive: 9              # still needs ID
+        id_wishes: useful tools      # still needs ID
+        id_other: ;)           # still needs ID
+    - Click: save-button
 
     # She sees a notification that she has successfully reflected on her outer call and done her
     # card. There also is the link to the Game page again. She clicks it to continue.
     - Find text: Congratulations
-    - Click: game-button
+    - Click: continue-game-button
 
     # Back on the Game page the former Inner-Call card has disappeared. She clicks on the
     # deck again to draw another card. The card appearing is the Biography-Card.
     # She reads through the card and clicks on the details-link to learn more about how to do it.
-    - Find element: card              # still needs ID
+    - Click: deck                         # still needs ID
     - Find text: Biography
-    - Click: details-link             # still needs ID
-    - Click: close-button             # “ok” on detail pop-up
+    - Click: card-biography-details
+    - Click: card-biography-details-success  # the “ok” on the details pop-up
+    - Wait: 1
 
     # After having read through the detailed instructions on the card she now knows what to do
     # and navigates to the Legend Page and from there to the unlocked Biography link.
     - Click: menu-button-connected
     - Click: menu-button-legend           # still needs ID
-    - Click: biography-button-create      # still needs ID
+    - Click: biography-button
 
     # She gets prompted to the Biography page where she is introduced by Coralina and scans # the page to see what is there.
     - Page title: Biography
-    - Find element: coralina.png          # still needs Coralina picture ID
+
+    - Find element: coralina-avatar          # still needs Coralina picture ID
     - Find text: Coralina                 # name of Coralina picture
-    - Find element: Coralina-chat         # still needs ID “chat box of Coralina”
-    - Find element: Biography.png         # still needs Outer Call picture ID
+    - Find element: speech-bubble         # still needs ID “chat box of Coralina”
+
+    - Find element: biography-image            # still needs Inner Call picture ID
     - Find text: Here are some questions to help you get started
-    - Find element: entry-biography           # still needs ID
 
     # She fills in the entry field and submits it
     - Fill form:
-        id_biography: I have lived a full life.
-    - Click submit
+        id_biography: |
+          I was bord in an average family.
+          I had lived a full life.
+    - Click: save-button
 
     # She sees a notification that she has successfully written her biography and therefor done
     # her card. She clicks on the Game link again..
     - Find text: Congratulations
-    - Click: game-button
+    - Click: continue-game-button
 
+
+
+    - Click: deck
+    - Find text: About
+    - Click: card-about-details
+    - Click: card-about-details-success  # the “ok” on the details pop-up
+    - Wait: 1
+
+    # After having read through the detailed instructions on the card she now knows what to do
+    # and navigates to the Legend Page and from there to the unlocked Biography link.
+    - Click: menu-button-connected
+    - Click: menu-button-legend           # still needs ID
     # She then gets prompted to the Legend Page
     - Page title: Legend
+    # She find the 'about' section
+    - Find text: About
+    # and clicks on the edit link
+    - Click: legend-about-edit
 
-    # She is introduced by Coralina and scans the page to see what is there.
-    - Page title: Legend
-    - Find element: coralina.png          # still needs Coralina picture ID
-    - Find text: Coralina                 # name of Coralina picture
-    - Find element: Coralina-chat         # still needs ID “chat box of Coralina”
-    - Find element: Legend-quote          # still needs ID for box of quote
-    - Find element: quote-author                 # quote author
-    - Find text : shared by               # quote sharer (animal)
+    # she fills out the about form and submits it.
+    - Fill form:
+        id_name: Carolina Cora
+        id_gender: Female
+        id_occupation: Tester
+        id_birthday: '1990-01-04'
+        id_address: |
+          coLegend street 4
+          4242 Berlin
+          Germany
+        id_phone: '+4317644444444'
+    - Click: save-button
 
-    # She wants to see if she already has a badge and how many legend days she has already spent in coLegend.
-    - Find element: badges-box-legend     # still needs ID
-    - Find element: legend-days           # still needs ID
+    - Find text: Congratulations
+    - Click: continue-game-button
 
-    # She wants to continue advancing on the platform. So she goes back to the continuous page.
-    - Click: menu-button-continuous
-    - Click: continuous-dashboard
+    - Click: deck                         # still needs ID
+    - Find text: Guidelines
+    - Click: card-guidelines-details
+    - Click: card-guidelines-details-success  # the “ok” on the details pop-up
+    - Wait: 1
+
+    - Click: menu-button-connected
+    - Click: menu-button-guidelines
 
     # She clicks on the next possible button: Guidelines. She gets prompted to Coralina’s introduction to the guidelines and answers that she is not interested in the guidelines.
-    - Click: guidlines-button-continuous
     - Page title: Community Guidelines
-    - Find element: coralina.png          # still needs Coralina picture ID
-    - Find text: Coralina                 # name of Coralina picture
-    - Find element: Coralina-chat         # still needs ID “chat box of Coralina”
-    - Find element: answer-box-guidelines     # still needs ID
+
+    # Coralina introduction text
+    - Find element: coralina-avatar
+    - Find text: Coralina
+    - Find element: speech-bubble
+
     - Click: not-interested-answer-guidelines     # still needs ID
-    - Find text containing: You might find out why by taking a look at them.
-    - Click: OK
+    - Find text: You might find out why by taking a look at them.
+    - Click: not-interested-answer-guidelines-success
 
     # She gets back to the Community Guidelines page and now wants to accept them.
     - Page title: Community Guidelines
-    - Click: yes-answer-guidelines            # still needs ID
-
     # She reads through the guidelines and accepts them.
     - Find text: "I accept the following guidelines:"
-    - Click: Accept
+    - Click: accept
 
-    # She wants to continue advancing on the platform. So she goes back to the continuous page.
-    - Click: menu-button-continuous
-    - Click: continuous-dashboard
+    - Find text: Congratulations
+    - Click: continue-game-button
 
-    # She clicks on the next possible button: Chat. She gets prompted to Coralina’s introduction to the chat and answers.
-    - Click: chat-button-continuous
-    - Page title: Chat
-    - Find element: coralina.png          # still needs Coralina picture ID
-    - Find text: Coralina                 # name of Coralina picture
-    - Find element: Coralina-chat         # still needs ID “chat box of Coralina”
-    - Find element: answer-box-chat       # still needs ID
-    - Click: Yes, let’s get it started!       # still needs ID
+    - Click: deck                         # still needs ID
+    - Find text: Chat
+    - Click: card-chat-details
+    - Click: card-chat-details-success  # the “ok” on the details pop-up
+    - Wait: 1
+
+    - Click: menu-button-connected
+    - Click: menu-button-chat
+
+    # Coralina introduction text
+    - Find element: coralina-avatar
+    - Find text: Coralina
+    - Find element: speech-bubble
+
+    - Click: chat-introduction-success
 
     # She gets prompted to the Slack Invitation page and reads through the several steps. She then sends herself and invite.
     - Page title: Slack Invitation
-    - Find text: “NEXT STEPS”
-    - Fill form:
-        id_email: carolina@example.com
-    - Find text: WOOT! CHECK YOUR EMAIL!
+    - Find text: NEXT STEPS
+    # She reads the steps and fills in the form and sends it.
+    - Find element: chat-invitation-form  # the slack invite form
+    # She checks her email and finds one from coLegend asking her to join coLegend on Slack.
+    # She then signs up for slack with her email and username.
 
-    # She checks her email and finds one from coLegend asking her to join coLegend on Slack:
-    - Wait for email:
-        Containing: You’re invited to coLegend
+#    - Wait for email:
+#        Containing: You’re invited to coLegend
+#
+#    # She clicks on the confirm link in that email:
+#    - Click email link:
+#        Containing: Join coLegend
+#
+#    # She joins Slack by creating a password and clicking on Next.
+#    - Fill form:
+#        id_password: carolina1234
+#    - Click: Next
 
-    # She clicks on the confirm link in that email:
-    - Click email link:
-        Containing: Join coLegend
+    # Carolina wants to continue advancing on the coLegend platform.
+    # She comes back to the Slack Invitation page and finishes the Chat registration process.
+    - Click: chat-invitation-success  # Text: I’m done
 
-    # She joins Slack by creating a password and clicking on Next.
-    - Fill form:
-        id_password: carolina1234
-    - Click: Next
+    - Find text: Congratulations
+    - Click: continue-game-button
 
-    # Carolina wants to continue advancing on the coLegend platform. She comes back to the Slack Invitation page and finishes the Chat registration process.
-    - Click: I’m done
+    - Click: deck                         # still needs ID
+    - Find text: Cloud Guide
+    - Click: card-cloud-guide-details
+    - Click: card-cloud-guide-details-success  # the “ok” on the details pop-up
+    - Wait: 1
 
-    # She gets prompted to the connected page where she gets introduced by Coralina.
-    - Page title: Connected
-    - Find element: coralina.png          # still needs Coralina picture ID
-    - Find text: Coralina                 # name of Coralina picture
-    - Find element: Coralina-chat         # still needs ID “chat box of Coralina”
-    - Find element: connected-quote       # still needs ID for box of quote
-    - Find element: quote-author                 # quote author
-    - Find text : shared by               # quote sharer (animal)
-
-    # She wants to continue advancing on the platform. So she goes back to the continuous page.
-    - Click: menu-button-continuous
-    - Click: continuous-dashboard
-
-    # She clicks on the next possible button: Chat. She gets prompted to Coralina’s introduction to the chat and answers.
-    - Page title: Continuous
-    - Click: cloud-guide-button-continuous        # still needs ID
+    - Click: menu-button-connected
+    - Click: menu-button-cloud-guide
 
     # She gets prompted to the cloud guide page where she gets introduced by Coralina. She answers with the second answer option (alternative: with the first).
     - Page title: Cloud Guide
-    - Find element: coralina.png          # still needs Coralina picture ID
-    - Find text: Coralina                 # name of Coralina picture
-    - Find element: Coralina-chat         # still needs ID “chat box of Coralina”
-    - Find element: answer-box-chat       # still needs ID
-    - Click: “Wait - I already have questions!”   # still needs ID
-    - Find text: “Questions”
-    - Click: Ok
-    #- Click: Sure! I’m ready to be found by my Cloud Guide
 
-    # She gets prompted to the Cloud Guide page.
-    - Page title: Cloud Guide
-    - Find element: cloud-guide.png       # still needs ID
-    - Find text containing: “he or she will find you soon enough”
+    # Coralina introduction text
+    - Find element: coralina-avatar
+    - Find text: Coralina
+    - Find element: speech-bubble
 
-    # She wants to continue advancing on the platform. So she goes back to the continuous page.
-    - Click: menu-button-continuous
-    - Click: continuous-dashboard
+    - Click: guide-introduction-success
+    - Find text: Looks like your Cloud Guide is still on the lookout for you
 
-    # She clicks on the next possible button: Chapter 1 - Entering Leyenda. She gets prompted to the introduction of first part of the chapter 1 story and chooses a consumption way.
-    - Execute: typed_skip();  # [Immediately show the link]
-    - Click: read
+    # TODO: Continue to update/write the test
 
-    # She gets prompted to the first part of Chapter 1 story and reads.
-    - Find text: Entering Leyenda
 
-    # She has finished reading the first part of the story and now wants to continue with the journal part.
-    - Click: success
-
-    # She gets prompted to the journal part of Chapter 1 and reads. After she’s finished she clicks on the next button to continue.
-    - Find text: Pioneer Journal
-    - Click: success                  # ID of “close journal and return…”
-
-    # She gets prompted to the last part of the story and reads. In the end she clicks on the next button that is on the bottom of the page.
-    - Find text: Your Journal
-    - Click: success              # should lead to real journal page
-
-    # She gets prompted to the introduction site of the journal where she gets introduced by Coralina.
-
-    # Carolina has some questions concerning the platform so she looks for the FAQ.
-    - Click: menu-button-account
-    - Click: menu-button-support          # still needs ID
-
-    # She gets prompted to the support page, gets introduced by Coralina and clicks on the FAQ link.
-    - Page title: Support
-    - Find element: coralina.png          # still needs Coralina picture ID
-    - Find text: Coralina                 # name of Coralina picture
-    - Find element: Coralina-chat         # still needs ID “chat box of Coralina”
-    - Find element: support-quote         # still needs ID for box of quote
-    - Find element: quote-author                 # quote author
-    - Find text : shared by               # quote sharer (animal)
-    - Click: faq-button               # still needs ID for button
-        # alternative: Click: faq.png           # still needs ID for picture (link to FAQ)
-
-    # She gets prompted to the FAQ site and clicks on the link to the google-doc
-    - Page title: FAQ
-    - Click: FAQ-link                 # still needs ID for google-doc
-
-    # She goes back to the Support site and there clicks on the documentation.
-    - Click: Support
-    - Page title: Support
-    - Click: Documentation-button
-    # alternative: Click: Documentation.png       # still needs ID for pic (link to Document)
-
-    # She gets prompted to the documentation page and clicks on the trello-link
-    - Page title: Documentation
-    - Click: Documentation-link           # still needs ID for trello-link
+#    - Click: “Wait - I already have questions!”   # still needs ID
+#    - Find text: “Questions”
+#    - Click: Ok
+#    #- Click: Sure! I’m ready to be found by my Cloud Guide
+#
+#    # She gets prompted to the Cloud Guide page.
+#    - Page title: Cloud Guide
+#    - Find element: cloud-guide.png       # still needs ID
+#    - Find text containing: “he or she will find you soon enough”
+#
+#    # She wants to continue advancing on the platform. So she goes back to the continuous page.
+#    - Click: menu-button-continuous
+#    - Click: continuous-dashboard
+#
+#    # She clicks on the next possible button: Chapter 1 - Entering Leyenda. She gets prompted to the introduction of first part of the chapter 1 story and chooses a consumption way.
+#    - Execute: typed_skip();  # [Immediately show the link]
+#    - Click: read
+#
+#    # She gets prompted to the first part of Chapter 1 story and reads.
+#    - Find text: Entering Leyenda
+#
+#    # She has finished reading the first part of the story and now wants to continue with the journal part.
+#    - Click: success
+#
+#    # She gets prompted to the journal part of Chapter 1 and reads. After she’s finished she clicks on the next button to continue.
+#    - Find text: Pioneer Journal
+#    - Click: success                  # ID of “close journal and return…”
+#
+#    # She gets prompted to the last part of the story and reads. In the end she clicks on the next button that is on the bottom of the page.
+#    - Find text: Your Journal
+#    - Click: success              # should lead to real journal page
+#
+#    # She gets prompted to the introduction site of the journal where she gets introduced by Coralina.
+#
+#    # Carolina has some questions concerning the platform so she looks for the FAQ.
+#    - Click: menu-button-account
+#    - Click: menu-button-support          # still needs ID
+#
+#    # She gets prompted to the support page, gets introduced by Coralina and clicks on the FAQ link.
+#    - Page title: Support
+#    - Find element: coralina.png          # still needs Coralina picture ID
+#    - Find text: Coralina                 # name of Coralina picture
+#    - Find element: Coralina-chat         # still needs ID “chat box of Coralina”
+#    - Find element: support-quote         # still needs ID for box of quote
+#    - Find element: quote-author                 # quote author
+#    - Find text : shared by               # quote sharer (animal)
+#    - Click: faq-button               # still needs ID for button
+#        # alternative: Click: faq.png           # still needs ID for picture (link to FAQ)
+#
+#    # She gets prompted to the FAQ site and clicks on the link to the google-doc
+#    - Page title: FAQ
+#    - Click: FAQ-link                 # still needs ID for google-doc
+#
+#    # She goes back to the Support site and there clicks on the documentation.
+#    - Click: Support
+#    - Page title: Support
+#    - Click: Documentation-button
+#    # alternative: Click: Documentation.png       # still needs ID for pic (link to Document)
+#
+#    # She gets prompted to the documentation page and clicks on the trello-link
+#    - Page title: Documentation
+#    - Click: Documentation-link           # still needs ID for trello-link
 {% endblock %}

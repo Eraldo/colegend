@@ -65,7 +65,7 @@
                             </a>
 
                             {% if cloud_guide %}
-                                <a class="dropdown-item" href="{% url 'guides:guide' %}">
+                                <a id="menu-button-cloud-guide" class="dropdown-item" href="{% url 'guides:guide' %}">
                                     Cloud Guide
                                 </a>
                             {% else %}
@@ -98,7 +98,8 @@
                             <div class="dropdown-divider"></div>
 
                             {% if chat %}
-                                <a class="dropdown-item" href="{% url 'connected:chat' %}"{% if user.connected.chat %}
+                                <a id="menu-button-chat" class="dropdown-item" href="{% url 'connected:chat' %}"
+                                        {% if user.connected.chat %}
                                    target="_blank"{% endif %}>
                                     Chat
                                 </a>
@@ -121,7 +122,8 @@
                             {% endif %}
 
                             {% if guidelines %}
-                                <a class="dropdown-item" href="{% url 'connected:guidelines' %}">
+                                <a id="menu-button-guidelines" class="dropdown-item"
+                                   href="{% url 'connected:guidelines' %}">
                                     Guidelines
                                 </a>
                             {% endif %}

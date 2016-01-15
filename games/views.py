@@ -47,7 +47,14 @@ def complete_card(request, card):
     game.complete_card(card)
     game.save()
 
-    context = {'name': card, 'url': reverse('games:completed')}
+    card_name = '{} card'.format(card)
+    context = {'name': card_name, 'url': reverse('games:completed')}
     card_link = render_to_string('cards/widgets/link.html', context=context)
-    message = _('card {} completed').format(card_link)
+    success_message = _('Congratulations! You completed the {card_link}.').format(card_link=card_link)
+
+    game_link = reverse('games:index')
+    continue_message = _(
+        'If you want you can continue to play the <a id="continue-game-button" href="{link}">game</a>.').format(
+        link=game_link)
+    message = '{}<br>{}'.format(success_message, continue_message)
     messages.success(request, mark_safe(message))

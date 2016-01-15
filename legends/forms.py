@@ -21,7 +21,7 @@ class AvatarForm(forms.ModelForm):
         self.helper.layout = Layout(
             IconField('avatar', 'avatar'),
         )
-        self.helper.add_input(Submit('save', 'Save'))
+        self.helper.add_input(Submit('save', 'Save', css_id='save-button'))
 
 
 class LegendForm(forms.ModelForm):
@@ -51,7 +51,7 @@ class LegendForm(forms.ModelForm):
             IconField('address', 'address', rows=3),
             IconField('phone', 'phone'),
         )
-        self.helper.add_input(Submit('save', 'Save'))
+        self.helper.add_input(Submit('save', 'Save', css_id='save-button'))
 
 
 class BiographyForm(forms.ModelForm):
@@ -67,5 +67,5 @@ class BiographyForm(forms.ModelForm):
         self.helper.layout = Layout(
             Field('biography'),
         )
-        self.helper.add_input(Submit('save', 'Save', css_class='pull-right'))
+        self.helper.add_input(Submit('save', 'Save', css_id='save-button', css_class='pull-right'))
         self.helper.form_show_labels = False

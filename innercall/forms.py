@@ -29,4 +29,4 @@ class InnerCallForm(forms.ModelForm):
             Field('wishes', rows=2),
             Field('other', rows=2),
         )
-        self.helper.add_input(Submit('save', 'Save'))
+        self.helper.add_input(Submit('save', 'Save', css_id='save-button'))

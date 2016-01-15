@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import textwrap
+
 from django.db import migrations
 
 initial_cards_data = [
@@ -29,7 +31,10 @@ initial_cards_data = [
         'name': 'About',
         'sort_order': 4,
         'content': "Share some basic facts about yourself with your fellow legends and fill out the “About” part of your legend profile.",
-        'details': "-click: “connected” → “Legend” →  “Biography”",
+        'details': textwrap.dedent("""\
+            - click: “connected” → “Legend”
+            - Find the “About” section.
+            - There is now a little edit icon. Click on it."""),
         'category': 5,
     },
     {
