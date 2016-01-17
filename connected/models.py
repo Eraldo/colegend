@@ -10,6 +10,7 @@ class Connected(AutoOwnedBase, TimeStampedBase):
     biography = models.BooleanField(default=False)
 
     about = models.BooleanField(default=False)
+    avatar = models.BooleanField(default=False)
 
     guidelines_introduction = models.BooleanField(default=False)
     guidelines = models.BooleanField(default=False)

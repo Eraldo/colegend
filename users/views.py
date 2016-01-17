@@ -150,3 +150,29 @@ class LegendUpdateView(LoginRequiredMixin, UpdateView):
 class LegendAvatarView(LegendUpdateView):
     template_name = 'profiles/avatar.html'
     form_class = AvatarForm
+
+    def get(self, request, *args, **kwargs):
+        user = request.user
+        connected = user.connected
+        if connected.avatar or user.game.has_card('profile picture'):
+            return super().get(request, *args, **kwargs)
+        else:
+            messages.warning(request, 'You need to unlock this feature first.')
+            return redirect('games:index')
+
+    def get_initial(self):
+        # overwriting the LegendUpdateView method
+        return super().get_initial()
+
+    def form_valid(self, form):
+        request = self.request
+        connected = request.user.connected
+        if not connected.avatar:
+            connected.avatar = True
+            connected.save()
+            # update game
+            complete_card(request, 'profile picture')
+        else:
+            message = _('changes saved')
+            messages.success(self.request, message)
+        return super().form_valid(form)

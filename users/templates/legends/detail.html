@@ -38,7 +38,12 @@
             {% include 'legends/widgets/legend.html' with source=hero_avatar_url name='Hero' size='medium' %}
         </div>
         <div class="col-md-6 text-center">
-            {% legend size='large' %}
+            {% if user == legend %}
+                {% url 'legends:avatar' username=legend.username as avatar_url %}
+                {% legend size='large' url=avatar_url %}
+            {% else %}
+                {% legend size='large' %}
+            {% endif %}
         </div>
         <div class="col-md-3 text-center">
             {% static 'legends/images/coLegend-demon.png' as demon_avatar_url %}
