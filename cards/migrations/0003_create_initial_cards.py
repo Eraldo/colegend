@@ -47,7 +47,7 @@ initial_cards_data = [
     {
         'name': 'Chat',
         'sort_order': 6,
-        'content': "Connect yourself with other fellow legends by registering for our chat programm Slack.",
+        'content': "Connect yourself with other fellow legends by registering for our chat program Slack.",
         'details': "-click: “connected” → “Chat”",
         'category': 5,
     },
