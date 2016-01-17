@@ -1,5 +1,5 @@
 {% extends 'legends/base_legend.html' %}
-{% load crispy_forms_tags %}
+{% load static crispy_forms_tags %}
 
 {% block title %}Outer Call{% endblock %}
 
@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block content %}
-    <img id="outer-call-image" src="http://helmutheim.de/wp-content/uploads/2014/08/beziehungskompetenz-1024x8261.png"
+    <img id="outer-call-image" src="{% static 'outercall/outercall.jpg' %}"
          class="img-responsive" style="max-height: 200px;" alt="chatting">
     <p></p>
     {% crispy form %}

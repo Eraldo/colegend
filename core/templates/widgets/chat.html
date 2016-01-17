@@ -31,8 +31,9 @@
         <div class="col-lg-8 col-lg-offset-4">
             <div class="row">
                 <div class="col-sm-4 col-sm-push-8 text-center">
+                    {# TODO: refactor to use widget handling auth #}
                     {% if user.is_authenticated %}
-                        {% legend user.legend size='large' %}
+                        {% legend size='large' %}
                     {% else %}
                         {% include 'legends/widgets/legend.html' %}
                     {% endif %}

@@ -8,6 +8,7 @@ icon_dict = {
     # connected
     'connected': 'heart',
     'legend': 'user',
+    'legends': 'user',
     # continuous
     'continuous': 'paw',
     # orga

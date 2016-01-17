@@ -1,0 +1,63 @@
+{% extends 'legends/base_legend.html' %}
+{% load static crispy_forms_tags %}
+
+{% block title %}Biography{% endblock %}
+
+{% block pre_content %}
+    {% include 'profiles/chats/biography.html' %}
+    <div class="card bg-content">
+        <div class="card-header">
+            Here are some questions to help you get started:
+        </div>
+        <div class="card-block">
+            <i class="fa fa-question-circle fa-5x fa-pull-right fa-border hidden-sm-down"></i>
+            <ul>
+                <li>
+                    In what ways was your life remarkable/despicable/admirable?
+                </li>
+                <li>
+                    What qualities were most influential in shaping the way you live and influence your surroundings?
+                </li>
+                <li>
+                    Which quality or trait proved most troubling/difficult/beneficial?
+                </li>
+                <li>
+                    Did you make any major mistakes or bad decisions? If so, what were they and how would you choose and
+                    act differently if you could do so now?
+                </li>
+                <li>
+
+                    What are the two or three most important lessons you can pass on to your fellow legends?
+                </li>
+                <li>
+                    Some people say you can judge the quality of a person's life by the enemies they make. Do you think
+                    this is true for you?
+                </li>
+                <li>
+                    Was there a person in your life that guided or encouraged you in a special way?
+                </li>
+                <li>
+                    Many people act out of a "code" or a set of beliefs which dictate choices (religion, politics,
+                    personal philosophy). To what extent did you act by a code or act independently of any set of
+                    beliefs? Were there times when the code was challenged and impossible to follow?
+                </li>
+                <li>
+                    What do you think it means to be a hero? Have you been a hero so far?
+                </li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-4">
+            <img id="biography-image" src="{% static 'profiles/images/coLegend-biography.jpg' %}" alt="biography"
+                 class="img-responsive center-block" style="max-height: 15em;">
+        </div>
+        <div class="col-md-8">
+            {% crispy form %}
+        </div>
+    </div>
+{% endblock %}

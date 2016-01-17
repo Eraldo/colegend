@@ -48,7 +48,7 @@ THIRD_PARTY_APPS = (
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
-    'users',  # custom users app
+    'users',  # custom users ('legends') app
     # Your stuff: custom apps go here
     # 'roles',
     'core',  # common code
@@ -62,9 +62,10 @@ LOCAL_APPS = (
     'conscious',
     'outercall',
     'innercall',
+    'biography',
 
     'connected',
-    'legends',
+    # 'profiles',
     'guides',
 
     'continuous',

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load legends_tags %}
+
+{% block title %}Legends{% endblock %}
+
+{% block content %}
+    <div class="row text-center">
+        {% for profile in legends %}
+            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                {% legend size='medium' %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

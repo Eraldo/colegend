@@ -24,10 +24,10 @@ urlpatterns = patterns(
     url(r'^{}/'.format(settings.ADMIN_URL), include(admin.site.urls)),
 
     # User management
-    url(r'^users/', include('users.urls', namespace='users')),
+    url(r'^legends/', include('users.urls', namespace='legends')),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^join/$', JoinView.as_view(), name='join'),
-    url(r'^legends/', include('legends.urls', namespace='legends')),
+    url(r'^profiles/', include('profiles.urls', namespace='profiles')),
     url(r'^roles/', include('roles.urls', namespace='roles')),
 
     # Your stuff: custom urls includes go here
@@ -40,6 +40,7 @@ urlpatterns = patterns(
     url(r'^conscious/', include('conscious.urls', namespace='conscious')),
     url(r'^outer-call/', include('outercall.urls', namespace='outer-call')),
     url(r'^inner-call/', include('innercall.urls', namespace='inner-call')),
+    url(r'^biography/', include('biography.urls', namespace='biography')),
 
     url(r'^connected/', include('connected.urls', namespace='connected')),
     url(r'^guides/', include('guides.urls', namespace='guides')),

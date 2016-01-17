@@ -205,7 +205,7 @@
 
     # She fills in the entry field and submits it
     - Fill form:
-        id_biography: |
+        id_text: |
           I was bord in an average family.
           I had lived a full life.
     - Click: save-button

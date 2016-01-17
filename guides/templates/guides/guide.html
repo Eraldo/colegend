@@ -15,10 +15,10 @@
             <p>
                 {% if user.connected.guide %}
                     Your cloud guide was:
-                    {% legend user.guiderelation.guide.legend size='small' %}
+                    {% legend user.guiderelation.guide size='small' %}
                 {% elif user.guiderelation.guide %}
                     Your cloud guide:
-                    {% legend user.guiderelation.guide.legend size='small' %}
+                    {% legend user.guiderelation.guide size='small' %}
                 {% else %}
                     Looks like your Cloud Guide is still on the lookout for you… <br>
                     Don’t worry - he or she will find you soon enough! :)

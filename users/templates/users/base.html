@@ -4,5 +4,6 @@
 
 {% block breadcrumbs %}
     {{ block.super }}
-    {% include '_breadcrumb.html' with url='users:index' icon='user' title='profile' %}
+    {% url 'legends:detail' user.username as url %}
+    {% include '_breadcrumb.html' with url=url icon='legend' title='legend' %}
 {% endblock %}

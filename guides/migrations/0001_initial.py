@@ -7,7 +7,7 @@ import annoying.fields
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('users', '0002_auto_20151031_1930'),
+        ('users', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 

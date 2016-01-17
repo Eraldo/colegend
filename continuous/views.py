@@ -25,7 +25,7 @@ class ContinuousView(LoginRequiredMixin, TemplateView):
         steps = [
             hasattr(user, 'outercall'),
             hasattr(user, 'innercall'),
-            user.legend.biography,
+            user.profile.biography,
             user.connected.guidelines,
             user.connected.chat,
             user.connected.guide,

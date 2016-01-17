@@ -7,7 +7,7 @@ from django.conf import settings
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('users', '0002_auto_20151031_1930'),
+        ('users', '0001_initial'),
     ]
 
     operations = [

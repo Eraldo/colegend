@@ -1,11 +1,11 @@
 {% load legends_tags %}
 <div class="card bg-content">
     <div class="card-header">
-        <a href="{% url 'legends:legend' %}">
+        <a href="{% url 'legends:detail' user.username %}">
             Legend
         </a>
     </div>
     <div class="card-block">
-        {% legend user.legend size='medium' %}
+        {% legend size='medium' %}
     </div>
 </div>

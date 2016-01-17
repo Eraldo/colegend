@@ -60,7 +60,8 @@
 
                             <div class="dropdown-divider"></div>
 
-                            <a id="menu-button-legend" class="dropdown-item" href="{% url 'legends:legend' %}">
+                            <a id="menu-button-legend" class="dropdown-item"
+                               href="{% url 'legends:detail' user.username %}">
                                 Legend
                             </a>
 
@@ -175,22 +176,23 @@
                         <button class="btn btn-link nav-link" type="button" id="menu-button-account"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                 style="padding: 0;">
-                            {% if user.legend.avatar %}
-                                <img src="{{ user.legend.avatar.small.url }}" class="avatar img-circle"
+                            {# TODO: refactor to use widget #}
+                            {% if user.avatar %}
+                                <img src="{{ user.avatar.small.url }}" class="avatar img-circle"
                                      height="38px" alt="avatar"/>
                             {% else %}
-                                <img src="{% static 'images/anonymous.png' %}" class="avatar img-circle"
+                                <img src="{% static 'legends/images/anonymous.png' %}" class="avatar img-circle"
                                      height="38px" alt="avatar"/>
                             {% endif %}
                         </button>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="menu-button-account">
-                            <a class="dropdown-item" href="{% url 'legends:legend' %}">
+                            <a class="dropdown-item" href="{% url 'legends:detail' user.username %}">
                                 {% icon 'legend' %} Legend
                             </a>
                             <a class="dropdown-item" href="{% url 'support:index' %}">
                                 {% icon 'support' %} Support
                             </a>
-                            <a class="dropdown-item" href="{% url 'users:settings' %}">
+                            <a class="dropdown-item" href="{% url 'legends:settings' %}">
                                 {% icon 'settings' %} Settings
                             </a>
                             <a class="dropdown-item" href="{% url 'account_logout' %}">

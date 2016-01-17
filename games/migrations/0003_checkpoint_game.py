@@ -7,7 +7,7 @@ from django.conf import settings
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('users', '0005_remove_user_name'),
+        ('users', '0001_initial'),
         ('games', '0002_auto_20160109_0033'),
     ]
 
