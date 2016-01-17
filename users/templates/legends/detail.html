@@ -18,6 +18,9 @@
         {% url 'biography:create' as url %}
         {% include 'widgets/button.html' with name='Biography' url=url kind='link btn-sm' condition=biography %}
 
+        {% url 'legends:update' username=legend.username as url %}
+        {% include 'widgets/button.html' with name='About' url=url kind='link btn-sm' condition=can_edit_about %}
+
         {% include 'widgets/button.html' with name='Hero' kind='link btn-sm' locked=True %}
 
         {% include 'widgets/button.html' with name='Demon' kind='link btn-sm' locked=True %}
@@ -56,12 +59,6 @@
             <div class="card bg-content">
                 <div class="card-header">
                     About
-                    {% if can_edit_about %}
-                        <a id="legend-about-edit" href="{% url 'legends:update' username=legend.username %}"
-                           class="pull-right">
-                            {% icon 'edit' %}
-                        </a>
-                    {% endif %}
                 </div>
                 <div class="card-block">
                     {% if legend.name %}
@@ -95,7 +92,7 @@
                 <div class="card-block">
                     {% if legend.guiderelation.guide %}
                         <p>
-                            Cloud guide:
+                            Cloud Guide:
                             {% legend legend.guiderelation.guide size='small' %}
                         </p>
                     {% else %}
