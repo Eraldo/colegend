@@ -76,9 +76,15 @@ class GuideView(LoginRequiredMixin, DetailView):
     model = GuideRelation
 
     def get(self, request, *args, **kwargs):
-        connected = request.user.connected
+        request = self.request
+        user = request.user
+        connected = user.connected
         if not connected.guide_introduction:
             return redirect('guides:introduction')
+        if not connected.guide:
+            relation = self.get_object()
+            if relation.done:
+                complete_card(request, 'cloud guide')
         return super().get(request, *args, **kwargs)
 
     def get_object(self, queryset=None):
@@ -101,19 +107,14 @@ class GuideManageView(LoginRequiredMixin, UpdateView):
             raise Http404
 
     def form_valid(self, form):
-        request = self.request
-        user = self.request.user
-        connected = user.connected
-        if not connected.guide:
+        relation = self.get_object()
+        if not relation.done:
             # Check if the guide did all tasks with his guidee.
             instance = form.instance
             if all(
                 [instance.guide, instance.outer_call_checked, instance.inner_call_checked,
                  instance.coLegend_checked, instance.guiding_checked]):
                 instance.done = True
-                connected.guide = True
-                connected.save()
-                complete_card(request, 'cloud guide')
         return super().form_valid(form)
 
     def get_success_url(self):
