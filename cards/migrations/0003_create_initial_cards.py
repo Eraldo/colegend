@@ -98,7 +98,7 @@ def create_initial_cards(apps, schema_editor):
 def delete_initial_cards(apps, schema_editor):
     Card = apps.get_model('cards', 'Card')
     db_alias = schema_editor.connection.alias
-    Card.objects.using(db_alias).filter(sort_order__gte=0, sort_order__lte=8).delete()
+    Card.objects.using(db_alias).filter(sort_order__gte=0, sort_order__lte=9).delete()
 
 
 class Migration(migrations.Migration):
