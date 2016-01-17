@@ -93,10 +93,10 @@
                     Relations
                 </div>
                 <div class="card-block">
-                    {% if legend.owner.guiderelation.guide %}
+                    {% if legend.guiderelation.guide %}
                         <p>
                             Cloud guide:
-                            {% legend legend.owner.guiderelation.guide 'small' %}
+                            {% legend legend.guiderelation.guide size='small' %}
                         </p>
                     {% else %}
                         No relations yet.
@@ -157,7 +157,7 @@
                     Biography
                 </div>
                 <div class="card-block">
-                    {{ legend.biography }}
+                    {{ legend.biography.text }}
                 </div>
             </div>
 
