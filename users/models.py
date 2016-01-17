@@ -52,7 +52,7 @@ class User(AbstractUser):
     occupation = models.CharField(_('occupation(s)'), max_length=255, blank=True)
 
     avatar = ThumbnailerImageField(
-        upload_to=UploadToOwnedDirectory('avatars'),
+        upload_to=UploadToOwnedDirectory('avatars', ),
         resize_source=dict(size=(400, 400)),
     )
 

@@ -147,9 +147,13 @@ class LegendUpdateView(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
 
 
-class LegendAvatarView(LegendUpdateView):
-    template_name = 'profiles/avatar.html'
+class LegendAvatarView(LoginRequiredMixin, UpdateView):
+    template_name = 'legends/avatar.html'
+    model = User
     form_class = AvatarForm
+    context_object_name = 'legend'
+    slug_field = 'username'
+    slug_url_kwarg = 'username'
 
     def get(self, request, *args, **kwargs):
         user = request.user
@@ -159,10 +163,6 @@ class LegendAvatarView(LegendUpdateView):
         else:
             messages.warning(request, 'You need to unlock this feature first.')
             return redirect('games:index')
-
-    def get_initial(self):
-        # overwriting the LegendUpdateView method
-        return super().get_initial()
 
     def form_valid(self, form):
         request = self.request

@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.utils.deconstruct import deconstructible
 
 
@@ -17,11 +18,14 @@ class UploadToOwnedDirectory(object):
             self.user_attribute = user_attribute
 
     def __call__(self, instance, filename):
-        # file will be uploaded to MEDIA_ROOT/users/<id>_<username>/(?:<sub_directory>/)<filename>
+        # file will be uploaded to MEDIA_ROOT/users/<username>/(?:<sub_directory>/)<filename>
         user_attribute = self.user_attribute
 
-        owner = getattr(instance, user_attribute)
-        username = owner.username
+        if isinstance(instance, get_user_model()):
+            username = instance.username
+        else:
+            owner = getattr(instance, user_attribute)
+            username = owner.username
 
         sub_directory = self.sub_directory
 
