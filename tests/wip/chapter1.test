@@ -332,7 +332,7 @@
     - Click: menu-button-connected
     - Click: menu-button-cloud-guide
 
-    # She gets prompted to the cloud guide page where she gets introduced by Coralina. She answers with the second answer option (alternative: with the first).
+    # She gets prompted to the Cloud Guide page where she gets introduced by Coralina. She answers with the second answer option (alternative: with the first).
     - Page title: Cloud Guide
 
     # Coralina introduction text

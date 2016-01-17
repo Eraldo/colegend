@@ -14,10 +14,10 @@
         <div class="col-sm-8">
             <p>
                 {% if user.connected.guide %}
-                    Your cloud guide was:
+                    Your Cloud Guide was:
                     {% legend user.guiderelation.guide size='small' %}
                 {% elif user.guiderelation.guide %}
-                    Your cloud guide:
+                    Your Cloud Guide:
                     {% legend user.guiderelation.guide size='small' %}
                 {% else %}
                     Looks like your Cloud Guide is still on the lookout for you… <br>
