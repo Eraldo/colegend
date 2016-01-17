@@ -76,7 +76,7 @@
                             {{ legend.city }}
                         </p>
                     {% endif %}
-                    {% if legend.owner != user %}
+                    {% if legend != user %}
                         <a href="mailto:{{ legend.owner.email }}" target="_blank" class="btn btn-primary btn-sm">
                             {% icon 'send' %} Send Message
                         </a>
