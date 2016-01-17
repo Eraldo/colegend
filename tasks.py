@@ -1,6 +1,3 @@
-import os
-from subprocess import Popen, PIPE
-import signal
 from time import sleep
 
 from celery.utils.term import colored
@@ -22,9 +19,9 @@ def message(text, *args, **kwargs):
     print(c.cyan('\n>> [{}] {}'.format(environment, text)), *args, **kwargs)
 
 
-def local_run(command):
+def local_run(command, *args, **kwargs):
     print('$: {}'.format(command))
-    invoke_run(command)
+    invoke_run(command, *args, **kwargs)
 
 
 def heroku_run(command='run', parameters=''):
@@ -43,7 +40,7 @@ def run(command, heroku_command='run', *args, **kwargs):
     Running a command for the chosen environment.
     """
     if context.get('environment') == 'development':
-        return local_run('source ~/.virtualenvs/{}/bin/activate && {}'.format(project_name, command))
+        return local_run('source ~/.virtualenvs/{}/bin/activate && {}'.format(project_name, command), *args, **kwargs)
     elif context.get('environment') in ['staging', 'production']:
         return heroku_run(heroku_command, parameters=command, *args, **kwargs)
 
@@ -137,15 +134,42 @@ def backup():
 
 
 @task
+def reset():
+    """
+    Reset the database. (development or staging only)
+    """
+    if context.get('environment') == 'development':
+        message('resetting database')
+        run('dropdb {}'.format(project_name))
+        run('createdb {}'.format(project_name))
+        migrate()
+    elif context.get('environment') == 'staging':
+        message('resetting database')
+        run('', heroku_command='pg:reset DATABASE')
+
+
+@task
+def create_superuser():
+    """
+    Reset the database. (development or staging only)
+    """
+
+    if context.get('environment') == 'development':
+        message('creating superuser')
+        run('./manage.py createsuperuser', pty=True)
+    elif context.get('environment') in ['staging', 'production']:
+        message('creating superuser')
+        run('./manage.py createsuperuser')
+
+
+@task
 def serve():
     """
     Starting the development server.
     """
     if context.get('environment') == 'development':
         message('Starting server')
-        process = Popen(['python', './manage.py', 'runserver'], stdout=PIPE, preexec_fn=os.setsid, shell=True)
-        input('press any key to stop the server')
-        os.killpg(os.getpgid(process.pid), signal.SIGTERM)
+        run('./manage.py runserver', pty=True)
     else:
         run('./manage.py runserver')
 
