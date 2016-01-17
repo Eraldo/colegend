@@ -18,3 +18,6 @@ gevent==1.1b6
 
 # Enables better email testing
 maildump==0.5.1
+
+# Management tasks
+invoke==0.12.0
