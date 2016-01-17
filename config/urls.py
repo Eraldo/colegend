@@ -27,7 +27,6 @@ urlpatterns = patterns(
     url(r'^legends/', include('users.urls', namespace='legends')),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^join/$', JoinView.as_view(), name='join'),
-    url(r'^profiles/', include('profiles.urls', namespace='profiles')),
     url(r'^roles/', include('roles.urls', namespace='roles')),
 
     # Your stuff: custom urls includes go here

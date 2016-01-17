@@ -65,7 +65,6 @@ LOCAL_APPS = (
     'biography',
 
     'connected',
-    # 'profiles',
     'guides',
 
     'continuous',
