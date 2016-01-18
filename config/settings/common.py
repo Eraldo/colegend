@@ -50,15 +50,17 @@ THIRD_PARTY_APPS = (
 LOCAL_APPS = (
     'users',  # custom users ('legends') app
     # Your stuff: custom apps go here
-    # 'roles',
-    'core',  # common code
+    'checkpoints',
+    'roles',
+
+    'core',  # common code library
+
     'about',
     'home',
     'support',
 
     # common
     'categories',
-    'checkpoints',
 
     'conscious',
     'outercall',
