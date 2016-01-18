@@ -58,6 +58,7 @@ LOCAL_APPS = (
 
     # common
     'categories',
+    'checkpoints',
 
     'conscious',
     'outercall',

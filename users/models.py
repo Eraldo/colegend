@@ -13,6 +13,7 @@ from django.utils.translation import ugettext_lazy as _
 from easy_thumbnails.fields import ThumbnailerImageField
 from phonenumber_field.modelfields import PhoneNumberField
 
+from checkpoints.models import Checkpoint
 from core.utils.media_paths import UploadToOwnedDirectory
 
 
@@ -58,6 +59,8 @@ class User(AbstractUser):
 
     def get_avatar(self, size='medium'):
         return self.avatar[size]
+
+    checkpoints = models.ManyToManyField(Checkpoint)
 
     @property
     def legend_days(self):
