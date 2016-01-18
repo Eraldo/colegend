@@ -4,6 +4,7 @@ from __future__ import absolute_import, unicode_literals
 from braces.views import LoginRequiredMixin
 from django.contrib import messages
 from django.shortcuts import redirect
+from django.utils.safestring import mark_safe
 from django.views.generic import DetailView, UpdateView, ListView
 
 from games.views import complete_card
@@ -107,8 +108,11 @@ class LegendUpdateView(LoginRequiredMixin, UpdateView):
         if connected.about or user.game.has_card('about'):
             return super().get(request, *args, **kwargs)
         else:
-            messages.warning(request, 'You need to unlock this feature first.')
-            return redirect('games:index')
+            game_url = user.game.get_absolute_url()
+            game_link = '<a href="{}">game</a>'.format(game_url)
+            message = _('You need to unlock this feature in the {}.').format(game_link)
+            messages.warning(request, mark_safe(message))
+            return redirect(request.META.get('HTTP_REFERER', '/'))
 
     def get_object(self, queryset=None):
         username = self.kwargs.get('username')
@@ -161,8 +165,11 @@ class LegendAvatarView(LoginRequiredMixin, UpdateView):
         if connected.avatar or user.game.has_card('profile picture'):
             return super().get(request, *args, **kwargs)
         else:
-            messages.warning(request, 'You need to unlock this feature first.')
-            return redirect('games:index')
+            game_url = user.game.get_absolute_url()
+            game_link = '<a href="{}">game</a>'.format(game_url)
+            message = _('You need to unlock this feature in the {}.').format(game_link)
+            messages.warning(request, mark_safe(message))
+            return redirect(request.META.get('HTTP_REFERER', '/'))
 
     def form_valid(self, form):
         request = self.request

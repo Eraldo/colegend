@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.db import models
 from orderable.models import Orderable
 from categories.models import Category
@@ -71,3 +72,7 @@ class Game(AutoOwnedBase):
 
     def __str__(self):
         return "{}'s game".format(self.owner)
+
+    @staticmethod
+    def get_absolute_url():
+        return reverse('games:index')
