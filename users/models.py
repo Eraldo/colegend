@@ -15,6 +15,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 from checkpoints.models import Checkpoint
 from core.utils.media_paths import UploadToOwnedDirectory
+from roles.models import Role
 
 
 class User(AbstractUser):
@@ -60,7 +61,8 @@ class User(AbstractUser):
     def get_avatar(self, size='medium'):
         return self.avatar[size]
 
-    checkpoints = models.ManyToManyField(Checkpoint)
+    roles = models.ManyToManyField(Role, blank=True)
+    checkpoints = models.ManyToManyField(Checkpoint, blank=True)
 
     @property
     def legend_days(self):
