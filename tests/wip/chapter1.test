@@ -232,7 +232,7 @@
     # She find the 'about' section
     - Find text: About
     # and clicks on the edit link
-    - Click: legend-about-edit
+    - Click: about-button
 
     # she fills out the about form and submits it.
     - Fill form:
