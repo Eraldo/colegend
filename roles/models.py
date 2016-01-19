@@ -27,6 +27,8 @@ class RoleQuerySet(models.QuerySet):
 
 class Role(models.Model):
     name = models.CharField(_('name'), max_length=255, unique=True)
+    nickname = models.CharField(_('nickname'), max_length=255, blank=True)
+    description = models.TextField(blank=True)
 
     objects = RoleQuerySet.as_manager()
 
@@ -34,4 +36,7 @@ class Role(models.Model):
         default_related_name = 'roles'
 
     def __str__(self):
-        return self.name
+        return '{}{}'.format(
+            self.name,
+            ' ({})'.format(self.nickname) if self.nickname else '',
+        )
