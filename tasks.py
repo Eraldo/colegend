@@ -175,6 +175,17 @@ def serve():
 
 
 @task
+def test(path='.'):
+    """
+    Run the hitch test suite.
+    :param path: The path to test. May be a single file or directory
+    """
+
+    message('starting test suite')
+    run('cd tests && hitch test {}'.format(path))
+
+
+@task
 def ls(path):
     """
     List the specified directory.
