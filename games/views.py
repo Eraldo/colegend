@@ -51,7 +51,7 @@ def complete_card(request, card):
     completed = game.complete_card(card)
     if completed:
         checkpoint_name = str(card.name).lower()
-        user.checkpoints.create(name=checkpoint_name)
+        user.add_checkpoint(name=checkpoint_name)
 
     card_name = '{} card'.format(card)
     context = {'name': card_name, 'url': reverse('games:completed')}

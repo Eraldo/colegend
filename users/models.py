@@ -64,6 +64,14 @@ class User(AbstractUser):
     roles = models.ManyToManyField(Role, blank=True)
     checkpoints = models.ManyToManyField(Checkpoint, blank=True)
 
+    def has_checkpoint(self, name):
+        return self.checkpoints.contains_name(name)
+
+    def add_checkpoint(self, name):
+        checkpoint, created = self.checkpoints.get_or_create(name=name)
+        self.checkpoints.add(checkpoint)
+        return checkpoint
+
     @property
     def legend_days(self):
         date_joined = self.date_joined

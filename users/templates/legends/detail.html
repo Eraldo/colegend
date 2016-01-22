@@ -19,7 +19,7 @@
         {% include 'widgets/button.html' with name='Biography' url=url kind='link btn-sm' condition=biography %}
 
         {% url 'legends:update' username=legend.username as url %}
-        {% include 'widgets/button.html' with name='About' url=url kind='link btn-sm' condition=can_edit_about %}
+        {% include 'widgets/button.html' with name='About' url=url kind='link btn-sm' condition=about %}
 
         {% include 'widgets/button.html' with name='Hero' kind='link btn-sm' locked=True %}
 

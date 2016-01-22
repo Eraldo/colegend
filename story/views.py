@@ -24,7 +24,7 @@ class StoryView(LoginRequiredMixin, TemplateView):
             {
                 'name': 'Welcome Tree',
                 'url': reverse('story:welcome-tree'),
-                'condition': user.continuous.prologue,
+                'condition': user.has_checkpoint('prologue'),
             },
         ]
         context['prologue_buttons'] = prologue_buttons
@@ -32,17 +32,17 @@ class StoryView(LoginRequiredMixin, TemplateView):
             {
                 'name': 'Entering Leyenda',
                 'url': reverse('story:leyenda'),
-                'condition': user.game.has_card('Storytime'),
+                'condition': user.has_checkpoint('storytime'),
             },
             {
                 'name': 'Pioneer Journal',
                 'url': reverse('story:poineer-journal'),
-                'condition': user.continuous.leyenda,
+                'condition': user.has_checkpoint('leyenda'),
             },
             {
                 'name': 'The Journal',
                 'url': reverse('story:your-journal'),
-                'condition': user.continuous.pioneer_journal,
+                'condition': user.has_checkpoint('pioneer journal'),
             },
         ]
         context['chapter1_buttons'] = chapter1_buttons
@@ -72,6 +72,7 @@ class PrologueView(LoginRequiredMixin, TemplateView):
         typed_username = self.get_typed_username()
         context['typed_username'] = typed_username
 
+        context['prologue'] = user.has_checkpoint('prologue')
         return context
 
     def get_prologue_country(self):
@@ -134,8 +135,9 @@ class PrologueView(LoginRequiredMixin, TemplateView):
 
     def post(self, request, *args, **kwargs):
         if 'welcome-tree' in request.POST:
+            user = request.user
+            user.checkpoints.create(name='prologue')
             continuous = request.user.continuous
-            continuous.prologue = True
             continuous.chapter = 1
             continuous.save()
             return redirect('story:welcome-tree')
@@ -143,6 +145,11 @@ class PrologueView(LoginRequiredMixin, TemplateView):
 
 class WelcomeTreeView(LoginRequiredMixin, TemplateView):
     template_name = "story/welcome-tree.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['prologue'] = self.request.user.has_checkpoint('prologue')
+        return context
 
 
 class WelcomeTreeLeafWidgetView(LoginRequiredMixin, TemplateView):
@@ -174,11 +181,15 @@ class LeyendaView(LoginRequiredMixin, TemplateView):
     def post(self, request, *args, **kwargs):
         post = request.POST
         if 'success' in post:
-            continuous = request.user.continuous
-            if not continuous.leyenda:
-                continuous.leyenda = True
-                continuous.save()
+            user = request.user
+            if not user.has_checkpoint(name='leyenda'):
+                user.add_checkpoint(name='leyenda')
             return redirect('story:poineer-journal')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['leyenda'] = self.request.user.has_checkpoint('leyenda')
+        return context
 
 
 class PioneerJournalView(LoginRequiredMixin, TemplateView):
@@ -186,10 +197,9 @@ class PioneerJournalView(LoginRequiredMixin, TemplateView):
 
     def post(self, request, *args, **kwargs):
         if 'success' in request.POST:
-            continuous = request.user.continuous
-            if not continuous.pioneer_journal:
-                continuous.pioneer_journal = True
-                continuous.save()
+            user = request.user
+            if not user.has_checkpoint('pioneer journal'):
+                user.add_checkpoint('pioneer journal')
             return redirect('story:your-journal')
 
 
@@ -198,10 +208,15 @@ class YourJournalView(LoginRequiredMixin, TemplateView):
 
     def post(self, request, *args, **kwargs):
         if 'success' in request.POST:
-            continuous = request.user.continuous
-            if not continuous.your_journal:
-                continuous.your_journal = True
-                continuous.chapter = 2
-                continuous.save()
+            user = request.user
+            if not user.has_checkpoint('your journal'):
+                user.add_checkpoint('your journal')
+                user.continuous.chapter = 2
+                user.continuous.save()
                 complete_card(request, 'storytime')
             return redirect('story:index')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['your_journal'] = self.request.user.has_checkpoint('your journal')
+        return context

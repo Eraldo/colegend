@@ -37,13 +37,13 @@ initial_cards_data = [
             - There is now a little edit icon. Click on it."""),
         'category': 5,
     },
-    {
-        'name': 'Profile Picture',
-        'sort_order': 5,
-        'content': "Upload a profile picture of yourself so that your fellow legends can get a better impression of you.",
-        'details': "-click: “connected” → “Legend” → “Your Face Here”",
-        'category': 5,
-    },
+    # {
+    #     'name': 'Profile Picture',
+    #     'sort_order': 5,
+    #     'content': "Upload a profile picture of yourself so that your fellow legends can get a better impression of you.",
+    #     'details': "-click: “connected” → “Legend” → “Your Face Here”",
+    #     'category': 5,
+    # },
     {
         'name': 'Guidelines',
         'sort_order': 6,

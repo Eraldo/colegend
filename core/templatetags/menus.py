@@ -12,11 +12,11 @@ def menu(context, user=None):
         user = context.get('user')
     if user.is_authenticated():
         template = '_menu.html'
-        context['cloud_guide'] = user.connected.guide_introduction or user.game.has_card('cloud guide')
+        context['cloud_guide'] = user.has_checkpoint('cloud guide card')
         context['dream_team'] = False
-        context['chat'] = user.connected.chat_introduction or user.game.has_card('chat')
-        context['virtual_room'] = user.connected.virtual_room
-        context['guidelines'] = user.connected.guidelines or user.game.has_card('guidelines')
+        context['chat'] = user.has_checkpoint('chat card')
+        context['virtual_room'] = user.has_checkpoint('virtual room')
+        context['guidelines'] = user.has_checkpoint('guidelines card')
     else:
         template = '_menu_anonymous.html'
         context = {}

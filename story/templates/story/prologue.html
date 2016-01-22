@@ -5,19 +5,19 @@
 {% block site_messages %}{% endblock %}
 
 {% block site_menu %}
-    {% if user.continuous.prologue %}
+    {% if prologue %}
         {{ block.super }}
     {% endif %}
 {% endblock %}
 
 {% block breadcrumbs %}
-    {% if user.continuous.prologue %}
+    {% if prologue %}
         {{ block.super }}
     {% endif %}
 {% endblock %}
 
 {% block content %}
-    {% if user.continuous.prologue %}
+    {% if prologue %}
         <a href="#" onclick="typed_skip()" class="pull-right">Skip</a>
     {% endif %}
     <div id="typed-strings">

@@ -35,44 +35,6 @@ class SettingsView(LoginRequiredMixin, DetailView):
         return self.request.user
 
 
-# class UserUpdateView(LoginRequiredMixin, UpdateView):
-#     template_name = 'users/update.html'
-#     fields = ['first_name', 'last_name']
-#
-#     # we already imported User in the view code above, remember?
-#     model = User
-#
-#     # send the user back to their own page after a successful update
-#     def get_success_url(self):
-#         return reverse("legends:profile",
-#                        kwargs={"username": self.request.user.username})
-#
-#     def get_object(self):
-#         # Only get the User record for the user making the request
-#         return User.objects.get(username=self.request.user.username)
-
-
-# class UserListView(LoginRequiredMixin, ListView):
-#     template_name = 'users/list.html'
-#     model = User
-#     # These next two lines tell the view to index lookups by username
-#     slug_field = "username"
-#     slug_url_kwarg = "username"
-
-
-# class UserIntroductionView(LoginRequiredMixin, TemplateView):
-#     template_name = 'users/introduction.html'
-#
-#     def post(self, request, *args, **kwargs):
-#         if 'success' in request.POST:
-#             # update connected path
-#             user = request.user
-#             user.connected.legend_introduction = True
-#             user.connected.save()
-#             # redirect to profile
-#             return redirect('legends:profile', user.username)
-#         return self.get(request, *args, **kwargs)
-
 class LegendListView(LoginRequiredMixin, ListView):
     template_name = 'legends/list.html'
     model = User
@@ -89,10 +51,10 @@ class LegendDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user
-        context['can_edit_about'] = user.game.has_card('about')
-        context['outercall'] = user.game.has_card('outer call')
-        context['innercall'] = user.game.has_card('inner call')
-        context['biography'] = user.game.has_card('biography')
+        context['about'] = user.has_checkpoint('about card')
+        context['outercall'] = user.has_checkpoint('outer call card')
+        context['innercall'] = user.has_checkpoint('inner call card')
+        context['biography'] = user.has_checkpoint('biography card')
         return context
 
 
@@ -104,8 +66,7 @@ class LegendUpdateView(LoginRequiredMixin, UpdateView):
 
     def get(self, request, *args, **kwargs):
         user = request.user
-        connected = user.connected
-        if connected.about or user.game.has_card('about'):
+        if user.has_checkpoint('about card'):
             return super().get(request, *args, **kwargs)
         else:
             game_url = user.game.get_absolute_url()
@@ -161,8 +122,7 @@ class LegendAvatarView(LoginRequiredMixin, UpdateView):
 
     def get(self, request, *args, **kwargs):
         user = request.user
-        connected = user.connected
-        if connected.avatar or user.game.has_card('profile picture'):
+        if user.has_checkpoint('profile picture card'):
             return super().get(request, *args, **kwargs)
         else:
             game_url = user.game.get_absolute_url()
