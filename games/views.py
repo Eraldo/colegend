@@ -25,8 +25,11 @@ class GameIndexView(LoginRequiredMixin, TemplateView):
     def post(self, request, *args, **kwargs):
         post = request.POST
         if 'draw' in post:
-            game = request.user.game
-            game.draw()
+            user = request.user
+            game = user.game
+            card = game.draw()
+            checkpoint_name = '{} card'.format(str(card.name).lower())
+            user.checkpoints.create(name=checkpoint_name)
             return redirect('games:index')
 
 
@@ -41,11 +44,14 @@ class CompletedView(LoginRequiredMixin, ListView):
 
 
 def complete_card(request, card):
-    game = request.user.game
+    user = request.user
+    game = user.game
     if isinstance(card, str):
         card = game.get_card(card)
-    game.complete_card(card)
-    game.save()
+    completed = game.complete_card(card)
+    if completed:
+        checkpoint_name = str(card.name).lower()
+        user.checkpoints.create(name=checkpoint_name)
 
     card_name = '{} card'.format(card)
     context = {'name': card_name, 'url': reverse('games:completed')}

@@ -63,6 +63,7 @@ class Game(AutoOwnedBase):
         if card in self.hand.all():
             self.hand.remove(card)
             self.completed.add(card)
+            self.save()
             return True
         return False
 

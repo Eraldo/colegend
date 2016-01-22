@@ -182,7 +182,7 @@ def test(path='.'):
     """
 
     message('starting test suite')
-    run('cd tests && hitch test {}'.format(path))
+    run('cd tests && hitch test -s tdd.settings {}'.format(path))
 
 
 @task
