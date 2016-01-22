@@ -1,5 +1,5 @@
 from subprocess import call
-from os import path
+from os import path, getcwd
 import hitchpostgres
 import hitchselenium
 import hitchpython
@@ -11,6 +11,9 @@ from time import sleep
 
 # Get directory above this file
 PROJECT_DIRECTORY = path.abspath(path.join(path.dirname(__file__), '..'))
+
+# Get the static files path for the tests (used for upload)
+STATIC_TEST_FILES_PATH = path.join(getcwd(), 'static', 'tests')
 
 
 class ExecutionEngine(hitchtest.ExecutionEngine):
@@ -129,7 +132,10 @@ class ExecutionEngine(hitchtest.ExecutionEngine):
 
     def fill_form(self, **kwargs):
         """Fill in a form with id=value."""
+
         for element, text in kwargs.items():
+            if isinstance(text, dict):
+                text = path.join(STATIC_TEST_FILES_PATH, text.get('file'))
             try:
                 self.driver.find_element_by_id(element).send_keys(text)
             except:  # Added to find case sensitive ids like "Email".

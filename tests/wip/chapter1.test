@@ -215,8 +215,6 @@
     - Find text: Congratulations
     - Click: continue-game-button
 
-
-
     - Click: deck
     - Find text: About
     - Click: card-about-details
@@ -249,6 +247,35 @@
 
     - Find text: Congratulations
     - Click: continue-game-button
+
+
+    - Click: deck
+    - Find text: Profile Picture
+    - Click: card-profile-picture-details
+    - Click: card-profile-picture-details-success  # the “ok” on the details pop-up
+    - Wait: 1
+
+    # After having read through the detailed instructions on the card she now knows what to do
+    # and navigates to the Legend Page and from there to the Profile Picture link.
+    - Click: menu-button-connected
+    - Click: menu-button-legend           # still needs ID
+    # She then gets prompted to the Legend Page
+    - Page title: Legend
+    # She finds her profile picture placeholder with the right label
+    - Find text: Carolina
+    # and clicks on placeholder image
+    - Click: carolina-avatar
+
+    # she fills out the about form and submits it.
+#    - Fill form:
+#        id_avatar:
+#          file: 'images/Carolina.jpg'
+    - Pause
+    - Click: save-button
+
+    - Find text: Congratulations
+    - Click: continue-game-button
+
 
     - Click: deck                         # still needs ID
     - Find text: Guidelines

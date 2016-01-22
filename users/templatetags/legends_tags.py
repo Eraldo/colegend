@@ -1,5 +1,6 @@
 from django import template
 from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.template.defaultfilters import slugify
 from django.template.loader import render_to_string
 
 register = template.Library()
@@ -16,6 +17,7 @@ def legend(context, legend=None, url=None, size=None):
     context = {
         'name': legend,
         'url': url,
+        'id': slugify(legend.username),
     }
 
     template = 'legends/widgets/link.html'
@@ -56,6 +58,6 @@ def npc(name):
     context = {
         'name': full_name,
         'source': static('legends/images/npc/{image_name}'.format(image_name=image_name)),
-        'id': name,
+        'classname': name,
     }
     return render_to_string(template, context)
