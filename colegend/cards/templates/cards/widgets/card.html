@@ -10,8 +10,9 @@
         <div class="game-card-block">
             <img class="card-img-top game-card-image img-responsive" src="{{ source }}"
                  alt="{{ title }} image">
+            {% if url %}<a href="{{ url }}">{% endif %}
             <h4 class="card-title">{{ title }}</h4>
-
+            {% if url %}</a>{% endif %}
             <p class="card-text">
                 {{ content|linebreaks }}
                 {% if details %}

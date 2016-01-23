@@ -6,7 +6,7 @@ register = template.Library()
 
 
 @register.simple_tag(takes_context=True)
-def card(context, card=None):
+def card(context, card=None, url=None):
     if not card:
         card = context.get('card')
     context = {
@@ -15,6 +15,7 @@ def card(context, card=None):
         'source': card.image.url if card.image else '',
         'id': card.id,
         'details': card.details,
+        'url': url,
     }
     template = 'cards/widgets/card.html'
     return render_to_string(template, context=context)

@@ -21,6 +21,10 @@ icon_dict = {
     'journal': 'book',
     'manager': 'check',
 
+    'create': 'plus',
+    'update': 'pencil',
+    'delete': 'trash',
+
     'checked': 'check-square-o',
     'unchecked': 'square-o',
 

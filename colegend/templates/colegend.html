@@ -83,6 +83,12 @@
             <div class="card-footer" style="padding: 0;">
                 {% block page_links %}
                 {% endblock %}
+                <div class="clearfix"></div>
+            </div>
+            <div class="card-footer" style="padding: 0;">
+                {% block page_controls %}
+                {% endblock %}
+                <div class="clearfix"></div>
             </div>
         </div>
     {% endblock %}
@@ -90,9 +96,9 @@
     {% block pre_content %}{% endblock %}
     {% block content_container %}
         <div id="content" class="{% block content_class %}card card-block bg-content{% endblock %}">
-        {% block content %}
-        {% endblock content %}
-    </div>
+            {% block content %}
+            {% endblock content %}
+        </div>
     {% endblock %}
 </div>
 <!-- /container -->
