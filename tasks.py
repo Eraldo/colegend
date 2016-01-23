@@ -175,14 +175,13 @@ def serve():
 
 
 @task
-def test(path='.'):
+def test(path='.', settings='tdd'):
     """
     Run the hitch test suite.
     :param path: The path to test. May be a single file or directory
     """
-
     message('starting test suite')
-    run('cd tests && hitch test -s tdd.settings {}'.format(path))
+    run('cd tests && hitch test -s {}.settings {}'.format(settings, path))
 
 
 @task
