@@ -1,5 +1,5 @@
 # Bleeding edge Django
-django==1.8.7
+django==1.9.1
 
 # Configuration
 django-environ==0.4.0
@@ -13,7 +13,7 @@ django-floppyforms==1.5.2
 
 # Models
 django-model-utils==2.3.1
-django-annoying==0.8.4
+django-annoying==0.8.5
 django-phonenumber-field==1.0.0
 django-orderable==4.0.1
 

@@ -74,9 +74,6 @@ LOCAL_APPS = (
     'games',
     'cards',
     'story',
-
-    # helpers
-    'django.contrib.webdesign',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

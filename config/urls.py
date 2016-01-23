@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.conf import settings
-from django.conf.urls import include, url, patterns
+from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.views import defaults as default_views
@@ -14,8 +14,7 @@ BACKEND_NAME = 'coLegend backend'
 admin.site.site_header = BACKEND_NAME
 admin.site.site_title = BACKEND_NAME
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     # Favicon
     url(r'^favicon\.ico$',
         RedirectView.as_view(url=settings.STATIC_URL + 'images/favicon.ico', permanent=True)),
@@ -54,7 +53,7 @@ urlpatterns = patterns(
     # Added robots.txt file for crawlers (google/etc)
     url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
 
-) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit

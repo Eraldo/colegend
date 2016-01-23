@@ -1,12 +1,11 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from django.views.generic import RedirectView
 
 from .views import CardListView, CardDetailView, CardUpdateView
 
 __author__ = 'eraldo'
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^$',
         RedirectView.as_view(url='list/', permanent=False),
         name='index'),
@@ -19,6 +18,6 @@ urlpatterns = patterns(
     url(r'^(?P<pk>[0-9]+)/update/$',
         CardUpdateView.as_view(),
         name='update'),
-)
+]
 
 card_urls = urlpatterns

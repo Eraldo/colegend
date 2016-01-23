@@ -1,11 +1,10 @@
-from django.conf.urls import patterns, url, include
+from django.conf.urls import url
 from .views import ContinuousView
 
 __author__ = 'eraldo'
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^$',
         ContinuousView.as_view(),
         name='index'),
-)
+]

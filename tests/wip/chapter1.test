@@ -70,6 +70,7 @@
     # She finds the button and clicks on it.
     - Find text: continue
     - Click: close-button
+    - Wait: 1
     - Click: success-button
 
     # She gets prompted to the continuous game page where she gets welcomed by Coralina who explains the content of the page to her.

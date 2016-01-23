@@ -1,12 +1,11 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from django.views.generic import RedirectView
 
 from .views import InnerCallCreateView, InnerCallUpdateView
 
 __author__ = 'eraldo'
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^$',
         RedirectView.as_view(url='create/', permanent=False),
         name='index'),
@@ -16,4 +15,4 @@ urlpatterns = patterns(
     url(r'^update/$',
         InnerCallUpdateView.as_view(),
         name='update'),
-)
+]

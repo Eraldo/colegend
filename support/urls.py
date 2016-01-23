@@ -1,10 +1,9 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from .views import DocumentationView, FAQView, SupportView
 
 __author__ = 'eraldo'
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^$',
         SupportView.as_view(),
         name='index'),
@@ -14,4 +13,4 @@ urlpatterns = patterns(
     url(r'^documentation/$',
         DocumentationView.as_view(),
         name='documentation'),
-)
+]

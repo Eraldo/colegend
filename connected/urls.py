@@ -1,11 +1,10 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from .views import ConnectedView, VirtualRoomView, GuidelinesView, GuidelinesIntroductionView, ChatView, \
     ChatIntroductionView, ChatInvitationView
 
 __author__ = 'eraldo'
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^$',
         ConnectedView.as_view(),
         name='index'),
@@ -27,4 +26,4 @@ urlpatterns = patterns(
     url(r'^virtual-room/$',
         VirtualRoomView.as_view(),
         name='virtual-room'),
-)
+]

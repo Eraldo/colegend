@@ -4,9 +4,8 @@ from django.conf.urls import patterns, url
 
 __author__ = 'eraldo'
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     # url(r'^$',
     #     IndexView.as_view(),
     #     name='index'),
-)
+]

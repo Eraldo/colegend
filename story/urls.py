@@ -1,12 +1,11 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
 from .views import Chapter1View, PrologueView, WelcomeTreeView, WelcomeTreeLeafWidgetView, \
     PioneerJournalView, YourJournalView, LeyendaView, StoryView
 
 __author__ = 'eraldo'
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^$',
         StoryView.as_view(),
         name='index'),
@@ -31,4 +30,4 @@ urlpatterns = patterns(
     url(r'^your-journal/$',
         YourJournalView.as_view(),
         name='your-journal'),
-)
+]

@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from django.views.generic import RedirectView
 
 from .views import GuideIntroductionView, GuideManageView, GuideDetailView, GuideListView, \
@@ -6,8 +6,7 @@ from .views import GuideIntroductionView, GuideManageView, GuideDetailView, Guid
 
 __author__ = 'eraldo'
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^$',
         RedirectView.as_view(url='list/', permanent=False),
         name='index'),
@@ -32,4 +31,4 @@ urlpatterns = patterns(
     url(r'^(?P<owner>[\w.@+-]+)/guide/$',
         GuideActionView.as_view(),
         name='guide-action'),
-)
+]
