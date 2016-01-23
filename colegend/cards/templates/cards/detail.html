@@ -1,5 +1,5 @@
 {% extends 'cards/base.html' %}
-{% load cards_tags icons %}
+{% load cards_tags icons buttons %}
 
 {% block title %}Card{% endblock %}
 
@@ -7,8 +7,10 @@
 {% endblock %}
 
 {% block page_controls %}
-    <a href="{{ card.get_update_url }}" class="btn btn-sm btn-primary">{% icon 'update' %}</a>
-    <a href="{{ card.get_delete_url }}" class="btn btn-sm btn-danger pull-right">{% icon 'delete' %}</a>
+    {% update_button url=card.get_update_url %}
+    <div class="pull-right">
+        {% delete_button url=card.get_delete_url %}
+    </div>
 {% endblock %}
 
 {% block content %}

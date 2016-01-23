@@ -22,12 +22,12 @@ class StoryView(LoginRequiredMixin, TemplateView):
             {
                 'name': 'Prologue',
                 'url': reverse('story:prologue'),
-                'condition': True,
+                'locked': False,
             },
             {
                 'name': 'Welcome Tree',
                 'url': reverse('story:welcome-tree'),
-                'condition': user.has_checkpoint('prologue'),
+                'locked': not user.has_checkpoint('prologue'),
             },
         ]
         context['prologue_buttons'] = prologue_buttons
@@ -35,17 +35,17 @@ class StoryView(LoginRequiredMixin, TemplateView):
             {
                 'name': 'Entering Leyenda',
                 'url': reverse('story:leyenda'),
-                'condition': user.has_checkpoint('storytime card'),
+                'locked': not user.has_checkpoint('storytime card'),
             },
             {
                 'name': 'Pioneer Journal',
                 'url': reverse('story:poineer-journal'),
-                'condition': user.has_checkpoint('leyenda'),
+                'locked': not user.has_checkpoint('leyenda'),
             },
             {
                 'name': 'The Journal',
                 'url': reverse('story:your-journal'),
-                'condition': user.has_checkpoint('pioneer journal'),
+                'locked': not user.has_checkpoint('pioneer journal'),
             },
         ]
         context['chapter1_buttons'] = chapter1_buttons

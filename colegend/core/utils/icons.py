@@ -22,6 +22,7 @@ icon_dict = {
     'manager': 'check',
 
     'create': 'plus',
+    'detail': 'eye',
     'update': 'pencil',
     'delete': 'trash',
 
