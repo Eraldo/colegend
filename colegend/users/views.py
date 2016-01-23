@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
 
-from braces.views import LoginRequiredMixin
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.utils.safestring import mark_safe
 from django.views.generic import DetailView, UpdateView, ListView
 from django.utils.translation import ugettext as _
 
+from colegend.core.views import CheckpointsRequiredMixin
 from colegend.games.views import complete_card
 from colegend.users.forms import AvatarForm, LegendForm
 
@@ -99,24 +100,14 @@ class LegendUpdateView(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
 
 
-class LegendAvatarView(LoginRequiredMixin, UpdateView):
+class LegendAvatarView(LoginRequiredMixin, CheckpointsRequiredMixin, UpdateView):
     template_name = 'legends/avatar.html'
     model = User
     form_class = AvatarForm
     context_object_name = 'legend'
     slug_field = 'username'
     slug_url_kwarg = 'username'
-
-    def get(self, request, *args, **kwargs):
-        user = request.user
-        if user.has_checkpoint('profile picture card'):
-            return super().get(request, *args, **kwargs)
-        else:
-            game_url = user.game.get_absolute_url()
-            game_link = '<a href="{}">game</a>'.format(game_url)
-            message = _('You need to unlock this feature in the {}.').format(game_link)
-            messages.warning(request, mark_safe(message))
-            return redirect(request.META.get('HTTP_REFERER', '/'))
+    required_checkpoints = ['profile picture card']
 
     def form_valid(self, form):
         request = self.request

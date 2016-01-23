@@ -72,6 +72,14 @@ class User(AbstractUser):
         self.checkpoints.add(checkpoint)
         return checkpoint
 
+    def has_role(self, name):
+        return self.roles.contains_name(name)
+
+    def add_role(self, name):
+        role, created = self.roles.get_or_create(name=name)
+        self.roles.add(role)
+        return role
+
     @property
     def legend_days(self):
         date_joined = self.date_joined
