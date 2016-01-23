@@ -1,7 +1,7 @@
 import random
 from os import path
 
-from braces.views import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
