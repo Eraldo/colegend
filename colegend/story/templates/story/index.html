@@ -1,4 +1,5 @@
 {% extends "story/base.html" %}
+{% load buttons %}
 
 {% block title %}
     Story
@@ -15,15 +16,14 @@
     <div class="chapter-marker">Prologue</div>
     <p>
         {% for button in prologue_buttons %}
-            {% include 'widgets/button.html' with name=button.name url=button.url locked=button.locked kind='continuous' %}
+            {% button name=button.name url=button.url kind='continuous' locked=button.locked id=button.id %}
         {% endfor %}
     </p>
     <hr>
     <div class="chapter-marker">Chapter 1</div>
     <p>
         {% for button in chapter1_buttons %}
-            {% include 'widgets/button.html' with name=button.name url=button.url locked=button.locked kind='continuous' %}
-        {% endfor %}
+            {% button name=button.name url=button.url kind='continuous' locked=button.locked id=button.id %}        {% endfor %}
     </p>
 
 {% endblock %}

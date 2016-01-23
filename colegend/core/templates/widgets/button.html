@@ -1,13 +1,13 @@
 {% load icons %}
 
 {% if locked %}
-    <a id="{% if id %}{{ id }}{% else %}{{ name|slugify }}{% endif %}-button" href="#"
-       class="btn btn-{{ kind }} disabled">
+    <a{% if id %} id="{{ id }}-button"{% endif %} href="#"
+                  class="btn btn-{{ kind }} disabled">
         {% icon 'locked' %}
         {% if icon %}{% icon icon %} {% endif %}{{ name }}
     </a>
 {% else %}
-    <a id="{{ name|slugify }}-button" href="{{ url }}" class="btn btn-{{ kind }}">
+    <a{% if id %} id="{{ id }}"{% endif %} href="{{ url }}" class="btn btn-{{ kind }}">
         {% if icon %}{% icon icon %} {% endif %}{{ name }}
     </a>
 {% endif %}

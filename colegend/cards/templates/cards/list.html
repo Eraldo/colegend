@@ -7,7 +7,7 @@
 {% block title %}Cards{% endblock %}
 
 {% block page_controls %}
-    {% create_button pattern='cards:create' %}
+    {% button 'create' pattern='cards:create' %}
 {% endblock %}
 
 
@@ -15,9 +15,9 @@
     <div class="row">
         {% for card in cards %}
             <div class="col-lg-3 col-sm-6">
-                {% detail_button url=card.get_absolute_url %}
-                {% update_button url=card.get_update_url %}
-                {% delete_button url=card.get_delete_url %}
+                {% button 'detail' url=card.get_absolute_url %}
+                {% button 'update' url=card.get_update_url %}
+                {% button 'delete' url=card.get_delete_url %}
                 {% card %}
             </div>
         {% endfor %}

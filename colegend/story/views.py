@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
+from django.template.defaultfilters import slugify
 from django.utils import timezone
 from django.views.generic import TemplateView
 
@@ -31,6 +32,8 @@ class StoryView(LoginRequiredMixin, TemplateView):
             },
         ]
         context['prologue_buttons'] = prologue_buttons
+        for button in prologue_buttons:
+            button.update({'id': '{}-button'.format(slugify(button.get('name')))})
         chapter1_buttons = [
             {
                 'name': 'Entering Leyenda',
@@ -48,6 +51,8 @@ class StoryView(LoginRequiredMixin, TemplateView):
                 'locked': not user.has_checkpoint('pioneer journal'),
             },
         ]
+        for button in chapter1_buttons:
+            button.update({'id': '{}-button'.format(slugify(button.get('name')))})
         context['chapter1_buttons'] = chapter1_buttons
         return context
 

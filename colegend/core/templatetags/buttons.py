@@ -8,74 +8,30 @@ __author__ = 'Eraldo Energy'
 
 
 @register.simple_tag(takes_context=True)
-def button(context, button=None):
-    if not button:
-        button = context.get('button')
-    context = {
-        'name': button.name,
-        'url': button.url,
-        'kind': button.kind,
-        'locked': button.locked,
+def button(context, name, pattern=None, url=None, kind=None, icon=None, locked=False, id=None):
+    kind_dict = {
+        'list': 'secondary btn-sm',
+        'create': 'secondary btn-sm',
+        'detail': 'secondary btn-sm',
+        'update': 'secondary btn-sm',
+        'delete': 'danger btn-sm',
     }
-    template = 'widgets/button.html'
-    return render_to_string(template, context=context)
+    if not kind:
+        kind = kind_dict.get(name, 'primary')
 
-
-@register.simple_tag(takes_context=True)
-def create_button(context, name='create', pattern=None, url=None, kind='secondary btn-sm', locked=False):
     if not url and pattern:
         url = reverse(pattern)
+
+    if not icon and name in kind_dict.keys():
+        icon = name
+
     context = {
-        'id': name,
+        'name': name,
         'url': url,
         'kind': kind,
-        'icon': name,
+        'icon': icon,
         'locked': locked,
-    }
-    template = 'widgets/button.html'
-    return render_to_string(template, context=context)
-
-
-@register.simple_tag(takes_context=True)
-def detail_button(context, name='detail', pattern=None, url=None, kind='secondary btn-sm', locked=False):
-    if not url and pattern:
-        url = reverse(pattern)
-    context = {
-        'id': name,
-        'url': url,
-        'kind': kind,
-        'icon': name,
-        'locked': locked,
-    }
-    template = 'widgets/button.html'
-    return render_to_string(template, context=context)
-
-
-@register.simple_tag(takes_context=True)
-def update_button(context, name='update', pattern=None, url=None, kind='primary btn-sm', locked=False):
-    if not url and pattern:
-        url = reverse(pattern)
-    context = {
-        'id': name,
-        'url': url,
-        'kind': kind,
-        'icon': name,
-        'locked': locked,
-    }
-    template = 'widgets/button.html'
-    return render_to_string(template, context=context)
-
-
-@register.simple_tag(takes_context=True)
-def delete_button(context, name='delete', pattern=None, url=None, kind='danger btn-sm', locked=False):
-    if not url and pattern:
-        url = reverse(pattern)
-    context = {
-        'id': name,
-        'url': url,
-        'kind': kind,
-        'icon': name,
-        'locked': locked,
+        'id': id,
     }
     template = 'widgets/button.html'
     return render_to_string(template, context=context)
