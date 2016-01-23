@@ -1,9 +1,0 @@
-{% extends "base.html" %}
-
-{% block title %}Profile{% endblock %}
-
-{% block breadcrumbs %}
-    {{ block.super }}
-    {% url 'legends:detail' user.username as url %}
-    {% include '_breadcrumb.html' with url=url icon='legend' title='legend' %}
-{% endblock %}

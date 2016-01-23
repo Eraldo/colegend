@@ -1,9 +1,0 @@
-{% extends django_slack %}
-
-{% block text %}
-{{ message }}
-{% endblock %}
-
-{% block channel %}
-    {% if channel %}{{ channel }}{% else %}{{ block.super }}{% endif %}
-{% endblock %}

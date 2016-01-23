@@ -48,32 +48,32 @@ THIRD_PARTY_APPS = (
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
-    'users',  # custom users ('legends') app
+    'colegend.users',  # custom users ('legends') app
     # Your stuff: custom apps go here
-    'checkpoints',
-    'roles',
+    'colegend.checkpoints',
+    'colegend.roles',
 
-    'core',  # common code library
+    'colegend.core',  # common code library
 
-    'about',
-    'home',
-    'support',
+    'colegend.about',
+    'colegend.home',
+    'colegend.support',
 
     # common
-    'categories',
+    'colegend.categories',
 
-    'conscious',
-    'outercall',
-    'innercall',
-    'biography',
+    'colegend.conscious',
+    'colegend.outercall',
+    'colegend.innercall',
+    'colegend.biography',
 
-    'connected',
-    'guides',
+    'colegend.connected',
+    'colegend.guides',
 
-    'continuous',
-    'games',
-    'cards',
-    'story',
+    'colegend.continuous',
+    'colegend.games',
+    'colegend.cards',
+    'colegend.story',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

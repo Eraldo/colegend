@@ -6,7 +6,8 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views import defaults as default_views
 from django.views.generic import RedirectView, TemplateView
-from home.views import TestView, HomeView, JoinView
+
+from colegend.home.views import TestView, HomeView, JoinView
 
 __author__ = 'Eraldo Energy'
 
@@ -23,30 +24,30 @@ urlpatterns = [
     url(r'^{}/'.format(settings.ADMIN_URL), include(admin.site.urls)),
 
     # User management
-    url(r'^legends/', include('users.urls', namespace='legends')),
+                  url(r'^legends/', include('colegend.users.urls', namespace='legends')),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^join/$', JoinView.as_view(), name='join'),
-    url(r'^roles/', include('roles.urls', namespace='roles')),
+                  url(r'^roles/', include('colegend.roles.urls', namespace='roles')),
 
     # Your stuff: custom urls includes go here
     url(r'^$', RedirectView.as_view(url='home/', permanent=False), name='index'),
 
     url(r'^home/$', HomeView.as_view(), name='home'),
-    url(r'^about/', include('about.urls')),
-    url(r'^support/', include('support.urls', namespace='support')),
+                  url(r'^about/', include('colegend.about.urls')),
+                  url(r'^support/', include('colegend.support.urls', namespace='support')),
 
-    url(r'^conscious/', include('conscious.urls', namespace='conscious')),
-    url(r'^outer-call/', include('outercall.urls', namespace='outer-call')),
-    url(r'^inner-call/', include('innercall.urls', namespace='inner-call')),
-    url(r'^biography/', include('biography.urls', namespace='biography')),
+                  url(r'^conscious/', include('colegend.conscious.urls', namespace='conscious')),
+                  url(r'^outer-call/', include('colegend.outercall.urls', namespace='outer-call')),
+                  url(r'^inner-call/', include('colegend.innercall.urls', namespace='inner-call')),
+                  url(r'^biography/', include('colegend.biography.urls', namespace='biography')),
 
-    url(r'^connected/', include('connected.urls', namespace='connected')),
-    url(r'^guides/', include('guides.urls', namespace='guides')),
+                  url(r'^connected/', include('colegend.connected.urls', namespace='connected')),
+                  url(r'^guides/', include('colegend.guides.urls', namespace='guides')),
 
-    url(r'^continuous/', include('continuous.urls', namespace='continuous')),
-    url(r'^games/', include('games.urls', namespace='games')),
-    url(r'^cards/', include('cards.urls', namespace='cards')),
-    url(r'^story/', include('story.urls', namespace='story')),
+                  url(r'^continuous/', include('colegend.continuous.urls', namespace='continuous')),
+                  url(r'^games/', include('colegend.games.urls', namespace='games')),
+                  url(r'^cards/', include('colegend.cards.urls', namespace='cards')),
+                  url(r'^story/', include('colegend.story.urls', namespace='story')),
 
     url(r'^test/$', TestView.as_view(), name='test'),
 

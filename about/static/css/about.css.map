@@ -1,9 +1,0 @@
-{
-  "version": 3,
-  "mappings": "AAEA,cAAc;EACZ,OAAO,EAAE,IAAI;;AAEf,qFAAqF;EACnF,WAAW,EAAE,CAAC;;AAEhB,8CAA8C;EAC5C,eAAe,EAAE,IAAI;;AAEvB,eAAe;EACb,SAAS,EAAE,GAAG;;AAGhB,oBAAoB;EAClB,aAAa,EAAE,CAAC;;AAElB,2BAA2B;EACzB,KAAK,EAAE,OAAO;;AAEhB,gBAAgB;EACd,KAAK,EAAE,KAAK;;AAEd,wBAAwB;EACtB,SAAS,EAAE,OAAO",
-  "sources": [
-    "../sass/about.sass"
-  ],
-  "names": [],
-  "file": "about.css"
-}
