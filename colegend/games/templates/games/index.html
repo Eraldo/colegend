@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load cards_tags %}
+
+{% block title %}Game{% endblock %}
+
+{% block content_class %}
+{% endblock %}
+
+{% block page_links %}
+    {% if completed %}
+        <a href="{% url 'games:completed' %}" class="btn btn-default btn-sm">
+            <span class="text-success">{{ completed }}</span>
+            Completed
+        </a>
+    {% endif %}
+{% endblock %}
+
+{% block pre_content %}
+    {% include 'widgets/quote.html' with author='J. R. Rim' sharer='Dance Monkey Comedian' text="Life is not a game. Still, in this life, we choose the games we live to play." %}
+
+    <p>
+        {% include 'games/chats/introduction.html' %}
+    </p>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-3 col-sm-6">
+            {% include 'cards/widgets/deck.html' with covered=True %}
+        </div>
+        {% for card in cards %}
+            <div class="col-lg-3 col-sm-6">
+                {% card %}
+            </div>
+            {% empty %}
+            <div class="col-lg-3 col-sm-6">
+                {% include 'cards/widgets/placeholder.html' %}
+            </div>
+        {% endfor %}
+    </div>
+    </div>
+    </div>
+
+{% endblock %}

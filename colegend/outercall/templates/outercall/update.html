@@ -1,0 +1,15 @@
+{% extends 'legends/base_legend.html' %}
+{% load static crispy_forms_tags %}
+
+{% block title %}Outer Call{% endblock %}
+
+{% block pre_content %}
+    {% include 'outercall/chats/introduction.html' %}
+{% endblock %}
+
+{% block content %}
+    <img id="outer-call-image" src="{% static 'outercall/outercall.jpg' %}"
+         class="img-responsive" style="max-height: 200px;" alt="chatting">
+    <p></p>
+    {% crispy form %}
+{% endblock %}

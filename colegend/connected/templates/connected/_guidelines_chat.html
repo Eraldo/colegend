@@ -1,0 +1,58 @@
+{% extends 'base/chat.html' %}
+
+{% block chat_title %}
+    Hello fellow..
+{% endblock %}
+
+{% block chat_content %}
+    <p>
+        What can you do - right here, right now? <br>
+        … Good that you asked ;-)
+    </p>
+    <p>
+        First, you can get ready for a new experience of community and already contribute to it by reading through our
+        community guidelines.
+    </p>
+{% endblock %}
+
+{% block chat_answers %}
+    <form action="" method="post">{% csrf_token %}
+        <button id="guidelines-introduction-success" name="success" type="submit" class="list-group-item">
+            Sure, let's go.
+        </button>
+    </form>
+    <a id="not-interested-answer-guidelines" href="" data-toggle="modal" data-target="#answerModal"
+       class="list-group-item">
+        Not interested - the only rules I care about are my own!
+    </a>
+
+    <!-- Modal -->
+    <div class="modal fade" id="answerModal" tabindex="-1" role="dialog" aria-labelledby="answerModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="answerModalLabel">Best practices</h4>
+                </div>
+                <div class="modal-body">
+                    Our community guidelines are not rules. They are best practices of ways of communication and
+                    interaction. We have experienced them to be especially valuable for creating a safe space for
+                    personal
+                    development. You might find out why by taking a look at them.
+                </div>
+                <div class="modal-footer">
+                    <form action="" method="post">{% csrf_token %}
+                        <button id="not-interested-answer-guidelines-success" name="success" type="submit"
+                                class="btn btn-success">
+                            Ok
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

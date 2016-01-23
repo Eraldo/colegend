@@ -1,0 +1,70 @@
+{% extends 'connected/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}Community Guidelines{% endblock %}
+
+{% block content %}
+    <h4>I {% if user.connected.guidelines %}have accepted{% else %}accept{% endif %} the following guidelines:</h4>
+
+    <div class="media">
+        <a class="media-left" href="#">
+            <img class="media-object" src="{% static 'connected/images/stop.jpg' %}" alt="stop">
+        </a>
+
+        <div class="media-body">
+            <h4 class="media-heading">Stop Rule</h4>
+            When someone says ‘Stop’ it means ‘Stop’!
+        </div>
+    </div>
+
+    <div class="media">
+        <a class="media-left" href="#">
+            <img class="media-object" src="{% static 'connected/images/discretion.jpg' %}" alt="discretion">
+        </a>
+
+        <div class="media-body">
+            <h4 class="media-heading">Discretion</h4>
+            Everything stays in the coLegend world!
+        </div>
+    </div>
+
+    <div class="media">
+        <a class="media-left" href="#">
+            <img class="media-object" src="{% static 'connected/images/responsibility.jpg' %}" alt="resonsibility">
+        </a>
+
+        <div class="media-body">
+            <h4 class="media-heading">Personal Responsibility</h4>
+            I am responsible for my own experience.
+        </div>
+    </div>
+
+    <div class="media">
+        <a class="media-left" href="#">
+            <img class="media-object" src="{% static 'connected/images/appreciation.jpg' %}" alt="appreciation">
+        </a>
+
+        <div class="media-body">
+            <h4 class="media-heading">Appreciation</h4>
+            I am willing to treat the platform and its members with appreciation.
+        </div>
+    </div>
+
+    <div class="media">
+        <a class="media-left" href="#">
+            <img class="media-object" src="{% static 'connected/images/terms.jpg' %}" alt="terms">
+        </a>
+
+        <div class="media-body">
+            <h4 class="media-heading">Terms and Conditions</h4>
+            I accept the general advice, terms and conditions.
+        </div>
+    </div>
+    {% if not user.connected.guidelines %}
+        <p></p>
+        <form action="" method="post">{% csrf_token %}
+            <button id="accept" name="accept" type="submit" class="btn btn-primary">Accept</button>
+        </form>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,53 @@
+{% load legends_tags %}
+
+{% if not direction == 'right' %}
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col-sm-4 text-center">
+                    {% npc npc|default:'coralina' %}
+                </div>
+                <div class="col-sm-8">
+                    <div class="speech-bubble-arrow hidden-xs-down"></div>
+                    <div class="speech-bubble card bg-content">
+                        <div class="card-block">
+                            {% if title %}
+                                <h4 class="card-title">
+                                    {{ title }}
+                                </h4>
+                            {% endif %}
+                            <div class="card-text">
+                                {{ content }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-4">
+            <div class="row">
+                <div class="col-sm-4 col-sm-push-8 text-center">
+                    {% npc npc|default:'coralina' %}
+                </div>
+                <div class="col-sm-8  col-sm-pull-4">
+                    <div class="speech-bubble-arrow-right hidden-xs-down"></div>
+                    <div class="speech-bubble card bg-content">
+                        <div class="card-block">
+                            {% if title %}
+                                <h4 class="card-title">
+                                    {{ title }}
+                                </h4>
+                            {% endif %}
+                            <div class="card-text">
+                                {{ content }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

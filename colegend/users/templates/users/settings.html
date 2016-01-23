@@ -1,0 +1,13 @@
+{% extends "users/base.html" %}
+{% load static %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block title %}Settings{% endblock %}
+
+{% block page_links %}
+    <a href="{% url 'account_email' %}" class="btn btn-default btn-sm">Email</a>
+    <a href="{% url 'socialaccount_connections' %}" class="btn btn-default btn-sm">Social Accounts</a>
+{% endblock %}
+
+{% block content_container %}{% endblock %}

@@ -1,0 +1,13 @@
+{% load static icons %}
+<div class="card bg-content">
+    <a href="{% url 'support:faq' %}">
+        <div class="card-header">
+            {% icon 'faq' %}
+            FAQ
+        </div>
+        <img class="card-img-top img-responsive center-block"
+             src="{% static 'support/images/faq.jpg' %}"
+             alt="faq"
+             style="max-height: 12rem;">
+    </a>
+</div>

@@ -1,0 +1,29 @@
+{% extends 'guides/base.html' %}
+
+{% load static legends_tags %}
+{% load crispy_forms_tags %}
+
+{% block title %}Cloud Guide{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-4">
+            <img class="img-responsive center-block"
+                 src="{% static 'connected/images/guide.png' %}"
+                 alt="Cloud Guide">
+        </div>
+        <div class="col-sm-8">
+            {% if guiderelation.owner.connected.guide %}
+                <p>
+                    I was Cloud Guide for: {% legend guiderelation.owner 'small' %}
+                </p>
+            {% else %}
+                <p>
+                    Your guidee: {% legend guiderelation.owner 'small' %}
+                </p>
+            {% endif %}
+        </div>
+    </div>
+    <p></p>
+    {% crispy form %}
+{% endblock %}

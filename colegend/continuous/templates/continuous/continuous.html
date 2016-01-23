@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static icons %}
+
+{% block title %}Continuous{% endblock %}
+
+{% block body_class %}continuous-pattern{% endblock %}
+
+{% block pre_content %}
+
+    {% include 'widgets/quote.html' with author='Octavia E. Butler' sharer='Dance Monkey Comedian' text="Every story I create, creates me. I write to create myself." %}
+
+    <p>
+        {% include 'continuous/_continuous_chat.html' %}
+    </p>
+
+{% endblock %}
+
+{% block content_container %}
+{% endblock %}

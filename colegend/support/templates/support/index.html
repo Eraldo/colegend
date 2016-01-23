@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Support{% endblock %}
+
+{% block pre_content %}
+    {% include 'widgets/quote.html' with author='Ricky Martin' sharer='Cooking Kangaroo Mother' text="A hero is someone who is willing to help others in his or her best capacity." %}
+    <p>
+        {% include 'support/chats/introduction.html' %}
+    </p>
+{% endblock %}
+
+{% block page_links %}
+    <a href="{% url 'support:faq' %}" class="btn btn-link btn-sm">FAQ</a>
+    <a href="{% url 'support:documentation' %}" class="btn btn-link btn-sm">Documentation</a>
+{% endblock %}
+
+{% block content_class %}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6">
+            {% include 'support/cards/faq.html' %}
+        </div>
+        <div class="col-md-6">
+            {% include 'support/cards/documentation.html' %}
+        </div>
+    </div>
+{% endblock %}

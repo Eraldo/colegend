@@ -1,0 +1,67 @@
+{% extends 'guides/base.html' %}
+
+{% load static legends_tags icons %}
+
+{% block title %}Cloud Guide{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-4">
+            <img class="img-responsive center-block"
+                 src="{% static 'connected/images/guide.png' %}"
+                 alt="Cloud Guide">
+        </div>
+        <div class="col-sm-8">
+            <p>
+                {% if user.connected.guide %}
+                    Your Cloud Guide was:
+                    {% legend user.guiderelation.guide size='small' %}
+                {% elif user.guiderelation.guide %}
+                    Your Cloud Guide:
+                    {% legend user.guiderelation.guide size='small' %}
+                {% else %}
+                    Looks like your Cloud Guide is still on the lookout for you… <br>
+                    Don’t worry - he or she will find you soon enough! :)
+                {% endif %}
+            </p>
+        </div>
+    </div>
+    <p></p>
+    {% if user.guiderelation.guide %}
+        <h5>Checklist for you and your Cloud Guide</h5>
+        <ul class="list-group">
+            <li class="list-group-item">
+                {% if user.guiderelation.outer_call_checked %}
+                    {% icon 'checked' fixed=True %}
+                {% else %}
+                    {% icon 'unchecked' fixed=True %}
+                {% endif %}
+                Talked about outer call
+            </li>
+            <li class="list-group-item">
+                {% if user.guiderelation.inner_call_checked %}
+                    {% icon 'checked' fixed=True %}
+                {% else %}
+                    {% icon 'unchecked' fixed=True %}
+                {% endif %}
+                Talked about inner call
+            </li>
+            <li class="list-group-item">
+                {% if user.guiderelation.coLegend_checked %}
+                    {% icon 'checked' fixed=True %}
+                {% else %}
+                    {% icon 'unchecked' fixed=True %}
+                {% endif %}
+                Answered any questions about coLegend
+            </li>
+            <li class="list-group-item">
+                {% if user.guiderelation.guiding_checked %}
+                    {% icon 'checked' fixed=True %}
+                {% else %}
+                    {% icon 'unchecked' fixed=True %}
+                {% endif %}
+                Talked about becoming a guide
+            </li>
+        </ul>
+    {% endif %}
+{% endblock %}
