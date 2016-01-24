@@ -63,11 +63,12 @@ LOCAL_APPS = (
     'colegend.categories',
 
     'colegend.conscious',
+    'colegend.journals',
+
+    'colegend.connected',
     'colegend.outercall',
     'colegend.innercall',
     'colegend.biography',
-
-    'colegend.connected',
     'colegend.guides',
 
     'colegend.continuous',

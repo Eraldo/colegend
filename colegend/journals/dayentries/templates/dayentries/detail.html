@@ -1,0 +1,15 @@
+{% extends 'dayentries/base.html' %}
+{% load icons buttons dayentries_tags %}
+
+{% block title %}Day Entry{% endblock %}
+
+{% block page_controls %}
+    {% button 'update' url=dayentry.get_update_url %}
+    <div class="pull-right">
+        {% button 'delete' url=dayentry.get_delete_url %}
+    </div>
+{% endblock %}
+
+{% block content %}
+    {{ dayentry }}
+{% endblock %}

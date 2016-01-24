@@ -1,0 +1,14 @@
+{% extends 'journals/base.html' %}
+{% load icons buttons journals_tags %}
+
+{% block title %}Journals{% endblock %}
+
+{% block page_controls %}
+    {% button 'create' pattern='journals:create' %}
+{% endblock %}
+
+{% block content %}
+    {% for journal in journals %}
+        {% journal_link %}<br>
+    {% endfor %}
+{% endblock %}

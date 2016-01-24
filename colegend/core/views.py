@@ -28,24 +28,28 @@ class CheckpointsRequiredMixin(object):
                 return False
         return True
 
-    def handle_insufficient_checkpoints(self):
+    def handle_insufficient_checkpoints(self, request, *args, **kwargs):
         """
         Rediredt the user to the page he came from and
         show a message pointing him to the game to unlock more features.
         :return: The page the user came from or his home.
         """
-        request = self.request
         user = request.user
-        game_url = user.game.get_absolute_url()
-        game_link = '<a href="{}">game</a>'.format(game_url)
-        message = _('You need to unlock this feature in the {}.').format(game_link)
-        messages.warning(request, mark_safe(message))
-        return redirect(request.META.get('HTTP_REFERER', '/'))
+        if user.is_superuser:
+            message = _('Viewing as {}.'.format('admin'))
+            messages.info(request, message)
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            game_url = user.game.get_absolute_url()
+            game_link = '<a href="{}">game</a>'.format(game_url)
+            message = _('You need to unlock this feature in the {}.').format(game_link)
+            messages.warning(request, mark_safe(message))
+            return redirect(request.META.get('HTTP_REFERER', '/'))
 
     def dispatch(self, request, *args, **kwargs):
         has_checkpoints = self.has_checkpoints()
         if not has_checkpoints:
-            return self.handle_insufficient_checkpoints()
+            return self.handle_insufficient_checkpoints(request, *args, **kwargs)
         return super().dispatch(request, *args, **kwargs)
 
 
@@ -73,19 +77,64 @@ class RolesRequiredMixin(object):
                 return False
         return True
 
-    def handle_insufficient_roles(self):
+    def handle_insufficient_roles(self, request, *args, **kwargs):
         """
         Rediredt the user to the page he came from and
         show a message pointing him to the game to unlock more features.
         :return: The page the user came from or his home.
         """
-        request = self.request
-        message = _('You currently do not have the required roles.')
-        messages.warning(request, message)
-        return redirect(request.META.get('HTTP_REFERER', '/'))
+        user = request.user
+        if user.is_superuser:
+            message = _('Viewing as {}.'.format('admin'))
+            messages.info(request, message)
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            message = _('You currently do not have the required roles.')
+            messages.warning(request, message)
+            return redirect(request.META.get('HTTP_REFERER', '/'))
 
     def dispatch(self, request, *args, **kwargs):
         has_roles = self.has_roles()
         if not has_roles:
-            return self.handle_insufficient_roles()
+            return self.handle_insufficient_roles(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
+
+
+class OwnerRequiredMixin(object):
+    """
+    A django View mixin that checks if the user has got ownership of the resource.
+    """
+
+    def has_ownership(self):
+        """
+        Checks if the user is the owner of the resource.
+        :return: `True` if check passes; `False` if the user did not pass all requirements.
+        """
+        user = self.request.user
+        object = self.get_object()
+        if object.owned_by(user):
+            return True
+        else:
+            return False
+
+    def handle_no_ownership(self, request, *args, **kwargs):
+        """
+        Rediredt the user to the page he came from and
+        show a message informing him of the lack of ownership.
+        :return: The page the user came from or his home.
+        """
+        user = request.user
+        if user.is_superuser:
+            message = _('Viewing as {}.'.format('admin'))
+            messages.info(request, message)
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            message = _('Ownership required.')
+            messages.warning(request, message)
+            return redirect(request.META.get('HTTP_REFERER', '/'))
+
+    def dispatch(self, request, *args, **kwargs):
+        ownership = self.has_ownership()
+        if not ownership:
+            return self.handle_no_ownership(request, *args, **kwargs)
         return super().dispatch(request, *args, **kwargs)

@@ -5,6 +5,7 @@ __author__ = 'Eraldo Energy'
 icon_dict = {
     # conscious
     'conscious': 'graduation-cap',
+    'journal': 'book',
     # connected
     'connected': 'heart',
     'legend': 'user',

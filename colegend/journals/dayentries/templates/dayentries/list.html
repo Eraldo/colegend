@@ -1,0 +1,14 @@
+{% extends 'dayentries/base.html' %}
+{% load icons buttons dayentries_tags %}
+
+{% block title %}Day Entries{% endblock %}
+
+{% block page_controls %}
+    {% button 'create' pattern='dayentries:create' %}
+{% endblock %}
+
+{% block content %}
+    {% for dayentry in dayentries %}
+        {% dayentry_link %}<br>
+    {% endfor %}
+{% endblock %}
