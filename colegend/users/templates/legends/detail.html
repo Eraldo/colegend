@@ -1,5 +1,5 @@
 {% extends 'legends/base.html' %}
-{% load static icons legends_tags %}
+{% load static icons legends_tags buttons %}
 
 {% block title %}Legend{% endblock %}
 
@@ -8,25 +8,9 @@
 {% endblock %}
 
 {% block page_links %}
-    {% if user == legend %}
-        {% url 'outer-call:create' as url %}
-        {% include 'widgets/button.html' with name='Outer Call' url=url kind='link btn-sm' condition=outercall %}
-
-        {% url 'inner-call:create' as url %}
-        {% include 'widgets/button.html' with name='Inner Call' url=url kind='link btn-sm' condition=innercall %}
-
-        {% url 'biography:create' as url %}
-        {% include 'widgets/button.html' with name='Biography' url=url kind='link btn-sm' condition=biography %}
-
-        {% url 'legends:update' username=legend.username as url %}
-        {% include 'widgets/button.html' with name='About' url=url kind='link btn-sm' condition=about %}
-
-        {% include 'widgets/button.html' with name='Hero' kind='link btn-sm' locked=True %}
-
-        {% include 'widgets/button.html' with name='Demon' kind='link btn-sm' locked=True %}
-
-        <div class="clearfix"></div>
-    {% endif %}
+    {% for link in page_links %}
+        {% button name=link.name url=link.url kind=link.kind locked=link.locked id=link.id %}
+    {% endfor %}
 {% endblock %}
 
 {% block content_container %}

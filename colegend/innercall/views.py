@@ -30,10 +30,6 @@ class InnerCallCreateView(LoginRequiredMixin, CreateView):
         return initial
 
     def form_valid(self, form):
-        conscious = self.request.user.conscious
-        conscious.inner_call = True
-        conscious.save()
-        # update the game
         complete_card(self.request, 'inner call')
         return super().form_valid(form)
 

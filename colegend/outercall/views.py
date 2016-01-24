@@ -30,12 +30,6 @@ class OuterCallCreateView(LoginRequiredMixin, CreateView):
         return initial
 
     def form_valid(self, form):
-        user = self.request.user
-        # update the user path
-        conscious = user.conscious
-        conscious.outer_call = True
-        conscious.save()
-        # update the game
         complete_card(self.request, 'outer call')
         return super().form_valid(form)
 

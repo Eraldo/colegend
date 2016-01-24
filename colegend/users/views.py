@@ -3,7 +3,9 @@ from __future__ import absolute_import, unicode_literals
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
+from django.template.defaultfilters import slugify
 from django.utils.safestring import mark_safe
 from django.views.generic import DetailView, UpdateView, ListView
 from django.utils.translation import ugettext as _
@@ -39,10 +41,38 @@ class LegendDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user
-        context['about'] = user.has_checkpoint('about card')
-        context['outercall'] = user.has_checkpoint('outer call card')
-        context['innercall'] = user.has_checkpoint('inner call card')
-        context['biography'] = user.has_checkpoint('biography card')
+        legend = self.get_object()
+        if user == legend:
+            page_links = [
+                {
+                    'name': 'Outer Call',
+                    'url': reverse('outer-call:create'),
+                    'locked': not user.has_checkpoint('outer call card')
+                },
+                {
+                    'name': 'Inner Call',
+                    'url': reverse('inner-call:create'),
+                    'locked': not user.has_checkpoint('inner call card')
+                },
+                {
+                    'name': 'Biography',
+                    'url': reverse('biography:create'),
+                    'locked': not user.has_checkpoint('biography card')
+                },
+                {
+                    'name': 'About',
+                    'url': reverse('legends:update', kwargs={'username': legend.username}),
+                    'locked': not user.has_checkpoint('about card')
+                },
+            ]
+            # update the kind and id
+            kind = 'link btn-sm'
+            for link in page_links:
+                name = link.get('name')
+                slug = slugify(name)
+                id = '{}-button'.format(slug)
+                link.update({'kind': kind, 'id': id})
+            context['page_links'] = page_links
         return context
 
 

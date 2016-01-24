@@ -32,7 +32,7 @@ python-dateutil==2.4.2
 pyuv==1.2.0
 PyYAML==3.11
 requests==2.8.1
-selenium==2.48.0
+selenium==2.49.2
 simplegeneric==0.8.1
 six==1.10.0
 tblib==1.1.0

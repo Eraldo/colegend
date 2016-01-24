@@ -44,6 +44,7 @@ THIRD_PARTY_APPS = (
     'easy_thumbnails',
     'django_gravatar',
     'orderable',
+    'simplemde',
 )
 
 # Apps specific for this project go here.
@@ -64,6 +65,7 @@ LOCAL_APPS = (
 
     'colegend.conscious',
     'colegend.journals',
+    'colegend.dayentries',
 
     'colegend.connected',
     'colegend.outercall',

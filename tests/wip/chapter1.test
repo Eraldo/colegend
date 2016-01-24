@@ -268,10 +268,9 @@
     - Click: carolina-avatar
 
     # she fills out the about form and submits it.
-#    - Fill form:
-#        id_avatar:
-#          file: 'images/Carolina.jpg'
-    - Pause
+    - Fill form:
+        id_avatar:
+          file: 'images/Carolina.jpg'
     - Click: save-button
 
     - Find text: Congratulations
