@@ -1,5 +1,5 @@
 {% extends 'dayentries/base.html' %}
-{% load icons buttons dayentries_tags %}
+{% load icons buttons dayentries_tags markdown %}
 
 {% block title %}Day Entry{% endblock %}
 
@@ -11,5 +11,10 @@
 {% endblock %}
 
 {% block content %}
-    {{ dayentry }}
+    <p>
+        {{ dayentry }} {% icon 'address' %}{{ dayentry.locations }}
+    </p>
+    <div>
+        {{ dayentry.content|markdown }}
+    </div>
 {% endblock %}

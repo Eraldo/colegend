@@ -6,7 +6,6 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu:400,500')
 $font-stack: "Ubuntu", Helvetica, sans-serif
 
-
 // coLegend colors
 
 @import colors
@@ -91,7 +90,6 @@ $category-1: crimson
   border-color: $dark-pink
   color: $red
 
-
 // This is a fix for the bootstrap4 alpha release
 
 @media (max-width: 47.9em)
@@ -103,7 +101,6 @@ $category-1: crimson
     margin-left: 0
   .nav.navbar-nav.pull-right
     float: none !important
-
 
 // Display django-debug-toolbar.
 // See https://github.com/django-debug-toolbar/django-debug-toolbar/issues/742
@@ -149,7 +146,6 @@ body
 #page-title
   margin: 0
 
-
 //  coLegend text
 
 .text-conscious
@@ -161,7 +157,6 @@ body
 .text-continuous
   color: $continuous
 
-
 //  coLegend background
 
 .bg-conscious
@@ -172,7 +167,6 @@ body
 
 .bg-continuous
   background-color: $continuous
-
 
 // feedback button
 
@@ -305,3 +299,11 @@ form.list-group-item:focus, form.list-group-item:hover
   color: #555
   text-decoration: none
   background-color: #f5f5f5
+
+// Fixing the spacing of the fullscreen markup editor (simpleMDE)
+
+form .editor-toolbar.fullscreen
+  top: 56px
+
+form .CodeMirror-fullscreen
+  top: 106px

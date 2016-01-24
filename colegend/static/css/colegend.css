@@ -224,4 +224,12 @@ form.list-group-item:focus, form.list-group-item:hover {
   background-color: #f5f5f5;
 }
 
+form .editor-toolbar.fullscreen {
+  top: 56px;
+}
+
+form .CodeMirror-fullscreen {
+  top: 106px;
+}
+
 /*# sourceMappingURL=colegend.css.map */
