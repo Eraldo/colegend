@@ -1,4 +1,7 @@
+from django.contrib.admin.templatetags.admin_static import static
 from django.views.generic import TemplateView
+
+from colegend.roles.models import Role
 
 __author__ = 'Eraldo Energy'
 
@@ -37,5 +40,35 @@ class AboutView(TemplateView):
                 'npc': 'phoenix',
                 'text': "We’re already waiting for you - there’s much to be done...",
             },
+
         ]
+        team_members = Role.objects.get(name__iexact='core member').users.all()
+        member_data = []
+        anonymous_image = static('legends/images/anonymous.png')
+        for user in team_members:
+            avatar = user.get_avatar()
+            image = avatar.url if avatar else ''
+            social_accounts = user.socialaccount_set.all()
+            social_accounts_data = []
+            for account in social_accounts:
+                social_accounts_data.append({
+                    'url': account.get_profile_url(),
+                    'icon': account.provider,
+                })
+            member_data.append(
+                {
+                    'image': image or anonymous_image,
+                    'name': user.name,
+                    'roles': user.roles.all(),
+                    'social_accounts': social_accounts_data,
+                    'url': user.get_absolute_url(),
+                }
+            )
+        while len(member_data) < 4:
+            member_data.append({
+                'image': anonymous_image,
+                'name': 'Your Name',
+                'roles': ['your chosen roles'],
+            })
+        context['team_members'] = member_data
         return context

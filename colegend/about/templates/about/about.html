@@ -357,62 +357,18 @@
         <div class="row m-b-lg">
             <div class="col-lg-12 text-center">
                 <div class="navy-line"></div>
-                <h1>Our Team</h1>
+                <h1>Our Core Team</h1>
 
                 <p>Feel free to contact us.</p>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4 wow fadeInLeft">
-                <div class="team-member">
-                    <img src="https://www.colegend.org/media/avatars/Corinna_Curiosa/resized/200/Profilbild-Co_legend%20Kopie.jpg"
-                         class="img-responsive img-circle img-small" alt="">
-                    <h4><span class="navy">Corinna</span> Curiosa</h4>
-
-                    <p>Happiness Manager. Right Hand. Guide. Support Fairy. </p>
-                    <ul class="list-inline social-icon">
-                        <li><a href="http://www.google.com/profiles/107120626707532567348" target="_blank">
-                            {% icon 'google-plus' %}</a>
-                        </li>
-                        <li><a href="https://www.facebook.com/CorinnaS91" target="_blank">{% icon 'facebook' %}</a>
-                        </li>
-                    </ul>
+            {% for member in team_members %}
+                <div class="col-md-3 wow fadeInLeft">
+                    {% include 'about/widgets/team_member.html' with image=member.image name=member.name roles=member.roles social_accounts=member.social_accounts url=member.url %}
                 </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="team-member wow zoomIn">
-                    <img src="https://www.colegend.org/media/avatars/Eraldo/resized/200/Avatar-2014_BcCMVCZ.jpg"
-                         class="img-responsive img-circle" alt="" style="max-height: 88px;">
-                    <h4><span class="navy">Eraldo</span> Energy</h4>
+            {% endfor %}
 
-                    <p>Left Hand. Meeting Master. Gamification Guru. Resource Juggler. Coin Master. Presenter. Champion.
-                        Webster. CoNerd. Styler. Robot. John Doe. Guide.</p>
-                    <ul class="list-inline social-icon">
-                        <li><a href="http://www.google.com/profiles/108330741006963499878" target="_blank">
-                            {% icon 'google-plus' %}</a>
-                        </li>
-                        <li><a href="https://www.facebook.com/Eraldo" target="_blank">{% icon 'facebook' %}</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-sm-4 wow fadeInRight">
-                <div class="team-member">
-                    <img src="https://www.colegend.org/media/avatars/WaKaSaWaKaSa/resized/80/tumblr_nc572v1cqw1sz5crno1_1280.jpg"
-                         class="img-responsive img-circle img-small" alt="">
-                    <h4><span class="navy">Peter</span> Ahlhorn</h4>
-
-                    <p>Gatherer. Left Hand. Happiness Manager. Meeting Master. Wise One. Blog Buster. Guide.</p>
-                    <ul class="list-inline social-icon">
-                        <li><a href="http://www.google.com/profiles/115716934713164087185" target="_blank">
-                            {% icon 'google-plus' %}</a>
-                        </li>
-                        <li><a href="http://wakasawakasa.tumblr.com" target="_blank">
-                            {% icon 'tumblr' %}</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
         </div>
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 text-center m-t-lg m-b-lg">
@@ -561,7 +517,7 @@
                         <span>free!</span>
                     </li>
                     <li>
-                        {% icon 'check' %} All "<b>Legend</b>" features
+                        {% icon 'check' color='#1ab394' %} All "<b>Legend</b>" features
                     </li>
                     <li>
                         <a id="join-explorer" class="btn btn-info btn-lg" href="{% url "join" %}?next=/">Join</a>
@@ -581,22 +537,22 @@
                         <span>42€</span> / month
                     </li>
                     <li>
-                        {% icon 'check' %} </i> Social Gatherings
+                        {% icon 'check' color='#1ab394' %} </i> Social Gatherings
                     </li>
                     <li>
-                        {% icon 'check' %} </i> Comfort Challenges
+                        {% icon 'check' color='#1ab394' %} </i> Comfort Challenges
                     </li>
                     <li>
-                        {% icon 'check' %} </i> Smart Journal
+                        {% icon 'check' color='#1ab394' %} </i> Smart Journal
                     </li>
                     <li>
-                        {% icon 'check' %} </i> Self-Management System
+                        {% icon 'check' color='#1ab394' %} </i> Self-Management System
                     </li>
                     <li>
-                        {% icon 'check' %} </i> Support
+                        {% icon 'check' color='#1ab394' %} </i> Support
                     </li>
                     <li>
-                        {% icon 'check' %} </i> ...more!
+                        {% icon 'check' color='#1ab394' %} </i> ...more!
                     </li>
                     <li class="plan-action">
                         <a id="join-legend" class="btn btn-info btn-lg" href="{% url "join" %}?next=/">Join</a>
@@ -618,13 +574,13 @@
                         <span>420€</span> / month
                     </li>
                     <li>
-                        {% icon 'check' %} </i> All "<b>Legend</b>" features
+                        {% icon 'check' color='#1ab394' %} </i> All "<b>Legend</b>" features
                     </li>
                     <li>
-                        {% icon 'check' %} </i> <strong>Personal Coaching</strong>
+                        {% icon 'check' color='#1ab394' %} </i> <strong>Personal Coaching</strong>
                     </li>
                     <li>
-                        {% icon 'check' %} </i> <strong>Priority Support</strong>
+                        {% icon 'check' color='#1ab394' %}i </i> <strong>Priority Support</strong>
                     </li>
                     <li class="plan-action">
                         <a id="join-premium-legend" class="btn btn-info btn-lg"

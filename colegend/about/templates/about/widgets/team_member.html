@@ -1,0 +1,21 @@
+{% load icons %}
+<div class="team-member">
+    {% if url %}<a href="{{ url }}">{% endif %}
+    <img src="{{ image }}" class="img-responsive img-circle img-small" alt="{{ name }} avatar">
+    <h4 style="color: dimgrey"><span class="team-member-name navy">{{ name.split.0 }}</span> {{ name.split.1 }}</h4>
+    {% if url %}</a>{% endif %}
+    <p>
+        {% for role in roles %}
+            {{ role }}{% if not forloop.last %}, {% endif %}
+            {#            {% include 'roles/widgets/tag.html' with name=role %}#}
+        {% endfor %}
+    </p>
+
+    <ul class="list-inline social-icon">
+        {% for account in social_accounts %}
+            <li><a href="{{ account.url }}" target="_blank">
+                {% icon account.icon %}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

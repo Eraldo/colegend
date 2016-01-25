@@ -10,6 +10,7 @@ from django.dispatch import receiver
 from django.utils import timezone
 from django_slack import slack_message
 from django.utils.translation import ugettext_lazy as _
+from easy_thumbnails.exceptions import InvalidImageFormatError
 from easy_thumbnails.fields import ThumbnailerImageField
 from phonenumber_field.modelfields import PhoneNumberField
 
@@ -59,7 +60,11 @@ class User(AbstractUser):
     )
 
     def get_avatar(self, size='medium'):
-        return self.avatar[size]
+        try:
+            avatar = self.avatar[size]
+        except InvalidImageFormatError:
+            avatar = None
+        return avatar
 
     roles = models.ManyToManyField(Role, blank=True)
     checkpoints = models.ManyToManyField(Checkpoint, blank=True)
