@@ -1,0 +1,34 @@
+{% load icons buttons markdown %}
+
+<div {% if id %}id="dayentry-widget-{{ id }}"{% endif %} class="dayentry-widget">
+    <div class="content card bg-content">
+        <div class="card-header">
+            <!-- Action dropdown -->
+            <div class="btn-group pull-right" style="left: 0.6rem;">
+                <a type="button" data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false">{% icon 'actions' fixed=True color='grey' %}</a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    {% button 'detail' url=detail_url kind='default dropdown-item' %}
+                    {% button 'update' url=update_url kind='default dropdown-item' %}
+                    {% button 'delete' url=delete_url kind='default dropdown-item' %}
+                </div>
+            </div>
+
+            <span class="label label-pill bg-category-1">{{ weekday }}</span>
+            <strong>{{ date }}</strong>
+            <span>{% icon 'address' color='grey' %}{{ locations }}</span>
+            <div class="pull-right">
+                <span class="label label-default">Tag 1</span>
+                <span class="label label-default">Tag 2</span>
+            </div>
+            <span class="clearfix"></span>
+        </div>
+        <div class="card-block">
+            <p>
+                <strong>keyword 1, keyword2, keyword3, keyword4</strong>
+            </p>
+            {{ foo }}
+            {{ content }}
+        </div>
+    </div>
+</div>

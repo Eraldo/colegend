@@ -1,5 +1,5 @@
 {% extends 'dayentries/base.html' %}
-{% load icons buttons dayentries_tags markdown %}
+{% load icons buttons dayentries_tags %}
 
 {% block title %}Day Entry{% endblock %}
 
@@ -33,37 +33,7 @@
 {% block content_container %}
     <div class="row">
         <div class="col-md-8">
-            <div class="content card bg-content">
-                <div class="card-header">
-                    <!-- Action dropdown -->
-                    <div class="btn-group pull-right" style="left: 0.6rem;">
-                        <a type="button" data-toggle="dropdown" aria-haspopup="true"
-                           aria-expanded="false">{% icon 'actions' fixed=True color='grey' %}</a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Separated link</a>
-                        </div>
-                    </div>
-
-                    <span class="label label-pill bg-category-1">Monday</span>
-                    <strong>{{ dayentry }}</strong>
-                    <span>{% icon 'address' color='grey' %}{{ dayentry.locations }}</span>
-                    <div class="pull-right">
-                        <span class="label label-default">Tag 1</span>
-                        <span class="label label-default">Tag 2</span>
-                    </div>
-                    <span class="clearfix"></span>
-                </div>
-                <div class="card-block">
-                    <p>
-                        <strong>keyword 1, keyword2, keyword3, keyword4</strong>
-                    </p>
-                    {{ dayentry.content|markdown }}
-                </div>
-            </div>
+            {% dayentry_card %}
         </div>
         <div class="col-md-4">
             <div class="content card bg-content">
