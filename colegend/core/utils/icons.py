@@ -30,6 +30,14 @@ icon_dict = {
     'checked': 'check-square-o',
     'unchecked': 'square-o',
 
+    'previous': 'chevron-left',
+    'next': 'chevron-right',
+
+    'scope': 'search-plus',
+    'import': 'upload',
+
+    'actions': 'chevron-circle-down',
+
     'event': 'calendar',
     'feature': 'road',
     'news': 'newspaper-o',

@@ -7,13 +7,13 @@
     {% button 'update' url=dayentry.get_update_url %}
 
     <div class="btn-group" role="group" aria-label="Basic example">
-        {% button 'previous' url='#' kind='secondary btn-sm' %}
-        {% button 'next' url='#' kind='secondary btn-sm' %}
+        {% button 'previous' url='#' kind='secondary btn-sm' icon='previous' %}
+        {% button 'next' url='#' kind='secondary btn-sm' icon='next' %}
     </div>
     <div class="btn-group" role="group">
         <button id="btnGroupDrop1" type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-            Perspective
+            {% icon 'scope' %} Scope
         </button>
         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
             <a class="dropdown-item" href="#">Day</a>
@@ -25,7 +25,7 @@
     </div>
 
     <div class="pull-right">
-        {% button 'import' url='#' kind='secondary btn-sm' %}
+        {% button 'import' url='#' kind='secondary btn-sm' icon='import' %}
         {% button 'delete' url=dayentry.get_delete_url %}
     </div>
 {% endblock %}
@@ -35,6 +35,19 @@
         <div class="col-md-8">
             <div class="content card bg-content">
                 <div class="card-header">
+                    <!-- Action dropdown -->
+                    <div class="btn-group pull-right" style="left: 0.6rem;">
+                        <a type="button" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">{% icon 'actions' fixed=True color='grey' %}</a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Separated link</a>
+                        </div>
+                    </div>
+
                     <span class="label label-pill bg-category-1">Monday</span>
                     <strong>{{ dayentry }}</strong>
                     <span>{% icon 'address' color='grey' %}{{ dayentry.locations }}</span>
@@ -42,12 +55,42 @@
                         <span class="label label-default">Tag 1</span>
                         <span class="label label-default">Tag 2</span>
                     </div>
+                    <span class="clearfix"></span>
                 </div>
                 <div class="card-block">
                     <p>
                         <strong>keyword 1, keyword2, keyword3, keyword4</strong>
                     </p>
                     {{ dayentry.content|markdown }}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="content card bg-content">
+                <div class="card-header">
+                    Focus
+                </div>
+                <div class="card-block">
+                    1. TODO: Task 1<br>
+                    2. TODO: Task 1
+                </div>
+            </div>
+            <div class="content card bg-content">
+                <div class="card-header">
+                    Scheduled
+                </div>
+                <div class="card-block">
+                    2016-04-01 TODO: Task 1<br>
+                    2016-04-04 TODO: Task 1
+                </div>
+            </div>
+            <div class="content card bg-content">
+                <div class="card-header">
+                    Deadlines
+                </div>
+                <div class="card-block">
+                    2016-06-01 TODO: Task 1<br>
+                    2016-06-04 TODO: Task 1
                 </div>
             </div>
         </div>
