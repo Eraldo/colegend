@@ -8,8 +8,7 @@ register = template.Library()
 
 @register.simple_tag(takes_context=True)
 def dayentry_link(context, dayentry=None, **kwargs):
-    if not dayentry:
-        dayentry = context.get('dayentry')
+    dayentry = dayentry or context.get('dayentry')
     context = {
         'name': dayentry,
         'url': dayentry.get_absolute_url(),
@@ -21,8 +20,7 @@ def dayentry_link(context, dayentry=None, **kwargs):
 
 @register.simple_tag(takes_context=True)
 def dayentry_card(context, dayentry=None, **kwargs):
-    if not dayentry:
-        dayentry = context.get('dayentry')
+    dayentry = dayentry or context.get('dayentry')
     context = {
         'id': dayentry.id,
         'date': dayentry.date,
@@ -32,6 +30,8 @@ def dayentry_card(context, dayentry=None, **kwargs):
         'detail_url': dayentry.get_detail_url(),
         'update_url': dayentry.get_update_url(),
         'delete_url': dayentry.get_delete_url(),
+        'tags': ['tag1', 'tag2'],
+        'keywords': 'keyword1, keyword2, keyword3, keyword4',
     }
     context.update(kwargs)
     template = 'dayentries/widgets/card.html'

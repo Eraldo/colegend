@@ -18,16 +18,16 @@
             <strong>{{ date }}</strong>
             <span>{% icon 'address' color='grey' %}{{ locations }}</span>
             <div class="pull-right">
-                <span class="label label-default">Tag 1</span>
-                <span class="label label-default">Tag 2</span>
+                {% for tag in tags %}
+                    <span class="label label-default">{{ tag }}</span>
+                {% endfor %}
             </div>
             <span class="clearfix"></span>
         </div>
         <div class="card-block">
             <p>
-                <strong>keyword 1, keyword2, keyword3, keyword4</strong>
+                <strong>{{ keywords }}</strong>
             </p>
-            {{ foo }}
             {{ content }}
         </div>
     </div>
