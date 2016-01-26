@@ -3,7 +3,7 @@ from django.db import models
 from colegend.core.models import AutoOwnedBase, AutoUrlsMixin, OwnedQuerySet
 
 
-class JournalQuerySet(OwnedQuerySet, models.QuerySet):
+class JournalQuerySet(OwnedQuerySet):
     pass
 
 
