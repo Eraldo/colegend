@@ -6,3 +6,8 @@
 {% block content %}
     {% crispy form %}
 {% endblock %}
+
+{% block extra_script %}
+    {{ block.super }}
+    {{ form.media }}
+{% endblock %}

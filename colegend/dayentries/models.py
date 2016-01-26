@@ -34,7 +34,7 @@ class DayEntry(AutoUrlsMixin, TaggableBase, TimeStampedBase):
             return False
 
     class Meta:
-        verbose_name = _('DayEntry')
+        verbose_name = _('Day Entry')
         verbose_name_plural = _('Dayentries')
         unique_together = ['journal', 'date']
 

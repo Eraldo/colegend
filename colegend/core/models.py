@@ -19,6 +19,7 @@ class OwnedCheckMixin(object):
     """
     Adds the ability to check ownership to a model.
     """
+
     def owned_by(self, user):
         if user == self.owner:
             return True
