@@ -6,6 +6,7 @@ from colegend.core.fields import MarkdownField
 from colegend.core.models import AutoUrlsMixin, TimeStampedBase
 from colegend.core.validators import validate_date_present_or_past
 from colegend.journals.models import Journal
+from colegend.tags.models import TaggableBase
 
 
 class DayEntryQuerySet(models.QuerySet):
@@ -13,7 +14,7 @@ class DayEntryQuerySet(models.QuerySet):
         return self.filter(journal__owner=user)
 
 
-class DayEntry(AutoUrlsMixin, TimeStampedBase):
+class DayEntry(AutoUrlsMixin, TaggableBase, TimeStampedBase):
     """
     A django model representing a user's daily journal entry.
     """

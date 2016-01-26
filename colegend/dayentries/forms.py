@@ -13,6 +13,7 @@ class DayEntryForm(forms.ModelForm):
             'locations',
             'content',
             'keywords',
+            'tags',
         ]
 
     def __init__(self, *args, **kwargs):
@@ -20,8 +21,9 @@ class DayEntryForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Field('date'),
-            'locations',
-            'content',
-            'keywords',
+            Field('locations'),
+            Field('content'),
+            Field('keywords'),
+            Field('tags'),
         )
         self.helper.add_input(Submit('save', 'Save'))

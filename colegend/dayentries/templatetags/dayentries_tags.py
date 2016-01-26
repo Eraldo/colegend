@@ -31,7 +31,8 @@ def dayentry_card(context, dayentry=None, **kwargs):
         'update_url': dayentry.update_url,
         'delete_url': dayentry.delete_url,
         'tags': ['tag1', 'tag2'],
-        'keywords': 'keyword1, keyword2, keyword3, keyword4',
+        'keywords': dayentry.keywords,
+        'tags': dayentry.tags.all(),
     }
     context.update(kwargs)
     template = 'dayentries/widgets/card.html'
