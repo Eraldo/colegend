@@ -22,6 +22,8 @@ icon_dict = {
     'journal': 'book',
     'manager': 'check',
 
+    'tag': 'tag',
+
     'create': 'plus',
     'detail': 'eye',
     'update': 'pencil',

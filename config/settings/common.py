@@ -62,6 +62,7 @@ LOCAL_APPS = (
 
     # common
     'colegend.categories',
+    'colegend.tags',
 
     'colegend.conscious',
     'colegend.journals',

@@ -30,3 +30,13 @@ class Tag(AutoUrlsMixin, OwnedBase):
 
     def __str__(self):
         return self.name
+
+
+class TaggableBase(models.Model):
+    """
+    Adds a tags relation to the model. *-*
+    """
+    tags = models.ManyToManyField(Tag, blank=True)
+
+    class Meta:
+        abstract = True

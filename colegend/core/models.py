@@ -3,8 +3,6 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
 
-from colegend.tags.models import Tag
-
 
 class TimeStampedBase(models.Model):
     """
@@ -105,13 +103,3 @@ class AutoUrlsMixin(object):
 
     def get_absolute_url(self):
         return self.get_detail_url()
-
-
-class TaggableBase(models.Model):
-    """
-    Adds a tags relation to the model. *-*
-    """
-    tags = models.ManyToManyField(Tag, blank=True)
-
-    class Meta:
-        abstract = True

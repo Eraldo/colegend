@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
+from django.views.generic import CreateView, UpdateView
 
 
 class CheckpointsRequiredMixin(object):
@@ -138,3 +139,30 @@ class OwnerRequiredMixin(object):
         if not ownership:
             return self.handle_no_ownership(request, *args, **kwargs)
         return super().dispatch(request, *args, **kwargs)
+
+
+class OwnedCreateView(CreateView):
+    """
+    Adds the owner to the form and sets the current user as the default owner.
+    """
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['owner'] = self.request.user
+        return kwargs
+
+    def get_initial(self):
+        initial = super().get_initial()
+        initial['owner'] = self.request.user
+        return initial
+
+
+class OwnedUpdateView(UpdateView):
+    """
+    Adds the owner to the form.
+    """
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['owner'] = self.request.user
+        return kwargs

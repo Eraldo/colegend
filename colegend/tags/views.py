@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, RedirectView
+from django.views.generic import ListView, DetailView, DeleteView, RedirectView
 
+from colegend.core.views import OwnedCreateView, OwnedUpdateView
 from .models import Tag
 from .forms import TagForm
 
@@ -17,7 +18,7 @@ class TagListView(LoginRequiredMixin, ListView):
     context_object_name = 'tags'
 
 
-class TagCreateView(LoginRequiredMixin, CreateView):
+class TagCreateView(LoginRequiredMixin, OwnedCreateView):
     template_name = 'tags/create.html'
     model = Tag
     form_class = TagForm
@@ -28,7 +29,7 @@ class TagDetailView(LoginRequiredMixin, DetailView):
     model = Tag
 
 
-class TagUpdateView(LoginRequiredMixin, UpdateView):
+class TagUpdateView(LoginRequiredMixin, OwnedUpdateView):
     template_name = 'tags/update.html'
     model = Tag
     form_class = TagForm
@@ -37,3 +38,7 @@ class TagUpdateView(LoginRequiredMixin, UpdateView):
 class TagDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'tags/delete.html'
     model = Tag
+
+    def get_success_url(self):
+        object = self.get_object()
+        return object.get_index_url()
