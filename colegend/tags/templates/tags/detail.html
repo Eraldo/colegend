@@ -4,9 +4,9 @@
 {% block title %}Tag{% endblock %}
 
 {% block page_controls %}
-    {% button 'update' url=tag.get_update_url %}
+    {% button 'update' url=tag.update_url %}
     <div class="pull-right">
-        {% button 'delete' url=tag.get_delete_url %}
+        {% button 'delete' url=tag.delete_url %}
     </div>
 {% endblock %}
 

@@ -46,4 +46,5 @@ class JournalDeleteView(LoginRequiredMixin, RolesRequiredMixin, DeleteView):
     required_roles = ['admin']
 
     def get_success_url(self):
-        return self.get_object().get_index_url()
+        object = self.get_object()
+        return object.index_url()

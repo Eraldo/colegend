@@ -4,9 +4,9 @@
 {% block title %}Journal{% endblock %}
 
 {% block page_controls %}
-    {% button 'update' url=journal.get_update_url %}
+    {% button 'update' url=journal.update_url %}
     <div class="pull-right">
-        {% button 'delete' url=journal.get_delete_url %}
+        {% button 'delete' url=journal.delete_url %}
     </div>
 {% endblock %}
 

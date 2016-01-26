@@ -71,35 +71,41 @@ class AutoUrlsMixin(object):
     A mixin that automatically adds the CRUD urls to the model.
     """
 
-    def get_index_url(self):
+    @property
+    def index_url(self):
         app = self._meta.app_label
         url = '{}:index'.format(app)
         return reverse(url)
 
-    def get_list_url(self):
+    @property
+    def list_url(self):
         app = self._meta.app_label
         url = '{}:list'.format(app)
         return reverse(url)
 
-    def get_create_url(self):
+    @property
+    def create_url(self):
         app = self._meta.app_label
         url = '{}:create'.format(app)
         return reverse(url)
 
-    def get_detail_url(self):
+    @property
+    def detail_url(self):
         app = self._meta.app_label
         url = '{}:detail'.format(app)
         return reverse(url, kwargs={'pk': self.pk})
 
-    def get_update_url(self):
+    @property
+    def update_url(self):
         app = self._meta.app_label
         url = '{}:update'.format(app)
         return reverse(url, kwargs={'pk': self.pk})
 
-    def get_delete_url(self):
+    @property
+    def delete_url(self):
         app = self._meta.app_label
         url = '{}:delete'.format(app)
         return reverse(url, kwargs={'pk': self.pk})
 
     def get_absolute_url(self):
-        return self.get_detail_url()
+        return self.detail_url

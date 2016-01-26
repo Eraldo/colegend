@@ -22,8 +22,10 @@ class Card(Orderable):
     def get_absolute_url(self):
         return reverse('cards:detail', kwargs={'pk': self.pk})
 
-    def get_update_url(self):
+    @property
+    def update_url(self):
         return reverse('cards:update', kwargs={'pk': self.pk})
 
-    def get_delete_url(self):
+    @property
+    def delete_url(self):
         return reverse('cards:delete', kwargs={'pk': self.pk})

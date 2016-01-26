@@ -27,9 +27,9 @@ def dayentry_card(context, dayentry=None, **kwargs):
         'weekday': 'Monday',
         'locations': dayentry.locations,
         'content': render(dayentry.content),
-        'detail_url': dayentry.get_detail_url(),
-        'update_url': dayentry.get_update_url(),
-        'delete_url': dayentry.get_delete_url(),
+        'detail_url': dayentry.detail_url,
+        'update_url': dayentry.update_url,
+        'delete_url': dayentry.delete_url,
         'tags': ['tag1', 'tag2'],
         'keywords': 'keyword1, keyword2, keyword3, keyword4',
     }

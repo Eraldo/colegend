@@ -41,4 +41,4 @@ class TagDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self):
         object = self.get_object()
-        return object.get_index_url()
+        return object.index_url()

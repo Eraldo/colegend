@@ -4,7 +4,7 @@
 {% block title %}Day Entry{% endblock %}
 
 {% block page_controls %}
-    {% button 'update' url=dayentry.get_update_url %}
+    {% button 'update' url=dayentry.update_url %}
 
     <div class="btn-group" role="group" aria-label="Basic example">
         {% button 'previous' url='#' kind='secondary btn-sm' icon='previous' %}
@@ -26,7 +26,7 @@
 
     <div class="pull-right">
         {% button 'import' url='#' kind='secondary btn-sm' icon='import' %}
-        {% button 'delete' url=dayentry.get_delete_url %}
+        {% button 'delete' url=dayentry.delete_url %}
     </div>
 {% endblock %}
 

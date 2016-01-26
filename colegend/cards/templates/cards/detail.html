@@ -7,9 +7,9 @@
 {% endblock %}
 
 {% block page_controls %}
-    {% button 'update' url=card.get_update_url %}
+    {% button 'update' url=card.update_url %}
     <div class="pull-right">
-        {% button 'delete' url=card.get_delete_url %}
+        {% button 'delete' url=card.delete_url %}
     </div>
 {% endblock %}
 

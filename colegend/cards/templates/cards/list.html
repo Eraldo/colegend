@@ -16,8 +16,8 @@
         {% for card in cards %}
             <div class="col-lg-3 col-sm-6">
                 {% button 'detail' url=card.get_absolute_url %}
-                {% button 'update' url=card.get_update_url %}
-                {% button 'delete' url=card.get_delete_url %}
+                {% button 'update' url=card.update_url %}
+                {% button 'delete' url=card.delete_url %}
                 {% card %}
             </div>
         {% endfor %}
