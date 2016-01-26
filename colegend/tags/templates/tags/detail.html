@@ -1,0 +1,15 @@
+{% extends 'tags/base.html' %}
+{% load icons buttons tags_tags %}
+
+{% block title %}Tag{% endblock %}
+
+{% block page_controls %}
+    {% button 'update' url=tag.get_update_url %}
+    <div class="pull-right">
+        {% button 'delete' url=tag.get_delete_url %}
+    </div>
+{% endblock %}
+
+{% block content %}
+    {{ tag }}
+{% endblock %}

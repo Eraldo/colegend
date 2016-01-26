@@ -3,8 +3,13 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
 
+from colegend.tags.models import Tag
+
 
 class TimeStampedBase(models.Model):
+    """
+    Adds created and last modified fields to a model.
+    """
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
@@ -14,9 +19,8 @@ class TimeStampedBase(models.Model):
 
 class OwnedCheckMixin(object):
     """
-    Adds the ability to check ownership.
+    Adds the ability to check ownership to a model.
     """
-
     def owned_by(self, user):
         if user == self.owner:
             return True
@@ -25,6 +29,9 @@ class OwnedCheckMixin(object):
 
 
 class OwnedBase(OwnedCheckMixin, models.Model):
+    """
+    Adds a owner (user) field to the model. 1-*
+    """
     owner = models.ForeignKey(settings.AUTH_USER_MODEL)
 
     class Meta:
@@ -32,6 +39,9 @@ class OwnedBase(OwnedCheckMixin, models.Model):
 
 
 class SingleOwnedBase(OwnedCheckMixin, models.Model):
+    """
+    Adds a owner (user) field to the model. 1-1
+    """
     owner = models.OneToOneField(settings.AUTH_USER_MODEL)
 
     class Meta:
@@ -39,15 +49,19 @@ class SingleOwnedBase(OwnedCheckMixin, models.Model):
 
 
 class AutoOwnedBase(OwnedCheckMixin, models.Model):
+    """
+    Adds a owner (user) field to the model. 1-1
+    The inheriting model is automatically created on retrieval.
+    """
     owner = AutoOneToOneField(settings.AUTH_USER_MODEL, primary_key=True)
 
     class Meta:
         abstract = True
 
 
-class OwnedQuerySet(object):
+class OwnedQuerySet(models.QuerySet):
     """
-    Enable to the queryset to be filtered by owning users.
+    Enable the queryset to be filtered by owning users.
     """
 
     def owned_by(self, user):
@@ -91,3 +105,13 @@ class AutoUrlsMixin(object):
 
     def get_absolute_url(self):
         return self.get_detail_url()
+
+
+class TaggableBase(models.Model):
+    """
+    Adds a tags relation to the model. *-*
+    """
+    tags = models.ManyToManyField(Tag, blank=True)
+
+    class Meta:
+        abstract = True
