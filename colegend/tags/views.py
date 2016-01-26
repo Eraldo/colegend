@@ -34,11 +34,17 @@ class TagUpdateView(LoginRequiredMixin, OwnedUpdateView):
     model = Tag
     form_class = TagForm
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # The context variable 'tag' conflicts with the crispy form template
+        # which also uses the variable 'tag' to insert 'html-div-tags'.
+        context.pop('tag')
+        return context
 
 class TagDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'tags/delete.html'
     model = Tag
 
     def get_success_url(self):
-        object = self.get_object()
-        return object.index_url()
+        tag = self.get_object()
+        return tag.index_url()
