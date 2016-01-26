@@ -1,13 +1,11 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Field
-from django import forms
 
+from colegend.core.forms import OwnedModelForm
 from .models import Tag
 
 
-# class TagForm(OwnedModelForm):
-class TagForm(forms.ModelForm):
-
+class TagForm(OwnedModelForm):
     class Meta:
         model = Tag
         fields = [
@@ -28,10 +26,3 @@ class TagForm(forms.ModelForm):
             Field('category'),
         )
         self.helper.add_input(Submit('save', 'Save'))
-
-    def clean_owner(self):
-        owner = self.cleaned_data.get('owner')
-        if not owner == self.owner:
-            message = 'You need to be the owner.'
-            self.add_error(None, message)
-        return owner
