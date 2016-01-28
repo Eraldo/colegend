@@ -31,6 +31,9 @@ class DayEntryCreateView(LoginRequiredMixin, CreateView):
     def get_initial(self):
         initial = super().get_initial()
         initial['journal'] = self.request.user.journal
+        date = self.request.GET.get('date')
+        if date:
+            initial['date'] = date
         return initial
 
 

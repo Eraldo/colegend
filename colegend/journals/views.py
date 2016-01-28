@@ -101,5 +101,6 @@ class JournalDayView(LoginRequiredMixin, TemplateView):
         # previous and next button context
         context['next_url'] = self.get_next_url()
         context['previous_url'] = self.get_previous_url()
-        context['create_url'] = reverse('dayentries:create')
+        create_url = reverse('dayentries:create')
+        context['create_url'] = '{}?date={}'.format(create_url, date)
         return context
