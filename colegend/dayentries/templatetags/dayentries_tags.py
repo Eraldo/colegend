@@ -21,19 +21,21 @@ def dayentry_link(context, dayentry=None, **kwargs):
 @register.simple_tag(takes_context=True)
 def dayentry_card(context, dayentry=None, **kwargs):
     dayentry = dayentry or context.get('dayentry')
-    context = {
-        'id': dayentry.id,
-        'date': dayentry.date,
-        'weekday': 'Monday',
-        'locations': dayentry.locations,
-        'content': render(dayentry.content),
-        'detail_url': dayentry.detail_url,
-        'update_url': dayentry.update_url,
-        'delete_url': dayentry.delete_url,
-        'tags': ['tag1', 'tag2'],
-        'keywords': dayentry.keywords,
-        'tags': dayentry.tags.all(),
-    }
+    if dayentry:
+        context = {
+            'id': dayentry.id,
+            'date': dayentry.date,
+            'weekday': dayentry.date.strftime('%a'),
+            'weekday_number': dayentry.date.isoweekday(),
+            'locations': dayentry.locations,
+            'content': render(dayentry.content),
+            'actions': True,
+            'detail_url': dayentry.detail_url,
+            'update_url': dayentry.update_url,
+            'delete_url': dayentry.delete_url,
+            'keywords': dayentry.keywords,
+            'tags': dayentry.tags.all(),
+        }
     context.update(kwargs)
     template = 'dayentries/widgets/card.html'
     return render_to_string(template, context=context)

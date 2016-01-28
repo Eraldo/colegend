@@ -9,6 +9,7 @@ class DayEntryForm(forms.ModelForm):
     class Meta:
         model = DayEntry
         fields = [
+            'journal',
             'date',
             'locations',
             'content',
@@ -17,9 +18,11 @@ class DayEntryForm(forms.ModelForm):
         ]
 
     def __init__(self, *args, **kwargs):
+        self.owner = kwargs.pop('journal', None)
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
+            Field('journal', type='hidden'),
             Field('date'),
             Field('locations'),
             Field('content'),

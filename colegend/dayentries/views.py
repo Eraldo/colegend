@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.urlresolvers import reverse
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, RedirectView
 
 from .models import DayEntry
@@ -22,6 +23,16 @@ class DayEntryCreateView(LoginRequiredMixin, CreateView):
     model = DayEntry
     form_class = DayEntryForm
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['journal'] = self.request.user.journal
+        return kwargs
+
+    def get_initial(self):
+        initial = super().get_initial()
+        initial['journal'] = self.request.user.journal
+        return initial
+
 
 class DayEntryDetailView(LoginRequiredMixin, DetailView):
     template_name = 'dayentries/detail.html'
@@ -33,7 +44,21 @@ class DayEntryUpdateView(LoginRequiredMixin, UpdateView):
     model = DayEntry
     form_class = DayEntryForm
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['journal'] = self.request.user.journal
+        return kwargs
+
+    def get_initial(self):
+        initial = super().get_initial()
+        initial['journal'] = self.request.user.journal
+        return initial
+
 
 class DayEntryDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'dayentries/delete.html'
     model = DayEntry
+
+    def get_success_url(self):
+        dayentry = self.get_object()
+        return reverse('journals:day', kwargs={'date': dayentry.date})

@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
@@ -40,3 +41,7 @@ class DayEntry(AutoUrlsMixin, TaggableBase, TimeStampedBase):
 
     def __str__(self):
         return str(self.date)
+
+    @property
+    def detail_url(self):
+        return reverse('journals:day', kwargs={'date': self.date})

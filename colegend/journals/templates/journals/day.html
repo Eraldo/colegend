@@ -5,8 +5,8 @@
 
 {% block page_controls %}
     <div class="btn-group" role="group" aria-label="Basic example">
-        {% button 'previous' url='#' kind='secondary btn-sm' icon='previous' %}
-        {% button 'next' url='#' kind='secondary btn-sm' icon='next' %}
+        {% button 'previous' url=previous_url kind='secondary btn-sm' icon='previous' %}
+        {% button 'next' url=next_url kind='secondary btn-sm' icon='next' %}
     </div>
     <div class="btn-group" role="group">
         <button id="date-dropdown" type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown"
@@ -45,9 +45,7 @@
 {% block content_container %}
     <div class="row">
         <div class="col-md-8">
-            {% if dayentry %}
-                {% dayentry_card %}
-            {% endif %}
+            {% dayentry_card %}
         </div>
         <div class="col-md-4">
             <div class="content card bg-content">

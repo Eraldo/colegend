@@ -1,5 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
+from django.utils import timezone
 from django.utils.dateparse import parse_date
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, RedirectView, TemplateView
 
@@ -14,7 +16,7 @@ class JournalIndexView(RedirectView):
     query_string = True
 
     def get_redirect_url(self, *args, **kwargs):
-        self.url = self.request.user.journal.get_absolute_url()
+        self.url = reverse('journals:day', kwargs={'date': timezone.now().date()})
         return super().get_redirect_url(*args, **kwargs)
 
 
@@ -56,15 +58,13 @@ class JournalDeleteView(LoginRequiredMixin, RolesRequiredMixin, DeleteView):
 class JournalDayView(LoginRequiredMixin, TemplateView):
     template_name = 'journals/day.html'
 
-    def get(self, request, *args, **kwargs):
-        date = self.request.GET.get('date')
-        if date:
-            return redirect('journals:day', date)
-        return super().get(request, *args, **kwargs)
+    def get_date(self):
+        date_string = self.kwargs.get('date')
+        if date_string:
+            return parse_date(date_string)
 
     def get_entry(self, date):
         if date:
-            date = parse_date(date)
             user = self.request.user
             try:
                 return user.journal.dayentries.get(date=date)
@@ -72,11 +72,34 @@ class JournalDayView(LoginRequiredMixin, TemplateView):
                 return None
 
     def get_object(self, queryset=None):
-        # Check if date is provided.. if so use it..
-        date = self.kwargs.get('date')
+        date = self.get_date()
         return self.get_entry(date)
+
+    def get(self, request, *args, **kwargs):
+        date = self.request.GET.get('date')
+        if date:
+            return redirect('journals:day', date)
+        return super().get(request, *args, **kwargs)
+
+    def get_next_url(self):
+        date = self.get_date()
+        next_date = date + timezone.timedelta(days=1)
+        return reverse('journals:day', kwargs={'date': next_date})
+
+    def get_previous_url(self):
+        date = self.get_date()
+        previous_date = date - timezone.timedelta(days=1)
+        return reverse('journals:day', kwargs={'date': previous_date})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['dayentry'] = self.get_object()
+        dayentry = self.get_object()
+        context['dayentry'] = dayentry
+        date = self.get_date()
+        context['weekday'] = date.strftime('%a')
+        context['weekday_number'] = date.isoweekday()
+        # previous and next button context
+        context['next_url'] = self.get_next_url()
+        context['previous_url'] = self.get_previous_url()
+        context['create_url'] = reverse('dayentries:create')
         return context
