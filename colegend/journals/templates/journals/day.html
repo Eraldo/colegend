@@ -1,0 +1,82 @@
+{% extends 'journals/base.html' %}
+{% load icons buttons dayentries_tags %}
+
+{% block title %}Day{% endblock %}
+
+{% block page_controls %}
+    <div class="btn-group" role="group" aria-label="Basic example">
+        {% button 'previous' url='#' kind='secondary btn-sm' icon='previous' %}
+        {% button 'next' url='#' kind='secondary btn-sm' icon='next' %}
+    </div>
+    <div class="btn-group" role="group">
+        <button id="date-dropdown" type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+            {% icon 'date' %} Date
+        </button>
+        <div class="dropdown-menu" aria-labelledby="date-dropdown">
+            <form method="get" class="form-inline dropdown-item">
+                <div class="form-group">
+                    <input name="date" value="{{ date }}" type="text" class="form-control form-control-sm"
+                           style="max-width: 100px">
+                    <button type="submit" class="btn btn-primary btn-sm">Go</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="btn-group" role="group">
+        <button id="btnGroupDrop1" type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+            {% icon 'scope' %} Scope
+        </button>
+        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+            <a class="dropdown-item" href="#">Day</a>
+            <a class="dropdown-item" href="#">Week</a>
+            <a class="dropdown-item" href="#">Month</a>
+            <a class="dropdown-item" href="#">Half-Year</a>
+            <a class="dropdown-item" href="#">Year</a>
+        </div>
+    </div>
+
+    <div class="pull-right">
+        {% button 'import' url='#' kind='secondary btn-sm' icon='import' %}
+    </div>
+{% endblock %}
+
+{% block content_container %}
+    <div class="row">
+        <div class="col-md-8">
+            {% if dayentry %}
+                {% dayentry_card %}
+            {% endif %}
+        </div>
+        <div class="col-md-4">
+            <div class="content card bg-content">
+                <div class="card-header">
+                    Focus
+                </div>
+                <div class="card-block">
+                    1. TODO: Task 1<br>
+                    2. TODO: Task 1
+                </div>
+            </div>
+            <div class="content card bg-content">
+                <div class="card-header">
+                    Scheduled
+                </div>
+                <div class="card-block">
+                    2016-04-01 TODO: Task 1<br>
+                    2016-04-04 TODO: Task 1
+                </div>
+            </div>
+            <div class="content card bg-content">
+                <div class="card-header">
+                    Deadlines
+                </div>
+                <div class="card-block">
+                    2016-06-01 TODO: Task 1<br>
+                    2016-06-04 TODO: Task 1
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

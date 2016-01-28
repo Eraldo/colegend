@@ -48,6 +48,10 @@ icon_dict = {
     'story': 'magic',
     'tool': 'gavel',
 
+    'date': 'calendar',
+    'deadline': 'calendar-o',
+
+
     'address': 'map-marker',
     'occupation': 'briefcase',
     'phone': 'phone',
