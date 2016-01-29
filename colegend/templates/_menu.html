@@ -28,10 +28,18 @@
                             </a>
 
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item disabled" href="#">
-                                {% icon 'locked' %}
-                                Journal
-                            </a>
+
+                            {% if journal %}
+                                <a id="menu-button-journal" class="dropdown-item" href="{% url 'journals:index' %}">
+                                    Journal
+                                </a>
+                            {% else %}
+                                <a class="dropdown-item disabled" href="#">
+                                    {% icon 'locked' %}
+                                    Journal
+                                </a>
+                            {% endif %}
+
                             <a class="dropdown-item disabled" href="#">
                                 {% icon 'locked' %}
                                 Manager

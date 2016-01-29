@@ -12,6 +12,7 @@ def menu(context, user=None):
         user = context.get('user')
     if user.is_authenticated():
         template = '_menu.html'
+        context['journal'] = user.has_checkpoint('storytime')
         context['cloud_guide'] = user.has_checkpoint('cloud guide card')
         context['dream_team'] = False
         context['chat'] = user.has_checkpoint('chat card')
