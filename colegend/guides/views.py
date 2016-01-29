@@ -79,9 +79,10 @@ class GuideView(LoginRequiredMixin, DetailView):
         request = self.request
         user = request.user
         connected = user.connected
+        # TODO: update to card check
         if not connected.guide_introduction:
             return redirect('guides:introduction')
-        if not connected.guide:
+        if not user.has_checkpoint('cloud guide'):
             relation = self.get_object()
             if relation.done:
                 complete_card(request, 'cloud guide')
