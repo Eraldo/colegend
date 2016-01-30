@@ -10,7 +10,7 @@
     - Page title: "coLegend - About"
 
     # She looks for the name of her friend who happens to be part of the team.
-    - Find text: "Corinna"
+    - Find text: "Core Team"
     # Now she is certain, she hit the right page.
 
     # Now she wants to know more and finds a section giving 7 reasons to join coLegend.
