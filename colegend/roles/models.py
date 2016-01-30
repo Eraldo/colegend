@@ -28,6 +28,7 @@ class RoleQuerySet(models.QuerySet):
 class Role(models.Model):
     name = models.CharField(_('name'), max_length=255, unique=True)
     nickname = models.CharField(_('nickname'), max_length=255, blank=True)
+    item = models.CharField(_('item'), max_length=255, blank=True)
     description = models.TextField(blank=True)
 
     objects = RoleQuerySet.as_manager()

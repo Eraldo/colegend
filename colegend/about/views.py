@@ -42,7 +42,7 @@ class AboutView(TemplateView):
             },
 
         ]
-        team_members = Role.objects.get(name__iexact='core member').users.all()
+        team_members = Role.objects.get(name__iexact='core manager').users.all()
         member_data = []
         anonymous_image = static('legends/images/anonymous.png')
         for user in team_members:
