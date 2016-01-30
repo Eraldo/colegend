@@ -25,8 +25,8 @@ initial_roles_data = [
     },
     {
         'name': 'Core Manager',
-        'nickname': 'Insider',
-        'item': 'mantle',
+        'nickname': 'Architect',
+        'item': 'compasses',
         'description': '',
     },
     {
