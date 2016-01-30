@@ -10,7 +10,7 @@ __author__ = 'Eraldo Energy'
 def menu(context, user=None):
     if not user:
         user = context.get('user')
-    if user.is_authenticated():
+    if user and user.is_authenticated():
         template = '_menu.html'
         context['journal'] = user.has_checkpoint('storytime')
         context['cloud_guide'] = user.has_checkpoint('cloud guide card')

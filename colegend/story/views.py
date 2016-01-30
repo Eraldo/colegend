@@ -144,7 +144,7 @@ class PrologueView(LoginRequiredMixin, TemplateView):
     def post(self, request, *args, **kwargs):
         if 'welcome-tree' in request.POST:
             user = request.user
-            user.checkpoints.create(name='prologue')
+            user.add_checkpoint(name='prologue')
             continuous = request.user.continuous
             continuous.chapter = 1
             continuous.save()
