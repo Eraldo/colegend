@@ -2,8 +2,23 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, RedirectView
 
-from .models import DayEntry
 from .forms import DayEntryForm
+from .models import DayEntry
+
+
+class DayEntryMixin(object):
+    """
+    Default attributes and methods for dayentry related views.
+    """
+    model = DayEntry
+    form_class = DayEntryForm
+
+    def get_form(self):
+        form = super().get_form()
+        # limit tag choices to owned tags
+        user = self.request.user
+        form.fields['tags'].queryset = user.tags.all()
+        return form
 
 
 class DayEntryIndexView(RedirectView):
@@ -12,16 +27,13 @@ class DayEntryIndexView(RedirectView):
     pattern_name = 'dayentries:list'
 
 
-class DayEntryListView(LoginRequiredMixin, ListView):
+class DayEntryListView(LoginRequiredMixin, DayEntryMixin, ListView):
     template_name = 'dayentries/list.html'
-    model = DayEntry
     context_object_name = 'dayentries'
 
 
-class DayEntryCreateView(LoginRequiredMixin, CreateView):
+class DayEntryCreateView(LoginRequiredMixin, DayEntryMixin, CreateView):
     template_name = 'dayentries/create.html'
-    model = DayEntry
-    form_class = DayEntryForm
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -37,30 +49,21 @@ class DayEntryCreateView(LoginRequiredMixin, CreateView):
         return initial
 
 
-class DayEntryDetailView(LoginRequiredMixin, DetailView):
+class DayEntryDetailView(LoginRequiredMixin, DayEntryMixin, DetailView):
     template_name = 'dayentries/detail.html'
-    model = DayEntry
 
 
-class DayEntryUpdateView(LoginRequiredMixin, UpdateView):
+class DayEntryUpdateView(LoginRequiredMixin, DayEntryMixin, UpdateView):
     template_name = 'dayentries/update.html'
-    model = DayEntry
-    form_class = DayEntryForm
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs['journal'] = self.request.user.journal
         return kwargs
 
-    def get_initial(self):
-        initial = super().get_initial()
-        initial['journal'] = self.request.user.journal
-        return initial
 
-
-class DayEntryDeleteView(LoginRequiredMixin, DeleteView):
+class DayEntryDeleteView(LoginRequiredMixin, DayEntryMixin, DeleteView):
     template_name = 'dayentries/delete.html'
-    model = DayEntry
 
     def get_success_url(self):
         dayentry = self.get_object()
