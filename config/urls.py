@@ -38,8 +38,8 @@ urlpatterns = [
                   url(r'^support/', include('colegend.support.urls', namespace='support')),
 
                   url(r'^conscious/', include('colegend.conscious.urls', namespace='conscious')),
-                  url(r'^journals/', include('colegend.journals.urls', namespace='journals')),
-                  url(r'^dayentries/', include('colegend.dayentries.urls', namespace='dayentries')),
+                  url(r'^journal/', include('colegend.journals.urls', namespace='journals')),
+                  url(r'^day/', include('colegend.dayentries.urls', namespace='dayentries')),
 
                   url(r'^connected/', include('colegend.connected.urls', namespace='connected')),
                   url(r'^outer-call/', include('colegend.outercall.urls', namespace='outer-call')),
@@ -48,8 +48,8 @@ urlpatterns = [
                   url(r'^guides/', include('colegend.guides.urls', namespace='guides')),
 
                   url(r'^continuous/', include('colegend.continuous.urls', namespace='continuous')),
-                  url(r'^games/', include('colegend.games.urls', namespace='games')),
-                  url(r'^cards/', include('colegend.cards.urls', namespace='cards')),
+                  url(r'^game/', include('colegend.games.urls', namespace='games')),
+                  url(r'^card/', include('colegend.cards.urls', namespace='cards')),
                   url(r'^story/', include('colegend.story.urls', namespace='story')),
 
                   url(r'^test/$', TestView.as_view(), name='test'),
