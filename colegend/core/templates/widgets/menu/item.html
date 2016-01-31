@@ -1,0 +1,16 @@
+{% load icons %}
+
+{% if locked %}
+    <a class="dropdown-item disabled" href="#">
+        {% icon 'locked' %}
+        {{ name }}
+    </a>
+{% else %}
+    <a id="menu-button-{{ name|slugify }}" class="dropdown-item" href="{{ url }}"{% if external %}
+       target="_blank"{% endif %}>
+        {% if icon %}
+            {% icon icon %}
+        {% endif %}
+        {{ name }}
+    </a>
+{% endif %}

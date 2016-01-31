@@ -1,0 +1,3 @@
+{% load icons %}
+{% if pattern %}{% url pattern as url %}{% endif %}
+<a href="{{ url }}" class="breadcrumb-link">{% icon icon %} {{ title|title }}</a>

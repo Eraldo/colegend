@@ -4,7 +4,7 @@
 
 {% block breadcrumbs %}
     {{ block.super }}
-    {% include '_breadcrumb.html' with pattern='games:index' icon='game' title='game' %}
+    {% include 'widgets/breadcrumb.html' with pattern='games:index' icon='game' title='game' %}
 {% endblock %}
 
 {% block body_class %}continuous-pattern{% endblock %}
