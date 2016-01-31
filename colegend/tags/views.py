@@ -1,9 +1,17 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, DeleteView, RedirectView
 
-from colegend.core.views import OwnedCreateView, OwnedUpdateView
+from colegend.core.views import OwnedCreateView, OwnedUpdateView, OwnedItemsMixin
 from .models import Tag
 from .forms import TagForm
+
+
+class TagMixin(OwnedItemsMixin):
+    """
+    Default attributes and methods for Tag related views.
+    """
+    model = Tag
+    form_class = TagForm
 
 
 class TagIndexView(RedirectView):
@@ -12,38 +20,26 @@ class TagIndexView(RedirectView):
     pattern_name = 'tags:list'
 
 
-class TagListView(LoginRequiredMixin, ListView):
+class TagListView(LoginRequiredMixin, TagMixin, ListView):
     template_name = 'tags/list.html'
-    model = Tag
     context_object_name = 'tags'
 
 
-class TagCreateView(LoginRequiredMixin, OwnedCreateView):
+class TagCreateView(LoginRequiredMixin, TagMixin, OwnedCreateView):
     template_name = 'tags/create.html'
-    model = Tag
-    form_class = TagForm
 
 
-class TagDetailView(LoginRequiredMixin, DetailView):
+class TagDetailView(LoginRequiredMixin, TagMixin, DetailView):
     template_name = 'tags/detail.html'
-    model = Tag
 
 
-class TagUpdateView(LoginRequiredMixin, OwnedUpdateView):
+class TagUpdateView(LoginRequiredMixin, TagMixin, OwnedUpdateView):
     template_name = 'tags/update.html'
-    model = Tag
-    form_class = TagForm
+    context_object_name = 'object'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        # The context variable 'tag' conflicts with the crispy form template
-        # which also uses the variable 'tag' to insert 'html-div-tags'.
-        context.pop('tag')
-        return context
 
-class TagDeleteView(LoginRequiredMixin, DeleteView):
+class TagDeleteView(LoginRequiredMixin, TagMixin, DeleteView):
     template_name = 'tags/delete.html'
-    model = Tag
 
     def get_success_url(self):
         tag = self.get_object()

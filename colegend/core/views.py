@@ -166,3 +166,13 @@ class OwnedUpdateView(UpdateView):
         kwargs = super().get_form_kwargs()
         kwargs['owner'] = self.request.user
         return kwargs
+
+
+class OwnedItemsMixin(object):
+    """
+    Only uses owned items as the the default queryset.
+    """
+
+    def get_queryset(self):
+        user = self.request.user
+        return super().get_queryset().owned_by(user)

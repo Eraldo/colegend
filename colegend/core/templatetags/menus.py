@@ -44,7 +44,8 @@ def menu(context, user=None):
                     },
                     {
                         'name': 'Tags',
-                        'locked': True,
+                        'locked': not user.has_checkpoint('storytime'),
+                        'url': reverse('tags:list'),
                     },
                 ],
             },

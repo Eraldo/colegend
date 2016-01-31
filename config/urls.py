@@ -28,7 +28,7 @@ urlpatterns = [
                   url(r'^accounts/', include('allauth.urls')),
                   url(r'^join/$', JoinView.as_view(), name='join'),
                   url(r'^roles/', include('colegend.roles.urls', namespace='roles')),
-                  url(r'^tags/', include('colegend.tags.urls', namespace='tags')),
+                  url(r'^tag/', include('colegend.tags.urls', namespace='tags')),
 
                   # Your stuff: custom urls includes go here
                   url(r'^$', RedirectView.as_view(url='home/', permanent=False), name='index'),
