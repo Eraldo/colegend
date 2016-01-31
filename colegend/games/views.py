@@ -29,7 +29,7 @@ class GameIndexView(LoginRequiredMixin, TemplateView):
             game = user.game
             card = game.draw()
             checkpoint_name = '{} card'.format(str(card.name).lower())
-            user.checkpoints.create(name=checkpoint_name)
+            user.add_checkpoint(name=checkpoint_name)
             return redirect('games:index')
 
 
