@@ -73,7 +73,7 @@ class User(AbstractUser):
         return self.checkpoints.contains_name(name)
 
     def add_checkpoint(self, name):
-        checkpoint, created = self.checkpoints.get_or_create(name=name)
+        checkpoint, created = Checkpoint.objects.get_or_create(name=name)
         self.checkpoints.add(checkpoint)
         return checkpoint
 
@@ -81,7 +81,7 @@ class User(AbstractUser):
         return self.roles.contains_name(name)
 
     def add_role(self, name):
-        role, created = self.roles.get_or_create(name=name)
+        role, created = Role.objects.get_or_create(name=name)
         self.roles.add(role)
         return role
 
