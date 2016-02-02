@@ -21,12 +21,12 @@ django-mailgun==0.8.0
 
 # Raven is the Sentry client
 # --------------------------
-raven
+raven==5.10.2
 
 # Newrelic agent for performance monitoring
 # -----------------------------------------
-newrelic
+newrelic==2.60.0.46
 
 # Opbeat agent for performance monitoring
 # -----------------------------------------
-opbeat
+opbeat==3.2.1
