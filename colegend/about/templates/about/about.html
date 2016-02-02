@@ -505,7 +505,7 @@
         </div>
         <div class="row">
             <div class="col-lg-4 wow zoomIn">
-                <ul class="pricing-plan list-unstyled selected">
+                <ul class="pricing-plan list-unstyled">
                     <li class="pricing-title">
                         Explorer
                     </li>
@@ -561,7 +561,7 @@
             </div>
 
             <div class="col-lg-4 wow zoomIn">
-                <ul class="pricing-plan list-unstyled selected">
+                <ul class="pricing-plan list-unstyled">
                     <li class="pricing-title">
                         Premium Legend
                     </li>
@@ -580,7 +580,7 @@
                         {% icon 'check' color='#1ab394' %} </i> <strong>Personal Coaching</strong>
                     </li>
                     <li>
-                        {% icon 'check' color='#1ab394' %}i </i> <strong>Priority Support</strong>
+                        {% icon 'check' color='#1ab394' %} </i> <strong>Priority Support</strong>
                     </li>
                     <li class="plan-action">
                         <a id="join-premium-legend" class="btn btn-info btn-lg"
@@ -588,19 +588,21 @@
                     </li>
                 </ul>
             </div>
-            <div class="row m-t-lg">
-                <div class="col-lg-8 col-lg-offset-2 text-center m-t-lg">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center" style="margin-top: 2rem; margin-bottom: 2rem;">
                     <p>* If you really can't afford 42€ / month then your account is <span class="navy">free</span> -
                         period.</p>
                 </div>
             </div>
-            <div class="col-lg-4 col-lg-offset-4 wow zoomIn">
+            <div class="col-lg-8 col-lg-offset-2 wow tada">
                 <ul class="pricing-plan list-unstyled selected">
                     <li class="pricing-title">
                         Supporter
                     </li>
                     <li class="pricing-desc">
-                        You like the project and want to support it?
+                        <div class="text-left">
+                            {% include 'widgets/speech.html' with npc='tiger' content='Like the Project?<br> Show us and we will make it even better.' full=True %}
+                        </div>
                     </li>
                     <li>
                         {% icon 'check' color='#1ab394' %} </i> Featured as a supporting "<b>Legend</b>"

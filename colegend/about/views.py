@@ -1,4 +1,5 @@
 from django.contrib.admin.templatetags.admin_static import static
+from django.template.loader import render_to_string
 from django.views.generic import TemplateView
 
 from colegend.roles.models import Role
@@ -71,4 +72,5 @@ class AboutView(TemplateView):
                 'roles': ['your chosen roles'],
             })
         context['team_members'] = member_data
+        # context['donation_content'] = render_to_string()
         return context

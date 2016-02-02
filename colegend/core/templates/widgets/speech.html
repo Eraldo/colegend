@@ -2,7 +2,7 @@
 
 {% if not direction == 'right' %}
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-{% if not full %}8{% else %}12{% endif %}">
             <div class="row">
                 <div class="col-sm-4 text-center">
                     {% npc npc|default:'coralina' %}
@@ -27,7 +27,7 @@
     </div>
 {% else %}
     <div class="row">
-        <div class="col-lg-8 col-lg-offset-4">
+        <div class="col-lg-{% if not full %}8{% else %}12{% endif %} col-lg-offset-{% if not full %}4{% else %}0{% endif %}">
             <div class="row">
                 <div class="col-sm-4 col-sm-push-8 text-center">
                     {% npc npc|default:'coralina' %}
