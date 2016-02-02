@@ -1,5 +1,6 @@
 from django.contrib.admin.templatetags.admin_static import static
 from django.template.loader import render_to_string
+from django.utils.safestring import mark_safe
 from django.views.generic import TemplateView
 
 from colegend.roles.models import Role
@@ -72,5 +73,7 @@ class AboutView(TemplateView):
                 'roles': ['your chosen roles'],
             })
         context['team_members'] = member_data
-        # context['donation_content'] = render_to_string()
+        donation_message = 'Like the Project?<br>Show us and we will make it even better:<br>'
+        donation_button = render_to_string('widgets/donate.html')
+        context['donation_content'] = mark_safe('{}<br>{}'.format(donation_message, donation_button))
         return context

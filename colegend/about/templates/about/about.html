@@ -601,14 +601,11 @@
                     </li>
                     <li class="pricing-desc">
                         <div class="text-left">
-                            {% include 'widgets/speech.html' with npc='tiger' content='Like the Project?<br> Show us and we will make it even better.' full=True %}
+                            {% include 'widgets/speech.html' with npc='tiger' content=donation_content full=True %}
                         </div>
                     </li>
                     <li>
                         {% icon 'check' color='#1ab394' %} </i> Featured as a supporting "<b>Legend</b>"
-                    </li>
-                    <li class="plan-action">
-                        {% include 'widgets/donate.html' %}
                     </li>
                 </ul>
             </div>
