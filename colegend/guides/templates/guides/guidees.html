@@ -1,5 +1,4 @@
 {% extends 'guides/base.html' %}
-
 {% load legends_tags %}
 
 {% block title %}My Guidees{% endblock %}
@@ -9,7 +8,7 @@
     <ul class="list-group">
         {% for relation in active_relations %}
             <li class="list-group-item">
-                {% legend relation.owner 'small' %}
+                {% legend relation.owner size='small' %}
                 <a href="{% url 'guides:manage' relation.owner.username %}" class="btn btn-primary btn-sm">
                     Checklist
                 </a>
@@ -23,10 +22,7 @@
     <ul class="list-group">
         {% for relation in passive_relations %}
             <li class="list-group-item">
-                {% legend relation.owner 'small' %}<br>
-                <a href="{% url 'guides:manage' relation.owner.username %}" class="btn btn-primary btn-sm">
-                    Checklist
-                </a>
+                {% legend relation.owner size='small' %}<br>
             </li>
             {% empty %}
             You do not have guided guidees yet.

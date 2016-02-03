@@ -6,18 +6,18 @@
 
 {% block page_links %}
     <a href="{% url 'guides:guide' %}" class="btn btn-link btn-sm">My Guide</a>
-    {% if user.connected.guide %}
+    {% if is_guide %}
         <a href="{% url 'guides:guidees' %}" class="btn btn-link btn-sm">My Guidees</a>
     {% endif %}
 {% endblock %}
 
 {% block content %}
-    {% if searching_relations %}
+    {% if is_guide %}
         <h4>Searching for a Guide</h4>
         <ul class="list-group">
             {% for relation in searching_relations %}
                 <li class="list-group-item">
-                    {% legend relation.owner 'small' %}<br>
+                    {% legend relation.owner size='small' %}<br>
                     <form action="{% url 'guides:guide-action' owner=relation.owner.username %}" method="post"
                           style="display: inline-block">{% csrf_token %}
                         <button id="guidee-guide-action" name="guide-action" type="submit"

@@ -31,6 +31,7 @@ class GuideListView(LoginRequiredMixin, ListView):
         relations = self.get_queryset()
         user = self.request.user
         if user.has_checkpoint('cloud guide'):
+            context['is_guide'] = relations.searching()
             context['searching_relations'] = relations.searching()
         context['active_relations'] = relations.active()
         context['passive_relations'] = relations.passive()
