@@ -41,3 +41,9 @@ class Role(models.Model):
             self.name,
             ' ({})'.format(self.nickname) if self.nickname else '',
         )
+
+    @property
+    def display_name(self):
+        if self.nickname:
+            return self.nickname
+        return self.name

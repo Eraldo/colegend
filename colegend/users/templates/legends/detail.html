@@ -88,13 +88,23 @@
         <div class="col-md-6">
             <div id="legend-badges" class="card bg-content">
                 <div class="card-header">
-                    Badges
+                    Roles
                 </div>
                 <div class="card-block">
-                    <img src="{% static 'legends/images/badges/Core_Team_Badge.png' %}" class="badge team"
-                         alt="badge team">
-                    <img src="{% static 'legends/images/badges/Cloud_Guide_Badge.png' %}" class="badge guide"
-                         alt="badge guide">
+                    <div class="pull-left">
+                        {% if core_manager %}
+                            <img src="{% static 'legends/images/badges/Core_Team_Badge.png' %}" class="badge team"
+                                 alt="badge team">
+                        {% endif %}
+                        {% if cloud_guide %}
+                            <img src="{% static 'legends/images/badges/Cloud_Guide_Badge.png' %}" class="badge guide"
+                                 alt="badge guide">
+                        {% endif %}
+                    </div>
+                    {% for role in roles %}
+                        {% include 'roles/widgets/tag.html' with name=role.display_name %}
+                    {% endfor %}
+                    <div class="clearfix"></div>
                 </div>
             </div>
 
