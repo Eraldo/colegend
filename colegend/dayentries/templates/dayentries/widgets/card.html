@@ -1,4 +1,4 @@
-{% load icons buttons markdown %}
+{% load icons buttons markdown tags_tags %}
 
 <div {% if id %}id="dayentry-widget-{{ id }}"{% endif %} class="dayentry-widget">
     <div class="content card bg-content">
@@ -23,7 +23,7 @@
             {% if tags %}
                 <div class="pull-right">
                     {% for tag in tags %}
-                        <span class="label label-default">{{ tag }}</span>
+                        {% tag %}
                     {% endfor %}
                 </div>
             {% endif %}
