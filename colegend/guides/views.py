@@ -14,10 +14,9 @@ class GuideIntroductionView(LoginRequiredMixin, TemplateView):
 
     def post(self, request, *args, **kwargs):
         if 'success' in request.POST:
-            # update connected path
+            # update checkpoint
             user = request.user
-            user.connected.guide_introduction = True
-            user.connected.save()
+            user.add_checkpoint('cloud guide introduction')
             # redirect to profile
             return redirect('guides:guide')
         return self.get(request, *args, **kwargs)
@@ -30,7 +29,9 @@ class GuideListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         relations = self.get_queryset()
-        context['searching_relations'] = relations.searching()
+        user = self.request.user
+        if user.has_checkpoint('cloud guide'):
+            context['searching_relations'] = relations.searching()
         context['active_relations'] = relations.active()
         context['passive_relations'] = relations.passive()
         return context
@@ -78,9 +79,7 @@ class GuideView(LoginRequiredMixin, DetailView):
     def get(self, request, *args, **kwargs):
         request = self.request
         user = request.user
-        connected = user.connected
-        # TODO: update to card check
-        if not connected.guide_introduction:
+        if not user.has_checkpoint('cloud guide introduction'):
             return redirect('guides:introduction')
         if not user.has_checkpoint('cloud guide'):
             relation = self.get_object()
@@ -133,4 +132,5 @@ class GuideActionView(LoginRequiredMixin, RedirectView):
         relation = GuideRelation.objects.get(owner__username=owner)
         relation.guide = user
         relation.save()
+        user.add_role('Guide')
         return relation.get_absolute_url()

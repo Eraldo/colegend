@@ -44,6 +44,6 @@ class Role(models.Model):
 
     @property
     def display_name(self):
-        if self.nickname:
-            return self.nickname
-        return self.name
+        name = self.name or self.nickname
+        item = self.item
+        return '{} {}'.format(name, item)
