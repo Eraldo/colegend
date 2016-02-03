@@ -7,24 +7,22 @@ register = template.Library()
 
 
 @register.simple_tag(takes_context=True)
-def legend(context, legend=None, url=None, size=None):
-    if not legend:
-        # if no legend is given take the legend from the context or else the user
-        legend = context.get('legend', context.get('user'))
+def legend(context, legend=None, size=None, **kwargs):
+    # if no legend is given take the legend from the context or else the user
+    legend = legend or context.get('legend', context.get('user'))
     if not legend.is_authenticated():
         # TODO: return anonymous / context avatar
         return ''
-    if not url:
-        url = legend.get_absolute_url()
+
+    url = kwargs.get('url', legend.get_absolute_url())
 
     context = {
         'name': legend,
         'url': url,
         'id': slugify(legend.username),
     }
-
+    context.update(kwargs)
     template = 'legends/widgets/link.html'
-
     if size:
         context['size'] = size
         if legend.avatar:
