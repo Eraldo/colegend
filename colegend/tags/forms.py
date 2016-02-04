@@ -21,7 +21,7 @@ class TagForm(OwnedModelForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Field('owner', type='hidden'),
-            Field('name'),
+            Field('name', autofocus=True),
             Field('description'),
             Field('category'),
         )

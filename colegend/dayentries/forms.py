@@ -28,7 +28,7 @@ class DayEntryForm(forms.ModelForm):
         self.helper.layout = Layout(
             Field('journal', type='hidden'),
             Field('date'),
-            Field('locations'),
+            Field('locations', autofocus=True),
             Field('content'),
             Field('keywords'),
             Field('tags'),
