@@ -16,6 +16,7 @@ ROOT_DIR = environ.Path(__file__) - 3  # (/a/b/myfile.py - 3 = /)
 APPS_DIR = ROOT_DIR.path('colegend')
 
 env = environ.Env()
+env.read_env(ROOT_DIR('.env'))
 
 # APP CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -45,6 +46,10 @@ THIRD_PARTY_APPS = (
     'django_gravatar',
     'orderable',
     'simplemde',
+
+    # django-autocomplte-light v3
+    'dal',
+    'dal_select2',
 )
 
 # Apps specific for this project go here.

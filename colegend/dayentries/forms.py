@@ -1,3 +1,4 @@
+from dal.autocomplete import ModelSelect2Multiple
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Field
 from django import forms
@@ -16,6 +17,9 @@ class DayEntryForm(forms.ModelForm):
             'keywords',
             'tags',
         ]
+        widgets = {
+            'tags': ModelSelect2Multiple(url='tags:autocomplete')
+        }
 
     def __init__(self, *args, **kwargs):
         self.owner = kwargs.pop('journal', None)
@@ -30,3 +34,4 @@ class DayEntryForm(forms.ModelForm):
             Field('tags'),
         )
         self.helper.add_input(Submit('save', 'Save'))
+        self.helper.include_media = False

@@ -4,4 +4,4 @@ from .models import DayEntry
 
 @admin.register(DayEntry)
 class DayEntryAdmin(admin.ModelAdmin):
-    pass
+    filter_horizontal = ['tags']

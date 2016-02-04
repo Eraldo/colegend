@@ -1,7 +1,7 @@
 from django.conf.urls import url
 
 from .views import TagIndexView, TagListView, TagCreateView, TagDetailView, TagUpdateView, \
-    TagDeleteView
+    TagDeleteView, TagAutocompleteView
 
 urlpatterns = [
     url(r'^$',
@@ -22,4 +22,10 @@ urlpatterns = [
     url(r'^(?P<pk>[0-9]+)/delete/$',
         TagDeleteView.as_view(),
         name='delete'),
+
+    url(
+        'autocomplete/$',
+        TagAutocompleteView.as_view(),
+        name='autocomplete',
+    ),
 ]
