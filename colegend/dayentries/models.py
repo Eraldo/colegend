@@ -14,6 +14,12 @@ class DayEntryQuerySet(models.QuerySet):
     def owned_by(self, user):
         return self.filter(journal__owner=user)
 
+    def previous_locations(self, date=None):
+        date = date or timezone.now().date()
+        previous_entry = self.filter(date__lt=date).first()
+        if previous_entry:
+            return previous_entry.locations
+
 
 class DayEntry(AutoUrlsMixin, TaggableBase, TimeStampedBase):
     """
@@ -34,6 +40,7 @@ class DayEntry(AutoUrlsMixin, TaggableBase, TimeStampedBase):
         verbose_name = _('Day Entry')
         verbose_name_plural = _('Dayentries')
         unique_together = ['journal', 'date']
+        ordering = ['-date']
 
     def __str__(self):
         return str(self.date)

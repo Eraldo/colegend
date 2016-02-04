@@ -1,5 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse
+from django.shortcuts import redirect
+from django.utils import timezone
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, RedirectView
 
 from .forms import DayEntryForm
@@ -43,9 +45,9 @@ class DayEntryCreateView(LoginRequiredMixin, DayEntryMixin, CreateView):
     def get_initial(self):
         initial = super().get_initial()
         initial['journal'] = self.request.user.journal
-        date = self.request.GET.get('date')
-        if date:
-            initial['date'] = date
+        date = self.request.GET.get('date', timezone.now().date())
+        initial['date'] = date
+        initial['locations'] = DayEntry.objects.previous_locations(date)
         return initial
 
 
