@@ -1,8 +1,10 @@
 from django.db import models
 from orderable.models import Orderable
 
+from colegend.core.models import AutoUrlsMixin
 
-class Category(models.Model):
+
+class Category(AutoUrlsMixin, models.Model):
     order = models.PositiveSmallIntegerField(unique=True)
     name = models.CharField(max_length=255)
 

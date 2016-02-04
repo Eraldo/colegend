@@ -1,0 +1,36 @@
+.animal-bg-1 {
+  background-image: url("../images/1.jpg");
+  background-size: cover;
+}
+
+.animal-bg-2 {
+  background-image: url("../images/2.jpg");
+  background-size: cover;
+}
+
+.animal-bg-3 {
+  background-image: url("../images/3.jpg");
+  background-size: cover;
+}
+
+.animal-bg-4 {
+  background-image: url("../images/4.jpg");
+  background-size: cover;
+}
+
+.animal-bg-5 {
+  background-image: url("../images/5.jpg");
+  background-size: cover;
+}
+
+.animal-bg-6 {
+  background-image: url("../images/6.jpg");
+  background-size: cover;
+}
+
+.animal-bg-7 {
+  background-image: url("../images/7.jpg");
+  background-size: cover;
+}
+
+/*# sourceMappingURL=categories.css.map */

@@ -1,0 +1,8 @@
+{% extends 'conscious/base.html' %}
+
+{% block title %}Categories{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% include 'widgets/breadcrumb.html' with pattern='categories:index' title='Categories' %}
+{% endblock %}

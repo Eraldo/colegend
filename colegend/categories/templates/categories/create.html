@@ -1,0 +1,13 @@
+{% extends 'categories/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Create Category{% endblock %}
+
+{% block content %}
+    {% crispy form %}
+{% endblock %}
+
+{% block extra_script %}
+    {{ block.super }}
+    {{ form.media }}
+{% endblock %}

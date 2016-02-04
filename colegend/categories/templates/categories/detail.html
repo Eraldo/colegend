@@ -1,0 +1,53 @@
+{% extends 'categories/base.html' %}
+{% load static icons buttons legends_tags %}
+
+{% block title %}Category{% endblock %}
+
+{% block extra_head %}
+    {{ block.super }}
+    <link href="{% static 'categories/css/categories.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body_class %}animal-bg-{{ category.order }}{% endblock %}
+
+{% block page_controls %}
+    {% if user.is_superuser %}
+        {% button 'update' url=category.update_url %}
+        <div class="pull-right">
+            {% button 'delete' url=category.delete_url %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block content_container %}
+    <div class="row">
+        <div class="col-md-4 text-center">
+            {% npc animal.name %}
+        </div>
+        <div class="col-md-8">
+            <div class="card bg-content">
+                <h4 class="card-header">
+                    #{{ category.order }}
+                </h4>
+                <div class="card-block">
+                    {% for topic, text in animal.favorites %}
+                        <p>
+                            <strong>
+                                {{ topic }}:
+                            </strong>
+                            {{ text }}
+                        </p>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="card bg-content">
+                <div class="card-header">
+                    Story
+                </div>
+                <div class="card-block">
+                    {{ story }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

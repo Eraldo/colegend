@@ -1,0 +1,16 @@
+{% extends 'categories/base.html' %}
+{% load icons buttons categories_tags %}
+
+{% block title %}Categories{% endblock %}
+
+{% block page_controls %}
+    {% if user.is_superuser %}
+        {% button 'create' pattern='categories:create' %}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% for category in categories %}
+        {% category_link %}<br>
+    {% endfor %}
+{% endblock %}

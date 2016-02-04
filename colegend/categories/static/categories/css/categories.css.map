@@ -1,0 +1,9 @@
+{
+  "version": 3,
+  "mappings": "AACA,YAAY;EACV,gBAAgB,EAAE,sBAAsB;EACxC,eAAe,EAAE,KAAK;;AACxB,YAAY;EACV,gBAAgB,EAAE,sBAAsB;EACxC,eAAe,EAAE,KAAK;;AACxB,YAAY;EACV,gBAAgB,EAAE,sBAAsB;EACxC,eAAe,EAAE,KAAK;;AACxB,YAAY;EACV,gBAAgB,EAAE,sBAAsB;EACxC,eAAe,EAAE,KAAK;;AACxB,YAAY;EACV,gBAAgB,EAAE,sBAAsB;EACxC,eAAe,EAAE,KAAK;;AACxB,YAAY;EACV,gBAAgB,EAAE,sBAAsB;EACxC,eAAe,EAAE,KAAK;;AACxB,YAAY;EACV,gBAAgB,EAAE,sBAAsB;EACxC,eAAe,EAAE,KAAK",
+  "sources": [
+    "../sass/categories.sass"
+  ],
+  "names": [],
+  "file": "categories.css"
+}
