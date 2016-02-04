@@ -58,6 +58,8 @@ urlpatterns = [
                   # Added robots.txt file for crawlers (google/etc)
                   url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
 
+                  url(r'^mockups/', include('colegend.mockups.urls')),
+
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

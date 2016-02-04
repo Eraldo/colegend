@@ -83,6 +83,8 @@ LOCAL_APPS = (
     'colegend.games',
     'colegend.cards',
     'colegend.story',
+
+    'colegend.mockups',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
