@@ -28,11 +28,7 @@ class DayEntry(AutoUrlsMixin, TaggableBase, TimeStampedBase):
         help_text="What were the most important experiences/topics on this day?")
     content = MarkdownField(blank=True)
 
-    def owned_by(self, user):
-        if self.journal.owned_by(user):
-            return True
-        else:
-            return False
+    objects = DayEntryQuerySet.as_manager()
 
     class Meta:
         verbose_name = _('Day Entry')
@@ -42,6 +38,11 @@ class DayEntry(AutoUrlsMixin, TaggableBase, TimeStampedBase):
     def __str__(self):
         return str(self.date)
 
+    def owned_by(self, user):
+        if self.journal.owned_by(user):
+            return True
+        else:
+            return False
     @property
     def detail_url(self):
         return reverse('journals:day', kwargs={'date': self.date})
