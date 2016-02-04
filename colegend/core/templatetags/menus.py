@@ -47,6 +47,11 @@ def menu(context, user=None):
                         'locked': not user.has_checkpoint('storytime'),
                         'url': reverse('tags:list'),
                     },
+                    {
+                        'name': 'Categories',
+                        'locked': False,
+                        'url': reverse('categories:index'),
+                    },
                 ],
             },
             {
