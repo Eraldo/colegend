@@ -50,7 +50,7 @@ icon_dict = {
 
     'date': 'calendar',
     'deadline': 'calendar-o',
-
+    'content': 'align-left',
 
     'address': 'map-marker',
     'occupation': 'briefcase',

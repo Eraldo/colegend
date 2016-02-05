@@ -17,8 +17,7 @@ django-annoying==0.8.5
 django-phonenumber-field==1.0.0
 django-orderable==4.0.1
 django-simplemde==0.0.5
-# django-autocomplete-light waiting for release of version 3
--e git+git://github.com/yourlabs/django-autocomplete-light.git@v3#egg=dal
+django-autocomplete-light==3.0.2
 
 # Markdown
 Markdown==2.6.5

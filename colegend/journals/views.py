@@ -91,11 +91,13 @@ class JournalDayView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
         dayentry = self.get_object()
         context['dayentry'] = dayentry
+
         date = self.get_date()
-        context['weekday'] = date.strftime('%a')
-        context['weekday_number'] = date.isoweekday()
+        context['date'] = date
+
         # previous and next button context
         context['next_url'] = self.get_next_url()
         context['previous_url'] = self.get_previous_url()
@@ -161,37 +163,17 @@ class JournalWeekView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        # Context for the this week's dayentries.
+        # Context for the this week's entries.
         dates = self.get_week_dates()
-        dayentries = []
-        today = timezone.now().date()
+        days = []
         for date in dates:
-            current = True if date == today else False
-            dayentry = self.get_entry(date)
-            if dayentry:
-                url = dayentry.detail_url
-                keywords = dayentry.keywords
-                tags = dayentry.tags.all()
-            else:
-                create_url = reverse('dayentries:create')
-                url = '{}?date={}'.format(create_url, date)
-                keywords = ''
-                tags = ''
-            entry_data = {
+            days.append({
                 'date': date,
-                'current': current,
-                'url': url,
-                'weekday_number': date.isoweekday(),
-                'weekday': date.strftime('%a'),
-                'keywords': keywords,
-                'tags': tags,
-            }
-            dayentries.append(entry_data)
-        context['dayentries'] = dayentries
+                'entry': self.get_entry(date)
+            })
+        context['days'] = days
 
         # Previous and next button context.
         context['next_url'] = self.get_next_url()
         context['previous_url'] = self.get_previous_url()
-        create_url = reverse('dayentries:create')
-        context['create_url'] = '{}?date={}'.format(create_url, date)
         return context

@@ -43,34 +43,11 @@
 {% block content_container %}
     <div class="row">
         <div class="col-md-8">
-            <div class="card bg-content">
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead class="card-header">
-                        <tr>
-                            <th>Date</th>
-                            <th>Keywords</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for dayentry in dayentries %}
-                            <tr onclick="location = '{{ dayentry.url }}'"
-                                {% if dayentry.current %}class="table-info"{% endif %} style="cursor:pointer">
-                                <th scope="row">
-                                    <span class="weekday-widget label label-pill bg-category-{{ dayentry.weekday_number }}">{{ dayentry.weekday }}</span>
-                                    <span style="white-space: nowrap">{{ dayentry.date }}</span>
-                                </th>
-                                <td>
-                                    <span class="pull-right">{% icon 'map-marker' color='grey' %}</span>
-                                    {% for tag in dayentry.tags %}{% tag %}{% endfor %}<br>
-                                    {{ dayentry.keywords }}
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            {#            <div class="card bg-content">#}
+            {% for day in days %}
+                {% dayentry_line day.entry date=day.date %}
+            {% endfor %}
+            {#            </div>#}
         </div>
         <div class="col-md-4">
             <div class="content card bg-content">
