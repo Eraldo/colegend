@@ -1,7 +1,7 @@
 from django.conf.urls import url, include
 
 from .views import JournalIndexView, JournalListView, JournalCreateView, JournalDetailView, JournalUpdateView, \
-    JournalDeleteView, JournalDayView
+    JournalDeleteView, JournalDayView, JournalWeekView
 
 urlpatterns = [
     url(r'^$',
@@ -26,4 +26,7 @@ urlpatterns = [
     url(r'^(?P<date>[0-9]{4}-[0-9]{2}-[0-9]{2})/$',
         JournalDayView.as_view(),
         name='day'),
+    url(r'^week/(?P<date>[0-9]{4}-[0-9]{2}-[0-9]{2})/$',
+        JournalWeekView.as_view(),
+        name='week'),
 ]

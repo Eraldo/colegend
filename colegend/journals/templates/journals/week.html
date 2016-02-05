@@ -1,7 +1,7 @@
 {% extends 'journals/base.html' %}
 {% load icons buttons dayentries_tags %}
 
-{% block title %}Day{% endblock %}
+{% block title %}Week{% endblock %}
 
 {% block page_controls %}
     <div class="btn-group" role="group" aria-label="Basic example">
@@ -29,21 +29,18 @@
             {% icon 'scope' %} Scope
         </button>
         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-            <a class="dropdown-item disabled" href="#">Day</a>
-            <a class="dropdown-item" href="{% url 'journals:week' date %}">Week</a>
+            <a class="dropdown-item" href="{% url 'journals:day' date %}">Day</a>
+            <a class="dropdown-item disabled" href="#">Week</a>
             <a class="dropdown-item disabled" href="#">Month</a>
             <a class="dropdown-item disabled" href="#">Half-Year</a>
             <a class="dropdown-item disabled" href="#">Year</a>
         </div>
     </div>
-
-    <div class="pull-right">
-        {% button 'import' url='#' kind='secondary btn-sm' icon='import' %}
-    </div>
 {% endblock %}
 
 {% block content_container %}
     <div class="row">
+        {{ monday }}
         <div class="col-md-8">
             {% dayentry_card %}
         </div>
@@ -53,8 +50,8 @@
                     Focus
                 </div>
                 <div class="card-block">
-                    1. STEP: Task 1<br>
-                    2. STEP: Task 1
+                    1. OUTCOME: Outcome 1<br>
+                    2. OUTCOME: Outcome 1
                 </div>
             </div>
             <div class="content card bg-content">
@@ -62,8 +59,8 @@
                     Scheduled
                 </div>
                 <div class="card-block">
-                    2016-04-01 STEP: Task 1<br>
-                    2016-04-04 STEP: Task 1
+                    2016-04-01 OUTCOME: Outcome 1<br>
+                    2016-04-04 OUTCOME: Outcome 1
                 </div>
             </div>
             <div class="content card bg-content">
@@ -71,8 +68,8 @@
                     Deadlines
                 </div>
                 <div class="card-block">
-                    2016-06-01 STEP: Task 1<br>
-                    2016-06-04 STEP: Task 1
+                    2016-06-01 OUTCOME: Outcome 1<br>
+                    2016-06-04 OUTCOME: Outcome 1
                 </div>
             </div>
         </div>

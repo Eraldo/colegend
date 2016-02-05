@@ -102,3 +102,67 @@ class JournalDayView(LoginRequiredMixin, TemplateView):
         create_url = reverse('dayentries:create')
         context['create_url'] = '{}?date={}'.format(create_url, date)
         return context
+
+
+class JournalWeekView(LoginRequiredMixin, TemplateView):
+    template_name = 'journals/week.html'
+
+    def get_date(self):
+        date_string = self.kwargs.get('date')
+        if date_string:
+            return parse_date(date_string)
+        else:
+            today = timezone.now().date()
+            return today
+
+    def get_entry(self, date=None):
+        date = date or self.get_date()
+        user = self.request.user
+        try:
+            return user.journal.dayentries.get(date=date)
+        except DayEntry.DoesNotExist:
+            return None
+
+    def get_object(self, queryset=None):
+        return self.get_entry()
+
+    def get(self, request, *args, **kwargs):
+        date = self.request.GET.get('date')
+        if date:
+            return redirect('journals:week', date)
+        return super().get(request, *args, **kwargs)
+
+    def get_next_url(self):
+        date = self.get_date()
+        next_date = date + timezone.timedelta(days=1)
+        return reverse('journals:week', kwargs={'date': next_date})
+
+    def get_previous_url(self):
+        date = self.get_date()
+        previous_date = date - timezone.timedelta(days=1)
+        return reverse('journals:week', kwargs={'date': previous_date})
+
+    def get_monday(self, date=None):
+        date = self.get_date()
+        monday = date - timezone.timedelta(days=date.weekday())
+        return monday
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        monday = self.get_monday(self.get_date())
+        context['monday'] = monday
+        dayentries = {
+        }
+
+        dayentry = self.get_object()
+        context['dayentry'] = dayentry
+        date = self.get_date()
+        context['weekday'] = date.strftime('%a')
+        context['weekday_number'] = date.isoweekday()
+        # previous and next button context
+        context['next_url'] = self.get_next_url()
+        context['previous_url'] = self.get_previous_url()
+        create_url = reverse('dayentries:create')
+        context['create_url'] = '{}?date={}'.format(create_url, date)
+        return context
