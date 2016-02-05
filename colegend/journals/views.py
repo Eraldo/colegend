@@ -134,12 +134,12 @@ class JournalWeekView(LoginRequiredMixin, TemplateView):
 
     def get_next_url(self):
         date = self.get_date()
-        next_date = date + timezone.timedelta(days=1)
+        next_date = date + timezone.timedelta(days=7)
         return reverse('journals:week', kwargs={'date': next_date})
 
     def get_previous_url(self):
         date = self.get_date()
-        previous_date = date - timezone.timedelta(days=1)
+        previous_date = date - timezone.timedelta(days=7)
         return reverse('journals:week', kwargs={'date': previous_date})
 
     def get_monday(self, date=None):
@@ -147,20 +147,49 @@ class JournalWeekView(LoginRequiredMixin, TemplateView):
         monday = date - timezone.timedelta(days=date.weekday())
         return monday
 
+    def get_week_dates(self):
+        one_day = timezone.timedelta(1)
+        monday = self.get_monday()
+        tuesday = monday + one_day
+        wednesday = tuesday + one_day
+        thursday = wednesday + one_day
+        friday = thursday + one_day
+        saturday = friday + one_day
+        sunday = saturday + one_day
+        return [monday, tuesday, wednesday, thursday, friday, saturday, sunday]
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        monday = self.get_monday(self.get_date())
-        context['monday'] = monday
-        dayentries = {
-        }
+        # Context for the this week's dayentries.
+        dates = self.get_week_dates()
+        dayentries = []
+        today = timezone.now().date()
+        for date in dates:
+            current = True if date == today else False
+            dayentry = self.get_entry(date)
+            if dayentry:
+                url = dayentry.detail_url
+                keywords = dayentry.keywords
+                tags = dayentry.tags.all()
+            else:
+                create_url = reverse('dayentries:create')
+                url = '{}?date={}'.format(create_url, date)
+                keywords = ''
+                tags = ''
+            entry_data = {
+                'date': date,
+                'current': current,
+                'url': url,
+                'weekday_number': date.isoweekday(),
+                'weekday': date.strftime('%a'),
+                'keywords': keywords,
+                'tags': tags,
+            }
+            dayentries.append(entry_data)
+        context['dayentries'] = dayentries
 
-        dayentry = self.get_object()
-        context['dayentry'] = dayentry
-        date = self.get_date()
-        context['weekday'] = date.strftime('%a')
-        context['weekday_number'] = date.isoweekday()
-        # previous and next button context
+        # Previous and next button context.
         context['next_url'] = self.get_next_url()
         context['previous_url'] = self.get_previous_url()
         create_url = reverse('dayentries:create')

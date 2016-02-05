@@ -1,5 +1,5 @@
 {% extends 'journals/base.html' %}
-{% load icons buttons dayentries_tags %}
+{% load icons buttons dayentries_tags tags_tags %}
 
 {% block title %}Week{% endblock %}
 
@@ -9,7 +9,8 @@
         {% button 'next' url=next_url kind='secondary btn-sm' icon='next' %}
     </div>
     <div class="btn-group" role="group">
-        <button id="date-dropdown" type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown"
+        <button id="date-dropdown" type="button" class="btn btn-secondary btn-sm dropdown-toggle"
+                data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
             {% icon 'date' %} Date
         </button>
@@ -24,7 +25,8 @@
         </div>
     </div>
     <div class="btn-group" role="group">
-        <button id="btnGroupDrop1" type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown"
+        <button id="btnGroupDrop1" type="button" class="btn btn-secondary btn-sm dropdown-toggle"
+                data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
             {% icon 'scope' %} Scope
         </button>
@@ -40,9 +42,35 @@
 
 {% block content_container %}
     <div class="row">
-        {{ monday }}
         <div class="col-md-8">
-            {% dayentry_card %}
+            <div class="card bg-content">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="card-header">
+                        <tr>
+                            <th>Date</th>
+                            <th>Keywords</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for dayentry in dayentries %}
+                            <tr onclick="location = '{{ dayentry.url }}'"
+                                {% if dayentry.current %}class="table-info"{% endif %} style="cursor:pointer">
+                                <th scope="row">
+                                    <span class="weekday-widget label label-pill bg-category-{{ dayentry.weekday_number }}">{{ dayentry.weekday }}</span>
+                                    <span style="white-space: nowrap">{{ dayentry.date }}</span>
+                                </th>
+                                <td>
+                                    <span class="pull-right">{% icon 'map-marker' color='grey' %}</span>
+                                    {% for tag in dayentry.tags %}{% tag %}{% endfor %}<br>
+                                    {{ dayentry.keywords }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
         <div class="col-md-4">
             <div class="content card bg-content">

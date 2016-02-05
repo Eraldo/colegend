@@ -26,7 +26,7 @@ class DayEntry(AutoUrlsMixin, TaggableBase, TimeStampedBase):
         max_length=255,
         blank=True,
         help_text="What were the most important experiences/topics on this day?")
-    content = MarkdownField(blank=True)
+    content = MarkdownField()
 
     objects = DayEntryQuerySet.as_manager()
 
