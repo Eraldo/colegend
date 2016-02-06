@@ -306,14 +306,3 @@ THUMBNAIL_ALIASES = {
         'large': {'size': (200, 200), 'crop': True},
     },
 }
-
-SIMPLEMDE_OPTIONS = {
-    'indentWithTabs': False,
-    'autosave': {
-        'enabled': True,
-        # TODO: Fix that workaround => issue: https://github.com/onepill/django-simplemde/issues/4
-        'uniqueId': "simplemde_autosave_id",
-        'delay': 60000,
-    },
-    'tabSize': 4,
-}

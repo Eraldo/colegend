@@ -173,18 +173,15 @@ body {
   height: 0;
   border-bottom: 10px solid transparent;
   border-top: 20px solid transparent;
-  border-left: 20px solid transparent;
-}
+  border-left: 20px solid transparent; }
 
 .speech-bubble-arrow-right::before {
-  border-left-color: #e5e5e5;
-}
+  border-left-color: #e5e5e5; }
 
 .speech-bubble-arrow-right::after {
   right: 1px;
   border-left-color: white;
-  z-index: 1;
-}
+  z-index: 1; }
 
 .legend-name {
   color: white; }
@@ -215,23 +212,21 @@ body {
 form.list-group-item:focus, form.list-group-item:hover {
   color: #555;
   text-decoration: none;
-  background-color: #f5f5f5;
-}
+  background-color: #f5f5f5; }
 
 form .editor-toolbar.fullscreen {
-  top: 56px;
-}
+  top: 56px; }
+
+form .editor-preview-active-side {
+  top: 106px; }
 
 form .CodeMirror-fullscreen {
-  top: 106px;
-}
+  top: 106px; }
 
 .weekday-widget {
-  font-family: "Lucida Console", Monaco, monospace;
-}
+  font-family: "Lucida Console", Monaco, monospace; }
 
 .card-item {
-  padding: 0.6rem;
-}
+  padding: 0.6rem; }
 
 /*# sourceMappingURL=colegend.css.map */
