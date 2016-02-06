@@ -128,7 +128,6 @@ DEFAULT_FROM_EMAIL = env('DJANGO_DEFAULT_FROM_EMAIL',
 EMAIL_SUBJECT_PREFIX = env("DJANGO_EMAIL_SUBJECT_PREFIX", default='[coLegend] ')
 SERVER_EMAIL = env('DJANGO_SERVER_EMAIL', default=DEFAULT_FROM_EMAIL)
 
-
 # MANAGER CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
@@ -147,7 +146,6 @@ DATABASES = {
     'default': env.db("DATABASE_URL", default="postgres:///colegend"),
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
-
 
 # GENERAL CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -291,7 +289,7 @@ ADMIN_URL = env('DJANGO_ADMIN_URL', default='admin')
 
 # SLACK IM
 # ------------------------------------------------------------------------------
-INSTALLED_APPS += ('django_slack', )
+INSTALLED_APPS += ('django_slack',)
 SLACK_TOKEN = 'xoxp-7590691991-7590881985-13615726690-065713fdcc'
 SLACK_CHANNEL = env("SLACK_CHANNEL", default='core')
 SLACK_BACKEND = 'django_slack.backends.Urllib2Backend'
@@ -307,4 +305,15 @@ THUMBNAIL_ALIASES = {
         'medium': {'size': (100, 100), 'crop': True},
         'large': {'size': (200, 200), 'crop': True},
     },
+}
+
+SIMPLEMDE_OPTIONS = {
+    'indentWithTabs': False,
+    'autosave': {
+        'enabled': True,
+        # TODO: Fix that workaround => issue: https://github.com/onepill/django-simplemde/issues/4
+        'uniqueId': "simplemde_autosave_id",
+        'delay': 60000,
+    },
+    'tabSize': 4,
 }
