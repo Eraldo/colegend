@@ -10,19 +10,6 @@ if (typeof jQuery !== 'undefined') {
 }
 
 var simplemdeOptions = {
-    autosave: {
-        enabled: true,
-        uniqueId: "simplemde_autosave_id",
-        delay: 6000
-    },
-    indentWithTabs: false,
-    previewRender: function renderer(text) {
-        // replace user links
-        text = text.replace(/@(\w+)/g, "<a href='/legends/$1' target='_blank'>$1</a>");
-        return SimpleMDE.prototype.markdown(text)
-    },
-    tabSize: 4,
-    //toolbarTips: true,
     //toolbar: [
     //    {
     //        name: "bold",
@@ -107,17 +94,22 @@ var simplemdeOptions = {
     //        title: "Markdown Guide"
     //    }
     //]
+    previewRender: function renderer(text) {
+        // replace user links
+        text = text.replace(/@(\w+)/g, "<a href='/legends/$1' target='_blank'>$1</a>");
+        return SimpleMDE.prototype.markdown(text)
+    }
 };
-
-var simplemde = null;
 
 if (!!simplemdeJQuery) {
     simplemdeJQuery(function () {
         simplemdeJQuery.each(simplemdeJQuery('.simplemde-box'), function (i, elem) {
-            var options = simplemdeOptions;
-            //var options = JSON.parse(simplemdeJQuery(elem).attr('data-simplemde-options'));
+            var simplemde_options = simplemdeOptions;
+            var django_simplemde_options = JSON.parse(simplemdeJQuery(elem).attr('data-simplemde-options'));
+            var options = simplemdeJQuery.extend(simplemde_options, django_simplemde_options);
             options['element'] = elem;
-            simplemde = new SimpleMDE(options);
+            var simplemde = new SimpleMDE(options);
+            elem.SimpleMDE = simplemde;
         });
     });
 }

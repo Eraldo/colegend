@@ -306,3 +306,12 @@ THUMBNAIL_ALIASES = {
         'large': {'size': (200, 200), 'crop': True},
     },
 }
+
+SIMPLEMDE_OPTIONS = {
+    'indentWithTabs': False,
+    'autosave': {
+        'enabled': True,
+        'delay': 60000,
+    },
+    'tabSize': 4,
+}
