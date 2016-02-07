@@ -1,0 +1,60 @@
+{% extends 'roles/base.html' %}
+{% load icons buttons markdown legends_tags %}
+
+{% block title %}Role{% endblock %}
+
+{% block page_controls %}
+    {% if manager %}
+        {% button 'update' url=role.update_url %}
+        <div class="pull-right">
+            {% button 'delete' url=role.delete_url %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block content_container %}
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card bg-content card-block">
+                <h1>
+                    {{ role }}
+                </h1>
+                {% if role.item %}
+                    <p>
+                        <u>Item</u>: {{ role.item }}
+                    </p>
+                {% endif %}
+                <p>
+                    {{ role.description|markdown }}
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4 ">
+            <div class="card bg-content card-block">
+                <h4>
+                    Energizers
+                </h4>
+                {% if energizers %}
+                    {% for legend in energizers %}
+                        {% legend size='small' %}
+                        {% legend size='small' %}
+                        {% legend size='small' %}
+                        {% legend size='small' %}
+                        {% legend size='small' %}
+                        {% legend size='small' %}
+                        {% legend size='small' %}
+                    {% endfor %}
+                    <p></p>
+                    {% contact_button name='Contact this group' %}
+                {% else %}
+                    <p>
+                        We are looking for legends to energize this role.
+                    </p>
+                    <p>
+                        {% contact_button %}
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

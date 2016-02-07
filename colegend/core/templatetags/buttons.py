@@ -35,3 +35,16 @@ def button(context, name, pattern=None, url=None, kind=None, icon=None, locked=F
     }
     template = 'widgets/button.html'
     return render_to_string(template, context=context)
+
+
+@register.simple_tag(takes_context=True)
+def contact_button(context, **kwargs):
+    context = {
+        'name': 'Connect',
+        'url': 'mailto:connect@colegend.org',
+        'kind': 'secondary btn-sm',
+        'icon': 'send',
+    }
+    context.update(kwargs)
+    template = 'widgets/button.html'
+    return render_to_string(template, context=context)

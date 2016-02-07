@@ -1,11 +1,26 @@
 from django.conf.urls import url
 
-# from .views import IndexView
+from .views import RoleIndexView, RoleListView, RoleCreateView, RoleDetailView, RoleUpdateView, \
+    RoleDeleteView
 
-__author__ = 'eraldo'
 
 urlpatterns = [
-    # url(r'^$',
-    #     IndexView.as_view(),
-    #     name='index'),
+    url(r'^$',
+        RoleIndexView.as_view(),
+        name='index'),
+    url(r'^list/$',
+        RoleListView.as_view(),
+        name='list'),
+    url(r'^create/$',
+        RoleCreateView.as_view(),
+        name='create'),
+    url(r'^(?P<pk>[0-9]+)/$',
+        RoleDetailView.as_view(),
+        name='detail'),
+    url(r'^(?P<pk>[0-9]+)/update/$',
+        RoleUpdateView.as_view(),
+        name='update'),
+    url(r'^(?P<pk>[0-9]+)/delete/$',
+        RoleDeleteView.as_view(),
+        name='delete'),
 ]

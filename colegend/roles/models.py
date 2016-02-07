@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from colegend.core.models import OwnedBase, AutoUrlsMixin
+
 
 class RoleQuerySet(models.QuerySet):
     def contains_name(self, name):
@@ -25,7 +27,7 @@ class RoleQuerySet(models.QuerySet):
         return True
 
 
-class Role(models.Model):
+class Role(AutoUrlsMixin, models.Model):
     name = models.CharField(_('name'), max_length=255, unique=True)
     nickname = models.CharField(_('nickname'), max_length=255, blank=True)
     item = models.CharField(_('item'), max_length=255, blank=True)

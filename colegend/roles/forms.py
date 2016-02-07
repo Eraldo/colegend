@@ -1,28 +1,27 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Field
+from django import forms
 
-from colegend.core.forms import OwnedModelForm
-from .models import Tag
+from .models import Role
 
 
-class TagForm(OwnedModelForm):
+class RoleForm(forms.ModelForm):
     class Meta:
-        model = Tag
+        model = Role
         fields = [
-            'owner',
             'name',
+            'nickname',
+            'item',
             'description',
-            'category',
         ]
 
     def __init__(self, *args, **kwargs):
-        self.owner = kwargs.pop('owner', None)
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
-            Field('owner', type='hidden'),
-            Field('name', autofocus=True),
+            Field('name'),
+            Field('nickname'),
+            Field('item'),
             Field('description'),
-            Field('category'),
         )
         self.helper.add_input(Submit('save', 'Save'))

@@ -1,0 +1,16 @@
+{% extends 'roles/base.html' %}
+{% load icons buttons roles_tags %}
+
+{% block title %}Roles{% endblock %}
+
+{% block page_controls %}
+    {% if manager %}
+        {% button 'create' pattern='roles:create' %}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% for role in roles %}
+        {% role_link %}<br>
+    {% endfor %}
+{% endblock %}
