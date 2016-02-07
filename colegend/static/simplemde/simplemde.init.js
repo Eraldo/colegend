@@ -21,7 +21,6 @@ var simplemdeOptions = {
         text = text.replace(/@(\w+)/g, "<a href='/legends/$1' target='_blank'>$1</a>");
         return SimpleMDE.prototype.markdown(text)
     },
-    showIcons: ["code", "table"],
     tabSize: 4,
     //toolbarTips: true,
     //toolbar: [
@@ -29,59 +28,51 @@ var simplemdeOptions = {
     //        name: "bold",
     //        action: SimpleMDE.toggleBold,
     //        className: "fa fa-bold",
-    //        title: "Bold",
-    //        default: true
+    //        title: "Bold"
     //    },
     //    {
     //        name: "italic",
     //        action: SimpleMDE.toggleItalic,
     //        className: "fa fa-italic",
-    //        title: "Italic",
-    //        default: true
+    //        title: "Italic"
     //    },
     //    {
     //        name: "heading",
     //        action: SimpleMDE.toggleHeadingSmaller,
     //        className: "fa fa-header",
-    //        title: "Heading",
-    //        default: true
+    //        title: "Heading"
     //    },
     //    "|", // Separator
     //    {
     //        name: "quote",
     //        action: SimpleMDE.toggleBlockquote,
     //        className: "fa fa-quote-left",
-    //        title: "Quote",
-    //        default: true
+    //        title: "Quote"
     //    },
     //    {
     //        name: "unordered-list",
     //        action: SimpleMDE.toggleUnorderedList,
     //        className: "fa fa-list-ul",
-    //        title: "Generic List",
-    //        default: true
+    //        title: "Generic List"
     //    },
     //    {
     //        name: "ordered-list",
     //        action: SimpleMDE.toggleOrderedList,
     //        className: "fa fa-list-ol",
-    //        title: "Numbered List",
-    //        default: true
+    //        title: "Numbered List"
     //    },
     //    "|", // Separator
     //    {
     //        name: "link",
     //        action: SimpleMDE.drawLink,
     //        className: "fa fa-link",
-    //        title: "Create Link",
-    //        default: true
+    //        title: "Create Link"
     //    },
     //    {
     //        name: "image",
     //        action: SimpleMDE.drawImage,
     //        className: "fa fa-picture-o",
-    //        title: "Insert Image",
-    //        default: true
+    //        title: "Insert Image"
     //    },
     //    {
     //        name: "table",
@@ -94,32 +85,28 @@ var simplemdeOptions = {
     //        name: "preview",
     //        action: SimpleMDE.togglePreview,
     //        className: "fa fa-eye no-disable",
-    //        title: "Toggle Preview",
-    //        default: true
+    //        title: "Toggle Preview"
     //    },
     //    {
     //        name: "side-by-side",
     //        action: SimpleMDE.toggleSideBySide,
     //        className: "fa fa-columns no-disable no-mobile",
-    //        title: "Toggle Side by Side",
-    //        default: true
+    //        title: "Toggle Side by Side"
     //    },
     //    {
     //        name: "fullscreen",
     //        action: SimpleMDE.toggleFullScreen,
     //        className: "fa fa-arrows-alt no-disable no-mobile",
-    //        title: "Toggle Fullscreen",
-    //        default: true
+    //        title: "Toggle Fullscreen"
     //    },
     //    "|", // Separator
     //    {
     //        name: "guide",
     //        action: "http://nextstepwebs.github.io/simplemde-markdown-editor/markdown-guide",
     //        className: "fa fa-question-circle",
-    //        title: "Markdown Guide",
-    //        default: true
-    //    },
-    //],
+    //        title: "Markdown Guide"
+    //    }
+    //]
 };
 
 var simplemde = null;
