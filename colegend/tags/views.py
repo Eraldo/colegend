@@ -52,14 +52,3 @@ class TagAutocompleteView(LoginRequiredMixin, TagMixin, Select2QuerySetView):
     """
     A django view providing autocomplete data.
     """
-    # def get_queryset(self):
-    #     user = self.request.user
-    #     # Don't forget to filter out results depending on the visitor !
-    #     if not user.is_authenticated():
-    #         return Tag.objects.none()
-    #
-    #     qs = Tag.objects.owned_by(user)
-    #     if self.q:
-    #         qs = qs.filter(name__icontains=self.q)
-    #
-    #     return self.q

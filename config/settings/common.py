@@ -78,6 +78,7 @@ LOCAL_APPS = (
     'colegend.innercall',
     'colegend.biography',
     'colegend.guides',
+    'colegend.events',
 
     'colegend.continuous',
     'colegend.games',

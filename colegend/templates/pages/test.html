@@ -16,6 +16,12 @@
 
 {% block content %}
 
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <div class="g-hangout"
+         data-render="createhangout"
+         data-widget_size="72">
+    </div>
+
     {% legend request.user size='medium' %}
 
     <div id="typed-strings" class="invisible">

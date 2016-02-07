@@ -103,6 +103,10 @@ def menu(context, user=None):
                         'external': True,
                     },
                     {
+                        'name': 'Events',
+                        'url': reverse('events:index'),
+                    },
+                    {
                         'name': 'Guidelines',
                         'locked': not user.has_checkpoint('guidelines card'),
                         'url': reverse('connected:guidelines'),
