@@ -1,1 +1,3 @@
-<span class="label label-pill label-default">{{ name }}</span>
+<a class="label label-pill label-default" {% if url %} href="{{ url }}"{% endif %}>
+    {{ name }}
+</a>

@@ -102,7 +102,7 @@
                         {% endif %}
                     </div>
                     {% for role in roles %}
-                        {% include 'roles/widgets/tag.html' with name=role.display_name %}
+                        {% include 'roles/widgets/tag.html' with name=role.display_name url=role.detail_url %}
                     {% endfor %}
                     <div class="clearfix"></div>
                 </div>
