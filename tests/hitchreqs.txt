@@ -1,7 +1,7 @@
 appnope==0.1.0
 click==6.2
 colorama==0.3.6
-decorator==4.0.7
+decorator==4.0.6
 docopt==0.6.2
 faketime==0.9.6.3
 gnureadline==6.3.3
