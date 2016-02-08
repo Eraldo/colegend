@@ -61,4 +61,4 @@ class RoleDeleteView(LoginRequiredMixin, RolesRequiredMixin, RoleMixin, DeleteVi
 
     def get_success_url(self):
         role = self.get_object()
-        return role.index_url()
+        return role.index_url

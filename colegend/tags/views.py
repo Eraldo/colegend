@@ -45,7 +45,7 @@ class TagDeleteView(LoginRequiredMixin, TagMixin, DeleteView):
 
     def get_success_url(self):
         tag = self.get_object()
-        return tag.index_url()
+        return tag.index_url
 
 
 class TagAutocompleteView(LoginRequiredMixin, TagMixin, Select2QuerySetView):

@@ -50,7 +50,7 @@ class JournalDeleteView(LoginRequiredMixin, RolesRequiredMixin, JournalMixin, De
 
     def get_success_url(self):
         object = self.get_object()
-        return object.index_url()
+        return object.index_url
 
 
 class JournalDayView(LoginRequiredMixin, TemplateView):
