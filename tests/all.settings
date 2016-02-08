@@ -18,7 +18,7 @@ environment_variables:
 window_size:
   width: 1024
   height: 768
-python_version: 3.5.0
+python_version: 3.5.1
 environment:
   - approved_platforms:
     - linux

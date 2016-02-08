@@ -110,7 +110,6 @@ def menu(context, user=None):
                         'name': 'Guidelines',
                         'locked': not user.has_checkpoint('guidelines card'),
                         'url': reverse('connected:guidelines'),
-                        'external': True,
                     },
                 ],
             },
