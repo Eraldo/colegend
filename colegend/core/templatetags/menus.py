@@ -49,8 +49,11 @@ def menu(context, user=None):
                     },
                     {
                         'name': 'Categories',
-                        'locked': False,
                         'url': reverse('categories:index'),
+                    },
+                    {
+                        'name': 'Roles',
+                        'url': reverse('roles:index'),
                     },
                 ],
             },
