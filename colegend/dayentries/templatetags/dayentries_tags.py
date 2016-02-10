@@ -75,5 +75,5 @@ def dayentry_line(context, dayentry=None, **kwargs):
             context['weekday'] = date.strftime('%a')
             context['weekday_number'] = date.isoweekday()
     context.update(kwargs)
-    template = 'dayentries/widgets/line.html'
+    template = 'dayentries/widgets/item.html'
     return render_to_string(template, context=context)

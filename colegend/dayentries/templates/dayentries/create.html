@@ -1,5 +1,5 @@
 {% extends 'dayentries/base.html' %}
-{% load crispy_forms_tags %}
+{% load static crispy_forms_tags %}
 
 {% block title %}Create Day Entry{% endblock %}
 
@@ -7,7 +7,12 @@
     {% crispy form %}
 {% endblock %}
 
+{% block extra_head %}
+    {{ block.super }}
+    {{ form.media.css }}
+{% endblock %}
+
 {% block extra_script %}
     {{ block.super }}
-    {{ form.media }}
+    {{ form.media.js }}
 {% endblock %}

@@ -7,7 +7,12 @@
     {% crispy form %}
 {% endblock %}
 
+{% block extra_head %}
+    {{ block.super }}
+    {{ form.media.css }}
+{% endblock %}
+
 {% block extra_script %}
     {{ block.super }}
-    {{ form.media }}
+    {{ form.media.js }}
 {% endblock %}

@@ -1,0 +1,38 @@
+{% load icons buttons markdown tags_tags %}
+<div {% if id %}id="dayentry-widget-{{ id }}"{% endif %} class="dayentry-widget"
+     ondblclick="location='{% if detail_url %}{{ detail_url }}{% else %}{{ create_url }}{% endif %}'">
+    <div class="card card-item bg-content">
+        {% if actions %}
+            <!-- Action dropdown -->
+            <div class="btn-group pull-right">
+                <a type="button" data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false">{% icon 'actions' fixed=True color='grey' %}</a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    {% button 'update' url=update_url kind='default dropdown-item' %}
+                    {% button 'delete' url=delete_url kind='default dropdown-item' %}
+                </div>
+            </div>
+        {% else %}
+            <a href="{{ create_url }}" class="pull-right">{% icon 'create' fixed=True color='grey' %}</a>
+        {% endif %}
+        <span class="weekday-widget label label-pill bg-category-{{ weekday_number }}">{{ weekday }}</span>
+        <strong>{{ date }}</strong>
+        {% if locations %}
+            <span>{% icon 'address' color='grey' %}{{ locations }}</span>
+        {% endif %}
+        {% if tags %}
+            <div class="pull-right">
+                {% for tag in tags %}
+                    {% tag %}
+                {% endfor %}
+            </div>
+        {% endif %}
+        <span class="clearfix"></span>
+        {{ keywords }}
+        {% if content %}
+            <div class="pull-right">
+                {% icon 'content' color='grey' %}
+            </div>
+        {% endif %}
+    </div>
+</div>

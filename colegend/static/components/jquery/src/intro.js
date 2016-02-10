@@ -5,7 +5,7 @@
  * Includes Sizzle.js
  * http://sizzlejs.com/
  *
- * Copyright 2005, 2014 jQuery Foundation, Inc. and other contributors
+ * Copyright jQuery Foundation and other contributors
  * Released under the MIT license
  * http://jquery.org/license
  *
@@ -35,8 +35,7 @@
 	}
 
 // Pass this if window is not defined yet
-}(typeof window !== "undefined" ? window : this, function( window, noGlobal ) {
-
+}(typeof window !== "undefined" ? window : this, function (window, noGlobal) {
 // Support: Firefox 18+
 // Can't be in strict mode, several libs including ASP.NET trace
 // the stack via arguments.caller.callee and Firefox dies if

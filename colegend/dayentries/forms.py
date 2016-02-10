@@ -18,7 +18,7 @@ class DayEntryForm(forms.ModelForm):
             'tags',
         ]
         widgets = {
-            'tags': ModelSelect2Multiple(url='tags:autocomplete')
+            'tags': ModelSelect2Multiple(url='tags:autocomplete'),
         }
 
     def __init__(self, *args, **kwargs):

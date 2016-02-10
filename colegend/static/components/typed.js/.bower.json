@@ -1,5 +1,6 @@
 {
   "name": "typed.js",
+  "version": "1.1.1",
   "homepage": "https://github.com/mattboldt/typed.js",
   "authors": [
     "Matt Boldt <me@mattboldt.com>"
@@ -12,13 +13,13 @@
   ],
   "ignore": [],
   "license": "MIT",
-  "_release": "8a2a29a364",
+  "_release": "1.1.1",
   "_resolution": {
-    "type": "branch",
-    "branch": "master",
-    "commit": "8a2a29a364c2cca41cd36a3356b530971b976b1d"
+    "type": "version",
+    "tag": "v1.1.1",
+    "commit": "c386c0b7954e211eed14579f2ed17f7eb475cabd"
   },
   "_source": "git://github.com/mattboldt/typed.js.git",
-  "_target": "master",
+  "_target": "1.1.1",
   "_originalSource": "typed.js"
 }

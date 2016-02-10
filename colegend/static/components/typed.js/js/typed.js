@@ -43,7 +43,7 @@
         this.showCursor = this.isInput ? false : this.options.showCursor;
 
         // text content of element
-        this.elContent = this.attr ? this.el.attr(this.attr) : this.el.text()
+        this.elContent = this.attr ? this.el.attr(this.attr) : this.el.text();
 
         // html or plain text
         this.contentType = this.options.contentType;
@@ -59,9 +59,6 @@
 
         // amount of time to wait before backspacing
         this.backDelay = this.options.backDelay;
-
-        // div containing strings
-        this.stringsElement = this.options.stringsElement;
 
         // input strings of text
         this.strings = this.options.strings;
@@ -103,7 +100,7 @@
 
         ,
         init: function() {
-            // begin the loop w/ first current string (global self.strings)
+            // begin the loop w/ first current string (global self.string)
             // current string will be passed as an argument each time after this
             var self = this;
             self.timeout = setTimeout(function() {
@@ -119,19 +116,10 @@
 
         ,
         build: function() {
-            var self = this;
             // Insert cursor
             if (this.showCursor === true) {
                 this.cursor = $("<span class=\"typed-cursor\">" + this.cursorChar + "</span>");
                 this.el.after(this.cursor);
-            }
-            if (this.stringsElement) {
-                self.strings = [];
-                this.stringsElement.hide();
-                var strings = this.stringsElement.find('p');
-                $.each(strings, function(key, value){
-                    self.strings.push($(value).html());
-                });
             }
             this.init();
         }
@@ -178,7 +166,7 @@
 
                 if (self.contentType === 'html') {
                     // skip over html tags while typing
-                    var curChar = curString.substr(curStrPos).charAt(0)
+                    var curChar = curString.substr(curStrPos).charAt(0);
                     if (curChar === '<' || curChar === '&') {
                         var tag = '';
                         var endTag = '';
@@ -374,7 +362,7 @@
             var self = this;
             clearInterval(self.timeout);
             var id = this.el.attr('id');
-            this.el.after('<span id="' + id + '"/>')
+            this.el.after('<span id="' + id + '"/>');
             this.el.remove();
             if (typeof this.cursor !== 'undefined') {
                 this.cursor.remove();
@@ -397,7 +385,6 @@
 
     $.fn.typed.defaults = {
         strings: ["These are the default values...", "You know what you should do?", "Use your own!", "Have a great day!"],
-        stringsElement: null,
         // typing speed
         typeSpeed: 0,
         // time before typing starts
