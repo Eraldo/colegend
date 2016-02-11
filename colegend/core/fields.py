@@ -17,7 +17,7 @@ class DateFieldWidget(DateTimePicker):
         'down': 'fa fa-chevron-down',
         'previous': 'fa fa-chevron-left',
         'next': 'fa fa-chevron-right',
-        'today': 'fa fa-bullseye',
+        'today': 'fa fa-crosshairs',
         'clear': 'fa fa-trash',
         'close': 'fa fa-times'
     }

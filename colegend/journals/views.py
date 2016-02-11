@@ -8,7 +8,7 @@ from django.views.generic import ListView, DetailView, DeleteView, CreateView, U
 from colegend.core.views import RolesRequiredMixin, OwnerRequiredMixin
 from colegend.dayentries.models import DayEntry
 from .models import Journal
-from .forms import JournalForm
+from .forms import JournalForm, DatePickerForm
 
 
 class JournalMixin(object):
@@ -60,18 +60,20 @@ class JournalDayView(LoginRequiredMixin, TemplateView):
         date_string = self.kwargs.get('date')
         if date_string:
             return parse_date(date_string)
+        else:
+            today = timezone.now().date()
+            return today
 
-    def get_entry(self, date):
-        if date:
-            user = self.request.user
-            try:
-                return user.journal.dayentries.get(date=date)
-            except DayEntry.DoesNotExist:
-                return None
+    def get_entry(self, date=None):
+        date = date or self.get_date()
+        user = self.request.user
+        try:
+            return user.journal.dayentries.get(date=date)
+        except DayEntry.DoesNotExist:
+            return None
 
     def get_object(self, queryset=None):
-        date = self.get_date()
-        return self.get_entry(date)
+        return self.get_entry()
 
     def get(self, request, *args, **kwargs):
         date = self.request.GET.get('date')
@@ -97,6 +99,8 @@ class JournalDayView(LoginRequiredMixin, TemplateView):
 
         date = self.get_date()
         context['date'] = date
+
+        context['datepickerform'] = DatePickerForm(initial={'date': date})
 
         # previous and next button context
         context['next_url'] = self.get_next_url()
