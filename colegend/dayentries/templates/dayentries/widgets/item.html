@@ -5,7 +5,7 @@
         {% if actions %}
             <!-- Action dropdown -->
             <div class="btn-group pull-right">
-                <a type="button" data-toggle="dropdown" aria-haspopup="true"
+                <a href="#menu" type="button" data-toggle="dropdown" aria-haspopup="true"
                    aria-expanded="false">{% icon 'actions' fixed=True color='grey' %}</a>
                 <div class="dropdown-menu dropdown-menu-right">
                     {% button 'update' url=update_url kind='default dropdown-item' %}
@@ -27,12 +27,12 @@
                 {% endfor %}
             </div>
         {% endif %}
-        <span class="clearfix"></span>
         {{ keywords }}
         {% if content %}
             <div class="pull-right">
                 {% icon 'content' color='grey' %}
             </div>
         {% endif %}
+        <span class="clearfix"></span>
     </div>
 </div>
