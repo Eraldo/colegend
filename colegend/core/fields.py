@@ -34,6 +34,14 @@ class DateFieldWidget(DateTimePicker):
       };
     </script>"""
 
+    html_template = """
+    <div%(div_attrs)s>
+      <span class="input-group-addon">
+        <span%(icon_attrs)s></span>
+      </span>
+      <input%(input_attrs)s/>
+    </div>"""
+
     class Media:
         css = {
             'all': (

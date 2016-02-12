@@ -1,7 +1,12 @@
 {% extends 'journals/base.html' %}
-{% load icons buttons dayentries_tags tags_tags %}
+{% load icons buttons dayentries_tags tags_tags crispy_forms_tags %}
 
 {% block title %}Week{% endblock %}
+
+{% block extra_head %}
+    {{ block.super }}
+    {{ datepickerform.media.css }}
+{% endblock %}
 
 {% block page_controls %}
     <div class="btn-group" role="group" aria-label="Basic example">
@@ -14,14 +19,8 @@
                 aria-haspopup="true" aria-expanded="false">
             {% icon 'date' %} Date
         </button>
-        <div class="dropdown-menu" aria-labelledby="date-dropdown">
-            <form method="get" class="form-inline dropdown-item">
-                <div class="form-group">
-                    <input name="date" value="{{ date }}" type="text" class="form-control form-control-sm"
-                           style="max-width: 100px">
-                    <button type="submit" class="btn btn-primary btn-sm">Go</button>
-                </div>
-            </form>
+        <div class="dropdown-menu datepicker-widget" aria-labelledby="date-dropdown">
+            {% crispy datepickerform %}
         </div>
     </div>
     <div class="btn-group" role="group">
@@ -79,4 +78,14 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block extra_script %}
+    {{ block.super }}
+    {{ datepickerform.media.js }}
+    <script type="text/javascript">
+        $('.dropdown-menu').find('form').click(function (e) {
+            e.stopPropagation();
+        });
+    </script>
 {% endblock %}

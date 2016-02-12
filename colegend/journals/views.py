@@ -177,6 +177,10 @@ class JournalWeekView(LoginRequiredMixin, TemplateView):
             })
         context['days'] = days
 
+        date = self.get_date()
+        context['datepickerform'] = DatePickerForm(initial={'date': date})
+
+
         # Previous and next button context.
         context['next_url'] = self.get_next_url()
         context['previous_url'] = self.get_previous_url()

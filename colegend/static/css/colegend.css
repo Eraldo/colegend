@@ -226,7 +226,12 @@ form .CodeMirror-fullscreen {
 .weekday-widget {
   font-family: "Lucida Console", Monaco, monospace; }
 
-.card-item {
+.card-item, .datepicker-widget {
   padding: 0.6rem; }
+
+.datepicker-widget {
+  min-width: 14.5rem; }
+  .datepicker-widget .datepicker-form input {
+    max-width: 7rem; }
 
 /*# sourceMappingURL=colegend.css.map */

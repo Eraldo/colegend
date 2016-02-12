@@ -35,7 +35,7 @@ class DatePickerForm(forms.Form):
         )
         self.helper.add_input(Submit('get', 'Go'))
 
-        self.helper.form_class = 'datepicker form-inline'
+        self.helper.form_class = 'datepicker-form form-inline'
         self.helper.form_show_labels = False
         self.helper.form_method = 'get'
         self.helper.include_media = False
