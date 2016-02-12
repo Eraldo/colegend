@@ -23,7 +23,7 @@ class DateFieldWidget(DateTimePicker):
     }
 
     def __init__(self, attrs=None, format=None, options=None, div_attrs=None, icon_attrs=None):
-        options = options or {"format": self.format, 'icons': self.icons}
+        options = options or {"format": self.format, 'icons': self.icons, 'locale': 'en-gb'}
         icon_attrs = icon_attrs or {'class': 'fa fa-calendar'}
         super().__init__(attrs, format, options, div_attrs, icon_attrs)
 
@@ -49,7 +49,7 @@ class DateFieldWidget(DateTimePicker):
             )
         }
         js = (
-            'components/moment/min/moment.min.js',
+            'components/moment/min/moment-with-locales.min.js',
             'components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
         )
 
