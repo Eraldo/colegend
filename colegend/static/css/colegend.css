@@ -223,15 +223,15 @@ form .editor-preview-active-side {
 form .CodeMirror-fullscreen {
   top: 106px; }
 
-.weekday-widget {
+.widget-weekday {
   font-family: "Lucida Console", Monaco, monospace; }
 
-.card-item, .datepicker-widget {
+.card-item, .widget-datepicker {
   padding: 0.6rem; }
 
-.datepicker-widget {
+.widget-datepicker {
   min-width: 14.5rem; }
-  .datepicker-widget .datepicker-form input {
+  .widget-datepicker .datepicker-form input {
     max-width: 7rem; }
 
 /*# sourceMappingURL=colegend.css.map */

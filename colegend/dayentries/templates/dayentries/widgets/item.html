@@ -15,7 +15,7 @@
         {% else %}
             <a href="{{ create_url }}" class="pull-right">{% icon 'create' fixed=True color='grey' %}</a>
         {% endif %}
-        <span class="weekday-widget label label-pill bg-category-{{ weekday_number }}">{{ weekday }}</span>
+        <span class="widget-weekday label label-pill bg-category-{{ weekday_number }}">{{ weekday }}</span>
         <strong>{{ date }}</strong>
         {% if locations %}
             <span>{% icon 'address' color='grey' %}{{ locations }}</span>
