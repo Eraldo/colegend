@@ -17,8 +17,7 @@ django-model-utils==2.3.1
 django-annoying==0.8.5
 django-phonenumber-field==1.0.0
 django-orderable==4.0.1
-#django-simplemde==0.0.8
--e git+git://github.com/Eraldo/django-simplemde.git@1d942bc8c02875db49e10748e1ff18ac8230abf3#egg=django-simplemde
+django-simplemde==0.0.8
 django-autocomplete-light==3.0.4
 
 # Markdown
