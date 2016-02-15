@@ -19,7 +19,6 @@ django-phonenumber-field==1.0.0
 django-orderable==4.0.1
 #django-simplemde==0.0.8  # waiting for patch-2: https://github.com/onepill/django-simplemde/pull/7
 -e git+git://github.com/Eraldo/django-simplemde.git@patch-2#egg=django-simplemde
-django-simplemde==0.0.8
 django-autocomplete-light==3.0.4
 
 # Markdown
