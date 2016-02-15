@@ -1,4 +1,4 @@
-define([
+define( [
 	"../core",
 	"../queue",
 	"../effects" // Delay is optional because of this dependency
@@ -11,12 +11,12 @@ jQuery.fn.delay = function( time, type ) {
 	type = type || "fx";
 
 	return this.queue( type, function( next, hooks ) {
-		var timeout = window.setTimeout(next, time);
+		var timeout = window.setTimeout( next, time );
 		hooks.stop = function() {
-			window.clearTimeout(timeout);
+			window.clearTimeout( timeout );
 		};
-	});
+	} );
 };
 
 return jQuery.fn.delay;
-});
+} );

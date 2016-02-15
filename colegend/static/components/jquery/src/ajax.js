@@ -1,4 +1,4 @@
-define([
+define( [
 	"./core",
 	"./var/document",
 	"./var/rnotwhite",
@@ -11,7 +11,7 @@ define([
 	"./ajax/parseXML",
 	"./event/trigger",
 	"./deferred"
-], function (jQuery, document, rnotwhite, location, nonce, rquery) {
+], function( jQuery, document, rnotwhite, location, nonce, rquery ) {
 
 var
 	rhash = /#.*$/,
@@ -44,8 +44,8 @@ var
 	// Avoid comment-prolog char sequence (#10098); must appease lint and evade compression
 	allTypes = "*/".concat( "*" ),
 
-// Anchor tag for parsing the document origin
-	originAnchor = document.createElement("a");
+	// Anchor tag for parsing the document origin
+	originAnchor = document.createElement( "a" );
 	originAnchor.href = location.href;
 
 // Base "constructor" for jQuery.ajaxPrefilter and jQuery.ajaxTransport
@@ -66,16 +66,16 @@ function addToPrefiltersOrTransports( structure ) {
 		if ( jQuery.isFunction( func ) ) {
 
 			// For each dataType in the dataTypeExpression
-			while (( dataType = dataTypes[i++] )) {
+			while ( ( dataType = dataTypes[ i++ ] ) ) {
 
 				// Prepend if requested
-				if (dataType[0] === "+") {
+				if ( dataType[ 0 ] === "+" ) {
 					dataType = dataType.slice( 1 ) || "*";
-					( structure[dataType] = structure[dataType] || [] ).unshift(func);
+					( structure[ dataType ] = structure[ dataType ] || [] ).unshift( func );
 
 				// Otherwise append
 				} else {
-					( structure[dataType] = structure[dataType] || [] ).push(func);
+					( structure[ dataType ] = structure[ dataType ] || [] ).push( func );
 				}
 			}
 		}
@@ -93,7 +93,8 @@ function inspectPrefiltersOrTransports( structure, options, originalOptions, jqX
 		inspected[ dataType ] = true;
 		jQuery.each( structure[ dataType ] || [], function( _, prefilterOrFactory ) {
 			var dataTypeOrTransport = prefilterOrFactory( options, originalOptions, jqXHR );
-			if (typeof dataTypeOrTransport === "string" && !seekingTransport && !inspected[dataTypeOrTransport]) {
+			if ( typeof dataTypeOrTransport === "string" &&
+				!seekingTransport && !inspected[ dataTypeOrTransport ] ) {
 
 				options.dataTypes.unshift( dataTypeOrTransport );
 				inspect( dataTypeOrTransport );
@@ -101,7 +102,7 @@ function inspectPrefiltersOrTransports( structure, options, originalOptions, jqX
 			} else if ( seekingTransport ) {
 				return !( selected = dataTypeOrTransport );
 			}
-		});
+		} );
 		return selected;
 	}
 
@@ -117,7 +118,7 @@ function ajaxExtend( target, src ) {
 
 	for ( key in src ) {
 		if ( src[ key ] !== undefined ) {
-			( flatOptions[key] ? target : ( deep || ( deep = {} ) ) )[key] = src[key];
+			( flatOptions[ key ] ? target : ( deep || ( deep = {} ) ) )[ key ] = src[ key ];
 		}
 	}
 	if ( deep ) {
@@ -141,7 +142,7 @@ function ajaxHandleResponses( s, jqXHR, responses ) {
 	while ( dataTypes[ 0 ] === "*" ) {
 		dataTypes.shift();
 		if ( ct === undefined ) {
-			ct = s.mimeType || jqXHR.getResponseHeader("Content-Type");
+			ct = s.mimeType || jqXHR.getResponseHeader( "Content-Type" );
 		}
 	}
 
@@ -162,7 +163,7 @@ function ajaxHandleResponses( s, jqXHR, responses ) {
 
 		// Try convertible dataTypes
 		for ( type in responses ) {
-			if (!dataTypes[0] || s.converters[type + " " + dataTypes[0]]) {
+			if ( !dataTypes[ 0 ] || s.converters[ type + " " + dataTypes[ 0 ] ] ) {
 				finalDataType = type;
 				break;
 			}
@@ -265,7 +266,7 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 				if ( conv !== true ) {
 
 					// Unless errors are allowed to bubble, catch and return them
-					if (conv && s.throws) {
+					if ( conv && s.throws ) {
 						response = conv( response );
 					} else {
 						try {
@@ -285,7 +286,7 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 	return { state: "success", data: response };
 }
 
-	jQuery.extend({
+jQuery.extend( {
 
 	// Counter for holding the number of active queries
 	active: 0,
@@ -297,7 +298,7 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 	ajaxSettings: {
 		url: location.href,
 		type: "GET",
-		isLocal: rlocalProtocol.test(location.protocol),
+		isLocal: rlocalProtocol.test( location.protocol ),
 		global: true,
 		processData: true,
 		async: true,
@@ -401,7 +402,7 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 			// timeout handle
 			timeoutTimer,
 
-		// Url cleanup var
+			// Url cleanup var
 			urlAnchor,
 
 			// To know if global events are to be dispatched
@@ -418,13 +419,13 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 
 			// Context for global events is callbackContext if it is a DOM node or jQuery collection
 			globalEventContext = s.context &&
-			( callbackContext.nodeType || callbackContext.jquery ) ?
-				jQuery(callbackContext) :
-				jQuery.event,
+				( callbackContext.nodeType || callbackContext.jquery ) ?
+					jQuery( callbackContext ) :
+					jQuery.event,
 
 			// Deferreds
 			deferred = jQuery.Deferred(),
-			completeDeferred = jQuery.Callbacks("once memory"),
+			completeDeferred = jQuery.Callbacks( "once memory" ),
 
 			// Status-dependent callbacks
 			statusCode = s.statusCode || {},
@@ -449,8 +450,8 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 					if ( state === 2 ) {
 						if ( !responseHeaders ) {
 							responseHeaders = {};
-							while (( match = rheaders.exec(responseHeadersString) )) {
-								responseHeaders[match[1].toLowerCase()] = match[2];
+							while ( ( match = rheaders.exec( responseHeadersString ) ) ) {
+								responseHeaders[ match[ 1 ].toLowerCase() ] = match[ 2 ];
 							}
 						}
 						match = responseHeaders[ key.toLowerCase() ];
@@ -520,8 +521,8 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 		// Add protocol if not provided (prefilters might expect it)
 		// Handle falsy url in the settings object (#10093: consistency with old signature)
 		// We also use the url parameter if available
-		s.url = ( ( url || s.url || location.href ) + "" ).replace(rhash, "")
-			.replace(rprotocol, location.protocol + "//");
+		s.url = ( ( url || s.url || location.href ) + "" ).replace( rhash, "" )
+			.replace( rprotocol, location.protocol + "//" );
 
 		// Alias method option to type as per ticket #12004
 		s.type = options.method || options.type || s.method || s.type;
@@ -531,7 +532,7 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 
 		// A cross-domain request is in order when the origin doesn't match the current origin.
 		if ( s.crossDomain == null ) {
-			urlAnchor = document.createElement("a");
+			urlAnchor = document.createElement( "a" );
 
 			// Support: IE8-11+
 			// IE throws exception if url is malformed, e.g. http://example.com:80x/
@@ -543,7 +544,7 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 				urlAnchor.href = urlAnchor.href;
 				s.crossDomain = originAnchor.protocol + "//" + originAnchor.host !==
 					urlAnchor.protocol + "//" + urlAnchor.host;
-			} catch (e) {
+			} catch ( e ) {
 
 				// If there is an error parsing the URL, assume it is crossDomain,
 				// it can be rejected by the transport if it is invalid
@@ -570,7 +571,7 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 
 		// Watch for a new set of requests
 		if ( fireGlobals && jQuery.active++ === 0 ) {
-			jQuery.event.trigger("ajaxStart");
+			jQuery.event.trigger( "ajaxStart" );
 		}
 
 		// Uppercase the type
@@ -624,9 +625,9 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 		// Set the Accepts header for the server, depending on the dataType
 		jqXHR.setRequestHeader(
 			"Accept",
-			s.dataTypes[0] && s.accepts[s.dataTypes[0]] ?
-			s.accepts[s.dataTypes[0]] +
-			( s.dataTypes[0] !== "*" ? ", " + allTypes + "; q=0.01" : "" ) :
+			s.dataTypes[ 0 ] && s.accepts[ s.dataTypes[ 0 ] ] ?
+				s.accepts[ s.dataTypes[ 0 ] ] +
+					( s.dataTypes[ 0 ] !== "*" ? ", " + allTypes + "; q=0.01" : "" ) :
 				s.accepts[ "*" ]
 		);
 
@@ -636,8 +637,8 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 		}
 
 		// Allow custom headers/mimetypes and early abort
-		if (s.beforeSend &&
-			( s.beforeSend.call(callbackContext, jqXHR, s) === false || state === 2 )) {
+		if ( s.beforeSend &&
+			( s.beforeSend.call( callbackContext, jqXHR, s ) === false || state === 2 ) ) {
 
 			// Abort if not done already and return
 			return jqXHR.abort();
@@ -666,14 +667,14 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 			}
 
 			// If request was aborted inside ajaxSend, stop there
-			if (state === 2) {
+			if ( state === 2 ) {
 				return jqXHR;
 			}
 
 			// Timeout
 			if ( s.async && s.timeout > 0 ) {
-				timeoutTimer = window.setTimeout(function () {
-					jqXHR.abort("timeout");
+				timeoutTimer = window.setTimeout( function() {
+					jqXHR.abort( "timeout" );
 				}, s.timeout );
 			}
 
@@ -686,7 +687,7 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 				if ( state < 2 ) {
 					done( -1, e );
 
-					// Simply rethrow otherwise
+				// Simply rethrow otherwise
 				} else {
 					throw e;
 				}
@@ -708,7 +709,7 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 
 			// Clear timeout if it exists
 			if ( timeoutTimer ) {
-				window.clearTimeout(timeoutTimer);
+				window.clearTimeout( timeoutTimer );
 			}
 
 			// Dereference transport for early garbage collection
@@ -737,11 +738,11 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 
 				// Set the If-Modified-Since and/or If-None-Match header, if in ifModified mode.
 				if ( s.ifModified ) {
-					modified = jqXHR.getResponseHeader("Last-Modified");
+					modified = jqXHR.getResponseHeader( "Last-Modified" );
 					if ( modified ) {
 						jQuery.lastModified[ cacheURL ] = modified;
 					}
-					modified = jqXHR.getResponseHeader("etag");
+					modified = jqXHR.getResponseHeader( "etag" );
 					if ( modified ) {
 						jQuery.etag[ cacheURL ] = modified;
 					}
@@ -802,7 +803,7 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 
 				// Handle the global AJAX counter
 				if ( !( --jQuery.active ) ) {
-					jQuery.event.trigger("ajaxStop");
+					jQuery.event.trigger( "ajaxStop" );
 				}
 			}
 		}
@@ -817,7 +818,7 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 	getScript: function( url, callback ) {
 		return jQuery.get( url, undefined, callback, "script" );
 	}
-	});
+} );
 
 jQuery.each( [ "get", "post" ], function( i, method ) {
 	jQuery[ method ] = function( url, data, callback, type ) {
@@ -830,15 +831,15 @@ jQuery.each( [ "get", "post" ], function( i, method ) {
 		}
 
 		// The url can be an options object (which then must have .url)
-		return jQuery.ajax(jQuery.extend({
+		return jQuery.ajax( jQuery.extend( {
 			url: url,
 			type: method,
 			dataType: type,
 			data: data,
 			success: callback
-		}, jQuery.isPlainObject(url) && url));
+		}, jQuery.isPlainObject( url ) && url ) );
 	};
-});
+} );
 
 return jQuery;
-});
+} );

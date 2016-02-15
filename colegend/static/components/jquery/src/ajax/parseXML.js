@@ -1,4 +1,4 @@
-define([
+define( [
 	"../core"
 ], function( jQuery ) {
 
@@ -11,7 +11,7 @@ jQuery.parseXML = function( data ) {
 
 	// Support: IE9
 	try {
-		xml = ( new window.DOMParser() ).parseFromString(data, "text/xml");
+		xml = ( new window.DOMParser() ).parseFromString( data, "text/xml" );
 	} catch ( e ) {
 		xml = undefined;
 	}
@@ -24,4 +24,4 @@ jQuery.parseXML = function( data ) {
 
 return jQuery.parseXML;
 
-});
+} );

@@ -1,4 +1,4 @@
-define([
+define( [
 	"../core",
 	"../css"
 ], function( jQuery ) {
@@ -61,8 +61,8 @@ Tween.propHooks = {
 
 			// Use a property on the element directly when it is not a DOM element,
 			// or when there is no matching style property that exists.
-			if (tween.elem.nodeType !== 1 ||
-				tween.elem[tween.prop] != null && tween.elem.style[tween.prop] == null) {
+			if ( tween.elem.nodeType !== 1 ||
+				tween.elem[ tween.prop ] != null && tween.elem.style[ tween.prop ] == null ) {
 				return tween.elem[ tween.prop ];
 			}
 
@@ -82,9 +82,9 @@ Tween.propHooks = {
 			// Use .style if available and use plain properties where available.
 			if ( jQuery.fx.step[ tween.prop ] ) {
 				jQuery.fx.step[ tween.prop ]( tween );
-			} else if (tween.elem.nodeType === 1 &&
-				( tween.elem.style[jQuery.cssProps[tween.prop]] != null ||
-				jQuery.cssHooks[tween.prop] )) {
+			} else if ( tween.elem.nodeType === 1 &&
+				( tween.elem.style[ jQuery.cssProps[ tween.prop ] ] != null ||
+					jQuery.cssHooks[ tween.prop ] ) ) {
 				jQuery.style( tween.elem, tween.prop, tween.now + tween.unit );
 			} else {
 				tween.elem[ tween.prop ] = tween.now;
@@ -118,4 +118,4 @@ jQuery.fx = Tween.prototype.init;
 // Back Compat <1.8 extension point
 jQuery.fx.step = {};
 
-});
+} );

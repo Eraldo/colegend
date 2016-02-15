@@ -1,4 +1,4 @@
-define([
+define( [
 	"./core",
 	"./var/pnum",
 	"./core/access",
@@ -20,13 +20,13 @@ define([
 	"./core/init",
 	"./core/ready",
 	"./selector" // contains
-], function (jQuery, pnum, access, rmargin, document, rcssNum, rnumnonpx, cssExpand, isHidden,
-			 getStyles, swap, curCSS, adjustCSS, defaultDisplay, addGetHookIf, support, dataPriv) {
+], function( jQuery, pnum, access, rmargin, document, rcssNum, rnumnonpx, cssExpand, isHidden,
+	getStyles, swap, curCSS, adjustCSS, defaultDisplay, addGetHookIf, support, dataPriv ) {
 
 var
 
-// Swappable if display is none or starts with table
-// except "table", "table-cell", or "table-caption"
+	// Swappable if display is none or starts with table
+	// except "table", "table-cell", or "table-caption"
 	// See here for display values: https://developer.mozilla.org/en-US/docs/CSS/display
 	rdisplayswap = /^(none|table(?!-c[ea]).+)/,
 
@@ -36,24 +36,24 @@ var
 		fontWeight: "400"
 	},
 
-	cssPrefixes = ["Webkit", "O", "Moz", "ms"],
-	emptyStyle = document.createElement("div").style;
+	cssPrefixes = [ "Webkit", "O", "Moz", "ms" ],
+	emptyStyle = document.createElement( "div" ).style;
 
 // Return a css property mapped to a potentially vendor prefixed property
-	function vendorPropName(name) {
+function vendorPropName( name ) {
 
 	// Shortcut for names that are not vendor prefixed
-		if (name in emptyStyle) {
+	if ( name in emptyStyle ) {
 		return name;
 	}
 
 	// Check for vendor prefixed names
-		var capName = name[0].toUpperCase() + name.slice(1),
+	var capName = name[ 0 ].toUpperCase() + name.slice( 1 ),
 		i = cssPrefixes.length;
 
 	while ( i-- ) {
 		name = cssPrefixes[ i ] + capName;
-		if (name in emptyStyle) {
+		if ( name in emptyStyle ) {
 			return name;
 		}
 	}
@@ -63,11 +63,11 @@ function setPositiveNumber( elem, value, subtract ) {
 
 	// Any relative (+/-) values have already been
 	// normalized at this point
-	var matches = rcssNum.exec(value);
+	var matches = rcssNum.exec( value );
 	return matches ?
 
 		// Guard against undefined "subtract", e.g., when used as in cssHooks
-	Math.max(0, matches[2] - ( subtract || 0 )) + ( matches[3] || "px" ) :
+		Math.max( 0, matches[ 2 ] - ( subtract || 0 ) ) + ( matches[ 3 ] || "px" ) :
 		value;
 }
 
@@ -126,13 +126,13 @@ function getWidthOrHeight( elem, name, extra ) {
 	// Support: IE11 only
 	// In IE 11 fullscreen elements inside of an iframe have
 	// 100x too small dimensions (gh-1764).
-	if (document.msFullscreenElement && window.top !== window) {
+	if ( document.msFullscreenElement && window.top !== window ) {
 
 		// Support: IE11 only
 		// Running getBoundingClientRect on a disconnected node
 		// in IE throws an error.
-		if (elem.getClientRects().length) {
-			val = Math.round(elem.getBoundingClientRect()[name] * 100);
+		if ( elem.getClientRects().length ) {
+			val = Math.round( elem.getBoundingClientRect()[ name ] * 100 );
 		}
 	}
 
@@ -148,7 +148,7 @@ function getWidthOrHeight( elem, name, extra ) {
 		}
 
 		// Computed unit is not pixels. Stop here and return.
-		if (rnumnonpx.test(val)) {
+		if ( rnumnonpx.test( val ) ) {
 			return val;
 		}
 
@@ -185,7 +185,7 @@ function showHide( elements, show ) {
 			continue;
 		}
 
-		values[index] = dataPriv.get(elem, "olddisplay");
+		values[ index ] = dataPriv.get( elem, "olddisplay" );
 		display = elem.style.display;
 		if ( show ) {
 
@@ -199,10 +199,10 @@ function showHide( elements, show ) {
 			// in a stylesheet to whatever the default browser style is
 			// for such an element
 			if ( elem.style.display === "" && isHidden( elem ) ) {
-				values[index] = dataPriv.access(
+				values[ index ] = dataPriv.access(
 					elem,
 					"olddisplay",
-					defaultDisplay(elem.nodeName)
+					defaultDisplay( elem.nodeName )
 				);
 			}
 		} else {
@@ -212,7 +212,7 @@ function showHide( elements, show ) {
 				dataPriv.set(
 					elem,
 					"olddisplay",
-					hidden ? display : jQuery.css(elem, "display")
+					hidden ? display : jQuery.css( elem, "display" )
 				);
 			}
 		}
@@ -233,7 +233,7 @@ function showHide( elements, show ) {
 	return elements;
 }
 
-	jQuery.extend({
+jQuery.extend( {
 
 	// Add in style property hooks for overriding the default
 	// behavior of getting and setting a style property
@@ -286,8 +286,8 @@ function showHide( elements, show ) {
 			origName = jQuery.camelCase( name ),
 			style = elem.style;
 
-		name = jQuery.cssProps[origName] ||
-			( jQuery.cssProps[origName] = vendorPropName(origName) || origName );
+		name = jQuery.cssProps[ origName ] ||
+			( jQuery.cssProps[ origName ] = vendorPropName( origName ) || origName );
 
 		// Gets hook for the prefixed version, then unprefixed version
 		hooks = jQuery.cssHooks[ name ] || jQuery.cssHooks[ origName ];
@@ -297,8 +297,8 @@ function showHide( elements, show ) {
 			type = typeof value;
 
 			// Convert "+=" or "-=" to relative numbers (#7345)
-			if (type === "string" && ( ret = rcssNum.exec(value) ) && ret[1]) {
-				value = adjustCSS(elem, name, ret);
+			if ( type === "string" && ( ret = rcssNum.exec( value ) ) && ret[ 1 ] ) {
+				value = adjustCSS( elem, name, ret );
 
 				// Fixes bug #9237
 				type = "number";
@@ -310,8 +310,8 @@ function showHide( elements, show ) {
 			}
 
 			// If a number was passed in, add the unit (except for certain CSS properties)
-			if (type === "number") {
-				value += ret && ret[3] || ( jQuery.cssNumber[origName] ? "" : "px" );
+			if ( type === "number" ) {
+				value += ret && ret[ 3 ] || ( jQuery.cssNumber[ origName ] ? "" : "px" );
 			}
 
 			// Support: IE9-11+
@@ -321,8 +321,8 @@ function showHide( elements, show ) {
 			}
 
 			// If a hook was provided, use that value, otherwise just set the specified value
-			if (!hooks || !( "set" in hooks ) ||
-				( value = hooks.set(elem, value, extra) ) !== undefined) {
+			if ( !hooks || !( "set" in hooks ) ||
+				( value = hooks.set( elem, value, extra ) ) !== undefined ) {
 
 				style[ name ] = value;
 			}
@@ -330,8 +330,8 @@ function showHide( elements, show ) {
 		} else {
 
 			// If a hook was provided get the non-computed value from there
-			if (hooks && "get" in hooks &&
-				( ret = hooks.get(elem, false, extra) ) !== undefined) {
+			if ( hooks && "get" in hooks &&
+				( ret = hooks.get( elem, false, extra ) ) !== undefined ) {
 
 				return ret;
 			}
@@ -346,8 +346,8 @@ function showHide( elements, show ) {
 			origName = jQuery.camelCase( name );
 
 		// Make sure that we're working with the right name
-		name = jQuery.cssProps[origName] ||
-			( jQuery.cssProps[origName] = vendorPropName(origName) || origName );
+		name = jQuery.cssProps[ origName ] ||
+			( jQuery.cssProps[ origName ] = vendorPropName( origName ) || origName );
 
 		// Try prefixed name followed by the unprefixed name
 		hooks = jQuery.cssHooks[ name ] || jQuery.cssHooks[ origName ];
@@ -370,77 +370,77 @@ function showHide( elements, show ) {
 		// Make numeric if forced or a qualifier was provided and val looks numeric
 		if ( extra === "" || extra ) {
 			num = parseFloat( val );
-			return extra === true || isFinite(num) ? num || 0 : val;
+			return extra === true || isFinite( num ) ? num || 0 : val;
 		}
 		return val;
 	}
-	});
+} );
 
-	jQuery.each(["height", "width"], function (i, name) {
+jQuery.each( [ "height", "width" ], function( i, name ) {
 	jQuery.cssHooks[ name ] = {
 		get: function( elem, computed, extra ) {
 			if ( computed ) {
 
 				// Certain elements can have dimension info if we invisibly show them
 				// but it must have a current display style that would benefit
-				return rdisplayswap.test(jQuery.css(elem, "display")) &&
-				elem.offsetWidth === 0 ?
-					swap(elem, cssShow, function () {
-						return getWidthOrHeight(elem, name, extra);
-					}) :
-					getWidthOrHeight(elem, name, extra);
+				return rdisplayswap.test( jQuery.css( elem, "display" ) ) &&
+					elem.offsetWidth === 0 ?
+						swap( elem, cssShow, function() {
+							return getWidthOrHeight( elem, name, extra );
+						} ) :
+						getWidthOrHeight( elem, name, extra );
 			}
 		},
 
 		set: function( elem, value, extra ) {
 			var matches,
-				styles = extra && getStyles(elem),
+				styles = extra && getStyles( elem ),
 				subtract = extra && augmentWidthOrHeight(
 					elem,
 					name,
 					extra,
 					jQuery.css( elem, "boxSizing", false, styles ) === "border-box",
 					styles
-					);
+				);
 
 			// Convert to pixels if value adjustment is needed
-			if (subtract && ( matches = rcssNum.exec(value) ) &&
-				( matches[3] || "px" ) !== "px") {
+			if ( subtract && ( matches = rcssNum.exec( value ) ) &&
+				( matches[ 3 ] || "px" ) !== "px" ) {
 
-				elem.style[name] = value;
-				value = jQuery.css(elem, name);
+				elem.style[ name ] = value;
+				value = jQuery.css( elem, name );
 			}
 
-			return setPositiveNumber(elem, value, subtract);
+			return setPositiveNumber( elem, value, subtract );
 		}
 	};
-	});
+} );
 
-	jQuery.cssHooks.marginLeft = addGetHookIf(support.reliableMarginLeft,
-		function (elem, computed) {
-			if (computed) {
-				return ( parseFloat(curCSS(elem, "marginLeft")) ||
-						elem.getBoundingClientRect().left -
-						swap(elem, {marginLeft: 0}, function () {
-							return elem.getBoundingClientRect().left;
-						})
-					) + "px";
-			}
+jQuery.cssHooks.marginLeft = addGetHookIf( support.reliableMarginLeft,
+	function( elem, computed ) {
+		if ( computed ) {
+			return ( parseFloat( curCSS( elem, "marginLeft" ) ) ||
+				elem.getBoundingClientRect().left -
+					swap( elem, { marginLeft: 0 }, function() {
+						return elem.getBoundingClientRect().left;
+					} )
+				) + "px";
 		}
-	);
+	}
+);
 
 // Support: Android 2.3
 jQuery.cssHooks.marginRight = addGetHookIf( support.reliableMarginRight,
 	function( elem, computed ) {
 		if ( computed ) {
-			return swap(elem, {"display": "inline-block"},
+			return swap( elem, { "display": "inline-block" },
 				curCSS, [ elem, "marginRight" ] );
 		}
 	}
 );
 
 // These hooks are used by animate to expand properties
-	jQuery.each({
+jQuery.each( {
 	margin: "",
 	padding: "",
 	border: "Width"
@@ -451,7 +451,7 @@ jQuery.cssHooks.marginRight = addGetHookIf( support.reliableMarginRight,
 				expanded = {},
 
 				// Assumes a single number if not a string
-				parts = typeof value === "string" ? value.split(" ") : [value];
+				parts = typeof value === "string" ? value.split( " " ) : [ value ];
 
 			for ( ; i < 4; i++ ) {
 				expanded[ prefix + cssExpand[ i ] + suffix ] =
@@ -465,9 +465,9 @@ jQuery.cssHooks.marginRight = addGetHookIf( support.reliableMarginRight,
 	if ( !rmargin.test( prefix ) ) {
 		jQuery.cssHooks[ prefix + suffix ].set = setPositiveNumber;
 	}
-	});
+} );
 
-	jQuery.fn.extend({
+jQuery.fn.extend( {
 	css: function( name, value ) {
 		return access( this, function( elem, name, value ) {
 			var styles, len,
@@ -501,15 +501,15 @@ jQuery.cssHooks.marginRight = addGetHookIf( support.reliableMarginRight,
 			return state ? this.show() : this.hide();
 		}
 
-		return this.each(function () {
+		return this.each( function() {
 			if ( isHidden( this ) ) {
 				jQuery( this ).show();
 			} else {
 				jQuery( this ).hide();
 			}
-		});
+		} );
 	}
-	});
+} );
 
 return jQuery;
-});
+} );
