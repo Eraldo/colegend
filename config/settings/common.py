@@ -259,6 +259,9 @@ ACCOUNT_SIGNUP_PASSWORD_VERIFICATION = False
 ACCOUNT_USERNAME_MIN_LENGTH = 4
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+ACCOUNT_ADAPTER = 'colegend.users.adapters.AccountAdapter'
+SOCIALACCOUNT_ADAPTER = 'colegend.users.adapters.SocialAccountAdapter'
+ACCOUNT_ALLOW_REGISTRATION = env.bool("DJANGO_ACCOUNT_ALLOW_REGISTRATION", True)
 
 # Custom user app defaults
 # Select the correct user model
