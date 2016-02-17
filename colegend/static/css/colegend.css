@@ -1,4 +1,27 @@
-@import url("https://fonts.googleapis.com/css?family=Ubuntu:400,500");
+/* latin */
+@font-face {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 300;
+  src: local("Nunito-Light"), url(../fonts/Nunito/Nunito-Light.woff) format("woff");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000; }
+/* latin */
+@font-face {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Nunito-Light"), url(../fonts/Nunito/Nunito-Light.woff) format("woff");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000; }
+/* latin */
+@font-face {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  src: local("Nunito-Bold"), url(../fonts/Nunito/Nunito-Bold.woff) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000; }
+@font-face {
+  font-family: "Ubuntu Titling";
+  src: url("../fonts/Ubuntu-Titling/UbuntuTitling-Bold.woff"); }
 .text-category-7 {
   color: darkviolet; }
 
@@ -77,7 +100,11 @@
   text-decoration: none; }
 
 body {
-  font: 100% "Ubuntu", Helvetica, sans-serif; }
+  font-size: 100%;
+  font-family: "Nunito", "Ubuntu", Helvetica, sans-serif; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Ubuntu Titling"; }
 
 .default-pattern {
   background-image: url(../images/shattered.jpg); }
@@ -230,7 +257,7 @@ form .CodeMirror-fullscreen {
   padding: 0.6rem; }
 
 .widget-datepicker {
-  min-width: 14.5rem; }
+  min-width: 14.6rem; }
   .widget-datepicker .datepicker-form input {
     max-width: 7rem; }
 

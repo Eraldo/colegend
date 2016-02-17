@@ -26,7 +26,7 @@ class DayEntryForm(forms.ModelForm):
 
         # Update the tags field to use the custom django-autocomplete's create field
         tags_queryset = self.fields.get('tags').queryset
-        self.fields['tags'] = TagsCreateFormField(tags_queryset, owner)
+        self.fields['tags'] = TagsCreateFormField(tags_queryset, owner, required=False)
 
         self.helper = FormHelper()
         self.helper.layout = Layout(
