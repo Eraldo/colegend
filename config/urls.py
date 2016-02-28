@@ -4,6 +4,7 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.staticfiles.storage import staticfiles_storage
 from django.views import defaults as default_views
 from django.views.generic import RedirectView, TemplateView
 
@@ -18,7 +19,7 @@ admin.site.site_title = BACKEND_NAME
 urlpatterns = [
                   # Favicon
                   url(r'^favicon\.ico$',
-                      RedirectView.as_view(url=settings.STATIC_URL + 'images/favicon.ico', permanent=True)),
+                      RedirectView.as_view(url=staticfiles_storage.url('images/favicon.ico'), permanent=True)),
 
                   # Django Admin, use {% url 'admin:index' %}
                   url(r'^{}/'.format(settings.ADMIN_URL), include(admin.site.urls)),
