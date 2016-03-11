@@ -111,5 +111,6 @@
 }
 
 .grass {
+  pointer-events: none;
   position: absolute;
 }
