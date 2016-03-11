@@ -45,14 +45,15 @@ class DayEntryCreateView(LoginRequiredMixin, DayEntryMixin, CreateView):
         initial = super().get_initial()
 
         # Set the default owned journal.
-        initial['journal'] = self.request.user.journal
+        user = self.request.user
+        initial['journal'] = user.journal
 
         # Creation date is given or today as default.
         date = self.request.GET.get('date', timezone.now().date())
         initial['date'] = date
 
         # Prefill the entry based on the previous entry if found.
-        previous = DayEntry.objects.filter(date__lte=date).first()
+        previous = DayEntry.objects.owned_by(user).filter(date__lte=date).first()
         if previous:
             initial['locations'] = previous.locations
             initial['tags'] = previous.tags.all()
