@@ -41,6 +41,7 @@
     <link href="{% static 'css/about.css' %}" rel="stylesheet">
     <link href="{% static 'css/colegend.css' %}" rel="stylesheet">
 
+    <link href="{% static 'components/grass/grass.css' %}" rel="stylesheet">
 
 </head>
 <body id="page-top">
@@ -613,7 +614,13 @@
     </div>
 </section>
 
+
 <section id="contact" class="gray-section contact">
+    <div id="grassDiv"
+         style="background-color: green; height: 20px; margin-top: 200px; position: relative; width: 100%;">
+        <script src="{% static 'components/grass/grass.js' %}"></script>
+    </div>
+
     <div class="container">
         <div class="row m-b-lg">
             <div class="col-lg-12 text-center">
@@ -680,6 +687,11 @@
             </div>
         </div>
     </div>
+<div id="grass-spacer" style="height: 110px; "></div>
+<div id="grassDiv"
+     style="background-color: #009b0a; height: 10px; position: fixed; bottom: 0; width: 100%;">
+    <script src="{% static 'components/grass/grass.js' %}"></script>
+</div>
 </section>
 
 <div class="hidden-xs" id="audio-box" style="position: fixed; bottom: -0; right: 0; z-index: 10000">

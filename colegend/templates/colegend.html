@@ -37,6 +37,8 @@
         <!-- This file store project specific CSS -->
         <link href="{% static 'css/colegend.css' %}" rel="stylesheet">
 
+        <link href="{% static 'components/grass/grass.css' %}" rel="stylesheet">
+
         {% block extra_head %}{% endblock %}
 
     {% endblock %}
@@ -102,6 +104,12 @@
     {% endblock %}
 </div>
 <!-- /container -->
+
+<div id="grass-spacer" style="height: 150px; "></div>
+<div id="grassDiv"
+     style="background-color: #009b0a; height: 10px; position: fixed; bottom: 0; width: 100%;">
+    <script src="{% static 'components/grass/grass.js' %}"></script>
+</div>
 
 <div class="feedback-button-container">
     <div class="hidden-xs">
