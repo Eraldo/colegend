@@ -5,23 +5,20 @@
 {% endblock %}
 
 {% block chat_content %}
+
+
+
     <p>
-        This is the <strong class="text-continuous">continuous</strong> page - the place where all comes together and
-        where you can see where you are standing right now.
+        This is the <strong class="text-continuous">continuous</strong> page - the place where you get an overview of
+        your personal development in coLegend from different perspectives.
     </p>
     <p>
-        Imagine you’re standing on a board game - the game of your life!
-        You can advance step by step clicking on the fields below one after the other to advance in your personal
-        development... and on the coLegend platform.
-        Every accomplished field unlocks the next one.
+        From here you have access to <a href="{% url 'games:index' %}">the game</a> where you can advance in your journey through the platform, step by step,
+        card by card.
     </p>
     <p>
-        The different colors symbolize different topics:
-        On an orange field you get to enjoy a story, a blue field covers a task focusing on being conscious and a green
-        field always has something to do with being connected.
-    </p>
-    <p>
-        So let the game begin ;-) ...
+        On <a href="{% url 'story:index' %}">the story page</a> you also see your status of the different coLegend story elements.
+        You play a part in each and every one of them - go have a look for yourself by browsing through our library.
     </p>
 {% endblock %}
 
