@@ -231,6 +231,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .game-card-block {
   padding: 1rem; }
+  .game-card-block .card-text p {
+    max-height: 5.6rem;
+    overflow: scroll; }
 
 .game-card-image {
   max-height: 6rem;

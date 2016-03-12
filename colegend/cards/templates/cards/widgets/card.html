@@ -13,7 +13,7 @@
             {% if url %}<a href="{{ url }}">{% endif %}
             <h4 class="card-title">{{ title }}</h4>
             {% if url %}</a>{% endif %}
-            <p class="card-text">
+            <div class="card-text">
                 {{ content|linebreaks }}
                 {% if details %}
                     <a id="card-{{ title|slugify }}-details" href="" data-toggle="modal"
@@ -21,7 +21,7 @@
                         details
                     </a>
                 {% endif %}
-            </p>
+            </div>
         </div>
         {% if details %}
             <!-- Modal -->
