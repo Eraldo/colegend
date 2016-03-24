@@ -18,6 +18,8 @@
     # She fills in the form with her google credentials:
     - Fill form:
         'Email': 'gina.google@colegend.org'
+    - Click: next
+    - Fill form:
         'Passwd': 'ginagoogle'
     - Click: signIn
     - Wait:
