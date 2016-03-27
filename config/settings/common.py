@@ -318,4 +318,5 @@ SIMPLEMDE_OPTIONS = {
         'delay': 60000,
     },
     'tabSize': 4,
+    'spellChecker': False,
 }

@@ -28,12 +28,15 @@ class DayEntryForm(forms.ModelForm):
         tags_queryset = self.fields.get('tags').queryset
         self.fields['tags'] = TagsCreateFormField(tags_queryset, owner, required=False)
 
+        # Check for spellchecker options
+        spellchecker = journal.spellchecker
+
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Field('journal', type='hidden'),
             Field('date'),
             Field('locations', autofocus=True),
-            Field('content'),
+            Field('content', spellchecker=spellchecker),
             Field('keywords'),
             Field('tags'),
         )

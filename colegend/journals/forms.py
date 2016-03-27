@@ -10,14 +10,14 @@ class JournalForm(forms.ModelForm):
     class Meta:
         model = Journal
         fields = [
-            # 'name',
+            'spellchecker',
         ]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
-            # Field('name'),
+            Field('spellchecker'),
         )
         self.helper.add_input(Submit('save', 'Save'))
 

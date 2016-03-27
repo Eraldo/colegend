@@ -12,6 +12,8 @@ class Journal(AutoUrlsMixin, AutoOwnedBase):
     A django model representing a user's journal.
     """
 
+    spellchecker = models.BooleanField(default=False)
+
     objects = JournalQuerySet.as_manager()
 
     class Meta:

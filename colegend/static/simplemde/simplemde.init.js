@@ -104,9 +104,19 @@ var simplemdeOptions = {
 if (!!simplemdeJQuery) {
     simplemdeJQuery(function () {
         simplemdeJQuery.each(simplemdeJQuery('.simplemde-box'), function (i, elem) {
+            // Use the fixed local settings from the code above
             var simplemde_options = simplemdeOptions;
+
+            // Load and update the default values from django settings
             var django_simplemde_options = JSON.parse(simplemdeJQuery(elem).attr('data-simplemde-options'));
             var options = simplemdeJQuery.extend(simplemde_options, django_simplemde_options);
+
+            // Update the options based on user dependent per field settings
+            var spellchecker = simplemdeJQuery(elem).attr('spellchecker');
+            if (spellchecker == 'True') {
+                var options = simplemdeJQuery.extend(simplemde_options, {spellChecker: spellchecker});
+            }
+
             options['element'] = elem;
             var simplemde = new SimpleMDE(options);
             elem.SimpleMDE = simplemde;
