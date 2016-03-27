@@ -75,7 +75,7 @@ class LegendDetailView(LoginRequiredMixin, DetailView):
             context['page_links'] = page_links
             context['core_manager'] = user.has_role('core manager')
             context['cloud_guide'] = user.has_role('guide')
-            context['roles'] = user.roles.exclude(name__in=['Core Manager', 'Guide'])
+            context['roles'] = user.roles.all()
         return context
 
 

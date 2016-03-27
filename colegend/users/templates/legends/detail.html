@@ -92,17 +92,25 @@
                 </div>
                 <div class="card-block">
                     <div class="pull-left">
-                        {% if core_manager %}
-                            <img src="{% static 'legends/images/badges/Core_Team_Badge.png' %}" class="badge team"
-                                 alt="badge team">
-                        {% endif %}
-                        {% if cloud_guide %}
-                            <img src="{% static 'legends/images/badges/Cloud_Guide_Badge.png' %}" class="badge guide"
-                                 alt="badge guide">
-                        {% endif %}
+                        {% for role in roles %}
+                            {% if role.name == 'Core Manager' %}
+                                <a href="{{ role.detail_url }}"><img
+                                        src="{% static 'legends/images/badges/Core_Team_Badge.png' %}"
+                                        class="badge team"
+                                        alt="badge team"></a>
+                            {% elif role.name == 'Guide' %}
+                                <a href="{{ role.detail_url }}"><img
+                                        src="{% static 'legends/images/badges/Cloud_Guide_Badge.png' %}"
+                                        class="badge guide"
+                                        alt="badge guide"></a>
+                            {% endif %}
+                        {% endfor %}
                     </div>
                     {% for role in roles %}
-                        {% include 'roles/widgets/tag.html' with name=role.display_name url=role.detail_url %}
+                        {% if role.name == 'Core Manager' or role.name == 'Guide' %}
+                        {% else %}
+                            {% include 'roles/widgets/tag.html' with name=role.display_name url=role.detail_url %}
+                        {% endif %}
                     {% endfor %}
                     <div class="clearfix"></div>
                 </div>
