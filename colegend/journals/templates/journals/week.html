@@ -33,9 +33,13 @@
             <a class="dropdown-item" href="{% url 'journals:day' date %}">Day</a>
             <a class="dropdown-item disabled" href="#">Week</a>
             <a class="dropdown-item disabled" href="#">Month</a>
-            <a class="dropdown-item disabled" href="#">Half-Year</a>
+            <a class="dropdown-item disabled" href="#">Quarter</a>
             <a class="dropdown-item disabled" href="#">Year</a>
         </div>
+    </div>
+
+    <div class="pull-right">
+        {% button 'settings' url=settings_url kind='secondary btn-sm' icon='gear' %}
     </div>
 {% endblock %}
 

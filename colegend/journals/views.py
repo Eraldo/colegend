@@ -53,6 +53,13 @@ class JournalDeleteView(LoginRequiredMixin, RolesRequiredMixin, JournalMixin, De
         return object.index_url
 
 
+class JournalSettingsView(LoginRequiredMixin, OwnerRequiredMixin, JournalMixin, UpdateView):
+    template_name = 'journals/settings.html'
+
+    def get_success_url(self):
+        return self.get_object().index_url
+
+
 class JournalDayView(LoginRequiredMixin, TemplateView):
     template_name = 'journals/day.html'
 
@@ -93,6 +100,7 @@ class JournalDayView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        user = self.request.user
 
         dayentry = self.get_object()
         context['dayentry'] = dayentry
@@ -107,6 +115,7 @@ class JournalDayView(LoginRequiredMixin, TemplateView):
         context['previous_url'] = self.get_previous_url()
         create_url = reverse('dayentries:create')
         context['create_url'] = '{}?date={}'.format(create_url, date)
+        context['settings_url'] = reverse('journals:settings', kwargs={'pk': user.journal.pk})
         return context
 
 
@@ -166,6 +175,7 @@ class JournalWeekView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        user = self.request.user
 
         # Context for the this week's entries.
         dates = self.get_week_dates()
@@ -180,8 +190,8 @@ class JournalWeekView(LoginRequiredMixin, TemplateView):
         date = self.get_date()
         context['datepickerform'] = DatePickerForm(initial={'date': date})
 
-
         # Previous and next button context.
         context['next_url'] = self.get_next_url()
         context['previous_url'] = self.get_previous_url()
+        context['settings_url'] = reverse('journals:settings', kwargs={'pk': user.journal.pk})
         return context

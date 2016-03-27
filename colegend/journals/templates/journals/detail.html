@@ -11,5 +11,10 @@
 {% endblock %}
 
 {% block content %}
-    {{ journal }}
+    <h1>
+        {{ journal }}
+    </h1>
+    <p>
+        <strong>Spellchecker</strong>: {% if journal.spellchecker %}Enabled{% else %}Disabled{% endif %}
+    </p>
 {% endblock %}
