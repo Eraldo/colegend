@@ -1,5 +1,5 @@
 {% extends 'roles/base.html' %}
-{% load icons buttons roles_tags %}
+{% load icons buttons roles_tags legends_tags %}
 
 {% block title %}Roles{% endblock %}
 
@@ -11,6 +11,6 @@
 
 {% block content %}
     {% for role in roles %}
-        {% role_link %}<br>
+        {% role_link %}{% for user in role.users.all %} - {% legend %}{% endfor %}<br>
     {% endfor %}
 {% endblock %}
