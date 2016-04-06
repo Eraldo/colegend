@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block title %}Donations{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% include '_breadcrumb.html' with pattern='donations:index' title='Donations' %}
+{% endblock %}

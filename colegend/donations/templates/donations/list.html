@@ -1,0 +1,14 @@
+{% extends 'donations/base.html' %}
+{% load icons buttons donations_tags %}
+
+{% block title %}Donations{% endblock %}
+
+{% block page_controls %}
+    {% button 'create' pattern='donations:create' %}
+{% endblock %}
+
+{% block content %}
+    {% for donation in donations %}
+        {% donation_link %}<br>
+    {% endfor %}
+{% endblock %}

@@ -23,22 +23,31 @@ class User(AbstractUser):
     # First Name and Last Name do not cover name patterns
     # around the globe.
     name = models.CharField(
-        _("name"),
+        verbose_name=_("name"),
         max_length=255,
-        help_text=_("Your full name"))
+        help_text=_("Your full name"),
+    )
     # personal and contact data
     MALE = 'M'
     FEMALE = 'F'
     NEUTRAL = 'N'
     GENDER_CHOICES = (
-        (MALE, 'Male'),
-        (FEMALE, 'Female'),
-        (NEUTRAL, 'Neutral'),
+        (MALE, _('male')),
+        (FEMALE, _('female')),
+        (NEUTRAL, _('neutral')),
     )
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
-    birthday = models.DateField(null=True, blank=True)
+    gender = models.CharField(
+        verbose_name=_('gender'),
+        max_length=1,
+        choices=GENDER_CHOICES)
+    birthday = models.DateField(
+        verbose_name=_('birthday'),
+        null=True, blank=True,
+    )
 
-    address = models.TextField()
+    address = models.TextField(
+        verbose_name=_('address'),
+    )
 
     @property
     def city(self):
@@ -50,11 +59,16 @@ class User(AbstractUser):
                 city = parts[1]
         return city
 
-    phone = PhoneNumberField(blank=True)
+    phone = PhoneNumberField(
+        verbose_name=_('phone'),
+        blank=True,
+    )
 
-    occupation = models.CharField(_('occupation(s)'), max_length=255, blank=True)
+    occupation = models.CharField(
+        verbose_name=_('occupation(s)'), max_length=255, blank=True)
 
     avatar = ThumbnailerImageField(
+        verbose_name=_('avatar'),
         upload_to=UploadToOwnedDirectory('avatars', ),
         resize_source=dict(size=(400, 400)),
     )
@@ -66,8 +80,14 @@ class User(AbstractUser):
             avatar = None
         return avatar
 
-    roles = models.ManyToManyField(Role, blank=True)
-    checkpoints = models.ManyToManyField(Checkpoint, blank=True)
+    roles = models.ManyToManyField(
+        Role,
+        blank=True,
+    )
+    checkpoints = models.ManyToManyField(
+        Checkpoint,
+        blank=True,
+    )
 
     def has_checkpoint(self, name):
         return self.checkpoints.contains_name(name)
@@ -102,6 +122,7 @@ class User(AbstractUser):
         verbose_name = 'legend'
         verbose_name_plural = 'legends'
         default_related_name = 'users'
+        ordering = ['username']
 
 
 @receiver(user_signed_up)

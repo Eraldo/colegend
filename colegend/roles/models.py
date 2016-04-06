@@ -37,6 +37,7 @@ class Role(AutoUrlsMixin, models.Model):
 
     class Meta:
         default_related_name = 'roles'
+        ordering = ['name']
 
     def __str__(self):
         return '{}{}'.format(

@@ -31,6 +31,7 @@ urlpatterns = [
                   url(r'^roles/', include('colegend.roles.urls', namespace='roles')),
                   url(r'^tags/', include('colegend.tags.urls', namespace='tags')),
                   url(r'^category/', include('colegend.categories.urls', namespace='categories')),
+                  url(r'^donations/', include('colegend.donations.urls', namespace='donations')),
 
                   # Your stuff: custom urls includes go here
                   url(r'^$', RedirectView.as_view(url='home/', permanent=False), name='index'),

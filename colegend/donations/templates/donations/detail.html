@@ -1,0 +1,18 @@
+{% extends 'donations/base.html' %}
+{% load icons buttons  donations_tags %}
+
+{% block title %}Donation{% endblock %}
+
+{% block page_controls %}
+    {% button 'update' url=donation.update_url %}
+    <div class="pull-right">
+        {% button 'delete' url=donation.delete_url %}
+    </div>
+{% endblock %}
+
+{% block content %}
+    {{ donation }}<br>
+    {% if user.is_superuser %}
+        {{ donation.notes|linebreaksbr }}
+    {% endif %}
+{% endblock %}

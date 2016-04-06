@@ -1,5 +1,5 @@
 {% extends 'legends/base.html' %}
-{% load static icons legends_tags buttons %}
+{% load i18n static icons legends_tags buttons %}
 
 {% block title %}Legend{% endblock %}
 
@@ -148,6 +148,7 @@
                     <p>Chapter {{ legend.continuous.chapter }}</p>
 
                     <p class="text-muted">Animal</p>
+                    <p id="legend-donations">{% trans 'Donations' %}: €{{ legend.donations.total|default:'0.00' }}</p>
                 </div>
             </div>
 
