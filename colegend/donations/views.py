@@ -1,12 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, RedirectView
 
-from colegend.core.views import OwnedItemsMixin, RolesRequiredMixin
+from colegend.core.views import RolesRequiredMixin
 from .models import Donation
 from .forms import DonationForm
 
 
-class DonationMixin(OwnedItemsMixin):
+class DonationMixin:
     """
     Default attributes and methods for donation related views.
     """
