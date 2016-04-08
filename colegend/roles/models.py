@@ -47,6 +47,6 @@ class Role(AutoUrlsMixin, models.Model):
 
     @property
     def display_name(self):
-        name = self.name or self.nickname
-        item = self.item
-        return '{} {}'.format(name, item)
+        item = self.item or '★'
+        name = self.nickname or self.name
+        return '{} ({})'.format(item, name)
