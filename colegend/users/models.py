@@ -20,6 +20,9 @@ from colegend.roles.models import Role
 
 
 class User(AbstractUser):
+    """
+    A django model representing a coLegend user/member called 'Legend'.
+    """
     # First Name and Last Name do not cover name patterns
     # around the globe.
     name = models.CharField(
