@@ -37,6 +37,7 @@ class Donation(AutoUrlsMixin, TimeStampedBase, OwnedBase):
         verbose_name = _('donation')
         verbose_name_plural = _('donations')
         default_related_name = 'donations'
+        ordering = ['-date']
 
     def __str__(self):
         return '{}: €{} {}'.format(self.date, self.amount, self.owner)
