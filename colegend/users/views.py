@@ -73,9 +73,9 @@ class LegendDetailView(LoginRequiredMixin, DetailView):
                 id = '{}-button'.format(slug)
                 link.update({'kind': kind, 'id': id})
             context['page_links'] = page_links
-            context['core_manager'] = user.has_role('core manager')
-            context['cloud_guide'] = user.has_role('guide')
-            context['roles'] = user.roles.all()
+        context['core_manager'] = legend.has_role('core manager')
+        context['cloud_guide'] = legend.has_role('guide')
+        context['roles'] = legend.roles.all()
         return context
 
 
