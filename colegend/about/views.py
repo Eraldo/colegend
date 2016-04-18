@@ -73,7 +73,4 @@ class AboutView(TemplateView):
                 'roles': ['your chosen roles'],
             })
         context['team_members'] = member_data
-        donation_message = 'Like the Project?<br>Show us and we will make it even better:<br>'
-        donation_button = render_to_string('widgets/donate.html')
-        context['donation_content'] = mark_safe('{}<br>{}'.format(donation_message, donation_button))
         return context
