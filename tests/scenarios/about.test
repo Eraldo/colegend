@@ -20,6 +20,5 @@
     - Find text: "Pricing"
 
     # She finds the join button and clicks it:
-    - Scroll to: join-explorer
-    - Click: join-explorer
+    - Click: join
 {% endblock %}
