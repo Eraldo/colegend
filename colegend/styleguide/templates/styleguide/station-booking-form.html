@@ -1,0 +1,137 @@
+<div id="booking-form">
+	<form id="station-booking-form" action="/bookings/form/6/" method="post"><input type="hidden"
+																					name="csrfmiddlewaretoken"
+																					value="FijYHodHOsyX5adisJtM77kAc6Rqg2DH">
+		<div id="div_id_appointment" class="form-group">
+			<div class="controls "><select class="select form-control" id="id_appointment" name="appointment">
+				<option value="" selected="selected">---</option>
+				<option value="1">2016-02-22T15:04:00+00:00</option>
+				<option value="2">2016-02-22T15:14:00+00:00</option>
+				<option value="3">2016-02-22T15:24:00+00:00</option>
+				<option value="4">2016-02-25T15:04:00+00:00</option>
+				<option value="5">2016-02-25T15:14:00+00:00</option>
+				<option value="6">2016-02-25T15:24:00+00:00</option>
+				<option value="7">2016-02-26T15:04:00+00:00</option>
+			</select></div>
+		</div>
+		<div class="row">
+			<div class="col-sm-2">
+				<div class="crispy-form-number">1.</div>
+			</div>
+			<div class="col-sm-10">
+				<fieldset>
+					<legend>Wählen Sie ein Datum</legend>
+					<div id="div_id_date" class="form-group">
+						<label for="id_date" class="control-label ">
+							Date
+						</label>
+						<div class="controls ">
+							<select class="select form-control" id="id_date" name="date" style="max-width: 15em; display: inline-block;"></select>
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<i class="fa fa-calendar fa-2x" style="vertical-align: middle;"></i>
+						</div>
+					</div>
+				</fieldset>
+
+			</div>
+
+		</div>
+		<br><br>
+		<div class="row">
+			<div class="col-sm-2">
+				<div class="crispy-form-number">2.</div>
+			</div>
+			<div class="col-sm-10">
+				<fieldset>
+					<legend>Wählen Sie eine Zeit</legend>
+					<div id="div_id_time" class="form-group">
+						<label for="id_time" class="control-label ">
+							Time
+						</label>
+						<div class="controls ">
+							<select class="select form-control" id="id_time" name="time" style="max-width: 15em; display: inline-block;">
+							</select>
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<i class="fa fa-clock-o fa-2x" style="vertical-align: middle;"></i>
+						</div>
+					</div>
+				</fieldset>
+
+			</div>
+
+		</div>
+		<br><br>
+		<div class="row">
+			<div class="col-sm-2">
+				<div class="crispy-form-number">3.</div>
+			</div>
+			<div class="col-sm-10">
+				<fieldset>
+					<legend>Bitte machen Sie einige Angaben zur Gruppe lorem ipsum dolor sit amet</legend>
+					<div class="row">
+						<div class="col-sm-6 col-md-5">
+							<div id="div_id_name" class="form-group"><label for="id_name"
+																			class="control-label  requiredField">
+								Name<span class="asteriskField">*</span> </label>
+								<div class="controls "><input class="textinput textInput form-control" id="id_name"
+															  maxlength="500" name="name" type="text"></div>
+							</div>
+							<div id="div_id_email" class="form-group"><label for="id_email"
+																			 class="control-label  requiredField">
+								Email<span class="asteriskField">*</span> </label>
+								<div class="controls "><input class="emailinput form-control" id="id_email"
+															  maxlength="254" name="email" type="email"></div>
+							</div>
+							<div id="div_id_phone" class="form-group"><label for="id_phone"
+																			 class="control-label  requiredField">
+								Phone<span class="asteriskField">*</span> </label>
+								<div class="controls "><input class="textinput textInput form-control" id="id_phone"
+															  maxlength="100" name="phone" type="text"></div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-md-5 col-md-offset-2">
+							<div id="div_id_school" class="form-group"><label for="id_school"
+																			  class="control-label  requiredField">
+								School<span class="asteriskField">*</span> </label>
+								<div class="controls "><input class="textinput textInput form-control" id="id_school"
+															  maxlength="500" name="school" type="text"></div>
+							</div>
+							<div id="div_id_grade" class="form-group"><label for="id_grade"
+																			 class="control-label  requiredField">
+								Grade<span class="asteriskField">*</span> </label>
+								<div class="controls "><input class="numberinput form-control" id="id_grade" min="0"
+															  name="grade" type="number"></div>
+							</div>
+							<div id="div_id_people" class="form-group"><label for="id_people"
+																			  class="control-label  requiredField">
+								People<span class="asteriskField">*</span> </label>
+								<div class="controls "><input class="numberinput form-control" id="id_people" min="0"
+															  name="people" type="number"></div>
+							</div>
+							<div id="div_id_address" class="form-group"><label for="id_address"
+																			   class="control-label  requiredField">
+								Address<span class="asteriskField">*</span> </label>
+								<div class="controls "><textarea class="textarea form-control" cols="40" id="id_address"
+																 name="address" rows="2"></textarea></div>
+							</div>
+						</div>
+
+					</div>
+				</fieldset>
+
+			</div>
+
+		</div>
+		<br><br>
+		<div class="row">
+			<div class="col-sm-2">
+				<div class="crispy-form-number">4.</div>
+			</div>
+			<div class="col-sm-10">
+				{% include "widgets/button.html" with text="Buchungsanfrage absenden" fontawesome="check" %}
+			</div>
+
+		</div>
+	</form>
+
+</div>

@@ -1,0 +1,30 @@
+{% extends "styleguide/base.html" %}
+{% load static %}
+
+{% block page_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'styleguide/css/index.css' %}">
+{% endblock %}
+
+{% block title %}Styleguide{% endblock %}
+
+{% block page_links %}
+    <a href="#atoms" class="btn btn-link">Atoms</a>
+    <a href="#molecules" class="btn btn-link">Molecules</a>
+    <a href="#organisms" class="btn btn-link">Organisms</a>
+{% endblock %}
+
+{% block content %}
+    <h1 id="atoms" class="main-headline">Atoms</h1>
+    {{ button }}
+    <h1 id="molecules" class="main-headline">Molecules</h1>
+    <h1 id="organisms" class="main-headline">Organisms</h1>
+{% endblock %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script src="{% static 'styleguide/js/index.js' %}"></script>
+    <script type="application/javascript">
+        $(window).trigger('station-booking-form-loaded');
+    </script>
+{% endblock %}

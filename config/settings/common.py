@@ -87,6 +87,7 @@ LOCAL_APPS = (
     'colegend.story',
 
     'colegend.mockups',
+    'colegend.styleguide',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
