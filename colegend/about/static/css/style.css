@@ -1330,6 +1330,10 @@ section.comments {
   transform: rotate(2deg);
 }
 
+#join {
+  margin: 18px 0px 0px 0px;
+}
+
 #login {
-  margin: 18px 10px 0px 20px;
+  margin: 18px 10px 0px 0px;
 }

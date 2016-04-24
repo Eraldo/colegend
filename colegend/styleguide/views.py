@@ -7,6 +7,9 @@ from .data import data
 
 
 class StyleguideView(TemplateView):
+    """
+    A 'styleguide' django view.
+    """
     template_name = 'styleguide/index.html'
 
     def get_template_names(self):

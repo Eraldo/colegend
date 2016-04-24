@@ -5,8 +5,7 @@
     # Fiona looked at the landing page and now wants to join coLegend.
     # She opens the site, scrolls down and clicks on the join button:
     - Load website
-    - Scroll to: join-explorer
-    - Click: join-explorer
+    - Click: join
 
     # She comes to a chat page were she is greeted and asked how she wants to join:
     - Find text: Welcome

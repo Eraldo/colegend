@@ -61,7 +61,10 @@
                     {% if request.user.is_authenticated %}
                         <a id="login" href="{% url "home" %}" class="btn btn-info pull-right">Home</a>
                     {% else %}
-                        <a id="login" href="{% url "account_login" %}?next=/" class="btn btn-info pull-right">Login</a>
+                        <div class="btn-group pull-right" role="group">
+                        <a id="join" href="{% url "join" %}?next=/" class="btn btn-info">Join</a>
+                        <a id="login" href="{% url "account_login" %}?next=/" class="btn btn-secondary">Login</a>
+                        </div>
                     {% endif %}
                     <li class="nav-item active" style=""><a class="page-scroll" href="#page-top">About</a></li>
                     <li class="nav-item"><a class="page-scroll" href="#features">Features</a></li>
@@ -617,7 +620,7 @@
                                                 {% icon 'check' color='#1ab394' %} Website hosting<br>
                                                 {% icon 'check' color='#1ab394' %} coWorker compensation<br>
                                             </p>
-                                                <a href="mailto:connect@colegend.org" class="">More details</a>
+                                            <a href="mailto:connect@colegend.org" class="">More details</a>
                                         </div>
                                     </div>
                                 </div>
@@ -630,7 +633,7 @@
                                         <div class="card-block bg-content">
                                             <h4 class="card-title">{% icon 'clock-o' %} and {% icon 'eur' %}</h4>
                                             <p>
-                                            You can support us with your time/energy and with a financial donation.
+                                                You can support us with your time/energy and with a financial donation.
                                             </p>
                                             <div class="row">
                                                 <div class="col-xs-6">
@@ -651,7 +654,6 @@
         </div>
     </div>
 </section>
-
 
 <section id="contact" class="gray-section contact">
     <div class="container">
