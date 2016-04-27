@@ -1,9 +1,8 @@
 import pprint
-
 from django.template.defaultfilters import slugify
 from django.template.loader import render_to_string
 from django.views.generic import TemplateView
-from .data import data
+from .data import atoms_data, molecules_data, organisms_data
 
 
 class StyleguideView(TemplateView):
@@ -23,24 +22,25 @@ class StyleguideView(TemplateView):
 
         # TODO: Split in sub-methods
 
-        for item, values in data.items():
-            name = values.get('name')
-            template = values.get('template')
-            item_context = values.get('context')
+        atoms = []
+        for atom, data in sorted(atoms_data.items()):
+            template = data.get('template')
+            item_context = data.get('context')
 
             # Create rendering for meta data
-            meta_context = dict()
-            meta_context['name'] = name
-            meta_context['template'] = template
-            input = """{{% include "{}" %}}""".format(template)
-            meta_context['input'] = input
-            meta_context['context'] = pprint.pformat(item_context)
+            meta_context = {
+                'name': atom,
+                'template': template,
+                'context': pprint.pformat(item_context),
+            }
 
-            item_meta = render_to_string("styleguide/_meta.html", context=meta_context)
-            context[item + "_meta"] = item_meta
+            item_meta = render_to_string("styleguide/atoms/meta.html", context=meta_context)
+            context[atom + "_meta"] = item_meta
 
             item_output = render_to_string(template, context=item_context)
-            context[item + "_output"] = item_output
+            context[atom + "_output"] = item_output
 
-            context[item] = item_meta + item_output
+            context[atom] = item_meta + item_output
+            atoms.append(item_meta + item_output)
+        context['atoms'] = atoms
         return context

@@ -1,29 +1,15 @@
 .main-headline {
-  color: white;
-  background-color: black;
-  margin: 1em 0em;
-  padding: 0.4em; }
+  border-bottom: solid lightgrey;
+  background-color: #f5f5f5; }
 
-.widget-styleguide-meta {
-  margin: 0 0 30px 0;
-  background-color: #EBE8E6;
-  color: #002E48;
-  padding: 15px;
-  position: relative; }
-  .widget-styleguide-meta.open {
-    z-index: 10; }
-  .widget-styleguide-meta h2 {
-    padding: 20px 0 10px 0;
-    margin: 0;
-    cursor: pointer; }
-  .widget-styleguide-meta .widget-styleguide-meta-content {
-    display: none; }
-    .widget-styleguide-meta .widget-styleguide-meta-content pre {
-      background-color: #f5f5f5;
-      border: 1px solid #002E48;
-      border-radius: 0;
-      padding: 5px; }
-      .widget-styleguide-meta .widget-styleguide-meta-content pre.widget-styleguide-meta-context {
-        resize: both; }
+.atom-styleguide-meta .headline {
+  border-bottom: solid lightgrey;
+  border-width: thin;
+  display: block;
+  margin: 1em 0em;
+  color: darkgray;
+  text-decoration: none; }
+.atom-styleguide-meta pre {
+  background-color: #f5f5f5; }
 
 /*# sourceMappingURL=index.css.map */
