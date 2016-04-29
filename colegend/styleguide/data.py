@@ -2,6 +2,78 @@
 # Data for the styleguide context
 
 atoms_data = {
+    'Color "category 1"': {
+        'template': 'styleguide/atoms/color.html',
+        'context': {
+            'name': 'category-1',
+        },
+    },
+    'Color "category 2"': {
+        'template': 'styleguide/atoms/color.html',
+        'context': {
+            'name': 'category-2',
+        },
+    },
+    'Color "category 3"': {
+        'template': 'styleguide/atoms/color.html',
+        'context': {
+            'name': 'category-3',
+        },
+    },
+    'Color "category 4"': {
+        'template': 'styleguide/atoms/color.html',
+        'context': {
+            'name': 'category-4',
+        },
+    },
+    'Color "category 5"': {
+        'template': 'styleguide/atoms/color.html',
+        'context': {
+            'name': 'category-5',
+        },
+    },
+    'Color "category 6"': {
+        'template': 'styleguide/atoms/color.html',
+        'context': {
+            'name': 'category-6',
+        },
+    },
+    'Color "category 7"': {
+        'template': 'styleguide/atoms/color.html',
+        'context': {
+            'name': 'category-7',
+        },
+    },
+    'Color "success"': {
+        'template': 'styleguide/atoms/color.html',
+        'context': {
+            'name': 'success',
+        },
+    },
+    'Color "info"': {
+        'template': 'styleguide/atoms/color.html',
+        'context': {
+            'name': 'info',
+        },
+    },
+    'Color "warning"': {
+        'template': 'styleguide/atoms/color.html',
+        'context': {
+            'name': 'warning',
+        },
+    },
+    'Color "danger"': {
+        'template': 'styleguide/atoms/color.html',
+        'context': {
+            'name': 'danger',
+        },
+    },
+    'Color "primary"': {
+        'template': 'styleguide/atoms/color.html',
+        'context': {
+            'name': 'primary',
+        },
+    },
     'Headline 1': {
         'template': 'atoms/headline.html',
         'context': {
