@@ -23,7 +23,7 @@
   font-family: "Ubuntu Titling";
   src: url("../fonts/Ubuntu-Titling/UbuntuTitling-Bold.woff"); }
 .text-category-7 {
-  color: darkviolet; }
+  color: violet; }
 
 .text-category-6 {
   color: indigo; }
@@ -44,7 +44,7 @@
   color: crimson; }
 
 .bg-category-7, .phoenix-avatar {
-  background-color: darkviolet; }
+  background-color: violet; }
 
 .bg-category-6, .eagle-avatar {
   background-color: indigo; }

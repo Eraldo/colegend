@@ -6,42 +6,49 @@ atoms_data = {
         'template': 'styleguide/atoms/color.html',
         'context': {
             'name': 'category-1',
+            'code': '#ED143D',
         },
     },
     'Color "category 2"': {
         'template': 'styleguide/atoms/color.html',
         'context': {
             'name': 'category-2',
+            'code': '#FF8C00',
         },
     },
     'Color "category 3"': {
         'template': 'styleguide/atoms/color.html',
         'context': {
             'name': 'category-3',
+            'code': '#FFD700',
         },
     },
     'Color "category 4"': {
         'template': 'styleguide/atoms/color.html',
         'context': {
             'name': 'category-4',
+            'code': '#008000',
         },
     },
     'Color "category 5"': {
         'template': 'styleguide/atoms/color.html',
         'context': {
             'name': 'category-5',
+            'code': '#1E90FF',
         },
     },
     'Color "category 6"': {
         'template': 'styleguide/atoms/color.html',
         'context': {
             'name': 'category-6',
+            'code': '#4B0082',
         },
     },
     'Color "category 7"': {
         'template': 'styleguide/atoms/color.html',
         'context': {
             'name': 'category-7',
+            'code': '#EE82EE',
         },
     },
     'Color "success"': {
