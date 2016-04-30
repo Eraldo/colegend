@@ -357,7 +357,7 @@ CMS_TEMPLATES = (
     # ('feature.html', 'Page with Feature')
 )
 
-# CMS_PERMISSION = True
+CMS_PERMISSION = True
 
 
 # REVERSION
