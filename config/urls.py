@@ -34,7 +34,7 @@ urlpatterns = [
                   url(r'^donations/', include('colegend.donations.urls', namespace='donations')),
 
                   # Your stuff: custom urls includes go here
-                  url(r'^$', RedirectView.as_view(url='home/', permanent=False), name='index'),
+                  url(r'^index/$', RedirectView.as_view(url='home/', permanent=False), name='index'),
 
                   url(r'^home/$', HomeView.as_view(), name='home'),
                   url(r'^about/', include('colegend.about.urls')),
@@ -64,14 +64,24 @@ urlpatterns = [
                   url(r'^mockups/', include('colegend.mockups.urls')),
                   url(r'^styleguide/', include('colegend.styleguide.urls')),
 
+                  # CMS
+                  url(r'^files/', include('filer.urls')),
+                  url(r'^', include('cms.urls')),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit
     # these url in browser to see how these error pages look like.
-    urlpatterns += [
-        url(r'^400/$', default_views.bad_request),
-        url(r'^403/$', default_views.permission_denied),
-        url(r'^404/$', default_views.page_not_found),
+
+    urlpatterns = [
+        url(r'^400/$', default_views.bad_request, kwargs={'exception': Exception('Bad Request!')}),
+        url(r'^403/$', default_views.permission_denied, kwargs={'exception': Exception('Permission Denied')}),
+        url(r'^404/$', default_views.page_not_found, kwargs={'exception': Exception('Page not Found')}),
         url(r'^500/$', default_views.server_error),
-    ]
+    ] + urlpatterns
+
+    import debug_toolbar
+
+    urlpatterns = [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns

@@ -23,11 +23,11 @@ class UserAdmin(AuthUserAdmin):
         (None, {'fields': ('username', 'password')}),
         (_('Personal info'), {'fields': ('name', 'gender', 'birthday', 'email', 'phone', 'address', 'occupation')}),
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
-                                       'roles', 'checkpoints')}),
+                                       'roles', 'checkpoints', 'user_permissions')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
     list_display = ('username', 'name', 'email', 'phone', 'is_staff')
     list_filter = ('is_staff', 'is_superuser', 'is_active', 'roles', 'checkpoints')
-    filter_horizontal = ('roles', 'checkpoints',)
+    filter_horizontal = ('roles', 'checkpoints', 'user_permissions')
     form = UserChangeForm
     add_form = UserCreationForm
