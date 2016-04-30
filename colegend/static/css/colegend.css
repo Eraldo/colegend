@@ -264,4 +264,7 @@ form .CodeMirror-fullscreen {
   .widget-datepicker .datepicker-form input {
     max-width: 7rem; }
 
+.cms-icon-logo:before, div.cms .cms-toolbar-item-logo a.colegend-cms:before {
+  content: initial; }
+
 /*# sourceMappingURL=colegend.css.map */
