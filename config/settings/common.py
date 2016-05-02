@@ -391,10 +391,15 @@ THUMBNAIL_PROCESSORS = (
 )
 
 
+# SLACK CHAT
+# ------------------------------------------------------------------------------
+SLACK_TEAM_ID = 'colegend'
+
+
 # SLACK IM
 # ------------------------------------------------------------------------------
 INSTALLED_APPS += ('django_slack',)
-SLACK_TOKEN = 'xoxp-7590691991-7590881985-13615726690-065713fdcc'
+SLACK_TOKEN = env('SLACK_TOKEN', default=None)
 SLACK_CHANNEL = env("SLACK_CHANNEL", default='core')
 SLACK_BACKEND = 'django_slack.backends.Urllib2Backend'
 SLACK_USERNAME = 'coLegend'
