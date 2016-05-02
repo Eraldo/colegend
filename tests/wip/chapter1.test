@@ -8,8 +8,7 @@
     - Load website
 
     - Find text: Pricing
-    - Scroll to: join-explorer
-    - Click: join-explorer
+    - Click: join
 
     # She comes to a chat page where she is greeted and asked how she wants to join:
     - Page title: Join
