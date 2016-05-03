@@ -280,10 +280,54 @@ atoms = [
         },
     },
     {
-        'name': 'Avatar',
-        'template': 'atoms/avatar.html',
+        'name': 'Avatars',
+        'template': 'styleguide/molecules/atoms.html',
         'context': {
-            'image': 'legends/images/anonymous.png',
+            'columns': 3,
+            'atoms': [
+                {
+                    'name': 'Anonymous avatar',
+                    'template': 'atoms/avatar.html',
+                    'context': {
+                        'image': 'legends/images/anonymous.png',
+                    },
+                },
+                {
+                    'name': 'Legend avatar',
+                    'template': 'atoms/avatar.html',
+                    'context': {
+                        'image': 'legends/images/npc/Coralina.png',
+                        'name': 'Coralina Charming',
+                    },
+                },
+            ],
+        },
+    },
+    {
+        'name': 'Badges',
+        'template': 'styleguide/molecules/atoms.html',
+        'context': {
+            'columns': 3,
+            'atoms': [
+                {
+                    'name': 'Cake badge',
+                    'template': 'atoms/badge.html',
+                    'context': {
+                        'name': 'Cake',
+                        'category': '3',
+                        'image': 'styleguide/images/icon_cake.png',
+                    },
+                },
+                {
+                    'name': 'Camera badge',
+                    'template': 'atoms/badge.html',
+                    'context': {
+                        'name': 'Camera',
+                        'category': '5',
+                        'image': 'styleguide/images/icon_camera.png',
+                    },
+                },
+            ],
         },
     },
 ]

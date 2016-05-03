@@ -15,6 +15,19 @@
 .atom-styleguide-color {
   text-align: center; }
 
+.atom-avatar a {
+  display: inline-block; }
+.atom-avatar .avatar-image {
+  width: 8em;
+  height: 8em;
+  background-size: cover;
+  border-radius: 50%; }
+.atom-avatar .avatar-label {
+  text-align: center;
+  display: none; }
+.atom-avatar a:hover .avatar-label {
+  display: block; }
+
 .molecule-atoms {
   margin: 0 1em; }
 
