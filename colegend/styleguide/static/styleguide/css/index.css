@@ -1,5 +1,5 @@
 .main-headline {
-  border-bottom: solid lightgrey;
+  margin: 1em 0em;
   background-color: #f5f5f5; }
 
 .atom-styleguide-meta .headline {
@@ -11,5 +11,11 @@
   text-decoration: none; }
 .atom-styleguide-meta pre {
   background-color: #f5f5f5; }
+
+.atom-styleguide-color {
+  text-align: center; }
+
+.molecule-atoms {
+  margin: 0 1em; }
 
 /*# sourceMappingURL=index.css.map */

@@ -22,25 +22,26 @@ class StyleguideView(TemplateView):
 
         # TODO: Split in sub-methods
 
-        atoms = []
-        for atom, data in sorted(atoms_data.items()):
-            template = data.get('template')
-            item_context = data.get('context')
-
-            # Create rendering for meta data
-            meta_context = {
-                'name': atom,
-                'template': template,
-                'context': pprint.pformat(item_context),
-            }
-
-            item_meta = render_to_string('styleguide/atoms/meta.html', context=meta_context)
-            context[atom + "_meta"] = item_meta
-
-            item_output = render_to_string(template, context=item_context)
-            context[atom + "_output"] = item_output
-
-            context[atom] = item_meta + item_output
-            atoms.append(item_meta + item_output)
-        context['atoms'] = atoms
+        # atoms = []
+        # for atom in atoms_data:
+        #     name = atom.get('name')
+        #     template = atom.get('template')
+        #     atom_context = atom.get('context')
+        #
+        #     # Create rendering for meta data
+        #     meta_context = {
+        #         'name': name,
+        #         'template': template,
+        #         'context': pprint.pformat(atom_context),
+        #     }
+        #
+        #     item_meta = render_to_string('styleguide/atoms/meta.html', context=meta_context)
+        #     context[atom + "_meta"] = item_meta
+        #
+        #     item_output = render_to_string(template, context=item_context)
+        #     context[atom + "_output"] = item_output
+        #
+        #     context[atom] = item_meta + item_output
+        #     atoms.append(item_meta + item_output)
+        context['atoms'] = atoms_data
         return context

@@ -1,5 +1,5 @@
 {% extends "styleguide/base.html" %}
-{% load static %}
+{% load static styleguide_tags %}
 
 {% block page_css %}
     {{ block.super }}
@@ -17,7 +17,7 @@
 {% block content %}
     <h1 id="atoms" class="main-headline">Atoms</h1>
     {% for atom in atoms %}
-        {{ atom }}
+        {% atom %}
     {% endfor %}
     <h1 id="molecules" class="main-headline">Molecules</h1>
     {% for molecule in molecules %}
