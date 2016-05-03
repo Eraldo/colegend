@@ -16,6 +16,7 @@
 
 {% block content %}
     <h1 id="atoms" class="main-headline">Atoms</h1>
+    {% toc items=atoms %}
     {% for atom in atoms %}
         {% atom %}
     {% endfor %}

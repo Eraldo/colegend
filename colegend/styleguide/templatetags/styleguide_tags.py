@@ -1,9 +1,27 @@
 import pprint
 
 from django import template
+from django.template.defaultfilters import slugify
 from django.template.loader import render_to_string
 
 register = template.Library()
+
+
+@register.simple_tag(takes_context=True)
+def toc(context, items=None, **kwargs):
+    items = items or context.get('items')
+    links = []
+    for item in items:
+        name = item.get('name')
+        links.append({
+            'text': item.get('name'),
+            'url': '#{slug}'.format(slug=slugify(name)),
+        })
+    context = {
+        'links': links,
+    }
+    context.update(kwargs)
+    return render_to_string('styleguide/atoms/toc.html', context=context)
 
 
 @register.simple_tag(takes_context=True)
