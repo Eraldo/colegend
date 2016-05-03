@@ -167,6 +167,12 @@ atoms = [
         },
     },
     {
+        'name': 'Link',
+        'template': 'styleguide/atoms/link.html',
+        'context': {
+        },
+    },
+    {
         'name': 'Buttons',
         'template': 'styleguide/molecules/atoms.html',
         'context': {
