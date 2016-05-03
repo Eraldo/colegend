@@ -35,13 +35,16 @@
   color: green; }
 
 .text-category-3 {
-  color: green; }
+  color: gold; }
 
 .text-category-2 {
   color: darkorange; }
 
 .text-category-1 {
   color: crimson; }
+
+.bg-colored, .bg-category-7, .phoenix-avatar, .bg-category-6, .eagle-avatar, .bg-category-5, .parrot-avatar, .bg-category-4, .monkey-avatar, .bg-category-3, .tiger-avatar, .bg-category-2, .dolphin-avatar, .bg-category-1, .bear-avatar {
+  color: white; }
 
 .bg-category-7, .phoenix-avatar {
   background-color: violet; }

@@ -34,7 +34,7 @@ class StyleguideView(TemplateView):
                 'context': pprint.pformat(item_context),
             }
 
-            item_meta = render_to_string("styleguide/atoms/meta.html", context=meta_context)
+            item_meta = render_to_string('styleguide/atoms/meta.html', context=meta_context)
             context[atom + "_meta"] = item_meta
 
             item_output = render_to_string(template, context=item_context)
