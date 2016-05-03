@@ -1,3 +1,4 @@
+{% load icons %}
 <div class="atom-button">
-    <a href="#" class="btn btn-primary">{{ text }}</a>
+    <a {% if url %}href="{{ url }}" {% endif %}class="btn{% if class %} {{ class }}{% endif %}">{% if icon %}{% icon icon %}{% endif %}{{ text }}</a>
 </div>

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Data for the styleguide context
 
-atoms_data = [
+atoms = [
     {
         'name': 'Category Colors',
         'template': 'styleguide/molecules/atoms.html',
@@ -167,10 +167,110 @@ atoms_data = [
         },
     },
     {
-        'name': 'Button',
-        'template': 'atoms/button.html',
+        'name': 'Buttons',
+        'template': 'styleguide/molecules/atoms.html',
         'context': {
-            'text': 'Join',
+            'columns': 3,
+            'atoms': [
+                {
+                    'name': 'Action button',
+                    'template': 'atoms/button.html',
+                    'context': {
+                        'text': 'Action',
+                        'class': 'btn-primary',
+                    },
+                },
+                {
+                    'name': 'Secondary button',
+                    'template': 'atoms/button.html',
+                    'context': {
+                        'text': 'Login',
+                        'class': 'btn-secondary',
+                    },
+                },
+                {
+                    'name': 'Button with icon',
+                    'template': 'atoms/button.html',
+                    'context': {
+                        'text': 'Star',
+                        'icon': 'star',
+                        'class': 'btn-primary',
+                    },
+                },
+                {
+                    'name': 'Button with link',
+                    'template': 'atoms/button.html',
+                    'context': {
+                        'text': 'Click Me',
+                        'class': 'btn-primary',
+                        'url': 'https://www.google.com',
+                    },
+                },
+                {
+                    'name': 'Success button',
+                    'template': 'atoms/button.html',
+                    'context': {
+                        'text': 'Yeah!',
+                        'class': 'btn-success',
+                    },
+                },
+                {
+                    'name': 'Info button',
+                    'template': 'atoms/button.html',
+                    'context': {
+                        'text': 'More info',
+                        'class': 'btn-info',
+                    },
+                },
+                {
+                    'name': 'Warning button',
+                    'template': 'atoms/button.html',
+                    'context': {
+                        'text': 'Caution',
+                        'class': 'btn-warning',
+                    },
+                },
+                {
+                    'name': 'Danger button',
+                    'template': 'atoms/button.html',
+                    'context': {
+                        'text': 'Delete',
+                        'class': 'btn-danger',
+                    },
+                },
+                {
+                    'name': 'Small button',
+                    'template': 'atoms/button.html',
+                    'context': {
+                        'text': 'Mini',
+                        'class': 'btn-primary btn-sm',
+                    },
+                },
+                {
+                    'name': 'Large Button',
+                    'template': 'atoms/button.html',
+                    'context': {
+                        'text': 'Special Offer',
+                        'class': 'btn-primary btn-lg',
+                    },
+                },
+                {
+                    'name': 'Outline button',
+                    'template': 'atoms/button.html',
+                    'context': {
+                        'text': 'Optional',
+                        'class': 'btn-info-outline',
+                    },
+                },
+                {
+                    'name': 'Disabled button',
+                    'template': 'atoms/button.html',
+                    'context': {
+                        'text': 'Locked',
+                        'class': 'btn-primary disabled',
+                    },
+                },
+            ],
         },
     },
     {
@@ -182,6 +282,6 @@ atoms_data = [
     },
 ]
 
-molecules_data = {}
+molecules = {}
 
-organisms_data = {}
+organisms = {}
