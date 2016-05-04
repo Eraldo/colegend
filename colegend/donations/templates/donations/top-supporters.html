@@ -24,7 +24,7 @@
             {% include 'widgets/speech.html' with npc='monkey' content='Thanks for your time effort!' full=True %}
             <div class="card card-block bg-content">
             <h2>Top 4 Time Doners</h2>
-                {% for doner in top_money_doners %}
+                {% for doner in top_time_doners %}
                     <span class="fa-stack fa-2x" style="vertical-align: top">
                     <i class="fa fa-star fa-stack-2x text-category-3"></i>
                     <strong class="fa-stack-1x fa-stack-text fa-inverse">{{ forloop.counter }}</strong>
