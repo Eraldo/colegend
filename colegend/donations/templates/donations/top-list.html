@@ -1,0 +1,37 @@
+{% extends 'donations/base.html' %}
+{% load icons buttons donations_tags legends_tags %}
+
+{% block title %}Top Supporters{% endblock %}
+
+{% block content_class %}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6">
+            {% include 'widgets/speech.html' with npc='tiger' content='Thanks for your donations!' full=True %}
+            <div class="card card-block bg-content">
+                <h2>Top 4 Money Doners</h2>
+                {% for doner in top_money_doners %}
+                    <span class="fa-stack fa-2x" style="vertical-align: top">
+                    <i class="fa fa-star fa-stack-2x text-category-3"></i>
+                    <strong class="fa-stack-1x fa-stack-text fa-inverse">{{ forloop.counter }}</strong>
+                </span>
+                    {% legend doner size='small' %} donated: €{{ doner.total_donation }}<br>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-6">
+            {% include 'widgets/speech.html' with npc='monkey' content='Thanks for your time effort!' full=True %}
+            <div class="card card-block bg-content">
+            <h2>Top 4 Time Doners</h2>
+                {% for doner in top_money_doners %}
+                    <span class="fa-stack fa-2x" style="vertical-align: top">
+                    <i class="fa fa-star fa-stack-2x text-category-3"></i>
+                    <strong class="fa-stack-1x fa-stack-text fa-inverse">{{ forloop.counter }}</strong>
+                </span>
+                    {% legend doner size='small' %}<br>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
