@@ -148,6 +148,13 @@ def menu(context, user=None):
                         'name': 'coLegend Story',
                         'locked': True,
                     },
+                    {
+                        'name': 'divider',
+                    },
+                    {
+                        'name': 'Top Supporters',
+                        'url': reverse('donations:top-supporters'),
+                    },
                 ],
             },
         ]
