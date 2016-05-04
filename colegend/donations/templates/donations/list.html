@@ -3,6 +3,11 @@
 
 {% block title %}Donations{% endblock %}
 
+{% block page_links %}
+    <a href="{% url 'donations:top-supporters' %}" class="btn btn-link btn-sm">Top Supporters</a>
+{% endblock %}
+
+
 {% block page_controls %}
     {% button 'create' pattern='donations:create' %}
 {% endblock %}
