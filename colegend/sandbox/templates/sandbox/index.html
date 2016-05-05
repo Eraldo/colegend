@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load static legends_tags %}
+{% load static cms_tags legends_tags %}
 
 {% block extra_head %}
     {{ block.super }}
@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block content %}
-
+    {% placeholder 'content' %}
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <div class="g-hangout"
          data-render="createhangout"

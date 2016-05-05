@@ -119,6 +119,8 @@ LOCAL_APPS = (
 
     'colegend.mockups',
     'colegend.styleguide',
+
+    'colegend.sandbox',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

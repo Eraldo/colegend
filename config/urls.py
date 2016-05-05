@@ -8,7 +8,7 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 from django.views import defaults as default_views
 from django.views.generic import RedirectView, TemplateView
 
-from colegend.home.views import TestView, HomeView, JoinView
+from colegend.home.views import JoinView
 
 __author__ = 'Eraldo Energy'
 
@@ -51,8 +51,6 @@ urlpatterns = [
     url(r'^game/', include('colegend.games.urls', namespace='games')),
     url(r'^cards/', include('colegend.cards.urls', namespace='cards')),
     url(r'^story/', include('colegend.story.urls', namespace='story')),
-
-    url(r'^test/$', TestView.as_view(), name='test'),
 
     # Added robots.txt file for crawlers (google/etc)
     url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),

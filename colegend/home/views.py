@@ -1,4 +1,3 @@
-from django.contrib import messages
 from django.shortcuts import redirect
 from django.views.generic import TemplateView
 
@@ -21,15 +20,3 @@ class HomeView(TemplateView):
 
 class JoinView(TemplateView):
     template_name = "home/join.html"
-
-
-class TestView(TemplateView):
-    template_name = "pages/test.html"
-
-    def get(self, request, *args, **kwargs):
-        messages.success(request, "Test page loaded")
-        return super().get(request, *args, **kwargs)
-
-        # def get_context_data(self, **kwargs):
-        #     context = super().get_context_data(**kwargs)
-        #     context['user'] = self.request.u
