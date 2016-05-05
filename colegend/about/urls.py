@@ -1,8 +1,6 @@
 from django.conf.urls import url
 
-from colegend.about.views import AboutView
-
-__author__ = 'eraldo'
+from .views import AboutView
 
 urlpatterns = [
     url(r'^$',

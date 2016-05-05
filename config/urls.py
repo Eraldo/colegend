@@ -34,9 +34,6 @@ urlpatterns = [
     url(r'^donations/', include('colegend.donations.urls', namespace='donations')),
 
     # Your stuff: custom urls includes go here
-    url(r'^$', RedirectView.as_view(url='home/', permanent=False), name='index'),
-
-    url(r'^home/$', HomeView.as_view(), name='home'),
     url(r'^about/', include('colegend.about.urls')),
     url(r'^support/', include('colegend.support.urls', namespace='support')),
 
