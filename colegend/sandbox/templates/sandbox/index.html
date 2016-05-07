@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load static cms_tags legends_tags %}
+{% load static cms_tags menu_tags legends_tags %}
 
 {% block extra_head %}
     {{ block.super }}
@@ -15,6 +15,9 @@
 {% endblock %}
 
 {% block content %}
+    {% render_model card "name" %}
+    {% show_menu %}
+{#    {% show_menu 0 1 100 100 "menu.html" %}#}
     {% placeholder 'content' %}
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <div class="g-hangout"
