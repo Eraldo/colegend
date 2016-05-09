@@ -3,6 +3,63 @@
 
 atoms = [
     {
+        'name': 'Project Colors',
+        'template': 'styleguide/molecules/atoms.html',
+        'context': {
+            'columns': 4,
+            'atoms': [
+                {
+                    'name': 'Main',
+                    'template': 'styleguide/atoms/color.html',
+                    'context': {
+                        'name': 'main',
+                        'code': '#26C6DA',
+                    },
+                },
+                {
+                    'name': 'Main light',
+                    'template': 'styleguide/atoms/color.html',
+                    'context': {
+                        'name': 'main-light',
+                        'code': '#B2EBF2',
+                    },
+                },
+                {
+                    'name': 'Main dark',
+                    'template': 'styleguide/atoms/color.html',
+                    'context': {
+                        'name': 'main-dark',
+                        'code': '#0097A7',
+                    },
+                },
+                {
+                    'name': 'Accent',
+                    'template': 'styleguide/atoms/color.html',
+                    'context': {
+                        'name': 'accent',
+                        'code': '#9CCC65',
+                    },
+                },
+                {
+                    'name': 'Accent light',
+                    'template': 'styleguide/atoms/color.html',
+                    'context': {
+                        'name': 'accent-light',
+                        'code': '#DCEDC8',
+                    },
+                },
+                {
+                    'name': 'Accent dark',
+                    'template': 'styleguide/atoms/color.html',
+                    'context': {
+                        'name': 'accent-dark',
+                        'code': '#689F38',
+                    },
+                },
+            ],
+        },
+    },
+    {
         'name': 'Category Colors',
         'template': 'styleguide/molecules/atoms.html',
         'context': {
@@ -66,7 +123,8 @@ atoms = [
                 },
             ],
         },
-    }, {
+    },
+    {
         'name': 'Action Colors',
         'template': 'styleguide/molecules/atoms.html',
         'context': {
@@ -334,4 +392,30 @@ atoms = [
 
 molecules = {}
 
-organisms = {}
+organisms = [
+    {
+        'name': 'Navigation bars',
+        'template': 'styleguide/molecules/atoms.html',
+        'context': {
+            'columns': 12,
+            'atoms': [
+                {
+                    'name': 'Anonymous navigation bar',
+                    'template': 'organisms/navbar.html',
+                    'context': {
+                        'menu_id': 'styleguide',
+                        'class': 'bg-main-dark',
+                    },
+                },
+                {
+                    'name': 'Legend navigation bar',
+                    'template': 'organisms/navbar.html',
+                    'context': {
+                        'menu_id': 'styleguide',
+                        'class': 'bg-main',
+                    },
+                },
+            ],
+        },
+    },
+]

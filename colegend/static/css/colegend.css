@@ -22,50 +22,93 @@
 @font-face {
   font-family: "Ubuntu Titling";
   src: url("../fonts/Ubuntu-Titling/UbuntuTitling-Bold.woff"); }
-.text-category-7 {
-  color: violet; }
+.text-main {
+  color: #26c6da; }
 
-.text-category-6 {
-  color: indigo; }
+.text-main-light {
+  color: #b2ebf2; }
 
-.text-category-5 {
-  color: dodgerblue; }
+.text-main-dark {
+  color: #0097a7; }
 
-.text-category-4 {
-  color: green; }
+.text-accent {
+  color: #9ccc65; }
 
-.text-category-3 {
-  color: gold; }
+.text-accent-light {
+  color: #dcedc8; }
 
-.text-category-2 {
-  color: darkorange; }
+.text-accent-dark {
+  color: #689f38; }
 
-.text-category-1 {
-  color: crimson; }
-
-.bg-colored, .bg-category-7, .phoenix-avatar, .bg-category-6, .eagle-avatar, .bg-category-5, .parrot-avatar, .bg-category-4, .monkey-avatar, .bg-category-3, .tiger-avatar, .bg-category-2, .dolphin-avatar, .bg-category-1, .bear-avatar {
+.bg-main, .organism-header .dropdown-menu {
+  background-color: #26c6da;
   color: white; }
 
+.bg-main-light {
+  background-color: #b2ebf2; }
+
+.bg-main-dark {
+  background-color: #0097a7;
+  color: white; }
+
+.bg-accent, .organism-header .nav-link:focus, .organism-header .nav-link:hover, .organism-header .dropdown-menu .dropdown-item:focus, .organism-header .dropdown-menu .dropdown-item:hover {
+  background-color: #9ccc65;
+  color: white; }
+
+.bg-accent-light {
+  background-color: #dcedc8; }
+
+.bg-accent-dark {
+  background-color: #689f38;
+  color: white; }
+
+.text-category-7 {
+  color: #9c27b0; }
+
+.text-category-6 {
+  color: #3f51b5; }
+
+.text-category-5 {
+  color: #03a9f4; }
+
+.text-category-4 {
+  color: #4caf50; }
+
+.text-category-3 {
+  color: #ffeb3b; }
+
+.text-category-2 {
+  color: #ff9800; }
+
+.text-category-1 {
+  color: #f44336; }
+
 .bg-category-7, .phoenix-avatar {
-  background-color: violet; }
+  background-color: #9c27b0;
+  color: white; }
 
 .bg-category-6, .eagle-avatar {
-  background-color: indigo; }
+  background-color: #3f51b5;
+  color: white; }
 
 .bg-category-5, .parrot-avatar {
-  background-color: dodgerblue; }
+  background-color: #03a9f4;
+  color: white; }
 
 .bg-category-4, .monkey-avatar {
-  background-color: green; }
+  background-color: #4caf50;
+  color: white; }
 
 .bg-category-3, .tiger-avatar {
-  background-color: gold; }
+  background-color: #ffeb3b; }
 
 .bg-category-2, .dolphin-avatar {
-  background-color: darkorange; }
+  background-color: #ff9800;
+  color: white; }
 
 .bg-category-1, .bear-avatar {
-  background-color: crimson; }
+  background-color: #f44336;
+  color: white; }
 
 .alert-debug {
   background-color: white;
@@ -132,22 +175,22 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0; }
 
 .text-conscious {
-  color: #123eab; }
+  color: #3f51b5; }
 
 .text-connected {
-  color: #009b0a; }
+  color: #4caf50; }
 
 .text-continuous {
-  color: #c55b00; }
+  color: #ff9800; }
 
 .bg-conscious {
-  background-color: #123eab; }
+  background-color: #3f51b5; }
 
 .bg-connected {
-  background-color: #009b0a; }
+  background-color: #4caf50; }
 
 .bg-continuous {
-  background-color: #c55b00; }
+  background-color: #ff9800; }
 
 #feedback-button, #feedback-button-mobile {
   height: 67px;
@@ -162,18 +205,18 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn-conscious, .btn-conscious.active, .btn-conscious.focus, .btn-conscious:active, .btn-conscious:focus, .btn-conscious:hover, .open > .btn-conscious.dropdown-toggle {
   color: white;
-  background-color: #123eab;
-  border-color: #123eab; }
+  background-color: #3f51b5;
+  border-color: #3f51b5; }
 
 .btn-connected, .btn-connected.active, .btn-connected.focus, .btn-connected:active, .btn-connected:focus, .btn-connected:hover, .open > .btn-connected.dropdown-toggle {
   color: white;
-  background-color: #009b0a;
-  border-color: #009b0a; }
+  background-color: #4caf50;
+  border-color: #4caf50; }
 
 .btn-continuous, .btn-continuous.active, .btn-continuous.focus, .btn-continuous:active, .btn-continuous:focus, .btn-continuous:hover, .open > .btn-continuous.dropdown-toggle {
   color: white;
-  background-color: #c55b00;
-  border-color: #c55b00; }
+  background-color: #ff9800;
+  border-color: #ff9800; }
 
 .speech-bubble-arrow, .speech-bubble-arrow::before, .speech-bubble-arrow::after {
   content: "";
@@ -269,5 +312,10 @@ form .CodeMirror-fullscreen {
 
 .cms-icon-logo:before, div.cms .cms-toolbar-item-logo a.colegend-cms:before {
   content: initial; }
+
+.organism-header .nav-link {
+  color: inherit; }
+.organism-header .dropdown-menu .dropdown-item {
+  color: inherit; }
 
 /*# sourceMappingURL=colegend.css.map */

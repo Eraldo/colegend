@@ -26,6 +26,7 @@ def toc(context, items=None, **kwargs):
 
 @register.simple_tag(takes_context=True)
 def atom(context, atom=None, **kwargs):
+    request = context.get('request')
     atom = atom or context.get('atom')
     name = atom.get('name')
     template = atom.get('template')
@@ -37,5 +38,6 @@ def atom(context, atom=None, **kwargs):
     }
     context.update(kwargs)
     atom_meta = render_to_string('styleguide/atoms/meta.html', context=context)
-    atom_output = render_to_string(template, context=atom_context)
+    print(request)
+    atom_output = render_to_string(template, context=atom_context, request=request)
     return atom_meta + atom_output

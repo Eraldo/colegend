@@ -18,4 +18,5 @@ class StyleguideView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['atoms'] = atoms
+        context['organisms'] = organisms
         return context

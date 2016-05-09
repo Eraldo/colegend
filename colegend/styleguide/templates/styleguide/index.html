@@ -1,6 +1,5 @@
 {% extends "styleguide/base.html" %}
 {% load static styleguide_tags %}
-
 {% block page_css %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'styleguide/css/index.css' %}">
@@ -25,7 +24,8 @@
         {{ molecule }}
     {% endfor %}
     <h1 id="organisms" class="main-headline">Organisms</h1>
+    {% toc items=organisms %}
     {% for organism in organisms %}
-        {{ organism }}
+        {% atom organism %}
     {% endfor %}
 {% endblock %}
