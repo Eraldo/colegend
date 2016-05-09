@@ -25,19 +25,18 @@ def toc(context, items=None, **kwargs):
 
 
 @register.simple_tag(takes_context=True)
-def atom(context, atom=None, **kwargs):
+def meta_element(context, element=None, **kwargs):
     request = context.get('request')
-    atom = atom or context.get('atom')
-    name = atom.get('name')
-    template = atom.get('template')
-    atom_context = atom.get('context')
+    element = element or context.get('element')
+    name = element.get('name')
+    template = element.get('template')
+    element_context = element.get('context')
     context = {
         'name': name,
         'template': template,
-        'context': pprint.pformat(atom_context),
+        'context': pprint.pformat(element_context),
     }
     context.update(kwargs)
-    atom_meta = render_to_string('styleguide/atoms/meta.html', context=context)
-    print(request)
-    atom_output = render_to_string(template, context=atom_context, request=request)
-    return atom_meta + atom_output
+    element_meta = render_to_string('styleguide/atoms/meta.html', context=context)
+    element_output = render_to_string(template, context=element_context, request=request)
+    return element_meta + element_output

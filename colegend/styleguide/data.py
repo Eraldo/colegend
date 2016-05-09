@@ -237,6 +237,14 @@ atoms = [
             'columns': 3,
             'atoms': [
                 {
+                    'name': 'Link button',
+                    'template': 'atoms/button.html',
+                    'context': {
+                        'text': 'Link',
+                        'class': 'btn-link',
+                    },
+                },
+                {
                     'name': 'Action button',
                     'template': 'atoms/button.html',
                     'context': {
@@ -390,7 +398,79 @@ atoms = [
     },
 ]
 
-molecules = {}
+molecules = [
+    {
+        'name': 'Buttons',
+        'template': 'styleguide/molecules/atoms.html',
+        'context': {
+            'columns': 12,
+            'atoms': [
+                {
+                    'name': 'Button group',
+                    'template': 'molecules/buttons.html',
+                    'context': {
+                        'buttons': [
+                            {
+                                'text': 'Button 1',
+                                'class': 'btn-primary',
+                            },
+                            {
+                                'text': 'Button 2',
+                                'class': 'btn-primary',
+                            },
+                            {
+                                'text': 'Button 3',
+                                'class': 'btn-primary',
+                            },
+                        ],
+                    },
+                },
+                {
+                    'name': 'Small button group',
+                    'template': 'molecules/buttons.html',
+                    'context': {
+                        'buttons': [
+                            {
+                                'text': 'Button 1',
+                                'class': 'btn-primary',
+                            },
+                            {
+                                'text': 'Button 2',
+                                'class': 'btn-primary',
+                            },
+                            {
+                                'text': 'Button 3',
+                                'class': 'btn-primary',
+                            },
+                        ],
+                        'class': 'btn-group btn-group-sm',
+                    },
+                },
+                {
+                    'name': 'Small button vertical',
+                    'template': 'molecules/buttons.html',
+                    'context': {
+                        'buttons': [
+                            {
+                                'text': 'Button 1',
+                                'class': 'btn-primary',
+                            },
+                            {
+                                'text': 'Button 2',
+                                'class': 'btn-primary',
+                            },
+                            {
+                                'text': 'Button 3',
+                                'class': 'btn-primary',
+                            },
+                        ],
+                        'class': 'btn-group-vertical',
+                    },
+                },
+            ],
+        },
+    },
+]
 
 organisms = [
     {
@@ -413,6 +493,71 @@ organisms = [
                     'context': {
                         'menu_id': 'styleguide',
                         'class': 'bg-main',
+                    },
+                },
+            ],
+        },
+    },
+    {
+        'name': 'Headers',
+        'template': 'styleguide/molecules/atoms.html',
+        'context': {
+            'columns': 12,
+            'atoms': [
+                {
+                    'name': 'Simple header',
+                    'template': 'organisms/header.html',
+                    'context': {
+                        'title': 'Page Title Test',
+                    },
+                },
+                {
+                    'name': 'Header with breadcrumbs links and controls',
+                    'template': 'organisms/header.html',
+                    'context': {
+                        'title': 'Page Title Test',
+                        'breadcrumbs': [
+                            {
+                                'name': 'Link 1',
+                                'url': '#link1',
+                            },
+                            {
+                                'name': 'Link 2',
+                                'url': '#link2',
+                            },
+                            {
+                                'name': 'Link 3',
+                                'url': '#link3',
+                            },
+                        ],
+                        'links': [
+                            {
+                                'text': 'Link 1',
+                                'class': 'btn-link',
+                            },
+                            {
+                                'text': 'Link 2',
+                                'class': 'btn-link',
+                            },
+                            {
+                                'text': 'Link 3',
+                                'class': 'btn-link',
+                            },
+                        ],
+                        'buttons': [
+                            {
+                                'text': 'Button 1',
+                                'class': 'btn-primary',
+                            },
+                            {
+                                'text': 'Button 2',
+                                'class': 'btn-primary',
+                            },
+                            {
+                                'text': 'Button 3',
+                                'class': 'btn-primary',
+                            },
+                        ],
                     },
                 },
             ],

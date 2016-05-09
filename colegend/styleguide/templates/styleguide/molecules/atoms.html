@@ -3,7 +3,7 @@
     <div class="row">
         {% for atom in atoms %}
             <div class="col-md-{{ columns|default:12 }}">
-                {% atom %}
+                {% meta_element atom %}
             </div>
         {% endfor %}
     </div>

@@ -1,4 +1,2 @@
 {% load icons %}
-<div class="atom-button">
-    <a {% if url %}href="{{ url }}" {% endif %}class="btn{% if class %} {{ class }}{% endif %}">{% if icon %}{% icon icon %}{% endif %}{{ text }}</a>
-</div>
+<a {% if url %}href="{{ url }}" {% endif %}class="atom-button btn{% if class %} {{ class }}{% endif %}">{% if icon %}{% icon icon %}{% endif %}{{ text }}</a>

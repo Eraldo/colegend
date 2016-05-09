@@ -1,0 +1,14 @@
+<div class="organism-header">
+    <div class="card bg-content">
+        <div class="card-block">
+            {% include 'organisms/breadcrumbs.html' %}
+            <h1 {% if id %}id="{{ id }}"{% endif %} class="card-title">{{ title }}</h1>
+        </div>
+        {% if links %}
+            {% include 'organisms/links.html' %}
+        {% endif %}
+        {% if buttons %}
+            {% include 'organisms/controls.html' %}
+        {% endif %}
+    </div>
+</div>
