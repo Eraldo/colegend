@@ -7,15 +7,22 @@
                      alt="coLegend logo">
             </a>
             <button type="button" class="navbar-toggler hidden-sm-up pull-right" data-toggle="collapse"
-                    data-target="#bs-navbar-collapse-1">
+                    data-target="#bs-navbar-collapse-{{ id }}">
                 &#9776;
             </button>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-toggleable-xs" id="bs-navbar-collapse-1">
+            <div class="collapse navbar-toggleable-xs" id="bs-navbar-collapse{% if id %}-{{ id }}{% endif %}">
                 <ul class="nav navbar-nav">
-                    {% if menu_id %}
-                        {% show_menu_below_id "styleguide" 0 100 100 100 "organisms/menu.html" %}
+                    {% if menu_id and user.is_authenticated %}
+                        {% show_menu_below_id menu_id 0 100 100 100 "organisms/menu.html" %}
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-link" href="{% url 'join' %}">{% trans "Join" %}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-link" href="{% url 'account_login' %}">{% trans "Log in" %}</a>
+                        </li>
                     {% endif %}
                 </ul>
                 <ul class="nav navbar-nav pull-right">
