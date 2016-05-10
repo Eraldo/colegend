@@ -15,18 +15,29 @@
 .atom-styleguide-color {
   text-align: center; }
 
-.atom-avatar a {
-  display: inline-block; }
-.atom-avatar .avatar-image {
-  width: 8em;
-  height: 8em;
-  background-size: cover;
-  border-radius: 50%; }
-.atom-avatar .avatar-label {
-  text-align: center;
-  display: none; }
-.atom-avatar a:hover .avatar-label {
-  display: block; }
+.atom-avatar {
+  width: 6em;
+  height: 6em;
+  position: relative; }
+  .atom-avatar.small {
+    font-size: 0.5em; }
+  .atom-avatar.large {
+    font-size: 2em; }
+  .atom-avatar .atom-label {
+    position: absolute;
+    bottom: 0em;
+    width: 100%;
+    display: none;
+    white-space: inherit; }
+  .atom-avatar:hover .atom-label {
+    display: inherit; }
+  .atom-avatar:hover.small .atom-label {
+    display: none; }
+  .atom-avatar .avatar-image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    border-radius: 50%; }
 
 .molecule-atoms {
   margin: 0 1em; }

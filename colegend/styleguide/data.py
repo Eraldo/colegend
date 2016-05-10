@@ -364,6 +364,27 @@ atoms = [
                     'context': {
                         'image': 'legends/images/npc/Coralina.png',
                         'name': 'Coralina Charming',
+                        'url': '#coralina',
+                    },
+                },
+                {
+                    'name': 'Small legend avatar',
+                    'template': 'atoms/avatar.html',
+                    'context': {
+                        'image': 'legends/images/npc/Coralina.png',
+                        'name': 'Coralina Charming',
+                        'url': '#coralina',
+                        'size': 'small',
+                    },
+                },
+                {
+                    'name': 'large legend avatar',
+                    'template': 'atoms/avatar.html',
+                    'context': {
+                        'image': 'legends/images/npc/Coralina.png',
+                        'name': 'Coralina Charming',
+                        'url': '#coralina',
+                        'size': 'large',
                     },
                 },
             ],
@@ -483,14 +504,19 @@ organisms = [
                     'name': 'Anonymous navigation bar',
                     'template': 'organisms/navbar.html',
                     'context': {
+                        'id': 'anonymous-bar',
                         'menu_id': 'styleguide',
                         'class': 'bg-main-dark',
+                        'user': {
+                            'is_authenticated': False,
+                        },
                     },
                 },
                 {
                     'name': 'Legend navigation bar',
                     'template': 'organisms/navbar.html',
                     'context': {
+                        'id': 'legend-bar',
                         'menu_id': 'styleguide',
                         'class': 'bg-main',
                     },

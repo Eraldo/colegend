@@ -20,19 +20,30 @@
   text-align: center
 
 .atom-avatar
-  a
-    display: inline-block
+  width: 6em
+  height: 6em
+  &.small
+    font-size: 0.5em
+  &.large
+    font-size: 2em
+  position: relative
+  .atom-label
+    position: absolute
+    bottom: 0em
+    width: 100%
+    display: none
+    white-space: inherit
+  &:hover
+    .atom-label
+      display: inherit
+    &.small
+      .atom-label
+        display: none
   .avatar-image
-    width: 8em
-    height: 8em
+    width: 100%
+    height: 100%
     background-size: cover
     border-radius: 50%
-  .avatar-label
-    text-align: center
-    display: none
-  a:hover
-    .avatar-label
-      display: block
 
 // Molecules
 

@@ -1,23 +1,9 @@
 {% load static %}
-<div class="atom-avatar">
-    <div {% if id %}id="{{ id }}-avatar" {% endif %}{% if class %}class="{% if class %} {{ class }}{% endif %}"{% endif %}>
-        <a {% if url %}href="{{ url }}"{% endif %}>
-            <div class="avatar-image"
-                 style="{% if image %} background-image: url('{% static image %}');{% endif %}">
-            </div>
-            <div style="position: relative;">
-                {% if size == 'small' %}
-                    <div class="legend-name-small text-center">
-                        {{ name|default:"You" }}
-                    </div>
-                {% else %}
-                    <div class="avatar-label bg-inverse bg-connected"
-                         style="border-radius: 1em 1em 0 0; position: absolute; bottom: 0em; width: 100%;">
-                        <strong>{{ name|default:"You" }}</strong>
-                    </div>
-                {% endif %}
-            </div>
-
-        </a>
-    </div>
+<div {% if id %}id="{{ id }}" {% endif %} class="atom-avatar {{ class }} {{ size }}">
+    <a {% if url %}href="{{ url }}"{% endif %}>
+        <div class="avatar-image"
+             style="{% if image %} background-image: url('{% static image %}');{% endif %}">
+        </div>
+        {% include 'atoms/label.html' with text=name|default:'Anonymous' class='bg-accent' %}
+    </a>
 </div>
