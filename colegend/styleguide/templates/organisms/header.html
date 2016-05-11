@@ -1,7 +1,11 @@
 <div class="organism-header">
-    <div class="card bg-content">
+    <div class="card">
         <div class="card-block">
-            {% include 'organisms/breadcrumbs.html' %}
+            {% if breadcrumbs %}
+                {% include 'organisms/breadcrumbs.html' %}
+            {% else %}
+                <br>
+            {% endif %}
             <h1 {% if id %}id="{{ id }}"{% endif %} class="card-title">{{ title }}</h1>
         </div>
         {% if links %}
