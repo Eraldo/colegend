@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 # Data for the styleguide context
+from django.contrib.auth.models import AnonymousUser
+
+from colegend.users.tests.factories import UserFactory
 
 atoms = [
     {
@@ -507,9 +510,10 @@ organisms = [
                         'id': 'anonymous-bar',
                         'menu_id': 'styleguide',
                         'class': 'bg-main-dark',
-                        'user': {
-                            'is_authenticated': False,
-                        },
+                        'user': AnonymousUser(),
+                        # 'user': {
+                        #     'is_authenticated': False,
+                        # },
                     },
                 },
                 {
@@ -518,7 +522,8 @@ organisms = [
                     'context': {
                         'id': 'legend-bar',
                         'menu_id': 'styleguide',
-                        'class': 'bg-main',
+                        'class': 'bg-main-dark',
+                        'user': UserFactory.build(username='Demo'),
                     },
                 },
             ],
