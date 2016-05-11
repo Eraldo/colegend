@@ -349,6 +349,37 @@ atoms = [
         },
     },
     {
+        'name': 'Labels',
+        'template': 'styleguide/molecules/atoms.html',
+        'context': {
+            'columns': 3,
+            'atoms': [
+                {
+                    'name': 'Simple label',
+                    'template': 'atoms/label.html',
+                    'context': {
+                        'text': 'Information',
+                    },
+                },
+                {
+                    'name': 'Accented label',
+                    'template': 'atoms/label.html',
+                    'context': {
+                        'text': 'Important Text',
+                        'class': 'bg-main',
+                    },
+                },
+                {
+                    'name': 'Rounded warning label',
+                    'template': 'atoms/label.html',
+                    'context': {
+                        'text': 'Warning!',
+                        'class': 'label-pill bg-warning',
+                    },
+                },
+            ],
+        },
+    }, {
         'name': 'Avatars',
         'template': 'styleguide/molecules/atoms.html',
         'context': {
@@ -358,7 +389,11 @@ atoms = [
                     'name': 'Anonymous avatar',
                     'template': 'atoms/avatar.html',
                     'context': {
+                        'name': 'Anonymous',
                         'image': 'legends/images/anonymous.png',
+                        'label': {
+                            'class': 'label-pill bg-accent',
+                        },
                     },
                 },
                 {
@@ -368,6 +403,9 @@ atoms = [
                         'image': 'legends/images/npc/Coralina.png',
                         'name': 'Coralina Charming',
                         'url': '#coralina',
+                        'label': {
+                            'class': 'label-pill bg-accent',
+                        },
                     },
                 },
                 {
@@ -378,6 +416,9 @@ atoms = [
                         'name': 'Coralina Charming',
                         'url': '#coralina',
                         'size': 'small',
+                        'label': {
+                            'class': 'label-pill bg-accent',
+                        },
                     },
                 },
                 {
@@ -388,6 +429,9 @@ atoms = [
                         'name': 'Coralina Charming',
                         'url': '#coralina',
                         'size': 'large',
+                        'label': {
+                            'class': 'label-pill bg-accent',
+                        },
                     },
                 },
             ],
@@ -404,8 +448,11 @@ atoms = [
                     'template': 'atoms/badge.html',
                     'context': {
                         'name': 'Cake',
-                        'category': '3',
                         'image': 'styleguide/images/icon_cake.png',
+                        'class': 'bg-category-3',
+                        'label': {
+                            'class': 'bg-accent',
+                        },
                     },
                 },
                 {
@@ -413,8 +460,11 @@ atoms = [
                     'template': 'atoms/badge.html',
                     'context': {
                         'name': 'Camera',
-                        'category': '5',
                         'image': 'styleguide/images/icon_camera.png',
+                        'class': 'bg-category-5',
+                        'label': {
+                            'class': 'bg-accent',
+                        },
                     },
                 },
             ],
@@ -511,9 +561,6 @@ organisms = [
                         'menu_id': 'styleguide',
                         'class': 'bg-main-dark',
                         'user': AnonymousUser(),
-                        # 'user': {
-                        #     'is_authenticated': False,
-                        # },
                     },
                 },
                 {

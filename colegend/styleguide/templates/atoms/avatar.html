@@ -1,9 +1,9 @@
-{% load static %}
+{% load static atoms_tags %}
 <div {% if id %}id="{{ id }}" {% endif %} class="atom-avatar {{ class }} {{ size }}">
     <a {% if url %}href="{{ url }}"{% endif %}>
         <div class="avatar-image"
              style="{% if image %} background-image: url('{% static image %}');{% endif %}">
         </div>
-        {% include 'atoms/label.html' with text=name|default:'Anonymous' class='label-pill bg-accent' %}
+        {% label text=name class=label.class %}
     </a>
 </div>

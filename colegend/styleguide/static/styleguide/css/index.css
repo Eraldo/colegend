@@ -18,7 +18,8 @@
 .atom-avatar {
   width: 6em;
   height: 6em;
-  position: relative; }
+  position: relative;
+  border-radius: 50%; }
   .atom-avatar.small {
     font-size: 0.5em; }
   .atom-avatar.large {
