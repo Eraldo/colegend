@@ -1,10 +1,42 @@
 # -*- coding: utf-8 -*-
 # Data for the styleguide context
 from django.contrib.auth.models import AnonymousUser
+from django.templatetags.static import static
 
 from colegend.users.tests.factories import UserFactory
 
 atoms = [
+    {
+        'name': 'Logo',
+        'template': 'styleguide/molecules/atoms.html',
+        'context': {
+            'columns': 4,
+            'atoms': [
+                {
+                    'name': 'Default',
+                    'template': 'atoms/logo.html',
+                    'context': {
+                        'url': static('images/coLegendLogo_86x18.png'),
+                    },
+                },
+                {
+                    'name': 'With colored background',
+                    'template': 'atoms/logo.html',
+                    'context': {
+                        'url': static('images/coLegendLogo_white_86x18.png'),
+                        'class': 'bg-main-dark',
+                    },
+                },
+                {
+                    'name': 'Favicon',
+                    'template': 'atoms/logo.html',
+                    'context': {
+                        'url': static('images/favicon.ico'),
+                    },
+                },
+            ],
+        },
+    },
     {
         'name': 'Project Colors',
         'template': 'styleguide/molecules/atoms.html',
@@ -366,7 +398,7 @@ atoms = [
                     'template': 'atoms/label.html',
                     'context': {
                         'text': 'Important Text',
-                        'class': 'bg-main',
+                        'class': 'bg-accent',
                     },
                 },
                 {
@@ -547,6 +579,74 @@ molecules = [
 ]
 
 organisms = [
+    {
+        'name': 'Cards',
+        'template': 'styleguide/molecules/atoms.html',
+        'context': {
+            'columns': 6,
+            'atoms': [
+                {
+                    'name': 'Simple card',
+                    'template': 'organisms/card.html',
+                    'context': {
+                        'content': 'Hello World',
+                    },
+                },
+                {
+                    'name': 'Card with title',
+                    'template': 'organisms/card.html',
+                    'context': {
+                        'title': {
+                            'content': 'Hello',
+                        },
+                        'content': 'Hello World',
+                    },
+                },
+                {
+                    'name': 'Card with header',
+                    'template': 'organisms/card.html',
+                    'context': {
+                        'header': {
+                            'content': 'Hello above',
+                        },
+                        'content': 'Hello World',
+                    },
+                },
+                {
+                    'name': 'Card with footer',
+                    'template': 'organisms/card.html',
+                    'context': {
+                        'footer': {
+                            'content': 'Hello below',
+                        },
+                        'content': 'Hello World',
+                    },
+                },
+                {
+                    'name': 'Dismissable Card',
+                    'template': 'organisms/card.html',
+                    'context': {
+                        'closeable': True,
+                        'content': 'Close me!',
+                    },
+                },
+                {
+                    'name': 'Full Card',
+                    'template': 'organisms/card.html',
+                    'context': {
+                        'closeable': True,
+                        'header': {
+                            'content': 'Hello above',
+                        },
+                        'content': 'Close me!',
+                        'footer': {
+                            'content': 'Hello below',
+                        },
+                    },
+                },
+            ],
+        },
+    },
     {
         'name': 'Navigation bars',
         'template': 'styleguide/molecules/atoms.html',

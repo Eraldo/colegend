@@ -40,11 +40,17 @@
     background-size: cover;
     border-radius: 50%; }
 
+.atom-logo {
+  padding: 1em; }
+
 .molecule-atoms {
   margin: 0 1em; }
 
 .organism-header .card-block {
   padding-bottom: 0;
   padding-top: 0; }
+
+.organism-card .atom-close-button {
+  padding-left: 1em; }
 
 /*# sourceMappingURL=index.css.map */
