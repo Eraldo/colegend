@@ -1,6 +1,7 @@
 import pprint
 
 from django import template
+from django.template import Template, RequestContext
 from django.template.defaultfilters import slugify
 from django.template.loader import render_to_string
 
@@ -9,7 +10,7 @@ register = template.Library()
 
 @register.simple_tag(takes_context=True)
 def toc(context, items=None, **kwargs):
-    items = items or context.get('items')
+    items = items or context.get('items', {})
     links = []
     for item in items:
         name = item.get('name')
@@ -29,14 +30,20 @@ def meta_element(context, element=None, **kwargs):
     request = context.get('request')
     element = element or context.get('element')
     name = element.get('name')
+    tag = element.get('tag')
     template = element.get('template')
     element_context = element.get('context')
     context = {
         'name': name,
-        'template': template,
+        'tag': tag,
         'context': pprint.pformat(element_context),
     }
     context.update(kwargs)
     element_meta = render_to_string('styleguide/atoms/meta.html', context=context)
-    element_output = render_to_string(template, context=element_context, request=request)
+    if template:
+        element_output = render_to_string(template, context=element_context, request=request)
+    else:
+        template = Template('{{% load atoms_tags %}}{{% {tag} {tag}={tag} %}}'.format(tag=tag))
+        element_context.update({'{}'.format(tag):element_context})
+        element_output = template.render(context=RequestContext(request, element_context))
     return element_meta + element_output

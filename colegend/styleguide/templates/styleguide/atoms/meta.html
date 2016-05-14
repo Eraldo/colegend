@@ -14,8 +14,14 @@
                     <h4 class="modal-title" id="modal-{{ name|slugify }}-label">{{ name }}</h4>
                 </div>
                 <div class="modal-body">
-                    Template:
-                    <pre>{{ template }}</pre>
+                    {% if tag %}
+                        Tag:
+                        <pre>{{ tag }}</pre>
+                    {% endif %}
+                    {% if template %}
+                        Template:
+                        <pre>{{ template }}</pre>
+                    {% endif %}
                     Context:
                     <pre>{{ context }}</pre>
                 </div>

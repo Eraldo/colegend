@@ -5,7 +5,20 @@ from django.templatetags.static import static
 
 from colegend.users.tests.factories import UserFactory
 
+# atoms = [
+# ]
+#
+# molecules = []
+# organisms = []
+
 atoms = [
+    {
+        'name': 'Label',
+        'tag': 'label',
+        'context': {
+            'text': 'Inbox'
+        },
+    },
     {
         'name': 'Logo',
         'template': 'styleguide/molecules/atoms.html',

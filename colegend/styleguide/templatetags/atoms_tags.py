@@ -21,10 +21,7 @@ def button(context, button=None, **kwargs):
 @register.simple_tag(takes_context=True)
 def label(context, label=None, **kwargs):
     label = label or context.get('label', {})
-    label_context = {
-        'class': label.get('class'),
-        'text': label.get('text'),
-    }
+    label_context = label
     label_context.update(kwargs)
     label_template = 'atoms/label.html'
     return render_to_string(label_template, context=label_context)
