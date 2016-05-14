@@ -3,6 +3,7 @@
 from django.contrib.auth.models import AnonymousUser
 from django.templatetags.static import static
 
+from colegend.core.utils.icons import icon_dict
 from .models import Element, ElementGroup
 from colegend.users.tests.factories import UserFactory
 
@@ -264,6 +265,24 @@ link = Element(
     template='styleguide/atoms/link.html',
     context={
     }
+)
+
+atoms.append(link)
+
+link = Element(
+    'Icons',
+    template='styleguide/molecules/icons.html',
+    context={
+        'icons': [{'name': icon} for icon in icon_dict]
+    }
+)
+
+icons = ElementGroup(
+    'Icons',
+    columns=1,
+    elements=[
+        headline_1, headline_2, headline_3, headline_4, headline_5, headline_6,
+    ]
 )
 
 atoms.append(link)

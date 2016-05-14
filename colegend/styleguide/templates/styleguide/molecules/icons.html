@@ -1,0 +1,11 @@
+{% load atoms_tags %}
+<div class="atom-styleguide-icons">
+<div class="row">
+    {% for icon in icons %}
+        <div class="col-xs-4 col-sm-3 col-md-2 text-center">
+        {% icon icon=icon %}<br>
+        {{ icon.name }}
+        </div>
+    {% endfor %}
+</div>
+</div>

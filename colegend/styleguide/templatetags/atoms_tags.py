@@ -1,7 +1,17 @@
 from django import template
 from django.template.loader import render_to_string
 
+from colegend.core.utils.icons import get_icon
+
 register = template.Library()
+
+
+@register.simple_tag(takes_context=True)
+def icon(context, icon=None, **kwargs):
+    icon = icon or context.get('icon', {})
+    icon_context = icon
+    icon_context.update(kwargs)
+    return get_icon(**icon_context)
 
 
 @register.simple_tag(takes_context=True)
