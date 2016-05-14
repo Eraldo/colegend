@@ -22,8 +22,11 @@
                         Template:
                         <pre>{{ template }}</pre>
                     {% endif %}
-                    Context:
-                    <pre>{{ context }}</pre>
+
+                    {% if context %}
+                        Context:
+                        <pre>{{ context }}</pre>
+                    {% endif %}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

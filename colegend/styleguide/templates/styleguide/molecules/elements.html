@@ -1,9 +1,9 @@
 {% load styleguide_tags %}
 <div class="molecule-atoms">
     <div class="row">
-        {% for atom in atoms %}
+        {% for element in elements %}
             <div class="col-md-{{ columns|default:12 }}">
-                {% meta_element atom %}
+                {{ element.render }}
             </div>
         {% endfor %}
     </div>

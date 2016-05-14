@@ -9,13 +9,13 @@ register = template.Library()
 
 
 @register.simple_tag(takes_context=True)
-def toc(context, items=None, **kwargs):
-    items = items or context.get('items', {})
+def toc(context, elements=None, **kwargs):
+    elements = elements or context.get('elements', {})
     links = []
-    for item in items:
-        name = item.get('name')
+    for element in elements:
+        name = element.name
         links.append({
-            'text': item.get('name'),
+            'text': name,
             'url': '#{slug}'.format(slug=slugify(name)),
         })
     context = {
@@ -44,6 +44,6 @@ def meta_element(context, element=None, **kwargs):
         element_output = render_to_string(template, context=element_context, request=request)
     else:
         template = Template('{{% load atoms_tags %}}{{% {tag} {tag}={tag} %}}'.format(tag=tag))
-        element_context.update({'{}'.format(tag):element_context})
+        element_context.update({'{}'.format(tag): element_context})
         element_output = template.render(context=RequestContext(request, element_context))
     return element_meta + element_output

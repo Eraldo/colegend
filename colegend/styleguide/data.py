@@ -3,755 +3,762 @@
 from django.contrib.auth.models import AnonymousUser
 from django.templatetags.static import static
 
+from .models import Element, ElementGroup
 from colegend.users.tests.factories import UserFactory
 
-# atoms = [
-# ]
-#
-# molecules = []
-# organisms = []
+atoms = []
 
-atoms = [
-    {
-        'name': 'Label',
-        'tag': 'label',
-        'context': {
-            'text': 'Inbox'
-        },
-    },
-    {
-        'name': 'Logo',
-        'template': 'styleguide/molecules/atoms.html',
-        'context': {
-            'columns': 4,
-            'atoms': [
-                {
-                    'name': 'Default',
-                    'template': 'atoms/logo.html',
-                    'context': {
-                        'url': static('images/coLegendLogo_86x18.png'),
-                    },
-                },
-                {
-                    'name': 'With colored background',
-                    'template': 'atoms/logo.html',
-                    'context': {
-                        'url': static('images/coLegendLogo_white_86x18.png'),
-                        'class': 'bg-main-dark',
-                    },
-                },
-                {
-                    'name': 'Favicon',
-                    'template': 'atoms/logo.html',
-                    'context': {
-                        'url': static('images/favicon.ico'),
-                    },
-                },
-            ],
-        },
-    },
-    {
-        'name': 'Project Colors',
-        'template': 'styleguide/molecules/atoms.html',
-        'context': {
-            'columns': 4,
-            'atoms': [
-                {
-                    'name': 'Main',
-                    'template': 'styleguide/atoms/color.html',
-                    'context': {
-                        'name': 'main',
-                        'code': '#26C6DA',
-                    },
-                },
-                {
-                    'name': 'Main light',
-                    'template': 'styleguide/atoms/color.html',
-                    'context': {
-                        'name': 'main-light',
-                        'code': '#B2EBF2',
-                    },
-                },
-                {
-                    'name': 'Main dark',
-                    'template': 'styleguide/atoms/color.html',
-                    'context': {
-                        'name': 'main-dark',
-                        'code': '#0097A7',
-                    },
-                },
-                {
-                    'name': 'Accent',
-                    'template': 'styleguide/atoms/color.html',
-                    'context': {
-                        'name': 'accent',
-                        'code': '#9CCC65',
-                    },
-                },
-                {
-                    'name': 'Accent light',
-                    'template': 'styleguide/atoms/color.html',
-                    'context': {
-                        'name': 'accent-light',
-                        'code': '#DCEDC8',
-                    },
-                },
-                {
-                    'name': 'Accent dark',
-                    'template': 'styleguide/atoms/color.html',
-                    'context': {
-                        'name': 'accent-dark',
-                        'code': '#689F38',
-                    },
-                },
-            ],
-        },
-    },
-    {
-        'name': 'Category Colors',
-        'template': 'styleguide/molecules/atoms.html',
-        'context': {
-            'columns': 3,
-            'atoms': [
-                {
-                    'name': 'Color "category 1"',
-                    'template': 'styleguide/atoms/color.html',
-                    'context': {
-                        'name': 'category-1',
-                        'code': '#ED143D',
-                    },
-                },
-                {
-                    'name': 'Color "category 2"',
-                    'template': 'styleguide/atoms/color.html',
-                    'context': {
-                        'name': 'category-2',
-                        'code': '#FF8C00',
-                    },
-                },
-                {
-                    'name': 'Color "category 3"',
-                    'template': 'styleguide/atoms/color.html',
-                    'context': {
-                        'name': 'category-3',
-                        'code': '#FFD700',
-                    },
-                },
-                {
-                    'name': 'Color "category 4"',
-                    'template': 'styleguide/atoms/color.html',
-                    'context': {
-                        'name': 'category-4',
-                        'code': '#008000',
-                    },
-                },
-                {
-                    'name': 'Color "category 5"',
-                    'template': 'styleguide/atoms/color.html',
-                    'context': {
-                        'name': 'category-5',
-                        'code': '#1E90FF',
-                    },
-                },
-                {
-                    'name': 'Color "category 6"',
-                    'template': 'styleguide/atoms/color.html',
-                    'context': {
-                        'name': 'category-6',
-                        'code': '#4B0082',
-                    },
-                },
-                {
-                    'name': 'Color "category 7"',
-                    'template': 'styleguide/atoms/color.html',
-                    'context': {
-                        'name': 'category-7',
-                        'code': '#EE82EE',
-                    },
-                },
-            ],
-        },
-    },
-    {
-        'name': 'Action Colors',
-        'template': 'styleguide/molecules/atoms.html',
-        'context': {
-            'columns': 3,
-            'atoms': [
-                {
-                    'name': 'Color "primary"',
-                    'template': 'styleguide/atoms/color.html',
-                    'context': {
-                        'name': 'primary',
-                    },
-                },
-                {
-                    'name': 'Color "success"',
-                    'template': 'styleguide/atoms/color.html',
-                    'context': {
-                        'name': 'success',
-                    },
-                },
-                {
-                    'name': 'Color "info"',
-                    'template': 'styleguide/atoms/color.html',
-                    'context': {
-                        'name': 'info',
-                    },
-                },
-                {
-                    'name': 'Color "warning"',
-                    'template': 'styleguide/atoms/color.html',
-                    'context': {
-                        'name': 'warning',
-                    },
-                },
-                {
-                    'name': 'Color "danger"',
-                    'template': 'styleguide/atoms/color.html',
-                    'context': {
-                        'name': 'danger',
-                    },
-                },
-            ],
-        },
-    },
-    {
-        'name': 'Headlines',
-        'template': 'styleguide/molecules/atoms.html',
-        'context': {
-            'columns': 12,
-            'atoms': [
-                {
-                    'name': 'Headline 1',
-                    'template': 'atoms/headline.html',
-                    'context': {
-                        'text': 'Heading Level 1',
-                    },
-                },
-                {
-                    'name': 'Headline 2',
-                    'template': 'atoms/headline.html',
-                    'context': {
-                        'level': 2,
-                        'text': 'Heading Level 2',
-                    },
-                },
-                {
-                    'name': 'Headline 3',
-                    'template': 'atoms/headline.html',
-                    'context': {
-                        'level': 3,
-                        'text': 'Heading Level 3',
-                    },
-                },
-                {
-                    'name': 'Headline 4',
-                    'template': 'atoms/headline.html',
-                    'context': {
-                        'level': 4,
-                        'text': 'Heading Level 4',
-                    },
-                },
-                {
-                    'name': 'Headline 5',
-                    'template': 'atoms/headline.html',
-                    'context': {
-                        'level': 5,
-                        'text': 'Heading Level 5',
-                    },
-                },
-                {
-                    'name': 'Headline 6',
-                    'template': 'atoms/headline.html',
-                    'context': {
-                        'level': 6,
-                        'text': 'Heading Level 6',
-                    },
-                },
-            ],
-        },
-    },
-    {
-        'name': 'Link',
-        'template': 'styleguide/atoms/link.html',
-        'context': {
-        },
-    },
-    {
-        'name': 'Buttons',
-        'template': 'styleguide/molecules/atoms.html',
-        'context': {
-            'columns': 3,
-            'atoms': [
-                {
-                    'name': 'Link button',
-                    'template': 'atoms/button.html',
-                    'context': {
-                        'text': 'Link',
-                        'class': 'btn-link',
-                    },
-                },
-                {
-                    'name': 'Action button',
-                    'template': 'atoms/button.html',
-                    'context': {
-                        'text': 'Action',
-                        'class': 'btn-primary',
-                    },
-                },
-                {
-                    'name': 'Secondary button',
-                    'template': 'atoms/button.html',
-                    'context': {
-                        'text': 'Login',
-                        'class': 'btn-secondary',
-                    },
-                },
-                {
-                    'name': 'Button with icon',
-                    'template': 'atoms/button.html',
-                    'context': {
-                        'text': 'Star',
-                        'icon': 'star',
-                        'class': 'btn-primary',
-                    },
-                },
-                {
-                    'name': 'Button with link',
-                    'template': 'atoms/button.html',
-                    'context': {
-                        'text': 'Click Me',
-                        'class': 'btn-primary',
-                        'url': 'https://www.google.com',
-                    },
-                },
-                {
-                    'name': 'Success button',
-                    'template': 'atoms/button.html',
-                    'context': {
-                        'text': 'Yeah!',
-                        'class': 'btn-success',
-                    },
-                },
-                {
-                    'name': 'Info button',
-                    'template': 'atoms/button.html',
-                    'context': {
-                        'text': 'More info',
-                        'class': 'btn-info',
-                    },
-                },
-                {
-                    'name': 'Warning button',
-                    'template': 'atoms/button.html',
-                    'context': {
-                        'text': 'Caution',
-                        'class': 'btn-warning',
-                    },
-                },
-                {
-                    'name': 'Danger button',
-                    'template': 'atoms/button.html',
-                    'context': {
-                        'text': 'Delete',
-                        'class': 'btn-danger',
-                    },
-                },
-                {
-                    'name': 'Small button',
-                    'template': 'atoms/button.html',
-                    'context': {
-                        'text': 'Mini',
-                        'class': 'btn-primary btn-sm',
-                    },
-                },
-                {
-                    'name': 'Large Button',
-                    'template': 'atoms/button.html',
-                    'context': {
-                        'text': 'Special Offer',
-                        'class': 'btn-primary btn-lg',
-                    },
-                },
-                {
-                    'name': 'Outline button',
-                    'template': 'atoms/button.html',
-                    'context': {
-                        'text': 'Optional',
-                        'class': 'btn-info-outline',
-                    },
-                },
-                {
-                    'name': 'Disabled button',
-                    'template': 'atoms/button.html',
-                    'context': {
-                        'text': 'Locked',
-                        'class': 'btn-primary disabled',
-                    },
-                },
-            ],
-        },
-    },
-    {
-        'name': 'Labels',
-        'template': 'styleguide/molecules/atoms.html',
-        'context': {
-            'columns': 3,
-            'atoms': [
-                {
-                    'name': 'Simple label',
-                    'template': 'atoms/label.html',
-                    'context': {
-                        'text': 'Information',
-                    },
-                },
-                {
-                    'name': 'Accented label',
-                    'template': 'atoms/label.html',
-                    'context': {
-                        'text': 'Important Text',
-                        'class': 'bg-accent',
-                    },
-                },
-                {
-                    'name': 'Rounded warning label',
-                    'template': 'atoms/label.html',
-                    'context': {
-                        'text': 'Warning!',
-                        'class': 'label-pill bg-warning',
-                    },
-                },
-            ],
-        },
-    }, {
-        'name': 'Avatars',
-        'template': 'styleguide/molecules/atoms.html',
-        'context': {
-            'columns': 3,
-            'atoms': [
-                {
-                    'name': 'Anonymous avatar',
-                    'template': 'atoms/avatar.html',
-                    'context': {
-                        'name': 'Anonymous',
-                        'image': 'legends/images/anonymous.png',
-                        'label': {
-                            'class': 'label-pill bg-accent',
-                        },
-                    },
-                },
-                {
-                    'name': 'Legend avatar',
-                    'template': 'atoms/avatar.html',
-                    'context': {
-                        'image': 'legends/images/npc/Coralina.png',
-                        'name': 'Coralina Charming',
-                        'url': '#coralina',
-                        'label': {
-                            'class': 'label-pill bg-accent',
-                        },
-                    },
-                },
-                {
-                    'name': 'Small legend avatar',
-                    'template': 'atoms/avatar.html',
-                    'context': {
-                        'image': 'legends/images/npc/Coralina.png',
-                        'name': 'Coralina Charming',
-                        'url': '#coralina',
-                        'size': 'small',
-                        'label': {
-                            'class': 'label-pill bg-accent',
-                        },
-                    },
-                },
-                {
-                    'name': 'large legend avatar',
-                    'template': 'atoms/avatar.html',
-                    'context': {
-                        'image': 'legends/images/npc/Coralina.png',
-                        'name': 'Coralina Charming',
-                        'url': '#coralina',
-                        'size': 'large',
-                        'label': {
-                            'class': 'label-pill bg-accent',
-                        },
-                    },
-                },
-            ],
-        },
-    },
-    {
-        'name': 'Badges',
-        'template': 'styleguide/molecules/atoms.html',
-        'context': {
-            'columns': 3,
-            'atoms': [
-                {
-                    'name': 'Cake badge',
-                    'template': 'atoms/badge.html',
-                    'context': {
-                        'name': 'Cake',
-                        'image': 'styleguide/images/icon_cake.png',
-                        'class': 'bg-category-3',
-                        'label': {
-                            'class': 'bg-accent',
-                        },
-                    },
-                },
-                {
-                    'name': 'Camera badge',
-                    'template': 'atoms/badge.html',
-                    'context': {
-                        'name': 'Camera',
-                        'image': 'styleguide/images/icon_camera.png',
-                        'class': 'bg-category-5',
-                        'label': {
-                            'class': 'bg-accent',
-                        },
-                    },
-                },
-            ],
-        },
-    },
-]
+logo = Element(
+    'Default',
+    template='atoms/logo.html',
+    context={
+        'url': static('images/coLegendLogo_86x18.png'),
+    }
+)
+logo_colored = Element(
+    'Default',
+    template='atoms/logo.html',
+    context={
+        'url': static('images/coLegendLogo_white_86x18.png'),
+        'class': 'bg-main-dark',
+    }
+)
+favicon = Element(
+    'favicon',
+    template='atoms/logo.html',
+    context={
+        'url': static('images/favicon.ico'),
+    }
+)
 
-molecules = [
-    {
-        'name': 'Buttons',
-        'template': 'styleguide/molecules/atoms.html',
-        'context': {
-            'columns': 12,
-            'atoms': [
-                {
-                    'name': 'Button group',
-                    'template': 'molecules/buttons.html',
-                    'context': {
-                        'buttons': [
-                            {
-                                'text': 'Button 1',
-                                'class': 'btn-primary',
-                            },
-                            {
-                                'text': 'Button 2',
-                                'class': 'btn-primary',
-                            },
-                            {
-                                'text': 'Button 3',
-                                'class': 'btn-primary',
-                            },
-                        ],
-                    },
-                },
-                {
-                    'name': 'Small button group',
-                    'template': 'molecules/buttons.html',
-                    'context': {
-                        'buttons': [
-                            {
-                                'text': 'Button 1',
-                                'class': 'btn-primary',
-                            },
-                            {
-                                'text': 'Button 2',
-                                'class': 'btn-primary',
-                            },
-                            {
-                                'text': 'Button 3',
-                                'class': 'btn-primary',
-                            },
-                        ],
-                        'class': 'btn-group btn-group-sm',
-                    },
-                },
-                {
-                    'name': 'Small button vertical',
-                    'template': 'molecules/buttons.html',
-                    'context': {
-                        'buttons': [
-                            {
-                                'text': 'Button 1',
-                                'class': 'btn-primary',
-                            },
-                            {
-                                'text': 'Button 2',
-                                'class': 'btn-primary',
-                            },
-                            {
-                                'text': 'Button 3',
-                                'class': 'btn-primary',
-                            },
-                        ],
-                        'class': 'btn-group-vertical',
-                    },
-                },
-            ],
-        },
-    },
-]
+logos = ElementGroup('Logos', columns=4, elements=[logo, logo_colored, favicon])
 
-organisms = [
-    {
-        'name': 'Cards',
-        'template': 'styleguide/molecules/atoms.html',
-        'context': {
-            'columns': 6,
-            'atoms': [
-                {
-                    'name': 'Simple card',
-                    'template': 'organisms/card.html',
-                    'context': {
-                        'content': 'Hello World',
-                    },
-                },
-                {
-                    'name': 'Card with title',
-                    'template': 'organisms/card.html',
-                    'context': {
-                        'title': {
-                            'content': 'Hello',
-                        },
-                        'content': 'Hello World',
-                    },
-                },
-                {
-                    'name': 'Card with header',
-                    'template': 'organisms/card.html',
-                    'context': {
-                        'header': {
-                            'content': 'Hello above',
-                        },
-                        'content': 'Hello World',
-                    },
-                },
-                {
-                    'name': 'Card with footer',
-                    'template': 'organisms/card.html',
-                    'context': {
-                        'footer': {
-                            'content': 'Hello below',
-                        },
-                        'content': 'Hello World',
-                    },
-                },
-                {
-                    'name': 'Dismissable Card',
-                    'template': 'organisms/card.html',
-                    'context': {
-                        'closeable': True,
-                        'content': 'Close me!',
-                    },
-                },
-                {
-                    'name': 'Full Card',
-                    'template': 'organisms/card.html',
-                    'context': {
-                        'closeable': True,
-                        'header': {
-                            'content': 'Hello above',
-                        },
-                        'content': 'Close me!',
-                        'footer': {
-                            'content': 'Hello below',
-                        },
-                    },
-                },
-            ],
+atoms.append(logos)
+
+color_main = Element(
+    'Main',
+    template='styleguide/atoms/color.html',
+    context={
+        'name': 'main',
+    }
+)
+color_main_light = Element(
+    'Main light',
+    template='styleguide/atoms/color.html',
+    context={
+        'name': 'main-light',
+    }
+)
+color_main_dark = Element(
+    'Main dark',
+    template='styleguide/atoms/color.html',
+    context={
+        'name': 'main-dark',
+    }
+)
+color_accent = Element(
+    'Accent',
+    template='styleguide/atoms/color.html',
+    context={
+        'name': 'accent',
+    }
+)
+color_accent_light = Element(
+    'Accent light',
+    template='styleguide/atoms/color.html',
+    context={
+        'name': 'accent-light',
+    }
+)
+color_accent_dark = Element(
+    'Accent dark',
+    template='styleguide/atoms/color.html',
+    context={
+        'name': 'accent-dark',
+    }
+)
+
+project_colors = ElementGroup(
+    'Project colors',
+    columns=4,
+    elements=[
+        color_main, color_main_light, color_main_dark,
+        color_accent, color_accent_light, color_accent_dark
+    ]
+)
+
+color_category_1 = Element(
+    'Catagrory 1',
+    template='styleguide/atoms/color.html',
+    context={
+        'name': 'category-1',
+    }
+)
+color_category_2 = Element(
+    'Catagrory 2',
+    template='styleguide/atoms/color.html',
+    context={
+        'name': 'category-2',
+    }
+)
+color_category_3 = Element(
+    'Catagrory 3',
+    template='styleguide/atoms/color.html',
+    context={
+        'name': 'category-3',
+    }
+)
+color_category_4 = Element(
+    'Catagrory 4',
+    template='styleguide/atoms/color.html',
+    context={
+        'name': 'category-4',
+    }
+)
+color_category_5 = Element(
+    'Catagrory 5',
+    template='styleguide/atoms/color.html',
+    context={
+        'name': 'category-5',
+    }
+)
+color_category_6 = Element(
+    'Catagrory 6',
+    template='styleguide/atoms/color.html',
+    context={
+        'name': 'category-6',
+    }
+)
+color_category_7 = Element(
+    'Catagrory 7',
+    template='styleguide/atoms/color.html',
+    context={
+        'name': 'category-7',
+    }
+)
+
+category_colors = ElementGroup(
+    'Catagory colors',
+    columns=4,
+    elements=[
+        color_category_1, color_category_2, color_category_3,
+        color_category_4, color_category_5, color_category_6,
+        color_category_7
+    ]
+)
+
+color_primary = Element(
+    'Primary',
+    template='styleguide/atoms/color.html',
+    context={
+        'name': 'primary',
+    }
+)
+color_success = Element(
+    'Success',
+    template='styleguide/atoms/color.html',
+    context={
+        'name': 'success',
+    }
+)
+color_info = Element(
+    'Info',
+    template='styleguide/atoms/color.html',
+    context={
+        'name': 'info',
+    }
+)
+color_warning = Element(
+    'Warning',
+    template='styleguide/atoms/color.html',
+    context={
+        'name': 'warning',
+    }
+)
+color_danger = Element(
+    'Danger',
+    template='styleguide/atoms/color.html',
+    context={
+        'name': 'danger',
+    }
+)
+
+action_colors = ElementGroup(
+    'Action colors',
+    columns=4,
+    elements=[
+        color_primary, color_success, color_info, color_warning, color_danger,
+    ]
+)
+
+colors = ElementGroup(
+    'Colors',
+    columns=12,
+    elements=[
+        project_colors, category_colors, action_colors,
+    ]
+)
+
+atoms.append(colors)
+
+headline_1 = Element(
+    'Headline 1',
+    template='atoms/headline.html',
+    context={
+        'text': 'Heading Level 1',
+    }
+)
+headline_2 = Element(
+    'Headline 2',
+    template='atoms/headline.html',
+    context={
+        'text': 'Heading Level 2',
+        'level': 2,
+    }
+)
+headline_3 = Element(
+    'Headline 3',
+    template='atoms/headline.html',
+    context={
+        'text': 'Heading Level 3',
+        'level': 3,
+    }
+)
+headline_4 = Element(
+    'Headline 4',
+    template='atoms/headline.html',
+    context={
+        'text': 'Heading Level 4',
+        'level': 4,
+    }
+)
+headline_5 = Element(
+    'Headline 5',
+    template='atoms/headline.html',
+    context={
+        'text': 'Heading Level 5',
+        'level': 5,
+    }
+)
+headline_6 = Element(
+    'Headline 6',
+    template='atoms/headline.html',
+    context={
+        'text': 'Heading Level 6',
+        'level': 6,
+    }
+)
+
+headlines = ElementGroup(
+    'Headlines',
+    columns=12,
+    elements=[
+        headline_1, headline_2, headline_3, headline_4, headline_5, headline_6,
+    ]
+)
+
+atoms.append(headlines)
+
+link = Element(
+    'Link',
+    template='styleguide/atoms/link.html',
+    context={
+    }
+)
+
+atoms.append(link)
+
+link_button = Element(
+    'Link button',
+    template='atoms/button.html',
+    context={
+        'text': 'Link',
+        'class': 'btn-link',
+    }
+)
+action_button = Element(
+    'Action button',
+    template='atoms/button.html',
+    context={
+        'text': 'Action',
+        'class': 'btn-primary',
+    }
+)
+secondary_button = Element(
+    'Secondary button',
+    template='atoms/button.html',
+    context={
+        'text': 'Secondary',
+        'class': 'btn-secondary',
+    }
+)
+icon_button = Element(
+    'Button with icon',
+    template='atoms/button.html',
+    context={
+        'text': 'Star',
+        'icon': 'star',
+        'class': 'btn-primary',
+    }
+)
+linked_button = Element(
+    'Button with link',
+    template='atoms/button.html',
+    context={
+        'text': 'Click Me',
+        'class': 'btn-primary',
+        'url': 'https://www.google.com',
+    }
+)
+success_button = Element(
+    'Success button',
+    template='atoms/button.html',
+    context={
+        'text': 'Yeah!',
+        'class': 'btn-success',
+    }
+)
+info_button = Element(
+    'Info button',
+    template='atoms/button.html',
+    context={
+        'text': 'More info',
+        'class': 'btn-info',
+    }
+)
+warning_button = Element(
+    'Warning button',
+    template='atoms/button.html',
+    context={
+        'text': 'Caution',
+        'class': 'btn-warning',
+    }
+)
+danger_button = Element(
+    'Danger button',
+    template='atoms/button.html',
+    context={
+        'text': 'Delete',
+        'class': 'btn-danger',
+    }
+)
+small_button = Element(
+    'Small button',
+    template='atoms/button.html',
+    context={
+        'text': 'Mini',
+        'class': 'btn-primary btn-sm',
+    }
+)
+large_button = Element(
+    'Large button',
+    template='atoms/button.html',
+    context={
+        'text': 'Special Offer',
+        'class': 'btn-primary btn-lg',
+    }
+)
+outline_button = Element(
+    'Outline button',
+    template='atoms/button.html',
+    context={
+        'text': 'Optional',
+        'class': 'btn-info-outline',
+    }
+)
+disabled_button = Element(
+    'Disabled button',
+    template='atoms/button.html',
+    context={
+        'text': 'Locked',
+        'class': 'btn-primary disabled',
+    }
+)
+buttons = ElementGroup(
+    'Buttons',
+    columns=3,
+    elements=[
+        link_button, action_button, secondary_button,
+        icon_button, linked_button,
+        success_button, info_button, warning_button, danger_button,
+        small_button, large_button,
+        outline_button, disabled_button,
+    ]
+)
+
+atoms.append(buttons)
+
+label = Element(
+    'Simple label',
+    template='atoms/label.html',
+    context={
+        'text': 'Information',
+    }
+)
+accented_label = Element(
+    'Accented label',
+    template='atoms/label.html',
+    context={
+        'text': 'Information',
+        'class': 'bg-accent',
+    }
+)
+rounded_warning_label = Element(
+    'Rounded warning label',
+    template='atoms/label.html',
+    context={
+        'text': 'Warning!',
+        'class': 'label-pill bg-warning',
+    }
+)
+
+labels = ElementGroup(
+    'Labels',
+    columns=3,
+    elements=[
+        label, accented_label, rounded_warning_label,
+    ]
+)
+
+atoms.append(labels)
+
+anonymous_avatar = Element(
+    'Anonymous avatar',
+    template='atoms/avatar.html',
+    context={
+        'name': 'Anonymous',
+        'image': 'legends/images/anonymous.png',
+        'label': {
+            'class': 'label-pill bg-accent',
         },
-    },
-    {
-        'name': 'Navigation bars',
-        'template': 'styleguide/molecules/atoms.html',
-        'context': {
-            'columns': 12,
-            'atoms': [
-                {
-                    'name': 'Anonymous navigation bar',
-                    'template': 'organisms/navbar.html',
-                    'context': {
-                        'id': 'anonymous-bar',
-                        'menu_id': 'styleguide',
-                        'class': 'bg-main-dark',
-                        'user': AnonymousUser(),
-                    },
-                },
-                {
-                    'name': 'Legend navigation bar',
-                    'template': 'organisms/navbar.html',
-                    'context': {
-                        'id': 'legend-bar',
-                        'menu_id': 'styleguide',
-                        'class': 'bg-main-dark',
-                        'user': UserFactory.build(username='Demo'),
-                    },
-                },
-            ],
+    }
+)
+legend_avatar = Element(
+    'Legend avatar',
+    template='atoms/avatar.html',
+    context={
+        'image': 'legends/images/npc/Coralina.png',
+        'name': 'Coralina Charming',
+        'url': '#coralina',
+        'label': {
+            'class': 'label-pill bg-accent',
         },
-    },
-    {
-        'name': 'Headers',
-        'template': 'styleguide/molecules/atoms.html',
-        'context': {
-            'columns': 12,
-            'atoms': [
-                {
-                    'name': 'Simple header',
-                    'template': 'organisms/header.html',
-                    'context': {
-                        'title': 'Page Title Test',
-                    },
-                },
-                {
-                    'name': 'Header with breadcrumbs links and controls',
-                    'template': 'organisms/header.html',
-                    'context': {
-                        'title': 'Page Title Test',
-                        'breadcrumbs': [
-                            {
-                                'name': 'Link 1',
-                                'url': '#link1',
-                            },
-                            {
-                                'name': 'Link 2',
-                                'url': '#link2',
-                            },
-                            {
-                                'name': 'Link 3',
-                                'url': '#link3',
-                            },
-                        ],
-                        'links': [
-                            {
-                                'text': 'Link 1',
-                                'class': 'btn-link',
-                            },
-                            {
-                                'text': 'Link 2',
-                                'class': 'btn-link',
-                            },
-                            {
-                                'text': 'Link 3',
-                                'class': 'btn-link',
-                            },
-                        ],
-                        'buttons': [
-                            {
-                                'text': 'Button 1',
-                                'class': 'btn-primary',
-                            },
-                            {
-                                'text': 'Button 2',
-                                'class': 'btn-primary',
-                            },
-                            {
-                                'text': 'Button 3',
-                                'class': 'btn-primary',
-                            },
-                        ],
-                    },
-                },
-            ],
+    }
+)
+small_avatar = Element(
+    'Small avatar',
+    template='atoms/avatar.html',
+    context={
+        'image': 'legends/images/npc/Coralina.png',
+        'name': 'Coralina Charming',
+        'url': '#coralina',
+        'size': 'small',
+        'label': {
+            'class': 'label-pill bg-accent',
         },
-    },
-]
+    }
+)
+large_avatar = Element(
+    'Large avatar',
+    template='atoms/avatar.html',
+    context={
+        'image': 'legends/images/npc/Coralina.png',
+        'name': 'Coralina Charming',
+        'url': '#coralina',
+        'size': 'large',
+        'label': {
+            'class': 'label-pill bg-accent',
+        },
+    }
+)
+
+avatars = ElementGroup(
+    'Avatars',
+    columns=3,
+    elements=[
+        anonymous_avatar, legend_avatar, small_avatar, large_avatar
+    ]
+)
+
+atoms.append(avatars)
+
+cake_badge = Element(
+    'Cake badge',
+    template='atoms/badge.html',
+    context={
+        'name': 'Cake',
+        'image': 'styleguide/images/icon_cake.png',
+        'class': 'bg-category-3',
+        'label': {
+            'class': 'bg-accent',
+        },
+    }
+)
+camera_badge = Element(
+    'Camera badge',
+    template='atoms/badge.html',
+    context={
+        'name': 'Camera',
+        'image': 'styleguide/images/icon_camera.png',
+        'class': 'bg-category-5',
+        'label': {
+            'class': 'bg-accent',
+        },
+    }
+)
+
+badges = ElementGroup(
+    'Badges',
+    columns=3,
+    elements=[
+        cake_badge, camera_badge,
+    ]
+)
+
+atoms.append(badges)
+
+molecules = []
+
+horizontal_button_group = Element(
+    'Horizontal buttons',
+    template='molecules/buttons.html',
+    context={
+        'buttons': [
+            {
+                'text': 'Button 1',
+                'class': 'btn-primary',
+            },
+            {
+                'text': 'Button 2',
+                'class': 'btn-primary',
+            },
+            {
+                'text': 'Button 3',
+                'class': 'btn-primary',
+            },
+        ],
+    }
+)
+small_button_group = Element(
+    'Small buttons',
+    template='molecules/buttons.html',
+    context={
+        'buttons': [
+            {
+                'text': 'Button 1',
+                'class': 'btn-primary',
+            },
+            {
+                'text': 'Button 2',
+                'class': 'btn-primary',
+            },
+            {
+                'text': 'Button 3',
+                'class': 'btn-primary',
+            },
+        ],
+        'class': 'btn-group btn-group-sm',
+    }
+)
+small_vertical_button_group = Element(
+    'Small vertical buttons',
+    template='molecules/buttons.html',
+    context={
+        'buttons': [
+            {
+                'text': 'Button 1',
+                'class': 'btn-primary',
+            },
+            {
+                'text': 'Button 2',
+                'class': 'btn-primary',
+            },
+            {
+                'text': 'Button 3',
+                'class': 'btn-primary',
+            },
+        ],
+        'class': 'btn-group-vertical',
+    }
+)
+
+button_groups = ElementGroup(
+    'Button groups',
+    columns=12,
+    elements=[
+        horizontal_button_group, small_button_group, small_vertical_button_group,
+    ]
+)
+
+molecules.append(button_groups)
+
+organisms = []
+
+simple_card = Element(
+    'Simple card',
+    template='organisms/card.html',
+    context={
+        'content': 'Hello World',
+    }
+)
+card_with_title = Element(
+    'Card with title',
+    template='organisms/card.html',
+    context={
+        'title': {
+            'content': 'Hello',
+        },
+        'content': 'Hello World',
+    }
+)
+card_with_header = Element(
+    'Card with header',
+    template='organisms/card.html',
+    context={
+        'header': {
+            'content': 'Hello above',
+        },
+        'content': 'Hello World',
+    }
+)
+card_with_footer = Element(
+    'Card with footer',
+    template='organisms/card.html',
+    context={
+        'footer': {
+            'content': 'Hello below',
+        },
+        'content': 'Hello World',
+    }
+)
+dismissable_card = Element(
+    'Dismissable card',
+    template='organisms/card.html',
+    context={
+        'closeable': True,
+        'content': 'Close me!',
+    }
+)
+full_card = Element(
+    'Full card',
+    template='organisms/card.html',
+    context={
+        'closeable': True,
+        'header': {
+            'content': 'Hello above',
+        },
+        'content': 'Close me!',
+        'footer': {
+            'content': 'Hello below',
+        },
+    }
+)
+
+cards = ElementGroup(
+    'Cards',
+    columns=6,
+    elements=[
+        simple_card, card_with_title, card_with_header, card_with_footer, dismissable_card, full_card,
+    ]
+)
+
+organisms.append(cards)
+
+anonymous_navigation_bar = Element(
+    'Anonymous navigation bar',
+    template='organisms/navbar.html',
+    context={
+        'id': 'anonymous-bar',
+        'menu_id': 'styleguide',
+        'class': 'bg-main-dark',
+        'user': AnonymousUser(),
+    }
+)
+legend_navigation_bar = Element(
+    'Legend navigation bar',
+    template='organisms/navbar.html',
+    context={
+        'id': 'legend-bar',
+        'menu_id': 'styleguide',
+        'class': 'bg-main-dark',
+        'user': UserFactory.build(username='Demo'),
+    }
+)
+
+navigations = ElementGroup(
+    'Navigations',
+    columns=12,
+    elements=[
+        anonymous_navigation_bar, legend_navigation_bar,
+    ]
+)
+
+organisms.append(navigations)
+
+simple_header = Element(
+    'Simple header',
+    template='organisms/header.html',
+    context={
+        'title': 'Page Title Test',
+    }
+)
+
+full_header = Element(
+    'Header with breadcrumbs links and controls',
+    template='organisms/header.html',
+    context={
+        'title': 'Page Title Test',
+        'breadcrumbs': [
+            {
+                'name': 'Link 1',
+                'url': '#link1',
+            },
+            {
+                'name': 'Link 2',
+                'url': '#link2',
+            },
+            {
+                'name': 'Link 3',
+                'url': '#link3',
+            },
+        ],
+        'links': [
+            {
+                'text': 'Link 1',
+                'class': 'btn-link',
+            },
+            {
+                'text': 'Link 2',
+                'class': 'btn-link',
+            },
+            {
+                'text': 'Link 3',
+                'class': 'btn-link',
+            },
+        ],
+        'buttons': [
+            {
+                'text': 'Button 1',
+                'class': 'btn-primary',
+            },
+            {
+                'text': 'Button 2',
+                'class': 'btn-primary',
+            },
+            {
+                'text': 'Button 3',
+                'class': 'btn-primary',
+            },
+        ],
+    }
+)
+
+headers = ElementGroup(
+    'Headers',
+    columns=12,
+    elements=[
+        simple_header, full_header,
+    ]
+)
+
+organisms.append(headers)
