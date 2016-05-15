@@ -1,0 +1,94 @@
+.arrow
+  &.bottom:after, &.right:after, &.top:after
+    border-right-color: transparent
+  position: absolute
+  z-index: 10
+  &:after, &:before
+    position: absolute
+    left: 0
+    display: block
+    width: 0
+    height: 0
+    border-width:  9px
+    border-color: transparent
+    border-style: solid
+  &:after
+    border-width: 8px
+  &.top
+    top: -9px
+    left: 50%
+    margin-left: -9px
+    &.pull-in
+      top: -4px
+    &:before
+      border-bottom-color: rgba(120, 130, 140, 0.13)
+      border-top-width: 0
+    &:after
+      top: 1px
+      left: 1px
+      border-top-color: transparent
+      border-bottom-color: inherit
+      border-left-color: transparent
+      border-top-width: 0
+  &.right
+    top: 50%
+    right: 0
+    margin-top: -9px
+    &.pull-in
+      right: 4px
+    &:before
+      border-left-color: rgba(120, 130, 140, 0.13)
+      border-right-width: 0
+    &:after
+      top: 1px
+      left: 0
+      border-top-color: transparent
+      border-bottom-color: transparent
+      border-left-color: inherit
+      border-right-width: 0
+  &.bottom:after, &.left:after
+    border-bottom-color: transparent
+    border-left-color: transparent
+  &.bottom
+    bottom: 0
+    left: 50%
+    margin-left: -9px
+    &.pull-in
+      bottom: 4px
+    &:before
+      border-top-color: rgba(120, 130, 140, 0.13)
+      border-bottom-width: 0
+    &:after
+      top: 0
+      left: 1px
+      border-top-color: inherit
+      border-bottom-width: 0
+  &.left
+    top: 50%
+    left: -9px
+    margin-top: -9px
+    &.pull-in
+      left: -4px
+    &:before
+      border-right-color: rgba(120, 130, 140, 0.13)
+      border-left-width: 0
+    &:after
+      top: 1px
+      left: 1px
+      border-top-color: transparent
+      border-right-color: inherit
+      border-left-width: 0
+  &.pull-left
+    left: 18px
+  &.pull-right
+    left: auto
+    right: 26px
+  &.pull-top
+    top: 18px
+  &.pull-bottom
+    top: auto
+    bottom: 26px
+  &.bg-accent:before, &.b-danger:before, &.b-dark:before, &.b-info:before, &.b-primary:before, &.b-success:before, &.b-warning:before
+    border-color: transparent
+  &:after, &:before
+    content: ""

@@ -22,6 +22,12 @@
 @font-face {
   font-family: "Ubuntu Titling";
   src: url("../fonts/Ubuntu-Titling/UbuntuTitling-Bold.woff"); }
+.text-white {
+  color: white; }
+
+.text-black {
+  color: black; }
+
 .text-main {
   color: #26c6da; }
 
@@ -39,6 +45,14 @@
 
 .text-accent-dark {
   color: #689f38; }
+
+.bg-white {
+  background-color: white;
+  color: black; }
+
+.bg-black {
+  background-color: black;
+  color: white; }
 
 .bg-main, .organism-header .dropdown-menu {
   background-color: #26c6da;

@@ -269,7 +269,7 @@ link = Element(
 
 atoms.append(link)
 
-link = Element(
+icons = Element(
     'Icons',
     template='styleguide/molecules/icons.html',
     context={
@@ -277,15 +277,7 @@ link = Element(
     }
 )
 
-icons = ElementGroup(
-    'Icons',
-    columns=1,
-    elements=[
-        headline_1, headline_2, headline_3, headline_4, headline_5, headline_6,
-    ]
-)
-
-atoms.append(link)
+atoms.append(icons)
 
 link_button = Element(
     'Link button',
@@ -440,6 +432,67 @@ labels = ElementGroup(
 )
 
 atoms.append(labels)
+
+speech_bubble_right = Element(
+    'Simple bubble',
+    template='atoms/speech-bubble.html',
+    context={
+        'content': 'arrow left',
+    }
+)
+speech_bubble_left = Element(
+    'Bubble left',
+    template='atoms/speech-bubble.html',
+    context={
+        'content': 'arrow right',
+        'arrow': 'right',
+    }
+)
+speech_bubble_top = Element(
+    'Bubble top',
+    template='atoms/speech-bubble.html',
+    context={
+        'content': 'arrow bottom',
+        'arrow': 'bottom',
+    }
+)
+speech_bubble_bottom = Element(
+    'Bubble bottom',
+    template='atoms/speech-bubble.html',
+    context={
+        'content': 'arrow top',
+        'arrow': 'top',
+    }
+)
+
+speeach_bubbles = ElementGroup(
+    'Speech bubbles',
+    columns=3,
+    elements=[
+        speech_bubble_right, speech_bubble_left, speech_bubble_top, speech_bubble_bottom,
+    ]
+)
+
+atoms.append(speeach_bubbles)
+
+speech_bubble_bottom = Element(
+    'Bubble bottom',
+    template='atoms/speech-bubble.html',
+    context={
+        'content': 'arrow top',
+        'arrow': 'top',
+    }
+)
+
+speeach_bubbles = ElementGroup(
+    'Speech bubbles',
+    columns=3,
+    elements=[
+        speech_bubble_right, speech_bubble_left, speech_bubble_top, speech_bubble_bottom,
+    ]
+)
+
+atoms.append(speeach_bubbles)
 
 anonymous_avatar = Element(
     'Anonymous avatar',
