@@ -452,16 +452,16 @@ speech_bubble_top = Element(
     'Bubble top',
     template='atoms/speech-bubble.html',
     context={
-        'content': 'arrow bottom',
-        'arrow': 'bottom',
+        'content': 'arrow down',
+        'arrow': 'down',
     }
 )
 speech_bubble_bottom = Element(
     'Bubble bottom',
     template='atoms/speech-bubble.html',
     context={
-        'content': 'arrow top',
-        'arrow': 'top',
+        'content': 'arrow up',
+        'arrow': 'up',
     }
 )
 
@@ -475,24 +475,24 @@ speeach_bubbles = ElementGroup(
 
 atoms.append(speeach_bubbles)
 
-speech_bubble_bottom = Element(
-    'Bubble bottom',
-    template='atoms/speech-bubble.html',
-    context={
-        'content': 'arrow top',
-        'arrow': 'top',
-    }
-)
-
-speeach_bubbles = ElementGroup(
-    'Speech bubbles',
-    columns=3,
-    elements=[
-        speech_bubble_right, speech_bubble_left, speech_bubble_top, speech_bubble_bottom,
-    ]
-)
-
-atoms.append(speeach_bubbles)
+# speech_bubble_bottom = Element(
+#     'Bubble bottom',
+#     template='atoms/speech-bubble.html',
+#     context={
+#         'content': 'arrow up',
+#         'arrow': 'up',
+#     }
+# )
+#
+# speeach_bubbles = ElementGroup(
+#     'Speech bubbles',
+#     columns=3,
+#     elements=[
+#         speech_bubble_right, speech_bubble_left, speech_bubble_top, speech_bubble_bottom,
+#     ]
+# )
+#
+# atoms.append(speeach_bubbles)
 
 anonymous_avatar = Element(
     'Anonymous avatar',

@@ -1,6 +1,6 @@
 {% load static %}
-<link href="{% static 'styleguide/css/arrows.css' %}" media="screen" rel="stylesheet" type="text/css"/>
+{#<link href="{% static 'styleguide/css/arrows.css' %}" media="screen" rel="stylesheet" type="text/css"/>#}
 <div class="atom-speech-bubble card card-block">
-    <span class="arrow {{ arrow|default:'left' }}" style="border-color: white"></span>
+    <span class="arrow {{ arrow|default:'left' }}"></span>
     {{ content }}
 </div>
