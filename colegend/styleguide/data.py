@@ -475,25 +475,6 @@ speeach_bubbles = ElementGroup(
 
 atoms.append(speeach_bubbles)
 
-# speech_bubble_bottom = Element(
-#     'Bubble bottom',
-#     template='atoms/speech-bubble.html',
-#     context={
-#         'content': 'arrow up',
-#         'arrow': 'up',
-#     }
-# )
-#
-# speeach_bubbles = ElementGroup(
-#     'Speech bubbles',
-#     columns=3,
-#     elements=[
-#         speech_bubble_right, speech_bubble_left, speech_bubble_top, speech_bubble_bottom,
-#     ]
-# )
-#
-# atoms.append(speeach_bubbles)
-
 anonymous_avatar = Element(
     'Anonymous avatar',
     template='atoms/avatar.html',
@@ -663,6 +644,30 @@ button_groups = ElementGroup(
 )
 
 molecules.append(button_groups)
+
+simple_avatar_statement = Element(
+    'Simple statement',
+    template='molecules/avatar-statement.html',
+    context={
+        'name': 'Coralina Charming',
+        'url': '#coralina',
+        'label': {'class': 'label-pill bg-accent'},
+        'image': 'legends/images/npc/Coralina.png',
+        # statement
+        'content': 'arrow up',
+        # 'arrow': 'up',
+    }
+)
+
+avatar_statements = ElementGroup(
+    'Avatar statements',
+    columns=8,
+    elements=[
+        simple_avatar_statement
+    ]
+)
+
+molecules.append(avatar_statements)
 
 organisms = []
 
