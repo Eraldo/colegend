@@ -645,8 +645,8 @@ button_groups = ElementGroup(
 
 molecules.append(button_groups)
 
-simple_avatar_statement = Element(
-    'Simple statement',
+left_avatar_statement = Element(
+    'Left statement',
     template='molecules/avatar-statement.html',
     context={
         'name': 'Coralina Charming',
@@ -654,16 +654,30 @@ simple_avatar_statement = Element(
         'label': {'class': 'label-pill bg-accent'},
         'image': 'legends/images/npc/Coralina.png',
         # statement
-        'content': 'arrow up',
-        # 'arrow': 'up',
-    }
+        'content': 'Hello world!',
+    },
+    columns=6,
+)
+
+right_avatar_statement = Element(
+    'Right statement',
+    template='molecules/avatar-statement.html',
+    context={
+        'name': 'Coralina Charming',
+        'url': '#coralina',
+        'label': {'class': 'label-pill bg-accent'},
+        'image': 'legends/images/npc/Coralina.png',
+        # statement
+        'content': 'This is my answer',
+        'arrow': 'right',
+    },
+    columns=6,
 )
 
 avatar_statements = ElementGroup(
     'Avatar statements',
-    columns=8,
     elements=[
-        simple_avatar_statement
+        left_avatar_statement, right_avatar_statement
     ]
 )
 

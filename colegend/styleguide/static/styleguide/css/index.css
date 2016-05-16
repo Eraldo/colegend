@@ -50,6 +50,10 @@
   .arrow.down:after {
     bottom: -0.9rem;
     border-top-color: white; }
+  .arrow.pull-up:before, .arrow.pull-up:after {
+    top: 2rem; }
+  .arrow.pull-down:before, .arrow.pull-down:after {
+    bottom: 2rem; }
 
 .main-headline {
   margin: 1em 0em;
