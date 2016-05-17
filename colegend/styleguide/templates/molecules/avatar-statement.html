@@ -1,12 +1,11 @@
 {% load atoms_tags %}
 <div class="molecule-avatar-statement">
     <div class="row">
-        <div class="col-sm-4">
+        <div class="{{ avatar_class|default:'col-sm-4' }}">
             {% include 'atoms/avatar.html' %}
         </div>
-        <div class="col-sm-8">
-            {% include 'atoms/speech-bubble.html' with arrow='left pull-up' responsive_arrow='up' %}
-{#            {% include 'atoms/speech-bubble.html' with arrow='up' %}#}
+        <div class="{{ bubble_class|default:'col-sm-8' }}">
+            {% include 'atoms/speech-bubble.html' %}
         </div>
     </div>
 </div>

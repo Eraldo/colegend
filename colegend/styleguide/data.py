@@ -655,6 +655,8 @@ left_avatar_statement = Element(
         'image': 'legends/images/npc/Coralina.png',
         # statement
         'content': 'Hello world!',
+        'arrow': 'left pull-up',
+        'responsive_arrow': 'up',
     },
     columns=6,
 )
@@ -669,7 +671,10 @@ right_avatar_statement = Element(
         'image': 'legends/images/npc/Coralina.png',
         # statement
         'content': 'This is my answer',
-        'arrow': 'right',
+        'arrow': 'right pull-up',
+        'responsive_arrow': 'up',
+        'avatar_class': 'col-sm-4 col-sm-push-8',
+        'bubble_class': 'col-sm-8  col-sm-pull-4',
     },
     columns=6,
 )
