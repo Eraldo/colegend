@@ -385,6 +385,27 @@ disabled_button = Element(
         'class': 'btn-primary disabled',
     }
 )
+
+primary_feedback_button = Element(
+    'Primary feedback button',
+    template='atoms/image.html',
+    context={
+        'url': static('images/feedback.png'),
+        'class': 'img-responsive',
+        'name': 'feedback button',
+    },
+)
+
+accented_feedback_button = Element(
+    'Accented feedback button',
+    template='atoms/image.html',
+    context={
+        'url': static('images/feedback_accented_dark.png'),
+        'class': 'img-responsive',
+        'name': 'feedback button accented',
+    },
+)
+
 buttons = ElementGroup(
     'Buttons',
     columns=3,
@@ -394,6 +415,7 @@ buttons = ElementGroup(
         success_button, info_button, warning_button, danger_button,
         small_button, large_button,
         outline_button, disabled_button,
+        primary_feedback_button, accented_feedback_button,
     ]
 )
 
