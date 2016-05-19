@@ -33,7 +33,7 @@ class RoleListView(LoginRequiredMixin, RoleMixin, ListView):
 
 class RoleCreateView(LoginRequiredMixin, RolesRequiredMixin, RoleMixin, CreateView):
     template_name = 'roles/create.html'
-    required_roles = ['admin']
+    required_roles = ['Secretary']
 
     def get_initial(self):
         initial = super().get_initial()
@@ -52,12 +52,12 @@ class RoleDetailView(LoginRequiredMixin, RoleMixin, DetailView):
 
 class RoleUpdateView(LoginRequiredMixin, RolesRequiredMixin, RoleMixin, UpdateView):
     template_name = 'roles/update.html'
-    required_roles = ['manager']
+    required_roles = ['Secretary']
 
 
 class RoleDeleteView(LoginRequiredMixin, RolesRequiredMixin, RoleMixin, DeleteView):
     template_name = 'roles/delete.html'
-    required_roles = ['admin']
+    required_roles = ['Secretary']
 
     def get_success_url(self):
         role = self.get_object()
