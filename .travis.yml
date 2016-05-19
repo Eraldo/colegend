@@ -9,13 +9,13 @@ before_install:
 language: python
 python:
   - "3.5"
-install:
-  - "pip install hitch"
-  - "cd tests"
-  - "hitch init"
-#before_script:
-#  - "export DISPLAY=:99.0"
-#  - "sh -e /etc/init.d/xvfb start"
-#  - sleep 3 # give xvfb some time to start
-script:
-  - "hitch test scenarios --settings ci.settings"
+#install:
+#  - "pip install hitch"
+#  - "cd tests"
+#  - "hitch init"
+##before_script:
+##  - "export DISPLAY=:99.0"
+##  - "sh -e /etc/init.d/xvfb start"
+##  - sleep 3 # give xvfb some time to start
+#script:
+#  - "hitch test scenarios --settings ci.settings"
