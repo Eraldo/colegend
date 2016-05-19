@@ -680,7 +680,7 @@ left_avatar_statement = Element(
         'arrow': 'left pull-up',
         'responsive_arrow': 'up',
     },
-    columns=6,
+    columns=8,
 )
 
 right_avatar_statement = Element(
@@ -698,13 +698,50 @@ right_avatar_statement = Element(
         'avatar_class': 'col-sm-4 col-sm-push-8',
         'bubble_class': 'col-sm-8  col-sm-pull-4',
     },
-    columns=6,
+    columns=8,
+)
+
+big_avatar_statement = Element(
+    'Big statement',
+    template='molecules/avatar-statement.html',
+    context={
+        'name': 'Coralina Charming',
+        'url': '#coralina',
+        'label': {'class': 'label-pill bg-accent'},
+        'image': 'legends/images/npc/Coralina.png',
+        'size': 'large',
+        # statement
+        'content': 'This is my answer',
+        'arrow': 'left pull-up',
+        'responsive_arrow': 'up',
+        'avatar_class': 'col-sm-4',
+        'bubble_class': 'col-sm-8',
+    },
+)
+
+small_avatar_statement = Element(
+    'Small statement',
+    template='molecules/avatar-statement.html',
+    context={
+        'name': 'Coralina Charming',
+        'url': '#coralina',
+        'label': {'class': 'label-pill bg-accent'},
+        'image': 'legends/images/npc/Coralina.png',
+        'size': 'small',
+        # statement
+        'content': 'This is my answer',
+        'arrow': 'left pull-up',
+        'responsive_arrow': 'up',
+        'avatar_class': 'col-sm-4',
+        'bubble_class': 'col-sm-8',
+    },
+    columns=6
 )
 
 avatar_statements = ElementGroup(
     'Avatar statements',
     elements=[
-        left_avatar_statement, right_avatar_statement
+        left_avatar_statement, right_avatar_statement, big_avatar_statement, small_avatar_statement,
     ]
 )
 
