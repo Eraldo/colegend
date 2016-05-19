@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 # Data for the styleguide context
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AnonymousUser
 from django.templatetags.static import static
 
 from colegend.core.utils.icons import icon_dict
 from .models import Element, ElementGroup
-from colegend.users.tests.factories import UserFactory
+
+Legend = get_user_model()
 
 atoms = []
 
@@ -836,7 +838,7 @@ legend_navigation_bar = Element(
         'id': 'legend-bar',
         'menu_id': 'styleguide',
         'class': 'bg-main-dark',
-        'user': UserFactory.build(username='Demo'),
+        'user': Legend.objects.get_or_create(username='Demo')[0],
     }
 )
 
