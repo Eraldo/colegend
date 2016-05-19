@@ -16,7 +16,7 @@ def icon(context, icon=None, **kwargs):
 
 @register.simple_tag(takes_context=True)
 def button(context, button=None, **kwargs):
-    button = button or context.get('button')
+    button = button or context.get('button', {})
     button_context = {
         'url': button.get('url'),
         'class': button.get('class'),

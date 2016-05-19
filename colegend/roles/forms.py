@@ -12,6 +12,7 @@ class RoleForm(forms.ModelForm):
             'name',
             'nickname',
             'item',
+            'icon',
             'description',
         ]
 
@@ -22,6 +23,7 @@ class RoleForm(forms.ModelForm):
             Field('name'),
             Field('nickname'),
             Field('item'),
+            Field('icon'),
             Field('description'),
         )
         self.helper.add_input(Submit('save', 'Save'))
