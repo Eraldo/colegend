@@ -17,5 +17,5 @@ python:
 ##  - "export DISPLAY=:99.0"
 ##  - "sh -e /etc/init.d/xvfb start"
 ##  - sleep 3 # give xvfb some time to start
-#script:
-#  - "hitch test scenarios --settings ci.settings"
+script:
+  - "py.test"
