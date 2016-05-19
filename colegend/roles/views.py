@@ -16,7 +16,7 @@ class RoleMixin(object):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['manager'] = self.request.user.is_superuser
+        context['manager'] = self.request.user.has_role(name='Secretary')
         return context
 
 
