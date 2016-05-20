@@ -1,6 +1,11 @@
 {% extends 'tags/base.html' %}
 {% load icons buttons tags_tags %}
 
+{% block breadcrumbs %}
+    {% include 'widgets/breadcrumb.html' with pattern='legends:settings' title='Settings' icon='settings' %}
+{% endblock %}
+
+
 {% block title %}Tags{% endblock %}
 
 {% block page_controls %}

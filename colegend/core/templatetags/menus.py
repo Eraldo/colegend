@@ -30,10 +30,6 @@ def menu(context, user=None):
                         'url': reverse('journals:index'),
                     },
                     {
-                        'name': 'Story',
-                        'url': reverse('story:index'),
-                    },
-                    {
                         'name': 'Vision',
                         'locked': True,
                     },
@@ -45,6 +41,10 @@ def menu(context, user=None):
                         'name': 'Game',
                         'locked': True,
                         # 'url': reverse('games:index'),
+                    },
+                    {
+                        'name': 'Story',
+                        'url': reverse('story:index'),
                     },
                 ],
             },
