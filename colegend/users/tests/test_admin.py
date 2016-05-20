@@ -1,6 +1,6 @@
 from test_plus.test import TestCase
 
-from ..admin import MyUserCreationForm
+from ..admin import UserCreationForm
 
 
 class TestMyUserCreationForm(TestCase):
@@ -9,7 +9,7 @@ class TestMyUserCreationForm(TestCase):
 
     def test_clean_username_success(self):
         # Instantiate the form with a new username
-        form = MyUserCreationForm({
+        form = UserCreationForm({
             'username': 'alamode',
             'password1': '123456',
             'password2': '123456',
@@ -18,13 +18,9 @@ class TestMyUserCreationForm(TestCase):
         valid = form.is_valid()
         self.assertTrue(valid)
 
-        # Run the actual clean_username method
-        username = form.clean_username()
-        self.assertEqual('alamode', username)
-
     def test_clean_username_false(self):
         # Instantiate the form with the same username as self.user
-        form = MyUserCreationForm({
+        form = UserCreationForm({
             'username': self.user.username,
             'password1': '123456',
             'password2': '123456',

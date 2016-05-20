@@ -1,8 +1,7 @@
 from django.conf.urls import url
 
 from .views import DonationIndexView, DonationListView, DonationCreateView, DonationDetailView, DonationUpdateView, \
-    DonationDeleteView
-
+    DonationDeleteView, TopSupportersListView
 
 urlpatterns = [
     url(r'^$',
@@ -23,4 +22,7 @@ urlpatterns = [
     url(r'^(?P<pk>[0-9]+)/delete/$',
         DonationDeleteView.as_view(),
         name='delete'),
+    url(r'^top-supporters/$',
+        TopSupportersListView.as_view(),
+        name='top-supporters'),
 ]

@@ -33,8 +33,41 @@ DJANGO_APPS = (
     # 'django.contrib.humanize',
 
     # Admin
-    'django.contrib.admin',
+    # 'django.contrib.admin', => CMS
+
+    'colegend.users',  # custom users ('legends') app
 )
+
+CMS_APPS = (
+    'cms',  # django CMS itself
+    'treebeard',  # utilities for implementing a tree
+    'menus',  # helper for model independent hierarchical website navigation
+    'sekizai',  # for JavaScript and CSS management
+
+    'djangocms_admin_style',
+    # Admin
+    'django.contrib.admin',
+    # for the admin skin. You **must** add 'djangocms_admin_style' in the list **before** 'django.contrib.admin'.
+
+    # Filer
+    'filer',
+    'easy_thumbnails',
+
+    'djangocms_text_ckeditor',
+    'reversion',
+
+    'cmsplugin_filer_file',
+    'cmsplugin_filer_folder',
+    'cmsplugin_filer_link',
+    'cmsplugin_filer_image',
+    'cmsplugin_filer_teaser',
+    'cmsplugin_filer_video',
+
+    # 'djangocms_googlemap',
+    # 'djangocms_inherit',
+    # 'djangocms_link',
+)
+
 THIRD_PARTY_APPS = (
     'crispy_forms',  # Form layouts
     'allauth',  # registration
@@ -42,7 +75,6 @@ THIRD_PARTY_APPS = (
     'allauth.socialaccount',  # registration
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
-    'easy_thumbnails',
     'django_gravatar',
     'orderable',
     'simplemde',
@@ -54,7 +86,6 @@ THIRD_PARTY_APPS = (
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
-    'colegend.users',  # custom users ('legends') app
     # Your stuff: custom apps go here
     'colegend.checkpoints',
     'colegend.roles',
@@ -88,14 +119,20 @@ LOCAL_APPS = (
 
     'colegend.mockups',
     'colegend.styleguide',
+
+    'colegend.sandbox',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+INSTALLED_APPS = DJANGO_APPS + CMS_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 # MIDDLEWARE CONFIGURATION
 # ------------------------------------------------------------------------------
 MIDDLEWARE_CLASSES = (
+    # CMS special - should be on top:
+    # http://docs.django-cms.org/en/develop/how_to/install.html#configuring-your-project-for-django-cms
+    'cms.middleware.utils.ApphookReloadMiddleware',
+
     # Make sure djangosecure.middleware.SecurityMiddleware is listed first
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -103,12 +140,26 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+
+    # CMS
+    'cms.middleware.user.CurrentUserMiddleware',
+    'cms.middleware.page.CurrentPageMiddleware',
+    'cms.middleware.toolbar.ToolbarMiddleware',
+    'cms.middleware.language.LanguageCookieMiddleware'
 )
 
 # MIGRATIONS CONFIGURATION
 # ------------------------------------------------------------------------------
 MIGRATION_MODULES = {
-    'sites': 'colegend.contrib.sites.migrations'
+    'sites': 'colegend.contrib.sites.migrations',
+    # CMS
+    'cmsplugin_filer_image': 'cmsplugin_filer_image.migrations_django',
+    'cmsplugin_filer_folder': 'cmsplugin_filer_folder.migrations_django',
+    'cmsplugin_filer_file': 'cmsplugin_filer_file.migrations_django',
+    'cmsplugin_filer_teaser': 'cmsplugin_filer_teaser.migrations_django',
+    'cmsplugin_filer_video': 'cmsplugin_filer_video.migrations_django',
+    'cmsplugin_filer_link': 'cmsplugin_filer_link.migrations_django',
 }
 
 # DEBUG
@@ -159,7 +210,7 @@ DATABASES['default']['ATOMIC_REQUESTS'] = True
 TIME_ZONE = 'Europe/Berlin'
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#language-code
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
@@ -204,6 +255,9 @@ TEMPLATES = [
                 'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
                 # Your stuff: custom template context processors go here
+                # CMS
+                'sekizai.context_processors.sekizai',
+                'cms.context_processors.cms_settings',
             ],
         },
     },
@@ -268,7 +322,7 @@ ACCOUNT_ALLOW_REGISTRATION = env.bool("DJANGO_ACCOUNT_ALLOW_REGISTRATION", True)
 # Custom user app defaults
 # Select the correct user model
 AUTH_USER_MODEL = 'users.User'
-LOGIN_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'account_login'
 
 # Provider settings
@@ -293,15 +347,32 @@ ADMIN_URL = env('DJANGO_ADMIN_URL', default='admin')
 
 # Your common stuff: Below this line define 3rd party library settings
 
-# SLACK IM
+
+# CMS
 # ------------------------------------------------------------------------------
-INSTALLED_APPS += ('django_slack',)
-SLACK_TOKEN = 'xoxp-7590691991-7590881985-13615726690-065713fdcc'
-SLACK_CHANNEL = env("SLACK_CHANNEL", default='core')
-SLACK_BACKEND = 'django_slack.backends.Urllib2Backend'
-SLACK_USERNAME = 'coLegend'
-SLACK_ICON_EMOJI = ':co:'
-SLACK_LINK_NAMES = '1'
+LANGUAGES = [
+    ('en', 'English'),
+]
+
+CMS_TEMPLATES = (
+    ('page.html', 'Page'),
+    # ('feature.html', 'Page with Feature')
+)
+
+CMS_PERMISSION = True
+
+
+# REVERSION
+# ------------------------------------------------------------------------------
+CMS_MAX_PAGE_PUBLISH_REVERSIONS = 2
+
+
+# FILER
+# ------------------------------------------------------------------------------
+# FILER_IMAGE_USE_ICON = True
+# FILER_ENABLE_PERMISSIONS = True
+FILER_ENABLE_LOGGING = True
+
 
 # EASY THUMBNAILS
 # ------------------------------------------------------------------------------
@@ -312,6 +383,31 @@ THUMBNAIL_ALIASES = {
         'large': {'size': (200, 200), 'crop': True},
     },
 }
+THUMBNAIL_HIGH_RESOLUTION = True
+THUMBNAIL_PROCESSORS = (
+    'easy_thumbnails.processors.colorspace',
+    'easy_thumbnails.processors.autocrop',
+    #'easy_thumbnails.processors.scale_and_crop',
+    'filer.thumbnail_processors.scale_and_crop_with_subject_location',
+    'easy_thumbnails.processors.filters',
+)
+
+
+# SLACK CHAT
+# ------------------------------------------------------------------------------
+SLACK_TEAM_ID = 'colegend'
+
+
+# SLACK IM
+# ------------------------------------------------------------------------------
+INSTALLED_APPS += ('django_slack',)
+SLACK_TOKEN = env('SLACK_TOKEN', default=None)
+SLACK_CHANNEL = env("SLACK_CHANNEL", default='core')
+SLACK_BACKEND = 'django_slack.backends.Urllib2Backend'
+SLACK_USERNAME = 'coLegend'
+SLACK_ICON_EMOJI = ':co:'
+SLACK_LINK_NAMES = '1'
+
 
 SIMPLEMDE_OPTIONS = {
     'indentWithTabs': False,

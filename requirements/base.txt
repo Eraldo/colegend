@@ -52,6 +52,12 @@ celery==3.1.19
 
 # Your custom requirements go here
 
+# CMS
+django-cms==3.2.5
+cmsplugin-filer==1.0.1
+django-reversion==1.10.2
+djangocms-text-ckeditor==2.9.1
+
 # slack IM
 # django-slack==4.1.1
 # Using from pull request (to make it compatible with python3)

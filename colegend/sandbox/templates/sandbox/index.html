@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% load static cms_tags menu_tags legends_tags %}
+
+{% block extra_head %}
+    {{ block.super }}
+    <link href="{% static 'story/css/story.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}Test{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% include 'widgets/breadcrumb.html' with pattern='test' icon='eye' title='test' %}
+{% endblock %}
+
+{% block content %}
+    {% render_model card "name" %}
+    {% show_menu %}
+{#    {% show_menu 0 1 100 100 "menu.html" %}#}
+    {% placeholder 'content' %}
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <div class="g-hangout"
+         data-render="createhangout"
+         data-widget_size="72">
+    </div>
+
+    {% legend request.user size='medium' %}
+
+    <div id="typed-strings" class="invisible">
+        <p>
+            Hello..^3000 dear stranger, I am <strong>the coLegend spirit</strong>.
+        </p>
+
+        <p>I <em>type</em> the story.</p>
+    </div>
+    <span id="typed"></span>
+
+{% endblock %}
+
+{% block extra_script %}
+    {{ block.super }}
+    <script src="{% static 'components/typed.js/dist/typed.min.js' %}"></script>
+    <script>
+        $(function () {
+            $("#typed").typed({
+                stringsElement: $('#typed-strings')
+            });
+        });
+    </script>
+    <script>
+        $("#testLoad").load("https://colegend.slack.com/messages/general/");
+    </script>
+{% endblock %}

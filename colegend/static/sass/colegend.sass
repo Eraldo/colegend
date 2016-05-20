@@ -36,33 +36,86 @@ $font-headline: "Ubuntu Titling"
 
 $font-stack: "Nunito", "Ubuntu", Helvetica, sans-serif
 
-
 // COLORS
 
 @import colors
 
-$white: white
-$mint-green: #d6e9c6
-$black: black
-$pink: #f2dede
-$dark-pink: #eed3d7
-$red: #b94a48
-
 $site-menu-color: $white
 
-$conscious: $color-secondary-1-0
-$connected: $color-secondary-2-3
-$continuous: $color-primary-3
+.text-white
+  color: $white
+
+.text-black
+  color: $black
+
+.text-main
+  color: $main
+
+.text-main-light
+  color: $main-light
+
+.text-main-dark
+  color: $main-dark
+
+.text-accent
+  color: $accent
+
+.text-accent-light
+  color: $accent-light
+
+.text-accent-dark
+  color: $accent-dark
+
+.bg-white
+  background-color: $white
+  color: $black
+
+.bg-black
+  background-color: $black
+  color: $white
+
+.bg-main
+  background-color: $main
+  color: $white
+
+.bg-main-light
+  background-color: $main-light
+
+.bg-main-dark
+  background-color: $main-dark
+  color: $white
+
+.bg-accent
+  background-color: $accent
+  color: $white
+
+.bg-accent-light
+  background-color: $accent-light
+
+.bg-accent-dark
+  background-color: $accent-dark
+  color: $white
 
 // category colors
 
-$category-7: darkviolet
-$category-6: indigo
-$category-5: dodgerblue
-$category-4: green
-$category-3: gold
-$category-2: darkorange
-$category-1: crimson
+$category-7: #9c27b0
+// violet
+$category-6: #3f51b5
+// indigo
+$category-5: #03a9f4
+// dodgerblue
+$category-4: #4caf50
+// green
+$category-3: #ffeb3b
+// gold
+$category-2: #ff9800
+// darkorange
+$category-1: #f44336
+// crimson
+
+$conscious: $category-6
+$connected: $category-4
+$continuous: $category-2
 
 .text-category-7
   color: $category-7
@@ -77,7 +130,7 @@ $category-1: crimson
   color: $category-4
 
 .text-category-3
-  color: $category-4
+  color: $category-3
 
 .text-category-2
   color: $category-2
@@ -87,29 +140,40 @@ $category-1: crimson
 
 .bg-category-7
   background-color: $category-7
+  color: $white
 
 .bg-category-6
   background-color: $category-6
+  color: $white
 
 .bg-category-5
   background-color: $category-5
+  color: $white
 
 .bg-category-4
   background-color: $category-4
+  color: $white
 
 .bg-category-3
   background-color: $category-3
 
 .bg-category-2
   background-color: $category-2
+  color: $white
 
 .bg-category-1
   background-color: $category-1
+  color: $white
 
 // Alert colors
 
 // bootstrap alert CSS, translated to the django-standard levels of
 // debug, info, success, warning, error
+
+$mint-green: #d6e9c6
+$pink: #f2dede
+$dark-pink: #eed3d7
+$red: #b94a48
 
 .alert-debug
   background-color: $white
@@ -148,7 +212,6 @@ $category-1: crimson
 
 .breadcrumbs
   a
-    color: #818a91
     font-size: small
     text-decoration: none
 
@@ -351,9 +414,26 @@ form .CodeMirror-fullscreen
 .card-item
   padding: 0.6rem
 
-
 .widget-datepicker
   @extend .card-item
   min-width: 14.6rem
   .datepicker-form input
     max-width: 7rem
+
+// CMS (django cms branding)
+.cms-icon-logo:before, div.cms .cms-toolbar-item-logo a.colegend-cms:before
+  content: initial
+
+// header
+.organism-header
+  .nav-link
+    color: inherit
+  .nav-link:focus, .nav-link:hover
+    @extend .bg-accent
+  .dropdown-menu
+    @extend .bg-main
+    .dropdown-item
+      color: inherit
+    .dropdown-item:focus, .dropdown-item:hover
+      @extend .bg-accent
+

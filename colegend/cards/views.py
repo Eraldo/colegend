@@ -10,30 +10,30 @@ class CardListView(LoginRequiredMixin, RolesRequiredMixin, ListView):
     template_name = 'cards/list.html'
     model = Card
     context_object_name = 'cards'
-    required_roles = ['manager']
+    required_roles = ['Content Manager']
 
 
 class CardCreateView(LoginRequiredMixin, RolesRequiredMixin, CreateView):
     template_name = 'cards/create.html'
     model = Card
     form_class = CardForm
-    required_roles = ['admin']
+    required_roles = ['Content Manager']
 
 
 class CardDetailView(LoginRequiredMixin, RolesRequiredMixin, DetailView):
     template_name = 'cards/detail.html'
     model = Card
-    required_roles = ['manager']
+    required_roles = ['Content Manager']
 
 
 class CardUpdateView(LoginRequiredMixin, RolesRequiredMixin, UpdateView):
     template_name = 'cards/update.html'
     model = Card
     form_class = CardForm
-    required_roles = ['manager']
+    required_roles = ['Content Manager']
 
 
 class CardDeleteView(LoginRequiredMixin, RolesRequiredMixin, DeleteView):
     template_name = 'cards/delete.html'
     model = Card
-    required_roles = ['admin']
+    required_roles = ['Content Manager']

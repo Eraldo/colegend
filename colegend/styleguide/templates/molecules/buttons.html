@@ -1,0 +1,6 @@
+{% load atoms_tags %}
+<div class="molecule-buttons {{ class|default:'btn-group' }}" role="group" aria-label="Buttons">
+    {% for button in buttons %}
+        {% button %}
+    {% endfor %}
+</div>

@@ -1,4 +1,4 @@
-{% load staticfiles i18n menus %}
+{% load staticfiles i18n menus cms_tags sekizai_tags %}
 <!DOCTYPE html>
 
 <html lang="en" ng-app>
@@ -42,10 +42,11 @@
         {% block extra_head %}{% endblock %}
 
     {% endblock %}
-
+    {% render_block "css" %}
 </head>
 
 <body id="body" class="{% block body_class %}default-pattern{% endblock %}">
+{% cms_toolbar %}
 
 <div id="site-menu-container">
     {% block site_menu %}
@@ -150,6 +151,7 @@
     {% block extra_script %}{% endblock %}
 
 {% endblock javascript %}
+{% render_block "js" %}
 </body>
 </html>
 

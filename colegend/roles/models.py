@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from easy_thumbnails.fields import ThumbnailerImageField
 
 from colegend.core.models import OwnedBase, AutoUrlsMixin
 
@@ -31,6 +32,11 @@ class Role(AutoUrlsMixin, models.Model):
     name = models.CharField(_('name'), max_length=255, unique=True)
     nickname = models.CharField(_('nickname'), max_length=255, blank=True)
     item = models.CharField(_('item'), max_length=255, blank=True)
+    icon = ThumbnailerImageField(
+        upload_to='roles/icons/',
+        blank=True,
+        resize_source=dict(size=(100, 100)),
+    )
     description = models.TextField(blank=True)
 
     objects = RoleQuerySet.as_manager()

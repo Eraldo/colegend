@@ -1,0 +1,8 @@
+{% load atoms_tags %}
+<div class="organism-breadcrumbs">
+    <div class="breadcrumbs">
+        {% for breadcrumb in breadcrumbs %}
+            {% breadcrumb %}
+        {% endfor %}
+    </div>
+</div>

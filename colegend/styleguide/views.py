@@ -1,9 +1,8 @@
-import pprint
-
 from django.template.defaultfilters import slugify
-from django.template.loader import render_to_string
 from django.views.generic import TemplateView
-from .data import data
+
+from .models import Element, ElementGroup
+from .data import atoms, molecules, organisms
 
 
 class StyleguideView(TemplateView):
@@ -20,27 +19,18 @@ class StyleguideView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['atoms'] = atoms
+        context['organisms'] = organisms
+        context['molecules'] = molecules
 
-        # TODO: Split in sub-methods
+        # data = {'text': 'foo', 'class': 'bg-main'}
+        # label1 = label(context, data)
+        # label1.data = data
+        # context['element'] = label1
+        #
+        # data = {'text': label1}
+        # label2 = label(context, data)
+        # label2.data = data
+        # context['element2'] = label2
 
-        for item, values in data.items():
-            name = values.get('name')
-            template = values.get('template')
-            item_context = values.get('context')
-
-            # Create rendering for meta data
-            meta_context = dict()
-            meta_context['name'] = name
-            meta_context['template'] = template
-            input = """{{% include "{}" %}}""".format(template)
-            meta_context['input'] = input
-            meta_context['context'] = pprint.pformat(item_context)
-
-            item_meta = render_to_string("styleguide/_meta.html", context=meta_context)
-            context[item + "_meta"] = item_meta
-
-            item_output = render_to_string(template, context=item_context)
-            context[item + "_output"] = item_output
-
-            context[item] = item_meta + item_output
         return context

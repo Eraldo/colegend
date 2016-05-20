@@ -1,0 +1,11 @@
+{% load static atoms_tags %}
+<div {% if id %}id="{{ id }}" {% endif %} class="atom-avatar {{ class }} {{ size }}">
+    <a {% if url %}href="{{ url }}"{% endif %}>
+        {% if image %}
+            <img class="avatar-image img-responsive" src="{% static image %}" alt="{{ name }}">
+        {% endif %}
+        {% if name %}
+            {% label text=name class=label.class %}
+        {% endif %}
+    </a>
+</div>

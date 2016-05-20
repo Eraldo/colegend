@@ -1,0 +1,31 @@
+.arrow:before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  width: 0;
+  height: 0;
+  border: 0.5rem solid; }
+.arrow.left {
+  left: 50%;
+  margin-left: -0.5rem; }
+  .arrow.left:before {
+    border-top-color: transparent;
+    border-left-color: transparent;
+    border-bottom-color: transparent; }
+.arrow.right {
+  right: 50%;
+  margin-right: -0.5rem; }
+  .arrow.right:before {
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent; }
+.arrow.up:before {
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-top-color: transparent; }
+.arrow.down:before {
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent; }
+
+/*# sourceMappingURL=arrows.css.map */

@@ -1,0 +1,30 @@
+{% load icons %}
+<div class="organism-card card">
+    {% if header or closeable or action %}
+        <div class="card-header">
+            {{ header.content }}
+            {% if closeable %}
+                <div class="atom-close-button pull-right">
+                    <a onclick="$(this).closest('.card').hide('blind', {direction: 'up'});"
+                       class="close-button text-muted">
+                        {% icon 'close' %}
+                    </a>
+                </div>
+                {% if not header %}<br>{% endif %}
+            {% endif %}
+        </div>
+    {% endif %}
+    <div class="card-block">
+        {% if title %}
+            <h{{ title.size|default:4 }} class="card-title">
+                {{ title.content }}
+            </h{{ title.size|default:4 }}>
+        {% endif %}
+        {{ content }}
+    </div>
+    {% if footer %}
+        <div class="card-footer">
+            {{ footer.content }}
+        </div>
+    {% endif %}
+</div>

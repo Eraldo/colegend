@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static cms_tags %}
 
 {% block title %}Home{% endblock %}
 
@@ -11,8 +11,7 @@
 
 {% block content %}
 
-    {% include "home/cards/_links_card.html" %}
-
+    {% placeholder 'content' %}
     <div class="row">
 
         <div id="conscious-update" class="col-lg-4">

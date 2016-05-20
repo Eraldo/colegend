@@ -15,16 +15,14 @@ def menu(context, user=None):
         template = 'widgets/menu/authenticated.html'
         dropdowns = [
             {
-                'name': 'conscious',
+                'name': 'Apps',
                 'id': 'conscious',
-                'icon': 'conscious',
+                'icon': 'cubes',
+                'class': 'text-conscious',
                 'items': [
                     {
-                        'name': 'Dashboard',
-                        'url': reverse('conscious:index'),
-                    },
-                    {
-                        'name': 'divider',
+                        'name': 'Manager',
+                        'locked': True,
                     },
                     {
                         'name': 'Journal',
@@ -32,54 +30,32 @@ def menu(context, user=None):
                         'url': reverse('journals:index'),
                     },
                     {
-                        'name': 'Manager',
+                        'name': 'Vision',
                         'locked': True,
                     },
                     {
-                        'name': 'Habits',
+                        'name': 'Academy',
                         'locked': True,
                     },
                     {
-                        'name': 'divider',
+                        'name': 'Game',
+                        'locked': True,
+                        # 'url': reverse('games:index'),
                     },
                     {
-                        'name': 'Tags',
-                        'locked': not user.has_checkpoint('storytime'),
-                        'url': reverse('tags:list'),
-                    },
-                    {
-                        'name': 'Categories',
-                        'url': reverse('categories:index'),
-                    },
-                    {
-                        'name': 'Roles',
-                        'url': reverse('roles:index'),
+                        'name': 'Story',
+                        'url': reverse('story:index'),
                     },
                 ],
             },
             {
-                'name': 'connected',
-                'id': 'connected',
-                'icon': 'connected',
+                'name': 'Community',
+                'id': 'community',
+                'icon': 'group',
+                'class': 'text-connected',
                 'items': [
                     {
-                        'name': 'Dashboard',
-                        'url': reverse('connected:index'),
-                    },
-                    {
-                        'name': 'divider',
-                    },
-                    {
-                        'name': 'Legend',
-                        'url': reverse('legends:detail', args=[user.username]),
-                    },
-                    {
-                        'name': 'Cloud Guide',
-                        'locked': not user.has_checkpoint('cloud guide card'),
-                        'url': reverse('guides:guide'),
-                    },
-                    {
-                        'name': 'Dream Team',
+                        'name': 'Duo',
                         'locked': True,
                     },
                     {
@@ -87,11 +63,13 @@ def menu(context, user=None):
                         'locked': True,
                     },
                     {
-                        'name': 'Circle',
+                        'name': 'Clan',
                         'locked': True,
                     },
                     {
-                        'name': 'divider',
+                        'name': 'Guide',
+                        'locked': not user.has_checkpoint('cloud guide card'),
+                        'url': reverse('guides:guide'),
                     },
                     {
                         'name': 'Chat',
@@ -106,10 +84,6 @@ def menu(context, user=None):
                         'external': True,
                     },
                     {
-                        'name': 'Events',
-                        'url': reverse('events:index'),
-                    },
-                    {
                         'name': 'Guidelines',
                         'locked': not user.has_checkpoint('guidelines card'),
                         'url': reverse('connected:guidelines'),
@@ -117,35 +91,37 @@ def menu(context, user=None):
                 ],
             },
             {
-                'name': 'continuous',
-                'id': 'continuous',
-                'icon': 'continuous',
+                'name': 'Project',
+                'id': 'project',
+                'icon': 'info-circle',
+                'class': 'text-continuous',
                 'items': [
                     {
-                        'name': 'Dashboard',
-                        'url': reverse('continuous:index'),
+                        'name': 'About',
+                        'url': reverse('about'),
+                    },
+                    # {
+                    #     'name': 'Roles',
+                    #     'url': reverse('roles:index'),
+                    # },
+                    # {
+                    #     'name': 'Top Supporters',
+                    #     'url': reverse('donations:top-supporters'),
+                    # },
+                    {
+                        'name': 'Events',
+                        'url': reverse('events:index'),
                     },
                     {
-                        'name': 'divider',
+                        'name': 'Support',
+                        'url': reverse('support:index'),
                     },
+                    # {
+                    #     'name': 'Framework',
+                    #     'url': reverse('categories:index'),
+                    # },
                     {
-                        'name': 'Game',
-                        'url': reverse('games:index'),
-                    },
-                    {
-                        'name': 'Story',
-                        'url': reverse('story:index'),
-                    },
-                    {
-                        'name': 'Personal Story',
-                        'locked': True,
-                    },
-                    {
-                        'name': 'Tribe Story',
-                        'locked': True,
-                    },
-                    {
-                        'name': 'coLegend Story',
+                        'name': 'News',
                         'locked': True,
                     },
                 ],
@@ -154,14 +130,9 @@ def menu(context, user=None):
         context['dropdowns'] = dropdowns
         account_items = [
             {
-                'name': 'Legend',
+                'name': 'Profile',
                 'url': reverse('legends:detail', args=[user.username]),
                 'icon': 'legend',
-            },
-            {
-                'name': 'Support',
-                'url': reverse('support:index'),
-                'icon': 'support',
             },
             {
                 'name': 'Settings',

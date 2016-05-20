@@ -1,5 +1,10 @@
 {% extends 'roles/base.html' %}
-{% load icons buttons markdown legends_tags %}
+{% load static icons atoms_tags buttons markdown legends_tags %}
+
+{% block extra_head %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'styleguide/css/index.css' %}">
+{% endblock %}
 
 {% block title %}Role{% endblock %}
 
@@ -13,42 +18,48 @@
 {% endblock %}
 
 {% block content_container %}
-    <div class="row">
-        <div class="col-md-8">
-            <div class="card bg-content card-block">
-                <h1>
-                    {{ role }}
-                </h1>
-                {% if role.item %}
-                    <p>
-                        <u>Item</u>: {{ role.item }}
-                    </p>
-                {% endif %}
-                <p>
-                    {{ role.description|markdown }}
-                </p>
-            </div>
-        </div>
-        <div class="col-md-4 ">
-            <div class="card bg-content card-block">
-                <h4>
-                    Energizers
-                </h4>
-                {% if energizers %}
-                    {% for legend in energizers %}
-                        {% legend size='small' %}
-                    {% endfor %}
-                    <p></p>
-                    {% contact_button name='Contact this group' %}
+<div class="row">
+    <div class="col-md-8">
+        <div class="card bg-content card-block">
+            <h1>
+                {{ role }}
+            </h1>
+                {% if role.icon %}
+                    <div class="pull-left" style="margin-right: 0.5em">
+                        {% include 'atoms/badge.html' with image=role.icon.url class='bg-main-light' name=role.item url=role.detail_url %}
+                    </div>
                 {% else %}
-                    <p>
-                        We are looking for legends to energize this role.
-                    </p>
-                    <p>
-                        {% contact_button %}
-                    </p>
+                    <div class="pull-left" style="margin-right: 0.5em">
+                        {% static 'roles/images/icon_object_f.png' as default_image %}
+                        {% include 'atoms/badge.html' with image=default_image class='bg-main-light' name=role.item url=role.detail_url %}
+                    </div>
                 {% endif %}
-            </div>
+            <p>
+                {{ role.description|markdown }}
+            </p>
+            <div class="clearfix"></div>
         </div>
     </div>
+    <div class="col-md-4 ">
+        <div class="card bg-content card-block">
+            <h4>
+                Energizers
+            </h4>
+            {% if energizers %}
+                {% for legend in energizers %}
+                    {% legend size='small' %}
+                {% endfor %}
+                <p></p>
+                {% contact_button name='Contact this group' %}
+            {% else %}
+                <p>
+                    We are looking for legends to energize this role.
+                </p>
+                <p>
+                    {% contact_button %}
+                </p>
+            {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock %}
