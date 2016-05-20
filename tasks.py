@@ -128,9 +128,21 @@ def backup():
     """
     Backup the database. (development only)
     """
-    if context.get('environment') == 'development':
-        message('backing up database')
-        run('pg_dump -Fc {project} > backups/{project}_`date +%Y-%m-%d_%H%M%S`.dump'.format(project=project_name))
+    environment = context.get('environment')
+    if environment == 'development':
+        message('backing up local database')
+        run('pg_dump -Fc {project} > backups/development/{project}-{environment}_`date +%Y-%m-%d_%H%M%S`.dump'.format(
+            project=project_name, environment=environment))
+    elif environment == 'staging':
+        app = project_name + '-staging'
+        message('backing up staging database')
+        local_run('curl -o backups/{environment}/{project}-{environment}_`date +%Y-%m-%d_%H%M%S`.dump `heroku pg:backups public-url --app {app}`'.format(
+            project=project_name, environment=environment, app=app))
+    elif environment == 'production':
+        app = project_name
+        message('backing up production database')
+        local_run('curl -o backups/{environment}/{project}-{environment}_`date +%Y-%m-%d_%H%M%S`.dump `heroku pg:backups public-url --app {app}`'.format(
+            project=project_name, environment=environment, app=app))
 
 
 @task
