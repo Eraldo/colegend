@@ -4,6 +4,8 @@
         {% if image %}
             <img class="avatar-image img-responsive" src="{% static image %}" alt="{{ name }}">
         {% endif %}
-        {% label text=name class=label.class %}
+        {% if name %}
+            {% label text=name class=label.class %}
+        {% endif %}
     </a>
 </div>

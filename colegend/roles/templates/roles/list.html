@@ -1,5 +1,10 @@
 {% extends 'roles/base.html' %}
-{% load icons buttons roles_tags legends_tags %}
+{% load static icons atoms_tags buttons roles_tags legends_tags %}
+
+{% block extra_head %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'styleguide/css/index.css' %}">
+{% endblock %}
 
 {% block title %}Roles{% endblock %}
 
@@ -10,7 +15,24 @@
 {% endblock %}
 
 {% block content %}
-    {% for role in roles %}
-        {% role_link %}{% for user in role.users.all %} - {% legend %}{% endfor %}<br>
-    {% endfor %}
+    <div class="row">
+        {% for role in roles %}
+            <div class="col-lg-6" style="margin-bottom: 0.5em">
+                {% if role.icon %}
+                    <div class="pull-left" style="margin-right: 0.5em">
+                        {% include 'atoms/badge.html' with image=role.icon.url class='bg-category-3' name=role.item url=role.detail_url %}
+                    </div>
+                {% else %}
+                    <div class="pull-left" style="margin-right: 0.5em">
+                        {% static 'roles/images/icon_object_f.png' as default_image %}
+                        {% include 'atoms/badge.html' with image=default_image class='bg-category-3' name=role.item url=role.detail_url %}
+                    </div>
+                {% endif %}
+                {% role_link %}<br>
+                {% for user in role.users.all %}
+                    {% legend size='small' %}
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
