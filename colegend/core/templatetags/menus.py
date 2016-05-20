@@ -43,7 +43,8 @@ def menu(context, user=None):
                     },
                     {
                         'name': 'Game',
-                        'url': reverse('games:index'),
+                        'locked': True,
+                        # 'url': reverse('games:index'),
                     },
                 ],
             },
