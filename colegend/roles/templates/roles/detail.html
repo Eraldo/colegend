@@ -24,16 +24,20 @@
             <h1>
                 {{ role }}
             </h1>
-            {% if role.icon %}
-                {% include 'atoms/badge.html' with image=role.icon.url class='bg-category-3' name=role.item %}
-            {% elif role.item %}
-                <p>
-                    <u>Item</u>: {{ role.item }}
-                </p>
-            {% endif %}
+                {% if role.icon %}
+                    <div class="pull-left" style="margin-right: 0.5em">
+                        {% include 'atoms/badge.html' with image=role.icon.url class='bg-main-light' name=role.item url=role.detail_url %}
+                    </div>
+                {% else %}
+                    <div class="pull-left" style="margin-right: 0.5em">
+                        {% static 'roles/images/icon_object_f.png' as default_image %}
+                        {% include 'atoms/badge.html' with image=default_image class='bg-main-light' name=role.item url=role.detail_url %}
+                    </div>
+                {% endif %}
             <p>
                 {{ role.description|markdown }}
             </p>
+            <div class="clearfix"></div>
         </div>
     </div>
     <div class="col-md-4 ">
