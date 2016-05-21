@@ -1,7 +1,12 @@
 {% extends 'legends/base.html' %}
-{% load i18n static icons legends_tags buttons %}
+{% load i18n static icons legends_tags roles_tags buttons %}
 
 {% block title %}Legend{% endblock %}
+
+{% block extra_head %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'styleguide/css/index.css' %}">
+{% endblock %}
 
 {% block breadcrumbs %}
     {% include 'widgets/breadcrumb.html' with pattern='legends:list' icon='users' title='legends' %}
@@ -88,31 +93,30 @@
         <div class="col-md-6">
             <div id="legend-badges" class="card bg-content">
                 <div class="card-header">
-                    Magical Items
+                    <a href="{% url 'roles:index' %}">
+                        Roles
+                    </a>
                 </div>
                 <div class="card-block">
-                    <div class="pull-left">
+                    <h5>
+                        coLegend
+                    </h5>
+                    <div class="molecule-roles row">
                         {% for role in roles %}
-                            {% if role.name == 'Core Manager' %}
-                                <a href="{{ role.detail_url }}"><img
-                                        src="{% static 'legends/images/badges/Core_Team_Badge.png' %}"
-                                        class="badge team"
-                                        alt="badge team"></a>
-                            {% elif role.name == 'Guide' %}
-                                <a href="{{ role.detail_url }}"><img
-                                        src="{% static 'legends/images/badges/Cloud_Guide_Badge.png' %}"
-                                        class="badge guide"
-                                        alt="badge guide"></a>
+                            <div class="col-xs-6 col-sm-4 col-lg-2" style="margin-bottom: 0.5em">
+                                {% if role.icon %}
+                                    {% include 'atoms/badge.html' with image=role.icon.url class='bg-main-light' name=role url=role.detail_url size='small' %}
+                                {% else %}
+                                    {% static 'roles/images/icon_object_f.png' as default_image %}
+                                    {% include 'atoms/badge.html' with image=default_image class='bg-main-light' name=role url=role.detail_url size='small' %}
+                                {% endif %}
+                                <a href="{{ role.detail_url }}" class="small"><div>{{ role.display_name }}</div></a>
+                            </div>
+                            {% if forloop.counter|divisibleby:3 %}
+                                <div class="clearfix hidden-lg-up hidden-sm-down"></div>
                             {% endif %}
                         {% endfor %}
                     </div>
-                    {% for role in roles %}
-                        {% if role.name == 'Core Manager' or role.name == 'Guide' %}
-                        {% else %}
-                            {% include 'roles/widgets/tag.html' with name=role.display_name url=role.detail_url %}
-                        {% endif %}
-                    {% endfor %}
-                    <div class="clearfix"></div>
                 </div>
             </div>
 
