@@ -66,6 +66,10 @@ def menu(context, user=None):
                         'locked': True,
                     },
                     {
+                        'name': 'Legends',
+                        'url': reverse('legends:index'),
+                    },
+                    {
                         'name': 'Guide',
                         'locked': not user.has_checkpoint('cloud guide card'),
                         'url': reverse('guides:guide'),
