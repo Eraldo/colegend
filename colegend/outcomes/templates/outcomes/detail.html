@@ -1,0 +1,15 @@
+{% extends 'outcomes/base.html' %}
+{% load icons buttons  outcomes_tags %}
+
+{% block title %}Outcome{% endblock %}
+
+{% block page_controls %}
+    {% button 'update' url=outcome.update_url %}
+    <div class="pull-right">
+        {% button 'delete' url=outcome.delete_url %}
+    </div>
+{% endblock %}
+
+{% block content %}
+    {{ outcome }}
+{% endblock %}
