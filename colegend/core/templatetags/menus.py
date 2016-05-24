@@ -22,7 +22,7 @@ def menu(context, user=None):
                 'items': [
                     {
                         'name': 'Manager',
-                        'locked': True,
+                        'url': reverse('outcomes:index'),
                     },
                     {
                         'name': 'Journal',

@@ -11,6 +11,13 @@ class OutcomeForm(OwnedModelForm):
         fields = [
             'owner',
             'name',
+            'description',
+            'status',
+            'review',
+            'inbox',
+            'date',
+            'deadline',
+            'estimate',
         ]
 
     def __init__(self, *args, **kwargs):
@@ -20,5 +27,12 @@ class OutcomeForm(OwnedModelForm):
         self.helper.layout = Layout(
             Field('owner', type="hidden"),
             Field('name'),
+            Field('description'),
+            Field('status'),
+            Field('review'),
+            Field('inbox'),
+            Field('date'),
+            Field('deadline'),
+            Field('estimate'),
         )
         self.helper.add_input(Submit('save', 'Save'))
