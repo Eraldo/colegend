@@ -105,6 +105,9 @@ LOCAL_APPS = (
     'colegend.journals',
     'colegend.dayentries',
 
+    # Manager
+    'colegend.outcomes',
+
     'colegend.connected',
     'colegend.outercall',
     'colegend.innercall',
