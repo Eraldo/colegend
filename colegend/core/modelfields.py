@@ -35,7 +35,6 @@ class IntuitiveDurationField(models.DurationField):
 
     def value_to_string(self, obj):
         value = self._get_val_from_obj(obj)
-        raise Exception(intuitive_duration_string(value))
         return '' if value is None else intuitive_duration_string(value)
 
     def formfield(self, **kwargs):

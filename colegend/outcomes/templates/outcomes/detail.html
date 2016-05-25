@@ -1,5 +1,5 @@
 {% extends 'outcomes/base.html' %}
-{% load icons buttons  outcomes_tags %}
+{% load icons buttons outcomes_tags core_tags %}
 
 {% block title %}Outcome{% endblock %}
 
@@ -11,5 +11,26 @@
 {% endblock %}
 
 {% block content %}
-    {{ outcome }}
+    <div class="row">
+        <div class="col-md-8">
+            <strong>{{ outcome.name }}</strong><br>
+            <p>
+                {{ outcome.description|linebreaksbr }}
+            </p>
+        </div>
+        <div class="col-md-4">
+            <u>Status</u>:
+            {{ outcome.get_status_display }}<br>
+            <u>Review</u>:
+            {{ outcome.get_review_display }}<br>
+            <u>Inbox</u>:
+            {{ outcome.inbox }}<br>
+            <u>Date</u>:
+            {{ outcome.date }}<br>
+            <u>Deadline</u>:
+            {{ outcome.deadline }}<br>
+            <u>Estimate</u>:
+            {{ outcome.estimate|intuitive_duration }}<br>
+        </div>
+    </div>
 {% endblock %}
