@@ -73,7 +73,7 @@ def intuitive_duration_string(timedelta):
     :return: a string 'intuitively' representing the duration
     """
     if not isinstance(timedelta, datetime.timedelta):
-        ValidationError("Invalid input for an intuitive duration. Format: {}".format(intuitive_duration_format))
+        raise ValidationError("Invalid input for an intuitive duration. Format: {}".format(intuitive_duration_format))
 
     if not timedelta.days:
         seconds = timedelta.seconds

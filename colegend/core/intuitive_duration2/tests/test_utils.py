@@ -3,7 +3,7 @@ import datetime
 from django.core.exceptions import ValidationError
 from test_plus.test import TestCase
 
-from colegend.core.intuitive_duration2.utils import parse_intuitive_duration
+from colegend.core.intuitive_duration2.utils import parse_intuitive_duration, intuitive_duration_string
 
 
 class TestIntuitiveDuration(TestCase):
@@ -32,3 +32,14 @@ class TestIntuitiveDuration(TestCase):
 
         for string in invalid_inputs:
             self.assertRaises(ValidationError, parse_intuitive_duration, string)
+
+    def test_intuitive_duration_string(self):
+        # Valid input
+        assert intuitive_duration_string(datetime.timedelta(minutes=40)) == '40m'
+        assert intuitive_duration_string(datetime.timedelta(hours=1)) == '1h'
+        assert intuitive_duration_string(datetime.timedelta(days=3)) == '3d'
+        assert intuitive_duration_string(datetime.timedelta(weeks=2)) == '2w'
+        assert intuitive_duration_string(datetime.timedelta(days=180)) == '6M'
+        assert intuitive_duration_string(datetime.timedelta(hours=1, minutes=30)) == '1.5h'
+        # Invalid input
+        self.assertRaises(ValidationError, intuitive_duration_string, '1h')
