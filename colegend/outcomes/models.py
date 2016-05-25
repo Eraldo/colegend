@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from colegend.core.modelfields import IntuitiveDurationField
+from colegend.core.intuitive_duration.modelfields import IntuitiveDurationField
 from colegend.core.models import OwnedBase, AutoUrlsMixin, OwnedQuerySet, TimeStampedBase
 
 

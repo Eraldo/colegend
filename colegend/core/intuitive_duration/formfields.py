@@ -2,7 +2,7 @@ import datetime
 from django import forms
 from django.core.exceptions import ValidationError
 
-from colegend.core.intuitive_duration import intuitive_duration_string, parse_intuitive_duration
+from colegend.core.intuitive_duration.utils import intuitive_duration_string, parse_intuitive_duration
 
 
 class IntuitiveDurationFormField(forms.DurationField):

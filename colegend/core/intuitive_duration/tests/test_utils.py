@@ -3,7 +3,7 @@ import datetime
 from django.core.exceptions import ValidationError
 from test_plus.test import TestCase
 
-from colegend.core.intuitive_duration2.utils import parse_intuitive_duration, intuitive_duration_string
+from colegend.core.intuitive_duration.utils import parse_intuitive_duration, intuitive_duration_string
 
 
 class TestIntuitiveDuration(TestCase):

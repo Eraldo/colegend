@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from .formfields import IntuitiveDurationFormField
-from .intuitive_duration import parse_intuitive_duration, intuitive_duration_format, intuitive_duration_string
+from .utils import parse_intuitive_duration, intuitive_duration_format, intuitive_duration_string
 
 
 class IntuitiveDurationField(models.DurationField):
