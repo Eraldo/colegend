@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 
 __author__ = 'eraldo'
 
-intuitive_duration_format = "A number followed by the scope (seconds|hours|days|weeks|months|quarters|years). Example: 3d or 2.5 hours"
+intuitive_duration_format = "A number followed by the scope (seconds|hours|days|weeks|months). Example: 3d or 2.5 hours"
 
 
 def parse_intuitive_duration(intuitive_string):
@@ -19,21 +19,19 @@ def parse_intuitive_duration(intuitive_string):
     :return: timedelta or input value
     """
     intuitive_duration_regex = re.compile(
-        r'^{amount}(\s+)?({minutes}|{hours}|{days}|{weeks}|{months}|{quarters}|{years})$'.format(
+        r'^{amount}(\s+)?({minutes}|{hours}|{days}|{weeks}|{months})$'.format(
             amount=r'(?P<amount>\d+(\.\d+)?|(\d+)?\.\d+)',
             minutes=r'(?P<minutes>m|minute(s)?)',
             hours=r'(?P<hours>h|hour(s)?)',
             days=r'(?P<days>d|day(s)?)',
             weeks=r'(?P<weeks>w|week(s)?)',
             months=r'(?P<months>M|month(s)?)',
-            quarters=r'(?P<quarters>q|quarter(s)?)',
-            years=r'(?P<years>y|year(s)?)',
         )
     )
 
     # Only accept strings for further processing.
     if not isinstance(intuitive_string, str):
-        raise ValidationError("Invalid input for a intuitive duration")
+        raise ValidationError("Invalid input for a duration")
 
     # Remove spaces from start and end.
     string = intuitive_string.strip()
@@ -54,12 +52,6 @@ def parse_intuitive_duration(intuitive_string):
 
     if scope == 'months':
         amount *= 30
-        scope = 'days'
-    elif scope == 'quarters':
-        amount *= 90
-        scope = 'days'
-    elif scope == 'years':
-        amount *= 365
         scope = 'days'
 
     time_parameters = {scope: amount}
@@ -97,15 +89,7 @@ def intuitive_duration_string(timedelta):
         days = timedelta.days
         weeks = days / 7
         months = days / 30
-        quarters = days / 90
-        years = days / 365
-        if years >= 1:
-            symbol = 'y'
-            amount = years
-        elif quarters >= 1:
-            symbol = 'q'
-            amount = quarters
-        elif months >= 1:
+        if months >= 1:
             symbol = 'M'
             amount = months
         elif weeks >= 1:
