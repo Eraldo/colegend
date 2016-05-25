@@ -63,12 +63,14 @@ def intuitive_duration_string(timedelta):
     """
     Takes a time duration and converts it to a string representation.
     The string intervals for representation:
-        years, months, weeks, days, hours, minutes and seconds.
+        minutes, hours, days, weeks and months.
     Alternative represention with short characters:
-        Y, M, w, d, h, m and s
-    Example:
-        '1w 6d 20h 15m': one week, six days, twenty hours, 15 minutes
-        '1h'           : one hour
+        m, h, d, w and M.
+    Examples:
+        '15m': 15 minutes
+        '20h': Twenty hours
+        '6d': Six days
+        '1w': One week
     :param timedelta: python timedelta object
     :return: a string 'intuitively' representing the duration
     """
