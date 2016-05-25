@@ -21,19 +21,14 @@ class TestIntuitiveDuration(TestCase):
             ('6M', datetime.timedelta(days=6 * 30)),
             ('1.5h', datetime.timedelta(hours=1.5)),
         ]
-
         for string, duration in valid_input_map:
             parsed_duration = parse_intuitive_duration(string)
             assert parsed_duration == duration, '{} could not be parsed to {}'.format(repr(string), repr(duration))
 
         # Invalid input
-
         invalid_inputs = [
-            '1x',
+            '1x', 'y', 'd', '9', '1,3d', '1:2h', '1/2h'
         ]
 
         for string in invalid_inputs:
             self.assertRaises(ValidationError, parse_intuitive_duration, string)
-            # with pytest.raises(ValidationError):
-            #     parsed_duration = parse_intuitive_duration(string)
-            # assert parsed_duration == duration, '{} was expected to become {}'.format(repr(string), repr(duration))
