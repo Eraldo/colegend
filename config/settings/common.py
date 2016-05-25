@@ -75,13 +75,15 @@ THIRD_PARTY_APPS = (
     'allauth.socialaccount',  # registration
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
-    'django_gravatar',
+    'django_gravatar', # TODO: Researching if this is still in the project?
     'orderable',
     'simplemde',
 
     # django-autocomplte-light v3
     'dal',
     'dal_select2',
+
+    'django_filters',
 )
 
 # Apps specific for this project go here.

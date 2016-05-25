@@ -3,7 +3,8 @@ from django.views.generic import ListView, DetailView, DeleteView, CreateView, U
 
 from colegend.core.views import OwnedCreateView, OwnedUpdateView, OwnedItemsMixin
 from .models import Outcome
-from .forms import OutcomeForm
+from .forms import OutcomeForm, OutcomeFilterFormHelper
+from .filters import OutcomeFilter
 
 
 class OutcomeMixin(OwnedItemsMixin):
@@ -12,6 +13,7 @@ class OutcomeMixin(OwnedItemsMixin):
     """
     model = Outcome
     form_class = OutcomeForm
+    filter_class = OutcomeFilter
 
 
 class OutcomeIndexView(RedirectView):
@@ -23,6 +25,19 @@ class OutcomeIndexView(RedirectView):
 class OutcomeListView(LoginRequiredMixin, OutcomeMixin, ListView):
     template_name = 'outcomes/list.html'
     context_object_name = 'outcomes'
+    context_filter_name = 'filter'
+    filter_formhelper_class = OutcomeFilterFormHelper
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        self.filter = self.filter_class(self.request.GET, queryset=queryset)
+        self.filter.form.helper = self.filter_formhelper_class()
+        return self.filter.qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context[self.context_filter_name] = self.filter
+        return context
 
 
 class OutcomeCreateView(LoginRequiredMixin, OutcomeMixin, OwnedCreateView):

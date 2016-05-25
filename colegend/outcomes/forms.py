@@ -5,6 +5,16 @@ from colegend.core.forms import OwnedModelForm
 from .models import Outcome
 
 
+class OutcomeFilterFormHelper(FormHelper):
+    model = Outcome
+    form_method = 'GET'
+    help_text_inline = True
+
+    def __init__(self, form=None):
+        super().__init__(form)
+        self.add_input(Submit('filter', 'Filter'))
+
+
 class OutcomeForm(OwnedModelForm):
     class Meta:
         model = Outcome
