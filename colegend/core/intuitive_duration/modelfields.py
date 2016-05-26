@@ -33,6 +33,9 @@ class IntuitiveDurationField(models.DurationField):
 
         return value
 
+    def get_prep_value(self, value):
+        return self.to_python(value)
+
     def value_to_string(self, obj):
         value = self._get_val_from_obj(obj)
         return '' if value is None else intuitive_duration_string(value)

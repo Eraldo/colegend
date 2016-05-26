@@ -3,13 +3,14 @@ from django.utils.translation import ugettext_lazy as _
 
 from colegend.core.intuitive_duration.modelfields import IntuitiveDurationField
 from colegend.core.models import OwnedBase, AutoUrlsMixin, OwnedQuerySet, TimeStampedBase
+from colegend.tags.models import TaggableBase
 
 
 class OutcomeQuerySet(OwnedQuerySet):
     pass
 
 
-class Outcome(AutoUrlsMixin, OwnedBase, TimeStampedBase):
+class Outcome(AutoUrlsMixin, OwnedBase, TaggableBase, TimeStampedBase):
     """
     A django model representing a user's outcome.
     """

@@ -1,17 +1,49 @@
+import datetime
+
 import django_filters
 
+from colegend.core.intuitive_duration.utils import parse_intuitive_duration
 from .models import Outcome
+from .forms import OutcomeFilterForm
+
+
+def filter_estimate(queryset, value):
+    if value:
+        if value == '1d':
+            queryset = queryset.filter(estimate__lt=value)
+        elif value == '1w':
+            queryset = queryset.filter(estimate__range=('1d', '1w'))
+        elif value == '1M':
+            queryset = queryset.filter(estimate__range=('1w', '1M'))
+        elif value == '12M':
+            queryset = queryset.filter(estimate__gte='1M')
+        elif value == '0m':
+            queryset = queryset.filter(estimate__isnull=True)
+    return queryset
 
 
 class OutcomeFilter(django_filters.FilterSet):
+    name = django_filters.CharFilter(lookup_expr='icontains')
     status = django_filters.ChoiceFilter(choices=(('', 'all'),) + Outcome.STATUS_CHOICES)
     review = django_filters.ChoiceFilter(choices=(('', 'all'),) + Outcome.REVIEW_CHOICES)
+    ESTIMATE_CHOICES = (
+        ('1d', 'hour(s)'),
+        ('1w', 'day(s)'),
+        ('1M', 'week(s)'),
+        ('12M', 'month(s)'),
+        ('0m', 'unestimated'),
+    )
+    estimate = django_filters.ChoiceFilter(choices=(('', 'all'),) + ESTIMATE_CHOICES, action=filter_estimate)
 
     class Meta:
         model = Outcome
-        fields = {
-            'name': ['icontains'],
-            'status': ['exact'],
-            'review': ['exact'],
-            'inbox': ['exact'],
-        }
+        form = OutcomeFilterForm
+
+    def __init__(self, data=None, queryset=None, prefix=None, strict=None):
+        super().__init__(data, queryset, prefix, strict)
+
+    # def filter_estimate(self, queryset, value):
+    #     raise Exception('foo')
+    #     return queryset.filter(
+    #         estimate__lt=datetime.timedelta(weeks=1)
+    #     )

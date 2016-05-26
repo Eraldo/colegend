@@ -3,7 +3,7 @@ from django.views.generic import ListView, DetailView, DeleteView, CreateView, U
 
 from colegend.core.views import OwnedCreateView, OwnedUpdateView, OwnedItemsMixin
 from .models import Outcome
-from .forms import OutcomeForm, OutcomeFilterFormHelper
+from .forms import OutcomeForm
 from .filters import OutcomeFilter
 
 
@@ -26,12 +26,16 @@ class OutcomeListView(LoginRequiredMixin, OutcomeMixin, ListView):
     template_name = 'outcomes/list.html'
     context_object_name = 'outcomes'
     context_filter_name = 'filter'
-    filter_formhelper_class = OutcomeFilterFormHelper
+    filter_class = OutcomeFilter
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        self.filter = self.filter_class(self.request.GET, queryset=queryset)
-        self.filter.form.helper = self.filter_formhelper_class()
+
+        request = self.request
+        data = request.GET.copy()
+        data['owner'] = request.user
+        self.filter = self.filter_class(data=data, queryset=queryset)
+
         return self.filter.qs
 
     def get_context_data(self, **kwargs):

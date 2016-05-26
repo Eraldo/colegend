@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col-md-10">
             {% for outcome in outcomes %}
-                {% outcome_link %}<br>
+                {% outcome_link %} {{ outcome.estimate }}<br>
             {% endfor %}
             <br>
         </div>
@@ -19,7 +19,18 @@
             <br>
             <h6 class="text-main-dark">Filters</h6>
             <hr>
-            {% crispy filter.form filter.form.helper %}
+            {% crispy filter.form %}
         </div>
     </div>
 {% endblock %}
+
+{% block extra_head %}
+    {{ block.super }}
+    {{ filter.form.media.css }}
+{% endblock %}
+
+{% block extra_script %}
+    {{ block.super }}
+    {{ filter.form.media.js }}
+{% endblock %}
+
