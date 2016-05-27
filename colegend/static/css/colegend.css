@@ -331,4 +331,11 @@ form .CodeMirror-fullscreen {
 .organism-header .dropdown-menu .dropdown-item {
   color: inherit; }
 
+#div_id_tags .select2-container {
+  min-width: inherit;
+  width: 100% !important; }
+
+.filter-form .help-block {
+  display: none; }
+
 /*# sourceMappingURL=colegend.css.map */

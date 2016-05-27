@@ -2,7 +2,6 @@ import datetime
 
 import django_filters
 
-from colegend.core.intuitive_duration.utils import parse_intuitive_duration
 from .models import Outcome
 from .forms import OutcomeFilterForm
 
@@ -24,6 +23,7 @@ def filter_estimate(queryset, value):
 
 class OutcomeFilter(django_filters.FilterSet):
     name = django_filters.CharFilter(lookup_expr='icontains')
+    description = django_filters.CharFilter(lookup_expr='icontains')
     status = django_filters.ChoiceFilter(choices=(('', 'all'),) + Outcome.STATUS_CHOICES)
     review = django_filters.ChoiceFilter(choices=(('', 'all'),) + Outcome.REVIEW_CHOICES)
     ESTIMATE_CHOICES = (
@@ -38,12 +38,3 @@ class OutcomeFilter(django_filters.FilterSet):
     class Meta:
         model = Outcome
         form = OutcomeFilterForm
-
-    def __init__(self, data=None, queryset=None, prefix=None, strict=None):
-        super().__init__(data, queryset, prefix, strict)
-
-    # def filter_estimate(self, queryset, value):
-    #     raise Exception('foo')
-    #     return queryset.filter(
-    #         estimate__lt=datetime.timedelta(weeks=1)
-    #     )

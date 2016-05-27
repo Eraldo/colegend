@@ -52,3 +52,9 @@ class TagAutocompleteView(LoginRequiredMixin, TagMixin, Select2QuerySetView):
     """
     A django view providing autocomplete data.
     """
+    create_field = 'name'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        user = self.request.user
+        return queryset.owned_by(user)

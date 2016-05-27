@@ -7,51 +7,40 @@ from colegend.tags.fields import TagsCreateFormField
 from .models import Outcome
 
 
-class OutcomeFilterFormHelper(FormHelper):
-    model = Outcome
-    form_method = 'GET'
-    help_text_inline = True
-
-    def __init__(self, form=None):
-        super().__init__(form)
-        self.add_input(Submit('filter', 'Filter'))
-
-
 class OutcomeFilterForm(forms.ModelForm):
     class Meta:
         model = Outcome
         fields = [
-            # 'owner',
             'name',
-            # 'description',
+            'description',
             'status',
             'review',
             'inbox',
             'date',
-            # 'deadline',
+            'deadline',
             'estimate',
             'tags',
         ]
 
-    def __init__(self, data={}, *args, **kwargs):
-        self.owner = data.pop('owner', None)
-        super().__init__(data, *args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
-        # # Update the tags field to use the custom django-autocomplete's create field
-        # tags_queryset = self.fields.get('tags').queryset
-        # self.fields['tags'] = TagsCreateFormField(tags_queryset, self.owner, required=False)
+        # Update the tags field to use the custom django-autocomplete's create field
+        tags_queryset = self.fields.get('tags').queryset
+        self.fields['tags'] = TagsCreateFormField(tags_queryset, required=False)
 
         self.helper = FormHelper()
         self.helper.form_method = 'GET'
+        self.helper.form_class = 'filter-form'
+
         self.helper.layout = Layout(
-            # Field('owner', type="hidden"),
             Field('name'),
-            # Field('description'),
+            Field('description'),
             Field('status'),
             Field('review'),
             Field('inbox'),
             Field('date'),
-            # Field('deadline'),
+            Field('deadline'),
             Field('estimate'),
             Field('tags'),
         )
@@ -77,10 +66,9 @@ class OutcomeForm(OwnedModelForm):
     def __init__(self, *args, **kwargs):
         self.owner = kwargs.pop('owner', None)
         super().__init__(*args, **kwargs)
-
         # Update the tags field to use the custom django-autocomplete's create field
         tags_queryset = self.fields.get('tags').queryset
-        self.fields['tags'] = TagsCreateFormField(tags_queryset, self.owner, required=False)
+        self.fields['tags'] = TagsCreateFormField(tags_queryset, required=False)
 
         self.helper = FormHelper()
         self.helper.layout = Layout(
