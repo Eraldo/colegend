@@ -1,5 +1,6 @@
 {% load icons %}
-<div class="widget-outcome-card card card-item">
+<div id="{{ id }}" class="widget-outcome-card card card-item" data-url="{{ url }}"
+     ondblclick="window.location=$(this).attr('data-url');">
     <strong>{% icon 'checked' %} <a href="{{ url }}">{{ name }}</a></strong>
     <div class="pull-right">
         {{ status }} {{ inbox }} {{ review }} {{ date }} {{ deadline }} {{ estimate }}
