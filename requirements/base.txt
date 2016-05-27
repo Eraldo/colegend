@@ -18,7 +18,7 @@ django-annoying==0.8.5
 django-phonenumber-field==1.0.0
 django-orderable==4.0.1
 django-simplemde==0.0.9
-django-autocomplete-light==3.0.4
+django-autocomplete-light==3.1.6
 
 # Markdown
 Markdown==2.6.5

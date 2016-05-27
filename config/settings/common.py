@@ -44,7 +44,11 @@ CMS_APPS = (
     'menus',  # helper for model independent hierarchical website navigation
     'sekizai',  # for JavaScript and CSS management
 
-    'djangocms_admin_style',
+    # django-autocomplte-light v3 ..should be before 'django.contrib.admin' to enable it there.
+    'dal',
+    'dal_select2',
+
+    'djangocms_admin_style',  # should be above django.contrib.admin
     # Admin
     'django.contrib.admin',
     # for the admin skin. You **must** add 'djangocms_admin_style' in the list **before** 'django.contrib.admin'.
@@ -78,10 +82,6 @@ THIRD_PARTY_APPS = (
     'django_gravatar', # TODO: Researching if this is still in the project?
     'orderable',
     'simplemde',
-
-    # django-autocomplte-light v3
-    'dal',
-    'dal_select2',
 
     'django_filters',
 )
