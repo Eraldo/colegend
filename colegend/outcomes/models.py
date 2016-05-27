@@ -36,6 +36,7 @@ class Outcome(AutoUrlsMixin, OwnedBase, TaggableBase, TimeStampedBase):
         choices=STATUS_CHOICES,
         default=OPEN,
     )
+    inbox = models.BooleanField(default=False)
     DAILY = 0
     WEEKLY = 1
     MONTHLY = 2
@@ -57,7 +58,6 @@ class Outcome(AutoUrlsMixin, OwnedBase, TaggableBase, TimeStampedBase):
         null=True,
         help_text=_('Minimum review frequency')
     )
-    inbox = models.BooleanField(default=False)
 
     date = models.DateField(
         _('date'),

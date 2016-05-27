@@ -1,0 +1,11 @@
+{% load icons %}
+<div class="widget-outcome-card card card-item">
+    <strong>{% icon 'checked' %} {{ name }}</strong>
+    <div class="pull-right">
+        {{ status }} {{ inbox }} {{ review }} {{ date }} {{ deadline }} {{ estimate }}
+    </div>
+    <div>
+        {{ description|linebreaksbr }}
+    </div>
+    <div class="clearfix"></div>
+</div>

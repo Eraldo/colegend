@@ -3,6 +3,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AnonymousUser
 from django.templatetags.static import static
+from django.utils import timezone
 
 from colegend.core.utils.icons import icon_dict
 from .models import Element, ElementGroup
@@ -748,6 +749,40 @@ avatar_statements = ElementGroup(
 )
 
 molecules.append(avatar_statements)
+
+simple_outcome = Element(
+    'Simple outcome',
+    template='outcomes/widgets/card.html',
+    context={
+        'name': 'dummy outcome',
+        'status': 'open',
+    },
+)
+
+full_outcome = Element(
+    'Full outcome',
+    template='outcomes/widgets/card.html',
+    context={
+        'name': 'garage is clean',
+        'description': 'This is my outcome description.\nSecond line.',
+        'status': 'open',
+        'inbox': True,
+        'review': 0,
+        'date': timezone.now().today(),
+        'deadline': timezone.datetime(2020, 1, 7).date(),
+        'estimate': timezone.timedelta(days=4),
+    },
+)
+
+outcomes = ElementGroup(
+    'Outcomes',
+    columns=6,
+    elements=[
+        simple_outcome, full_outcome,
+    ]
+)
+
+molecules.append(outcomes)
 
 organisms = []
 
