@@ -1,6 +1,6 @@
 {% load icons %}
 <div class="widget-outcome-card card card-item">
-    <strong>{% icon 'checked' %} {{ name }}</strong>
+    <strong>{% icon 'checked' %} <a href="{{ url }}">{{ name }}</a></strong>
     <div class="pull-right">
         {{ status }} {{ inbox }} {{ review }} {{ date }} {{ deadline }} {{ estimate }}
     </div>

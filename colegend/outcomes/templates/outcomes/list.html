@@ -12,7 +12,7 @@
         <div class="col-md-10">
             {% crispy quick_create_form %}
             {% for outcome in outcomes %}
-                {% outcome_link %} {{ outcome.estimate }}<br>
+                {% outcome %}
             {% endfor %}
             <br>
         </div>
