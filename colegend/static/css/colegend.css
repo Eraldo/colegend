@@ -315,6 +315,9 @@ form .CodeMirror-fullscreen {
 .widget-weekday {
   font-family: "Lucida Console", Monaco, monospace; }
 
+.hover-border-accent:hover {
+  border-color: #9ccc65; }
+
 .card-item, .widget-datepicker {
   padding: 0.6rem; }
 
