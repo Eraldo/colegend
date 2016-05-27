@@ -1,0 +1,8 @@
+{% load query %}
+{% if is_paginated %}
+    <ul class="widget-pagination pagination">
+        {% for i in paginator.page_range %}
+            <li {% if page_obj.number == i %} class="active" {% endif %}><a href="?{% querystring page=i %}">{{ i }}</a></li>
+        {% endfor %}
+    </ul>
+{% endif %}

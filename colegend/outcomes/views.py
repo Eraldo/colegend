@@ -29,6 +29,7 @@ class OutcomeListView(LoginRequiredMixin, OutcomeMixin, ListView):
     context_filter_name = 'filter'
     filter_class = OutcomeFilter
     filter = None
+    paginate_by = 10
 
     def get_queryset(self):
         queryset = super().get_queryset()

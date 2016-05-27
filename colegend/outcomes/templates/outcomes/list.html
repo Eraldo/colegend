@@ -1,5 +1,5 @@
 {% extends 'outcomes/base.html' %}
-{% load icons buttons outcomes_tags crispy_forms_tags %}
+{% load icons buttons outcomes_tags crispy_forms_tags query %}
 
 {% block title %}Outcomes{% endblock %}
 
@@ -14,6 +14,7 @@
             {% for outcome in outcomes %}
                 {% outcome %}
             {% endfor %}
+        {% include 'widgets/pagination.html' %}
             <br>
         </div>
         <div class="col-md-2 card bg-main-light">
