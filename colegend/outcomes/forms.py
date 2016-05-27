@@ -112,7 +112,6 @@ class OutcomeQuickCreateForm(OwnedModelForm):
 
         self.helper.layout = Layout(
             Field('owner', type="hidden"),
-            Field('name', placeholder=_('Quick add..')),
+            Field('name', placeholder=_('New outcome..'), autofocus=True),
             Field('status', type="hidden"),
         )
-        self.helper.add_input(Submit('add', 'Add'))
