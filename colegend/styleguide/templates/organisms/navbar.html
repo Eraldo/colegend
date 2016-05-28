@@ -42,9 +42,7 @@
                                 {% endif %}
                             </button>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="menu-button-account">
-                                {% for item in account_items %}
-                                    {% menu_item %}
-                                {% endfor %}
+                                {% show_menu_below_id profile_id 0 100 100 100 "organisms/submenu.html" %}
                             </div>
                         </div>
                     </li>

@@ -1,4 +1,4 @@
-{% load staticfiles i18n menus cms_tags sekizai_tags %}
+{% load staticfiles i18n cms_tags sekizai_tags %}
 <!DOCTYPE html>
 
 <html lang="en" ng-app>
@@ -50,7 +50,7 @@
 
 <div id="site-menu-container">
     {% block site_menu %}
-        {% menu %}
+        {% include 'organisms/navbar.html' with class='bg-main-dark' id='legend-bar' menu_id='home' profile_id='profile' %}
     {% endblock %}
 </div>
 
