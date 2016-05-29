@@ -124,6 +124,13 @@
   background-color: #f44336;
   color: white; }
 
+body ::-moz-selection {
+  background: #dcedc8; }
+body ::selection {
+  background: #dcedc8; }
+body .text-accent-light::selection {
+  background: #689f38; }
+
 .alert-debug {
   background-color: white;
   border-color: #d6e9c6;

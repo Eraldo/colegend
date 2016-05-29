@@ -54,6 +54,36 @@
     {% endblock %}
 </div>
 
+{% block page_header %}
+    <div class="widget-header bg-main" style="margin-bottom: 1em">
+        <div class="container">
+            <div class="card-block">
+                <div class="breadcrumbs">
+                    {% block breadcrumbs %}
+                    {% endblock %}
+                </div>
+
+                <h1 id="page-title" class="card-title">{% block page_title %}{% endblock %}</h1>
+
+            </div>
+        </div>
+        <div class="bg-main-light" style="padding: 0;">
+            <div class="container">
+                {% block page_links %}
+                {% endblock %}
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="bg-main-light" style="padding: 0;">
+            <div class="container">
+                {% block page_controls %}
+                {% endblock %}
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
 <div class="container">
     {% block site_messages %}
         {% if messages %}
@@ -68,32 +98,6 @@
                 </div>
             {% endfor %}
         {% endif %}
-    {% endblock %}
-
-    {% block page_header %}
-        <div class="card bg-content">
-            <div class="card-block">
-
-                <div class="breadcrumbs">
-                    {% block breadcrumbs %}
-                    {% endblock %}
-                </div>
-
-                <h1 id="page-title" class="card-title">{% block page_title %}{% endblock %}</h1>
-
-            </div>
-
-            <div class="card-footer" style="padding: 0;">
-                {% block page_links %}
-                {% endblock %}
-                <div class="clearfix"></div>
-            </div>
-            <div class="card-footer" style="padding: 0;">
-                {% block page_controls %}
-                {% endblock %}
-                <div class="clearfix"></div>
-            </div>
-        </div>
     {% endblock %}
 
     {% block pre_content %}{% endblock %}
