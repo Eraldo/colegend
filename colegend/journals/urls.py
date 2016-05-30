@@ -3,7 +3,7 @@ from django.conf.urls import url, include
 from .views import JournalIndexView, JournalListView, JournalCreateView, JournalDetailView, JournalUpdateView, \
     JournalDeleteView, JournalDayView, JournalWeekView, JournalSettingsView
 
-patterns = [
+urlpatterns = [
     url(r'^$',
         JournalIndexView.as_view(),
         name='index'),
@@ -35,5 +35,5 @@ patterns = [
 ]
 
 urlpatterns = [
-    url(r'^', include(patterns, namespace='journals')),
+    url(r'^', include(urlpatterns, namespace='journals')),
 ]
