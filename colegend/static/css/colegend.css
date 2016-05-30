@@ -34,6 +34,9 @@
 .text-main-light {
   color: #b2ebf2; }
 
+.text-main-superlight {
+  color: #fbfefe; }
+
 .text-main-dark {
   color: #0097a7; }
 
@@ -60,6 +63,9 @@
 
 .bg-main-light, .organism-header .dropdown-menu {
   background-color: #b2ebf2; }
+
+.bg-main-superlight {
+  background-color: #fbfefe; }
 
 .bg-main-dark {
   background-color: #0097a7;
@@ -124,14 +130,12 @@
   background-color: #f44336;
   color: white; }
 
-body {
-  background-color: #fbfefe; }
-  body ::-moz-selection {
-    background: #dcedc8; }
-  body ::selection {
-    background: #dcedc8; }
-  body .text-accent-light::selection {
-    background: #689f38; }
+body ::-moz-selection {
+  background: #dcedc8; }
+body ::selection {
+  background: #dcedc8; }
+body .text-accent-light::selection {
+  background: #689f38; }
 
 .alert-debug {
   background-color: white;
@@ -323,15 +327,13 @@ form .CodeMirror-fullscreen {
 .hover-border-accent:hover {
   border-color: #9ccc65; }
 
-.widget-header {
-  margin-bottom: 1em; }
-  .widget-header .breadcrumbs {
-    margin-top: 0.5em; }
-  .widget-header #page-title {
-    margin-bottom: 0.2em; }
+.widget-header .breadcrumbs {
+  margin-top: 0.5em; }
+.widget-header #page-title {
+  margin-bottom: 0.2em; }
 
 #content-wrapper {
-  margin-bottom: 1em; }
+  padding-top: 1em; }
 
 .widget-footer {
   height: 1em; }

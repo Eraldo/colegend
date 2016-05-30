@@ -43,7 +43,7 @@
     {% render_block "css" %}
 </head>
 
-<body id="body" class="{% block body_class %}{% endblock %}">
+<body id="body" class="bg-main-dark {% block body_class %}{% endblock %}">
 {% cms_toolbar %}
 
 <div id="site-menu-container">
@@ -79,29 +79,31 @@
     </div>
 {% endblock %}
 
-<div id="content-wrapper" class="container">
-    {% block site_messages %}
-        {% if messages %}
-            {% for message in messages %}
-                <div class="card alert{% if message.tags %} alert-{{ message.tags }} alert-dismissible fade in"{% endif %}
-                     role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        <span class="sr-only">Close</span>
-                    </button>
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endif %}
-    {% endblock %}
+<div id="content-wrapper" class="bg-main-superlight">
+    <div class="container">
+        {% block site_messages %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="card alert{% if message.tags %} alert-{{ message.tags }} alert-dismissible fade in"{% endif %}
+                         role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endblock %}
 
-    {% block pre_content %}{% endblock %}
-    {% block content_container %}
-        <div id="content" class="{% block content_class %}{% endblock %}">
-            {% block content %}
-            {% endblock content %}
-        </div>
-    {% endblock %}
+        {% block pre_content %}{% endblock %}
+        {% block content_container %}
+            <div id="content" class="{% block content_class %}{% endblock %}">
+                {% block content %}
+                {% endblock content %}
+            </div>
+        {% endblock %}
+    </div>
 </div>
 <!-- /container -->
 
