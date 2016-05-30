@@ -40,9 +40,6 @@ urlpatterns = [
     url(r'^journal/', include('colegend.journals.urls', namespace='journals')),
     url(r'^days/', include('colegend.dayentries.urls', namespace='dayentries')),
 
-    # Manager
-    url(r'^outcomes/', include('colegend.outcomes.urls', namespace='outcomes')),
-
     url(r'^connected/', include('colegend.connected.urls', namespace='connected')),
     url(r'^outer-call/', include('colegend.outercall.urls', namespace='outer-call')),
     url(r'^inner-call/', include('colegend.innercall.urls', namespace='inner-call')),

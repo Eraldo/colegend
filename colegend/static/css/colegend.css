@@ -330,6 +330,12 @@ form .CodeMirror-fullscreen {
   .widget-header #page-title {
     margin-bottom: 0.2em; }
 
+#content-wrapper {
+  margin-bottom: 1em; }
+
+.widget-footer {
+  height: 1em; }
+
 .card-item, .widget-datepicker {
   padding: 0.6rem; }
 
