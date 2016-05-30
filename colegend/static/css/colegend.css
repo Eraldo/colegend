@@ -54,11 +54,11 @@
   background-color: black;
   color: white; }
 
-.bg-main, .organism-header .dropdown-menu {
+.bg-main {
   background-color: #26c6da;
   color: white; }
 
-.bg-main-light {
+.bg-main-light, .organism-header .dropdown-menu {
   background-color: #b2ebf2; }
 
 .bg-main-dark {
@@ -337,8 +337,6 @@ form .CodeMirror-fullscreen {
   content: initial; }
 
 .organism-header .nav-link {
-  color: inherit; }
-.organism-header .dropdown-menu .dropdown-item {
   color: inherit; }
 
 #div_id_tags .select2-container {
