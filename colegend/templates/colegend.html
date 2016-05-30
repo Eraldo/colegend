@@ -43,7 +43,7 @@
     {% render_block "css" %}
 </head>
 
-<body id="body" class="bg-main-dark {% block body_class %}{% endblock %}">
+<body id="body" class="{% block body_class %}{% endblock %}">
 {% cms_toolbar %}
 
 <div id="site-menu-container">

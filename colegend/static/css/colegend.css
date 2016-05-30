@@ -175,6 +175,7 @@ body .text-accent-light::selection {
     display: inline-block; }
 
 body {
+  background-color: #0097a7;
   font-size: 100%;
   font-family: "Nunito", "Ubuntu", Helvetica, sans-serif; }
 
