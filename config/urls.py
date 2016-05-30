@@ -34,8 +34,6 @@ urlpatterns = [
     url(r'^donations/', include('colegend.donations.urls', namespace='donations')),
 
     # Your stuff: custom urls includes go here
-    url(r'^support/', include('colegend.support.urls', namespace='support')),
-
     url(r'^conscious/', include('colegend.conscious.urls', namespace='conscious')),
     url(r'^days/', include('colegend.dayentries.urls', namespace='dayentries')),
 

@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from .views import DocumentationView, FAQView, SupportView
 
 __author__ = 'eraldo'
@@ -13,4 +13,9 @@ urlpatterns = [
     url(r'^documentation/$',
         DocumentationView.as_view(),
         name='documentation'),
+]
+
+
+urlpatterns = [
+    url(r'^', include(urlpatterns, namespace='support')),
 ]
