@@ -124,12 +124,14 @@
   background-color: #f44336;
   color: white; }
 
-body ::-moz-selection {
-  background: #dcedc8; }
-body ::selection {
-  background: #dcedc8; }
-body .text-accent-light::selection {
-  background: #689f38; }
+body {
+  background-color: #fbfefe; }
+  body ::-moz-selection {
+    background: #dcedc8; }
+  body ::selection {
+    background: #dcedc8; }
+  body .text-accent-light::selection {
+    background: #689f38; }
 
 .alert-debug {
   background-color: white;
@@ -161,9 +163,12 @@ body .text-accent-light::selection {
 #site-menu {
   background-color: white; }
 
-.breadcrumbs a {
-  font-size: small;
-  text-decoration: none; }
+.breadcrumbs {
+  padding-left: 0;
+  margin: 0;
+  font-size: smaller; }
+  .breadcrumbs li {
+    display: inline-block; }
 
 body {
   font-size: 100%;
@@ -186,13 +191,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .bg-content {
   background-color: white; }
-
-.breadcrumbs > a + a:before {
-  content: "/ ";
-  color: #ccc; }
-
-#page-title {
-  margin: 0; }
 
 .text-conscious {
   color: #3f51b5; }
@@ -324,6 +322,13 @@ form .CodeMirror-fullscreen {
 
 .hover-border-accent:hover {
   border-color: #9ccc65; }
+
+.widget-header {
+  margin-bottom: 1em; }
+  .widget-header .breadcrumbs {
+    margin-top: 0.5em; }
+  .widget-header #page-title {
+    margin-bottom: 0.2em; }
 
 .card-item, .widget-datepicker {
   padding: 0.6rem; }

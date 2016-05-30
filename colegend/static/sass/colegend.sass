@@ -167,6 +167,7 @@ $continuous: $category-2
 
 // Selection colors
 body
+  background-color: $main-superlight
   ::-moz-selection
     background: $accent-light
   ::selection
@@ -220,10 +221,16 @@ $red: #b94a48
 #site-menu
   background-color: $site-menu-color
 
+//.breadcrumbs
+//  a
+//    font-size: small
+//    text-decoration: none
 .breadcrumbs
-  a
-    font-size: small
-    text-decoration: none
+  padding-left: 0
+  margin: 0
+  font-size: smaller
+  li
+    display: inline-block
 
 body
   font-size: 100%
@@ -246,13 +253,6 @@ h1, h2, h3, h4, h5, h6
 
 .bg-content
   background-color: $white
-
-.breadcrumbs > a + a:before
-  content: '/ '
-  color: #ccc
-
-#page-title
-  margin: 0
 
 //  coLegend text
 
@@ -423,6 +423,13 @@ form .CodeMirror-fullscreen
 .hover-border-accent
   &:hover
     border-color: $accent
+
+.widget-header
+  margin-bottom: 1em
+  .breadcrumbs
+    margin-top: 0.5em
+  #page-title
+    margin-bottom: 0.2em
 
 // card sizes
 .card-item

@@ -1,4 +1,4 @@
-{% load staticfiles i18n cms_tags sekizai_tags %}
+{% load staticfiles i18n cms_tags menu_tags sekizai_tags %}
 <!DOCTYPE html>
 
 <html lang="en" ng-app>
@@ -45,7 +45,7 @@
     {% render_block "css" %}
 </head>
 
-<body id="body" class="{% block body_class %}default-pattern{% endblock %}">
+<body id="body" class="{% block body_class %}{% endblock %}">
 {% cms_toolbar %}
 
 <div id="site-menu-container">
@@ -55,17 +55,14 @@
 </div>
 
 {% block page_header %}
-    <div class="widget-header bg-main" style="margin-bottom: 1em">
+    <div class="widget-header bg-main">
         <div class="container">
-            <div class="card-block">
-                <div class="breadcrumbs">
-                    {% block breadcrumbs %}
-                    {% endblock %}
-                </div>
-
-                <h1 id="page-title" class="card-title">{% block page_title %}{% endblock %}</h1>
-
-            </div>
+            <ul class="breadcrumbs">
+                {% block breadcrumbs %}
+                    {% show_breadcrumb %}
+                {% endblock %}
+            </ul>
+            <h1 id="page-title" class="card-title">{% block page_title %}{% endblock %}</h1>
         </div>
         <div class="bg-main-light" style="padding: 0;">
             <div class="container">
@@ -102,7 +99,7 @@
 
     {% block pre_content %}{% endblock %}
     {% block content_container %}
-        <div id="content" class="{% block content_class %}card card-block bg-content{% endblock %}">
+        <div id="content" class="{% block content_class %}{% endblock %}">
             {% block content %}
             {% endblock content %}
         </div>
