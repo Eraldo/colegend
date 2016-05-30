@@ -3,9 +3,9 @@ from cms.apphook_pool import apphook_pool
 from django.utils.translation import ugettext_lazy as _
 
 
-class ManagerApphook(CMSApp):
-    name = _('Manager')
-    urls = ['colegend.manager.urls']
+class JournalApphook(CMSApp):
+    name = _('Journal')
+    urls = ['colegend.journals.urls']
 
 
-apphook_pool.register(ManagerApphook)
+apphook_pool.register(JournalApphook)

@@ -37,7 +37,6 @@ urlpatterns = [
     url(r'^support/', include('colegend.support.urls', namespace='support')),
 
     url(r'^conscious/', include('colegend.conscious.urls', namespace='conscious')),
-    url(r'^journal/', include('colegend.journals.urls', namespace='journals')),
     url(r'^days/', include('colegend.dayentries.urls', namespace='dayentries')),
 
     url(r'^connected/', include('colegend.connected.urls', namespace='connected')),
