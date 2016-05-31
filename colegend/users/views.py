@@ -121,10 +121,8 @@ class LegendUpdateView(LoginRequiredMixin, UpdateView):
 
     def form_valid(self, form):
         request = self.request
-        connected = request.user.connected
-        if not connected.about:
-            connected.about = True
-            connected.save()
+        user = request.user
+        if not user.has_checkpoint('about'):
             # update game
             complete_card(request, 'about')
         else:
@@ -144,10 +142,8 @@ class LegendAvatarView(LoginRequiredMixin, CheckpointsRequiredMixin, UpdateView)
 
     def form_valid(self, form):
         request = self.request
-        connected = request.user.connected
-        if not connected.avatar:
-            connected.avatar = True
-            connected.save()
+        user = request.user
+        if not user.has_checkpoint('profile picture'):
             # update game
             complete_card(request, 'profile picture')
         else:

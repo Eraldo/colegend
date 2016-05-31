@@ -17,9 +17,8 @@ class GuidelinesIntroductionView(LoginRequiredMixin, TemplateView):
 
     def post(self, request, *args, **kwargs):
         if 'success' in request.POST:
-            connected = request.user.connected
-            connected.guidelines_introduction = True
-            connected.save()
+            user = request.user
+            user.add_checkpoint('guidelines introduction')
             return redirect('connected:guidelines')
         return self.get(request, *args, **kwargs)
 
@@ -28,20 +27,24 @@ class GuidelinesView(LoginRequiredMixin, TemplateView):
     template_name = 'connected/guidelines.html'
 
     def get(self, request, *args, **kwargs):
-        connected = request.user.connected
-        if not connected.guidelines_introduction:
+        user = request.user
+        if not user.has_checkpoint('guidelines introduction'):
             return redirect('connected:guidelines-introduction')
         return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         if 'accept' in request.POST:
-            connected = request.user.connected
-            if not connected.guidelines:
-                connected.guidelines = True
-                connected.save()
+            user = request.user
+            if not user.has_checkpoint('guidelines'):
                 complete_card(request, 'guidelines')
             return redirect('connected:guidelines')
         return self.get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        context['guidelines_checkpoint'] = user.has_checkpoint('guidelines')
+        return context
 
 
 class ChatIntroductionView(LoginRequiredMixin, TemplateView):
@@ -49,9 +52,8 @@ class ChatIntroductionView(LoginRequiredMixin, TemplateView):
 
     def post(self, request, *args, **kwargs):
         if 'success' in request.POST:
-            connected = request.user.connected
-            connected.chat_introduction = True
-            connected.save()
+            user = request.user
+            user.add_checkpoint('chat introduction')
             return redirect('connected:chat-invitation')
         return self.get(request, *args, **kwargs)
 
@@ -60,17 +62,15 @@ class ChatInvitationView(LoginRequiredMixin, TemplateView):
     template_name = 'connected/chat_invitation.html'
 
     def get(self, request, *args, **kwargs):
-        connected = request.user.connected
-        if not connected.chat_introduction:
+        user = request.user
+        if not user.has_checkpoint('chat introduction'):
             return redirect('connected:chat-introduction')
         return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         if 'success' in request.POST:
-            connected = request.user.connected
-            if not connected.chat:
-                connected.chat = True
-                connected.save()
+            user = request.user
+            if not user.has_checkpoint('chat'):
                 complete_card(request, 'chat')
             return redirect('connected:index')
 
@@ -80,8 +80,8 @@ class ChatView(LoginRequiredMixin, RedirectView):
     url = 'https://colegend.slack.com'
 
     def get(self, request, *args, **kwargs):
-        connected = request.user.connected
-        if not connected.chat:
+        user = request.user
+        if not user.has_checkpoint('chat'):
             return redirect('connected:chat-invitation')
         return super().get(request, *args, **kwargs)
 

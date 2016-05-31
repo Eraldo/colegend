@@ -92,6 +92,12 @@ class GuideView(LoginRequiredMixin, DetailView):
         user = self.request.user
         return user.guiderelation
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        context['cloud_guide_checkpoint'] = user.has_checkpoint('cloud guide')
+        return context
+
 
 class GuideManageView(LoginRequiredMixin, UpdateView):
     template_name = 'guides/manage.html'
@@ -106,6 +112,12 @@ class GuideManageView(LoginRequiredMixin, UpdateView):
             return relation
         except GuideRelation.DoesNotExist:
             raise Http404
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        relation = self.get_object()
+        context['guiding_completed'] = relation.owner.has_checkpoint('cloud guide')
+        return context
 
     def form_valid(self, form):
         relation = self.get_object()

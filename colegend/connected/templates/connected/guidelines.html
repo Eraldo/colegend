@@ -5,7 +5,7 @@
 {% block title %}Community Guidelines{% endblock %}
 
 {% block content %}
-    <h4>I {% if user.connected.guidelines %}have accepted{% else %}accept{% endif %} the following guidelines:</h4>
+    <h4>I {% if guidelines_checkpoint %}have accepted{% else %}accept{% endif %} the following guidelines:</h4>
 
     <div class="media">
         <a class="media-left" href="#">
@@ -61,7 +61,7 @@
             I accept the general advice, terms and conditions.
         </div>
     </div>
-    {% if not user.connected.guidelines %}
+    {% if not guidelines_checkpoint %}
         <p></p>
         <form action="" method="post">{% csrf_token %}
             <button id="accept" name="accept" type="submit" class="btn btn-primary">Accept</button>
