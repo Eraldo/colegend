@@ -43,7 +43,6 @@ urlpatterns = [
     url(r'^biography/', include('colegend.biography.urls', namespace='biography')),
     url(r'^guides/', include('colegend.guides.urls', namespace='guides')),
 
-    url(r'^continuous/', include('colegend.continuous.urls', namespace='continuous')),
     url(r'^game/', include('colegend.games.urls', namespace='games')),
     url(r'^cards/', include('colegend.cards.urls', namespace='cards')),
     url(r'^story/', include('colegend.story.urls', namespace='story')),
