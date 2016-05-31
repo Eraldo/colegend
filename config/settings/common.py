@@ -103,7 +103,6 @@ LOCAL_APPS = (
     'colegend.categories',
     'colegend.tags',
 
-    'colegend.conscious',
     'colegend.journals',
     'colegend.dayentries',
 
