@@ -1,9 +1,0 @@
-{% extends 'base.html' %}
-
-{% block title %}Connected{% endblock %}
-{% block breadcrumbs %}
-    {{ block.super }}
-    {% include 'widgets/breadcrumb.html' with pattern='connected:index' icon='heart' title='connected' %}
-{% endblock %}
-
-{% block body_class %}connected-pattern{% endblock %}

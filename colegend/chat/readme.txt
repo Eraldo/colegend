@@ -1,1 +1,1 @@
-This file is absed on: https://github.com/avinassh/slackipycore
+This file is based on: https://github.com/avinassh/slackipycore

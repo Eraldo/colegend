@@ -37,7 +37,8 @@ urlpatterns = [
     url(r'^conscious/', include('colegend.conscious.urls', namespace='conscious')),
     url(r'^days/', include('colegend.dayentries.urls', namespace='dayentries')),
 
-    url(r'^connected/', include('colegend.connected.urls', namespace='connected')),
+    url(r'^guidelines/', include('colegend.guidelines.urls')),
+    url(r'^chat/', include('colegend.chat.urls')),
     url(r'^outer-call/', include('colegend.outercall.urls', namespace='outer-call')),
     url(r'^inner-call/', include('colegend.innercall.urls', namespace='inner-call')),
     url(r'^biography/', include('colegend.biography.urls', namespace='biography')),
