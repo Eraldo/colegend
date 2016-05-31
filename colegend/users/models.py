@@ -76,8 +76,6 @@ class User(AbstractUser):
         resize_source=dict(size=(400, 400)),
     )
 
-    registration_country = models.CharField(max_length=255, blank=True)
-
     def get_avatar(self, size='medium'):
         try:
             avatar = self.avatar[size]
@@ -128,6 +126,8 @@ class User(AbstractUser):
         verbose_name_plural = 'legends'
         default_related_name = 'users'
         ordering = ['username']
+
+    registration_country = models.CharField(max_length=255, blank=True)
 
 
 @receiver(user_signed_up)

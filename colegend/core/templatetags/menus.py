@@ -77,19 +77,19 @@ def menu(context, user=None):
                     {
                         'name': 'Chat',
                         'locked': not user.has_checkpoint('chat card'),
-                        'url': reverse('connected:chat'),
+                        'url': reverse('chat:index'),
                         'external': user.has_checkpoint('chat'),
                     },
                     {
                         'name': 'Virtual Room',
                         'locked': not user.has_checkpoint('virtual room'),
-                        'url': reverse('connected:virtual-room'),
+                        'url': reverse('chat:room'),
                         'external': True,
                     },
                     {
                         'name': 'Guidelines',
                         'locked': not user.has_checkpoint('guidelines card'),
-                        'url': reverse('connected:guidelines'),
+                        'url': reverse('guidelines:index'),
                     },
                 ],
             },
