@@ -65,6 +65,7 @@ class User(AbstractUser):
     phone = PhoneNumberField(
         verbose_name=_('phone'),
         blank=True,
+        help_text=_('International format: e.g "+4917612345678"')
     )
 
     occupation = models.CharField(
