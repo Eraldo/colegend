@@ -173,6 +173,8 @@ body .text-accent-light::selection {
   font-size: smaller; }
   .breadcrumbs li {
     display: inline-block; }
+  .breadcrumbs .active {
+    display: none; }
 
 body {
   background-color: #0097a7;
