@@ -25,7 +25,6 @@ urlpatterns = [
     url(r'^{}/'.format(settings.ADMIN_URL), include(admin.site.urls)),
 
     # User management
-    url(r'^legends/', include('colegend.users.urls', namespace='legends')),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^join/$', JoinView.as_view(), name='join'),
     url(r'^roles/', include('colegend.roles.urls', namespace='roles')),
