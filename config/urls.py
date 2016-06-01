@@ -36,7 +36,6 @@ urlpatterns = [
     # Your stuff: custom urls includes go here
     url(r'^days/', include('colegend.dayentries.urls', namespace='dayentries')),
 
-    url(r'^guidelines/', include('colegend.guidelines.urls')),
     url(r'^chat/', include('colegend.chat.urls')),
     url(r'^outer-call/', include('colegend.outercall.urls', namespace='outer-call')),
     url(r'^inner-call/', include('colegend.innercall.urls', namespace='inner-call')),

@@ -3,7 +3,6 @@ from .views import GuidelinesView, GuidelinesIntroductionView
 
 __author__ = 'eraldo'
 
-app_name = 'guidelines'
 urlpatterns = [
     url(r'^$',
         GuidelinesView.as_view(),
@@ -11,4 +10,7 @@ urlpatterns = [
     url(r'^introduction/$',
         GuidelinesIntroductionView.as_view(),
         name='introduction'),
+]
+urlpatterns = [
+    url(r'^', include(urlpatterns, namespace='guidelines')),
 ]
