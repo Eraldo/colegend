@@ -40,9 +40,7 @@ urlpatterns = [
     url(r'^inner-call/', include('colegend.innercall.urls', namespace='inner-call')),
     url(r'^biography/', include('colegend.biography.urls', namespace='biography')),
 
-    url(r'^game/', include('colegend.games.urls', namespace='games')),
     url(r'^cards/', include('colegend.cards.urls', namespace='cards')),
-    url(r'^story/', include('colegend.story.urls', namespace='story')),
 
     # Added robots.txt file for crawlers (google/etc)
     url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
