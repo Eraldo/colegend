@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.views.generic import RedirectView
 
 from .views import GuideIntroductionView, GuideManageView, GuideDetailView, GuideListView, \
@@ -31,4 +31,7 @@ urlpatterns = [
     url(r'^(?P<owner>[\w.@+-]+)/guide/$',
         GuideActionView.as_view(),
         name='guide-action'),
+]
+urlpatterns = [
+    url(r'^', include(urlpatterns, namespace='guides')),
 ]

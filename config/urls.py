@@ -39,7 +39,6 @@ urlpatterns = [
     url(r'^outer-call/', include('colegend.outercall.urls', namespace='outer-call')),
     url(r'^inner-call/', include('colegend.innercall.urls', namespace='inner-call')),
     url(r'^biography/', include('colegend.biography.urls', namespace='biography')),
-    url(r'^guides/', include('colegend.guides.urls', namespace='guides')),
 
     url(r'^game/', include('colegend.games.urls', namespace='games')),
     url(r'^cards/', include('colegend.cards.urls', namespace='cards')),
