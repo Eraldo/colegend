@@ -95,6 +95,7 @@ class OutcomeQuickCreateForm(OwnedModelForm):
             'owner',
             'name',
             'status',
+            'inbox',
         ]
 
     def __init__(self, *args, **kwargs):
@@ -114,4 +115,5 @@ class OutcomeQuickCreateForm(OwnedModelForm):
             Field('owner', type="hidden"),
             Field('name', placeholder=_('New outcome..'), autofocus=True),
             Field('status', type="hidden"),
+            Field('inbox', type="hidden"),
         )
