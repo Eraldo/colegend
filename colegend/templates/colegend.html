@@ -64,8 +64,11 @@
         </div>
         <div class="bg-main-light" style="padding: 0;">
             <div class="container">
-                {% block page_links %}
-                {% endblock %}
+                <ul class="widget-subnavigation nav nav-tabs">
+                    {% block page_links %}
+                        {% show_sub_menu 1 None 100 "organisms/menu.html" %}
+                    {% endblock %}
+                </ul>
                 <div class="clearfix"></div>
             </div>
         </div>

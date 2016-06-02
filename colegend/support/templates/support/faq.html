@@ -1,6 +1,9 @@
 {% extends 'support/base.html' %}
 
-{% block title %}FAQ{% endblock %}
+{% block page_links %}
+    <a href="{% url 'support:faq' %}" class="nav-item nav-link active">FAQ</a>
+    <a href="{% url 'support:documentation' %}" class="nav-item nav-link">Documentation</a>
+{% endblock %}
 
 {% block content %}
     <p>

@@ -3,6 +3,5 @@
 {% block title %}Outcomes{% endblock %}
 
 {% block breadcrumbs %}
-    {{ block.super }}
-    {% include '_breadcrumb.html' with pattern='outcomes:index' title='Outcomes' %}
+    {{ block.super }}{% include 'widgets/breadcrumb.html' with pattern='outcomes:index' title='Manager' %}
 {% endblock %}

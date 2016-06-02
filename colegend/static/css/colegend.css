@@ -61,7 +61,7 @@
   background-color: #26c6da;
   color: white; }
 
-.bg-main-light, .organism-header .dropdown-menu {
+.bg-main-light, .organism-header .dropdown-menu, .widget-subnavigation .dropdown-menu {
   background-color: #b2ebf2; }
 
 .bg-main-superlight {
@@ -71,7 +71,7 @@
   background-color: #0097a7;
   color: white; }
 
-.bg-accent, .organism-header .nav-link:focus, .organism-header .nav-link:hover, .organism-header .dropdown-menu .dropdown-item:focus, .organism-header .dropdown-menu .dropdown-item:hover {
+.bg-accent, .organism-header .nav-link:focus, .organism-header .nav-link:hover, .organism-header .dropdown-menu .dropdown-item:focus, .organism-header .dropdown-menu .dropdown-item:hover, .widget-subnavigation .nav-link:focus, .widget-subnavigation .nav-link:hover, .widget-subnavigation .dropdown-menu .dropdown-item:focus, .widget-subnavigation .dropdown-menu .dropdown-item:hover {
   background-color: #9ccc65;
   color: white; }
 
