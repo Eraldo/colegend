@@ -65,6 +65,8 @@ icon_dict = {
     'documentation': 'file-text-o',
     #
     'game': 'trophy',
+    # core
+    'more': 'ellipsis-v',
     # manager
     'description': 'align-left',
     'estimate': 'clock-o',

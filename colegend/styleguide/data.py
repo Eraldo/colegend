@@ -752,7 +752,7 @@ simple_outcome = Element(
     template='outcomes/widgets/card.html',
     context={
         'name': 'dummy outcome',
-        'status': 'open',
+        'status': 0,
     },
 )
 
@@ -762,12 +762,13 @@ full_outcome = Element(
     context={
         'name': 'garage is clean',
         'description': 'This is my outcome description.\nSecond line.',
-        'status': 'open',
+        'status': 1,
         'inbox': True,
         'review': 0,
         'date': timezone.now().today(),
         'deadline': timezone.datetime(2020, 1, 7).date(),
         'estimate': timezone.timedelta(days=4),
+        'actions': True,
     },
 )
 
