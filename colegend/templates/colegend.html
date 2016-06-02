@@ -1,4 +1,4 @@
-{% load staticfiles i18n menus cms_tags sekizai_tags %}
+{% load staticfiles i18n cms_tags menu_tags sekizai_tags %}
 <!DOCTYPE html>
 
 <html lang="en" ng-app>
@@ -37,80 +37,80 @@
         <!-- This file store project specific CSS -->
         <link href="{% static 'css/colegend.css' %}" rel="stylesheet">
 
-        <link href="{% static 'components/grass/grass.css' %}" rel="stylesheet">
-
         {% block extra_head %}{% endblock %}
 
     {% endblock %}
     {% render_block "css" %}
 </head>
 
-<body id="body" class="{% block body_class %}default-pattern{% endblock %}">
+<body id="body" class="{% block body_class %}{% endblock %}">
 {% cms_toolbar %}
 
 <div id="site-menu-container">
     {% block site_menu %}
-        {% menu %}
+        {% include 'organisms/navbar.html' with class='bg-main-dark' id='legend-bar' menu_id='home' profile_id='profile' %}
     {% endblock %}
 </div>
 
-<div class="container">
-    {% block site_messages %}
-        {% if messages %}
-            {% for message in messages %}
-                <div class="card alert{% if message.tags %} alert-{{ message.tags }} alert-dismissible fade in"{% endif %}
-                     role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        <span class="sr-only">Close</span>
-                    </button>
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endif %}
-    {% endblock %}
-
-    {% block page_header %}
-        <div class="card bg-content">
-            <div class="card-block">
-
-                <div class="breadcrumbs">
-                    {% block breadcrumbs %}
-                    {% endblock %}
-                </div>
-
-                <h1 id="page-title" class="card-title">{% block page_title %}{% endblock %}</h1>
-
-            </div>
-
-            <div class="card-footer" style="padding: 0;">
-                {% block page_links %}
+{% block page_header %}
+    <div class="widget-header bg-main">
+        <div class="container">
+            <ul class="breadcrumbs">
+                {% block breadcrumbs %}
+                    {% show_breadcrumb %}
                 {% endblock %}
+            </ul>
+            <h1 id="page-title" class="card-title">{% block page_title %}{% endblock %}</h1>
+        </div>
+        <div class="bg-main-light" style="padding: 0;">
+            <div class="container">
+                <ul class="widget-subnavigation nav nav-tabs">
+                    {% block page_links %}
+                        {% show_sub_menu 1 None 100 "organisms/menu.html" %}
+                    {% endblock %}
+                </ul>
                 <div class="clearfix"></div>
             </div>
-            <div class="card-footer" style="padding: 0;">
+        </div>
+        <div class="bg-main-light" style="padding: 0;">
+            <div class="container">
                 {% block page_controls %}
                 {% endblock %}
                 <div class="clearfix"></div>
             </div>
         </div>
-    {% endblock %}
+    </div>
+{% endblock %}
 
-    {% block pre_content %}{% endblock %}
-    {% block content_container %}
-        <div id="content" class="{% block content_class %}card card-block bg-content{% endblock %}">
-            {% block content %}
-            {% endblock content %}
-        </div>
-    {% endblock %}
+<div id="content-wrapper" class="bg-main-superlight">
+    <div class="container">
+        {% block site_messages %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="card alert{% if message.tags %} alert-{{ message.tags }} alert-dismissible fade in"{% endif %}
+                         role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endblock %}
+
+        {% block pre_content %}{% endblock %}
+        {% block content_container %}
+            <div id="content" class="{% block content_class %}{% endblock %}">
+                {% block content %}
+                {% endblock content %}
+            </div>
+        {% endblock %}
+    </div>
 </div>
 <!-- /container -->
 
-<div id="grass-spacer" style="height: 150px; "></div>
-<div id="grassDiv"
-     style="background-color: #009b0a; height: 10px; position: fixed; bottom: 0; width: 100%;">
-    <script src="{% static 'components/grass/grass.js' %}"></script>
-</div>
+<div id="footer" class="widget-footer bg-main-dark"></div>
 
 <div class="feedback-button-container">
     <div class="hidden-xs">

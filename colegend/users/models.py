@@ -65,6 +65,7 @@ class User(AbstractUser):
     phone = PhoneNumberField(
         verbose_name=_('phone'),
         blank=True,
+        help_text=_('International format: e.g "+4917612345678"')
     )
 
     occupation = models.CharField(
@@ -126,6 +127,8 @@ class User(AbstractUser):
         verbose_name_plural = 'legends'
         default_related_name = 'users'
         ordering = ['username']
+
+    registration_country = models.CharField(max_length=255, blank=True)
 
 
 @receiver(user_signed_up)

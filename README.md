@@ -1,4 +1,4 @@
-# [![coLegend](https://www.colegend.org/static/website/images/coLegendLogo.png)](https://www.colegend.org)
+# [![coLegend](https://www.colegend.org/staticimages/coLegendLogo.png)](https://www.colegend.org)
 
 [![GitHub version](https://badge.fury.io/gh/Eraldo%2Fcolegend.svg)](http://badge.fury.io/gh/Eraldo%2Fcolegend)
 [![Build Status](https://travis-ci.org/Eraldo/colegend.svg?branch=master)](https://travis-ci.org/Eraldo/colegend)

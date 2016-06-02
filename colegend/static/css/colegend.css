@@ -34,6 +34,9 @@
 .text-main-light {
   color: #b2ebf2; }
 
+.text-main-superlight {
+  color: #fbfefe; }
+
 .text-main-dark {
   color: #0097a7; }
 
@@ -54,18 +57,21 @@
   background-color: black;
   color: white; }
 
-.bg-main, .organism-header .dropdown-menu {
+.bg-main {
   background-color: #26c6da;
   color: white; }
 
-.bg-main-light {
+.bg-main-light, .organism-header .dropdown-menu, .widget-subnavigation .dropdown-menu {
   background-color: #b2ebf2; }
+
+.bg-main-superlight {
+  background-color: #fbfefe; }
 
 .bg-main-dark {
   background-color: #0097a7;
   color: white; }
 
-.bg-accent, .organism-header .nav-link:focus, .organism-header .nav-link:hover, .organism-header .dropdown-menu .dropdown-item:focus, .organism-header .dropdown-menu .dropdown-item:hover {
+.bg-accent, .organism-header .nav-link:focus, .organism-header .nav-link:hover, .organism-header .dropdown-menu .dropdown-item:focus, .organism-header .dropdown-menu .dropdown-item:hover, .widget-subnavigation .nav-link:focus, .widget-subnavigation .nav-link:hover, .widget-subnavigation .dropdown-menu .dropdown-item:focus, .widget-subnavigation .dropdown-menu .dropdown-item:hover {
   background-color: #9ccc65;
   color: white; }
 
@@ -124,6 +130,13 @@
   background-color: #f44336;
   color: white; }
 
+body ::-moz-selection {
+  background: #dcedc8; }
+body ::selection {
+  background: #dcedc8; }
+body .text-accent-light::selection {
+  background: #689f38; }
+
 .alert-debug {
   background-color: white;
   border-color: #d6e9c6;
@@ -154,38 +167,25 @@
 #site-menu {
   background-color: white; }
 
-.breadcrumbs a {
-  font-size: small;
-  text-decoration: none; }
+.breadcrumbs {
+  padding-left: 0;
+  margin: 0;
+  font-size: smaller; }
+  .breadcrumbs li {
+    display: inline-block; }
+  .breadcrumbs .active {
+    display: none; }
 
 body {
+  background-color: #0097a7;
   font-size: 100%;
   font-family: "Nunito", "Ubuntu", Helvetica, sans-serif; }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "Ubuntu Titling"; }
 
-.default-pattern {
-  background-image: url(../images/shattered.jpg); }
-
-.conscious-pattern {
-  background-image: url(../images/shattered-conscious.jpg); }
-
-.connected-pattern {
-  background-image: url(../images/shattered-connected.jpg); }
-
-.continuous-pattern {
-  background-image: url(../images/shattered-continuous.jpg); }
-
 .bg-content {
   background-color: white; }
-
-.breadcrumbs > a + a:before {
-  content: "/ ";
-  color: #ccc; }
-
-#page-title {
-  margin: 0; }
 
 .text-conscious {
   color: #3f51b5; }
@@ -315,6 +315,20 @@ form .CodeMirror-fullscreen {
 .widget-weekday {
   font-family: "Lucida Console", Monaco, monospace; }
 
+.hover-border-accent:hover {
+  border-color: #9ccc65; }
+
+.widget-header .breadcrumbs {
+  margin-top: 0.5em; }
+.widget-header #page-title {
+  margin-bottom: 0.2em; }
+
+#content-wrapper {
+  padding: 1em; }
+
+.widget-footer {
+  height: 1em; }
+
 .card-item, .widget-datepicker {
   padding: 0.6rem; }
 
@@ -328,7 +342,12 @@ form .CodeMirror-fullscreen {
 
 .organism-header .nav-link {
   color: inherit; }
-.organism-header .dropdown-menu .dropdown-item {
-  color: inherit; }
+
+#div_id_tags .select2-container {
+  min-width: inherit;
+  width: 100% !important; }
+
+.filter-form .help-block {
+  display: none; }
 
 /*# sourceMappingURL=colegend.css.map */

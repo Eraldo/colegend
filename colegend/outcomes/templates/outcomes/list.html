@@ -1,0 +1,38 @@
+{% extends 'outcomes/base.html' %}
+{% load icons buttons outcomes_tags crispy_forms_tags query %}
+
+{% block title %}Outcomes{% endblock %}
+
+{% block page_controls %}
+    {% button 'create' pattern='outcomes:create' %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-10">
+            {% crispy quick_create_form %}
+            {% for outcome in outcomes %}
+                {% outcome %}
+            {% endfor %}
+        {% include 'widgets/pagination.html' %}
+            <br>
+        </div>
+        <div class="col-md-2 card bg-main-light">
+            <br>
+            <h6 class="text-main-dark">Filters</h6>
+            <hr>
+            {% crispy filter.form %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_head %}
+    {{ block.super }}
+    {{ filter.form.media.css }}
+{% endblock %}
+
+{% block extra_script %}
+    {{ block.super }}
+    {{ filter.form.media.js }}
+{% endblock %}
+

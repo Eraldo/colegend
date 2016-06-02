@@ -15,9 +15,10 @@
 {% endblock %}
 
 {% block content %}
+    {% include 'organisms/navbar.html' with class='bg-main-dark' id='legend-bar' menu_id='home' profile_id='profile' %}
+    <hr>
     {% render_model card "name" %}
     {% show_menu %}
-{#    {% show_menu 0 1 100 100 "menu.html" %}#}
     {% placeholder 'content' %}
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <div class="g-hangout"

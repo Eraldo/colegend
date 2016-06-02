@@ -32,7 +32,7 @@ class PrologueViewTests(TestCase):
     def test_get_prologue_country__from_countinous(self):
         user = UserFactory()
         self.view.request.user = user
-        user.continuous.prologue_country = 'Germany'
+        user.registration_country = 'Germany'
         self.assertEqual(self.view.get_prologue_country(), 'Germany')
 
     def test_get_prologue_country__from_ip(self):
@@ -41,7 +41,7 @@ class PrologueViewTests(TestCase):
         self.view.request.user = user
         self.assertEqual(self.view.get_prologue_country(), 'Germany')
         # Check if the country has been saved to the continious path.
-        self.assertEqual(user.continuous.prologue_country, 'Germany')
+        self.assertEqual(user.registration_country, 'Germany')
 
     def test_get_time_of_day(self):
         # TODO: Write tests

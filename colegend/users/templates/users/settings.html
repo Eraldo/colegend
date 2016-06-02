@@ -1,15 +1,13 @@
 {% extends "users/base.html" %}
 {% load static %}
 
-{% block breadcrumbs %}{% endblock %}
-
 {% block title %}Settings{% endblock %}
 
 {% block page_links %}
-    <a href="{% url 'tags:index' %}" class="btn btn-default btn-sm">Tags</a>
-    <a href="#" class="btn btn-default btn-sm disaabled">Locations</a>
-    <a href="{% url 'account_email' %}" class="btn btn-default btn-sm">Email</a>
-    <a href="{% url 'socialaccount_connections' %}" class="btn btn-default btn-sm">Social Accounts</a>
+    <a href="{% url 'tags:index' %}" class="btn nav-item nav-link">Tags</a>
+    <a href="#" class="nav-item nav-link disaabled">Locations</a>
+    <a href="{% url 'account_email' %}" class="nav-item nav-link">Email</a>
+    <a href="{% url 'socialaccount_connections' %}" class="nav-item nav-link">Social Accounts</a>
 {% endblock %}
 
 {% block content_container %}{% endblock %}

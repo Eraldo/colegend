@@ -7,11 +7,6 @@
     <link href="{% static 'story/css/story.css' %}" rel="stylesheet">
 {% endblock %}
 
-{% block breadcrumbs %}
-    {{ block.super }}
-    {% include 'widgets/breadcrumb.html' with pattern='story:index' title='Story' icon='story' %}
-{% endblock %}
-
 {% block extra_script %}
     {{ block.super }}
     <script src="{% static 'components/typed.js/dist/typed.min.js' %}"></script>

@@ -31,10 +31,6 @@ class BiographyCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         user = self.request.user
-        # update the user path
-        connected = user.connected
-        connected.biography = True
-        connected.save()
         # update the game
         complete_card(self.request, 'biography')
         return super().form_valid(form)

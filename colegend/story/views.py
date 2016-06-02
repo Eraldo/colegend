@@ -85,12 +85,12 @@ class PrologueView(LoginRequiredMixin, TemplateView):
 
     def get_prologue_country(self):
         user = self.request.user
-        country = user.continuous.prologue_country
+        country = user.registration_country
         if not country:
             country = self.get_client_country()
             if country:
-                user.continuous.prologue_country = country
-                user.continuous.save()
+                user.registration_country = country
+                user.save()
         return country
 
     @staticmethod
@@ -145,9 +145,6 @@ class PrologueView(LoginRequiredMixin, TemplateView):
         if 'welcome-tree' in request.POST:
             user = request.user
             user.add_checkpoint(name='prologue')
-            continuous = request.user.continuous
-            continuous.chapter = 1
-            continuous.save()
             return redirect('story:welcome-tree')
 
 
@@ -219,8 +216,6 @@ class YourJournalView(LoginRequiredMixin, TemplateView):
             user = request.user
             if not user.has_checkpoint('your journal'):
                 user.add_checkpoint('your journal')
-                user.continuous.chapter = 2
-                user.continuous.save()
                 complete_card(request, 'storytime')
             return redirect('story:index')
 

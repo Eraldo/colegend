@@ -66,7 +66,7 @@ class LegendDetailView(LoginRequiredMixin, DetailView):
                 },
             ]
             # update the kind and id
-            kind = 'link btn-sm'
+            kind = 'link nav-item nav-link'
             for link in page_links:
                 name = link.get('name')
                 slug = slugify(name)
@@ -121,10 +121,8 @@ class LegendUpdateView(LoginRequiredMixin, UpdateView):
 
     def form_valid(self, form):
         request = self.request
-        connected = request.user.connected
-        if not connected.about:
-            connected.about = True
-            connected.save()
+        user = request.user
+        if not user.has_checkpoint('about'):
             # update game
             complete_card(request, 'about')
         else:
@@ -144,10 +142,8 @@ class LegendAvatarView(LoginRequiredMixin, CheckpointsRequiredMixin, UpdateView)
 
     def form_valid(self, form):
         request = self.request
-        connected = request.user.connected
-        if not connected.avatar:
-            connected.avatar = True
-            connected.save()
+        user = request.user
+        if not user.has_checkpoint('profile picture'):
             # update game
             complete_card(request, 'profile picture')
         else:

@@ -54,6 +54,9 @@ $site-menu-color: $white
 .text-main-light
   color: $main-light
 
+.text-main-superlight
+  color: $main-superlight
+
 .text-main-dark
   color: $main-dark
 
@@ -80,6 +83,9 @@ $site-menu-color: $white
 
 .bg-main-light
   background-color: $main-light
+
+.bg-main-superlight
+  background-color: $main-superlight
 
 .bg-main-dark
   background-color: $main-dark
@@ -165,6 +171,16 @@ $continuous: $category-2
   background-color: $category-1
   color: $white
 
+// Selection colors
+body
+  ::-moz-selection
+    background: $accent-light
+  ::selection
+    background: $accent-light
+  .text-accent-light
+    &::selection
+      background: $accent-dark
+
 // Alert colors
 
 // bootstrap alert CSS, translated to the django-standard levels of
@@ -210,39 +226,29 @@ $red: #b94a48
 #site-menu
   background-color: $site-menu-color
 
+//.breadcrumbs
+//  a
+//    font-size: small
+//    text-decoration: none
 .breadcrumbs
-  a
-    font-size: small
-    text-decoration: none
+  padding-left: 0
+  margin: 0
+  font-size: smaller
+  li
+    display: inline-block
+  .active
+    display: none
 
 body
+  background-color: $main-dark
   font-size: 100%
   font-family: $font-stack
 
 h1, h2, h3, h4, h5, h6
   font-family: $font-headline
 
-.default-pattern
-  background-image: url(../images/shattered.jpg)
-
-.conscious-pattern
-  background-image: url(../images/shattered-conscious.jpg)
-
-.connected-pattern
-  background-image: url(../images/shattered-connected.jpg)
-
-.continuous-pattern
-  background-image: url(../images/shattered-continuous.jpg)
-
 .bg-content
   background-color: $white
-
-.breadcrumbs > a + a:before
-  content: '/ '
-  color: #ccc
-
-#page-title
-  margin: 0
 
 //  coLegend text
 
@@ -410,6 +416,22 @@ form .CodeMirror-fullscreen
 .widget-weekday
   font-family: "Lucida Console", Monaco, monospace
 
+.hover-border-accent
+  &:hover
+    border-color: $accent
+
+.widget-header
+  .breadcrumbs
+    margin-top: 0.5em
+  #page-title
+    margin-bottom: 0.2em
+
+#content-wrapper
+  padding: 1em
+
+.widget-footer
+  height: 1em
+
 // card sizes
 .card-item
   padding: 0.6rem
@@ -431,9 +453,25 @@ form .CodeMirror-fullscreen
   .nav-link:focus, .nav-link:hover
     @extend .bg-accent
   .dropdown-menu
-    @extend .bg-main
-    .dropdown-item
-      color: inherit
+    @extend .bg-main-light
     .dropdown-item:focus, .dropdown-item:hover
       @extend .bg-accent
 
+.widget-subnavigation
+  .nav-link:focus, .nav-link:hover
+    @extend .bg-accent
+  .dropdown-menu
+    @extend .bg-main-light
+    .dropdown-item:focus, .dropdown-item:hover
+      @extend .bg-accent
+
+
+// Tags autocomplete
+#div_id_tags
+  .select2-container
+    min-width: inherit
+    width: 100% !important
+
+.filter-form
+  .help-block
+    display: none

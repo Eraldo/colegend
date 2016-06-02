@@ -33,6 +33,9 @@
                     {% legend size='small' %}
                 {% endfor %}
             </div>
+            {% if forloop.counter|divisibleby:2 %}
+                <div class="clearfix hidden-md-down"></div>
+            {% endif %}
         {% endfor %}
     </div>
 {% endblock %}

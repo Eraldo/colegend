@@ -2,6 +2,9 @@
 
 {% block title %}Tags{% endblock %}
 
+{% block page_links %}
+{% endblock %}
+
 {% block breadcrumbs %}
     {{ block.super }}
     {% include 'widgets/breadcrumb.html' with pattern='tags:index' title='Tags' icon='tag' %}

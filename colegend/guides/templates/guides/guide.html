@@ -8,12 +8,12 @@
     <div class="row">
         <div class="col-sm-4">
             <img class="img-responsive center-block"
-                 src="{% static 'connected/images/guide.png' %}"
+                 src="{% static 'guides/images/guide.png' %}"
                  alt="Cloud Guide">
         </div>
         <div class="col-sm-8">
             <p>
-                {% if user.connected.guide %}
+                {% if cloud_guide_checkpoint %}
                     Your Cloud Guide was:
                     {% legend user.guiderelation.guide size='small' %}
                 {% elif user.guiderelation.guide %}

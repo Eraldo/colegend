@@ -25,7 +25,6 @@ urlpatterns = [
     url(r'^{}/'.format(settings.ADMIN_URL), include(admin.site.urls)),
 
     # User management
-    url(r'^legends/', include('colegend.users.urls', namespace='legends')),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^join/$', JoinView.as_view(), name='join'),
     url(r'^roles/', include('colegend.roles.urls', namespace='roles')),
@@ -34,23 +33,13 @@ urlpatterns = [
     url(r'^donations/', include('colegend.donations.urls', namespace='donations')),
 
     # Your stuff: custom urls includes go here
-    url(r'^support/', include('colegend.support.urls', namespace='support')),
-
-    url(r'^conscious/', include('colegend.conscious.urls', namespace='conscious')),
-    url(r'^journal/', include('colegend.journals.urls', namespace='journals')),
     url(r'^days/', include('colegend.dayentries.urls', namespace='dayentries')),
 
-    url(r'^connected/', include('colegend.connected.urls', namespace='connected')),
     url(r'^outer-call/', include('colegend.outercall.urls', namespace='outer-call')),
     url(r'^inner-call/', include('colegend.innercall.urls', namespace='inner-call')),
     url(r'^biography/', include('colegend.biography.urls', namespace='biography')),
-    url(r'^guides/', include('colegend.guides.urls', namespace='guides')),
-    url(r'^events/', include('colegend.events.urls', namespace='events')),
 
-    url(r'^continuous/', include('colegend.continuous.urls', namespace='continuous')),
-    url(r'^game/', include('colegend.games.urls', namespace='games')),
     url(r'^cards/', include('colegend.cards.urls', namespace='cards')),
-    url(r'^story/', include('colegend.story.urls', namespace='story')),
 
     # Added robots.txt file for crawlers (google/etc)
     url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),

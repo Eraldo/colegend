@@ -9,11 +9,11 @@
     <div class="row">
         <div class="col-sm-4">
             <img class="img-responsive center-block"
-                 src="{% static 'connected/images/guide.png' %}"
+                 src="{% static 'guides/images/guide.png' %}"
                  alt="Cloud Guide">
         </div>
         <div class="col-sm-8">
-            {% if guiderelation.owner.connected.guide %}
+            {% if guiding_completed %}
                 <p>
                     I was Cloud Guide for: {% legend guiderelation.owner 'small' %}
                 </p>

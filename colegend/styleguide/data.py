@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
 # Data for the styleguide context
-from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AnonymousUser
 from django.templatetags.static import static
+from django.utils import timezone
 
 from colegend.core.utils.icons import icon_dict
 from .models import Element, ElementGroup
-
-Legend = get_user_model()
 
 atoms = []
 
@@ -749,6 +747,40 @@ avatar_statements = ElementGroup(
 
 molecules.append(avatar_statements)
 
+simple_outcome = Element(
+    'Simple outcome',
+    template='outcomes/widgets/card.html',
+    context={
+        'name': 'dummy outcome',
+        'status': 'open',
+    },
+)
+
+full_outcome = Element(
+    'Full outcome',
+    template='outcomes/widgets/card.html',
+    context={
+        'name': 'garage is clean',
+        'description': 'This is my outcome description.\nSecond line.',
+        'status': 'open',
+        'inbox': True,
+        'review': 0,
+        'date': timezone.now().today(),
+        'deadline': timezone.datetime(2020, 1, 7).date(),
+        'estimate': timezone.timedelta(days=4),
+    },
+)
+
+outcomes = ElementGroup(
+    'Outcomes',
+    columns=6,
+    elements=[
+        simple_outcome, full_outcome,
+    ]
+)
+
+molecules.append(outcomes)
+
 organisms = []
 
 simple_card = Element(
@@ -838,7 +870,7 @@ legend_navigation_bar = Element(
         'id': 'legend-bar',
         'menu_id': 'styleguide',
         'class': 'bg-main-dark',
-        'user': Legend.objects.get_or_create(username='Demo')[0],
+        'user': AnonymousUser(),
     }
 )
 

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
 
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.views.generic import RedirectView
 from .views import SettingsView, LegendAvatarView, LegendUpdateView, LegendDetailView, LegendListView
 
@@ -42,30 +42,7 @@ urlpatterns = [
         LegendAvatarView.as_view(),
         name='avatar'
     ),
-
-    # # URL pattern for the UserListView
-    # url(
-    #     regex=r'^introduction/$',
-    #     view=UserIntroductionView.as_view(),
-    #     name='introduction'
-    # ),
-
-    # # URL pattern for the UserUpdateView
-    # url(
-    #     regex=r'^update/$',
-    #     view=UserUpdateView.as_view(),
-    #     name='update'
-    # ),
-
-    # # URL pattern for the ProfileView
-    # url(
-    #     regex=r'^profile/$',
-    #     view=ProfileView.as_view(),
-    #     name='profile'
-    # ),
-    # url(
-    #     regex=r'^(?P<username>[\w.@+-]+)/$',
-    #     view=ProfileView.as_view(),
-    #     name='profile'
-    # ),
+]
+urlpatterns = [
+    url(r'^', include(urlpatterns, namespace='legends')),
 ]

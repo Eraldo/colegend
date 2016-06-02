@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 
 from .views import Chapter1View, PrologueView, WelcomeTreeView, WelcomeTreeLeafWidgetView, \
     PioneerJournalView, YourJournalView, LeyendaView, StoryView
@@ -30,4 +30,7 @@ urlpatterns = [
     url(r'^your-journal/$',
         YourJournalView.as_view(),
         name='your-journal'),
+]
+urlpatterns = [
+    url(r'^', include(urlpatterns, namespace='story')),
 ]
