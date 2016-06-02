@@ -65,6 +65,13 @@ icon_dict = {
     'documentation': 'file-text-o',
     #
     'game': 'trophy',
+    # manager
+    'description': 'align-left',
+    'estimate': 'clock-o',
+    # status
+    'open': 'square-o',
+    'waiting': 'hourglass-half',
+    'closed': 'check-square-o',
 }
 
 

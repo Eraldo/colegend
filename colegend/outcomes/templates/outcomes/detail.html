@@ -1,5 +1,5 @@
 {% extends 'outcomes/base.html' %}
-{% load icons buttons outcomes_tags core_tags %}
+{% load static icons buttons outcomes_tags %}
 
 {% block title %}Outcome{% endblock %}
 
@@ -30,7 +30,7 @@
             <u>Deadline</u>:
             {{ outcome.deadline }}<br>
             <u>Estimate</u>:
-            {{ outcome.estimate|intuitive_duration }}<br>
+            {% estimate outcome.estimate %}<br>
         </div>
     </div>
 {% endblock %}
