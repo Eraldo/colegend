@@ -103,8 +103,10 @@ def deploy():
     if context.get('environment') in ['staging', 'production']:
         message('deploying the app')
         maintenance(on=True)
+        if context.get('environment') == 'production':
+            backup()
         git_push()
-        sleep(30)
+        sleep(60)
         migrate()
         maintenance(off=True)
 

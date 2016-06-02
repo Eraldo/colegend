@@ -2,7 +2,12 @@
 All enhancements and patches to cookiecutter-django will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [2016-??-??] version 0.1.6
+## [2016-06-02] version 0.1.7
+### Added
++ Restructured navigation
++ Upgraded apps to cms apps
+
+## [2016-05-20] version 0.1.6
 ### Added
 + New Menu style and cms enabled
 + Outcomes app
