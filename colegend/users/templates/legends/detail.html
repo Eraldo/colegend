@@ -8,10 +8,6 @@
     <link rel="stylesheet" href="{% static 'styleguide/css/index.css' %}">
 {% endblock %}
 
-{% block breadcrumbs %}
-    {% include 'widgets/breadcrumb.html' with pattern='legends:list' icon='users' title='legends' %}
-{% endblock %}
-
 {% block page_links %}
     {% for link in page_links %}
         {% button name=link.name url=link.url kind=link.kind locked=link.locked id=link.id %}
@@ -110,7 +106,9 @@
                                     {% static 'roles/images/icon_object_f.png' as default_image %}
                                     {% include 'atoms/badge.html' with image=default_image class='bg-main-light' name=role url=role.detail_url size='small' %}
                                 {% endif %}
-                                <a href="{{ role.detail_url }}" class="small"><div>{{ role.display_name }}</div></a>
+                                <a href="{{ role.detail_url }}" class="small">
+                                    <div>{{ role.display_name }}</div>
+                                </a>
                             </div>
                             {% if forloop.counter|divisibleby:3 %}
                                 <div class="clearfix hidden-lg-up hidden-sm-down"></div>

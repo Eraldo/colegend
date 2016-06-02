@@ -2,6 +2,9 @@
 
 {% block title %}Legends{% endblock %}
 
+{% block page_links %}
+{% endblock %}
+
 {% block breadcrumbs %}
     {{ block.super }}
     {% include 'widgets/breadcrumb.html' with pattern='legends:list' icon='legends' title='legends' %}
