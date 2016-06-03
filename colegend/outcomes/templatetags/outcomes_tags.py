@@ -37,6 +37,16 @@ def outcome(context, outcome=None, **kwargs):
                 'deadline': outcome.deadline or '',
                 'estimate': outcome.estimate or '',
                 'url': outcome.detail_url,
+                'actions': [
+                    {
+                        'name': 'update',
+                        'url': outcome.update_url,
+                    },
+                    {
+                        'name': 'delete',
+                        'url': outcome.delete_url,
+                    },
+                ],
             })
         elif isinstance(outcome, dict):
             context.update(outcome)

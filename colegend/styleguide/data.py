@@ -673,27 +673,6 @@ action_menu = Element(
     context={
         'actions': [
             {
-                'name': 'detail',
-                'url': '#action3',
-            },
-            {
-                'name': 'update',
-                'url': '#action1',
-            },
-            {
-                'name': 'delete',
-                'url': '#action2',
-            },
-        ],
-    }
-)
-
-action_menu_right = Element(
-    'Right action menu',
-    template='widgets/action-menu.html',
-    context={
-        'actions': [
-            {
                 'name': 'Action 1',
                 'url': '#action1',
             },
@@ -706,6 +685,27 @@ action_menu_right = Element(
                 'url': '#action3',
             },
         ],
+    }
+)
+
+action_menu_right = Element(
+    'Right action menu',
+    template='widgets/action-menu.html',
+    context={
+        'actions': [
+            {
+                'name': 'detail',
+                'url': '#action3',
+            },
+            {
+                'name': 'update',
+                'url': '#action1',
+            },
+            {
+                'name': 'delete',
+                'url': '#action2',
+            },
+        ],
         'right': True,
         'class': 'pull-right'
     }
@@ -715,7 +715,7 @@ button_groups = ElementGroup(
     'Action menus',
     columns=6,
     elements=[
-        action_menu, action_menu_right
+        action_menu, action_menu_right,
     ]
 )
 
@@ -807,6 +807,16 @@ simple_outcome = Element(
     context={
         'name': 'dummy outcome',
         'status': 0,
+        'actions': [
+            {
+                'name': 'update',
+                'url': '#action1',
+            },
+            {
+                'name': 'delete',
+                'url': '#action2',
+            },
+        ],
     },
 )
 
@@ -822,7 +832,17 @@ full_outcome = Element(
         'date': timezone.now().today(),
         'deadline': timezone.datetime(2020, 1, 7).date(),
         'estimate': timezone.timedelta(days=4),
-        'actions': True,
+        'actions': [
+            {
+                'name': 'update',
+                'url': '#action1',
+            },
+            {
+                'name': 'delete',
+                'url': '#action2',
+            },
+        ],
+
     },
 )
 
