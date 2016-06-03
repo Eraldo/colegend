@@ -667,6 +667,60 @@ button_groups = ElementGroup(
 
 molecules.append(button_groups)
 
+action_menu = Element(
+    'Action menu',
+    template='widgets/action-menu.html',
+    context={
+        'actions': [
+            {
+                'name': 'detail',
+                'url': '#action3',
+            },
+            {
+                'name': 'update',
+                'url': '#action1',
+            },
+            {
+                'name': 'delete',
+                'url': '#action2',
+            },
+        ],
+    }
+)
+
+action_menu_right = Element(
+    'Right action menu',
+    template='widgets/action-menu.html',
+    context={
+        'actions': [
+            {
+                'name': 'Action 1',
+                'url': '#action1',
+            },
+            {
+                'name': 'Action 2',
+                'url': '#action2',
+            },
+            {
+                'name': 'Action 3',
+                'url': '#action3',
+            },
+        ],
+        'right': True,
+        'class': 'pull-right'
+    }
+)
+
+button_groups = ElementGroup(
+    'Action menus',
+    columns=6,
+    elements=[
+        action_menu, action_menu_right
+    ]
+)
+
+molecules.append(button_groups)
+
 left_avatar_statement = Element(
     'Left statement',
     template='molecules/avatar-statement.html',
