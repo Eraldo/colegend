@@ -32,6 +32,7 @@
                 {% for user in role.users.all %}
                     {% legend size='small' %}
                 {% endfor %}
+                <div class="clearfix"></div>
             </div>
             {% if forloop.counter|divisibleby:2 %}
                 <div class="clearfix hidden-md-down"></div>
