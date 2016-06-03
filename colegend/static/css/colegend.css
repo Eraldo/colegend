@@ -329,6 +329,11 @@ form .CodeMirror-fullscreen {
 .widget-footer {
   height: 1em; }
 
+.widget-outcome-card .widget-action-menu {
+  visibility: hidden; }
+.widget-outcome-card:hover .widget-action-menu {
+  visibility: visible; }
+
 .card-item, .widget-datepicker {
   padding: 0.6rem; }
 
