@@ -70,9 +70,9 @@ def status(context, status=None, **kwargs):
         if status == Outcome.OPEN:
             return icon('open')
         elif status == Outcome.WAITING:
-            return icon('waiting')
+            return icon('waiting', classes='text-category-7')
         elif status == Outcome.CLOSED:
-            return icon('closed')
+            return icon('closed', classes='text-category-4')
     return ''
 
 
