@@ -75,7 +75,7 @@
   background-color: #9ccc65;
   color: white; }
 
-.bg-accent-light {
+.bg-accent-light, .dayentry-widget.active {
   background-color: #dcedc8; }
 
 .bg-accent-dark, .widget-subnavigation .nav-link.active, .widget-subnavigation .nav-link.active:hover {
