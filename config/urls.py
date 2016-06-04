@@ -45,8 +45,6 @@ urlpatterns = [
 
     url(r'^mockups/', include('colegend.mockups.urls')),
     url(r'^styleguide/', include('colegend.styleguide.urls')),
-
-    url(r'^vision/', include('colegend.visions.urls')),
 ]
 # Static files
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
