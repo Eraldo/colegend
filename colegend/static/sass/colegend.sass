@@ -465,8 +465,11 @@ form .CodeMirror-fullscreen
       @extend .bg-accent
 
 .widget-subnavigation
-  .nav-link:focus, .nav-link:hover
-    @extend .bg-accent
+  .nav-link
+    &:focus, &.nav-link:hover
+      @extend .bg-accent
+    &.active, &.active:hover
+      @extend .bg-accent-dark
   .dropdown-menu
     @extend .bg-main-light
     .dropdown-item:focus, .dropdown-item:hover

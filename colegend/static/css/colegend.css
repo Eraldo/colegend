@@ -78,7 +78,7 @@
 .bg-accent-light {
   background-color: #dcedc8; }
 
-.bg-accent-dark {
+.bg-accent-dark, .widget-subnavigation .nav-link.active, .widget-subnavigation .nav-link.active:hover {
   background-color: #689f38;
   color: white; }
 
