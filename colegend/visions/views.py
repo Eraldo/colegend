@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.urlresolvers import reverse
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, RedirectView
 
 from colegend.core.views import OwnedCreateView, OwnedUpdateView, OwnedItemsMixin
@@ -13,11 +14,20 @@ class VisionMixin(OwnedItemsMixin):
     model = Vision
     form_class = VisionForm
 
+    def get_object(self, queryset=None):
+        scope = self.kwargs.get('scope')
+        user = self.request.user
+        return user.visions.scope(user, scope)
+
 
 class VisionIndexView(RedirectView):
     permanent = False
     query_string = True
     pattern_name = 'visions:list'
+
+    def get_redirect_url(self, *args, **kwargs):
+        scope = Vision.SCOPE_MAP.get(Vision.DAY)
+        return reverse('visions:detail', kwargs={'scope': scope})
 
 
 class VisionListView(LoginRequiredMixin, VisionMixin, ListView):

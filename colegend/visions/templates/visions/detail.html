@@ -1,7 +1,15 @@
 {% extends 'visions/base.html' %}
-{% load icons buttons  visions_tags %}
+{% load icons buttons visions_tags markdown thumbnail %}
 
 {% block title %}Vision{% endblock %}
+
+{% block page_links %}
+    <a href="{% url 'visions:detail' scope='day' %}" class="nav-item nav-link{% if vision.get_scope_display == 'day' %} active{% endif %}">Day</a>
+    <a href="{% url 'visions:detail' scope='week' %}" class="nav-item nav-link{% if vision.get_scope_display == 'week' %} active{% endif %}">Week</a>
+    <a href="{% url 'visions:detail' scope='month' %}" class="nav-item nav-link{% if vision.get_scope_display == 'month' %} active{% endif %}">Month</a>
+    <a href="{% url 'visions:detail' scope='quarter' %}" class="nav-item nav-link{% if vision.get_scope_display == 'quarter' %} active{% endif %}">Quarter</a>
+    <a href="{% url 'visions:detail' scope='year' %}" class="nav-item nav-link{% if vision.get_scope_display == 'year' %} active{% endif %}">Year</a>
+{% endblock %}
 
 {% block page_controls %}
     {% button 'update' url=vision.update_url %}
@@ -11,5 +19,13 @@
 {% endblock %}
 
 {% block content %}
-    {{ vision }}
+    {% if vision.image %}
+        {% thumbnail vision.image 1200x600 as image %}
+        <img src="{{ image.url }}" alt="{{ vision }}" class="img-responsive center-block">
+    {% endif %}
+    {% if vision.content %}
+        {{ vision.content|urlize|markdown }}
+    {% else %}
+        Time to update your vision. :)
+    {% endif %}
 {% endblock %}

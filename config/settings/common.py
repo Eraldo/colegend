@@ -110,6 +110,8 @@ LOCAL_APPS = (
     'colegend.manager',
     'colegend.outcomes',
 
+    'colegend.visions',
+
     'colegend.guidelines',
     'colegend.chat',
     'colegend.outercall',

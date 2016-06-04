@@ -1,8 +1,7 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 
 from .views import VisionIndexView, VisionListView, VisionCreateView, VisionDetailView, VisionUpdateView, \
     VisionDeleteView
-
 
 urlpatterns = [
     url(r'^$',
@@ -11,16 +10,21 @@ urlpatterns = [
     url(r'^list/$',
         VisionListView.as_view(),
         name='list'),
-    url(r'^create/$',
-        VisionCreateView.as_view(),
-        name='create'),
-    url(r'^(?P<pk>[0-9]+)/$',
-        VisionDetailView.as_view(),
-        name='detail'),
-    url(r'^(?P<pk>[0-9]+)/update/$',
-        VisionUpdateView.as_view(),
-        name='update'),
-    url(r'^(?P<pk>[0-9]+)/delete/$',
-        VisionDeleteView.as_view(),
-        name='delete'),
+    url(r'^(?P<scope>\w+)/', include([
+        url(r'^create/$',
+            VisionCreateView.as_view(),
+            name='create'),
+        url(r'^$',
+            VisionDetailView.as_view(),
+            name='detail'),
+        url(r'^update/$',
+            VisionUpdateView.as_view(),
+            name='update'),
+        url(r'^delete/$',
+            VisionDeleteView.as_view(),
+            name='delete'),
+    ])),
+]
+urlpatterns = [
+    url(r'^', include(urlpatterns, namespace='visions')),
 ]

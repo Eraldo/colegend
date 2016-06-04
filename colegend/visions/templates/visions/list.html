@@ -3,10 +3,6 @@
 
 {% block title %}Visions{% endblock %}
 
-{% block page_controls %}
-    {% button 'create' pattern='visions:create' %}
-{% endblock %}
-
 {% block content %}
     {% for vision in visions %}
         {% vision_link %}<br>
