@@ -1,0 +1,15 @@
+{% extends 'visions/base.html' %}
+{% load icons buttons  visions_tags %}
+
+{% block title %}Vision{% endblock %}
+
+{% block page_controls %}
+    {% button 'update' url=vision.update_url %}
+    <div class="pull-right">
+        {% button 'delete' url=vision.delete_url %}
+    </div>
+{% endblock %}
+
+{% block content %}
+    {{ vision }}
+{% endblock %}
