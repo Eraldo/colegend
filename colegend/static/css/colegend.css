@@ -334,6 +334,32 @@ form .CodeMirror-fullscreen {
 .widget-outcome-card:hover .widget-action-menu {
   visibility: visible; }
 
+.widget-avatar {
+  max-width: 6em;
+  max-height: 6em;
+  position: relative;
+  border-radius: 50%; }
+  .widget-avatar.small {
+    font-size: 0.5em; }
+  .widget-avatar.large {
+    font-size: 2em; }
+  .widget-avatar .widget-label {
+    position: absolute;
+    bottom: 0em;
+    width: 100%;
+    display: none;
+    white-space: inherit; }
+  .widget-avatar:hover .widget-label {
+    display: block; }
+  .widget-avatar:hover.small .widget-label {
+    display: none; }
+  .widget-avatar .avatar-image {
+    width: 100%;
+    height: 100%;
+    max-width: 6em;
+    max-height: 6em;
+    border-radius: 50%; }
+
 .card-item, .widget-datepicker {
   padding: 0.6rem; }
 

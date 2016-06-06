@@ -1,0 +1,11 @@
+{% load core_tags %}
+<div class="widget-avatar {{ class }} {{ size }} {% if compact %}compact{% endif %}">
+    <a {% if url %}href="{{ url }}"{% endif %}>
+        {% if image %}
+            <img class="avatar-image img-responsive" src="{{ image }}" alt="{{ name }}">
+        {% endif %}
+        {% if label and name %}
+            {% label text=name class=label.class %}
+        {% endif %}
+    </a>
+</div>

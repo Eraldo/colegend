@@ -443,6 +443,35 @@ form .CodeMirror-fullscreen
   &.active
     @extend .bg-accent-light
 
+.widget-avatar
+  max-width: 6em
+  max-height: 6em
+  position: relative
+  border-radius: 50%
+  &.small
+    font-size: 0.5em
+  &.large
+    font-size: 2em
+  .widget-label
+    position: absolute
+    bottom: 0em
+    width: 100%
+    display: none
+    white-space: inherit
+  &:hover
+    .widget-label
+      display: block
+    &.small
+      .widget-label
+        display: none
+  .avatar-image
+    width: 100%
+    height: 100%
+    max-width: 6em
+    max-height: 6em
+    border-radius: 50%
+
+
 // card sizes
 .card-item
   padding: 0.6rem
