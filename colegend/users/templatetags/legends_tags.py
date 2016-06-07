@@ -45,20 +45,22 @@ def legend_avatar(context, legend=None, **kwargs):
     legend_context.update(kwargs)
 
     # avatar
+    size = legend_context.get('size')
     if legend and legend.is_authenticated():
-        size = legend_context.get('size')
-        legend_context['avatar'] = avatar(
-            context=context,
-            name=legend,
-            url=legend.get_absolute_url(),
-            image=legend.get_avatar(size=size).url if legend.avatar else static('legends/images/anonymous.png'),
-        )
+        legend_context['avatar'] = avatar(**{
+            'context': context,
+            'name': legend,
+            'url': legend.get_absolute_url(),
+            'image': legend.get_avatar(size=size).url if legend.avatar else static('legends/images/anonymous.png'),
+            'class': size,
+        })
     else:
-        legend_context['avatar'] = avatar(
-            context=context,
-            name='Anonymous',
-            image=static('legends/images/anonymous.png'),
-        )
+        legend_context['avatar'] = avatar({
+            'context': context,
+            'name': 'Anonymous',
+            'image': static('legends/images/anonymous.png'),
+            'class': size,
+        })
     # link
     if legend_context.get('show_link'):
         legend_context['link'] = legend_link(context=legend_context, legend=legend)

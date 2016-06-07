@@ -521,7 +521,7 @@ small_avatar = Element(
         'image': static('legends/images/npc/Coralina.png'),
         'name': 'Coralina Charming',
         'url': '#coralina',
-        'size': 'small',
+        'class': 'small',
     }
 )
 large_avatar = Element(
@@ -531,7 +531,7 @@ large_avatar = Element(
         'image': static('legends/images/npc/Coralina.png'),
         'name': 'Coralina Charming',
         'url': '#coralina',
-        'size': 'large',
+        'class': 'large',
     }
 )
 
