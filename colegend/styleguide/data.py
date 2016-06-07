@@ -521,7 +521,7 @@ small_avatar = Element(
         'image': static('legends/images/npc/Coralina.png'),
         'name': 'Coralina Charming',
         'url': '#coralina',
-        'class': 'small',
+        'classes': 'small',
     }
 )
 large_avatar = Element(
@@ -531,7 +531,25 @@ large_avatar = Element(
         'image': static('legends/images/npc/Coralina.png'),
         'name': 'Coralina Charming',
         'url': '#coralina',
-        'class': 'large',
+        'classes': 'large',
+    }
+)
+cake_avatar = Element(
+    'Cake avatar',
+    template='widgets/avatar.html',
+    context={
+        'name': 'Cake',
+        'image': static('styleguide/images/icon_cake.png'),
+        'classes': 'bg-main-light',
+    }
+)
+camera_avatar = Element(
+    'Camera avatar',
+    template='widgets/avatar.html',
+    context={
+        'name': 'Camera',
+        'image': static('styleguide/images/icon_camera.png'),
+        'classes': 'bg-main-light',
     }
 )
 
@@ -539,46 +557,13 @@ avatars = ElementGroup(
     'Avatars',
     columns=3,
     elements=[
-        anonymous_avatar, legend_avatar, small_avatar, large_avatar
+        anonymous_avatar, legend_avatar, small_avatar, large_avatar,
+        cake_avatar, camera_avatar
     ]
 )
 
 atoms.append(avatars)
 
-cake_badge = Element(
-    'Cake badge',
-    template='atoms/badge.html',
-    context={
-        'name': 'Cake',
-        'image': static('styleguide/images/icon_cake.png'),
-        'class': 'bg-category-3',
-        'label': {
-            'class': 'bg-accent',
-        },
-    }
-)
-camera_badge = Element(
-    'Camera badge',
-    template='atoms/badge.html',
-    context={
-        'name': 'Camera',
-        'image': static('styleguide/images/icon_camera.png'),
-        'class': 'bg-category-5',
-        'label': {
-            'class': 'bg-accent',
-        },
-    }
-)
-
-badges = ElementGroup(
-    'Badges',
-    columns=3,
-    elements=[
-        cake_badge, camera_badge,
-    ]
-)
-
-atoms.append(badges)
 
 molecules = []
 
