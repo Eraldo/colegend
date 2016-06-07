@@ -37,7 +37,7 @@ def role(context, role=None, size=None, show_avatar=True, show_link=True, url=No
 
     if not role: return ''
 
-    name = role
+    name = role.display_name
     url = url or role.get_absolute_url()
     classes = 'bg-main-light {size}'.format(size=size)
 

@@ -335,10 +335,22 @@ form .CodeMirror-fullscreen {
   visibility: visible; }
 
 .widget-legend {
-  display: inline-block; }
+  display: inline-block;
+  text-align: center; }
+  .widget-legend .widget-avatar {
+    margin: auto; }
 
 .widget-npc {
-  display: inline-block; }
+  display: inline-block;
+  text-align: center; }
+  .widget-npc .widget-avatar {
+    margin: auto; }
+
+.widget-role {
+  display: inline-block;
+  text-align: center; }
+  .widget-role .widget-avatar {
+    margin: auto; }
 
 .widget-avatar {
   position: relative;
@@ -349,16 +361,6 @@ form .CodeMirror-fullscreen {
     font-size: 0.5em; }
   .widget-avatar.large {
     font-size: 2em; }
-  .widget-avatar .widget-label {
-    position: absolute;
-    bottom: 0em;
-    width: 100%;
-    display: none;
-    white-space: inherit; }
-  .widget-avatar:hover .widget-label {
-    display: block; }
-  .widget-avatar:hover.small .widget-label {
-    display: none; }
   .widget-avatar .avatar-image {
     width: 100%;
     height: 100%;
