@@ -81,7 +81,7 @@
     </div>
 {% endblock %}
 
-<div id="content-wrapper" class="bg-main-superlight">
+<div id="content-wrapper" class="{% block content_wrapper_class %}bg-main-superlight{% endblock %}">
     <div class="container">
         {% block site_messages %}
             {% if messages %}

@@ -30,58 +30,71 @@ def legend(context, legend=None, size=None, show_avatar=True, show_link=True, ur
     if show_link:
         legend_context['link'] = link(content=name, url=url)
 
-    legend_template = 'legends/widgets/avatar.html'
+    legend_template = 'legends/widgets/legend.html'
     return render_to_string(legend_template, context=legend_context)
 
 
-@register.simple_tag(takes_context=True)
-def legend_link(context, legend=None, **kwargs):
-    # if no legend is given take the legend from the context or else the user
-    legend = legend or context.get('legend', context.get('user'))
-    legend_context = {}
-    if legend and legend.is_authenticated():
-        legend_context.update({
-            'content': legend,
-            'url': legend.get_absolute_url(),
-        })
-    else:
-        legend_context.update({
-            'content': 'Anonymous',
-            'url': reverse('join'),
-        })
-    legend_context.update(kwargs)
-    template = 'widgets/link.html'
-    return render_to_string(template, context=legend_context)
-
-
 @register.simple_tag()
-def npc(name):
-    template = 'legends/widgets/legend.html'
-    images = {
-        'coralina': 'Coralina.png',
-        'phoenix': 'phoenix.png',
-        'eagle': 'eagle.png',
-        'parrot': 'parrot.png',
-        'monkey': 'monkey.png',
-        'tiger': 'tiger.png',
-        'dolphin': 'dolphin.png',
-        'bear': 'bear.png',
+def npc(name, size='large', show_avatar=True, show_link=True, url=None):
+    npcs = {
+        'coralina': {
+            'name': 'Coralina',
+            'file': 'Coralina.png',
+        },
+        'phoenix': {
+            'name': 'Light Phoenix Oracle',
+            'file': 'phoenix.png',
+            'category': 7,
+        },
+        'eagle': {
+            'name': 'Professor Eagle Scientist',
+            'file': 'eagle.png',
+            'category': 6,
+        },
+        'parrot': {
+            'name': 'Moderating Parrot Poet',
+            'file': 'parrot.png',
+            'category': 5,
+        },
+        'monkey': {
+            'file': 'monkey.png',
+            'name': 'Caring Monkey Mother',
+            'category': 4,
+        },
+        'tiger': {
+            'name': 'Trillionaire Tiger Entrepreneur',
+            'file': 'tiger.png',
+            'category': 3,
+        },
+        'dolphin': {
+            'name': 'Playful Dolphin Dancer',
+            'file': 'dolphin.png',
+            'category': 2,
+        },
+        'bear': {
+            'name': 'Healthy Bear Athlete',
+            'file': 'bear.png',
+            'category': 1,
+        },
     }
-    names = {
-        'coralina': 'Coralina',
-        'phoenix': 'Light Phoenix Oracle',
-        'eagle': 'Professor Eagle Scientist',
-        'parrot': 'Moderating Parrot Poet',
-        'monkey': 'Caring Monkey Mother',
-        'tiger': 'Trillionaire Tiger Entrepreneur',
-        'dolphin': 'Playful Dolphin Dancer',
-        'bear': 'Healthy Bear Athlete',
+    name = name.lower()
+
+    if name not in npcs:
+        return ''
+
+    npc = npcs.get(name)
+    file = npc.get('file')
+    image = static('legends/images/npc/{file}'.format(file=file))
+    full_name = npc.get('name')
+    category = npc.get('category')
+    if category:
+        classes = '{size} bg-category-{category}'.format(size=size, category=category)
+    else:
+        classes = '{size}'.format(size=size)
+
+    npc_context = {
+        'avatar': avatar(image=image, name=full_name, classes=classes),
+        'link': link(content=full_name, url='#{}'.format(name)),
     }
-    image_name = images.get(name) or images.get(name.lower())
-    full_name = names.get(name, name)
-    context = {
-        'name': full_name,
-        'source': static('legends/images/npc/{image_name}'.format(image_name=image_name)),
-        'classname': name,
-    }
-    return render_to_string(template, context)
+    npc_template = 'legends/widgets/npc.html'
+    return render_to_string(npc_template, npc_context)

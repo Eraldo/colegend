@@ -1,28 +1,4 @@
-{% load static %}
-
-<div {% if id %}id="{{ id }}-avatar" {% endif %}class="legend-avatar legend-avatar-{{ size }} text-center"
-     style="word-wrap: break-word; display: inline-block;">
-    <a {% if url %}href="{{ url }}"{% endif %}>
-        <div style="display: inline-block;">
-            {% if source %}
-                <img class="{% if classname %}{{ classname }}{% else %}{{ name|slugify }}{% endif %}-avatar image-{{ size }} img-responsive img-circle center-block"
-                     src="{{ source }}"
-                     alt="{{ name }}">
-            {% else %}
-                <img class="{% if classname %}{{ classname }}{% else %}{{ name|slugify }}{% endif %}-avatar image-{{ size }} img-responsive img-circle center-block"
-                     src="{% static 'legends/images/anonymous.png' %}"
-                     alt="Your avatar">
-            {% endif %}
-            <div style="position: relative;">
-                {% if size == 'small' %}
-                    <div class="legend-name-small text-center">{{ name|default:"You" }}
-                    </div>
-                {% else %}
-                    <div class="legend-name text-center bg-inverse bg-connected"
-                         style="border-radius: 1em 1em 0 0; position: absolute; bottom: 0em; width: 100%;"><strong>{{ name|default:"You" }}</strong>
-                    </div>
-                {% endif %}
-            </div>
-        </div>
-    </a>
+<div class="widget-legend">
+    {{ avatar }}
+    {{ link }}
 </div>
