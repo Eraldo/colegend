@@ -4,6 +4,8 @@ from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
 from django.template.loader import render_to_string
 
+from colegend.core.templatetags.core_tags import avatar
+
 register = template.Library()
 
 
@@ -34,34 +36,39 @@ def legend(context, legend=None, size=None, **kwargs):
 
 
 @register.simple_tag(takes_context=True)
-def legend_avatar(context, legend=None, size=None, **kwargs):
+def legend_avatar(context, legend=None, **kwargs):
     # if no legend is given take the legend from the context or else the user
     legend = legend or context.get('legend', context.get('user'))
-    size = size or context.get('size', 'medium')
     legend_context = {
-        'label': {
-            'class': 'label-pill bg-accent',
-        },
-        'size': size,
+        'show_link': True
     }
-    if legend and legend.is_authenticated():
-        legend_context.update({
-            'name': legend,
-            'image': legend.get_avatar(size=size).url if legend.avatar else static('legends/images/anonymous.png'),
-            'url': legend.get_absolute_url(),
-        })
-    else:
-        legend_context.update({
-            'name': 'Anonymous',
-            'image': static('legends/images/anonymous.png'),
-        })
     legend_context.update(kwargs)
+
+    # avatar
+    if legend and legend.is_authenticated():
+        size = legend_context.get('size')
+        legend_context['avatar'] = avatar(
+            context=context,
+            name=legend,
+            url=legend.get_absolute_url(),
+            image=legend.get_avatar(size=size).url if legend.avatar else static('legends/images/anonymous.png'),
+        )
+    else:
+        legend_context['avatar'] = avatar(
+            context=context,
+            name='Anonymous',
+            image=static('legends/images/anonymous.png'),
+        )
+    # link
+    if legend_context.get('show_link'):
+        legend_context['link'] = legend_link(context=legend_context, legend=legend)
+
     template = 'legends/widgets/avatar.html'
     return render_to_string(template, context=legend_context)
 
 
 @register.simple_tag(takes_context=True)
-def legend_link(context, legend=None, size=None, **kwargs):
+def legend_link(context, legend=None, **kwargs):
     # if no legend is given take the legend from the context or else the user
     legend = legend or context.get('legend', context.get('user'))
     legend_context = {}

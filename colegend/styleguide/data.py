@@ -499,51 +499,39 @@ atoms.append(speeach_bubbles)
 
 anonymous_avatar = Element(
     'Anonymous avatar',
-    template='atoms/avatar.html',
+    template='widgets/avatar.html',
     context={
         'name': 'Anonymous',
-        'image': 'legends/images/anonymous.png',
-        'label': {
-            'class': 'label-pill bg-accent',
-        },
+        'image': static('legends/images/anonymous.png'),
     }
 )
 legend_avatar = Element(
     'Legend avatar',
-    template='atoms/avatar.html',
+    template='widgets/avatar.html',
     context={
-        'image': 'legends/images/npc/Coralina.png',
+        'image': static('legends/images/npc/Coralina.png'),
         'name': 'Coralina Charming',
         'url': '#coralina',
-        'label': {
-            'class': 'label-pill bg-accent',
-        },
     }
 )
 small_avatar = Element(
     'Small avatar',
-    template='atoms/avatar.html',
+    template='widgets/avatar.html',
     context={
-        'image': 'legends/images/npc/Coralina.png',
+        'image': static('legends/images/npc/Coralina.png'),
         'name': 'Coralina Charming',
         'url': '#coralina',
         'size': 'small',
-        'label': {
-            'class': 'label-pill bg-accent',
-        },
     }
 )
 large_avatar = Element(
     'Large avatar',
-    template='atoms/avatar.html',
+    template='widgets/avatar.html',
     context={
-        'image': 'legends/images/npc/Coralina.png',
+        'image': static('legends/images/npc/Coralina.png'),
         'name': 'Coralina Charming',
         'url': '#coralina',
         'size': 'large',
-        'label': {
-            'class': 'label-pill bg-accent',
-        },
     }
 )
 
@@ -562,7 +550,7 @@ cake_badge = Element(
     template='atoms/badge.html',
     context={
         'name': 'Cake',
-        'image': 'styleguide/images/icon_cake.png',
+        'image': static('styleguide/images/icon_cake.png'),
         'class': 'bg-category-3',
         'label': {
             'class': 'bg-accent',
@@ -574,7 +562,7 @@ camera_badge = Element(
     template='atoms/badge.html',
     context={
         'name': 'Camera',
-        'image': 'styleguide/images/icon_camera.png',
+        'image': static('styleguide/images/icon_camera.png'),
         'class': 'bg-category-5',
         'label': {
             'class': 'bg-accent',

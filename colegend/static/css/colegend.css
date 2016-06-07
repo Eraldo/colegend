@@ -335,10 +335,10 @@ form .CodeMirror-fullscreen {
   visibility: visible; }
 
 .widget-avatar {
-  max-width: 6em;
-  max-height: 6em;
   position: relative;
-  border-radius: 50%; }
+  border-radius: 50%;
+  max-width: 6em;
+  max-height: 6em; }
   .widget-avatar.small {
     font-size: 0.5em; }
   .widget-avatar.large {
@@ -356,8 +356,6 @@ form .CodeMirror-fullscreen {
   .widget-avatar .avatar-image {
     width: 100%;
     height: 100%;
-    max-width: 6em;
-    max-height: 6em;
     border-radius: 50%; }
 
 .card-item, .widget-datepicker {
