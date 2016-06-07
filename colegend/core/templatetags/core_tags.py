@@ -24,30 +24,24 @@ def label(context, label=None, **kwargs):
     return render_to_string(label_template, context=label_context)
 
 
-@register.simple_tag(takes_context=True)
-def avatar(context, avatar=None, **kwargs):
-    """
-    Settings:
-    + name
-    + image
-    + url
-    + class
-    :param context:
-    :param avatar:
-    :param kwargs:
-    :return:
-    """
-    avatar = avatar or context.get('avatar', {})
-    avatar_context = avatar
-    avatar_context.update(kwargs)
+@register.simple_tag()
+def avatar(image, name=None, url=None, classes=None):
     avatar_template = 'widgets/avatar.html'
+    avatar_context = {
+        'image': image,
+        'name': name,
+        'classes': classes,
+        'url': url,
+    }
     return render_to_string(avatar_template, context=avatar_context)
 
 
-@register.simple_tag(takes_context=True)
-def link(context, link=None, **kwargs):
-    link = link or context.get('link', {})
-    link_context = link
-    link_context.update(kwargs)
+@register.simple_tag()
+def link(content, url, external=False):
+    link_context = {
+        'content': content,
+        'url': url,
+        'external': external,
+    }
     link_template = 'widgets/link.html'
     return render_to_string(link_template, context=link_context)
