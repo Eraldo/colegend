@@ -46,11 +46,9 @@
 {% block content_container %}
     <div class="row">
         <div class="col-md-8">
-            {#            <div class="card bg-content">#}
             {% for day in days %}
                 {% dayentry_line day.entry date=day.date %}
             {% endfor %}
-            {#            </div>#}
         </div>
         <div class="col-md-4">
             <div class="content card bg-content">

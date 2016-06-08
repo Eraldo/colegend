@@ -1,0 +1,12 @@
+{% load icons buttons %}
+{% if actions %}
+    <div class="widget-action-menu btn-group {{ class }}">
+        <a href="#menu" type="button" data-toggle="dropdown" aria-haspopup="true"
+           aria-expanded="false">{% icon 'more' fixed=True color='grey' %}</a>
+        <div class="dropdown-menu{% if right %} dropdown-menu-right{% endif %}">
+            {% for action in actions %}
+                {% button action.name url=action.url kind='default dropdown-item' %}
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

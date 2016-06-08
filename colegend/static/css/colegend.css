@@ -75,10 +75,10 @@
   background-color: #9ccc65;
   color: white; }
 
-.bg-accent-light {
+.bg-accent-light, .dayentry-widget.active {
   background-color: #dcedc8; }
 
-.bg-accent-dark {
+.bg-accent-dark, .widget-subnavigation .nav-link.active, .widget-subnavigation .nav-link.active:hover {
   background-color: #689f38;
   color: white; }
 
@@ -328,6 +328,106 @@ form .CodeMirror-fullscreen {
 
 .widget-footer {
   height: 1em; }
+
+.widget-outcome-card .widget-action-menu {
+  visibility: hidden; }
+.widget-outcome-card:hover .widget-action-menu {
+  visibility: visible; }
+
+.widget-legend {
+  display: inline-block;
+  text-align: center; }
+  .widget-legend .widget-avatar {
+    margin: auto; }
+
+.widget-npc {
+  display: inline-block;
+  text-align: center; }
+  .widget-npc .widget-avatar {
+    margin: auto; }
+
+.widget-role {
+  display: inline-block;
+  text-align: center; }
+  .widget-role .widget-avatar {
+    margin: auto; }
+
+.widget-avatar {
+  position: relative;
+  border-radius: 50%;
+  max-width: 6em;
+  max-height: 6em; }
+  .widget-avatar.small {
+    font-size: 0.5em; }
+  .widget-avatar.large {
+    font-size: 2em; }
+  .widget-avatar .avatar-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%; }
+
+.arrow {
+  border-color: inherit; }
+  .arrow:before, .arrow:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 0.5rem solid; }
+  .arrow.left:before, .arrow.left:after {
+    top: 50%;
+    left: -1rem;
+    margin-top: -0.5rem;
+    border-left-color: transparent;
+    border-right-color: inherit;
+    border-top-color: transparent;
+    border-bottom-color: transparent; }
+  .arrow.left:after {
+    left: -0.9rem;
+    border-right-color: white; }
+  .arrow.right:before, .arrow.right:after {
+    top: 50%;
+    right: -1rem;
+    margin-top: -0.5rem;
+    border-left-color: inherit;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    border-bottom-color: transparent; }
+  .arrow.right:after {
+    right: -0.9rem;
+    border-left-color: white; }
+  .arrow.up:before, .arrow.up:after {
+    top: -1rem;
+    left: 50%;
+    margin-left: -0.5rem;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    border-bottom-color: inherit; }
+  .arrow.up:after {
+    top: -0.9rem;
+    border-bottom-color: white; }
+  .arrow.down:before, .arrow.down:after {
+    bottom: -1rem;
+    left: 50%;
+    margin-left: -0.5rem;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-top-color: inherit;
+    border-bottom-color: transparent; }
+  .arrow.down:after {
+    bottom: -0.9rem;
+    border-top-color: white; }
+  .arrow.pull-up:before, .arrow.pull-up:after {
+    top: 2rem; }
+  .arrow.pull-down:before, .arrow.pull-down:after {
+    bottom: 2rem; }
+
+.widget-statement .widget-legend {
+  display: block; }
+
+.widget-statement .widget-npc {
+  display: block; }
 
 .card-item, .widget-datepicker {
   padding: 0.6rem; }

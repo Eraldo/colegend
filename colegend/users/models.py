@@ -77,7 +77,9 @@ class User(AbstractUser):
         resize_source=dict(size=(400, 400)),
     )
 
-    def get_avatar(self, size='medium'):
+    def get_avatar(self, size=None):
+        if not size:
+            size = 'medium'
         try:
             avatar = self.avatar[size]
         except InvalidImageFormatError:

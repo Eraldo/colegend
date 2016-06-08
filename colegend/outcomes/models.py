@@ -36,7 +36,7 @@ class Outcome(AutoUrlsMixin, OwnedBase, TaggableBase, TimeStampedBase):
         choices=STATUS_CHOICES,
         default=OPEN,
     )
-    inbox = models.BooleanField(default=False)
+    inbox = models.BooleanField(default=True)
     DAILY = 0
     WEEKLY = 1
     MONTHLY = 2

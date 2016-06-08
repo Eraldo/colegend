@@ -8,11 +8,12 @@ from django.template.loader import render_to_string
 class Element:
     meta_template = 'styleguide/atoms/meta.html'
 
-    def __init__(self, name, tag=None, template=None, context={}, columns=0, **kwargs):
+    def __init__(self, name, tag=None, libraries=None, template=None, context={}, columns=0, **kwargs):
         if not (tag or template):
             raise Exception('Element `{}` needs a tag or template.'.format(name))
         self.name = name
         self.tag = tag
+        self.libraries = libraries
         self.template = template
         self.context = context
         self.columns = columns
@@ -21,6 +22,7 @@ class Element:
         context = {
             'name': self.name,
             'tag': self.tag,
+            'libraries': self.libraries,
             'template': self.template,
             'context': self.context,
         }
@@ -34,7 +36,7 @@ class Element:
         else:
             context = {self.tag: self.context}
             template = Template(
-                '{{% load atoms_tags molecules_tags organisms_tags %}}{{% {tag} {tag}={tag} %}}'.format(tag=self.tag))
+                '{{% load atoms_tags molecules_tags organisms_tags {libraries} %}}{{% {tag} {tag}={tag} %}}'.format(tag=self.tag, libraries=self.libraries))
             outcome = template.render(context=Context(context))
         return outcome
 

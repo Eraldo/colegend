@@ -260,14 +260,43 @@ headlines = ElementGroup(
 
 atoms.append(headlines)
 
-link = Element(
-    'Link',
-    template='styleguide/atoms/link.html',
+link_simple = Element(
+    'Simple link',
+    template='widgets/link.html',
     context={
+        'content': 'foo bar',
+        'url': '#foobar',
     }
 )
 
-atoms.append(link)
+link_external = Element(
+    'External link',
+    template='widgets/link.html',
+    context={
+        'content': 'google',
+        'url': 'http://www.google.com',
+        'external': True,
+    }
+)
+
+link_legend = Element(
+    'Legend link',
+    template='widgets/link.html',
+    context={
+        'content': 'Coralina',
+        'url': '#coralina',
+    }
+)
+
+links = ElementGroup(
+    'Links',
+    columns=4,
+    elements=[
+        link_simple, link_external, link_legend,
+    ]
+)
+
+atoms.append(links)
 
 icons = Element(
     'Icons',
@@ -487,11 +516,32 @@ speech_bubble_bottom = Element(
     }
 )
 
+speech_bubble_right_responsive = Element(
+    'Bubble right responsive',
+    template='atoms/speech-bubble.html',
+    context={
+        'content': 'arrow left responsive up',
+        'arrow': 'left pull-up',
+        'responsive_arrow': 'up',
+    }
+)
+speech_bubble_left_responsive = Element(
+    'Bubble left responsive',
+    template='atoms/speech-bubble.html',
+    context={
+        'content': 'arrow right responsive up',
+        'arrow': 'right pull-up',
+        'responsive_arrow': 'up',
+
+    }
+)
+
 speeach_bubbles = ElementGroup(
     'Speech bubbles',
     columns=3,
     elements=[
         speech_bubble_right, speech_bubble_left, speech_bubble_top, speech_bubble_bottom,
+        speech_bubble_right_responsive, speech_bubble_left_responsive,
     ]
 )
 
@@ -499,51 +549,57 @@ atoms.append(speeach_bubbles)
 
 anonymous_avatar = Element(
     'Anonymous avatar',
-    template='atoms/avatar.html',
+    template='widgets/avatar.html',
     context={
         'name': 'Anonymous',
-        'image': 'legends/images/anonymous.png',
-        'label': {
-            'class': 'label-pill bg-accent',
-        },
+        'image': static('legends/images/anonymous.png'),
     }
 )
 legend_avatar = Element(
     'Legend avatar',
-    template='atoms/avatar.html',
+    template='widgets/avatar.html',
     context={
-        'image': 'legends/images/npc/Coralina.png',
+        'image': static('legends/images/npc/Coralina.png'),
         'name': 'Coralina Charming',
         'url': '#coralina',
-        'label': {
-            'class': 'label-pill bg-accent',
-        },
     }
 )
 small_avatar = Element(
     'Small avatar',
-    template='atoms/avatar.html',
+    template='widgets/avatar.html',
     context={
-        'image': 'legends/images/npc/Coralina.png',
+        'image': static('legends/images/npc/Coralina.png'),
         'name': 'Coralina Charming',
         'url': '#coralina',
-        'size': 'small',
-        'label': {
-            'class': 'label-pill bg-accent',
-        },
+        'classes': 'small',
     }
 )
 large_avatar = Element(
     'Large avatar',
-    template='atoms/avatar.html',
+    template='widgets/avatar.html',
     context={
-        'image': 'legends/images/npc/Coralina.png',
+        'image': static('legends/images/npc/Coralina.png'),
         'name': 'Coralina Charming',
         'url': '#coralina',
-        'size': 'large',
-        'label': {
-            'class': 'label-pill bg-accent',
-        },
+        'classes': 'large',
+    }
+)
+cake_avatar = Element(
+    'Cake avatar',
+    template='widgets/avatar.html',
+    context={
+        'name': 'Cake',
+        'image': static('styleguide/images/icon_cake.png'),
+        'classes': 'bg-main-light',
+    }
+)
+camera_avatar = Element(
+    'Camera avatar',
+    template='widgets/avatar.html',
+    context={
+        'name': 'Camera',
+        'image': static('styleguide/images/icon_camera.png'),
+        'classes': 'bg-main-light',
     }
 )
 
@@ -551,46 +607,13 @@ avatars = ElementGroup(
     'Avatars',
     columns=3,
     elements=[
-        anonymous_avatar, legend_avatar, small_avatar, large_avatar
+        anonymous_avatar, legend_avatar, small_avatar, large_avatar,
+        cake_avatar, camera_avatar
     ]
 )
 
 atoms.append(avatars)
 
-cake_badge = Element(
-    'Cake badge',
-    template='atoms/badge.html',
-    context={
-        'name': 'Cake',
-        'image': 'styleguide/images/icon_cake.png',
-        'class': 'bg-category-3',
-        'label': {
-            'class': 'bg-accent',
-        },
-    }
-)
-camera_badge = Element(
-    'Camera badge',
-    template='atoms/badge.html',
-    context={
-        'name': 'Camera',
-        'image': 'styleguide/images/icon_camera.png',
-        'class': 'bg-category-5',
-        'label': {
-            'class': 'bg-accent',
-        },
-    }
-)
-
-badges = ElementGroup(
-    'Badges',
-    columns=3,
-    elements=[
-        cake_badge, camera_badge,
-    ]
-)
-
-atoms.append(badges)
 
 molecules = []
 
@@ -667,92 +690,169 @@ button_groups = ElementGroup(
 
 molecules.append(button_groups)
 
-left_avatar_statement = Element(
+action_menu = Element(
+    'Action menu',
+    template='widgets/action-menu.html',
+    context={
+        'actions': [
+            {
+                'name': 'Action 1',
+                'url': '#action1',
+            },
+            {
+                'name': 'Action 2',
+                'url': '#action2',
+            },
+            {
+                'name': 'Action 3',
+                'url': '#action3',
+            },
+        ],
+    }
+)
+
+action_menu_right = Element(
+    'Right action menu',
+    template='widgets/action-menu.html',
+    context={
+        'actions': [
+            {
+                'name': 'detail',
+                'url': '#action3',
+            },
+            {
+                'name': 'update',
+                'url': '#action1',
+            },
+            {
+                'name': 'delete',
+                'url': '#action2',
+            },
+        ],
+        'right': True,
+        'class': 'pull-right'
+    }
+)
+
+button_groups = ElementGroup(
+    'Action menus',
+    columns=6,
+    elements=[
+        action_menu, action_menu_right,
+    ]
+)
+
+molecules.append(button_groups)
+
+legend = Element(
+    'Legend',
+    template='legends/widgets/legend.html',
+    context={
+        'avatar': legend_avatar.render_element(),
+        'link': link_legend.render_element(),
+    }
+)
+
+legend_large = Element(
+    'Legend large',
+    template='legends/widgets/legend.html',
+    context={
+        'avatar': large_avatar.render_element(),
+        'link': link_legend.render_element(),
+    }
+)
+
+legend_small = Element(
+    'Legend large',
+    template='legends/widgets/legend.html',
+    context={
+        'avatar': small_avatar.render_element(),
+        'link': link_legend.render_element(),
+    }
+)
+
+legends = ElementGroup(
+    'Legends',
+    columns=4,
+    elements=[
+        legend, legend_large, legend_small,
+    ]
+)
+
+molecules.append(legends)
+
+statement_left = Element(
     'Left statement',
-    template='molecules/avatar-statement.html',
+    template='widgets/statement.html',
     context={
-        'name': 'Coralina Charming',
-        'url': '#coralina',
-        'label': {'class': 'label-pill bg-accent'},
-        'image': 'legends/images/npc/Coralina.png',
-        # statement
-        'content': 'Hello world!',
-        'arrow': 'left pull-up',
-        'responsive_arrow': 'up',
+        'speaker': legend.render_element(),
+        'content': speech_bubble_right_responsive.render_element(),
+        'speaker_classes': 'col-sm-4',
+        'bubble_classes': 'col-sm-8',
     },
     columns=8,
 )
 
-right_avatar_statement = Element(
+statement_right = Element(
     'Right statement',
-    template='molecules/avatar-statement.html',
+    template='widgets/statement.html',
     context={
-        'name': 'Coralina Charming',
-        'url': '#coralina',
-        'label': {'class': 'label-pill bg-accent'},
-        'image': 'legends/images/npc/Coralina.png',
-        # statement
-        'content': 'This is my answer',
-        'arrow': 'right pull-up',
-        'responsive_arrow': 'up',
-        'avatar_class': 'col-sm-4 col-sm-push-8',
-        'bubble_class': 'col-sm-8  col-sm-pull-4',
+        'speaker': legend.render_element(),
+        'content': speech_bubble_left_responsive.render_element(),
+        'speaker_classes': 'col-sm-4 col-sm-push-8',
+        'bubble_classes': 'col-sm-8  col-sm-pull-4',
     },
     columns=8,
 )
 
-big_avatar_statement = Element(
+statement_big = Element(
     'Big statement',
-    template='molecules/avatar-statement.html',
+    template='widgets/statement.html',
     context={
-        'name': 'Coralina Charming',
-        'url': '#coralina',
-        'label': {'class': 'label-pill bg-accent'},
-        'image': 'legends/images/npc/Coralina.png',
-        'size': 'large',
-        # statement
-        'content': 'This is my answer',
-        'arrow': 'left pull-up',
-        'responsive_arrow': 'up',
-        'avatar_class': 'col-sm-4',
-        'bubble_class': 'col-sm-8',
+        'speaker': legend_large.render_element(),
+        'content': speech_bubble_right_responsive.render_element(),
+        'speaker_classes': 'col-sm-4',
+        'bubble_classes': 'col-sm-8',
     },
 )
 
-small_avatar_statement = Element(
+statement_small = Element(
     'Small statement',
-    template='molecules/avatar-statement.html',
+    template='widgets/statement.html',
     context={
-        'name': 'Coralina Charming',
-        'url': '#coralina',
-        'label': {'class': 'label-pill bg-accent'},
-        'image': 'legends/images/npc/Coralina.png',
-        'size': 'small',
-        # statement
-        'content': 'This is my answer',
-        'arrow': 'left pull-up',
-        'responsive_arrow': 'up',
-        'avatar_class': 'col-sm-4',
-        'bubble_class': 'col-sm-8',
+        'speaker': legend_small.render_element(),
+        'content': speech_bubble_right_responsive.render_element(),
+        'speaker_classes': 'col-sm-4',
+        'bubble_classes': 'col-sm-8',
     },
     columns=6
 )
 
-avatar_statements = ElementGroup(
-    'Avatar statements',
+statements = ElementGroup(
+    'Statements',
     elements=[
-        left_avatar_statement, right_avatar_statement, big_avatar_statement, small_avatar_statement,
+        statement_left, statement_right, statement_big, statement_small,
     ]
 )
 
-molecules.append(avatar_statements)
+molecules.append(statements)
 
 simple_outcome = Element(
     'Simple outcome',
     template='outcomes/widgets/card.html',
     context={
         'name': 'dummy outcome',
-        'status': 'open',
+        'status': 0,
+        'actions': [
+            {
+                'name': 'update',
+                'url': '#action1',
+            },
+            {
+                'name': 'delete',
+                'url': '#action2',
+            },
+        ],
     },
 )
 
@@ -762,12 +862,23 @@ full_outcome = Element(
     context={
         'name': 'garage is clean',
         'description': 'This is my outcome description.\nSecond line.',
-        'status': 'open',
+        'status': 1,
         'inbox': True,
         'review': 0,
         'date': timezone.now().today(),
         'deadline': timezone.datetime(2020, 1, 7).date(),
         'estimate': timezone.timedelta(days=4),
+        'actions': [
+            {
+                'name': 'update',
+                'url': '#action1',
+            },
+            {
+                'name': 'delete',
+                'url': '#action2',
+            },
+        ],
+
     },
 )
 

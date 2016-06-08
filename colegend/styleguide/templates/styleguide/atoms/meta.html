@@ -17,6 +17,10 @@
                     {% if tag %}
                         Tag:
                         <pre>{{ tag }}</pre>
+                        {% if libraries %}
+                            Libraries:
+                            <pre>{{ libraries }}</pre>
+                        {% endif %}
                     {% endif %}
                     {% if template %}
                         Template:

@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
-{% load cms_tags %}
+{% load cms_tags menu_tags %}
 
 {% block title %}{% page_attribute 'page_title' %}{% endblock title %}
+
+{% block page_links %}
+    {% show_sub_menu 1 None 100 "organisms/menu.html" %}
+{% endblock %}
 
 {% block content %}
     {% placeholder 'content' %}

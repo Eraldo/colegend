@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from easy_thumbnails.fields import ThumbnailerImageField
 
-from colegend.core.models import OwnedBase, AutoUrlsMixin
+from colegend.core.models import AutoUrlsMixin
 
 
 class RoleQuerySet(models.QuerySet):

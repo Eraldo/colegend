@@ -27,7 +27,6 @@ urlpatterns = [
     # User management
     url(r'^accounts/', include('allauth.urls')),
     url(r'^join/$', JoinView.as_view(), name='join'),
-    url(r'^roles/', include('colegend.roles.urls', namespace='roles')),
     url(r'^tags/', include('colegend.tags.urls', namespace='tags')),
     url(r'^category/', include('colegend.categories.urls', namespace='categories')),
     url(r'^donations/', include('colegend.donations.urls', namespace='donations')),
@@ -46,7 +45,6 @@ urlpatterns = [
 
     url(r'^mockups/', include('colegend.mockups.urls')),
     url(r'^styleguide/', include('colegend.styleguide.urls')),
-
 ]
 # Static files
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

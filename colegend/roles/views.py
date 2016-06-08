@@ -16,7 +16,9 @@ class RoleMixin(object):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['manager'] = self.request.user.has_role(name='Secretary')
+        user = self.request.user
+        if user.is_authenticated():
+            context['manager'] = self.request.user.has_role(name='Secretary')
         return context
 
 
@@ -26,7 +28,7 @@ class RoleIndexView(RedirectView):
     pattern_name = 'roles:list'
 
 
-class RoleListView(LoginRequiredMixin, RoleMixin, ListView):
+class RoleListView(RoleMixin, ListView):
     template_name = 'roles/list.html'
     context_object_name = 'roles'
 
@@ -41,7 +43,7 @@ class RoleCreateView(LoginRequiredMixin, RolesRequiredMixin, RoleMixin, CreateVi
         return initial
 
 
-class RoleDetailView(LoginRequiredMixin, RoleMixin, DetailView):
+class RoleDetailView(RoleMixin, DetailView):
     template_name = 'roles/detail.html'
 
     def get_context_data(self, **kwargs):

@@ -432,6 +432,59 @@ form .CodeMirror-fullscreen
 .widget-footer
   height: 1em
 
+.widget-outcome-card
+  .widget-action-menu
+    visibility: hidden
+  &:hover
+    .widget-action-menu
+      visibility: visible
+
+.dayentry-widget
+  &.active
+    @extend .bg-accent-light
+
+.widget-legend
+  display: inline-block
+  text-align: center
+  .widget-avatar
+    margin: auto
+
+.widget-npc
+  display: inline-block
+  text-align: center
+  .widget-avatar
+    margin: auto
+
+.widget-role
+  display: inline-block
+  text-align: center
+  .widget-avatar
+    margin: auto
+
+.widget-avatar
+  position: relative
+  border-radius: 50%
+  max-width: 6em
+  max-height: 6em
+  &.small
+    font-size: 0.5em
+  &.large
+    font-size: 2em
+  .avatar-image
+    width: 100%
+    height: 100%
+    border-radius: 50%
+
+@import arrows
+
+.widget-statement
+  .widget-legend
+    display: block
+
+.widget-statement
+  .widget-npc
+    display: block
+
 // card sizes
 .card-item
   padding: 0.6rem
@@ -458,13 +511,15 @@ form .CodeMirror-fullscreen
       @extend .bg-accent
 
 .widget-subnavigation
-  .nav-link:focus, .nav-link:hover
-    @extend .bg-accent
+  .nav-link
+    &:focus, &.nav-link:hover
+      @extend .bg-accent
+    &.active, &.active:hover
+      @extend .bg-accent-dark
   .dropdown-menu
     @extend .bg-main-light
     .dropdown-item:focus, .dropdown-item:hover
       @extend .bg-accent
-
 
 // Tags autocomplete
 #div_id_tags

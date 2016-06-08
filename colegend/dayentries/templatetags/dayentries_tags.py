@@ -1,6 +1,7 @@
 from django import template
 from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
+from django.utils import timezone
 
 from colegend.core.utils.markdown import render
 
@@ -52,6 +53,7 @@ def dayentry_card(context, dayentry=None, **kwargs):
 @register.simple_tag(takes_context=True)
 def dayentry_line(context, dayentry=None, **kwargs):
     dayentry = dayentry or context.get('dayentry')
+    today = timezone.now().date()
     if dayentry:
         context = {
             'id': dayentry.id,
@@ -66,6 +68,7 @@ def dayentry_line(context, dayentry=None, **kwargs):
             'keywords': dayentry.keywords,
             'content': dayentry.content,
             'tags': dayentry.tags.all(),
+            'class': 'active' if dayentry.date == today else '',
         }
     else:
         date = kwargs.get('date', context.get('date'))
@@ -74,6 +77,7 @@ def dayentry_line(context, dayentry=None, **kwargs):
             context['create_url'] = '{}?date={}'.format(create_url, date)
             context['weekday'] = date.strftime('%a')
             context['weekday_number'] = date.isoweekday()
+            context['class'] = 'active' if date == today else ''
     context.update(kwargs)
     template = 'dayentries/widgets/item.html'
     return render_to_string(template, context=context)

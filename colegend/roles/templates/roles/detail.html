@@ -1,5 +1,5 @@
 {% extends 'roles/base.html' %}
-{% load static icons atoms_tags buttons markdown legends_tags %}
+{% load static icons atoms_tags buttons markdown legends_tags roles_tags %}
 
 {% block extra_head %}
     {{ block.super }}
@@ -26,12 +26,12 @@
             </h1>
                 {% if role.icon %}
                     <div class="pull-left" style="margin-right: 0.5em">
-                        {% include 'atoms/badge.html' with image=role.icon.url class='bg-main-light' name=role.item url=role.detail_url %}
+                        {% include 'roles/widgets/role.html' with image=role.icon.url class='bg-main-light' name=role.item url=role.detail_url %}
                     </div>
                 {% else %}
                     <div class="pull-left" style="margin-right: 0.5em">
                         {% static 'roles/images/icon_object_f.png' as default_image %}
-                        {% include 'atoms/badge.html' with image=default_image class='bg-main-light' name=role.item url=role.detail_url %}
+                        {% include 'roles/widgets/role.html' with image=default_image class='bg-main-light' name=role.item url=role.detail_url %}
                     </div>
                 {% endif %}
             <p>

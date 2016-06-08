@@ -64,15 +64,14 @@
         </div>
         <div class="bg-main-light" style="padding: 0;">
             <div class="container">
-                <ul class="widget-subnavigation nav nav-tabs">
+                <ul class="widget-subnavigation nav nav-pills">
                     {% block page_links %}
-                        {% show_sub_menu 1 None 100 "organisms/menu.html" %}
                     {% endblock %}
                 </ul>
                 <div class="clearfix"></div>
             </div>
         </div>
-        <div class="bg-main-light" style="padding: 0;">
+        <div class="bg-main-superlight">
             <div class="container">
                 {% block page_controls %}
                 {% endblock %}
@@ -82,7 +81,7 @@
     </div>
 {% endblock %}
 
-<div id="content-wrapper" class="bg-main-superlight">
+<div id="content-wrapper" class="{% block content_wrapper_class %}bg-main-superlight{% endblock %}">
     <div class="container">
         {% block site_messages %}
             {% if messages %}

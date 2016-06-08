@@ -18,20 +18,14 @@
     <div class="row">
         {% for role in roles %}
             <div class="col-lg-6" style="margin-bottom: 0.5em">
-                {% if role.icon %}
-                    <div class="pull-left" style="margin-right: 0.5em">
-                        {% include 'atoms/badge.html' with image=role.icon.url class='bg-main-light' name=role.item url=role.detail_url %}
-                    </div>
-                {% else %}
-                    <div class="pull-left" style="margin-right: 0.5em">
-                        {% static 'roles/images/icon_object_f.png' as default_image %}
-                        {% include 'atoms/badge.html' with image=default_image class='bg-main-light' name=role.item url=role.detail_url %}
-                    </div>
-                {% endif %}
+                <div class="pull-left" style="margin-right: 0.5em">
+                    {% role show_link=False %}
+                </div>
                 {% role_link %}<br>
                 {% for user in role.users.all %}
                     {% legend size='small' %}
                 {% endfor %}
+                <div class="clearfix"></div>
             </div>
             {% if forloop.counter|divisibleby:2 %}
                 <div class="clearfix hidden-md-down"></div>

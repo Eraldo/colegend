@@ -1,12 +1,17 @@
-{% load icons %}
+{% load icons outcomes_tags buttons %}
 <div id="{{ id }}" class="widget-outcome-card card card-item bg-content hover-border-accent" data-url="{{ url }}"
      ondblclick="window.location=$(this).attr('data-url');">
-    <strong>{% icon 'checked' %} <a href="{{ url }}">{{ name }}</a></strong>
+    <strong>{% status %}<a href="{{ url }}">{{ name }}</a></strong>
+    {% include 'widgets/action-menu.html' with right=True class='pull-right' %}
     <div class="pull-right">
-        {{ status }} {{ inbox }} {{ review }} {{ date }} {{ deadline }} {{ estimate }}
+        {% estimate %}
+        {% if description %}{% icon 'description' %}{% endif %}
+        {% review %}
+        {% inbox %}
     </div>
-    <div>
-        {{ description|linebreaksbr }}
+    <div class="pull-right">
+        {% date %}
+        {% deadline %}
     </div>
     <div class="clearfix"></div>
 </div>

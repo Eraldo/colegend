@@ -64,7 +64,7 @@
                         </p>
                     {% endif %}
                     {% if legend != user %}
-                        <a href="mailto:{{ legend.owner.email }}" target="_blank" class="btn btn-primary btn-sm">
+                        <a href="mailto:{{ legend.email }}" target="_blank" class="btn btn-primary btn-sm">
                             {% icon 'send' %} Send Message
                         </a>
                     {% endif %}
@@ -99,19 +99,20 @@
                     </h5>
                     <div class="molecule-roles row">
                         {% for role in roles %}
-                            <div class="col-xs-6 col-sm-4 col-lg-2" style="margin-bottom: 0.5em">
-                                {% if role.icon %}
-                                    {% include 'atoms/badge.html' with image=role.icon.url class='bg-main-light' name=role url=role.detail_url size='small' %}
-                                {% else %}
-                                    {% static 'roles/images/icon_object_f.png' as default_image %}
-                                    {% include 'atoms/badge.html' with image=default_image class='bg-main-light' name=role url=role.detail_url size='small' %}
-                                {% endif %}
-                                <a href="{{ role.detail_url }}" class="small">
-                                    <div>{{ role.display_name }}</div>
-                                </a>
+                            <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 col-xl-2" style="margin-bottom: 0.5em">
+                                {% role size='small' %}
                             </div>
+                            {% if forloop.counter|divisibleby:6 %}
+                                <div class="clearfix hidden-lg-down"></div>
+                            {% endif %}
+                            {% if forloop.counter|divisibleby:4 %}
+                                <div class="clearfix hidden-md-down hidden-xl-up"></div>
+                            {% endif %}
                             {% if forloop.counter|divisibleby:3 %}
-                                <div class="clearfix hidden-lg-up hidden-sm-down"></div>
+                                <div class="clearfix hidden-xs-down hidden-lg-up"></div>
+                            {% endif %}
+                            {% if forloop.counter|divisibleby:2 %}
+                                <div class="clearfix hidden-sm-up"></div>
                             {% endif %}
                         {% endfor %}
                     </div>

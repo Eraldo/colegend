@@ -1,4 +1,4 @@
-{% load staticfiles i18n icons menu_tags %}
+{% load staticfiles i18n icons menu_tags legends_tags %}
 <div class="organism-header">
     <nav {% if id %}id="{{ id }}" {% endif %}class="navbar navbar-static-top{% if class %} {{ class }}{% endif %}">
         <div class="container">
@@ -32,14 +32,9 @@
                             <button class="btn btn-link nav-link" type="button" id="menu-button-account"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                     style="padding: 0;">
-                                {# TODO: refactor to use widget #}
-                                {% if user.avatar %}
-                                    <img src="{{ user.avatar.small.url }}" class="avatar img-circle"
-                                         height="38px" alt="avatar"/>
-                                {% else %}
-                                    <img src="{% static 'legends/images/anonymous.png' %}" class="avatar img-circle"
-                                         height="38px" alt="avatar"/>
-                                {% endif %}
+                                <div style="height: 38px; width: 38px">
+                                    {% legend size='small' show_link=False %}
+                                </div>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="menu-button-account">
                                 {% show_menu_below_id profile_id 0 100 100 100 "organisms/submenu.html" %}

@@ -1,0 +1,10 @@
+{% extends 'visions/base.html' %}
+{% load icons buttons visions_tags %}
+
+{% block title %}Visions{% endblock %}
+
+{% block content %}
+    {% for vision in visions %}
+        {% vision_link %}<br>
+    {% endfor %}
+{% endblock %}

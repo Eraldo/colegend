@@ -71,41 +71,43 @@ class AutoUrlsMixin(object):
     """
     A mixin that automatically adds the CRUD urls to the model.
     """
+    auto_url_namespace = ''
+
+    @property
+    def auto_url_prefix(self):
+        return '{app}:{namespace}'.format(
+            app=self._meta.app_label,
+            namespace=self.auto_url_namespace + ':' if self.auto_url_namespace else ''
+        )
 
     @property
     def index_url(self):
-        app = self._meta.app_label
-        url = '{}:index'.format(app)
+        url = '{}index'.format(self.auto_url_prefix)
         return reverse(url)
 
     @property
     def list_url(self):
-        app = self._meta.app_label
-        url = '{}:list'.format(app)
+        url = '{}list'.format(self.auto_url_prefix)
         return reverse(url)
 
     @property
     def create_url(self):
-        app = self._meta.app_label
-        url = '{}:create'.format(app)
+        url = '{}create'.format(self.auto_url_prefix)
         return reverse(url)
 
     @property
     def detail_url(self):
-        app = self._meta.app_label
-        url = '{}:detail'.format(app)
+        url = '{}detail'.format(self.auto_url_prefix)
         return reverse(url, kwargs={'pk': self.pk})
 
     @property
     def update_url(self):
-        app = self._meta.app_label
-        url = '{}:update'.format(app)
+        url = '{}update'.format(self.auto_url_prefix)
         return reverse(url, kwargs={'pk': self.pk})
 
     @property
     def delete_url(self):
-        app = self._meta.app_label
-        url = '{}:delete'.format(app)
+        url = '{}delete'.format(self.auto_url_prefix)
         return reverse(url, kwargs={'pk': self.pk})
 
     def get_absolute_url(self):
