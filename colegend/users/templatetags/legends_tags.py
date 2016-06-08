@@ -117,12 +117,12 @@ def statement(speaker, content, direction='left', responsive=True):
         statement_context.update({
             'speaker_classes': 'col-sm-4',
             'bubble_classes': 'col-sm-8',
-            'content': speech_bubble(content, responsive=responsive),
+            'content': speech_bubble(content, direction='left', arrow_classes='pull-up', responsive=responsive),
         })
     elif direction == 'right':
         statement_context.update({
             'speaker_classes': 'col-sm-4 col-sm-push-8',
             'bubble_classes': 'col-sm-8  col-sm-pull-4',
-            'content': speech_bubble(content, direction='right', responsive=responsive),
+            'content': speech_bubble(content, direction='right', arrow_classes='pull-up', responsive=responsive),
         })
     return render_to_string(statement_template, context=statement_context)

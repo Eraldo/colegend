@@ -63,8 +63,8 @@
                         <a id="login" href="{% url "home" %}" class="btn btn-info pull-right">Home</a>
                     {% else %}
                         <div class="btn-group pull-right" role="group">
-                        <a id="join" href="{% url "join" %}?next=/" class="btn btn-info">Join</a>
-                        <a id="login" href="{% url "account_login" %}?next=/" class="btn btn-secondary">Login</a>
+                            <a id="join" href="{% url "join" %}?next=/" class="btn btn-info">Join</a>
+                            <a id="login" href="{% url "account_login" %}?next=/" class="btn btn-secondary">Login</a>
                         </div>
                     {% endif %}
                     <li class="nav-item active" style=""><a class="page-scroll" href="#page-top">About</a></li>
@@ -309,10 +309,19 @@
                 <h1>7 reasons to join coLegend</h1>
                 <br>
                 {% for reason in reasons %}
-                    <div class="wow zoomIn" style="text-align: left;">
+                    <div class="wow zoomIn">
                         <span style="display: none;">{% cycle 'left' 'right' as direction %}</span>
-                        {% include 'widgets/speech.html' with npc=reason.npc content=reason.text direction=direction %}
-                        <br>
+                        <div class="row">
+                            {% if direction == 'left' %}
+                                <div class="col-lg-8">
+                                    {% statement reason.npc reason.text direction=direction %}
+                                </div>
+                            {% elif direction == 'right' %}
+                                <div class="col-lg-8 col-lg-offset-4">
+                                    {% statement reason.npc reason.text direction=direction %}
+                                </div>
+                            {% endif %}
+                        </div>
                     </div>
                 {% endfor %}
             </div>

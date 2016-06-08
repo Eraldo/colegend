@@ -48,10 +48,10 @@ def avatar(image, name=None, url=None, classes=None):
 
 
 @register.simple_tag()
-def speech_bubble(content, direction='left', responsive=False):
+def speech_bubble(content, direction='left', arrow_classes=None, responsive=False):
     speech_bubble_template = 'widgets/speech-bubble.html'
     speech_bubble_context = {
-        'arrow': direction,
+        'arrow': '{direction}{classes}'.format(direction=direction, classes=' {}'.format(arrow_classes) if arrow_classes else ''),
         'responsive_arrow': 'up' if responsive else '',
         'content': content,
     }
