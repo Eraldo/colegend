@@ -4,8 +4,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [2016-??-??] version 0.1.8
 ### Added
++ Updated the avatar, speech and statement widgets
 + Added visions app
 + Changed page controls styling
++ Transformed roles into cms app
++ Auto urls support namespaces
++ Updated styling for outcomes
++ Added an action menu tag and added it to outcomes
++ Outcomes are in the inbox by default
 
 ## [2016-06-02] version 0.1.7
 ### Added
