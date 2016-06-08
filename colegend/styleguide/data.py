@@ -516,11 +516,32 @@ speech_bubble_bottom = Element(
     }
 )
 
+speech_bubble_right_responsive = Element(
+    'Bubble right responsive',
+    template='atoms/speech-bubble.html',
+    context={
+        'content': 'arrow left responsive up',
+        'arrow': 'left pull-up',
+        'responsive_arrow': 'up',
+    }
+)
+speech_bubble_left_responsive = Element(
+    'Bubble left responsive',
+    template='atoms/speech-bubble.html',
+    context={
+        'content': 'arrow right responsive up',
+        'arrow': 'right pull-up',
+        'responsive_arrow': 'up',
+
+    }
+)
+
 speeach_bubbles = ElementGroup(
     'Speech bubbles',
     columns=3,
     elements=[
         speech_bubble_right, speech_bubble_left, speech_bubble_top, speech_bubble_bottom,
+        speech_bubble_right_responsive, speech_bubble_left_responsive,
     ]
 )
 
@@ -732,95 +753,89 @@ legend = Element(
     }
 )
 
+legend_large = Element(
+    'Legend large',
+    template='legends/widgets/legend.html',
+    context={
+        'avatar': large_avatar.render_element(),
+        'link': link_legend.render_element(),
+    }
+)
+
+legend_small = Element(
+    'Legend large',
+    template='legends/widgets/legend.html',
+    context={
+        'avatar': small_avatar.render_element(),
+        'link': link_legend.render_element(),
+    }
+)
+
 legends = ElementGroup(
     'Legends',
-    columns=12,
+    columns=4,
     elements=[
-        legend
+        legend, legend_large, legend_small,
     ]
 )
 
 molecules.append(legends)
 
-left_avatar_statement = Element(
+statement_left = Element(
     'Left statement',
-    template='molecules/avatar-statement.html',
+    template='widgets/statement.html',
     context={
-        'name': 'Coralina Charming',
-        'url': '#coralina',
-        'label': {'class': 'label-pill bg-accent'},
-        'image': 'legends/images/npc/Coralina.png',
-        # statement
-        'content': 'Hello world!',
-        'arrow': 'left pull-up',
-        'responsive_arrow': 'up',
+        'speaker': legend.render_element(),
+        'content': speech_bubble_right_responsive.render_element(),
+        'speaker_classes': 'col-sm-4',
+        'bubble_classes': 'col-sm-8',
     },
     columns=8,
 )
 
-right_avatar_statement = Element(
+statement_right = Element(
     'Right statement',
-    template='molecules/avatar-statement.html',
+    template='widgets/statement.html',
     context={
-        'name': 'Coralina Charming',
-        'url': '#coralina',
-        'label': {'class': 'label-pill bg-accent'},
-        'image': 'legends/images/npc/Coralina.png',
-        # statement
-        'content': 'This is my answer',
-        'arrow': 'right pull-up',
-        'responsive_arrow': 'up',
-        'avatar_class': 'col-sm-4 col-sm-push-8',
-        'bubble_class': 'col-sm-8  col-sm-pull-4',
+        'speaker': legend.render_element(),
+        'content': speech_bubble_left_responsive.render_element(),
+        'speaker_classes': 'col-sm-4 col-sm-push-8',
+        'bubble_classes': 'col-sm-8  col-sm-pull-4',
     },
     columns=8,
 )
 
-big_avatar_statement = Element(
+statement_big = Element(
     'Big statement',
-    template='molecules/avatar-statement.html',
+    template='widgets/statement.html',
     context={
-        'name': 'Coralina Charming',
-        'url': '#coralina',
-        'label': {'class': 'label-pill bg-accent'},
-        'image': 'legends/images/npc/Coralina.png',
-        'size': 'large',
-        # statement
-        'content': 'This is my answer',
-        'arrow': 'left pull-up',
-        'responsive_arrow': 'up',
-        'avatar_class': 'col-sm-4',
-        'bubble_class': 'col-sm-8',
+        'speaker': legend_large.render_element(),
+        'content': speech_bubble_right_responsive.render_element(),
+        'speaker_classes': 'col-sm-4',
+        'bubble_classes': 'col-sm-8',
     },
 )
 
-small_avatar_statement = Element(
+statement_small = Element(
     'Small statement',
-    template='molecules/avatar-statement.html',
+    template='widgets/statement.html',
     context={
-        'name': 'Coralina Charming',
-        'url': '#coralina',
-        'label': {'class': 'label-pill bg-accent'},
-        'image': 'legends/images/npc/Coralina.png',
-        'size': 'small',
-        # statement
-        'content': 'This is my answer',
-        'arrow': 'left pull-up',
-        'responsive_arrow': 'up',
-        'avatar_class': 'col-sm-4',
-        'bubble_class': 'col-sm-8',
+        'speaker': legend_small.render_element(),
+        'content': speech_bubble_right_responsive.render_element(),
+        'speaker_classes': 'col-sm-4',
+        'bubble_classes': 'col-sm-8',
     },
     columns=6
 )
 
-avatar_statements = ElementGroup(
-    'Avatar statements',
+statements = ElementGroup(
+    'Statements',
     elements=[
-        left_avatar_statement, right_avatar_statement, big_avatar_statement, small_avatar_statement,
+        statement_left, statement_right, statement_big, statement_small,
     ]
 )
 
-molecules.append(avatar_statements)
+molecules.append(statements)
 
 simple_outcome = Element(
     'Simple outcome',

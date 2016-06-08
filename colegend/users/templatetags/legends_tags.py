@@ -3,7 +3,7 @@ from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
 
-from colegend.core.templatetags.core_tags import avatar, link
+from colegend.core.templatetags.core_tags import avatar, link, speech_bubble
 
 register = template.Library()
 
@@ -98,3 +98,31 @@ def npc(name, size='large', show_avatar=True, show_link=True, url=None):
     }
     npc_template = 'legends/widgets/npc.html'
     return render_to_string(npc_template, npc_context)
+
+
+@register.simple_tag()
+def statement(speaker, content, direction='left', responsive=True):
+    statement_template = 'widgets/statement.html'
+
+    # speaker
+    if isinstance(speaker, str):
+        speaker = npc(speaker)
+    else:
+        speaker = legend(context={}, legend=speaker)
+
+    statement_context = {
+        'speaker': speaker,
+    }
+    if direction == 'left':
+        statement_context.update({
+            'speaker_classes': 'col-sm-4',
+            'bubble_classes': 'col-sm-8',
+            'content': speech_bubble(content, responsive=responsive),
+        })
+    elif direction == 'right':
+        statement_context.update({
+            'speaker_classes': 'col-sm-4 col-sm-push-8',
+            'bubble_classes': 'col-sm-8  col-sm-pull-4',
+            'content': speech_bubble(content, direction='right', responsive=responsive),
+        })
+    return render_to_string(statement_template, context=statement_context)

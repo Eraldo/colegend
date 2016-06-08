@@ -17,11 +17,22 @@ def intuitive_duration(value):
 
 @register.simple_tag(takes_context=True)
 def label(context, label=None, **kwargs):
+    label_template = 'widgets/label.html'
     label = label or context.get('label', {})
     label_context = label
     label_context.update(kwargs)
-    label_template = 'widgets/label.html'
     return render_to_string(label_template, context=label_context)
+
+
+@register.simple_tag()
+def link(content, url, external=False):
+    link_template = 'widgets/link.html'
+    link_context = {
+        'content': content,
+        'url': url,
+        'external': external,
+    }
+    return render_to_string(link_template, context=link_context)
 
 
 @register.simple_tag()
@@ -37,11 +48,11 @@ def avatar(image, name=None, url=None, classes=None):
 
 
 @register.simple_tag()
-def link(content, url, external=False):
-    link_context = {
+def speech_bubble(content, direction='left', responsive=False):
+    speech_bubble_template = 'widgets/speech-bubble.html'
+    speech_bubble_context = {
+        'arrow': direction,
+        'responsive_arrow': 'up' if responsive else '',
         'content': content,
-        'url': url,
-        'external': external,
     }
-    link_template = 'widgets/link.html'
-    return render_to_string(link_template, context=link_context)
+    return render_to_string(speech_bubble_template, context=speech_bubble_context)

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load static cms_tags menu_tags legends_tags %}
+{% load static cms_tags menu_tags legends_tags core_tags %}
 
 {% block extra_head %}
     {{ block.super }}
@@ -15,6 +15,12 @@
 {% endblock %}
 
 {% block content %}
+    {% speech_bubble 'foo' %}
+    {% speech_bubble 'foo' direction='right' %}
+    {% speech_bubble 'foo' direction='right' responsive=True %}
+    {% statement user 'Hello world' %}
+    {% statement user 'Hello world' direction='right' %}
+    {% statement 'tiger' 'Hello world' direction='right' %}
     {% include 'organisms/navbar.html' with class='bg-main-dark' id='legend-bar' menu_id='home' profile_id='profile' %}
     <hr>
     {% render_model card "name" %}

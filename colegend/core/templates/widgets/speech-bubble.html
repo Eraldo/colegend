@@ -1,0 +1,12 @@
+{% if responsive_arrow %}
+    <div class="hidden-sm-up" style="margin-top: 0.5em"></div>
+{% endif %}
+<div class="widget-speech-bubble card card-block bg-white">
+    {% if responsive_arrow %}
+            <span class="arrow hidden-xs-down {{ arrow|default:'left' }}"></span>
+            <span class="arrow hidden-sm-up {{ responsive_arrow|default:'up' }}"></span>
+    {% else %}
+        <span class="arrow {{ arrow|default:'left' }}"></span>
+    {% endif %}
+    {{ content }}
+</div>
