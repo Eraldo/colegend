@@ -260,14 +260,43 @@ headlines = ElementGroup(
 
 atoms.append(headlines)
 
-link = Element(
-    'Link',
-    template='styleguide/atoms/link.html',
+link_simple = Element(
+    'Simple link',
+    template='widgets/link.html',
     context={
+        'content': 'foo bar',
+        'url': '#foobar',
     }
 )
 
-atoms.append(link)
+link_external = Element(
+    'External link',
+    template='widgets/link.html',
+    context={
+        'content': 'google',
+        'url': 'http://www.google.com',
+        'external': True,
+    }
+)
+
+link_legend = Element(
+    'Legend link',
+    template='widgets/link.html',
+    context={
+        'content': 'Coralina',
+        'url': '#coralina',
+    }
+)
+
+links = ElementGroup(
+    'Links',
+    columns=4,
+    elements=[
+        link_simple, link_external, link_legend,
+    ]
+)
+
+atoms.append(links)
 
 icons = Element(
     'Icons',
@@ -693,6 +722,25 @@ button_groups = ElementGroup(
 )
 
 molecules.append(button_groups)
+
+legend = Element(
+    'Legend',
+    template='legends/widgets/legend.html',
+    context={
+        'avatar': legend_avatar.render_element(),
+        'link': link_legend.render_element(),
+    }
+)
+
+legends = ElementGroup(
+    'Legends',
+    columns=12,
+    elements=[
+        legend
+    ]
+)
+
+molecules.append(legends)
 
 left_avatar_statement = Element(
     'Left statement',

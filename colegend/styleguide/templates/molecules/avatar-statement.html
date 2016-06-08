@@ -2,7 +2,7 @@
 <div class="molecule-avatar-statement">
     <div class="row">
         <div class="{{ avatar_class|default:'col-sm-4' }}">
-            {% include 'atoms/avatar.html' %}
+            {{ avatar }}
         </div>
         <div class="{{ bubble_class|default:'col-sm-8' }}">
             {% include 'atoms/speech-bubble.html' %}
