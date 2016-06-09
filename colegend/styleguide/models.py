@@ -36,7 +36,7 @@ class Element:
         else:
             context = {self.tag: self.context}
             template = Template(
-                '{{% load atoms_tags molecules_tags organisms_tags {libraries} %}}{{% {tag} {tag}={tag} %}}'.format(tag=self.tag, libraries=self.libraries))
+                '{{% load styleguide_widgets_tags {libraries} %}}{{% {tag} {tag}={tag} %}}'.format(tag=self.tag, libraries=self.libraries))
             outcome = template.render(context=Context(context))
         return outcome
 

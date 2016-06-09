@@ -43,7 +43,7 @@ def meta_element(context, element=None, **kwargs):
     if template:
         element_output = render_to_string(template, context=element_context, request=request)
     else:
-        template = Template('{{% load atoms_tags %}}{{% {tag} {tag}={tag} %}}'.format(tag=tag))
+        template = Template('{{% load styleguide_widgets_tags %}}{{% {tag} {tag}={tag} %}}'.format(tag=tag))
         element_context.update({'{}'.format(tag): element_context})
         element_output = template.render(context=RequestContext(request, element_context))
     return element_meta + element_output

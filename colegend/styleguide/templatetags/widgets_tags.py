@@ -47,3 +47,25 @@ def breadcrumb(context, breadcrumb=None, **kwargs):
     breadcrumb_context.update(kwargs)
     breadcrumb_template = 'atoms/breadcrumb.html'
     return render_to_string(breadcrumb_template, context=breadcrumb_context)
+
+
+@register.simple_tag(takes_context=True)
+def buttons(context, buttons=None, **kwargs):
+    buttons = buttons or context.get('buttons')
+    buttons_context = {
+        'buttons': buttons
+    }
+    buttons_context.update(kwargs)
+    buttons_template = 'molecules/buttons.html'
+    return render_to_string(buttons_template, context=buttons_context)
+
+
+@register.simple_tag(takes_context=True)
+def card(context, card=None, **kwargs):
+    card = card or context.get('card')
+    card_context = {
+        'card': card
+    }
+    card_context.update(kwargs)
+    card_template = 'molecules/card.html'
+    return render_to_string(card_template, context=card_context)
