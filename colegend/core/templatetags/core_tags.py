@@ -48,6 +48,17 @@ def avatar(image, name=None, url=None, classes=None):
 
 
 @register.simple_tag()
+def image(url, name=None, classes=None):
+    image_template = 'widgets/image.html'
+    image_context = {
+        'url': url,
+        'name': name,
+        'classes': classes,
+    }
+    return render_to_string(image_template, context=image_context)
+
+
+@register.simple_tag()
 def speech_bubble(content, direction='left', arrow_classes=None, responsive=False):
     speech_bubble_template = 'widgets/speech-bubble.html'
     speech_bubble_context = {

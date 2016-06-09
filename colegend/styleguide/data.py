@@ -4,6 +4,7 @@ from django.contrib.auth.models import AnonymousUser
 from django.templatetags.static import static
 from django.utils import timezone
 
+from colegend.core.templatetags.core_tags import image
 from colegend.core.utils.icons import icon_dict
 from .models import Widget, WidgetGroup
 
@@ -11,24 +12,26 @@ widgets = []
 
 logo = Widget(
     'Default',
-    template='widgets/logo.html',
+    template='widgets/div.html',
     context={
-        'url': static('images/coLegendLogo_86x18.png'),
+        'content': image(static('images/coLegendLogo_86x18.png'), name='logo'),
+        'classes': 'card-block',
     }
 )
 logo_colored = Widget(
     'Default',
-    template='widgets/logo.html',
+    template='widgets/div.html',
     context={
-        'url': static('images/coLegendLogo_white_86x18.png'),
-        'classes': 'bg-main-dark',
+        'content': image(static('images/coLegendLogo_white_86x18.png'), name='logo inverted'),
+        'classes': 'card-block bg-main-dark',
     }
 )
 favicon = Widget(
     'favicon',
-    template='widgets/logo.html',
+    template='widgets/div.html',
     context={
-        'url': static('images/favicon.ico'),
+        'content': image(static('images/favicon.ico'), name='favicon'),
+        'classes': 'card-block',
     }
 )
 
