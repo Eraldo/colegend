@@ -1,10 +1,10 @@
 {% load icons %}
-<div class="organism-card card bg-content">
+<div class="widget-card card bg-content">
     {% if header or closeable or action %}
         <div class="card-header">
             {{ header.content }}
             {% if closeable %}
-                <div class="atom-close-button pull-right">
+                <div class="widget-close-button pull-right">
                     <a onclick="$(this).closest('.card').hide('blind', {direction: 'up'});"
                        class="close-button text-muted">
                         {% icon 'close' %}

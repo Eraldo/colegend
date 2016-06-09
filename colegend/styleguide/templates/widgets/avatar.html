@@ -1,5 +1,5 @@
 {% load static styleguide_widgets_tags %}
-<div {% if id %}id="{{ id }}" {% endif %} class="atom-avatar {{ class }} {{ size }}">
+<div {% if id %}id="{{ id }}" {% endif %} class="widget-avatar {{ class }} {{ size }}">
     <a {% if url %}href="{{ url }}"{% endif %}>
         {% if image %}
             <img class="avatar-image img-responsive" src="{% static image %}" alt="{{ name }}">

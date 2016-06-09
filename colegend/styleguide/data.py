@@ -5,262 +5,262 @@ from django.templatetags.static import static
 from django.utils import timezone
 
 from colegend.core.utils.icons import icon_dict
-from .models import Element, ElementGroup
+from .models import Widget, WidgetGroup
 
-atoms = []
+widgets = []
 
-logo = Element(
+logo = Widget(
     'Default',
-    template='atoms/logo.html',
+    template='widgets/logo.html',
     context={
         'url': static('images/coLegendLogo_86x18.png'),
     }
 )
-logo_colored = Element(
+logo_colored = Widget(
     'Default',
-    template='atoms/logo.html',
+    template='widgets/logo.html',
     context={
         'url': static('images/coLegendLogo_white_86x18.png'),
-        'class': 'bg-main-dark',
+        'classes': 'bg-main-dark',
     }
 )
-favicon = Element(
+favicon = Widget(
     'favicon',
-    template='atoms/logo.html',
+    template='widgets/logo.html',
     context={
         'url': static('images/favicon.ico'),
     }
 )
 
-logos = ElementGroup('Logos', columns=4, elements=[logo, logo_colored, favicon])
+logos = WidgetGroup('Logos', columns=4, widgets=[logo, logo_colored, favicon])
 
-atoms.append(logos)
+widgets.append(logos)
 
-color_main = Element(
+color_main = Widget(
     'Main',
-    template='styleguide/atoms/color.html',
+    template='styleguide/widgets/color.html',
     context={
         'name': 'main',
     }
 )
-color_main_light = Element(
+color_main_light = Widget(
     'Main light',
-    template='styleguide/atoms/color.html',
+    template='styleguide/widgets/color.html',
     context={
         'name': 'main-light',
     }
 )
-color_main_dark = Element(
+color_main_dark = Widget(
     'Main dark',
-    template='styleguide/atoms/color.html',
+    template='styleguide/widgets/color.html',
     context={
         'name': 'main-dark',
     }
 )
-color_accent = Element(
+color_accent = Widget(
     'Accent',
-    template='styleguide/atoms/color.html',
+    template='styleguide/widgets/color.html',
     context={
         'name': 'accent',
     }
 )
-color_accent_light = Element(
+color_accent_light = Widget(
     'Accent light',
-    template='styleguide/atoms/color.html',
+    template='styleguide/widgets/color.html',
     context={
         'name': 'accent-light',
     }
 )
-color_accent_dark = Element(
+color_accent_dark = Widget(
     'Accent dark',
-    template='styleguide/atoms/color.html',
+    template='styleguide/widgets/color.html',
     context={
         'name': 'accent-dark',
     }
 )
 
-project_colors = ElementGroup(
+project_colors = WidgetGroup(
     'Project colors',
     columns=4,
-    elements=[
+    widgets=[
         color_main, color_main_light, color_main_dark,
         color_accent, color_accent_light, color_accent_dark
     ]
 )
 
-color_category_1 = Element(
+color_category_1 = Widget(
     'Catagrory 1',
-    template='styleguide/atoms/color.html',
+    template='styleguide/widgets/color.html',
     context={
         'name': 'category-1',
     }
 )
-color_category_2 = Element(
+color_category_2 = Widget(
     'Catagrory 2',
-    template='styleguide/atoms/color.html',
+    template='styleguide/widgets/color.html',
     context={
         'name': 'category-2',
     }
 )
-color_category_3 = Element(
+color_category_3 = Widget(
     'Catagrory 3',
-    template='styleguide/atoms/color.html',
+    template='styleguide/widgets/color.html',
     context={
         'name': 'category-3',
     }
 )
-color_category_4 = Element(
+color_category_4 = Widget(
     'Catagrory 4',
-    template='styleguide/atoms/color.html',
+    template='styleguide/widgets/color.html',
     context={
         'name': 'category-4',
     }
 )
-color_category_5 = Element(
+color_category_5 = Widget(
     'Catagrory 5',
-    template='styleguide/atoms/color.html',
+    template='styleguide/widgets/color.html',
     context={
         'name': 'category-5',
     }
 )
-color_category_6 = Element(
+color_category_6 = Widget(
     'Catagrory 6',
-    template='styleguide/atoms/color.html',
+    template='styleguide/widgets/color.html',
     context={
         'name': 'category-6',
     }
 )
-color_category_7 = Element(
+color_category_7 = Widget(
     'Catagrory 7',
-    template='styleguide/atoms/color.html',
+    template='styleguide/widgets/color.html',
     context={
         'name': 'category-7',
     }
 )
 
-category_colors = ElementGroup(
+category_colors = WidgetGroup(
     'Catagory colors',
     columns=4,
-    elements=[
+    widgets=[
         color_category_1, color_category_2, color_category_3,
         color_category_4, color_category_5, color_category_6,
         color_category_7
     ]
 )
 
-color_primary = Element(
+color_primary = Widget(
     'Primary',
-    template='styleguide/atoms/color.html',
+    template='styleguide/widgets/color.html',
     context={
         'name': 'primary',
     }
 )
-color_success = Element(
+color_success = Widget(
     'Success',
-    template='styleguide/atoms/color.html',
+    template='styleguide/widgets/color.html',
     context={
         'name': 'success',
     }
 )
-color_info = Element(
+color_info = Widget(
     'Info',
-    template='styleguide/atoms/color.html',
+    template='styleguide/widgets/color.html',
     context={
         'name': 'info',
     }
 )
-color_warning = Element(
+color_warning = Widget(
     'Warning',
-    template='styleguide/atoms/color.html',
+    template='styleguide/widgets/color.html',
     context={
         'name': 'warning',
     }
 )
-color_danger = Element(
+color_danger = Widget(
     'Danger',
-    template='styleguide/atoms/color.html',
+    template='styleguide/widgets/color.html',
     context={
         'name': 'danger',
     }
 )
 
-action_colors = ElementGroup(
+action_colors = WidgetGroup(
     'Action colors',
     columns=4,
-    elements=[
+    widgets=[
         color_primary, color_success, color_info, color_warning, color_danger,
     ]
 )
 
-colors = ElementGroup(
+colors = WidgetGroup(
     'Colors',
     columns=12,
-    elements=[
+    widgets=[
         project_colors, category_colors, action_colors,
     ]
 )
 
-atoms.append(colors)
+widgets.append(colors)
 
-headline_1 = Element(
+headline_1 = Widget(
     'Headline 1',
-    template='atoms/headline.html',
+    template='widgets/headline.html',
     context={
         'text': 'Heading Level 1',
     }
 )
-headline_2 = Element(
+headline_2 = Widget(
     'Headline 2',
-    template='atoms/headline.html',
+    template='widgets/headline.html',
     context={
         'text': 'Heading Level 2',
         'level': 2,
     }
 )
-headline_3 = Element(
+headline_3 = Widget(
     'Headline 3',
-    template='atoms/headline.html',
+    template='widgets/headline.html',
     context={
         'text': 'Heading Level 3',
         'level': 3,
     }
 )
-headline_4 = Element(
+headline_4 = Widget(
     'Headline 4',
-    template='atoms/headline.html',
+    template='widgets/headline.html',
     context={
         'text': 'Heading Level 4',
         'level': 4,
     }
 )
-headline_5 = Element(
+headline_5 = Widget(
     'Headline 5',
-    template='atoms/headline.html',
+    template='widgets/headline.html',
     context={
         'text': 'Heading Level 5',
         'level': 5,
     }
 )
-headline_6 = Element(
+headline_6 = Widget(
     'Headline 6',
-    template='atoms/headline.html',
+    template='widgets/headline.html',
     context={
         'text': 'Heading Level 6',
         'level': 6,
     }
 )
 
-headlines = ElementGroup(
+headlines = WidgetGroup(
     'Headlines',
     columns=12,
-    elements=[
+    widgets=[
         headline_1, headline_2, headline_3, headline_4, headline_5, headline_6,
     ]
 )
 
-atoms.append(headlines)
+widgets.append(headlines)
 
-link_simple = Element(
+link_simple = Widget(
     'Simple link',
     template='widgets/link.html',
     context={
@@ -269,7 +269,7 @@ link_simple = Element(
     }
 )
 
-link_external = Element(
+link_external = Widget(
     'External link',
     template='widgets/link.html',
     context={
@@ -279,7 +279,7 @@ link_external = Element(
     }
 )
 
-link_legend = Element(
+link_legend = Widget(
     'Legend link',
     template='widgets/link.html',
     context={
@@ -288,157 +288,157 @@ link_legend = Element(
     }
 )
 
-links = ElementGroup(
+links = WidgetGroup(
     'Links',
     columns=4,
-    elements=[
+    widgets=[
         link_simple, link_external, link_legend,
     ]
 )
 
-atoms.append(links)
+widgets.append(links)
 
-icons = Element(
+icons = Widget(
     'Icons',
-    template='styleguide/molecules/icons.html',
+    template='styleguide/widgets/icons.html',
     context={
         'icons': [{'name': icon} for icon in icon_dict]
     }
 )
 
-atoms.append(icons)
+widgets.append(icons)
 
-link_button = Element(
+link_button = Widget(
     'Link button',
-    template='atoms/button.html',
+    template='widgets/button.html',
     context={
-        'text': 'Link',
-        'class': 'btn-link',
+        'content': 'Link',
+        'classes': 'btn btn-link',
     }
 )
-action_button = Element(
+action_button = Widget(
     'Action button',
-    template='atoms/button.html',
+    template='widgets/button.html',
     context={
-        'text': 'Action',
-        'class': 'btn-primary',
+        'content': 'Action',
+        'classes': 'btn btn-primary',
     }
 )
-secondary_button = Element(
+secondary_button = Widget(
     'Secondary button',
-    template='atoms/button.html',
+    template='widgets/button.html',
     context={
-        'text': 'Secondary',
-        'class': 'btn-secondary',
+        'content': 'Secondary',
+        'classes': 'btn btn-secondary',
     }
 )
-icon_button = Element(
+icon_button = Widget(
     'Button with icon',
-    template='atoms/button.html',
+    template='widgets/button.html',
     context={
-        'text': 'Star',
+        'content': 'Star',
         'icon': 'star',
-        'class': 'btn-primary',
+        'classes': 'btn btn-primary',
     }
 )
-linked_button = Element(
+linked_button = Widget(
     'Button with link',
-    template='atoms/button.html',
+    template='widgets/button.html',
     context={
-        'text': 'Click Me',
-        'class': 'btn-primary',
+        'content': 'Click Me',
+        'classes': 'btn btn-primary',
         'url': 'https://www.google.com',
     }
 )
-success_button = Element(
+success_button = Widget(
     'Success button',
-    template='atoms/button.html',
+    template='widgets/button.html',
     context={
-        'text': 'Yeah!',
-        'class': 'btn-success',
+        'content': 'Yeah!',
+        'classes': 'btn btn-success',
     }
 )
-info_button = Element(
+info_button = Widget(
     'Info button',
-    template='atoms/button.html',
+    template='widgets/button.html',
     context={
-        'text': 'More info',
-        'class': 'btn-info',
+        'content': 'More info',
+        'classes': 'btn btn-info',
     }
 )
-warning_button = Element(
+warning_button = Widget(
     'Warning button',
-    template='atoms/button.html',
+    template='widgets/button.html',
     context={
-        'text': 'Caution',
-        'class': 'btn-warning',
+        'content': 'Caution',
+        'classes': 'btn btn-warning',
     }
 )
-danger_button = Element(
+danger_button = Widget(
     'Danger button',
-    template='atoms/button.html',
+    template='widgets/button.html',
     context={
-        'text': 'Delete',
-        'class': 'btn-danger',
+        'content': 'Delete',
+        'classes': 'btn btn-danger',
     }
 )
-small_button = Element(
+small_button = Widget(
     'Small button',
-    template='atoms/button.html',
+    template='widgets/button.html',
     context={
-        'text': 'Mini',
-        'class': 'btn-primary btn-sm',
+        'content': 'Mini',
+        'classes': 'btn btn-primary btn-sm',
     }
 )
-large_button = Element(
+large_button = Widget(
     'Large button',
-    template='atoms/button.html',
+    template='widgets/button.html',
     context={
-        'text': 'Special Offer',
-        'class': 'btn-primary btn-lg',
+        'content': 'Special Offer',
+        'classes': 'btn btn-primary btn-lg',
     }
 )
-outline_button = Element(
+outline_button = Widget(
     'Outline button',
-    template='atoms/button.html',
+    template='widgets/button.html',
     context={
-        'text': 'Optional',
-        'class': 'btn-info-outline',
+        'content': 'Optional',
+        'classes': 'btn btn-info-outline',
     }
 )
-disabled_button = Element(
+disabled_button = Widget(
     'Disabled button',
-    template='atoms/button.html',
+    template='widgets/button.html',
     context={
-        'text': 'Locked',
-        'class': 'btn-primary disabled',
+        'content': 'Locked',
+        'classes': 'btn btn-primary disabled',
     }
 )
 
-primary_feedback_button = Element(
+primary_feedback_button = Widget(
     'Primary feedback button',
-    template='atoms/image.html',
+    template='widgets/image.html',
     context={
         'url': static('images/feedback.png'),
-        'class': 'img-responsive',
+        'classes': 'img-responsive',
         'name': 'feedback button',
     },
 )
 
-accented_feedback_button = Element(
+accented_feedback_button = Widget(
     'Accented feedback button',
-    template='atoms/image.html',
+    template='widgets/image.html',
     context={
         'url': static('images/feedback_accented_dark.png'),
-        'class': 'img-responsive',
+        'classes': 'img-responsive',
         'name': 'feedback button accented',
     },
 )
 
-buttons = ElementGroup(
+buttons = WidgetGroup(
     'Buttons',
     columns=3,
-    elements=[
+    widgets=[
         link_button, action_button, secondary_button,
         icon_button, linked_button,
         success_button, info_button, warning_button, danger_button,
@@ -448,86 +448,86 @@ buttons = ElementGroup(
     ]
 )
 
-atoms.append(buttons)
+widgets.append(buttons)
 
-label = Element(
+label = Widget(
     'Simple label',
-    template='atoms/label.html',
+    template='widgets/label.html',
     context={
-        'text': 'Information',
+        'content': 'Information',
     }
 )
-accented_label = Element(
+accented_label = Widget(
     'Accented label',
-    template='atoms/label.html',
+    template='widgets/label.html',
     context={
-        'text': 'Information',
-        'class': 'bg-accent',
+        'content': 'Information',
+        'classes': 'bg-accent',
     }
 )
-rounded_warning_label = Element(
+rounded_warning_label = Widget(
     'Rounded warning label',
-    template='atoms/label.html',
+    template='widgets/label.html',
     context={
-        'text': 'Warning!',
-        'class': 'label-pill bg-warning',
+        'content': 'Warning!',
+        'classes': 'label-pill bg-warning',
     }
 )
 
-labels = ElementGroup(
+labels = WidgetGroup(
     'Labels',
     columns=3,
-    elements=[
+    widgets=[
         label, accented_label, rounded_warning_label,
     ]
 )
 
-atoms.append(labels)
+widgets.append(labels)
 
-speech_bubble_right = Element(
+speech_bubble_right = Widget(
     'Simple bubble',
-    template='atoms/speech-bubble.html',
+    template='widgets/speech-bubble.html',
     context={
         'content': 'arrow left',
     }
 )
-speech_bubble_left = Element(
+speech_bubble_left = Widget(
     'Bubble left',
-    template='atoms/speech-bubble.html',
+    template='widgets/speech-bubble.html',
     context={
         'content': 'arrow right',
         'arrow': 'right',
     }
 )
-speech_bubble_top = Element(
+speech_bubble_top = Widget(
     'Bubble top',
-    template='atoms/speech-bubble.html',
+    template='widgets/speech-bubble.html',
     context={
         'content': 'arrow down',
         'arrow': 'down',
     }
 )
-speech_bubble_bottom = Element(
+speech_bubble_bottom = Widget(
     'Bubble bottom',
-    template='atoms/speech-bubble.html',
+    template='widgets/speech-bubble.html',
     context={
         'content': 'arrow up',
         'arrow': 'up',
     }
 )
 
-speech_bubble_right_responsive = Element(
+speech_bubble_right_responsive = Widget(
     'Bubble right responsive',
-    template='atoms/speech-bubble.html',
+    template='widgets/speech-bubble.html',
     context={
         'content': 'arrow left responsive up',
         'arrow': 'left pull-up',
         'responsive_arrow': 'up',
     }
 )
-speech_bubble_left_responsive = Element(
+speech_bubble_left_responsive = Widget(
     'Bubble left responsive',
-    template='atoms/speech-bubble.html',
+    template='widgets/speech-bubble.html',
     context={
         'content': 'arrow right responsive up',
         'arrow': 'right pull-up',
@@ -536,18 +536,18 @@ speech_bubble_left_responsive = Element(
     }
 )
 
-speeach_bubbles = ElementGroup(
+speeach_bubbles = WidgetGroup(
     'Speech bubbles',
     columns=3,
-    elements=[
+    widgets=[
         speech_bubble_right, speech_bubble_left, speech_bubble_top, speech_bubble_bottom,
         speech_bubble_right_responsive, speech_bubble_left_responsive,
     ]
 )
 
-atoms.append(speeach_bubbles)
+widgets.append(speeach_bubbles)
 
-anonymous_avatar = Element(
+anonymous_avatar = Widget(
     'Anonymous avatar',
     template='widgets/avatar.html',
     context={
@@ -555,7 +555,7 @@ anonymous_avatar = Element(
         'image': static('legends/images/anonymous.png'),
     }
 )
-legend_avatar = Element(
+legend_avatar = Widget(
     'Legend avatar',
     template='widgets/avatar.html',
     context={
@@ -564,7 +564,7 @@ legend_avatar = Element(
         'url': '#coralina',
     }
 )
-small_avatar = Element(
+small_avatar = Widget(
     'Small avatar',
     template='widgets/avatar.html',
     context={
@@ -574,7 +574,7 @@ small_avatar = Element(
         'classes': 'small',
     }
 )
-large_avatar = Element(
+large_avatar = Widget(
     'Large avatar',
     template='widgets/avatar.html',
     context={
@@ -584,7 +584,7 @@ large_avatar = Element(
         'classes': 'large',
     }
 )
-cake_avatar = Element(
+cake_avatar = Widget(
     'Cake avatar',
     template='widgets/avatar.html',
     context={
@@ -593,7 +593,7 @@ cake_avatar = Element(
         'classes': 'bg-main-light',
     }
 )
-camera_avatar = Element(
+camera_avatar = Widget(
     'Camera avatar',
     template='widgets/avatar.html',
     context={
@@ -603,94 +603,91 @@ camera_avatar = Element(
     }
 )
 
-avatars = ElementGroup(
+avatars = WidgetGroup(
     'Avatars',
     columns=3,
-    elements=[
+    widgets=[
         anonymous_avatar, legend_avatar, small_avatar, large_avatar,
         cake_avatar, camera_avatar
     ]
 )
 
-atoms.append(avatars)
+widgets.append(avatars)
 
-
-molecules = []
-
-horizontal_button_group = Element(
+horizontal_button_group = Widget(
     'Horizontal buttons',
-    template='molecules/buttons.html',
+    template='widgets/buttons.html',
     context={
         'buttons': [
             {
-                'text': 'Button 1',
-                'class': 'btn-primary',
+                'content': 'Button 1',
+                'classes': 'btn btn-primary',
             },
             {
-                'text': 'Button 2',
-                'class': 'btn-primary',
+                'content': 'Button 2',
+                'classes': 'btn btn-primary',
             },
             {
-                'text': 'Button 3',
-                'class': 'btn-primary',
+                'content': 'Button 3',
+                'classes': 'btn btn-primary',
             },
         ],
     }
 )
-small_button_group = Element(
+small_button_group = Widget(
     'Small buttons',
-    template='molecules/buttons.html',
+    template='widgets/buttons.html',
     context={
         'buttons': [
             {
-                'text': 'Button 1',
-                'class': 'btn-primary',
+                'content': 'Button 1',
+                'classes': 'btn btn-primary',
             },
             {
-                'text': 'Button 2',
-                'class': 'btn-primary',
+                'content': 'Button 2',
+                'classes': 'btn btn-primary',
             },
             {
-                'text': 'Button 3',
-                'class': 'btn-primary',
+                'content': 'Button 3',
+                'classes': 'btn btn-primary',
             },
         ],
-        'class': 'btn-group btn-group-sm',
+        'classes': 'btn-group btn-group-sm',
     }
 )
-small_vertical_button_group = Element(
+small_vertical_button_group = Widget(
     'Small vertical buttons',
-    template='molecules/buttons.html',
+    template='widgets/buttons.html',
     context={
         'buttons': [
             {
-                'text': 'Button 1',
-                'class': 'btn-primary',
+                'content': 'Button 1',
+                'classes': 'btn btn-primary',
             },
             {
-                'text': 'Button 2',
-                'class': 'btn-primary',
+                'content': 'Button 2',
+                'classes': 'btn btn-primary',
             },
             {
-                'text': 'Button 3',
-                'class': 'btn-primary',
+                'content': 'Button 3',
+                'classes': 'btn btn-primary',
             },
         ],
-        'class': 'btn-group-vertical',
+        'classes': 'btn-group-vertical',
     }
 )
 
-button_groups = ElementGroup(
+button_groups = WidgetGroup(
     'Button groups',
     columns=12,
-    elements=[
+    widgets=[
         horizontal_button_group, small_button_group, small_vertical_button_group,
     ]
 )
 
-molecules.append(button_groups)
+widgets.append(button_groups)
 
-action_menu = Element(
+action_menu = Widget(
     'Action menu',
     template='widgets/action-menu.html',
     context={
@@ -711,7 +708,7 @@ action_menu = Element(
     }
 )
 
-action_menu_right = Element(
+action_menu_right = Widget(
     'Right action menu',
     template='widgets/action-menu.html',
     context={
@@ -730,114 +727,114 @@ action_menu_right = Element(
             },
         ],
         'right': True,
-        'class': 'pull-right'
+        'classes': 'pull-right'
     }
 )
 
-button_groups = ElementGroup(
+button_groups = WidgetGroup(
     'Action menus',
     columns=6,
-    elements=[
+    widgets=[
         action_menu, action_menu_right,
     ]
 )
 
-molecules.append(button_groups)
+widgets.append(button_groups)
 
-legend = Element(
+legend = Widget(
     'Legend',
     template='legends/widgets/legend.html',
     context={
-        'avatar': legend_avatar.render_element(),
-        'link': link_legend.render_element(),
+        'avatar': legend_avatar.render_widget(),
+        'link': link_legend.render_widget(),
     }
 )
 
-legend_large = Element(
+legend_large = Widget(
     'Legend large',
     template='legends/widgets/legend.html',
     context={
-        'avatar': large_avatar.render_element(),
-        'link': link_legend.render_element(),
+        'avatar': large_avatar.render_widget(),
+        'link': link_legend.render_widget(),
     }
 )
 
-legend_small = Element(
+legend_small = Widget(
     'Legend large',
     template='legends/widgets/legend.html',
     context={
-        'avatar': small_avatar.render_element(),
-        'link': link_legend.render_element(),
+        'avatar': small_avatar.render_widget(),
+        'link': link_legend.render_widget(),
     }
 )
 
-legends = ElementGroup(
+legends = WidgetGroup(
     'Legends',
     columns=4,
-    elements=[
+    widgets=[
         legend, legend_large, legend_small,
     ]
 )
 
-molecules.append(legends)
+widgets.append(legends)
 
-statement_left = Element(
+statement_left = Widget(
     'Left statement',
     template='widgets/statement.html',
     context={
-        'speaker': legend.render_element(),
-        'content': speech_bubble_right_responsive.render_element(),
+        'speaker': legend.render_widget(),
+        'content': speech_bubble_right_responsive.render_widget(),
         'speaker_classes': 'col-sm-4',
         'bubble_classes': 'col-sm-8',
     },
     columns=8,
 )
 
-statement_right = Element(
+statement_right = Widget(
     'Right statement',
     template='widgets/statement.html',
     context={
-        'speaker': legend.render_element(),
-        'content': speech_bubble_left_responsive.render_element(),
+        'speaker': legend.render_widget(),
+        'content': speech_bubble_left_responsive.render_widget(),
         'speaker_classes': 'col-sm-4 col-sm-push-8',
         'bubble_classes': 'col-sm-8  col-sm-pull-4',
     },
     columns=8,
 )
 
-statement_big = Element(
+statement_big = Widget(
     'Big statement',
     template='widgets/statement.html',
     context={
-        'speaker': legend_large.render_element(),
-        'content': speech_bubble_right_responsive.render_element(),
+        'speaker': legend_large.render_widget(),
+        'content': speech_bubble_right_responsive.render_widget(),
         'speaker_classes': 'col-sm-4',
         'bubble_classes': 'col-sm-8',
     },
 )
 
-statement_small = Element(
+statement_small = Widget(
     'Small statement',
     template='widgets/statement.html',
     context={
-        'speaker': legend_small.render_element(),
-        'content': speech_bubble_right_responsive.render_element(),
+        'speaker': legend_small.render_widget(),
+        'content': speech_bubble_right_responsive.render_widget(),
         'speaker_classes': 'col-sm-4',
         'bubble_classes': 'col-sm-8',
     },
     columns=6
 )
 
-statements = ElementGroup(
+statements = WidgetGroup(
     'Statements',
-    elements=[
+    widgets=[
         statement_left, statement_right, statement_big, statement_small,
     ]
 )
 
-molecules.append(statements)
+widgets.append(statements)
 
-simple_outcome = Element(
+simple_outcome = Widget(
     'Simple outcome',
     template='outcomes/widgets/card.html',
     context={
@@ -856,7 +853,7 @@ simple_outcome = Element(
     },
 )
 
-full_outcome = Element(
+full_outcome = Widget(
     'Full outcome',
     template='outcomes/widgets/card.html',
     context={
@@ -882,28 +879,26 @@ full_outcome = Element(
     },
 )
 
-outcomes = ElementGroup(
+outcomes = WidgetGroup(
     'Outcomes',
     columns=6,
-    elements=[
+    widgets=[
         simple_outcome, full_outcome,
     ]
 )
 
-molecules.append(outcomes)
+widgets.append(outcomes)
 
-organisms = []
-
-simple_card = Element(
+simple_card = Widget(
     'Simple card',
-    template='organisms/card.html',
+    template='widgets/card.html',
     context={
         'content': 'Hello World',
     }
 )
-card_with_title = Element(
+card_with_title = Widget(
     'Card with title',
-    template='organisms/card.html',
+    template='widgets/card.html',
     context={
         'title': {
             'content': 'Hello',
@@ -911,9 +906,9 @@ card_with_title = Element(
         'content': 'Hello World',
     }
 )
-card_with_header = Element(
+card_with_header = Widget(
     'Card with header',
-    template='organisms/card.html',
+    template='widgets/card.html',
     context={
         'header': {
             'content': 'Hello above',
@@ -921,9 +916,9 @@ card_with_header = Element(
         'content': 'Hello World',
     }
 )
-card_with_footer = Element(
+card_with_footer = Widget(
     'Card with footer',
-    template='organisms/card.html',
+    template='widgets/card.html',
     context={
         'footer': {
             'content': 'Hello below',
@@ -931,17 +926,17 @@ card_with_footer = Element(
         'content': 'Hello World',
     }
 )
-dismissable_card = Element(
+dismissable_card = Widget(
     'Dismissable card',
-    template='organisms/card.html',
+    template='widgets/card.html',
     context={
         'closeable': True,
         'content': 'Close me!',
     }
 )
-full_card = Element(
+full_card = Widget(
     'Full card',
-    template='organisms/card.html',
+    template='widgets/card.html',
     context={
         'closeable': True,
         'header': {
@@ -954,58 +949,58 @@ full_card = Element(
     }
 )
 
-cards = ElementGroup(
+cards = WidgetGroup(
     'Cards',
     columns=6,
-    elements=[
+    widgets=[
         simple_card, card_with_title, card_with_header, card_with_footer, dismissable_card, full_card,
     ]
 )
 
-organisms.append(cards)
+widgets.append(cards)
 
-anonymous_navigation_bar = Element(
+anonymous_navigation_bar = Widget(
     'Anonymous navigation bar',
-    template='organisms/navbar.html',
+    template='widgets/navbar.html',
     context={
         'id': 'anonymous-bar',
         'menu_id': 'styleguide',
-        'class': 'bg-main-dark',
+        'classes': 'bg-main-dark',
         'user': AnonymousUser(),
     }
 )
-legend_navigation_bar = Element(
+legend_navigation_bar = Widget(
     'Legend navigation bar',
-    template='organisms/navbar.html',
+    template='widgets/navbar.html',
     context={
         'id': 'legend-bar',
         'menu_id': 'styleguide',
-        'class': 'bg-main-dark',
+        'classes': 'bg-main-dark',
         'user': AnonymousUser(),
     }
 )
 
-navigations = ElementGroup(
+navigations = WidgetGroup(
     'Navigations',
     columns=12,
-    elements=[
+    widgets=[
         anonymous_navigation_bar, legend_navigation_bar,
     ]
 )
 
-organisms.append(navigations)
+widgets.append(navigations)
 
-simple_header = Element(
+simple_header = Widget(
     'Simple header',
-    template='organisms/header.html',
+    template='widgets/header.html',
     context={
         'title': 'Page Title Test',
     }
 )
 
-full_header = Element(
+full_header = Widget(
     'Header with breadcrumbs links and controls',
-    template='organisms/header.html',
+    template='widgets/header.html',
     context={
         'title': 'Page Title Test',
         'breadcrumbs': [
@@ -1024,41 +1019,41 @@ full_header = Element(
         ],
         'links': [
             {
-                'text': 'Link 1',
-                'class': 'btn-link',
+                'content': 'Link 1',
+                'classes': 'btn btn-link',
             },
             {
-                'text': 'Link 2',
-                'class': 'btn-link',
+                'content': 'Link 2',
+                'classes': 'btn btn-link',
             },
             {
-                'text': 'Link 3',
-                'class': 'btn-link',
+                'content': 'Link 3',
+                'classes': 'btn btn-link',
             },
         ],
         'buttons': [
             {
-                'text': 'Button 1',
-                'class': 'btn-primary',
+                'content': 'Button 1',
+                'classes': 'btn btn-primary',
             },
             {
-                'text': 'Button 2',
-                'class': 'btn-primary',
+                'content': 'Button 2',
+                'classes': 'btn btn-primary',
             },
             {
-                'text': 'Button 3',
-                'class': 'btn-primary',
+                'content': 'Button 3',
+                'classes': 'btn btn-primary',
             },
         ],
     }
 )
 
-headers = ElementGroup(
+headers = WidgetGroup(
     'Headers',
     columns=12,
-    elements=[
+    widgets=[
         simple_header, full_header,
     ]
 )
 
-organisms.append(headers)
+widgets.append(headers)

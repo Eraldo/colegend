@@ -99,4 +99,4 @@ def get_icon(name, large=False, fixed=False, spin=False, pulse=False, li=False, 
         'color': color,
         'classes': classes,
     }
-    return render_to_string('atoms/icon.html', context=context)
+    return render_to_string('widgets/icon.html', context=context)

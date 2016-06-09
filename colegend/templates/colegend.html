@@ -48,7 +48,7 @@
 
 <div id="site-menu-container">
     {% block site_menu %}
-        {% include 'organisms/navbar.html' with class='bg-main-dark' id='legend-bar' menu_id='home' profile_id='profile' %}
+        {% include 'widgets/navbar.html' with class='bg-main-dark' id='legend-bar' menu_id='home' profile_id='profile' %}
     {% endblock %}
 </div>
 
@@ -60,7 +60,7 @@
                     {% show_breadcrumb %}
                 {% endblock %}
             </ul>
-            <h1 id="page-title" class="card-title">{% block page_title %}{% endblock %}</h1>
+            <h1 id="page-title">{% block page_title %}{% endblock %}</h1>
         </div>
         <div class="bg-main-light" style="padding: 0;">
             <div class="container">

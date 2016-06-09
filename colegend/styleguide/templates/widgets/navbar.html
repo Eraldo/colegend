@@ -1,6 +1,6 @@
 {% load staticfiles i18n icons menu_tags legends_tags %}
-<div class="organism-header">
-    <nav {% if id %}id="{{ id }}" {% endif %}class="navbar navbar-static-top{% if class %} {{ class }}{% endif %}">
+<div class="widget-project-bar">
+    <nav {% if id %}id="{{ id }}" {% endif %}class="navbar navbar-static-top{% if classes %} {{ classes }}{% endif %}">
         <div class="container">
             <a class="navbar-brand" href="{% url 'home' %}">
                 <img id="navbar-brand-logo" src="{% static 'images/coLegendLogo_white_86x18.png' %}"
@@ -15,7 +15,7 @@
             <div class="collapse navbar-toggleable-xs" id="bs-navbar-collapse{% if id %}-{{ id }}{% endif %}">
                 <ul class="nav navbar-nav">
                     {% if menu_id and user.is_authenticated %}
-                        {% show_menu_below_id menu_id 0 100 100 100 "organisms/menu.html" %}
+                        {% show_menu_below_id menu_id 0 100 100 100 "widgets/menu.html" %}
                     {% else %}
                         <li class="nav-item">
                             <a class="nav-link btn btn-link" href="{% url 'join' %}">{% trans "Join" %}</a>
@@ -37,7 +37,7 @@
                                 </div>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="menu-button-account">
-                                {% show_menu_below_id profile_id 0 100 100 100 "organisms/submenu.html" %}
+                                {% show_menu_below_id profile_id 0 100 100 100 "widgets/submenu.html" %}
                             </div>
                         </div>
                     </li>

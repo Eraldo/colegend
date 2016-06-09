@@ -61,17 +61,17 @@
   background-color: #26c6da;
   color: white; }
 
-.bg-main-light, .organism-header .dropdown-menu, .widget-subnavigation .dropdown-menu {
+.bg-main-light, .widget-project-bar .dropdown-menu, .widget-subnavigation .dropdown-menu {
   background-color: #b2ebf2; }
 
 .bg-main-superlight {
   background-color: #fbfefe; }
 
-.bg-main-dark {
+.bg-main-dark, .widget-project-bar {
   background-color: #0097a7;
   color: white; }
 
-.bg-accent, .organism-header .nav-link:focus, .organism-header .nav-link:hover, .organism-header .dropdown-menu .dropdown-item:focus, .organism-header .dropdown-menu .dropdown-item:hover, .widget-subnavigation .nav-link:focus, .widget-subnavigation .nav-link:hover, .widget-subnavigation .dropdown-menu .dropdown-item:focus, .widget-subnavigation .dropdown-menu .dropdown-item:hover {
+.bg-accent, .widget-project-bar .nav-link:focus, .widget-project-bar .nav-link:hover, .widget-project-bar .dropdown-menu .dropdown-item:focus, .widget-project-bar .dropdown-menu .dropdown-item:hover, .widget-subnavigation .nav-link:focus, .widget-subnavigation .nav-link:hover, .widget-subnavigation .dropdown-menu .dropdown-item:focus, .widget-subnavigation .dropdown-menu .dropdown-item:hover {
   background-color: #9ccc65;
   color: white; }
 
@@ -440,7 +440,7 @@ form .CodeMirror-fullscreen {
 .cms-icon-logo:before, div.cms .cms-toolbar-item-logo a.colegend-cms:before {
   content: initial; }
 
-.organism-header .nav-link {
+.widget-project-bar .nav-link {
   color: inherit; }
 
 #div_id_tags .select2-container {

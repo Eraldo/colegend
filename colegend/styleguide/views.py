@@ -1,8 +1,7 @@
 from django.template.defaultfilters import slugify
 from django.views.generic import TemplateView
 
-from .models import Element, ElementGroup
-from .data import atoms, molecules, organisms
+from .data import widgets
 
 
 class StyleguideView(TemplateView):
@@ -19,18 +18,5 @@ class StyleguideView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['atoms'] = atoms
-        context['organisms'] = organisms
-        context['molecules'] = molecules
-
-        # data = {'text': 'foo', 'class': 'bg-main'}
-        # label1 = label(context, data)
-        # label1.data = data
-        # context['element'] = label1
-        #
-        # data = {'text': label1}
-        # label2 = label(context, data)
-        # label2.data = data
-        # context['element2'] = label2
-
+        context['widgets'] = widgets
         return context

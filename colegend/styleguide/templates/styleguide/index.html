@@ -7,26 +7,10 @@
 
 {% block title %}Styleguide{% endblock %}
 
-{% block page_links %}
-    <a href="#atoms" class="btn btn-link">Atoms</a>
-    <a href="#molecules" class="btn btn-link">Molecules</a>
-    <a href="#organisms" class="btn btn-link">Organisms</a>
-{% endblock %}
-
 {% block content %}
-    <h1 id="atoms" class="main-headline">Atoms</h1>
-    {% toc elements=atoms %}
-    {% for atom in atoms %}
-        {{ atom.render }}
-    {% endfor %}
-    <h1 id="molecules" class="main-headline">Molecules</h1>
-    {% toc elements=molecules %}
-    {% for molecule in molecules %}
-        {{ molecule.render }}
-    {% endfor %}
-    <h1 id="organisms" class="main-headline">Organisms</h1>
-    {% toc elements=organisms %}
-    {% for organism in organisms %}
-        {{ organism.render }}
+    <h1 class="main-headline">Widgets</h1>
+    {% toc widgets=widgets %}
+    {% for widget in widgets %}
+        {{ widget.render }}
     {% endfor %}
 {% endblock %}

@@ -1,9 +1,9 @@
 {% load styleguide_tags %}
-<div class="molecule-atoms">
+<div class="widget-styleguide-widgets">
     <div class="row">
-        {% for element in elements %}
+        {% for widget in widgets %}
             <div class="col-md-{{ columns|default:12 }}">
-                {{ element.render }}
+                {{ widget.render }}
             </div>
         {% endfor %}
     </div>

@@ -1,13 +1,1 @@
-{% load icons %}
-
-{% if locked %}
-    <a{% if id %} id="{{ id }}-button"{% endif %} href="#"
-                  class="btn btn-{{ kind }} disabled">
-        {% icon 'locked' %}
-        {% if icon %}{% icon icon fixed=True %} {% endif %}{{ name }}
-    </a>
-{% else %}
-    <a{% if id %} id="{{ id }}"{% endif %} href="{{ url }}" class="btn btn-{{ kind }}">
-        {% if icon %}{% icon icon fixed=True %} {% endif %}{{ name }}
-    </a>
-{% endif %}
+<a {% if url %}href="{{ url }}" {% endif %}class="widget-button{% if classes %} {{ classes }}{% endif %}">{{ content }}</a>

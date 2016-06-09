@@ -2,6 +2,10 @@
 All enhancements and patches to cookiecutter-django will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2016-??-??] version 0.1.9
+### Added
++ Refactored atomic elements to widgets
+
 ## [2016-06-08] version 0.1.8
 ### Added
 + Updated the avatar, speech and statement widgets

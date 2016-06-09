@@ -1,6 +1,9 @@
 from django import template
 from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
+from django.utils.html import format_html
+
+from colegend.core.templatetags.icons import icon as render_icon
 
 register = template.Library()
 
@@ -25,13 +28,21 @@ def button(context, name, pattern=None, url=None, kind=None, icon=None, locked=F
     if not icon and name in kind_dict.keys():
         icon = name
 
+    if locked:
+        icon = 'locked'
+        url = None
+        kind += ' disabled'
+
+    if icon:
+        content = format_html(
+            '{icon} {name}', icon=render_icon(icon, fixed=True), name=name)
+    else:
+        content = name
+
     context = {
-        'name': name,
         'url': url,
-        'kind': kind,
-        'icon': icon,
-        'locked': locked,
-        'id': id,
+        'classes': 'btn btn-{}'.format(kind),
+        'content': content,
     }
     template = 'widgets/button.html'
     return render_to_string(template, context=context)

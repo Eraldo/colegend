@@ -5,12 +5,12 @@ from django.template import Template, Context
 from django.template.loader import render_to_string
 
 
-class Element:
-    meta_template = 'styleguide/atoms/meta.html'
+class Widget:
+    meta_template = 'styleguide/widgets/meta.html'
 
     def __init__(self, name, tag=None, libraries=None, template=None, context={}, columns=0, **kwargs):
         if not (tag or template):
-            raise Exception('Element `{}` needs a tag or template.'.format(name))
+            raise Exception('Widget `{}` needs a tag or template.'.format(name))
         self.name = name
         self.tag = tag
         self.libraries = libraries
@@ -29,7 +29,7 @@ class Element:
         template = self.meta_template
         return render_to_string(template, context=context)
 
-    def render_element(self):
+    def render_widget(self):
         template = self.template
         if template:
             outcome = render_to_string(template, context=self.context)
@@ -41,7 +41,7 @@ class Element:
         return outcome
 
     def render(self):
-        outcome = self.render_meta() + self.render_element()
+        outcome = self.render_meta() + self.render_widget()
         if self.columns:
             template = Template(
                 '<div class="row"><div class="col-xs-{columns}">{{{{ outcome }}}}</div></div>'.format(columns=self.columns)
@@ -54,23 +54,20 @@ class Element:
         return self.name
 
 
-class ElementGroup(Element):
-    template = 'styleguide/molecules/elements.html'
+class WidgetGroup(Widget):
+    template = 'styleguide/widgets/widgets.html'
     is_group = True
 
-    def __init__(self, name, columns=12, elements=[], **kwargs):
-        context = {'columns': columns, 'elements': elements}
+    def __init__(self, name, columns=12, widgets=[], **kwargs):
+        context = {'columns': columns, 'widgets': widgets}
         super().__init__(name, template=self.template, context=context)
 
     def render_meta(self):
         context = {
             'name': self.name,
-            # 'tag': self.tag,
-            # 'template': self.template,
-            # 'context': self.context,
         }
         template = self.meta_template
         return render_to_string(template, context=context)
 
-    def append(self, element):
-        self.context.get('elements', []).append(element)
+    def append(self, widget):
+        self.context.get('widgets', []).append(widget)
