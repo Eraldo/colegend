@@ -3,8 +3,9 @@
 from django.contrib.auth.models import AnonymousUser
 from django.templatetags.static import static
 from django.utils import timezone
+from django.utils.html import format_html
 
-from colegend.core.templatetags.core_tags import image
+from colegend.core.templatetags.core_tags import image, icon
 from colegend.core.utils.icons import icon_dict
 from .models import Widget, WidgetGroup
 
@@ -209,14 +210,15 @@ headline_1 = Widget(
     'Headline 1',
     template='widgets/headline.html',
     context={
-        'text': 'Heading Level 1',
+        'content': 'Heading Level 1',
+        'level': 1,
     }
 )
 headline_2 = Widget(
     'Headline 2',
     template='widgets/headline.html',
     context={
-        'text': 'Heading Level 2',
+        'content': 'Heading Level 2',
         'level': 2,
     }
 )
@@ -224,7 +226,7 @@ headline_3 = Widget(
     'Headline 3',
     template='widgets/headline.html',
     context={
-        'text': 'Heading Level 3',
+        'content': 'Heading Level 3',
         'level': 3,
     }
 )
@@ -232,7 +234,7 @@ headline_4 = Widget(
     'Headline 4',
     template='widgets/headline.html',
     context={
-        'text': 'Heading Level 4',
+        'content': 'Heading Level 4',
         'level': 4,
     }
 )
@@ -240,7 +242,7 @@ headline_5 = Widget(
     'Headline 5',
     template='widgets/headline.html',
     context={
-        'text': 'Heading Level 5',
+        'content': 'Heading Level 5',
         'level': 5,
     }
 )
@@ -248,7 +250,7 @@ headline_6 = Widget(
     'Headline 6',
     template='widgets/headline.html',
     context={
-        'text': 'Heading Level 6',
+        'content': 'Heading Level 6',
         'level': 6,
     }
 )
@@ -305,7 +307,7 @@ icons = Widget(
     'Icons',
     template='styleguide/widgets/icons.html',
     context={
-        'icons': [{'name': icon} for icon in icon_dict]
+        'icons': [icon for icon in icon_dict.keys()]
     }
 )
 
@@ -339,8 +341,7 @@ icon_button = Widget(
     'Button with icon',
     template='widgets/button.html',
     context={
-        'content': 'Star',
-        'icon': 'star',
+        'content': format_html('{} {}', icon('star'), 'Star'),
         'classes': 'btn btn-primary',
     }
 )

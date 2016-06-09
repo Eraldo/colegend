@@ -2,8 +2,7 @@ from django import template
 from django.template.loader import render_to_string
 from django.utils import timezone
 
-from colegend.core.templatetags.core_tags import intuitive_duration
-from colegend.core.templatetags.icons import icon
+from colegend.core.templatetags.core_tags import icon, intuitive_duration
 from colegend.outcomes.models import Outcome
 
 register = template.Library()

@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
 from django.utils.html import format_html
 
-from colegend.core.templatetags.icons import icon as render_icon
+from colegend.core.templatetags.core_tags import icon as render_icon
 
 register = template.Library()
 

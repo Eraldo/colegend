@@ -79,24 +79,3 @@ icon_dict = {
 
 def get_icon_name(name):
     return icon_dict.get(name, name)
-
-
-def get_icon(name, large=False, fixed=False, spin=False, pulse=False, li=False, rotate=False, border=False, color=False,
-             classes=None, raw=False):
-    name = get_icon_name(name)
-    if raw:
-        return name
-    context = {
-        'prefix': 'fa',
-        'name': name,
-        'large': large,
-        'fixed': fixed,
-        'spin': spin,
-        'pulse': pulse,
-        'li': li,
-        'rotate': rotate,
-        'border': border,
-        'color': color,
-        'classes': classes,
-    }
-    return render_to_string('widgets/icon.html', context=context)

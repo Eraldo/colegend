@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 from django.template.loader import render_to_string
 
 from colegend.core.intuitive_duration.utils import intuitive_duration_string
+from colegend.core.utils.icons import get_icon_name
 
 register = template.Library()
 
@@ -56,6 +57,50 @@ def image(url, name=None, classes=None):
         'classes': classes,
     }
     return render_to_string(image_template, context=image_context)
+
+
+@register.simple_tag()
+def headline(content, level=1, classes=None):
+    headline_template = 'widgets/headline.html'
+    headline_context = {
+        'level': level,
+        'content': content,
+        'classes': classes,
+    }
+    return render_to_string(headline_template, context=headline_context)
+
+
+@register.simple_tag
+def icon(name, prefix='fa', large=False, fixed=False, spin=False, pulse=False, list=False,
+         rotate=0, border=False, color=None, classes=None, raw=False):
+    name = get_icon_name(name)
+    icon = '{prefix} {prefix}-{name}'.format(
+        prefix=prefix,
+        name=name,
+    )
+    if large:
+        icon += ' {}-lg'.format(prefix)
+    if fixed:
+        icon += ' {}-fw'.format(prefix)
+    if spin:
+        icon += ' {}-spin'.format(prefix)
+    if pulse:
+        icon += ' {}-pulse'.format(prefix)
+    if list:
+        icon += ' {}-li'.format(prefix)
+    if rotate:
+        icon += ' {}-rotate-{}'.format(prefix, rotate)
+    if border:
+        icon += ' {}-border'.format(prefix)
+    if classes:
+        icon += ' {}-classes'.format(prefix)
+    if raw:
+        return name
+    context = {
+        'classes': icon,
+        'color': color,
+    }
+    return render_to_string('widgets/icon.html', context=context)
 
 
 @register.simple_tag()
