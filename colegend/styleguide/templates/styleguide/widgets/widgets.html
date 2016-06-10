@@ -5,6 +5,9 @@
             <div class="col-md-{{ columns|default:12 }}">
                 {{ widget.render }}
             </div>
+            {% if columns == 3 and forloop.counter|divisibleby:4 %}
+                <div class="clearfix hidden-sm-down"></div>
+            {% endif %}
         {% endfor %}
     </div>
 </div>

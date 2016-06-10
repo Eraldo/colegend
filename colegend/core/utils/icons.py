@@ -2,7 +2,7 @@ from django.template.loader import render_to_string
 
 __author__ = 'Eraldo Energy'
 
-icon_dict = {
+fontawesome_icons = {
     # conscious
     'conscious': 'graduation-cap',
     'journal': 'book',
@@ -76,6 +76,16 @@ icon_dict = {
     'closed': 'check-square-o',
 }
 
+coicons = [
+    'window'
+]
 
-def get_icon_name(name):
-    return icon_dict.get(name, name)
+
+def get_icon_class(name):
+    if name in coicons:
+        return 'coicon co-{}'.format(name)
+    else:
+        name = fontawesome_icons.get(name, name)
+        return 'fa-{}'.format(name)
+
+icons = list(fontawesome_icons.keys()) + coicons

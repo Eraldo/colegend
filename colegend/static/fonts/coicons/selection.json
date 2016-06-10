@@ -1,0 +1,79 @@
+{
+	"IcoMoonType": "selection",
+	"icons": [
+		{
+			"icon": {
+				"paths": [
+					"M0.465 0c-0.258 0-0.465 0.207-0.465 0.465v1023.070c0 0.258 0.207 0.465 0.465 0.465h1023.070c0.257 0 0.465-0.207 0.465-0.465v-1023.070c0-0.258-0.207-0.465-0.465-0.465h-1023.070zM128.341 128h767.319c0.189 0 0.34 0.152 0.34 0.341v352.508c0-0.138-0.111-0.25-0.249-0.25h-351.749l0.024-351.748c0-0.138-0.112-0.249-0.25-0.249l-63.501-0.005c-0.138-0-0.249 0.111-0.249 0.249l-0.024 351.753h-351.753c-0.138 0-0.249 0.112-0.249 0.25v-352.508c0-0.189 0.152-0.341 0.341-0.341zM128 544.35c0 0.138 0.111 0.249 0.249 0.249h351.749l-0.024 351.401h-351.633c-0.189 0-0.341-0.152-0.341-0.341v-351.31zM896 544.35v351.31c0 0.189-0.151 0.341-0.34 0.341h-351.686l0.024-351.401h351.753c0.138 0 0.249-0.111 0.249-0.249z"
+				],
+				"attrs": [],
+				"isMulticolor": false,
+				"grid": 16,
+				"tags": [
+					"coicon_window"
+				],
+				"colorPermutations": {}
+			},
+			"attrs": [],
+			"properties": {
+				"order": 15,
+				"id": 1,
+				"prevSize": 32,
+				"code": 59648,
+				"name": "window"
+			},
+			"setIdx": 0,
+			"setId": 6,
+			"iconIdx": 0
+		}
+	],
+	"height": 1024,
+	"metadata": {
+		"name": "coicons",
+		"url": "https://www.colegend.org",
+		"designer": "Corinna Schwozer"
+	},
+	"preferences": {
+		"showGlyphs": true,
+		"showCodes": true,
+		"showQuickUse": true,
+		"showQuickUse2": true,
+		"showSVGs": true,
+		"fontPref": {
+			"prefix": "co-",
+			"metadata": {
+				"fontFamily": "coicons",
+				"majorVersion": 1,
+				"minorVersion": 0,
+				"designer": "Corinna Schwozer",
+				"description": "coLegend icons",
+				"fontURL": "https://www.colegend.org"
+			},
+			"metrics": {
+				"emSize": 1024,
+				"baseline": 14.29,
+				"whitespace": 50
+			},
+			"embed": false,
+			"showMetrics": true,
+			"showMetadata": true,
+			"showSelector": true,
+			"showVersion": true,
+			"selector": "i",
+			"classSelector": ".icon",
+			"cssVars": false
+		},
+		"imagePref": {
+			"prefix": "icon-",
+			"png": true,
+			"useClassSelector": true,
+			"color": 0,
+			"bgColor": 16777215,
+			"classSelector": ".icon"
+		},
+		"historySize": 100,
+		"gridSize": 16,
+		"showGrid": true,
+		"showLiga": false
+	}
+}

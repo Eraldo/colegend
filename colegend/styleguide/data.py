@@ -6,7 +6,7 @@ from django.utils import timezone
 from django.utils.html import format_html
 
 from colegend.core.templatetags.core_tags import image, icon
-from colegend.core.utils.icons import icon_dict
+from colegend.core.utils.icons import icons
 from .models import Widget, WidgetGroup
 
 widgets = []
@@ -303,15 +303,27 @@ links = WidgetGroup(
 
 widgets.append(links)
 
-icons = Widget(
-    'Icons',
-    template='styleguide/widgets/icons.html',
-    context={
-        'icons': [icon for icon in icon_dict.keys()]
-    }
+
+WidgetGroup(
+    'Links',
+    columns=4,
+    widgets=[
+        link_simple, link_external, link_legend,
+    ]
 )
 
-widgets.append(icons)
+widgets.append(
+    WidgetGroup(
+        'Icons',
+        columns=3,
+        widgets=[
+            Widget(
+                '{} icon'.format(name),
+                template='widgets/icon.html',
+                context={'classes': icon(name, raw=True)}) for name in icons
+            ]
+    )
+)
 
 link_button = Widget(
     'Link button',
@@ -341,7 +353,7 @@ icon_button = Widget(
     'Button with icon',
     template='widgets/button.html',
     context={
-        'content': format_html('{} {}', icon('star'), 'Star'),
+        'content': format_html('{} {}', Widget.get('Challenges icon'), 'Star'),
         'classes': 'btn btn-primary',
     }
 )
