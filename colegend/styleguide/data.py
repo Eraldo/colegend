@@ -19,6 +19,7 @@ widgets.append(
         parameters={
             'content': 'foo bar head',
         },
+        comment='Help foo\nbla',
     )
 )
 

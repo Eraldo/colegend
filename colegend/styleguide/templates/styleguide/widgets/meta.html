@@ -1,6 +1,10 @@
+{% load core_tags %}
 <div class="widget-styleguide-meta">
     <a id="{{ name|slugify }}" class="headline" data-toggle="modal" data-target="#modal-{{ name|slugify }}">
         {{ name }}
+        {% if comment %}
+            <span class="pull-right">{% icon 'comment' %}</span>
+        {% endif %}
     </a>
 
     <div class="modal fade" id="modal-{{ name|slugify }}" tabindex="-1" role="dialog"
@@ -18,6 +22,10 @@
                         {{ key|title }}:
                         <pre>{{ value }}</pre>
                     {% endfor %}
+                    {% if comment %}
+                        Comment:
+                        <pre>{{ comment }}</pre>
+                    {% endif %}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

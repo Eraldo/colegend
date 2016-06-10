@@ -8,10 +8,11 @@ class BaseWidget:
     widget_template = 'styleguide/widgets/widget.html'
     widgets = {}
 
-    def __init__(self, name, columns=12, **kwargs):
+    def __init__(self, name, columns=12, comment=None, **kwargs):
         self.name = name
         self.columns = columns
         self.widgets[slugify(name)] = self
+        self.comment = comment
 
     def get_meta_kwargs(self):
         if hasattr(self, 'meta_kwargs'):
@@ -22,6 +23,7 @@ class BaseWidget:
     def render_meta(self):
         context = {
             'name': self.name,
+            'comment': self.comment,
         }
         context.update({'meta': self.get_meta_kwargs()})
         template = self.meta_template
