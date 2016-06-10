@@ -1,9 +1,8 @@
-{% load styleguide_tags %}
 <div class="widget-styleguide-widgets">
     <div class="row">
         {% for widget in widgets %}
-            <div class="col-md-{{ columns|default:12 }}">
-                {{ widget.render }}
+            <div class="col-md-{{ columns }}">
+                {{ widget.render_widget }}
             </div>
             {% if columns == 3 and forloop.counter|divisibleby:4 %}
                 <div class="clearfix hidden-sm-down"></div>

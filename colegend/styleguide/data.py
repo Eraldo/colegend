@@ -11,16 +11,16 @@ from .models import Widget, WidgetGroup
 
 widgets = []
 
-widgets.append(
-    Widget(
-        'Foo headline',
-        tag='headline',
-        libraries='core_tags',
-        parameters={
-            'content': 'foo bar head',
-        },
-    )
-)
+# widgets.append(
+#     Widget(
+#         'Foo headline',
+#         tag='headline',
+#         libraries='core_tags',
+#         parameters={
+#             'content': 'foo bar head',
+#         },
+#     )
+# )
 
 logo = Widget(
     'Default',
@@ -771,8 +771,8 @@ legend = Widget(
     'Legend',
     template='legends/widgets/legend.html',
     context={
-        'avatar': legend_avatar.render_widget(),
-        'link': link_legend.render_widget(),
+        'avatar': legend_avatar.render(),
+        'link': link_legend.render(),
     }
 )
 
@@ -780,8 +780,8 @@ legend_large = Widget(
     'Legend large',
     template='legends/widgets/legend.html',
     context={
-        'avatar': large_avatar.render_widget(),
-        'link': link_legend.render_widget(),
+        'avatar': large_avatar.render(),
+        'link': link_legend.render(),
     }
 )
 
@@ -789,8 +789,8 @@ legend_small = Widget(
     'Legend large',
     template='legends/widgets/legend.html',
     context={
-        'avatar': small_avatar.render_widget(),
-        'link': link_legend.render_widget(),
+        'avatar': small_avatar.render(),
+        'link': link_legend.render(),
     }
 )
 
@@ -808,8 +808,8 @@ statement_left = Widget(
     'Left statement',
     template='widgets/statement.html',
     context={
-        'speaker': legend.render_widget(),
-        'content': speech_bubble_right_responsive.render_widget(),
+        'speaker': legend.render(),
+        'content': speech_bubble_right_responsive.render(),
         'speaker_classes': 'col-sm-4',
         'bubble_classes': 'col-sm-8',
     },
@@ -820,8 +820,8 @@ statement_right = Widget(
     'Right statement',
     template='widgets/statement.html',
     context={
-        'speaker': legend.render_widget(),
-        'content': speech_bubble_left_responsive.render_widget(),
+        'speaker': legend.render(),
+        'content': speech_bubble_left_responsive.render(),
         'speaker_classes': 'col-sm-4 col-sm-push-8',
         'bubble_classes': 'col-sm-8  col-sm-pull-4',
     },
@@ -832,8 +832,8 @@ statement_big = Widget(
     'Big statement',
     template='widgets/statement.html',
     context={
-        'speaker': legend_large.render_widget(),
-        'content': speech_bubble_right_responsive.render_widget(),
+        'speaker': legend_large.render(),
+        'content': speech_bubble_right_responsive.render(),
         'speaker_classes': 'col-sm-4',
         'bubble_classes': 'col-sm-8',
     },
@@ -843,8 +843,8 @@ statement_small = Widget(
     'Small statement',
     template='widgets/statement.html',
     context={
-        'speaker': legend_small.render_widget(),
-        'content': speech_bubble_right_responsive.render_widget(),
+        'speaker': legend_small.render(),
+        'content': speech_bubble_right_responsive.render(),
         'speaker_classes': 'col-sm-4',
         'bubble_classes': 'col-sm-8',
     },

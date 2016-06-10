@@ -1,90 +1,102 @@
-from django.db import models
-
-# Create your models here.
-from django.template import Template, Context
 from django.template.defaultfilters import slugify
 from django.template.loader import render_to_string
 
 
-class Widget:
+class BaseWidget:
     meta_template = 'styleguide/widgets/meta.html'
+    widget_template = 'styleguide/widgets/widget.html'
     widgets = {}
 
-    def __init__(self, name, tag=None, libraries=None, parameters={}, template=None, context={}, columns=0, **kwargs):
-        if not (tag or template):
-            raise Exception('Widget `{}` needs a tag or template.'.format(name))
+    def __init__(self, name, columns=12, **kwargs):
         self.name = name
-        self.tag = tag
-        self.libraries = libraries
-        self.parameters = parameters
-        self.template = template
-        self.context = context
         self.columns = columns
         self.widgets[slugify(name)] = self
+
+    def get_meta_kwargs(self):
+        if hasattr(self, 'meta_kwargs'):
+            return self.meta_kwargs
+        else:
+            return {}
 
     def render_meta(self):
         context = {
             'name': self.name,
-            'tag': self.tag,
-            'libraries': self.libraries,
-            'parameters': self.parameters,
-            'template': self.template,
-            'context': self.context,
         }
+        context.update({'meta': self.get_meta_kwargs()})
         template = self.meta_template
         return render_to_string(template, context=context)
 
-    def render_widget(self):
-        template = self.template
-        if template:
-            outcome = render_to_string(template, context=self.context)
-        else:
-            template = Template(
-                '{{% load {libraries} %}}{{% {tag} {parameters} %}}'.format(
-                    tag=self.tag,
-                    libraries=self.libraries,
-                    parameters=' '.join('{name}={name}'.format(name=name) for name in self.parameters.keys())
-                )
-            )
-            outcome = template.render(context=Context(self.parameters))
-        return outcome
-
     def render(self):
-        outcome = self.render_meta() + self.render_widget()
-        if self.columns:
-            template = Template(
-                '<div class="row"><div class="col-xs-{columns}">{{{{ outcome }}}}</div></div>'.format(
-                    columns=self.columns)
-            )
-            context = Context({'outcome': outcome})
-            outcome = template.render(context=context)
-        return outcome
+        raise NotImplementedError()
+
+    def render_widget(self):
+        context = {
+            'meta': self.render_meta(),
+            'widget': self.render(),
+            'columns': self.columns,
+        }
+        return render_to_string(self.widget_template, context=context)
 
     @classmethod
     def get(cls, name):
         widget = cls.widgets.get(slugify(name))
         if widget:
-            return widget.render_widget()
+            return widget.render()
         raise Exception('Widget "{}" not found.'.format(name))
 
     def __str__(self):
         return self.name
 
 
+class Widget(BaseWidget):
+    def __init__(self, name, template, context={}, **kwargs):
+        self.template = template
+        self.context = context
+        super().__init__(name, **kwargs)
+
+    def get_meta_kwargs(self):
+        kwargs = {
+            'template': self.template,
+            'context': self.context,
+        }
+        return kwargs
+
+    def render(self):
+        return render_to_string(self.template, context=self.context)
+
+
+# class TagWidget(Widget):
+#     meta_template = 'styleguide/widgets/widgets.html'
+#
+#     def __init__(self, name, tag, libraries='core_tags', parameters={}, **kwargs):
+#         self.tag = tag
+#         self.parameters = parameters
+#         self.libraries = libraries
+#         super().__init__(name, **kwargs)
+#
+#     def render_meta(self):
+#         context = {
+#             'name': self.name,
+#         }
+#         template = self.meta_template
+#         return render_to_string(template, context=context)
+#
+#     def append(self, widget):
+#         self.context.get('widgets', []).append(widget)
+
+
 class WidgetGroup(Widget):
-    template = 'styleguide/widgets/widgets.html'
     is_group = True
 
-    def __init__(self, name, columns=12, widgets=[], **kwargs):
+    def __init__(self, name, widgets=[], columns=12, **kwargs):
+        template = 'styleguide/widgets/widgets.html'
+        self.group_widgets = widgets
         context = {'columns': columns, 'widgets': widgets}
-        super().__init__(name, template=self.template, context=context)
+        super().__init__(name, template=template, context=context, **kwargs)
 
-    def render_meta(self):
-        context = {
-            'name': self.name,
+    def get_meta_kwargs(self):
+        kwargs = {
+            'columns': self.columns,
+            'widgets': ', '.join([str(widget) for widget in self.group_widgets]),
         }
-        template = self.meta_template
-        return render_to_string(template, context=context)
-
-    def append(self, widget):
-        self.context.get('widgets', []).append(widget)
+        return kwargs

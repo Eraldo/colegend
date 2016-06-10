@@ -14,26 +14,10 @@
                     <h4 class="modal-title" id="modal-{{ name|slugify }}-label">{{ name }}</h4>
                 </div>
                 <div class="modal-body">
-                    {% if tag %}
-                        Tag:
-                        <pre>{{ tag }}</pre>
-                        {% if libraries %}
-                            Libraries:
-                            <pre>{{ libraries }}</pre>
-                        {% endif %}
-                        {% if parameters %}
-                            Parameters:
-                            <pre>{{ parameters }}</pre>
-                        {% endif %}
-                    {% endif %}
-                    {% if template %}
-                        Template:
-                        <pre>{{ template }}</pre>
-                    {% endif %}
-                    {% if context %}
-                        Context:
-                        <pre>{{ context }}</pre>
-                    {% endif %}
+                    {% for key, value in meta.items %}
+                        {{ key|title }}:
+                        <pre>{{ value }}</pre>
+                    {% endfor %}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
