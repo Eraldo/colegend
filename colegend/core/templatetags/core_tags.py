@@ -65,7 +65,7 @@ def headline(content, level=1, classes=None):
     headline_context = {
         'level': level,
         'content': content,
-        'classes': classes,
+        'classes': classes or '',
     }
     return render_to_string(headline_template, context=headline_context)
 

@@ -11,6 +11,17 @@ from .models import Widget, WidgetGroup
 
 widgets = []
 
+widgets.append(
+    Widget(
+        'Foo headline',
+        tag='headline',
+        libraries='core_tags',
+        context={
+            'content': 'foo bar head',
+        },
+    )
+)
+
 logo = Widget(
     'Default',
     template='widgets/div.html',
@@ -302,7 +313,6 @@ links = WidgetGroup(
 )
 
 widgets.append(links)
-
 
 WidgetGroup(
     'Links',

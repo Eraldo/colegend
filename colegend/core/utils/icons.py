@@ -1,5 +1,3 @@
-from django.template.loader import render_to_string
-
 __author__ = 'Eraldo Energy'
 
 fontawesome_icons = {

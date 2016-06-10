@@ -37,18 +37,22 @@ class Widget:
         if template:
             outcome = render_to_string(template, context=self.context)
         else:
-            context = {self.tag: self.context}
             template = Template(
-                # TODO: Refactoring the template because keyword arguments now work differently for tags.
-                '{{% load styleguide_widgets_tags {libraries} %}}{{% {tag} {tag}={tag} %}}'.format(tag=self.tag, libraries=self.libraries))
-            outcome = template.render(context=Context(context))
+                '{{% load {libraries} %}}{{% {tag} {parameters} %}}'.format(
+                    tag=self.tag,
+                    libraries=self.libraries,
+                    parameters=' '.join('{name}={name}'.format(name=name) for name in self.context.keys())
+                )
+            )
+            outcome = template.render(context=Context(self.context))
         return outcome
 
     def render(self):
         outcome = self.render_meta() + self.render_widget()
         if self.columns:
             template = Template(
-                '<div class="row"><div class="col-xs-{columns}">{{{{ outcome }}}}</div></div>'.format(columns=self.columns)
+                '<div class="row"><div class="col-xs-{columns}">{{{{ outcome }}}}</div></div>'.format(
+                    columns=self.columns)
             )
             context = Context({'outcome': outcome})
             outcome = template.render(context=context)
