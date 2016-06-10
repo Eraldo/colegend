@@ -16,7 +16,7 @@ widgets.append(
         'Foo headline',
         tag='headline',
         libraries='core_tags',
-        context={
+        parameters={
             'content': 'foo bar head',
         },
     )

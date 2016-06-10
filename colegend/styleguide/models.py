@@ -10,12 +10,13 @@ class Widget:
     meta_template = 'styleguide/widgets/meta.html'
     widgets = {}
 
-    def __init__(self, name, tag=None, libraries=None, template=None, context={}, columns=0, **kwargs):
+    def __init__(self, name, tag=None, libraries=None, parameters={}, template=None, context={}, columns=0, **kwargs):
         if not (tag or template):
             raise Exception('Widget `{}` needs a tag or template.'.format(name))
         self.name = name
         self.tag = tag
         self.libraries = libraries
+        self.parameters = parameters
         self.template = template
         self.context = context
         self.columns = columns
@@ -26,6 +27,7 @@ class Widget:
             'name': self.name,
             'tag': self.tag,
             'libraries': self.libraries,
+            'parameters': self.parameters,
             'template': self.template,
             'context': self.context,
         }
@@ -41,10 +43,10 @@ class Widget:
                 '{{% load {libraries} %}}{{% {tag} {parameters} %}}'.format(
                     tag=self.tag,
                     libraries=self.libraries,
-                    parameters=' '.join('{name}={name}'.format(name=name) for name in self.context.keys())
+                    parameters=' '.join('{name}={name}'.format(name=name) for name in self.parameters.keys())
                 )
             )
-            outcome = template.render(context=Context(self.context))
+            outcome = template.render(context=Context(self.parameters))
         return outcome
 
     def render(self):

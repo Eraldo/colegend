@@ -21,12 +21,15 @@
                             Libraries:
                             <pre>{{ libraries }}</pre>
                         {% endif %}
+                        {% if parameters %}
+                            Parameters:
+                            <pre>{{ parameters }}</pre>
+                        {% endif %}
                     {% endif %}
                     {% if template %}
                         Template:
                         <pre>{{ template }}</pre>
                     {% endif %}
-
                     {% if context %}
                         Context:
                         <pre>{{ context }}</pre>
