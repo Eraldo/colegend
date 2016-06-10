@@ -3,7 +3,10 @@
     <a id="{{ name|slugify }}" class="headline" data-toggle="modal" data-target="#modal-{{ name|slugify }}">
         {{ name }}
         {% if comment %}
-            <span class="pull-right">{% icon 'comment' %}</span>
+            <span class="pull-right">{% icon 'comment' fixed=True %}</span>
+        {% endif %}
+        {% if meta.tag %}
+            <span class="pull-right">{% icon 'tag' fixed=True %}</span>
         {% endif %}
     </a>
 

@@ -13,11 +13,12 @@ widgets = []
 
 widgets.append(
     TagWidget(
-        'Foo headline',
+        'Styleguide widget example',
         tag='headline',
         libraries='core_tags',
         parameters={
-            'content': 'foo bar head',
+            'content': 'Headline widget example as tag with comments',
+            'level': 4,
         },
         comment='Help foo\nbla',
     )
