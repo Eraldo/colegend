@@ -1,3 +1,4 @@
+from django.template import Template, Context
 from django.template.defaultfilters import slugify
 from django.template.loader import render_to_string
 
@@ -65,29 +66,37 @@ class Widget(BaseWidget):
         return render_to_string(self.template, context=self.context)
 
 
-# class TagWidget(Widget):
-#     meta_template = 'styleguide/widgets/widgets.html'
-#
-#     def __init__(self, name, tag, libraries='core_tags', parameters={}, **kwargs):
-#         self.tag = tag
-#         self.parameters = parameters
-#         self.libraries = libraries
-#         super().__init__(name, **kwargs)
-#
-#     def render_meta(self):
-#         context = {
-#             'name': self.name,
-#         }
-#         template = self.meta_template
-#         return render_to_string(template, context=context)
-#
-#     def append(self, widget):
-#         self.context.get('widgets', []).append(widget)
+class TagWidget(BaseWidget):
+    def __init__(self, name, tag, libraries='core_tags', parameters={}, **kwargs):
+        self.tag = tag
+        self.parameters = parameters
+        self.libraries = libraries
+        super().__init__(name, **kwargs)
+
+    def get_meta_kwargs(self):
+        kwargs = {
+            'tag': self.tag,
+            'parameters': self.parameters,
+            'libraries': self.libraries,
+        }
+        return kwargs
+
+    def render(self):
+        return render_to_string(self.template, context=self.context)
+
+    def render(self):
+        template = Template(
+            '{{% load {libraries} %}}{{% {tag} {parameters} %}}'.format(
+                tag=self.tag,
+                libraries=self.libraries,
+                parameters=' '.join('{name}={name}'.format(name=name) for name in self.parameters.keys())
+            )
+        )
+        outcome = template.render(context=Context(self.parameters))
+        return outcome
 
 
 class WidgetGroup(Widget):
-    is_group = True
-
     def __init__(self, name, widgets=[], columns=12, **kwargs):
         template = 'styleguide/widgets/widgets.html'
         self.group_widgets = widgets

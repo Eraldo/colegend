@@ -7,20 +7,20 @@ from django.utils.html import format_html
 
 from colegend.core.templatetags.core_tags import image, icon
 from colegend.core.utils.icons import icons
-from .models import Widget, WidgetGroup
+from .models import Widget, WidgetGroup, TagWidget
 
 widgets = []
 
-# widgets.append(
-#     Widget(
-#         'Foo headline',
-#         tag='headline',
-#         libraries='core_tags',
-#         parameters={
-#             'content': 'foo bar head',
-#         },
-#     )
-# )
+widgets.append(
+    TagWidget(
+        'Foo headline',
+        tag='headline',
+        libraries='core_tags',
+        parameters={
+            'content': 'foo bar head',
+        },
+    )
+)
 
 logo = Widget(
     'Default',
