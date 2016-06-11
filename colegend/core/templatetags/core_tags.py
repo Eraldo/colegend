@@ -1,6 +1,8 @@
 from django import template
 from django.core.exceptions import ValidationError
+from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
+from django.utils.html import format_html
 
 from colegend.core.intuitive_duration.utils import intuitive_duration_string
 from colegend.core.utils.icons import get_icon_class
@@ -16,12 +18,13 @@ def intuitive_duration(value):
         return ''
 
 
-@register.simple_tag(takes_context=True)
-def label(context, label=None, **kwargs):
+@register.simple_tag()
+def label(content, classes='label-default'):
     label_template = 'widgets/label.html'
-    label = label or context.get('label', {})
-    label_context = label
-    label_context.update(kwargs)
+    label_context = {
+        'content': content,
+        'classes': classes,
+    }
     return render_to_string(label_template, context=label_context)
 
 
@@ -103,11 +106,62 @@ def icon(name, prefix='fa', large=False, fixed=False, spin=False, pulse=False, l
     return render_to_string('widgets/icon.html', context=context)
 
 
+render_icon = icon
+
+
+@register.simple_tag()
+def button(name, url=None, pattern=None, prefix='btn', content=None, classes='btn-primary', icon=None, size=None, locked=False):
+    classes_dict = {
+        'list': 'btn-secondary btn-sm',
+        'create': 'btn-secondary btn-sm',
+        'detail': 'btn-secondary btn-sm',
+        'update': 'btn-secondary btn-sm',
+        'delete': 'btn-danger btn-sm',
+    }
+    if prefix:
+        classes = '{} {}'.format(prefix, classes)
+    if name in classes_dict:
+        # TODO: refactor to overwrite classes and the size variable
+        classes += ' {}'.format(classes_dict.get('name'))
+        if not icon:
+            icon = name
+
+    if size:
+        sizes = {
+            'small': 'btn-sm',
+            'large': 'btn-lg',
+        }
+        size_class = sizes.get(size, '')
+        if size_class:
+            classes += ' {}'.format(size_class)
+    if pattern and not url:
+        url = reverse(pattern)
+    if locked:
+        icon = 'locked'
+        url = None
+        classes += ' disabled'
+
+    if not content:
+        content = name
+    if icon:
+        content = format_html(
+            '{icon} {content}', icon=render_icon(icon, fixed=True), content=content)
+
+    context = {
+        'url': url,
+        'classes': classes,
+        'content': content,
+    }
+    template = 'widgets/button.html'
+    return render_to_string(template, context=context)
+
+
 @register.simple_tag()
 def speech_bubble(content, direction='left', arrow_classes=None, responsive=False):
     speech_bubble_template = 'widgets/speech-bubble.html'
     speech_bubble_context = {
-        'arrow': '{direction}{classes}'.format(direction=direction, classes=' {}'.format(arrow_classes) if arrow_classes else ''),
+        'arrow': '{direction}{classes}'.format(direction=direction,
+                                               classes=' {}'.format(arrow_classes) if arrow_classes else ''),
         'responsive_arrow': 'up' if responsive else '',
         'content': content,
     }
