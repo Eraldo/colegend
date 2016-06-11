@@ -1,26 +1,58 @@
 __author__ = 'Eraldo Energy'
 
 fontawesome_icons = {
-    # conscious
-    'conscious': 'graduation-cap',
-    'journal': 'book',
-    # connected
-    'connected': 'heart',
-    'legend': 'user',
-    'legends': 'user',
-    # continuous
-    'continuous': 'paw',
-    # orga
-    'settings': 'wrench',
-    'sign-out': 'sign-out',
-    'locked': 'lock',
+    # apps
+    'manager': 'briefcase',  # alt: 'check'
+    # - status
+    'open': 'square-o',
+    'waiting': 'hourglass-half',
+    'state-undefined': 'circle-thin',
+    'closed': 'check-square-o',
+    'done': 'check',
+    'canceled': 'ban',
     #
-    'gatherings': 'comments-o',
+    'date': 'calendar-o',
+    'deadline': 'calendar-times-o',
+    'estimate': 'clock-o',
+    #
+    'journal': 'book',
+    'story': 'magic',
+    'vision': 'compass',
+    'accademy': 'graduation-cap',
     'challenges': 'star',
-    'journal': 'book',
-    'manager': 'check',
+    'game': 'game-pad',
+    # community
+    'community': 'group',
+    'chat': 'commenting-o',
+    'virtual-room': 'key',
+    'event': 'calendar-check-o',
+    'guide': 'road',
+    'gatherings': 'comments-o',
+    # project
+    'about': 'info-circle',
+    'support': 'question-circle',
+    'documentation': 'file-text-o',
+    'news': 'newspaper-o',
+    'styleguide': 'paint-brush',
+    'quote': 'quote-left',
+    # user
+    'legend': 'user',
+    'legends': 'group',
+    'profile': 'user',
+    'settings': 'cogs',
+    'logout': 'sign-out',
     #
+    'address': 'map-marker',
+    'occupation': 'briefcase',
+    'phone': 'phone',
+    'birthday': 'birthday-cake',
+    'gender': 'transgender-alt',
+    'name': 'user',
+    'avatar': 'camera',
+    # core
+    'locked': 'lock',
     'tag': 'tag',
+    'tags': 'tags',
     #
     'create': 'plus',
     'detail': 'eye',
@@ -32,50 +64,19 @@ fontawesome_icons = {
     #
     'previous': 'chevron-left',
     'next': 'chevron-right',
+    'more': 'ellipsis-v',
     #
     'scope': 'search-plus',
     'import': 'upload',
     #
     'actions': 'chevron-circle-down',
     #
-    'event': 'calendar',
-    'feature': 'road',
-    'news': 'newspaper-o',
-    'quote': 'quote-left',
-    'role': 'user-md',
-    'story': 'magic',
-    'tool': 'gavel',
-    #
-    'date': 'calendar',
-    'deadline': 'calendar-o',
     'content': 'align-left',
-    #
-    'address': 'map-marker',
-    'occupation': 'briefcase',
-    'phone': 'phone',
-    'birthday': 'birthday-cake',
-    'gender': 'transgender-alt',
-    'name': 'user',
-    'avatar': 'camera',
-    #
-    'support': 'question-circle',
-    'faq': 'question',
-    'documentation': 'file-text-o',
-    #
-    'game': 'trophy',
-    # core
-    'more': 'ellipsis-v',
-    # manager
     'description': 'align-left',
-    'estimate': 'clock-o',
-    # status
-    'open': 'square-o',
-    'waiting': 'hourglass-half',
-    'closed': 'check-square-o',
 }
 
 coicons = [
-    'window'
+    'game', 'duo', 'tribe', 'clan', 'apps', 'project', 'roles'
 ]
 
 
