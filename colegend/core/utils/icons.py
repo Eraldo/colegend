@@ -14,6 +14,7 @@ fontawesome_icons = {
     'date': 'calendar-o',
     'deadline': 'calendar-times-o',
     'estimate': 'clock-o',
+    'inbox': 'inbox',
     #
     'journal': 'book',
     'story': 'magic',
