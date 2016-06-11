@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 from django.template import Template, Context
 from django.template.defaultfilters import slugify
 from django.template.loader import render_to_string
@@ -6,7 +8,7 @@ from django.template.loader import render_to_string
 class BaseWidget:
     meta_template = 'styleguide/widgets/meta.html'
     widget_template = 'styleguide/widgets/widget.html'
-    widgets = {}
+    widgets = OrderedDict()
 
     def __init__(self, name, columns=12, comment=None, **kwargs):
         self.name = name
@@ -58,10 +60,10 @@ class Widget(BaseWidget):
         super().__init__(name, **kwargs)
 
     def get_meta_kwargs(self):
-        kwargs = {
+        kwargs = OrderedDict({
             'template': self.template,
             'context': self.context,
-        }
+        })
         return kwargs
 
     def render(self):
@@ -76,11 +78,11 @@ class TagWidget(BaseWidget):
         super().__init__(name, **kwargs)
 
     def get_meta_kwargs(self):
-        kwargs = {
+        kwargs = OrderedDict({
             'tag': self.tag,
             'parameters': self.parameters,
             'libraries': self.libraries,
-        }
+        })
         return kwargs
 
     def render(self):
@@ -106,8 +108,8 @@ class WidgetGroup(Widget):
         super().__init__(name, template=template, context=context, **kwargs)
 
     def get_meta_kwargs(self):
-        kwargs = {
-            'columns': self.columns,
+        kwargs = OrderedDict({
             'widgets': ', '.join([str(widget) for widget in self.group_widgets]),
-        }
+            'columns': self.columns,
+        })
         return kwargs

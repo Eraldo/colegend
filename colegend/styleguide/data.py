@@ -219,64 +219,61 @@ colors = WidgetGroup(
 
 widgets.append(colors)
 
-headline_1 = Widget(
-    'Headline 1',
-    template='widgets/headline.html',
-    context={
-        'content': 'Heading Level 1',
-        'level': 1,
-    }
+widgets.append(
+    WidgetGroup(
+        'Headlines',
+        columns=12,
+        widgets=[
+            TagWidget(
+                'Headline 1',
+                tag='headline',
+                parameters={
+                    'content': 'Heading Level 1',
+                }
+            ),
+            Widget(
+                'Headline 2',
+                template='widgets/headline.html',
+                context={
+                    'content': 'Heading Level 2',
+                    'level': 2,
+                }
+            ),
+            Widget(
+                'Headline 3',
+                template='widgets/headline.html',
+                context={
+                    'content': 'Heading Level 3',
+                    'level': 3,
+                }
+            ),
+            Widget(
+                'Headline 4',
+                template='widgets/headline.html',
+                context={
+                    'content': 'Heading Level 4',
+                    'level': 4,
+                }
+            ),
+            Widget(
+                'Headline 5',
+                template='widgets/headline.html',
+                context={
+                    'content': 'Heading Level 5',
+                    'level': 5,
+                }
+            ),
+            Widget(
+                'Headline 6',
+                template='widgets/headline.html',
+                context={
+                    'content': 'Heading Level 6',
+                    'level': 6,
+                }
+            ),
+        ]
+    )
 )
-headline_2 = Widget(
-    'Headline 2',
-    template='widgets/headline.html',
-    context={
-        'content': 'Heading Level 2',
-        'level': 2,
-    }
-)
-headline_3 = Widget(
-    'Headline 3',
-    template='widgets/headline.html',
-    context={
-        'content': 'Heading Level 3',
-        'level': 3,
-    }
-)
-headline_4 = Widget(
-    'Headline 4',
-    template='widgets/headline.html',
-    context={
-        'content': 'Heading Level 4',
-        'level': 4,
-    }
-)
-headline_5 = Widget(
-    'Headline 5',
-    template='widgets/headline.html',
-    context={
-        'content': 'Heading Level 5',
-        'level': 5,
-    }
-)
-headline_6 = Widget(
-    'Headline 6',
-    template='widgets/headline.html',
-    context={
-        'content': 'Heading Level 6',
-        'level': 6,
-    }
-)
-
-headlines = WidgetGroup(
-    'Headlines',
-    columns=12,
-    widgets=[
-        headline_1, headline_2, headline_3, headline_4, headline_5, headline_6,
-    ]
-)
-
-widgets.append(headlines)
 
 link_simple = Widget(
     'Simple link',
