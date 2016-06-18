@@ -6,5 +6,4 @@ urlpatterns = [
     url(r'^$',
         ManagerIndexView.as_view(),
         name='index'),
-    url(r'^outcomes/', include('colegend.outcomes.urls', namespace='outcomes')),
 ]
