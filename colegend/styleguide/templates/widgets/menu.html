@@ -1,21 +1,20 @@
 {% load i18n %}
 
-{% for child in children %}
-    <li class="nav-item {% if child.ancestor %}ancestor{% endif %}
-        {% if child.selected %} active{% endif %}
-        {% if child.children %} dropdown{% endif %}">
-        {% if child.children %}
-            <a id="{{ child.get_absolute_url }}" class="nav-link btn btn-link dropdown-toggle" data-toggle="dropdown"
+{% for node in nodes %}
+    <li class="nav-item {% if node.ancestor %}ancestor{% endif %}
+        {% if node.selected %} active{% endif %}
+        {% if node.nodes %} dropdown{% endif %}">
+        {% if node.nodes %}
+            <a id="menu-item-{{ node.name }}" class="nav-link btn btn-link dropdown-toggle" data-toggle="dropdown"
                href="#"
                role="button" aria-haspopup="true" aria-expanded="false">
-                {{ child.get_menu_title }}
+                {{ node.name }}
             </a>
-            <div class="dropdown-menu" aria-labelledby="{{ child.get_absolute_url }}">
-{#                {% show_menu from_level to_level extra_inactive extra_active "widgets/submenu.html" "" "" child %}#}
+            <div class="dropdown-menu" aria-labelledby="menu-item-{{ node.name }}">
+            {% include 'widgets/submenu.html' with nodes=node.nodes %}
             </div>
         {% else %}
-            <a class="nav-link" href="{{ child.get_absolute_url }}"><span>{{ child.get_menu_title }}</span></a>
+            <a class="nav-link btn btn-link" href="{{ node.url }}"><span>{{ node.name }}</span></a>
         {% endif %}
     </li>
-    {% if class and forloop.last and not forloop.parentloop %}{% endif %}
 {% endfor %}

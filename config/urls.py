@@ -46,7 +46,7 @@ urlpatterns = [
     url(r'^roles/', include('colegend.roles.urls')),
     url(r'^category/', include('colegend.categories.urls', namespace='categories')),
 
-    url(r'^manager/', include('colegend.manager.urls')),
+    url(r'^manager/', include('colegend.manager.urls', namespace='manager')),
     url(r'^vision/', include('colegend.visions.urls')),
     url(r'^journal/', include('colegend.journals.urls')),
     url(r'^days/', include('colegend.dayentries.urls', namespace='dayentries')),
@@ -54,6 +54,7 @@ urlpatterns = [
     url(r'^guides/', include('colegend.guides.urls')),
     url(r'^events/', include('colegend.events.urls')),
     url(r'^chat/', include('colegend.chat.urls')),
+    url(r'^guidelines/', include('colegend.guidelines.urls')),
 
     url(r'^game/', include('colegend.games.urls')),
     url(r'^cards/', include('colegend.cards.urls', namespace='cards')),
@@ -62,7 +63,7 @@ urlpatterns = [
     # Added robots.txt file for crawlers (google/etc)
     url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
 
-    url(r'^styleguide/', include('colegend.styleguide.urls')),
+    url(r'^styleguide/', include('colegend.styleguide.urls', namespace='styleguide')),
     url(r'^mockups/', include('colegend.mockups.urls')),
 ]
 # Static files

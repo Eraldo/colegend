@@ -1,6 +1,4 @@
-{% load i18n cache %}
-
-{% for child in children %}
-    <a class="dropdown-item" href="{{ child.get_absolute_url }}"><span>{{ child.get_menu_title }}</span></a>
-    {% if class and forloop.last and not forloop.parentloop %}{% endif %}
+{% load i18n %}
+{% for node in nodes %}
+    <a class="dropdown-item" href="{{ node.url }}"><span>{{ node.name }}</span></a>
 {% endfor %}
