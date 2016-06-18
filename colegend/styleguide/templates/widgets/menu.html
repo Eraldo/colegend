@@ -1,4 +1,4 @@
-{% load i18n menu_tags cache %}
+{% load i18n %}
 
 {% for child in children %}
     <li class="nav-item {% if child.ancestor %}ancestor{% endif %}
@@ -11,7 +11,7 @@
                 {{ child.get_menu_title }}
             </a>
             <div class="dropdown-menu" aria-labelledby="{{ child.get_absolute_url }}">
-                {% show_menu from_level to_level extra_inactive extra_active "widgets/submenu.html" "" "" child %}
+{#                {% show_menu from_level to_level extra_inactive extra_active "widgets/submenu.html" "" "" child %}#}
             </div>
         {% else %}
             <a class="nav-link" href="{{ child.get_absolute_url }}"><span>{{ child.get_menu_title }}</span></a>

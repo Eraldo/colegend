@@ -82,7 +82,11 @@ class User(AbstractUser):
             size = 'medium'
         try:
             avatar = self.avatar[size]
+            if not avatar:
+                avatar = self.avatar
         except InvalidImageFormatError:
+            if self.avatar:
+                return self.avatar
             avatar = None
         return avatar
 

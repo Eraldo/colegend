@@ -1,4 +1,4 @@
-{% load staticfiles i18n cms_tags menu_tags sekizai_tags %}
+{% load staticfiles i18n %}
 <!DOCTYPE html>
 
 <html lang="en" ng-app>
@@ -41,11 +41,9 @@
         {% block extra_head %}{% endblock %}
 
     {% endblock %}
-    {% render_block "css" %}
 </head>
 
 <body id="body" class="{% block body_class %}{% endblock %}">
-{% cms_toolbar %}
 
 <div id="site-menu-container">
     {% block site_menu %}
@@ -58,7 +56,6 @@
         <div class="container">
             <ul class="breadcrumbs">
                 {% block breadcrumbs %}
-                    {% show_breadcrumb %}
                 {% endblock %}
             </ul>
             <h1 id="page-title">{% block page_title %}{% endblock %}</h1>
@@ -151,7 +148,6 @@
     {% block extra_script %}{% endblock %}
 
 {% endblock javascript %}
-{% render_block "js" %}
 </body>
 </html>
 

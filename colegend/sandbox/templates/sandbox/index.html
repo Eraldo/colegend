@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load static cms_tags menu_tags legends_tags core_tags %}
+{% load static legends_tags core_tags %}
 
 {% block extra_head %}
     {{ block.super }}
@@ -23,9 +23,6 @@
     {% statement 'tiger' 'Hello world' direction='right' %}
     {% include 'widgets/navbar.html' with class='bg-main-dark' id='legend-bar' menu_id='home' profile_id='profile' %}
     <hr>
-    {% render_model card "name" %}
-    {% show_menu %}
-    {% placeholder 'content' %}
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <div class="g-hangout"
          data-render="createhangout"
