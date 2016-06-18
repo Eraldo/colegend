@@ -1,10 +1,10 @@
 @font-face {
     font-family: 'coicons';
-    src:    url('fonts/coicons.eot?w6540j');
-    src:    url('fonts/coicons.eot?w6540j#iefix') format('embedded-opentype'),
-        url('fonts/coicons.ttf?w6540j') format('truetype'),
-        url('fonts/coicons.woff?w6540j') format('woff'),
-        url('fonts/coicons.svg?w6540j#coicons') format('svg');
+    src:    url('fonts/coicons.eot?sctkze');
+    src:    url('fonts/coicons.eot?sctkze#iefix') format('embedded-opentype'),
+        url('fonts/coicons.ttf?sctkze') format('truetype'),
+        url('fonts/coicons.woff?sctkze') format('woff'),
+        url('fonts/coicons.svg?sctkze#coicons') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -24,7 +24,31 @@ i.coicon {
     -moz-osx-font-smoothing: grayscale;
 }
 
-.co-window:before {
+.co-wizard:before {
+    content: "\e901";
+}
+.co-notepad:before {
+    content: "\e902";
+}
+.co-dotted-circle:before {
+    content: "\e903";
+}
+.co-dotted-square:before {
+    content: "\e904";
+}
+.co-dotted-duo:before {
+    content: "\e905";
+}
+.co-white-dice:before {
+    content: "\e906";
+}
+.co-lego:before {
+    content: "\e907";
+}
+.co-black-dice:before {
+    content: "\e908";
+}
+.co-logo:before {
     content: "\e900";
 }
 

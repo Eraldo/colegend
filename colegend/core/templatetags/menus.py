@@ -123,10 +123,6 @@ def menu(context, user=None, name='main'):
                             'locked': not user.is_staff,
                             'url': reverse('styleguide:index'),
                         },
-                        {
-                            'name': 'Legend',
-                            'locked': True,
-                        },
                     ],
                 },
             ]

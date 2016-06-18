@@ -76,16 +76,23 @@ fontawesome_icons = {
     'description': 'align-left',
 }
 
-coicons = [
-    'game', 'duo', 'tribe', 'clan', 'apps', 'project', 'roles'
-]
+coicons = {
+    'game': 'black-dice',
+    'duo': 'dotted-duo',
+    'tribe': 'dotted-square',
+    'clan': 'dotted-circle',
+    'apps': 'lego',
+    'project': 'logo',
+    'roles': 'wizard',
+}
 
 
 def get_icon_class(name):
     if name in coicons:
-        return 'coicon co-{}'.format(name)
+        return 'coicon co-{}'.format(coicons.get(name))
     else:
         name = fontawesome_icons.get(name, name)
         return 'fa-{}'.format(name)
 
-icons = list(fontawesome_icons.keys()) + coicons
+
+icons = list(fontawesome_icons.keys()) + list(coicons.keys())
