@@ -10,6 +10,11 @@ from django.views.generic import RedirectView, TemplateView
 
 from colegend.home.views import JoinView
 
+from wagtail.wagtailcore import urls as wagtail_urls
+from wagtail.wagtailadmin import urls as wagtailadmin_urls
+from wagtail.wagtaildocs import urls as wagtaildocs_urls
+from wagtail.wagtailsearch import urls as wagtailsearch_urls
+
 __author__ = 'Eraldo Energy'
 
 BACKEND_NAME = 'coLegend backend'
@@ -36,9 +41,9 @@ urlpatterns = [
     url(r'^tags/', include('colegend.tags.urls', namespace='tags')),
 
     # Your stuff: custom urls includes go here
-    url(r'^$', RedirectView.as_view(url='home/', permanent=False), name='index'),
+    # url(r'^$', RedirectView.as_view(url='home/', permanent=False), name='index'),
 
-    url(r'^home/$', include('colegend.home.urls')),
+    url(r'^home/', include('colegend.home.urls')),
 
     url(r'^about/', include('colegend.about.urls')),
     url(r'^support/', include('colegend.support.urls')),
@@ -92,6 +97,8 @@ if settings.DEBUG:
 
 urlpatterns += [
     # CMS
-    # url(r'^files/', include('filer.urls')),
-    # url(r'^', include('cms.urls')),
+    url(r'^cms/', include(wagtailadmin_urls)),
+    url(r'^search/', include(wagtailsearch_urls)),
+    url(r'^documents/', include(wagtaildocs_urls)),
+    url(r'^', include(wagtail_urls)),
 ]

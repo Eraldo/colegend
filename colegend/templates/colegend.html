@@ -1,4 +1,4 @@
-{% load staticfiles i18n %}
+{% load staticfiles i18n wagtailuserbar %}
 <!DOCTYPE html>
 
 <html lang="en" ng-app>
@@ -148,6 +148,7 @@
     {% block extra_script %}{% endblock %}
 
 {% endblock javascript %}
+{% wagtailuserbar %}
 </body>
 </html>
 

@@ -1,18 +1,22 @@
 # Bleeding edge Django
+# ------------------------------------------------
 django==1.9.7
 
 # Configuration
+# ------------------------------------------------
 django-environ==0.4.0
 django-secure==1.0.1
 whitenoise==2.0.6
 
 # Forms
+# ------------------------------------------------
 django-braces==1.8.1
 django-crispy-forms==1.6.0
 django-floppyforms==1.5.2
 django-bootstrap3-datetimepicker-2==2.4.2
 
 # Models
+# ------------------------------------------------
 django-model-utils==2.3.1
 django-annoying==0.8.5
 django-phonenumber-field==1.0.0
@@ -21,49 +25,64 @@ django-simplemde==0.0.9
 django-autocomplete-light==3.1.6
 
 # Markdown
+# ------------------------------------------------
 Markdown==2.6.5
 bleach==1.4.2
 
 # Images
+# ------------------------------------------------
 Pillow==3.2.0
 easy-thumbnails==2.3
 django-gravatar2==1.4.0
 
+# Accounts
+# ------------------------------------------------
 # For user registration, either via email or social
 # Well-built with regular release cycles!
 django-allauth==0.24.1
 
+# Database
+# ------------------------------------------------
 # Python-PostgreSQL Database Adapter
 psycopg2==2.6.1
 
 # Unicode slugification
+# ------------------------------------------------
 unicode-slugify==0.1.3
 django-autoslug==1.9.3
 
 # Time zones support
+# ------------------------------------------------
 pytz==2015.7
 
 # Redis support
+# ------------------------------------------------
 django-redis==4.3.0
 redis>=2.10.0
 
+# Celery
+# ------------------------------------------------
 celery==3.1.19
 
 
 # Your custom requirements go here
 
 # CMS
-#currently removed
+# ------------------------------------------------
+wagtail==1.5.2
 
 # Views
+# ------------------------------------------------
 django-filter==0.13.0
 
 # slack IM
+# ------------------------------------------------
 # django-slack==4.1.1
 # Using from pull request (to make it compatible with python3)
 # https://github.com/lamby/django-slack/pull/20
 -e git+git://github.com/Eraldo/django-slack.git@python3-support-eraldo#egg=django-slack
 
 # Prologue (story/prologue)
+# ------------------------------------------------
 # WAITING: Replace with geoip2 in django 1.9 https://docs.djangoproject.com/en/1.9/ref/contrib/gis/geoip2/
 pygeoip==0.3.2

@@ -1,14 +1,16 @@
 from django.contrib.admin.templatetags.admin_static import static
-from django.template.loader import render_to_string
-from django.utils.safestring import mark_safe
 from django.views.generic import TemplateView
 
+from colegend.about.models import AboutPage
+from colegend.home.views import PageMixin
 from colegend.roles.models import Role
 
 __author__ = 'Eraldo Energy'
 
 
-class AboutView(TemplateView):
+class AboutView(PageMixin, TemplateView):
+    page_class = AboutPage
+    page_query_kwargs = {'slug': 'about'}
     template_name = "about/about.html"
 
     def get_context_data(self, **kwargs):

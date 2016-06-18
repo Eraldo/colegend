@@ -39,13 +39,20 @@ DJANGO_APPS = (
 )
 
 CMS_APPS = (
-    # 'cms',  # django CMS itself
-    # 'treebeard',  # utilities for implementing a tree
-    # 'menus',  # helper for model independent hierarchical website navigation
-    # 'sekizai',  # for JavaScript and CSS management
+    'wagtail.wagtailforms',
+    'wagtail.wagtailredirects',
+    'wagtail.wagtailembeds',
+    'wagtail.wagtailsites',
+    'wagtail.wagtailusers',
+    'wagtail.wagtailsnippets',
+    'wagtail.wagtaildocs',
+    'wagtail.wagtailimages',
+    'wagtail.wagtailsearch',
+    'wagtail.wagtailadmin',
+    'wagtail.wagtailcore',
 
-    # django-autocomplte-light v3 ..should be before 'django.contrib.admin' to enable it there.
-
+    'taggit',
+    'modelcluster',
 )
 
 THIRD_PARTY_APPS = (
@@ -122,6 +129,9 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    # wagtail cms
+    'wagtail.wagtailcore.middleware.SiteMiddleware',
+    'wagtail.wagtailredirects.middleware.RedirectMiddleware',
 )
 
 # MIGRATIONS CONFIGURATION
@@ -146,7 +156,7 @@ FIXTURE_DIRS = (
 # ------------------------------------------------------------------------------
 EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
 DEFAULT_FROM_EMAIL = env('DJANGO_DEFAULT_FROM_EMAIL',
-                         default='coLegend <noreply@colegend.org>')
+                         default='coLegend <connect@colegend.org>')
 EMAIL_SUBJECT_PREFIX = env("DJANGO_EMAIL_SUBJECT_PREFIX", default='[coLegend] ')
 SERVER_EMAIL = env('DJANGO_SERVER_EMAIL', default=DEFAULT_FROM_EMAIL)
 
@@ -330,6 +340,20 @@ THUMBNAIL_PROCESSORS = (
     'easy_thumbnails.processors.filters',
 )
 THUMBNAIL_BASEDIR = 'thumbnails'
+
+
+# WATAIL CMS
+# ------------------------------------------------------------------------------
+WAGTAIL_SITE_NAME = 'coLegend'
+WAGTAILIMAGES_MAX_UPLOAD_SIZE = 1 * 1024 * 1024 #  Example: `20 * 1024 * 1024` => 20MB
+WAGTAILADMIN_NOTIFICATION_USE_HTML = True
+TAGGIT_CASE_INSENSITIVE = True
+# WAGTAILADMIN_NOTIFICATION_FROM_EMAIL = 'connect@colegend.org'
+# PASSWORD_REQUIRED_TEMPLATE = 'myapp/password_required.html'
+# WAGTAIL_USER_EDIT_FORM = 'users.forms.CustomUserEditForm'
+# WAGTAIL_USER_CREATION_FORM = 'users.forms.CustomUserCreationForm'
+# WAGTAIL_USER_CUSTOM_FIELDS = ['country']
+# WAGTAIL_USAGE_COUNT_ENABLED = True
 
 
 # SLACK CHAT
