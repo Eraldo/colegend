@@ -1,20 +1,16 @@
-{% load i18n %}
+{% load i18n core_tags %}
 
 {% for node in nodes %}
     <li class="nav-item {% if node.ancestor %}ancestor{% endif %}
         {% if node.selected %} active{% endif %}
         {% if node.nodes %} dropdown{% endif %}">
         {% if node.nodes %}
-            <a id="menu-item-{{ node.name }}" class="nav-link btn btn-link dropdown-toggle" data-toggle="dropdown"
-               href="#"
-               role="button" aria-haspopup="true" aria-expanded="false">
-                {{ node.name }}
-            </a>
+            {% button name=node.name url=node.url classes='nav-link btn-link dropdown-toggle' locked=node.locked icon=node.name|slugify attributes='data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"' %}
             <div class="dropdown-menu" aria-labelledby="menu-item-{{ node.name }}">
             {% include 'widgets/submenu.html' with nodes=node.nodes %}
             </div>
         {% else %}
-            <a class="nav-link btn btn-link" href="{{ node.url }}"><span>{{ node.name }}</span></a>
+            {% button name=node.name url=node.url classes='nav-link btn-link' locked=node.locked icon=node.name|slugify %}
         {% endif %}
     </li>
 {% endfor %}

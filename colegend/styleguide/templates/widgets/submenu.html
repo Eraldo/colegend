@@ -1,4 +1,4 @@
 {% load i18n core_tags %}
 {% for node in nodes %}
-    <a class="dropdown-item{% if node.locked %} disabled{% endif %}"{% if not node.locked and node.url %} href="{{ node.url }}"{% endif %}><span>{{ node.name }}</span></a>
+    {% button name=node.name url=node.url classes='dropdown-item' locked=node.locked icon=node.name|slugify %}
 {% endfor %}

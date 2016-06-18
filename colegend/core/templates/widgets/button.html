@@ -1,1 +1,1 @@
-<a {% if url %}href="{{ url }}" {% endif %}class="widget-button{% if classes %} {{ classes }}{% endif %}">{{ content }}</a>
+<a {% if url %}href="{{ url }}" {% endif %}class="widget-button{% if classes %} {{ classes }}{% endif %}"{% if attributes %} {{ attributes }}{% endif %}>{{ content }}</a>
