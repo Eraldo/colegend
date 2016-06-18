@@ -5,9 +5,7 @@ from django.db import models
 from django.shortcuts import redirect
 from wagtail.wagtailcore.models import Page
 
-from colegend.roles.models import Role
-
 
 class AboutPage(Page):
-    def serve(self, request):
+    def serve(self, request, *args, **kwargs):
         return redirect('about')
