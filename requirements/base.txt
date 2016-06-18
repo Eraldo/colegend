@@ -1,5 +1,5 @@
 # Bleeding edge Django
-django==1.9.1
+django==1.9.7
 
 # Configuration
 django-environ==0.4.0
@@ -25,7 +25,7 @@ Markdown==2.6.5
 bleach==1.4.2
 
 # Images
-Pillow==3.0.0
+Pillow==3.2.0
 easy-thumbnails==2.3
 django-gravatar2==1.4.0
 
