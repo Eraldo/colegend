@@ -1,3 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}Game{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}{% include 'widgets/breadcrumb.html' with pattern='game:index' title='Game' icon='game' %}
+{% endblock %}

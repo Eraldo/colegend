@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block title %}Events{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}{% include 'widgets/breadcrumb.html' with pattern='events:index' title='Events' icon='event' %}
+{% endblock %}

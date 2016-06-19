@@ -1,4 +1,4 @@
 {% load i18n core_tags %}
 {% for node in nodes %}
-    {% button name=node.name url=node.url classes='dropdown-item' locked=node.locked icon=node.name|slugify %}
+    {% button name=node.name url=node.url classes='dropdown-item' locked=node.locked external=node.external icon=node.name|slugify %}
 {% endfor %}

@@ -1,1 +1,8 @@
 {% extends 'base.html' %}
+
+{% block title %}Styleguide{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% include 'widgets/breadcrumb.html' with pattern='roles:index' title='Styleguide' icon='styleguide' %}
+{% endblock %}

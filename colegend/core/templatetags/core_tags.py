@@ -110,7 +110,7 @@ render_icon = icon
 
 
 @register.simple_tag()
-def button(name, url=None, pattern=None, prefix='btn', content=None, classes='btn-primary', icon=None, size=None, locked=False, attributes=None):
+def button(name, url=None, pattern=None, prefix='btn', content=None, classes='btn-primary', icon=None, size=None, locked=False, external=False, attributes=None):
     classes_dict = {
         'list': 'btn-secondary btn-sm',
         'create': 'btn-secondary btn-sm',
@@ -151,6 +151,7 @@ def button(name, url=None, pattern=None, prefix='btn', content=None, classes='bt
         'url': url,
         'classes': classes,
         'content': content,
+        'external': external,
         'attributes': attributes,
     }
     template = 'widgets/button.html'

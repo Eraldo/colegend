@@ -5,12 +5,12 @@
         {% if node.selected %} active{% endif %}
         {% if node.nodes %} dropdown{% endif %}">
         {% if node.nodes %}
-            {% button name=node.name url=node.url classes='nav-link btn-link dropdown-toggle' locked=node.locked icon=node.name|slugify attributes='data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"' %}
+            {% button name=node.name url=node.url classes='nav-link btn-link dropdown-toggle' locked=node.locked external=node.external icon=node.name|slugify attributes='data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"' %}
             <div class="dropdown-menu" aria-labelledby="menu-item-{{ node.name }}">
             {% include 'widgets/submenu.html' with nodes=node.nodes %}
             </div>
         {% else %}
-            {% button name=node.name url=node.url classes='nav-link btn-link' locked=node.locked icon=node.name|slugify %}
+            {% button name=node.name url=node.url classes='nav-link btn-link' locked=node.locked external=node.external icon=node.name|slugify %}
         {% endif %}
     </li>
 {% endfor %}

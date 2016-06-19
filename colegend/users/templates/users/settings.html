@@ -3,6 +3,11 @@
 
 {% block title %}Settings{% endblock %}
 
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% include 'widgets/breadcrumb.html' with pattern='settings:index' title='Settings' icon='settings' %}
+{% endblock %}
+
 {% block page_links %}
     <a href="{% url 'tags:index' %}" class="btn nav-item nav-link">Tags</a>
     <a href="#" class="nav-item nav-link disaabled">Locations</a>

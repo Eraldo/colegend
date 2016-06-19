@@ -74,7 +74,7 @@ def menu(context, user=None, name='main'):
                         {
                             'name': 'Guide',
                             'locked': not user.has_checkpoint('cloud guide card'),
-                            'url': reverse('guides:guide'),
+                            'url': reverse('guides:index'),
                         },
                         {
                             'name': 'Chat',
