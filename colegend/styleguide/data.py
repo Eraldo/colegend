@@ -739,7 +739,7 @@ widgets.append(
                 'Legend large',
                 template='legends/widgets/legend.html',
                 context={
-                    'avatar': Widget.get('Legend avatar'),
+                    'avatar': Widget.get('Large avatar'),
                     'link': Widget.get('Legend link'),
                 }
             ),
