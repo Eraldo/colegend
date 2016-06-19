@@ -14,10 +14,10 @@ widgets = []
 widgets.append(
     TagWidget(
         'Styleguide widget example',
-        tag='headline',
+        tag='heading',
         libraries='core_tags',
         parameters={
-            'content': 'Headline widget example as tag with comments',
+            'content': 'Heading widget example as tag with comments',
             'level': 4,
         },
         comment='Help foo\nbla',
@@ -212,51 +212,51 @@ widgets.append(
 
 widgets.append(
     WidgetGroup(
-        'Headlines',
+        'Headings',
         columns=12,
         widgets=[
             TagWidget(
-                'Headline 1',
-                tag='headline',
+                'Heading 1',
+                tag='heading',
                 parameters={
                     'content': 'Heading Level 1',
                 }
             ),
             Widget(
-                'Headline 2',
-                template='widgets/headline.html',
+                'Heading 2',
+                template='widgets/heading.html',
                 context={
                     'content': 'Heading Level 2',
                     'level': 2,
                 }
             ),
             Widget(
-                'Headline 3',
-                template='widgets/headline.html',
+                'Heading 3',
+                template='widgets/heading.html',
                 context={
                     'content': 'Heading Level 3',
                     'level': 3,
                 }
             ),
             Widget(
-                'Headline 4',
-                template='widgets/headline.html',
+                'Heading 4',
+                template='widgets/heading.html',
                 context={
                     'content': 'Heading Level 4',
                     'level': 4,
                 }
             ),
             Widget(
-                'Headline 5',
-                template='widgets/headline.html',
+                'Heading 5',
+                template='widgets/heading.html',
                 context={
                     'content': 'Heading Level 5',
                     'level': 5,
                 }
             ),
             Widget(
-                'Headline 6',
-                template='widgets/headline.html',
+                'Heading 6',
+                template='widgets/heading.html',
                 context={
                     'content': 'Heading Level 6',
                     'level': 6,

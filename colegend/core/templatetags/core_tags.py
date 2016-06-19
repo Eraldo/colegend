@@ -63,14 +63,14 @@ def image(url, name=None, classes=None):
 
 
 @register.simple_tag()
-def headline(content, level=1, classes=None):
-    headline_template = 'widgets/headline.html'
-    headline_context = {
+def heading(content, level=1, classes=None):
+    heading_template = 'widgets/heading.html'
+    heading_context = {
         'level': level,
         'content': content,
         'classes': classes or '',
     }
-    return render_to_string(headline_template, context=headline_context)
+    return render_to_string(heading_template, context=heading_context)
 
 
 @register.simple_tag

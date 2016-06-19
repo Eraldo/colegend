@@ -5,7 +5,9 @@ from django.db import models
 from django.shortcuts import redirect
 from wagtail.wagtailcore.models import Page
 
+from colegend.cms.models import SinglePageMixin
 
-class AboutPage(Page):
+
+class AboutPage(SinglePageMixin, Page):
     def serve(self, request, *args, **kwargs):
         return redirect('about')

@@ -6,8 +6,10 @@ from wagtail.wagtailadmin.edit_handlers import FieldPanel
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page
 
+from colegend.cms.models import SinglePageMixin
 
-class HomePage(Page):
+
+class HomePage(SinglePageMixin, Page):
     template = 'home/index.html'
 
     content = RichTextField(blank=True)

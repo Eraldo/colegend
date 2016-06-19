@@ -64,6 +64,10 @@ TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 # Your local stuff: Below this line define 3rd party library settings
 
+# CMS
+# ------------------------------------------------------------------------------
+INSTALLED_APPS += ('wagtail.contrib.wagtailstyleguide', )
+
 # Slack
 # ------------------------------------------------------------------------------
 SLACK_BACKEND = 'django_slack.backends.ConsoleBackend'
