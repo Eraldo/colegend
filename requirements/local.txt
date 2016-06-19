@@ -13,13 +13,6 @@ django-debug-toolbar==1.4
 # ------------------------------------------------
 ipdb==0.10.0
 
-
-# Enables better email testing
-# ------------------------------------------------
-#maildump==0.5.1
-# Required by maildump.
-gevent==1.1b6
-
 # Management tasks
 # ------------------------------------------------
 invoke==0.12.2
