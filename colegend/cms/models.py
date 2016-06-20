@@ -1,3 +1,4 @@
+from django.db import ProgrammingError
 from wagtail.wagtailadmin.edit_handlers import StreamFieldPanel
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.models import Page
@@ -15,8 +16,11 @@ class SinglePageMixin(object):
     @classmethod
     def clean_parent_page_models(cls):
         # Only allow a single instance.
-        if cls.objects.exists():
-            return []
+        try:
+            if cls.objects.first().exists():
+                return []
+        except ProgrammingError:  # not migrated yet.
+            pass
         return super().clean_parent_page_models()
 
 
