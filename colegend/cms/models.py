@@ -17,7 +17,7 @@ class SinglePageMixin(object):
     def clean_parent_page_models(cls):
         # Only allow a single instance.
         try:
-            if cls.objects.first().exists():
+            if cls.objects.exists():
                 return []
         except ProgrammingError:  # not migrated yet.
             pass
