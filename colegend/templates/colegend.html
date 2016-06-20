@@ -37,6 +37,7 @@
         <!-- This file store project specific CSS -->
         <link href="{% static 'css/colegend.css' %}" rel="stylesheet">
         <link href="{% static 'fonts/coicons/style.css' %}" rel="stylesheet">
+        <link href="{% static 'cms/css/index.css' %}" rel="stylesheet">
 
         {% block extra_head %}{% endblock %}
 
@@ -148,7 +149,9 @@
     {% block extra_script %}{% endblock %}
 
 {% endblock javascript %}
-{% wagtailuserbar %}
+<div class="widget-cms-userbar">
+    {% wagtailuserbar position='top-right' %}
+</div>
 </body>
 </html>
 
