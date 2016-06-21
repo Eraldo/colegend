@@ -9,7 +9,7 @@
     font-style: normal;
 }
 
-i.coicon {
+.coicon:before {
     /* use !important to prevent issues with browser extensions that change fonts */
     font-family: 'coicons' !important;
     speak: none;
