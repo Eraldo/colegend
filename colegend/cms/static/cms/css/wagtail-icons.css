@@ -1,0 +1,6 @@
+.object .stream-menu .icon-fa:before {
+  font-family: "FontAwesome" !important; }
+.object .stream-menu .icon-fa.coicon:before {
+  font-family: "coicons" !important; }
+
+/*# sourceMappingURL=wagtail-icons.css.map */

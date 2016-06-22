@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AACE,oCAAe;EACb,WAAW,EAAE,wBAAwB;AACvC,2CAAsB;EACpB,WAAW,EAAE,oBAAoB",
+"sources": ["../sass/wagtail-icons.sass"],
+"names": [],
+"file": "wagtail-icons.css"
+}
