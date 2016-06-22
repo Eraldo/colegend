@@ -8,7 +8,7 @@ from colegend.cms.blocks import BASE_BLOCKS
 __author__ = 'Eraldo Energy'
 
 
-class SinglePageMixin(object):
+class UniquePageMixin(object):
     """
     Mixin for Wagtail pages to make sure only one of this Page exists.
     """
