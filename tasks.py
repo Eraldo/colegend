@@ -128,7 +128,7 @@ def maintenance(on=False, off=False):
 @task
 def backup():
     """
-    Backup the database. (development only)
+    Backup the database.
     """
     environment = context.get('environment')
     if environment == 'development':
@@ -145,6 +145,15 @@ def backup():
         message('backing up production database')
         local_run('curl -o backups/{environment}/{project}-{environment}_`date +%Y-%m-%d_%H%M%S`.dump `heroku pg:backups public-url --app {app}`'.format(
             project=project_name, environment=environment, app=app))
+
+
+@task
+def restore():
+    """
+    Restore the database from a backup.
+    """
+    message('restoring database')
+    message('Please use: pg_restore -d colegend colegend-development_YYYY-MM-DD_hhmmss.dump')
 
 
 @task
