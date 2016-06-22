@@ -1,6 +1,6 @@
 {% load styleguide_widgets_tags %}
 <div class="widget-buttons {{ classes|default:'btn-group' }}" role="group" aria-label="Buttons">
     {% for button in buttons %}
-        {% button %}
+        {{ button }}
     {% endfor %}
 </div>

@@ -541,12 +541,12 @@ widgets.append(
         'Avatars',
         columns=3,
         widgets=[
-            Widget(
+            TagWidget(
                 'Anonymous avatar',
-                template='widgets/avatar.html',
-                context={
-                    'name': 'Anonymous',
+                tag='avatar',
+                parameters={
                     'image': static('legends/images/anonymous.png'),
+                    'name': 'Anonymous',
                 }
             ),
             Widget(
@@ -578,10 +578,10 @@ widgets.append(
                     'classes': 'large',
                 }
             ),
-            Widget(
+            TagWidget(
                 'Cake avatar',
-                template='widgets/avatar.html',
-                context={
+                tag='avatar',
+                parameters={
                     'name': 'Cake',
                     'image': static('styleguide/images/icon_cake.png'),
                     'classes': 'bg-main-light',
@@ -605,23 +605,14 @@ widgets.append(
         'Button groups',
         columns=12,
         widgets=[
-            Widget(
+            TagWidget(
                 'Horizontal buttons',
-                template='widgets/buttons.html',
-                context={
+                tag='buttons',
+                parameters={
                     'buttons': [
-                        {
-                            'content': 'Button 1',
-                            'classes': 'btn btn-primary',
-                        },
-                        {
-                            'content': 'Button 2',
-                            'classes': 'btn btn-primary',
-                        },
-                        {
-                            'content': 'Button 3',
-                            'classes': 'btn btn-primary',
-                        },
+                        Widget.get('Action button'),
+                        Widget.get('Secondary button'),
+                        Widget.get('Success button'),
                     ],
                 }
             ),
@@ -630,18 +621,9 @@ widgets.append(
                 template='widgets/buttons.html',
                 context={
                     'buttons': [
-                        {
-                            'content': 'Button 1',
-                            'classes': 'btn btn-primary',
-                        },
-                        {
-                            'content': 'Button 2',
-                            'classes': 'btn btn-primary',
-                        },
-                        {
-                            'content': 'Button 3',
-                            'classes': 'btn btn-primary',
-                        },
+                        Widget.get('Action button'),
+                        Widget.get('Secondary button'),
+                        Widget.get('Success button'),
                     ],
                     'classes': 'btn-group btn-group-sm',
                 }
@@ -651,18 +633,9 @@ widgets.append(
                 template='widgets/buttons.html',
                 context={
                     'buttons': [
-                        {
-                            'content': 'Button 1',
-                            'classes': 'btn btn-primary',
-                        },
-                        {
-                            'content': 'Button 2',
-                            'classes': 'btn btn-primary',
-                        },
-                        {
-                            'content': 'Button 3',
-                            'classes': 'btn btn-primary',
-                        },
+                        Widget.get('Action button'),
+                        Widget.get('Secondary button'),
+                        Widget.get('Success button'),
                     ],
                     'classes': 'btn-group-vertical',
                 }

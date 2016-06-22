@@ -168,3 +168,13 @@ def speech_bubble(content, direction='left', arrow_classes=None, responsive=Fals
         'content': content,
     }
     return render_to_string(speech_bubble_template, context=speech_bubble_context)
+
+
+@register.simple_tag()
+def buttons(buttons, classes=None):
+    buttons_template = 'widgets/buttons.html'
+    buttons_context = {
+        'buttons': buttons,
+        'classes': classes or '',
+    }
+    return render_to_string(buttons_template, context=buttons_context)
