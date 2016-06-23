@@ -76,11 +76,7 @@ def heading(content, level=1, classes=None):
 @register.simple_tag
 def icon(name, prefix='fa', large=False, fixed=False, spin=False, pulse=False, list=False,
          rotate=0, border=False, color=None, classes=None, raw=False):
-    name = get_icon_class(name)
-    icon = '{prefix} {name}'.format(
-        prefix=prefix,
-        name=name,
-    )
+    icon = get_icon_class(name)
     if large:
         icon += ' {}-lg'.format(prefix)
     if fixed:
@@ -96,7 +92,7 @@ def icon(name, prefix='fa', large=False, fixed=False, spin=False, pulse=False, l
     if border:
         icon += ' {}-border'.format(prefix)
     if classes:
-        icon += ' {}-classes'.format(prefix)
+        icon += ' {}'.format(classes)
     if raw:
         return icon
     context = {

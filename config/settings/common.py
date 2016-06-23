@@ -83,6 +83,7 @@ LOCAL_APPS = (
     'colegend.about',
     'colegend.home',
     'colegend.support',
+    'colegend.blog',
 
     # common
     'colegend.categories',
@@ -115,6 +116,7 @@ LOCAL_APPS = (
     'colegend.sandbox',
 
     'colegend.cms',
+    'colegend.coicons',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

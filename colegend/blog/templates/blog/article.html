@@ -1,0 +1,28 @@
+{% extends 'pages/content.html' %}
+{% load core_tags wagtailcore_tags %}
+
+{% block content %}
+    {% heading page.title %}
+    <p>
+        <u>Date:</u>
+        {{ page.date }}
+    </p>
+    <p>
+        <u>Tags:</u>
+        {% for tag in page.tags.all %}
+            {{ tag }}
+        {% endfor %}
+    </p>
+    <p>
+        <u>Image:</u>
+        {{ page.image }}
+    </p>
+    <p>
+        <u>Color:</u>
+        {{ page.color }}
+    </p>
+    <p>
+        <u>Content:</u>
+        {{ page.content|richtext }}
+    </p>
+{% endblock %}

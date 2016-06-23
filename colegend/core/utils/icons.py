@@ -1,3 +1,4 @@
+
 __author__ = 'Eraldo Energy'
 
 fontawesome_icons = {
@@ -97,7 +98,7 @@ def get_icon_class(name):
         return 'coicon co-{}'.format(coicons.get(name))
     else:
         name = fontawesome_icons.get(name, name)
-        return 'fa-{}'.format(name)
+        return 'fa fa-{}'.format(name)
 
 
 icons = list(fontawesome_icons.keys()) + list(coicons.keys())

@@ -153,7 +153,7 @@ def restore():
     Restore the database from a backup.
     """
     message('restoring database')
-    message('Please use: pg_restore -d colegend colegend-development_YYYY-MM-DD_hhmmss.dump')
+    message('Please use: dropdb colegend && createdb colegend && pg_restore -d colegend colegend-development_YYYY-MM-DD_hhmmss.dump')
 
 
 @task

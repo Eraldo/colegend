@@ -15,7 +15,7 @@ class HomePage(UniquePageMixin, Page):
     content = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
-        FieldPanel('content', classname="full")
+        FieldPanel('content', classname="full"),
     ]
 
     def serve(self, request, *args, **kwargs):
