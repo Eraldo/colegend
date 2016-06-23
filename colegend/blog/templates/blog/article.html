@@ -1,8 +1,15 @@
 {% extends 'pages/content.html' %}
 {% load core_tags wagtailcore_tags %}
 
+{% block title %}
+    {{ page.title }}
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}{% include 'widgets/breadcrumb.html' with url=page.get_blog.url title='Blog' icon='blog' %}
+{% endblock %}
+
 {% block content %}
-    {% heading page.title %}
     <p>
         <u>Date:</u>
         {{ page.date }}
@@ -25,4 +32,5 @@
         <u>Content:</u>
         {{ page.content|richtext }}
     </p>
+    {{ page.get_blog }}
 {% endblock %}
