@@ -30,7 +30,7 @@ class BlogPage(UniquePageMixin, Page):
 
     @property
     def tags(self):
-        return BlogTag.objects.all()
+        return BlogTag.objects.filter(blog_blogpagetag_items__isnull=False).distinct()
 
     class Meta:
         verbose_name = _('Blog')
