@@ -1,0 +1,20 @@
+{% load core_tags %}
+<a href="{{ url }}" style="text-decoration: none">
+    <div class="widget-blog-article text-center {{ classes }} card bg-content">
+        <div style="background-color: {{ color }}">
+            {% if image %}
+                {% image url=image %}
+            {% endif %}
+        </div>
+        <div class="card-block">
+            <div class="blog-article-tags small text-muted">
+                {% for tag in tags %}
+                    {% if forloop.first %}&mdash;{% endif %}
+                    {{ tag }}
+                    {% if forloop.last %}&mdash;{% endif %}
+                {% endfor %}
+            </div>
+            <span class="large">{{ title }}</span>
+        </div>
+    </div>
+</a>

@@ -1,13 +1,8 @@
 {% extends 'blog/base.html' %}
-{% load static core_tags %}
+{% load core_tags %}
 
 {% block title %}
     {{ page.title }}
-{% endblock %}
-
-{% block extra_head %}
-    {{ block.super }}
-    <link href="{% static 'blog/css/index.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block breadcrumbs %}

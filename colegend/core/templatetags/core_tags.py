@@ -52,8 +52,10 @@ def avatar(image, name=None, url=None, classes=None):
 
 
 @register.simple_tag()
-def image(url, name=None, classes=None):
+def image(url, name=None, classes='', responsive=True):
     image_template = 'widgets/image.html'
+    if responsive:
+        classes += ' img-responsive'
     image_context = {
         'url': url,
         'name': name,
