@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load core_tags %}
 
+{% block title %}
+    {{ page.title }}
+{% endblock %}
+
 {% block content %}
     {% heading page.title %}
     {{ page.content }}

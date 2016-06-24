@@ -36,7 +36,7 @@ fontawesome_icons = {
     'events': 'calendar-check-o',
     'support': 'question-circle',
     'documentation': 'file-text-o',
-    'news': 'newspaper-o',
+    'blog': 'newspaper-o',
     'styleguide': 'paint-brush',
     'quote': 'quote-left',
     # user

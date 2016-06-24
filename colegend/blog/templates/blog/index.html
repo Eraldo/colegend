@@ -1,9 +1,8 @@
-{% extends 'pages/content.html' %}
+{% extends 'blog/base.html' %}
 {% load core_tags %}
 
 {% block content %}
-    {% heading page.title %}
     {% for article in page.articles %}
-        {% link article url=article.url %}
+        {% link article url=article.url %}<br>
     {% endfor %}
 {% endblock %}

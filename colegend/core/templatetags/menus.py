@@ -1,6 +1,7 @@
 from django import template
 from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
+from wagtail.wagtailcore.templatetags.wagtailcore_tags import slugurl
 
 register = template.Library()
 
@@ -111,8 +112,8 @@ def menu(context, user=None, name='main'):
                             'url': reverse('support:index'),
                         },
                         {
-                            'name': 'News',
-                            'locked': True,
+                            'name': 'Blog',
+                            'url': slugurl(context, slug='blog'),
                         },
                         {
                             'name': 'Roles',
