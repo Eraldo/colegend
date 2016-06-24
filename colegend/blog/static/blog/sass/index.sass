@@ -2,19 +2,20 @@
 .widget-blog-article-detail
   .blog-article-meta
     color: rgba(255,255,255,.5)
+  .blog-article-header
+    padding-top: 4em
   .blog-image
     max-height: 20em
     margin: 0 auto
+  .blog-article-lead
+    font-size: 1.5em
+    &:first-letter
+      float: left
+      font-size: 3em
+      font-weight: 700
+      margin: 0 0.1em 0 0em
+      line-height: 1em
   .blog-article-content
     max-width: 60em
     margin: 2em auto
-    div.widget-richtext:first-child
-      .rich-text > p:first-child
-        font-size: 1.5em
-        &:first-letter
-          //color: #6bdaed
-          float: left
-          font-size: 3em
-          font-weight: 700
-          margin: 0 0.1em 0 0em
-          line-height: 1em
+

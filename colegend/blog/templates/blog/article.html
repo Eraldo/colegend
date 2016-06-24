@@ -18,20 +18,23 @@
 
 {% block content %}
     <div class="widget-blog-article-detail">
-        <div style="{% if page.color %} background-color: {{ page.color }}{% endif %}; padding-top: 4em"
-             class="text-center">
+        <div style="background-color: {{ color }}" class="blog-article-header text-center">
             <h1 class="text-white">{{ page.title }}</h1>
             <div class="blog-article-meta">
                 {{ page.owner }} |
-                {{ page.date }}{% if page.tags %} |{% for tag in page.tags.all %} {{ tag }}{% endfor %}{% endif %}
+                {{ page.date }}{% if page.tags.all %} |{% for tag in page.tags.all %} {{ tag }}{% endfor %}{% endif %}
             </div>
-            {% image image name=page.image classes="blog-image img-responsive" %}
+            {% if page.image %}
+                {% image image name=page.image classes="blog-image img-responsive" %}
+            {% endif %}
             <div class="clearfix"></div>
         </div>
-        <div class="blog-article-lead">
-            Even before you’re ready to offer international customer service, your website or product may attract customers who require support in their own languages.
-        </div>
         <div class="blog-article-content">
+            {% if page.lead %}
+                <p class="blog-article-lead">
+                    <span style="color: {{ color }}">{{ page.lead.0 }}</span>{{ page.lead|slice:"1:" }}
+                </p>
+            {% endif %}
             {{ page.content }}
         </div>
     </div>

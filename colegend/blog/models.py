@@ -17,6 +17,7 @@ from colegend.cms.models import UniquePageMixin
 
 class BlogPage(UniquePageMixin, Page):
     template = 'blog/index.html'
+
     @property
     def articles(self):
         articles = BlogArticlePage.objects.descendant_of(self).live()
@@ -46,14 +47,23 @@ class BlogTag(Tag):
 class BlogArticlePage(Page):
     template = 'blog/article.html'
 
-    content = StreamField(BASE_BLOCKS, blank=True)
-
+    lead = models.TextField(
+        verbose_name=_('Lead text'),
+        blank=True,
+    )
+    content = StreamField(
+        BASE_BLOCKS,
+        blank=True,
+    )
     date = models.DateField(
-        _("Display date"), default=timezone.now().date(),
+        verbose_name=_('Display date'), default=timezone.now().date(),
         help_text=_("This date may be displayed on the blog article. It is not "
                     "used to schedule posts to go live at a later date.")
     )
-    tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
+    tags = ClusterTaggableManager(
+        through=BlogPageTag,
+        blank=True
+    )
     image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -62,10 +72,29 @@ class BlogArticlePage(Page):
         related_name='+',
         verbose_name=_('Image')
     )
+    PINK = '#f72e74'
+    ORANGE = '#FFAB40'
+    YELLOW = '#eede39'
+    GREEN = '#a8e141'
+    CYAN = '#6bdaed'
+    BLUE = '#3197d6'
+    PURPLE = '#ad86fc'
+    DARK = '#455A64'
+    COLOR_CHOICES = (
+        (PINK, _('pink')),
+        (ORANGE, _('orange')),
+        (YELLOW, _('yellow')),
+        (GREEN, _('green')),
+        (CYAN, _('cyan')),
+        (BLUE, _('blue')),
+        (PURPLE, _('purple')),
+        (DARK, _('dark')),
+    )
     color = models.CharField(
         max_length=80,
         verbose_name=_('Color'),
         blank=True,
+        choices=COLOR_CHOICES,
     )
 
     class Meta:
@@ -73,6 +102,7 @@ class BlogArticlePage(Page):
         verbose_name_plural = _('Blog articles')
 
     content_panels = Page.content_panels + [
+        FieldPanel('lead'),
         StreamFieldPanel('content'),
         ImageChooserPanel('image'),
         FieldPanel('color'),
@@ -84,6 +114,7 @@ class BlogArticlePage(Page):
     ]
 
     search_fields = Page.search_fields + (
+        index.SearchField('lead'),
         index.SearchField('content'),
     )
 
@@ -92,6 +123,7 @@ class BlogArticlePage(Page):
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         context['image'] = self.image.get_rendition('max-1200x1200').url if self.image else ''
+        context['color'] = self.color or self.DARK
         return context
 
     def get_blog(self):

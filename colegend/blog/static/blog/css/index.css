@@ -1,0 +1,20 @@
+.widget-blog-article-detail .blog-article-meta {
+  color: rgba(255, 255, 255, 0.5); }
+.widget-blog-article-detail .blog-article-header {
+  padding-top: 4em; }
+.widget-blog-article-detail .blog-image {
+  max-height: 20em;
+  margin: 0 auto; }
+.widget-blog-article-detail .blog-article-lead {
+  font-size: 1.5em; }
+  .widget-blog-article-detail .blog-article-lead:first-letter {
+    float: left;
+    font-size: 3em;
+    font-weight: 700;
+    margin: 0 0.1em 0 0em;
+    line-height: 1em; }
+.widget-blog-article-detail .blog-article-content {
+  max-width: 60em;
+  margin: 2em auto; }
+
+/*# sourceMappingURL=index.css.map */
