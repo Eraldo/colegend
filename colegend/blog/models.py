@@ -4,13 +4,14 @@ from django.utils.translation import ugettext_lazy as _
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.fields import ParentalKey
 from taggit.models import TaggedItemBase, Tag
-from wagtail.wagtailadmin.edit_handlers import FieldPanel
-from wagtail.wagtailcore.fields import RichTextField
+from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel
+from wagtail.wagtailcore.fields import RichTextField, StreamField
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.models import register_snippet
 
+from colegend.cms.blocks import BASE_BLOCKS
 from colegend.cms.models import UniquePageMixin
 
 
@@ -45,7 +46,8 @@ class BlogTag(Tag):
 class BlogArticlePage(Page):
     template = 'blog/article.html'
 
-    content = RichTextField(verbose_name=_('content'))
+    content = StreamField(BASE_BLOCKS, blank=True)
+
     date = models.DateField(
         _("Display date"), default=timezone.now().date(),
         help_text=_("This date may be displayed on the blog article. It is not "
@@ -71,7 +73,7 @@ class BlogArticlePage(Page):
         verbose_name_plural = _('Blog articles')
 
     content_panels = Page.content_panels + [
-        FieldPanel('content', classname="full"),
+        StreamFieldPanel('content'),
         ImageChooserPanel('image'),
         FieldPanel('color'),
         FieldPanel('tags'),
@@ -89,6 +91,7 @@ class BlogArticlePage(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
+        context['image'] = self.image.get_rendition('max-1200x1200').url if self.image else ''
         return context
 
     def get_blog(self):
