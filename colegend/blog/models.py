@@ -28,10 +28,30 @@ class BlogPage(UniquePageMixin, Page):
         )
         return articles
 
+    @property
+    def tags(self):
+        return BlogTag.objects.all()
+
     class Meta:
         verbose_name = _('Blog')
 
     subpage_types = ['blog.BlogArticlePage']
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        articles = self.articles
+        # owners = articles.values_list('owner', flat=True)
+        tag = request.GET.get('tag')
+        if tag:
+            context['tag'] = tag
+            articles = articles.filter(tags__slug=tag)
+        owner = request.GET.get('owner')
+        if owner:
+            context['owner'] = owner
+            articles = articles.filter(owner__username=owner)
+        context['articles'] = articles
+        context['tags'] = self.tags
+        return context
 
 
 class BlogPageTag(TaggedItemBase):

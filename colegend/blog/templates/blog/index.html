@@ -1,9 +1,27 @@
 {% extends 'blog/base.html' %}
 {% load core_tags blog_tags %}
 
+{% block page_links %}
+    {% if not tag %}
+        {% button name='Most recent' url='.' classes='nav-item nav-link active' %}
+    {% else %}
+        {% button name='Most recent' url='.' classes='nav-item nav-link' %}
+    {% endif %}
+    {% with current_tag=tag %}
+        {% for tag in tags %}
+            {% if tag.slug == current_tag %}
+                {% button name=tag url='?tag='|add:tag.slug classes='nav-item nav-link active' %}
+            {% else %}
+                {% button name=tag url='?tag='|add:tag.slug classes='nav-item nav-link' %}
+            {% endif %}
+        {% endfor %}
+    {% endwith %}
+
+{% endblock %}
+
 {% block content %}
     <div class="row">
-        {% for article in page.articles %}
+        {% for article in articles %}
             <div class="col-md-4">
                 {% article article %}
             </div>
