@@ -3,10 +3,11 @@ All enhancements and patches to cookiecutter-django will be documented in this f
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [2016-??-??] version 0.1.10
+## [2016-06-25] version 0.1.10
 + Added custom icons to the cms
 + Added a content page type
 + Added basic stream field blocks
++ Added a blog app
 
 ## [2016-06-19] version 0.1.9
 + Refactored atomic elements to widgets
