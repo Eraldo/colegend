@@ -46,7 +46,6 @@ urlpatterns = [
     url(r'^home/', include('colegend.home.urls')),
 
     url(r'^about/', include('colegend.about.urls')),
-    url(r'^support/', include('colegend.support.urls')),
     url(r'^donations/', include('colegend.donations.urls', namespace='donations')),
     url(r'^roles/', include('colegend.roles.urls')),
     url(r'^category/', include('colegend.categories.urls', namespace='categories')),

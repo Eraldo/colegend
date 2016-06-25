@@ -109,7 +109,7 @@ def menu(context, user=None, name='main'):
                         },
                         {
                             'name': 'Support',
-                            'url': reverse('support:index'),
+                            'url': slugurl(context, slug='support'),
                         },
                         {
                             'name': 'Blog',
