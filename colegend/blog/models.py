@@ -78,7 +78,7 @@ class BlogPostPage(Page):
         blank=True,
     )
     date = models.DateField(
-        verbose_name=_('Display date'), default=timezone.now().date(),
+        verbose_name=_('Display date'), default=timezone.now().date,
         help_text=_("This date may be displayed on the blog post. It is not "
                     "used to schedule posts to go live at a later date.")
     )
