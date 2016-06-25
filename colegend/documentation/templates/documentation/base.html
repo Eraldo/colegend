@@ -1,0 +1,7 @@
+{% extends 'pages/content.html' %}
+{% load static %}
+
+{% block extra_head %}
+    {{ block.super }}
+    <link href="{% static 'documentation/css/index.css' %}" rel="stylesheet">
+{% endblock %}

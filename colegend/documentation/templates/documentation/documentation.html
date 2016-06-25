@@ -1,0 +1,33 @@
+{% extends 'documentation/base.html' %}
+{% load core_tags %}
+
+{#{% block breadcrumbs %}#}
+{#    {{ block.super }}{% include 'widgets/breadcrumb.html' with url=page.index_url title='Documentation' icon='documentation' %}#}
+{#{% endblock %}#}
+
+{#{% block page_title %}{% endblock %}#}
+
+{#{% block content %}#}
+{#    <div class="widget-documentation-article-detail">#}
+{#        <div style="background-color: {{ color }}" class="documentation-article-header text-center">#}
+{#            <h1 class="text-white">{{ page.title }}</h1>#}
+{#            <div class="documentation-article-meta">#}
+{#                {{ page.owner }} |#}
+{#                {{ page.date }}{% if page.tags.all %} |{% for tag in page.tags.all %} {{ tag }}{% endfor %}{% endif %}#}
+{#            </div>#}
+{#            {% if page.image %}#}
+{#                {% image image name=page.image classes="documentation-image img-responsive" %}#}
+{#            {% endif %}#}
+{#            <div class="clearfix"></div>#}
+{#        </div>#}
+{#        <div class="documentation-article-content">#}
+{#            {% if page.lead %}#}
+{#                <p class="documentation-article-lead">#}
+{#                    <span style="color: {{ color }}">{{ page.lead.0 }}</span>{{ page.lead|slice:"1:" }}#}
+{#                </p>#}
+{#                <div class="clearfix"></div>#}
+{#            {% endif %}#}
+{#            {{ page.content }}#}
+{#        </div>#}
+{#    </div>#}
+{#{% endblock %}#}

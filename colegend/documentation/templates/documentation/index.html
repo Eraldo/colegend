@@ -1,0 +1,34 @@
+{% extends 'documentation/base.html' %}
+{% load core_tags documentation_tags %}
+
+{#{% block page_links %}#}
+{#    {% if not tag %}#}
+{#        {% button name='Most recent' url='.' classes='nav-item nav-link active' %}#}
+{#    {% else %}#}
+{#        {% button name='Most recent' url='.' classes='nav-item nav-link' %}#}
+{#    {% endif %}#}
+{#    {% with current_tag=tag %}#}
+{#        {% for tag in tags %}#}
+{#            {% if tag.slug == current_tag %}#}
+{#                {% button name=tag url='?tag='|add:tag.slug classes='nav-item nav-link active' %}#}
+{#            {% else %}#}
+{#                {% button name=tag url='?tag='|add:tag.slug classes='nav-item nav-link' %}#}
+{#            {% endif %}#}
+{#        {% endfor %}#}
+{#    {% endwith %}#}
+{##}
+{#{% endblock %}#}
+
+{#{% block content %}#}
+{#    <div class="row">#}
+{#        {% for post in posts %}#}
+{#            <div class="col-md-4">#}
+{#                {% post post %}#}
+{#            </div>#}
+{#            {% if forloop.counter|divisibleby:3 %}#}
+{#                <div class="clearfix hidden-sm-down"></div>#}
+{#            {% endif %}#}
+{#        {% endfor %}#}
+{#        <div class="clearfix"></div>#}
+{#    </div>#}
+{#{% endblock %}#}
