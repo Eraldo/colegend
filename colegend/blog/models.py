@@ -3,9 +3,9 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.fields import ParentalKey
-from taggit.models import TaggedItemBase, Tag
+from taggit.models import Tag, TagBase, ItemBase
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel
-from wagtail.wagtailcore.fields import RichTextField, StreamField
+from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
@@ -19,53 +19,55 @@ class BlogPage(UniquePageMixin, Page):
     template = 'blog/index.html'
 
     @property
-    def articles(self):
-        articles = BlogArticlePage.objects.descendant_of(self).live()
-        articles = articles.order_by(
+    def posts(self):
+        posts = BlogPostPage.objects.descendant_of(self).live()
+        posts = posts.order_by(
             '-date'
         ).select_related('owner').prefetch_related(
             'tagged_items__tag',
         )
-        return articles
+        return posts
 
     @property
     def tags(self):
-        return BlogTag.objects.filter(blog_blogpagetag_items__isnull=False).distinct()
+        return BlogTag.objects.all()
 
     class Meta:
         verbose_name = _('Blog')
 
-    subpage_types = ['blog.BlogArticlePage']
+    subpage_types = ['blog.BlogPostPage']
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        articles = self.articles
-        # owners = articles.values_list('owner', flat=True)
+        posts = self.posts
+        # owners = posts.values_list('owner', flat=True)
         tag = request.GET.get('tag')
         if tag:
             context['tag'] = tag
-            articles = articles.filter(tags__slug=tag)
+            posts = posts.filter(tags__slug=tag)
         owner = request.GET.get('owner')
         if owner:
             context['owner'] = owner
-            articles = articles.filter(owner__username=owner)
-        context['articles'] = articles
+            posts = posts.filter(owner__username=owner)
+        context['posts'] = posts
         context['tags'] = self.tags
         return context
 
 
-class BlogPageTag(TaggedItemBase):
-    content_object = ParentalKey('BlogArticlePage', related_name='tagged_items')
-
-
 @register_snippet
-class BlogTag(Tag):
+class BlogTag(TagBase):
     class Meta:
-        proxy = True
+        verbose_name = _("Blog tag")
+        verbose_name_plural = _("Blog tags")
 
 
-class BlogArticlePage(Page):
-    template = 'blog/article.html'
+class TaggedBlogPostPage(ItemBase):
+    content_object = ParentalKey('BlogPostPage', related_name='tagged_items')
+    tag = models.ForeignKey(BlogTag, related_name="%(app_label)s_%(class)s_items")
+
+
+class BlogPostPage(Page):
+    template = 'blog/post.html'
 
     lead = models.TextField(
         verbose_name=_('Lead text'),
@@ -77,11 +79,11 @@ class BlogArticlePage(Page):
     )
     date = models.DateField(
         verbose_name=_('Display date'), default=timezone.now().date(),
-        help_text=_("This date may be displayed on the blog article. It is not "
+        help_text=_("This date may be displayed on the blog post. It is not "
                     "used to schedule posts to go live at a later date.")
     )
     tags = ClusterTaggableManager(
-        through=BlogPageTag,
+        through=TaggedBlogPostPage,
         blank=True
     )
     image = models.ForeignKey(
@@ -118,8 +120,8 @@ class BlogArticlePage(Page):
     )
 
     class Meta:
-        verbose_name = _('Blog article')
-        verbose_name_plural = _('Blog articles')
+        verbose_name = _('Blog post')
+        verbose_name_plural = _('Blog posts')
 
     content_panels = Page.content_panels + [
         FieldPanel('lead'),

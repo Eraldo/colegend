@@ -21,9 +21,9 @@
 
 {% block content %}
     <div class="row">
-        {% for article in articles %}
+        {% for post in posts %}
             <div class="col-md-4">
-                {% article article %}
+                {% post post %}
             </div>
             {% if forloop.counter|divisibleby:3 %}
                 <div class="clearfix hidden-sm-down"></div>
