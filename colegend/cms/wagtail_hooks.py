@@ -1,9 +1,13 @@
 from django.conf import settings
-from django.core.urlresolvers import reverse
+from django.contrib.auth import get_user_model
+from django.core.urlresolvers import reverse, NoReverseMatch
 from django.utils.html import format_html_join
 from wagtail.wagtailadmin.menu import MenuItem
+from wagtail.wagtailadmin.site_summary import SummaryItem
 from wagtail.wagtailcore import hooks
 from django.utils.translation import ugettext_lazy as _
+
+from colegend.core.templatetags.core_tags import icon
 
 
 @hooks.register('insert_global_admin_css')
@@ -39,23 +43,49 @@ def add_wagtail_icon_items(request, items):
         items.append(DjangoBackendLinkItem())
 
 
-@hooks.register('construct_main_menu')
-def main_menu_django_admin_item(request, menu_items):
-    if request.user.is_superuser:
-        menu_items.append(
-            MenuItem(
-                _('Backend'),
-                reverse('admin:index'),
-                classnames='icon icon-fa fa-database',
-                order=10000
-            )
-        )
+class UsersSummaryItem(SummaryItem):
+    template = 'cms/widgets/site_summary_item.html'
+    order = 400
 
-# @hooks.register('register_admin_menu_item')
-# def register_backend_menu_item():
-#     return MenuItem(
-#         _('Backend'),
-#         reverse('admin:index'),
-#         classnames='icon icon-fa fa-bar-chart',
-#         order=9000
-#     )
+    def get_context(self):
+        users = get_user_model().objects.all()
+        return {
+            'url': reverse('wagtailusers_users:index'),
+            'icon': icon('legends', raw=True),
+            'name': _('Legends'),
+            'amount': users.count(),
+        }
+
+
+@hooks.register('construct_homepage_summary_items')
+def add_users_summary_item(request, items):
+    items.append(UsersSummaryItem(request))
+
+
+class BackendMenuItem(MenuItem):
+    def is_shown(self, request):
+        return request.user.is_superuser
+
+
+@hooks.register('register_admin_menu_item')
+def register_backend_menu_item():
+    return MenuItem(
+        _('Backend'),
+        reverse('admin:index'),
+        classnames='icon icon-fa fa-database',
+        order=10000
+    )
+
+
+@hooks.register('register_admin_menu_item')
+def register_frontend_menu_item():
+    try:
+        url = reverse('home')
+    except NoReverseMatch:
+        url = '/'
+    return MenuItem(
+        _('Frontend'),
+        url=url,
+        classnames='icon icon-coicon co-logo',
+        order=10000
+    )
