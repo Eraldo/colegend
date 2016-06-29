@@ -3,6 +3,8 @@ from wagtail.wagtailcore.blocks import RawHTMLBlock
 from wagtail.wagtailembeds.blocks import EmbedBlock as WagtailEmbedBlock
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 
+from colegend.core.templatetags.core_tags import image
+
 
 class HeadingBlock(blocks.CharBlock):
     class Meta:
@@ -32,6 +34,13 @@ class ImageBlock(ImageChooserBlock):
     class Meta:
         icon = 'image'
         template = 'widgets/image.html'
+
+    def render(self, value):
+        context = self.get_context(value)
+        return image(
+            url=context.get('url'),
+            name=context.get('name'),
+        )
 
     def get_context(self, value):
         context = super().get_context(value)
