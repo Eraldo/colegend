@@ -836,10 +836,10 @@ widgets.append(
         'Cards',
         columns=6,
         widgets=[
-            Widget(
+            TagWidget(
                 'Simple card',
-                template='widgets/card.html',
-                context={
+                tag='card',
+                parameters={
                     'content': 'Hello World',
                 }
             ),
@@ -847,9 +847,7 @@ widgets.append(
                 'Card with title',
                 template='widgets/card.html',
                 context={
-                    'title': {
-                        'content': 'Hello',
-                    },
+                    'title': 'Hello',
                     'content': 'Hello World',
                 }
             ),
@@ -857,9 +855,7 @@ widgets.append(
                 'Card with header',
                 template='widgets/card.html',
                 context={
-                    'header': {
-                        'content': 'Hello above',
-                    },
+                    'header': 'Hello above',
                     'content': 'Hello World',
                 }
             ),
@@ -867,9 +863,7 @@ widgets.append(
                 'Card with footer',
                 template='widgets/card.html',
                 context={
-                    'footer': {
-                        'content': 'Hello below',
-                    },
+                    'footer': 'Hello below',
                     'content': 'Hello World',
                 }
             ),
@@ -886,13 +880,9 @@ widgets.append(
                 template='widgets/card.html',
                 context={
                     'closeable': True,
-                    'header': {
-                        'content': 'Hello above',
-                    },
+                    'header': 'Hello above',
                     'content': 'Close me!',
-                    'footer': {
-                        'content': 'Hello below',
-                    },
+                    'footer': 'Hello below',
                 }
             ),
         ]
