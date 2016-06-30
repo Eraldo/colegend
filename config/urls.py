@@ -69,6 +69,7 @@ urlpatterns = [
     url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
 
     url(r'^styleguide/', include('colegend.styleguide.urls', namespace='styleguide')),
+    url(r'^metrics/', include('colegend.metrics.urls', namespace='metrics')),
     url(r'^mockups/', include('colegend.mockups.urls')),
 ]
 # Static files

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Metrics{% endblock %}
+
+{% block content %}
+    {% for name, value in metrics.items %}
+        <p>
+            <strong>{{ name|title }}</strong>: {{ value }}
+        </p>
+    {% endfor %}
+
+{% endblock %}

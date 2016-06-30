@@ -112,6 +112,7 @@ LOCAL_APPS = (
 
     'colegend.mockups',
     'colegend.styleguide',
+    'colegend.metrics',
 
     'colegend.sandbox',
 
