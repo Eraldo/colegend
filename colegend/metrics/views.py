@@ -1,18 +1,21 @@
 from collections import OrderedDict
 
 from django.contrib.auth import get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Sum
 from django.utils import timezone
 from django.views.generic import TemplateView
 
 from colegend.checkpoints.models import Checkpoint
 from colegend.core.templatetags.core_tags import link
+from colegend.core.views import RolesRequiredMixin
 from colegend.donations.models import Donation
 from colegend.roles.models import Role
 
 
-class MetricsIndexView(TemplateView):
+class MetricsIndexView(LoginRequiredMixin, RolesRequiredMixin, TemplateView):
     template_name = 'metrics/index.html'
+    required_roles = ['Core Manager']
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
