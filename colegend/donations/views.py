@@ -58,7 +58,7 @@ class TopSupportersListView(LoginRequiredMixin, DonationMixin, ListView):
         context = super().get_context_data(**kwargs)
         legends = get_user_model()
         top_money_doners = legends.objects.annotate(total_donation=Sum('donation__amount')).filter(donation__isnull=False).order_by('-total_donation')[:4]
-        top_time_doners = legends.objects.all()[:4]
+        top_time_doners = legends.objects.order_by('date_joined')[:4]
         context.update({
             'top_money_doners': top_money_doners,
             'top_time_doners': top_time_doners,
