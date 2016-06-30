@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 + Added support app 
 + Added documentation
 + Added faq
++ Added metrics app
 
 ## [2016-06-25] version 0.1.10
 + Added custom icons to the cms
