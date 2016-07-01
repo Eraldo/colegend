@@ -3,5 +3,9 @@
 
 {% block extra_head %}
     {{ block.super }}
-    <link href="{% static 'documentation/css/index.css' %}" rel="stylesheet">
+    <link href="{% static 'support/css/index.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}{% include 'widgets/breadcrumb.html' with url=page.get_parent.url title=page.get_parent icon=page.get_parent|slugify %}
 {% endblock %}

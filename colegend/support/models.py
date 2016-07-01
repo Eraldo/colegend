@@ -42,7 +42,8 @@ class DocumentationIndexPage(UniquePageMixin, Page):
 
     @property
     def pages(self):
-        pages = DocumentationPage.objects.descendant_of(self).live()
+        pages = self.get_children().live().in_menu()
+        # pages = DocumentationPage.objects.children_of(self).live().in_menu()
         return pages
 
     class Meta:
@@ -55,6 +56,7 @@ class DocumentationIndexPage(UniquePageMixin, Page):
         context = super().get_context(request, *args, **kwargs)
         pages = self.pages
         context['pages'] = pages
+        context['cards'] = [card(link(page, url=page.url)) for page in pages]
         return context
 
 
@@ -83,4 +85,10 @@ class DocumentationPage(Page):
 
     def get_documentation_root(self):
         # Find closest ancestor which is a documentation index
-        return self.get_ancestors().type(DocumentationPage).last()
+        return self.get_ancestors().type(DocumentationIndexPage).last()
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        index = self.get_documentation_root()
+        context['index'] = index
+        return context

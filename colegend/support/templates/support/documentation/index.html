@@ -1,5 +1,14 @@
 {% extends 'support/documentation/base.html' %}
-{% load core_tags support_tags %}
+
+{% block content %}
+    <div class="row">
+        {% for card in cards %}
+            <div class="col-md-4">
+                {{ card }}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
 
 {#{% block page_links %}#}
 {#    {% if not tag %}#}

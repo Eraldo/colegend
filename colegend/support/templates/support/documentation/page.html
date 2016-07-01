@@ -1,11 +1,18 @@
 {% extends 'support/documentation/base.html' %}
-{% load core_tags %}
-
-{#{% block breadcrumbs %}#}
-{#    {{ block.super }}{% include 'widgets/breadcrumb.html' with url=page.index_url title='Documentation' icon='documentation' %}#}
-{#{% endblock %}#}
+{% load core_tags cms_tags%}
 
 {#{% block page_title %}{% endblock %}#}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-9 col-md-push-3">
+            {{ page.content }}
+        </div>
+        <div class="col-md-3 col-md-pull-9">
+            {% menu index %}
+        </div>
+    </div>
+{% endblock %}
 
 {#{% block content %}#}
 {#    <div class="widget-documentation-article-detail">#}
