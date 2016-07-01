@@ -78,7 +78,7 @@ class DocumentationPage(Page):
         index.SearchField('content'),
     )
 
-    parent_page_types = ['support.DocumentationIndexPage']
+    parent_page_types = ['support.DocumentationIndexPage', 'support.DocumentationPage']
     subpage_types = ['support.DocumentationPage']
 
     def get_documentation_root(self):
