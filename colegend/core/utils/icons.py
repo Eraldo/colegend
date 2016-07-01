@@ -1,3 +1,4 @@
+from django.template.defaultfilters import slugify
 
 __author__ = 'Eraldo Energy'
 
@@ -35,7 +36,10 @@ fontawesome_icons = {
     'event': 'calendar-check-o',
     'events': 'calendar-check-o',
     'support': 'question-circle',
+    'faq': 'question-circle-o',
+    'personal-support': 'user-md',  # fa-life-ring
     'documentation': 'file-text-o',
+    'tutorials': 'graduation-cap',
     'blog': 'newspaper-o',
     'styleguide': 'paint-brush',
     'quote': 'quote-left',
@@ -94,6 +98,7 @@ coicons = {
 
 
 def get_icon_class(name):
+    name = slugify(name)
     if name in coicons:
         return 'coicon co-{}'.format(coicons.get(name))
     else:

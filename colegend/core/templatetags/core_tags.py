@@ -29,12 +29,15 @@ def label(content, classes='label-default'):
 
 
 @register.simple_tag()
-def link(content, url, external=False):
+def link(content, url, external=False, unstyled=False, classes=''):
     link_template = 'widgets/link.html'
+    if unstyled:
+        classes += ' unstyled'
     link_context = {
         'content': content,
         'url': url,
         'external': external,
+        'classes': classes,
     }
     return render_to_string(link_template, context=link_context)
 

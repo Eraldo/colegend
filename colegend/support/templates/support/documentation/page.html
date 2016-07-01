@@ -1,8 +1,6 @@
 {% extends 'support/documentation/base.html' %}
 {% load core_tags cms_tags%}
 
-{#{% block page_title %}{% endblock %}#}
-
 {% block content %}
     <div class="row">
         <div class="col-md-9 col-md-push-3">
@@ -13,28 +11,3 @@
         </div>
     </div>
 {% endblock %}
-
-{#{% block content %}#}
-{#    <div class="widget-documentation-article-detail">#}
-{#        <div style="background-color: {{ color }}" class="documentation-article-header text-center">#}
-{#            <h1 class="text-white">{{ page.title }}</h1>#}
-{#            <div class="documentation-article-meta">#}
-{#                {{ page.owner }} |#}
-{#                {{ page.date }}{% if page.tags.all %} |{% for tag in page.tags.all %} {{ tag }}{% endfor %}{% endif %}#}
-{#            </div>#}
-{#            {% if page.image %}#}
-{#                {% image image name=page.image classes="documentation-image img-responsive" %}#}
-{#            {% endif %}#}
-{#            <div class="clearfix"></div>#}
-{#        </div>#}
-{#        <div class="documentation-article-content">#}
-{#            {% if page.lead %}#}
-{#                <p class="documentation-article-lead">#}
-{#                    <span style="color: {{ color }}">{{ page.lead.0 }}</span>{{ page.lead|slice:"1:" }}#}
-{#                </p>#}
-{#                <div class="clearfix"></div>#}
-{#            {% endif %}#}
-{#            {{ page.content }}#}
-{#        </div>#}
-{#    </div>#}
-{#{% endblock %}#}

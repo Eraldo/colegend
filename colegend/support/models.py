@@ -1,3 +1,5 @@
+from django.template.defaultfilters import slugify
+from django.utils.html import format_html
 from django.utils.translation import ugettext_lazy as _
 from wagtail.wagtailadmin.edit_handlers import StreamFieldPanel
 from wagtail.wagtailcore.fields import StreamField
@@ -7,7 +9,7 @@ from wagtail.wagtailsearch import index
 
 from colegend.cms.blocks import BASE_BLOCKS
 from colegend.cms.models import UniquePageMixin
-from colegend.core.templatetags.core_tags import card, link
+from colegend.core.templatetags.core_tags import card, link, icon
 
 
 class SupportPage(UniquePageMixin, Page):
@@ -23,7 +25,20 @@ class SupportPage(UniquePageMixin, Page):
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         subpages = self.get_children().live()
-        context['cards'] = [card(link(page, url=page.url)) for page in subpages]
+        context['cards'] = [
+            link(
+                card(
+                    format_html(
+                        '{icon}<br>{content}',
+                        icon=icon(slugify(page), classes='fa-3x'),
+                        content=page,
+                    ), classes='text-center'
+                ),
+                url=page.url,
+                unstyled=True
+            )
+            for page in subpages
+            ]
         return context
 
 
@@ -56,7 +71,20 @@ class DocumentationIndexPage(UniquePageMixin, Page):
         context = super().get_context(request, *args, **kwargs)
         pages = self.pages
         context['pages'] = pages
-        context['cards'] = [card(link(page, url=page.url)) for page in pages]
+        context['cards'] = [
+            link(
+                card(
+                    format_html(
+                        '{icon}<br>{content}',
+                        icon=icon(slugify(page), classes='fa-3x'),
+                        content=page,
+                    ), classes='text-center'
+                ),
+                url=page.url,
+                unstyled=True
+            )
+            for page in pages
+            ]
         return context
 
 

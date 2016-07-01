@@ -312,6 +312,13 @@ form .editor-preview-active-side {
 form .CodeMirror-fullscreen {
   top: 106px; }
 
+.widget-link.unstyled {
+  color: inherit;
+  text-decoration: inherit; }
+
+.widget-icon.fa {
+  line-height: inherit; }
+
 .widget-weekday {
   font-family: "Lucida Console", Monaco, monospace; }
 
