@@ -7,6 +7,7 @@ from wagtail.wagtailsearch import index
 
 from colegend.cms.blocks import BASE_BLOCKS
 from colegend.cms.models import UniquePageMixin
+from colegend.core.templatetags.core_tags import card, link
 
 
 class SupportPage(UniquePageMixin, Page):
@@ -16,13 +17,13 @@ class SupportPage(UniquePageMixin, Page):
         verbose_name = _('Support')
 
     parent_page_types = ['home.HomePage']
-    # subpage_types = []
 
+    # subpage_types = []
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         subpages = self.get_children().live()
-        context['subpages'] = subpages
+        context['cards'] = [card(link(page, url=page.url)) for page in subpages]
         return context
 
 

@@ -1,10 +1,9 @@
 {% extends 'support/base.html' %}
-{% load core_tags %}
 {% block content %}
     <div class="row">
-        {% for subpage in subpages %}
+        {% for card in cards %}
             <div class="col-md-6">
-                {% card content=subpage %}
+                {{ card }}
             </div>
         {% endfor %}
     </div>
