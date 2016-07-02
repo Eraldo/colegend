@@ -5,4 +5,9 @@
 .widget-cms-userbar .wagtail-icon-wagtail:before {
   content: "d"; }
 
+.widget-richtext .richtext-image.right {
+  float: right; }
+.widget-richtext .richtext-image.left {
+  float: left; }
+
 /*# sourceMappingURL=index.css.map */

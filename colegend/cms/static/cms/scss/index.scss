@@ -6,3 +6,14 @@
 .widget-cms-userbar .wagtail-icon-wagtail:before {
   content: "d";
 }
+
+.widget-richtext {
+  .richtext-image {
+    &.right {
+      float: right;
+    }
+    &.left {
+      float: left;
+    }
+  }
+}

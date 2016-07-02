@@ -401,7 +401,8 @@ form .CodeMirror-fullscreen {
 
 .widget-table-of-contents {
   background-color: #b2ebf2;
-  padding: 1em; }
+  padding: 1em;
+  margin: 0 0 1em 1em; }
   .widget-table-of-contents .toc-links {
     padding: 0;
     list-style-type: none; }

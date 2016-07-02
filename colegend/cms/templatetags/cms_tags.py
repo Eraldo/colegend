@@ -17,7 +17,15 @@ class TableOfContents(InclusionTag):
         Argument('headings', required=False),
     )
 
-    def get_context(self, context, headings, **kwargs):
+    def render_tag(self, context, **kwargs):
+        nodes = self.get_context(context, **kwargs).get('nodes')
+        if nodes:
+            return super().render_tag(context, **kwargs)
+        else:
+            return ''
+
+    def get_context(self, context, **kwargs):
+        headings = kwargs.get('headings')
         if not headings:
             page = context.get('page')
             if page and hasattr(page, 'content'):
