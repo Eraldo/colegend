@@ -8,36 +8,36 @@
 @import url("//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;lang=en");
 
 // Variables
-@navy: #26c6da;
+$navy: #26c6da;
 // Primary color
-@text-color: #676a6c;
+$text-color: #676a6c;
 // Body text
-@border-color: #e7eaec;
+$border-color: #e7eaec;
 // Border
 
 /* GLOBAL STYLES
 -------------------------------------------------- */
 
 body {
-  color: @text-color;
+  color: $text-color;
   font-family: 'Open Sans', helvetica, arial, sans-serif;
 }
 
 span.navy {
-  color: @navy;
+  color: $navy;
 }
 
 p.text-color {
-  color: @text-color;
+  color: $text-color;
 }
 
 a.navy-link {
-  color: @navy;
+  color: $navy;
   text-decoration: none;
 }
 
 a.navy-link:hover {
-  color: darken(@navy, 4%);
+  color: darken($navy, 4%);
 }
 
 section p {
@@ -59,11 +59,11 @@ h1 {
   width: 60px;
   height: 1px;
   margin: 60px auto 0;
-  border-bottom: 2px solid @navy;
+  border-bottom: 2px solid $navy;
 }
 
 .navy-bg {
-  background-color: @navy;
+  background-color: $navy;
   color: #ffffff;
 }
 
@@ -117,11 +117,11 @@ h1 {
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover {
   background: transparent;
   color: #fff;
-  border-top: 6px solid @navy;
+  border-top: 6px solid $navy;
 }
 
 .navbar-default .navbar-nav > li > a:hover {
-  color: @navy;
+  color: $navy;
 }
 
 .navbar-default .navbar-nav > .active > a:focus {
@@ -135,7 +135,7 @@ h1 {
 }
 
 .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
-  background: darken(@navy, 4%);
+  background: darken($navy, 4%);
   color: #fff;
 }
 
@@ -144,25 +144,25 @@ h1 {
   height: auto;
   display: block;
   font-size: 14px;
-  background: @navy;
+  background: $navy;
   padding: 15px 20px 15px 20px;
-  border-radius: 0 0px 5px 5px;
+  border-radius: 0 0 5px 5px;
   font-weight: 700;
   transition: all 0.3s ease-in-out 0s;
 }
 
 .navbar-scroll.navbar-default .nav li a {
-  color: @text-color;
+  color: $text-color;
 }
 
 .navbar-scroll.navbar-default .nav li a:hover {
-  color: @navy;
+  color: $navy;
 }
 
 .navbar-wrapper .navbar.navbar-scroll {
   padding-top: 0;
   padding-bottom: 5px;
-  border-bottom: 1px solid @border-color;
+  border-bottom: 1px solid $border-color;
   border-radius: 0;
 
   // Uncomment this to add box shodow
@@ -354,7 +354,7 @@ h1 {
 }
 
 .features small {
-  color: @navy;
+  color: $navy;
 }
 
 .features h2 {
@@ -371,13 +371,13 @@ h1 {
 }
 
 .features-icon {
-  color: @navy;
+  color: $navy;
   font-size: 40px;
 }
 
 .navy-section {
   margin-top: 60px;
-  background: @navy;
+  background: $navy;
   color: #fff;
   padding: 20px 0;
 }
@@ -396,7 +396,7 @@ h1 {
 }
 
 //.social-icon a {
-//  background: @navy;
+//  background: $navy;
 //  color: #fff;
 //  padding: 4px 8px;
 //  height: 28px;
@@ -406,7 +406,7 @@ h1 {
 //}
 
 //.social-icon a:hover {
-//  background: darken(@navy, 4%);
+//  background: darken($navy, 4%);
 //}
 
 .img-small {
@@ -426,14 +426,14 @@ h1 {
 
 .pricing-plan li {
   padding: 10px 16px;
-  border-top: 1px solid @border-color;
+  border-top: 1px solid $border-color;
   text-align: center;
   color: #aeaeae;
 }
 
 .pricing-plan .pricing-price span {
   font-weight: 700;
-  color: @navy;
+  color: $navy;
 }
 
 li.pricing-desc {
@@ -443,7 +443,7 @@ li.pricing-desc {
 }
 
 li.pricing-title {
-  background: @navy;
+  background: $navy;
   color: #fff;
   padding: 10px;
   border-radius: 4px 4px 0 0;
@@ -454,7 +454,7 @@ li.pricing-title {
 .testimonials {
   padding-top: 80px;
   padding-bottom: 90px;
-  background-color: @navy;
+  background-color: $navy;
   background-image: url('../img/avatar_all.png');
 }
 
@@ -463,7 +463,7 @@ li.pricing-title {
 }
 
 .features .big-icon {
-  color: @navy;
+  color: $navy;
 }
 
 .contact {
@@ -484,8 +484,8 @@ li.pricing-title {
 }
 
 .btn-primary {
-  background-color: @navy;
-  border-color: @navy;
+  background-color: $navy;
+  border-color: $navy;
   color: #FFFFFF;
 
   font-size: 14px;
@@ -494,8 +494,8 @@ li.pricing-title {
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
-  background-color: darken(@navy, 3%);
-  border-color: darken(@navy, 3%);
+  background-color: darken($navy, 3%);
+  border-color: darken($navy, 3%);
   color: #FFFFFF;
 }
 
@@ -504,8 +504,8 @@ li.pricing-title {
 }
 
 .btn-primary.disabled, .btn-primary.disabled:hover, .btn-primary.disabled:focus, .btn-primary.disabled:active, .btn-primary.disabled.active, .btn-primary[disabled], .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled]:active, .btn-primary.active[disabled], fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary:hover, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:active, fieldset[disabled] .btn-primary.active {
-  background-color: lighten(@navy, 4%);
-  border-color: lighten(@navy, 4%);
+  background-color: lighten($navy, 4%);
+  border-color: lighten($navy, 4%);
 }
 
 /* RESPONSIVE CSS
@@ -578,17 +578,17 @@ li.pricing-title {
   }
 
   .navbar-default .nav li a {
-    color: @text-color;
+    color: $text-color;
   }
 
   .navbar-default .nav li a:hover {
-    color: @navy;
+    color: $navy;
   }
 
   .navbar-wrapper .navbar {
     padding-top: 0;
     padding-bottom: 5px;
-    border-bottom: 1px solid @border-color;
+    border-bottom: 1px solid $border-color;
     border-radius: 0;
   }
 
@@ -1198,7 +1198,7 @@ section.comments {
 }
 
 .vertical-date small {
-  color: @navy;
+  color: $navy;
   font-weight: 400;
 }
 

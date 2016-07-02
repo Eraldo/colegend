@@ -32,6 +32,7 @@ fontawesome_icons = {
     'gatherings': 'comments-o',
     'guidelines': 'map-signs',
     # project
+    'process': 'refresh',
     'about': 'info-circle',
     'event': 'calendar-check-o',
     'events': 'calendar-check-o',

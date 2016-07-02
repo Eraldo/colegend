@@ -94,21 +94,21 @@ def npc(name, size='large', show_avatar=True, show_link=True, url=None):
 
     npc_context = {
         'avatar': avatar(image=image, name=full_name, classes=classes),
-        'link': link(content=full_name, url='#{}'.format(name)),
+        'link': link(content=full_name, url='#{}'.format(name)) if show_link else '',
     }
     npc_template = 'legends/widgets/npc.html'
     return render_to_string(npc_template, npc_context)
 
 
 @register.simple_tag()
-def statement(speaker, content, direction='left', responsive=True):
+def statement(speaker, content, direction='left', responsive=True, show_link=True):
     statement_template = 'widgets/statement.html'
 
     # speaker
     if isinstance(speaker, str):
-        speaker = npc(speaker)
+        speaker = npc(speaker, show_link=show_link)
     else:
-        speaker = legend(context={}, legend=speaker)
+        speaker = legend(context={}, legend=speaker, show_link=show_link)
 
     statement_context = {
         'speaker': speaker,

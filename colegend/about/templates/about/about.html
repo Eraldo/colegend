@@ -29,6 +29,7 @@
 
     <!-- Fontawesome CSS -->
     <link href="{% static 'components/fontawesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'coicons/css/index.css' %}" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -37,8 +38,8 @@
     <![endif]-->
 
     <!-- Custom styles for this template -->
-    <link href="{% static 'css/style.css' %}" rel="stylesheet">
-    <link href="{% static 'css/about.css' %}" rel="stylesheet">
+    <link href="{% static 'about/css/index.css' %}" rel="stylesheet">
+    <link href="{% static 'about/css/about.css' %}" rel="stylesheet">
     <link href="{% static 'css/colegend.css' %}" rel="stylesheet">
 </head>
 <body id="page-top" class="bg-main-superlight">
@@ -56,18 +57,17 @@
             <div id="navbar" class="navbar-collapse collapse navbar-toggleable-sm">
                 <ul class="nav navbar-nav navbar-right pull-right">
                     {% if request.user.is_authenticated %}
-                        <a id="login" href="{% url "home" %}" class="btn btn-info pull-right">Home</a>
+                        <a id="login" href="{% url "home" %}" class="btn btn-success pull-right">Home</a>
                     {% else %}
                         <div class="btn-group pull-right" role="group">
-                            <a id="join" href="{% url "join" %}?next=/" class="btn btn-info">Join</a>
+                            <a id="join" href="{% url "join" %}?next=/" class="btn btn-success">Join</a>
                             <a id="login" href="{% url "account_login" %}?next=/" class="btn btn-secondary">Login</a>
                         </div>
                     {% endif %}
                     <li class="nav-item active" style=""><a class="page-scroll" href="#page-top">About</a></li>
                     <li class="nav-item"><a class="page-scroll" href="#features">Features</a></li>
-                    <li class="nav-item"><a class="page-scroll" href="#team">Team</a></li>
-                    {#                    <li><a class="page-scroll" href="#testimonials">Testimonials</a></li>#}
                     <li class="nav-item"><a class="page-scroll" href="#pricing">Pricing</a></li>
+                    <li class="nav-item"><a class="page-scroll" href="#team">Team</a></li>
                     <li class="nav-item"><a class="page-scroll" href="#contact">Contact</a></li>
 
                 </ul>
@@ -99,7 +99,7 @@
                         Once upon a time.. is now!
                     </p>
 
-                    <p><a class="btn btn-lg btn-primary page-scroll" href="#" onclick="playintro();" role="button">Start
+                    <p><a class="btn btn-lg btn-success page-scroll" href="#" onclick="playintro();" role="button">Start
                         Video</a></p>
                 </div>
                 <div class="carousel-image wow zoomIn back-tilted">
@@ -120,7 +120,7 @@
 
                     <p> of what you truly want</p>
 
-                    <p><a class="btn btn-lg btn-primary page-scroll" href="#" onclick="playintro();" role="button">Start
+                    <p><a class="btn btn-lg btn-success page-scroll" href="#" onclick="playintro();" role="button">Start
                         Video</a></p>
                 </div>
             </div>
@@ -136,7 +136,7 @@
 
                     <p> with fellows who support you along the way</p>
 
-                    <p><a class="btn btn-lg btn-primary page-scroll" href="#" onclick="playintro();" role="button">Start
+                    <p><a class="btn btn-lg btn-success page-scroll" href="#" onclick="playintro();" role="button">Start
                         Video</a></p>
                 </div>
             </div>
@@ -152,7 +152,7 @@
 
                     <p> a legendary life =]</p>
 
-                    <p><a class="btn btn-lg btn-primary page-scroll" href="#" onclick="playintro();" role="button">Start
+                    <p><a class="btn btn-lg btn-success page-scroll" href="#" onclick="playintro();" role="button">Start
                         Video</a></p>
                 </div>
             </div>
@@ -171,8 +171,7 @@
 </div>
 <section id="intro" class="container services">
     <div class="row">
-        <div class="col-sm-3"></div>
-        <div class="col-sm-6 text-center">
+        <div class="col-sm-6 col-sm-offset-3 text-center">
             <div id="intro-video-container" class="embed-responsive embed-responsive-16by9 col-xs-12">
                 <div style="padding-top: 10px; color: white">..video is loading..</div>
                 <iframe id="intro-video" class="embed-responsive-item" allowfullscreen
@@ -184,18 +183,21 @@
                 </script>
             </div>
         </div>
-        <div class="col-sm-3"></div>
     </div>
 
 </section>
 
 <section id="services" class="container services">
+    <p id="vision" class="lead text-center text-main-dark">{% icon 'quote-left' color='grey' %} A world where people get
+        support from structure, technology and each other to live a fully conscious life worthy of continuously sharing
+        their personal story and fusing individual potentials to transform history into an ongoing
+        legend. {% icon 'quote-right' color='grey' %}</p>
     <div class="row text-center">
         <div class="col-sm-4">
             {#            <img class="img-circle" src="{% static 'website/images/mentor_140x140.jpg' %}" alt="Mentor"/>#}
-
-            <h2>Conscious<br/>
-                <small>Visioning Planing Managing</small>
+            {% icon 'apps' classes='fa-4x text-category-6' %}
+            <h2>Conscious Apps<br/>
+                {#                <small>Visioning Planing Managing</small>#}
             </h2>
 
             <p class="text-left">
@@ -209,9 +211,9 @@
         </div>
         <div class="col-sm-4">
             {#            <img class="img-circle" src="{% static 'website/images/manager_140x140.jpg' %}" alt="Manager"/>#}
-
-            <h2>Connected<br/>
-                <small>Community Sharing Groups</small>
+            {% icon 'community' classes='fa-4x text-category-4' %}
+            <h2>Connected Community<br/>
+                {#                <small>Community Sharing Groups</small>#}
             </h2>
 
             <p class="text-left">
@@ -225,8 +227,9 @@
         </div>
         <div class="col-sm-4">
             {#            <img class="img-circle" src="{% static 'website/images/motivator_140x140.jpg' %}" alt="Motivator"/>#}
-            <h2>continuous<br/>
-                <small>Story Challenge Support</small>
+            {% icon 'process' classes='fa-4x text-category-2' %}
+            <h2>Continuous Process<br/>
+                {#                <small>Story Challenge Support</small>#}
             </h2>
 
             <p class="text-left">
@@ -244,12 +247,15 @@
     <div class="row">
         <div class="col-lg-12 text-center">
             <div class="navy-line"></div>
-            <h1>A community of awesome people<br/>
+            <h1>
+                <span class="text-category-6"> A collection of useful apps</span><br/>
                 <small>+</small>
                 <br/>
-                <span class="navy"> A collection of useful tools</span></h1>
-            <p style="position: relative; top: -10px; height: 0px;">for your personal development</p>
-
+                <span class="text-category-4">A community of awesome people</span><br/>
+                <small>+</small>
+                <br/>
+                <span class="text-category-2">A tested personal development process</span><br/>
+            </h1>
             <h1>
                 <small>=</small>
                 <br>
@@ -260,44 +266,55 @@
     <div class="row">
         <div class="col-md-3 text-center wow fadeInLeft">
             <div>
-                {% icon 'gatherings' classes='features-icon' %}
+                {% icon 'gatherings' classes='features-icon text-main' %}
 
                 <h2>Social Gatherings</h2>
 
                 <p>A space to make room for your biggest challenges, strongest feelings and emotions.</p>
             </div>
             <div class="m-t-lg">
-                {% icon 'challenges' classes='features-icon' %}
+                {% icon 'vision' classes='features-icon text-main' %}
 
-                <h2>Comfort Challenges</h2>
+                <h2>Personal Vision</h2>
 
-                <p>Take on challenges that help you expand your comfort zone and bring adventures to your everyday
-                    life.</p>
+                <p>Envision a blueprint of what you really want so that your true desires don’t get out of your
+                    sight.</p>
+                {#                {% icon 'challenges' classes='features-icon' %}#}
+                {##}
+                {#                <h2>Comfort Challenges</h2>#}
+                {##}
+                {#                <p>Take on challenges that help you expand your comfort zone and bring adventures to your everyday#}
+                {#                    life.</p>#}
             </div>
         </div>
         <div class="col-md-6 text-center  wow zoomIn">
-            <img src="{% static 'img/gatherings.png' %}" alt="gatherings" class="img-responsive">
+            <img src="{% static 'about/img/gatherings.png' %}" alt="gatherings" class="img-responsive">
         </div>
         <div class="col-md-3 text-center wow fadeInRight">
             <div>
-                {% icon 'journal' classes='features-icon' %}
+                {% icon 'manager' classes='features-icon text-main' %}
+
+                <h2>Organised Manager</h2>
+
+                <p>Organic Outcome Management. Keep track of what you want and know your next steps to get there.</p>
+            </div>
+            <div class="m-t-lg">
+                {% icon 'journal' classes='features-icon text-main' %}
 
                 <h2>Smart Journal</h2>
 
                 <p>Become more aware of your current life by reflecting on it in a smart and personalized way.</p>
-            </div>
-            <div class="m-t-lg">
 
-                {% icon 'manager' classes='features-icon' %}
-
-                <h2>Self-Management System</h2>
-
-                <p>Organic Project Management. Projects start small and may grow bigger with time.</p>
             </div>
         </div>
     </div>
+    <div class="text-center" style="margin-bottom: 2em">
+        <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg wow tada"
+           style="font-size: xx-large">Join</a><br/>
+    </div>
 </section>
-<section id="reasons" class="reasons default-pattern">
+
+<section id="reasons" class="reasons bg-main-light">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -322,72 +339,50 @@
                 {% endfor %}
             </div>
         </div>
-    </div>
-</section>
-
-<section id="explore" class="container explore">
-    <div class="row">
-        <div class="col-lg-12 text-center">
-            <div class="navy-line"></div>
-            <h1>Explore your own personal legend</h1>
-
-            <p>
-                According to an old legend, some people choose to live an awesome life.
-                They break out of the typical
-                life and transform into ..well.. legends - unleashing their full potential - feeling vibrant, charged
-                and
-                energetic.
-                The interesting question here is:
-                Are you one of them?
-                - Well, let us find out..
-            </p>
-        </div>
-    </div>
-    <div class="row features-block">
-        <div class="col-xs-12 col-md-5 text-right wow fadeInLeft">
-            <img src="{% static 'img/seminar.png' %}" alt="agenda" class="img-responsive center-block">
-        </div>
-        <div class="col-md-2 features-text text-center wow zoomInDown">
-            <small>coLegend</small>
-            <h2>Once upon a time.. is now!</h2>
-
-            <p>
-                <a id="join-quick" href="{% url "join" %}?next=/" class="btn btn-info btn-lg">Join</a><br/>
-                <i>the circle of real life legends!</i>
-            </p>
-        </div>
-        <div class="col-md-5 text-right wow fadeInRight">
-            <img src="{% static 'img/agenda.png' %}" alt="agenda" class="img-responsive center-block">
+        <div class="text-center" style="margin: 2rem">
+            <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg wow tada"
+               style="font-size: xx-large">Join</a><br/>
         </div>
     </div>
 </section>
 
-<section id="team" class="gray-section team">
-    <div class="container">
-        <div class="row m-b-lg">
-            <div class="col-lg-12 text-center">
-                <div class="navy-line"></div>
-                <h1>Our Core Team</h1>
 
-                <p>Feel free to contact us.</p>
-            </div>
-        </div>
-        <div class="row">
-            {% for member in team_members %}
-                <div class="col-md-3 wow fadeInLeft">
-                    {% include 'about/widgets/team_member.html' with image=member.image name=member.name roles=member.roles social_accounts=member.social_accounts url=member.url %}
-                </div>
-            {% endfor %}
-
-        </div>
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 text-center m-t-lg m-b-lg">
-                <p>Let us know if you want to join our team. At coLegend you can chose from a buffet of roles - I am
-                    quite sure there is something that matches your taste. ;)</p>
-            </div>
-        </div>
-    </div>
-</section>
+{#<section id="explore" class="container explore">#}
+{#    <div class="row">#}
+{#        <div class="col-lg-12 text-center">#}
+{#            <div class="navy-line"></div>#}
+{#            <h1>Explore your own personal legend</h1>#}
+{##}
+{#            <p>#}
+{#                According to an old legend, some people choose to live an awesome life.#}
+{#                They break out of the typical#}
+{#                life and transform into ..well.. legends - unleashing their full potential - feeling vibrant, charged#}
+{#                and#}
+{#                energetic.#}
+{#                The interesting question here is:#}
+{#                Are you one of them?#}
+{#                - Well, let us find out..#}
+{#            </p>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="row features-block">#}
+{#        <div class="col-xs-12 col-md-5 text-right wow fadeInLeft">#}
+{#            <img src="{% static 'img/seminar.png' %}" alt="agenda" class="img-responsive center-block">#}
+{#        </div>#}
+{#        <div class="col-md-2 features-text text-center wow zoomInDown">#}
+{#            <small>coLegend</small>#}
+{#            <h2>Once upon a time.. is now!</h2>#}
+{##}
+{#            <p>#}
+{#                <a id="join-quick" href="{% url "join" %}?next=/" class="btn btn-info btn-lg">Join</a><br/>#}
+{#                <i>the circle of real life legends!</i>#}
+{#            </p>#}
+{#        </div>#}
+{#        <div class="col-md-5 text-right wow fadeInRight">#}
+{#            <img src="{% static 'img/agenda.png' %}" alt="agenda" class="img-responsive center-block">#}
+{#        </div>#}
+{#    </div>#}
+{#</section>#}
 
 {#<section class="features">#}
 {#    <div class="container">#}
@@ -483,21 +478,11 @@
 <section id="testimonials" class="navy-section testimonials" style="margin-top: 0">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 text-center wow zoomIn">
-                {% icon 'comment' classes='big-icon' %}
-
-                <h1>
-                    What our members say
+            <div class="col-lg-12 wow zoomIn">
+                <h1 class="text-center" style="margin-bottom: 2em">
+                    What our legends say ...
                 </h1>
-
-                <div class="testimonials-text">
-                    <i>"Being part of coLegend has changed my life!<br>I am slowly and surely living up to my dreams and
-                        it feels great to have a constant circle of awesome people to explore and share my journey
-                        with."</i>
-                </div>
-                <small>
-                    <strong>2015-10-04 - Coralina</strong>
-                </small>
+                {% statement 'coralina' content="Being part of coLegend has changed my life!<br>I am slowly and surely living up to my dreams and it feels great to have a constant circle of awesome people to explore and share my journey with.</br><span class='small text-muted pull-right'>Coralina, 2015-10-04</small>" show_link=False %}
             </div>
         </div>
     </div>
@@ -514,7 +499,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 wow tada">
+            <div class="col-lg-8 col-lg-offset-2">
                 <ul class="pricing-plan list-unstyled selected">
                     <li class="pricing-title">
                         Pricing - Pay as YOU wish
@@ -526,8 +511,8 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="card text-xs-center">
-                                        <h6 class="card-header"
-                                            style="background-color: #1ab394; color: white; margin: 0;">
+                                        <h6 class="card-header bg-main"
+                                            style="margin: 0;">
                                             Transparent expenses
                                         </h6>
                                         <div class="card-block bg-content">
@@ -536,14 +521,15 @@
                                                 {% icon 'check' color='#1ab394' %} Website hosting<br>
                                                 {% icon 'check' color='#1ab394' %} coWorker compensation<br>
                                             </p>
-                                            <a href="mailto:connect@colegend.org" class="">More details</a>
+                                            <a href="mailto:connect@colegend.org" target="_blank" class="">More
+                                                details</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="card text-xs-center">
-                                        <h6 class="card-header"
-                                            style="background-color: #1ab394; color: white; margin: 0;">
+                                        <h6 class="card-header bg-main"
+                                            style="margin: 0;">
                                             Your support for us
                                         </h6>
                                         <div class="card-block bg-content">
@@ -553,7 +539,8 @@
                                             </p>
                                             <div class="row">
                                                 <div class="col-xs-6">
-                                                    <a href="mailto:connect@colegend.org" class="btn btn-info">Contribute<br>energy</a>
+                                                    <a href="mailto:connect@colegend.org" class="btn btn-success"
+                                                       target="_blank">Contribute<br>energy</a>
                                                 </div>
                                                 <div class="col-xs-6">
                                                     {% include 'widgets/donate.html' %}
@@ -568,61 +555,103 @@
                 </ul>
             </div>
         </div>
+        <div class="text-center" style="margin-top: 4em">
+            <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg wow tada"
+               style="font-size: xx-large">Join</a><br/>
+        </div>
     </div>
 </section>
 
-<section id="contact" class="gray-section contact">
+
+<section id="team" class="gray-section team">
+    <div class="container">
+        <div class="row m-b-lg">
+            <div class="col-lg-12 text-center">
+                <div class="navy-line"></div>
+                <h1>Our Core Team</h1>
+
+                <p>Feel free to contact us.</p>
+            </div>
+        </div>
+        <div class="row">
+            {% for member in team_members %}
+                <div class="col-md-3 wow fadeInLeft">
+                    {% include 'about/widgets/team_member.html' with image=member.image name=member.name roles=member.roles social_accounts=member.social_accounts url=member.url %}
+                </div>
+            {% endfor %}
+
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center m-t-lg m-b-lg">
+                <p class="lead">{% link 'Let us know' url='mailto:connect@colegend.org' external=True %} if you want to
+                    join our team. At coLegend you can chose from a buffet of roles - I am
+                    quite sure there is something that matches your taste. ;)</p>
+                {% button "Roles page" pattern='roles:index' classes='btn-info' size='small' icon='roles' external=True %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="contact">
     <div class="container">
         <div class="row m-b-lg">
             <div class="col-lg-12 text-center">
                 <div class="navy-line"></div>
                 <h1>Contact Us</h1>
-
-                {#                <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod.</p>#}
             </div>
         </div>
         <div class="row m-b-lg">
-            <div class="col-lg-3 col-lg-offset-2 text-left">
-                <p class="text-color">{% icon 'legend' color="blue" %} Personal contact..
-                </p>
-
+            <div class="col-sm-4 text-center">
+                {% icon 'smile-o' classes='fa-4x text-main' %}
+                <h2>Personal Contact</h2>
                 <p class="text-color">We are humans here at coLegend. As such you can <a href="#team">reach the team</a>
                     in person. Via phone or by arranging a meetup face to face.</p>
             </div>
-            <div class="col-lg-2 text-center">
-                <address>
-                    <strong><span class="navy">coLegend</span></strong><br/>
-                    {% icon 'address' fixed=True %} Berlin, Germany<br/>
-                    {% icon 'phone' fixed=True %} +49 (176) 97 99 44 80
-                </address>
+            <div class="col-sm-4 text-center">
+                {% icon 'project' classes='fa-4x text-main' %}
+                <h2>coLegend</h2>
+                <p class="text-center">
+                    {% icon 'address' fixed=True %} Berlin, Germany<br>
+                    {% icon 'phone' fixed=True %} +49 (176) 979944 80<br>
+                    {% icon 'phone' fixed=True %} +49 (178) 3472667
+                </p>
             </div>
-            <div class="col-lg-3 text-right">
-                <p class="text-color">We love feedback! {% icon 'heart' color="red" %}</p>
-
-                <p class="text-color">We really do! ;)<br/>
-                    Feel free to share your feelings and whatever it is, that is on your mind.</p>
+            <div class="col-sm-4 text-center">
+                <span class="fa-stack fa-lg fa-3x">
+                {% icon 'thumbs-o-down' classes='text-main' %}
+                {% icon 'thumbs-o-up' classes='text-main' %}
+                </span>
+                <h2>We {% icon 'heart' classes='text-category-1' %} Feedback</h2>
+                <p class="text-color">
+                    We really do! ;)<br/>
+                    Feel free to share your feelings and whatever it is, that is on your mind.
+                </p>
             </div>
-            {#            <div class="col-lg-4">#}
-            {#                <p class="text-color">#}
-            {#                    Consectetur adipisicing elit. Aut eaque, totam corporis laboriosam veritatis quis ad perspiciatis,#}
-            {#                    totam corporis laboriosam veritatis, consectetur adipisicing elit quos non quis ad perspiciatis,#}
-            {#                    totam corporis ea,#}
-            {#                </p>#}
-            {#            </div>#}
         </div>
         <div class="row">
             <div class="col-lg-12 text-center">
-                <a href="mailto:connect@colegend.org" class="btn btn-primary">Send us mail</a>
+                {% button "Send us mail" url='mailto:connect@colegend.org' classes='btn-success' size='large' icon='send' external=True %}
+                {#                <a href="" class="btn btn-primary">Send us mail</a>#}
 
                 <p class="m-t-sm">
-                    Or follow us on social platforms
+                    And follow us on social platforms ...
                 </p>
                 <ul class="list-inline social-icon">
-                    <li><a href="https://plus.google.com/+ColegendOrgPage" target="_blank">
-                        {% icon 'google-plus' %}</a>
+                    <li>
+                        <a href="https://plus.google.com/+ColegendOrgPage" target="_blank">
+                        <span class="fa-stack fa-lg">
+                            {% icon 'circle' classes='fa-stack-2x text-main' %}
+                            {% icon 'google-plus' classes='fa-stack-1x fa-inverse' %}
+                        </span>
+                        </a>
                     </li>
-                    <li><a href="https://www.facebook.com/colegend.org" target="_blank">
-                        {% icon 'facebook' %}</a>
+                    <li>
+                        <a href="https://www.facebook.com/colegend.org" target="_blank">
+                            <span class="fa-stack fa-lg">
+                                {% icon 'circle' classes='fa-stack-2x text-main' %}
+                                {% icon 'facebook' classes='fa-stack-1x fa-inverse' %}
+                            </span>
+                        </a>
                     </li>
                 </ul>
             </div>
