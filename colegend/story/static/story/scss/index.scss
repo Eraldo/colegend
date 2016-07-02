@@ -1,0 +1,97 @@
+.typed-cursor {
+  opacity: 1;
+  -webkit-animation: blink 0.7s infinite;
+  -moz-animation: blink 0.7s infinite;
+  animation: blink 0.7s infinite;
+}
+
+@mixin keyframes-blink {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  @include keyframes-blink;
+}
+
+@-webkit-keyframes blink {
+  @include keyframes-blink;
+}
+
+@-moz-keyframes blink {
+  @include keyframes-blink;
+}
+
+// Story initial font
+@font-face {
+  font-family: preciosa;
+  src: url("../fonts/PRECIOSA.TTF");
+}
+
+$story-initial-font: preciosa;
+
+// Story text font
+@font-face {
+  font-family: specialelite;
+  src: url("../fonts/special-elite/SpecialElite.ttf");
+}
+
+$story-font: specialelite;
+
+.story-initial-letter {
+  font: 400% $story-initial-font;
+}
+
+#typed-strings, .after-typed {
+  display: none;
+}
+
+#typed, .typed {
+  font-family: $story-font;
+}
+
+// Handwritten font
+@font-face {
+  font-family: journal;
+  src: url("../fonts/Journal/journal.ttf");
+}
+
+$handwritten-font: journal;
+
+.handwritten-font {
+  font-family: $handwritten-font;
+}
+
+#paper-scroll {
+  background-image: url("../images/paper-scroll.png");
+  min-height: 400px;
+  background-size: 100% 100%;
+  padding: 60px 50px;
+
+  #welcome-tree-leaf {
+    font-size: 2em;
+    overflow: scroll;
+    max-height: 400px;
+  }
+
+  #next-button {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+  }
+
+  #close-button {
+    position: absolute;
+    top: 0;
+    right: 5px;
+  }
+}

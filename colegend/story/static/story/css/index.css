@@ -1,0 +1,67 @@
+.typed-cursor {
+  opacity: 1;
+  -webkit-animation: blink 0.7s infinite;
+  -moz-animation: blink 0.7s infinite;
+  animation: blink 0.7s infinite; }
+
+@keyframes blink {
+  0% {
+    opacity: 1; }
+  50% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+@-webkit-keyframes blink {
+  0% {
+    opacity: 1; }
+  50% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+@-moz-keyframes blink {
+  0% {
+    opacity: 1; }
+  50% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+@font-face {
+  font-family: preciosa;
+  src: url("../fonts/PRECIOSA.TTF"); }
+@font-face {
+  font-family: specialelite;
+  src: url("../fonts/special-elite/SpecialElite.ttf"); }
+.story-initial-letter {
+  font: 400% preciosa; }
+
+#typed-strings, .after-typed {
+  display: none; }
+
+#typed, .typed {
+  font-family: specialelite; }
+
+@font-face {
+  font-family: journal;
+  src: url("../fonts/Journal/journal.ttf"); }
+.handwritten-font {
+  font-family: journal; }
+
+#paper-scroll {
+  background-image: url("../images/paper-scroll.png");
+  min-height: 400px;
+  background-size: 100% 100%;
+  padding: 60px 50px; }
+  #paper-scroll #welcome-tree-leaf {
+    font-size: 2em;
+    overflow: scroll;
+    max-height: 400px; }
+  #paper-scroll #next-button {
+    position: absolute;
+    top: 10px;
+    left: 20px; }
+  #paper-scroll #close-button {
+    position: absolute;
+    top: 0;
+    right: 5px; }
+
+/*# sourceMappingURL=index.css.map */

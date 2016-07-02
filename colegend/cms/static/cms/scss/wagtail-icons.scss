@@ -1,0 +1,13 @@
+.icon {
+  &.icon-fa {
+    &:before {
+      font-family: "FontAwesome";
+    }
+  }
+
+  &.icon-coicon {
+    &:before {
+      font-family: "coicons";
+    }
+  }
+}
