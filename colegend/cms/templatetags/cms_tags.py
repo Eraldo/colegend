@@ -2,8 +2,32 @@ from classytags.arguments import Argument
 from classytags.core import Options
 from classytags.helpers import InclusionTag
 from django import template
+from django.template.defaultfilters import slugify
+
+from colegend.core.templatetags.core_tags import link
 
 register = template.Library()
+
+
+@register.tag
+class TableOfContents(InclusionTag):
+    name = 'toc'
+    template = 'cms/widgets/table-of-contents.html'
+    options = Options(
+        Argument('headings', required=False),
+    )
+
+    def get_context(self, context, headings, **kwargs):
+        if not headings:
+            page = context.get('page')
+            if page and hasattr(page, 'content'):
+                headings = [block.value for block in page.content if block.block_type == 'heading']
+        nodes = []
+        if headings and len(headings) > 1:
+            nodes = [link(heading, url='#{}'.format(slugify(heading))) for heading in headings]
+        return {
+            'nodes': nodes,
+        }
 
 
 @register.tag

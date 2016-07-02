@@ -1,5 +1,11 @@
 {% extends 'pages/content.html' %}
+{% load static %}
 
 {% block breadcrumbs %}
     {{ block.super }}{% include 'widgets/breadcrumb.html' with url=page.get_parent.url title=page.get_parent icon=page.get_parent|slugify %}
+{% endblock %}
+
+{% block extra_head %}
+    {{ block.super }}
+    <link href="{% static 'support/css/index.css' %}" rel="stylesheet">
 {% endblock %}

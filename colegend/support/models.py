@@ -118,5 +118,6 @@ class DocumentationPage(Page):
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         index = self.get_documentation_root()
+        context['content'] = self.content
         context['index'] = index
         return context

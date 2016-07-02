@@ -319,6 +319,12 @@ form .CodeMirror-fullscreen {
 .widget-icon.fa {
   line-height: inherit; }
 
+.widget-heading:hover .heading-link {
+  visibility: visible; }
+.widget-heading .heading-link {
+  font-size: 0.5em;
+  visibility: hidden; }
+
 .widget-weekday {
   font-family: "Lucida Console", Monaco, monospace; }
 
@@ -329,6 +335,13 @@ form .CodeMirror-fullscreen {
   margin-top: 0.5em; }
 .widget-header #page-title {
   margin-bottom: 0.2em; }
+
+.widget-table-of-contents {
+  background-color: #b2ebf2;
+  padding: 1em; }
+  .widget-table-of-contents .toc-links {
+    padding: 0;
+    list-style-type: none; }
 
 #content-wrapper {
   padding: 1em; }

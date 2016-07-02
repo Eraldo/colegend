@@ -1,0 +1,11 @@
+{% load i18n %}
+<div class="widget-table-of-contents">
+    <span class="heading">{% trans 'Content' %}</span><br>
+    <ol class="toc-links">
+        {% for node in nodes %}
+            <li>
+                {{ node }}
+            </li>
+        {% endfor %}
+    </ol>
+</div>

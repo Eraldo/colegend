@@ -423,6 +423,14 @@ form .CodeMirror-fullscreen
     //fixing line-height to match 'coicons'
     line-height: inherit
 
+.widget-heading
+  &:hover
+    .heading-link
+      visibility: visible
+  .heading-link
+    font-size: 0.5em
+    visibility: hidden
+
 .widget-weekday
   font-family: "Lucida Console", Monaco, monospace
 
@@ -435,6 +443,13 @@ form .CodeMirror-fullscreen
     margin-top: 0.5em
   #page-title
     margin-bottom: 0.2em
+
+.widget-table-of-contents
+  background-color: $main-light
+  padding: 1em
+  .toc-links
+    padding: 0
+    list-style-type: none
 
 #content-wrapper
   padding: 1em

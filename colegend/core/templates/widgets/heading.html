@@ -1,1 +1,7 @@
-<h{{ level }} class="widget-heading {{ classes }}">{{ content }}</h{{ level }}>
+{% load core_tags %}
+<h{{ level }} id="{{ content|slugify }}" class="widget-heading {{ classes }}">
+    {{ content }}
+    <a class="heading-link" href="#{{ content|slugify }}" title="Permalink to this headline">
+        {% icon 'link' %}
+    </a>
+</h{{ level }}>
