@@ -43,9 +43,9 @@ addUnitAlias('millisecond', 'ms');
 
 // PARSING
 
-addRegexToken('S', match1to3, match1);
-addRegexToken('SS', match1to3, match2);
-addRegexToken('SSS', match1to3, match3);
+addRegexToken('S',    match1to3, match1);
+addRegexToken('SS',   match1to3, match2);
+addRegexToken('SSS',  match1to3, match3);
 
 var token;
 for (token = 'SSSS'; token.length <= 9; token += 'S') {

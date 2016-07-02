@@ -16,7 +16,7 @@ addUnitAlias('date', 'D');
 
 // PARSING
 
-addRegexToken('D', match1to2);
+addRegexToken('D',  match1to2);
 addRegexToken('DD', match1to2, match2);
 addRegexToken('Do', function (isStrict, locale) {
     return isStrict ? locale._ordinalParse : locale._ordinalParseLenient;

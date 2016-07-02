@@ -15,7 +15,7 @@ addUnitAlias('minute', 'm');
 
 // PARSING
 
-addRegexToken('m', match1to2);
+addRegexToken('m',  match1to2);
 addRegexToken('mm', match1to2, match2);
 addParseToken(['m', 'mm'], MINUTE);
 

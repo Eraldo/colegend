@@ -1,4 +1,19 @@
-### `0.5.0` _2015_12_28_
+### `0.5.4` _2016-05-03_
+* Updated data to IANA TZDB `2016d`. [#336](https://github.com/moment/moment-timezone/pull/336)
+* Ignore the results from `Intl.DateTimeFormat().resolvedOptions().timeZone` if it is undefined. [#322](https://github.com/moment/moment-timezone/pull/322)
+
+### `0.5.3` _2016-03-24_
+* Updated data to IANA TZDB `2016c`. [#321](https://github.com/moment/moment-timezone/pull/321)
+
+### `0.5.2` _2016-03-15_
+* Updated data to IANA TZDB `2016b`. [#315](https://github.com/moment/moment-timezone/pull/315)
+
+### `0.5.1` _2016-03-01_
+* Updated data to IANA TZDB `2016a`. [#299](https://github.com/moment/moment-timezone/pull/299)
+* Fixed bug when `Date#toTimeString` did not return a known format. [#302](https://github.com/moment/moment-timezone/pull/302)  [#303](https://github.com/moment/moment-timezone/pull/303)
+* Added lookup on `Intl.DateTimeFormat().resolvedOptions().timeZone` to `moment.tz.guess()`. [#304](https://github.com/moment/moment-timezone/pull/304) [#291](https://github.com/moment/moment-timezone/pull/291)
+
+### `0.5.0` _2015-12-28_
 * Added support for guessing the user's timezone via `moment.tz.guess()`. [#285](https://github.com/moment/moment-timezone/pull/285)
 * Fixed UMD export issue when there was an html element with `id=exports`. [#275](https://github.com/moment/moment-timezone/pull/275)
 * Removed jspm specific dependencies from `package.json`. [#284](https://github.com/moment/moment-timezone/pull/284)
