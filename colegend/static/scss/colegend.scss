@@ -1,0 +1,766 @@
+// project specific CSS goes here
+
+// FONTS
+
+/* latin */
+@font-face {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 300;
+  src: local("Nunito-Light"), url(../fonts/Nunito/Nunito-Light.woff) format("woff");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
+/* latin */
+@font-face {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Nunito-Light"), url(../fonts/Nunito/Nunito-Light.woff) format("woff");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
+/* latin */
+@font-face {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  src: local("Nunito-Bold"), url(../fonts/Nunito/Nunito-Bold.woff) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
+$font-default: "Nunito";
+
+@font-face {
+  font-family: "Ubuntu Titling";
+  src: url("../fonts/Ubuntu-Titling/UbuntuTitling-Bold.woff");
+}
+
+$font-heading: "Ubuntu Titling";
+
+$font-stack: "Nunito", "Ubuntu", Helvetica, sans-serif;
+
+// COLORS
+
+@import "colors";
+
+$site-menu-color: $white;
+
+.text-white {
+  color: $white;
+}
+
+.text-black {
+  color: $black;
+}
+
+.text-main {
+  color: $main;
+}
+
+.text-main-light {
+  color: $main-light;
+}
+
+.text-main-superlight {
+  color: $main-superlight;
+}
+
+.text-main-dark {
+  color: $main-dark;
+}
+
+.text-accent {
+  color: $accent;
+}
+
+.text-accent-light {
+  color: $accent-light;
+}
+
+.text-accent-dark {
+  color: $accent-dark;
+}
+
+.bg-white {
+  background-color: $white;
+  color: $black;
+}
+
+.bg-black {
+  background-color: $black;
+  color: $white;
+}
+
+.bg-main {
+  background-color: $main;
+  color: $white;
+}
+
+.bg-main-light {
+  background-color: $main-light;
+}
+
+.bg-main-superlight {
+  background-color: $main-superlight;
+}
+
+.bg-main-dark {
+  background-color: $main-dark;
+  color: $white;
+}
+
+.bg-accent {
+  background-color: $accent;
+  color: $white;
+}
+
+.bg-accent-light {
+  background-color: $accent-light;
+}
+
+.bg-accent-dark {
+  background-color: $accent-dark;
+  color: $white;
+}
+
+// category colors
+
+$category-7: #9c27b0;
+
+// violet
+$category-6: #3f51b5;
+
+// indigo
+$category-5: #03a9f4;
+
+// dodgerblue
+$category-4: #4caf50;
+
+// green
+$category-3: #ffeb3b;
+
+// gold
+$category-2: #ff9800;
+
+// darkorange
+$category-1: #f44336;
+
+// crimson
+
+$conscious: $category-6;
+$connected: $category-4;
+$continuous: $category-2;
+
+.text-category-7 {
+  color: $category-7;
+}
+
+.text-category-6 {
+  color: $category-6;
+}
+
+.text-category-5 {
+  color: $category-5;
+}
+
+.text-category-4 {
+  color: $category-4;
+}
+
+.text-category-3 {
+  color: $category-3;
+}
+
+.text-category-2 {
+  color: $category-2;
+}
+
+.text-category-1 {
+  color: $category-1;
+}
+
+.bg-category-7 {
+  background-color: $category-7;
+  color: $white;
+}
+
+.bg-category-6 {
+  background-color: $category-6;
+  color: $white;
+}
+
+.bg-category-5 {
+  background-color: $category-5;
+  color: $white;
+}
+
+.bg-category-4 {
+  background-color: $category-4;
+  color: $white;
+}
+
+.bg-category-3 {
+  background-color: $category-3;
+}
+
+.bg-category-2 {
+  background-color: $category-2;
+  color: $white;
+}
+
+.bg-category-1 {
+  background-color: $category-1;
+  color: $white;
+}
+
+// Selection colors
+body {
+  ::-moz-selection {
+    background: $accent-light;
+  }
+
+  ::selection {
+    background: $accent-light;
+  }
+
+  .text-accent-light {
+    &::selection {
+      background: $accent-dark;
+    }
+  }
+}
+
+// Alert colors
+
+// bootstrap alert CSS, translated to the django-standard levels of
+// debug, info, success, warning, error
+
+$mint-green: #d6e9c6;
+$pink: #f2dede;
+$dark-pink: #eed3d7;
+$red: #b94a48;
+
+.alert-debug {
+  background-color: $white;
+  border-color: $mint-green;
+  color: $black;
+}
+
+.alert-error {
+  background-color: $pink;
+  border-color: $dark-pink;
+  color: $red;
+}
+
+// This is a fix for the bootstrap4 alpha release
+
+@media (max-width: 47.9em) {
+  .navbar-nav .nav-item {
+    display: inline-block;
+    float: none;
+    width: 100%;
+  }
+
+  .navbar-nav .nav-item + .nav-item {
+    margin-left: 0;
+  }
+
+  .nav.navbar-nav.pull-right {
+    float: none !important;
+  }
+}
+
+// Display django-debug-toolbar.
+// See https://github.com/django-debug-toolbar/django-debug-toolbar/issues/742
+// and https://github.com/pydanny/cookiecutter-django/issues/317
+
+[hidden="hidden"][style*="display: block;"] {
+  display: block !important;
+}
+
+#navbar-brand-logo {
+  padding-top: 0.425rem;
+}
+
+#site-menu {
+  background-color: $site-menu-color;
+}
+
+//.breadcrumbs
+//  a
+//    font-size: small
+//    text-decoration: none
+.breadcrumbs {
+  padding-left: 0;
+  margin: 0;
+  font-size: smaller;
+
+  li {
+    display: inline-block;
+  }
+
+  .active {
+    display: none;
+  }
+}
+
+body {
+  background-color: $main-dark;
+  font-size: 100%;
+  font-family: $font-stack;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-heading;
+}
+
+.bg-content {
+  background-color: $white;
+}
+
+//  coLegend text
+
+.text-conscious {
+  color: $conscious;
+}
+
+.text-connected {
+  color: $connected;
+}
+
+.text-continuous {
+  color: $continuous;
+}
+
+//  coLegend background
+
+.bg-conscious {
+  background-color: $conscious;
+}
+
+.bg-connected {
+  background-color: $connected;
+}
+
+.bg-continuous {
+  background-color: $continuous;
+}
+
+// feedback button
+
+#feedback-button {
+  height: 67px;
+  width: 67px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
+#feedback-button-mobile {
+  @extend #feedback-button;
+
+  height: 33px;
+  width: 33px;
+}
+
+.btn-conscious, .btn-conscious.active, .btn-conscious.focus, .btn-conscious:active, .btn-conscious:focus, .btn-conscious:hover, .open > .btn-conscious.dropdown-toggle {
+  color: white;
+  background-color: $conscious;
+  border-color: $conscious;
+}
+
+.btn-connected, .btn-connected.active, .btn-connected.focus, .btn-connected:active, .btn-connected:focus, .btn-connected:hover, .open > .btn-connected.dropdown-toggle {
+  color: white;
+  background-color: $connected;
+  border-color: $connected;
+}
+
+.btn-continuous, .btn-continuous.active, .btn-continuous.focus, .btn-continuous:active, .btn-continuous:focus, .btn-continuous:hover, .open > .btn-continuous.dropdown-toggle {
+  color: white;
+  background-color: $continuous;
+  border-color: $continuous;
+}
+
+.speech-bubble-arrow {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-bottom: 10px solid transparent;
+  border-top: 20px solid transparent;
+  border-right: 20px solid transparent;
+}
+
+.speech-bubble-arrow::before {
+  @extend .speech-bubble-arrow;
+
+  border-right-color: #e5e5e5;
+}
+
+.speech-bubble-arrow::after {
+  @extend .speech-bubble-arrow;
+
+  left: 1px;
+  border-right-color: white;
+  z-index: 1;
+}
+
+.speech-bubble-arrow-right {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-bottom: 10px solid transparent;
+  border-top: 20px solid transparent;
+  border-left: 20px solid transparent;
+}
+
+.speech-bubble-arrow-right::before {
+  @extend .speech-bubble-arrow-right;
+
+  border-left-color: #e5e5e5;
+}
+
+.speech-bubble-arrow-right::after {
+  @extend .speech-bubble-arrow-right;
+
+  right: 1px;
+  border-left-color: white;
+  z-index: 1;
+}
+
+.legend-name {
+  color: white;
+}
+
+.image-small {
+  max-height: 50px;
+  max-width: 50px;
+}
+
+.image-medium {
+  max-height: 100px;
+  max-width: 100px;
+}
+
+.image-large {
+  max-height: 200px;
+  max-width: 200px;
+}
+
+.badge {
+  max-height: 6rem;
+  max-width: 6rem;
+}
+
+.game-card-block {
+  padding: 1rem;
+
+  .card-text p {
+    max-height: 5.6rem;
+    overflow: scroll;
+  }
+}
+
+.game-card-image {
+  max-height: 6rem;
+  margin: auto;
+}
+
+// story animals
+
+.phoenix-avatar {
+  @extend .bg-category-7;
+}
+
+.eagle-avatar {
+  @extend .bg-category-6;
+}
+
+.parrot-avatar {
+  @extend .bg-category-5;
+}
+
+.monkey-avatar {
+  @extend .bg-category-4;
+}
+
+.tiger-avatar {
+  @extend .bg-category-3;
+}
+
+.dolphin-avatar {
+  @extend .bg-category-2;
+}
+
+.bear-avatar {
+  @extend .bg-category-1;
+}
+
+// Used for forms in speech bubble responses
+form.list-group-item:focus, form.list-group-item:hover {
+  color: #555;
+  text-decoration: none;
+  background-color: #f5f5f5;
+}
+
+// Fixing the spacing of the fullscreen markup editor (simpleMDE)
+
+form .editor-toolbar.fullscreen {
+  top: 56px;
+}
+
+form .editor-preview-active-side {
+  top: 106px;
+}
+
+form .CodeMirror-fullscreen {
+  top: 106px;
+}
+
+// Widgets
+
+.widget-link {
+  &.unstyled {
+    color: inherit;
+    text-decoration: inherit;
+  }
+}
+
+.widget-icon {
+  &.fa {
+    //fixing line-height to match 'coicons'
+    line-height: inherit;
+  }
+}
+
+.widget-heading {
+  &:hover {
+    .heading-link {
+      visibility: visible;
+    }
+  }
+
+  .heading-link {
+    font-size: 0.5em;
+    visibility: hidden;
+  }
+}
+
+.widget-weekday {
+  font-family: "Lucida Console", Monaco, monospace;
+}
+
+.hover-border-accent {
+  &:hover {
+    border-color: $accent;
+  }
+}
+
+.widget-header {
+  .breadcrumbs {
+    margin-top: 0.5em;
+  }
+
+  #page-title {
+    margin-bottom: 0.2em;
+  }
+}
+
+.widget-table-of-contents {
+  background-color: $main-light;
+  padding: 1em;
+
+  .toc-links {
+    padding: 0;
+    list-style-type: none;
+  }
+}
+
+#content-wrapper {
+  padding: 1em;
+}
+
+.widget-footer {
+  height: 1em;
+}
+
+.widget-outcome-card {
+  .widget-action-menu {
+    visibility: hidden;
+  }
+
+  &:hover {
+    .widget-action-menu {
+      visibility: visible;
+    }
+  }
+}
+
+.dayentry-widget {
+  &.active {
+    @extend .bg-accent-light;
+  }
+}
+
+.widget-legend {
+  display: inline-block;
+  text-align: center;
+
+  .widget-avatar {
+    margin: auto;
+  }
+}
+
+.widget-npc {
+  display: inline-block;
+  text-align: center;
+
+  .widget-avatar {
+    margin: auto;
+  }
+}
+
+.widget-role {
+  display: inline-block;
+  text-align: center;
+
+  .widget-avatar {
+    margin: auto;
+  }
+}
+
+.widget-avatar {
+  position: relative;
+  border-radius: 50%;
+  max-width: 6em;
+  max-height: 6em;
+
+  &.small {
+    font-size: 0.5em;
+  }
+
+  &.large {
+    font-size: 2em;
+  }
+
+  .avatar-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+}
+
+@import "arrows";
+
+.widget-statement {
+  .widget-legend {
+    display: block;
+  }
+}
+
+.widget-statement {
+  .widget-npc {
+    display: block;
+  }
+}
+
+// card sizes
+.card-item {
+  padding: 0.6rem;
+}
+
+.widget-datepicker {
+  @extend .card-item;
+
+  min-width: 14.6rem;
+
+  .datepicker-form input {
+    max-width: 7rem;
+  }
+}
+
+// CMS (django cms branding)
+.cms-icon-logo:before, div.cms .cms-toolbar-item-logo a.colegend-cms:before {
+  content: initial;
+}
+
+// header
+.widget-project-bar {
+  @extend .bg-main-dark;
+
+  .nav-link {
+    color: inherit;
+  }
+
+  .nav-link:focus, .nav-link:hover {
+    @extend .bg-accent;
+  }
+
+  .dropdown-menu {
+    @extend .bg-main-light;
+
+    .dropdown-item:focus, .dropdown-item:hover {
+      @extend .bg-accent;
+    }
+  }
+}
+
+.widget-subnavigation {
+  .nav-link {
+    &:focus, &.nav-link:hover {
+      @extend .bg-accent;
+    }
+
+    &.active, &.active:hover {
+      @extend .bg-accent-dark;
+    }
+  }
+
+  .dropdown-menu {
+    @extend .bg-main-light;
+
+    .dropdown-item:focus, .dropdown-item:hover {
+      @extend .bg-accent;
+    }
+  }
+}
+
+// Tags autocomplete
+#div_id_tags {
+  .select2-container {
+    min-width: inherit;
+    width: 100% !important;
+  }
+}
+
+.filter-form {
+  .help-block {
+    display: none;
+  }
+}
+
+// CMS
+.rich-text img {
+  max-width: 100%;
+  height: auto;
+}
+
+.responsive-object {
+  position: relative;
+}
+
+.responsive-object iframe,
+.responsive-object object,
+.responsive-object embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
