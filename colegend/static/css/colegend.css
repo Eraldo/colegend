@@ -22,6 +22,69 @@
 @font-face {
   font-family: "Ubuntu Titling";
   src: url("../fonts/Ubuntu-Titling/UbuntuTitling-Bold.woff"); }
+.text-pink {
+  font-size: #f72e74; }
+
+.bg-pink {
+  background-color: #f72e74;
+  color: white; }
+
+.text-orange {
+  font-size: #FFAB40; }
+
+.bg-orange {
+  background-color: #FFAB40;
+  color: white; }
+
+.text-yellow {
+  font-size: #eede39; }
+
+.bg-yellow {
+  background-color: #eede39;
+  color: white; }
+
+.text-green {
+  font-size: #a8e141; }
+
+.bg-green {
+  background-color: #a8e141;
+  color: white; }
+
+.text-cyan {
+  font-size: #6bdaed; }
+
+.bg-cyan {
+  background-color: #6bdaed;
+  color: white; }
+
+.text-blue {
+  font-size: #3197d6; }
+
+.bg-blue {
+  background-color: #3197d6;
+  color: white; }
+
+.text-purple {
+  font-size: #ad86fc; }
+
+.bg-purple {
+  background-color: #ad86fc;
+  color: white; }
+
+.text-dark {
+  font-size: #455A64; }
+
+.bg-dark {
+  background-color: #455A64;
+  color: white; }
+
+.text-grey {
+  font-size: #ccc; }
+
+.bg-grey {
+  background-color: #ccc;
+  color: white; }
+
 .text-white {
   color: white; }
 

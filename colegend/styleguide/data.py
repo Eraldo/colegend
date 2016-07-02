@@ -206,6 +206,68 @@ widgets.append(
                     ),
                 ]
             ),
+            WidgetGroup(
+                'Content colors',
+                columns=4,
+                widgets=[
+                    Widget(
+                        'Pink color',
+                        template='styleguide/widgets/color.html',
+                        context={
+                            'name': 'pink',
+                        }
+                    ),
+                    Widget(
+                        'Orange color',
+                        template='styleguide/widgets/color.html',
+                        context={
+                            'name': 'orange',
+                        }
+                    ),
+                    Widget(
+                        'Yellow color',
+                        template='styleguide/widgets/color.html',
+                        context={
+                            'name': 'yellow',
+                        }
+                    ),
+                    Widget(
+                        'Green color',
+                        template='styleguide/widgets/color.html',
+                        context={
+                            'name': 'green',
+                        }
+                    ),
+                    Widget(
+                        'Cyan color',
+                        template='styleguide/widgets/color.html',
+                        context={
+                            'name': 'cyan',
+                        }
+                    ),
+                    Widget(
+                        'Blue color',
+                        template='styleguide/widgets/color.html',
+                        context={
+                            'name': 'blue',
+                        }
+                    ),
+                    Widget(
+                        'Purple color',
+                        template='styleguide/widgets/color.html',
+                        context={
+                            'name': 'purple',
+                        }
+                    ),
+                    Widget(
+                        'Dark color',
+                        template='styleguide/widgets/color.html',
+                        context={
+                            'name': 'dark',
+                        }
+                    ),
+                ]
+            ),
         ]
     ),
 )
