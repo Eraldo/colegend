@@ -3,7 +3,7 @@ All enhancements and patches to cookiecutter-django will be documented in this f
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [2016-??-??] version 0.1.11
+## [2016-07-03] version 0.1.11
 + Added new into video 
 + Added support app 
 + Added documentation
