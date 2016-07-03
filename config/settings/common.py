@@ -16,7 +16,9 @@ ROOT_DIR = environ.Path(__file__) - 3  # (/a/b/myfile.py - 3 = /)
 APPS_DIR = ROOT_DIR.path('colegend')
 
 env = environ.Env()
-env.read_env(ROOT_DIR('.env'))
+env_file = ROOT_DIR('.env')
+if environ.os.path.isfile(env_file):
+    env.read_env(env_file)
 
 # APP CONFIGURATION
 # ------------------------------------------------------------------------------
