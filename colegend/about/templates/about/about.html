@@ -669,8 +669,21 @@
     </div>
 </section>
 
-<div class="hidden-xs" id="audio-box" style="position: fixed; bottom: -0; right: 0; z-index: 10000">
+<div class="hidden-xs-down" id="audio-box" style="position: fixed; bottom: -0; left: 0; z-index: 10000">
     <audio id="audioplayer" src="{% static 'audio/colegend_song.mp3' %}" controls loop></audio>
+</div>
+
+<div class="feedback-button-container">
+    <div class="hidden-xs-down">
+        <a href="mailto:connect@colegend.org" target="_blank">
+            <img id="feedback-button" src="{% static 'images/feedback.png' %}" alt="Feedback"/>
+        </a>
+    </div>
+    <div class="hidden-sm-up">
+        <a href="mailto:connect@colegend.org" target="_blank">
+            <img id="feedback-button-mobile" src="{% static 'images/feedback.png' %}" alt="Feedback"/>
+        </a>
+    </div>
 </div>
 
 <script src="{% static 'js/jquery-2.1.1.js' %}"></script>
