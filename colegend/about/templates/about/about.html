@@ -1,4 +1,4 @@
-{% load i18n static core_tags legends_tags wagtailuserbar %}
+{% load i18n static core_tags legends_tags wagtailuserbar wagtailcore_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -188,57 +188,30 @@
 </section>
 
 <section id="services" class="container services">
-    <p id="vision" class="lead text-center text-main-dark">{% icon 'quote-left' color='grey' %} A world where people get
-        support from structure, technology and each other to live a fully conscious life worthy of continuously sharing
-        their personal story and fusing individual potentials to transform history into an ongoing
-        legend. {% icon 'quote-right' color='grey' %}</p>
+    <p id="vision"
+       class="lead text-center text-main-dark">{% icon 'quote-left' color='grey' %} {{ page.vision_text }} {% icon 'quote-right' color='grey' %}</p>
     <div class="row text-center">
         <div class="col-sm-4">
             {#            <img class="img-circle" src="{% static 'website/images/mentor_140x140.jpg' %}" alt="Mentor"/>#}
             {% icon 'apps' classes='fa-4x text-category-6' %}
-            <h2>Conscious Apps<br/>
-                {#                <small>Visioning Planing Managing</small>#}
-            </h2>
-
-            <p class="text-left">
-                Uncover your <u>deep desires</u> and explore your legendary <b style="display:inline-block;">life
-                vision</b>. Benefit from online <u>interactive
-                visioning tools</u> and use a management system to make sure you always know your <u>next
-                steps</u>.
-            </p>
-
-            {#            <p><a class="navy-link" href="#" role="button">Details &raquo;</a></p>#}
+            <h2>Conscious Apps</h2>
+            <span class="text-left">
+                {{ page.apps_teaser_text|richtext }}
+            </span>
         </div>
         <div class="col-sm-4">
-            {#            <img class="img-circle" src="{% static 'website/images/manager_140x140.jpg' %}" alt="Manager"/>#}
             {% icon 'community' classes='fa-4x text-category-4' %}
-            <h2>Connected Community<br/>
-                {#                <small>Community Sharing Groups</small>#}
-            </h2>
-
-            <p class="text-left">
-                Feel connected and get <u>active support</u> by being part of a larger <b>community</b> of benevolent
-                fellows called "<i>legends</i>" who share the journey of living up to your <u>full potential</u> and
-                making <u>dreams come true</u>.
-
-            </p>
-
-            {#            <p><a class="navy-link" href="#" role="button">Details &raquo;</a></p>#}
+            <h2>Connected Community</h2>
+            <span class="text-left">
+                {{ page.community_teaser_text|richtext }}
+            </span>
         </div>
         <div class="col-sm-4">
-            {#            <img class="img-circle" src="{% static 'website/images/motivator_140x140.jpg' %}" alt="Motivator"/>#}
             {% icon 'process' classes='fa-4x text-category-2' %}
-            <h2>Continuous Process<br/>
-                {#                <small>Story Challenge Support</small>#}
-            </h2>
-
-            <p class="text-left">
-                Stay motivated by enjoying creative methods like <b style="display: inline-block">storytelling</b>.
-                Let new perspectives <u>challenge and surprise</u> you.
-                Overcome obstacles by the support of lasting relationships and <u>personal coaching</u>.
-            </p>
-
-            {#            <p><a class="navy-link" href="#" role="button">Details &raquo;</a></p>#}
+            <h2>Continuous Process</h2>
+            <span class="text-left">
+                {{ page.process_teaser_text|richtext }}
+            </span>
         </div>
     </div>
 </section>
@@ -279,12 +252,6 @@
 
                 <p>Envision a blueprint of what you really want so that your true desires don’t get out of your
                     sight.</p>
-                {#                {% icon 'challenges' classes='features-icon' %}#}
-                {##}
-                {#                <h2>Comfort Challenges</h2>#}
-                {##}
-                {#                <p>Take on challenges that help you expand your comfort zone and bring adventures to your everyday#}
-                {#                    life.</p>#}
             </div>
         </div>
         <div class="col-md-6 text-center  wow zoomIn">
@@ -320,18 +287,18 @@
             <div class="col-lg-12 text-center">
                 <div class="navy-line"></div>
                 <h1>7 reasons to join coLegend</h1>
-                <br>
+                {{ page.reasons_intro|richtext }}
                 {% for reason in reasons %}
                     <div class="wow zoomIn">
                         <span style="display: none;">{% cycle 'left' 'right' as direction %}</span>
                         <div class="row">
                             {% if direction == 'left' %}
                                 <div class="col-lg-8">
-                                    {% statement reason.npc reason.text direction=direction %}
+                                    {% statement reason.npc reason.text|richtext direction=direction %}
                                 </div>
                             {% elif direction == 'right' %}
                                 <div class="col-lg-8 col-lg-offset-4">
-                                    {% statement reason.npc reason.text direction=direction %}
+                                    {% statement reason.npc reason.text|richtext direction=direction %}
                                 </div>
                             {% endif %}
                         </div>
@@ -482,7 +449,7 @@
                 <h1 class="text-center" style="margin-bottom: 2em">
                     What our legends say ...
                 </h1>
-                {% statement 'coralina' content="Being part of coLegend has changed my life!<br>I am slowly and surely living up to my dreams and it feels great to have a constant circle of awesome people to explore and share my journey with.</br><span class='small text-muted pull-right'>Coralina, 2015-10-04</small>" show_link=False %}
+                {% statement 'coralina' content=page.testimonial|richtext|add:"<span class='small text-muted pull-right'>Coralina, 2015-10-04</small>" show_link=False %}
             </div>
         </div>
     </div>
@@ -495,7 +462,7 @@
                 <div class="navy-line"></div>
                 <h1>Pricing</h1>
 
-                <p>A man who dares to waste one hour of time has not discovered the value of life.</p>
+                {{ page.pricing_intro|richtext }}
             </div>
         </div>
         <div class="row">
@@ -506,8 +473,7 @@
                     </li>
                     <li class="pricing-desc">
                         <div class="text-left">
-                            {% trans "I LOVE win-win-situations – and right now I’m confident you can get one: coLegend supports you to figure out what you truly want, how you can get it and accompanies you along the way. And YOU can help coLegend by contributing your energy." as support_text %}
-                            {% statement 'tiger' content=support_text %}
+                            {% statement 'tiger' content=page.tiger_statement|richtext %}
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="card text-xs-center">
@@ -583,9 +549,9 @@
         </div>
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 text-center m-t-lg m-b-lg">
-                <p class="lead">{% link 'Let us know' url='mailto:connect@colegend.org' external=True %} if you want to
-                    join our team. At coLegend you can chose from a buffet of roles - I am
-                    quite sure there is something that matches your taste. ;)</p>
+                <span class="lead">
+                    {{ page.roles_intro|richtext }}
+                </span>
                 {% button "Roles page" pattern='roles:index' classes='btn-info' size='small' icon='roles' external=True %}
             </div>
         </div>
@@ -604,8 +570,7 @@
             <div class="col-sm-4 text-center">
                 {% icon 'smile-o' classes='fa-4x text-main' %}
                 <h2>Personal Contact</h2>
-                <p class="text-color">We are humans here at coLegend. As such you can <a href="#team">reach the team</a>
-                    in person. Via phone or by arranging a meetup face to face.</p>
+                {{ page.contact_teaser|richtext }}
             </div>
             <div class="col-sm-4 text-center">
                 {% icon 'project' classes='fa-4x text-main' %}
@@ -622,10 +587,7 @@
                 {% icon 'thumbs-o-up' classes='text-main' %}
                 </span>
                 <h2>We {% icon 'heart' classes='text-category-1' %} Feedback</h2>
-                <p class="text-color">
-                    We really do! ;)<br/>
-                    Feel free to share your feelings and whatever it is, that is on your mind.
-                </p>
+                {{ page.feedback_teaser|richtext }}
             </div>
         </div>
         <div class="row">
@@ -654,6 +616,10 @@
                         </a>
                     </li>
                 </ul>
+                <p>
+                    {% trans "Not quite read to join and want to stay up-to-date about the project?" %}
+                </p>
+                {% button "Subscribe to newsletter" url='http://colegend.us13.list-manage.com/subscribe?u=e6c12ce160532f8031b6b21ee&id=7aa5f1f50c' classes='btn-success' size='large' icon='blog' external=True %}
             </div>
         </div>
         <div class="row">
@@ -661,7 +627,8 @@
                 <p><strong>&copy; 2014 - {% now "Y" %} coLegend</strong><br/>
                     <a href="mailto:connect@colegend.org" class="text-muted" target="_blank">Impressum</a> | Designed by
                     <a
-                            href="http://www.eraldo.org" class="text-muted" target="_blank">Eraldo Webdesign</a> |
+                            href="http://www.eraldo.org" class="text-muted" target="_blank">Eraldo Webdesign & Corinna
+                        UX</a> |
                     Crafted with <span class="text-category-1">♥</span>
                 </p>
             </div>

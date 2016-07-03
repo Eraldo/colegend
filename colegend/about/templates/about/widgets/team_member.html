@@ -6,7 +6,7 @@
     {% if url %}</a>{% endif %}
     <p>
         {% for role in roles %}
-            {{ role }}{% if not forloop.last %}, {% endif %}
+            {{ role.name }}{% if not forloop.last %}, {% endif %}
             {#            {% include 'roles/widgets/tag.html' with name=role %}#}
         {% endfor %}
     </p>
