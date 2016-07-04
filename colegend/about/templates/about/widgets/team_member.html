@@ -5,10 +5,14 @@
     <h4 style="color: dimgrey"><span class="team-member-name navy">{{ name.split.0 }}</span> {{ name.split.1 }}</h4>
     {% if url %}</a>{% endif %}
     <p>
-        {% for role in roles %}
-            {{ role.name }}{% if not forloop.last %}, {% endif %}
-            {#            {% include 'roles/widgets/tag.html' with name=role %}#}
+        {% for role in roles|slice:":8" %}
+             {{ role.name }}{% if not forloop.last %},{% endif %}
         {% endfor %}
+        {% if roles|length > 8 %}
+                <a class="show-more" href="{{ url }}#legend-roles" target="_blank">
+                    ... see all {{ roles|length }} roles
+                </a>
+        {% endif %}
     </p>
 
     <ul class="list-inline social-icon">
