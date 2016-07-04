@@ -289,7 +289,7 @@
                 <h1>7 reasons to join coLegend</h1>
                 {{ page.reasons_intro|richtext }}
                 {% for reason in reasons %}
-                    <div class="wow zoomIn">
+                    <div class="wow {% cycle 'fadeInLeftBig' 'fadeInRightBig' %}">
                         <span style="display: none;">{% cycle 'left' 'right' as direction %}</span>
                         <div class="row">
                             {% if direction == 'left' %}
