@@ -55,6 +55,10 @@ class AboutView(PageMixin, TemplateView):
                 },
 
             ]
+            context['feature_image'] = {
+                'url': page.feature_image.get_rendition('max-1200x1200').url if page.feature_image else '',
+                'name': page.feature_image,
+            }
         team_members = Role.objects.get(name__iexact='core manager').users.all()
         member_data = []
         anonymous_image = static('legends/images/anonymous.png')

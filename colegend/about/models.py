@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from wagtail.wagtailadmin.edit_handlers import MultiFieldPanel, FieldPanel
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 from colegend.cms.models import UniquePageMixin
 
@@ -24,6 +25,13 @@ class AboutPage(UniquePageMixin, Page):
     )
     process_teaser_text = RichTextField(
         blank=True,
+    )
+    feature_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
     )
 
     reasons_intro = RichTextField(
@@ -84,6 +92,7 @@ class AboutPage(UniquePageMixin, Page):
                 FieldPanel('apps_teaser_text', classname="full"),
                 FieldPanel('community_teaser_text', classname="full"),
                 FieldPanel('process_teaser_text', classname="full"),
+                ImageChooserPanel('feature_image'),
             ],
             heading="Features",
             classname="collapsible"
