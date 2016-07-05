@@ -11,6 +11,11 @@ from colegend.cms.models import UniquePageMixin
 class AboutPage(UniquePageMixin, Page):
     vision_text = models.TextField(blank=True)
 
+    intro_video_id = models.CharField(
+        max_length=50,
+        blank=True
+    )
+
     apps_teaser_text = RichTextField(
         blank=True,
     )
@@ -73,6 +78,7 @@ class AboutPage(UniquePageMixin, Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('vision_text', classname="full"),
+        FieldPanel('intro_video_id'),
         MultiFieldPanel(
             [
                 FieldPanel('apps_teaser_text', classname="full"),
