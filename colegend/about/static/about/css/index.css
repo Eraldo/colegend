@@ -142,13 +142,9 @@ h1 {
 -------------------------------------------------- */
 .header-back {
   height: 470px;
-  width: 100%; }
-
-.header-back.one {
-  background: url("../img/header_one.jpg") 50% 0 no-repeat; }
-
-.header-back.two {
-  background: url("../img/header_two.jpg") 50% 0 no-repeat; }
+  width: 100%;
+  background-size: cover;
+  background-position: 50%; }
 
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
@@ -980,12 +976,6 @@ section.comments {
 
 .navbar-default .navbar-brand {
   background: white; }
-
-.header-back.zero {
-  background: url("../img/header_zero.jpg") 50% 0 no-repeat; }
-
-.header-back.three {
-  background: url("../img/header_three.jpg") 50% 0 no-repeat; }
 
 .carousel-caption {
   background: rgba(0, 0, 0, 0.4);

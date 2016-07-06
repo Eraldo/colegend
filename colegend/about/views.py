@@ -59,6 +59,13 @@ class AboutView(PageMixin, TemplateView):
                 'url': page.feature_image.get_rendition('max-1200x1200').url if page.feature_image else '',
                 'name': page.feature_image,
             }
+            for image_field in ['colegend_header_image', 'conscious_header_image', 'connected_header_image', 'continuous_header_image']:
+                image = getattr(page, image_field)
+                if image:
+                    context[image_field] = {
+                        'url': image.get_rendition('max-1200x1200').url,
+                        'name': image,
+                    }
         team_members = Role.objects.get(name__iexact='core manager').users.all()
         member_data = []
         anonymous_image = static('legends/images/anonymous.png')

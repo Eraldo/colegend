@@ -12,6 +12,35 @@ from colegend.cms.models import UniquePageMixin
 class AboutPage(UniquePageMixin, Page):
     vision_text = models.TextField(blank=True)
 
+    colegend_header_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    conscious_header_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    connected_header_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    continuous_header_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
     intro_video_id = models.CharField(
         max_length=50,
         blank=True
@@ -86,7 +115,17 @@ class AboutPage(UniquePageMixin, Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('vision_text', classname="full"),
-        FieldPanel('intro_video_id'),
+        MultiFieldPanel(
+            [
+                ImageChooserPanel('colegend_header_image'),
+                ImageChooserPanel('conscious_header_image'),
+                ImageChooserPanel('connected_header_image'),
+                ImageChooserPanel('continuous_header_image'),
+                FieldPanel('intro_video_id'),
+            ],
+            heading="Header",
+            classname="collapsible"
+        ),
         MultiFieldPanel(
             [
                 FieldPanel('apps_teaser_text', classname="full"),
@@ -97,7 +136,6 @@ class AboutPage(UniquePageMixin, Page):
             heading="Features",
             classname="collapsible"
         ),
-
         MultiFieldPanel(
             [
                 FieldPanel('reasons_intro', classname="full"),
