@@ -48,6 +48,7 @@ fontawesome_icons = {
     'legend': 'user',
     'legends': 'group',
     'profile': 'user',
+    'account': 'user',
     'settings': 'cogs',
     'join': 'user-plus',
     'login': 'sign-out',
