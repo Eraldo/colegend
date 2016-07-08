@@ -17,18 +17,19 @@
     <div class="clearfix"></div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="outcome-{{ id }}-modal" tabindex="-1" role="dialog"
-     aria-labelledby="outcome-{{ id }}-modal-label" aria-hidden="true">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" tabindex="-1">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-
-                {% crispy status_form %}
+{% if status_form %}
+    <!-- Modal -->
+    <div class="modal fade" id="outcome-{{ id }}-modal" tabindex="-1" role="dialog"
+         aria-labelledby="outcome-{{ id }}-modal-label" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" tabindex="-1">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {% crispy status_form %}
+                </div>
             </div>
         </div>
     </div>
-</div>
+{% endif %}

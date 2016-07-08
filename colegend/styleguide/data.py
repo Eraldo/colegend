@@ -850,6 +850,7 @@ widgets.append(
                 'Simple outcome',
                 template='outcomes/widgets/card.html',
                 context={
+                    'id': '1',
                     'name': 'dummy outcome',
                     'status': 0,
                     'actions': [
@@ -868,6 +869,7 @@ widgets.append(
                 'Full outcome',
                 template='outcomes/widgets/card.html',
                 context={
+                    'id': '2',
                     'name': 'garage is clean',
                     'description': 'This is my outcome description.\nSecond line.',
                     'status': 1,
