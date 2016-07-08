@@ -312,6 +312,9 @@ h1 {
   font-weight: 700;
   text-transform: uppercase;
   text-shadow: none;
+  a {
+    text-transform: initial;
+  }
 }
 
 .caption-link {

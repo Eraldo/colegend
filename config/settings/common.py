@@ -351,6 +351,7 @@ THUMBNAIL_BASEDIR = 'thumbnails'
 
 # WATAIL CMS
 # ------------------------------------------------------------------------------
+BASE_URL = env('BASE_URL', default=None)  # used by wagtailadmin notifications
 WAGTAIL_SITE_NAME = 'coLegend'
 WAGTAILIMAGES_MAX_UPLOAD_SIZE = 1 * 1024 * 1024 #  Example: `20 * 1024 * 1024` => 20MB
 WAGTAILADMIN_NOTIFICATION_USE_HTML = True
