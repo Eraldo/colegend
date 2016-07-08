@@ -1,8 +1,7 @@
 from django.conf.urls import url
 
 from .views import OutcomeIndexView, OutcomeListView, OutcomeCreateView, OutcomeDetailView, OutcomeUpdateView, \
-    OutcomeDeleteView
-
+    OutcomeDeleteView, OutcomeInboxView
 
 urlpatterns = [
     url(r'^$',
@@ -11,6 +10,9 @@ urlpatterns = [
     url(r'^list/$',
         OutcomeListView.as_view(),
         name='list'),
+    url(r'^inbox/$',
+        OutcomeInboxView.as_view(),
+        name='inbox'),
     url(r'^create/$',
         OutcomeCreateView.as_view(),
         name='create'),

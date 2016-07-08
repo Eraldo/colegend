@@ -1,7 +1,15 @@
 {% extends 'outcomes/base.html' %}
-{% load buttons outcomes_tags crispy_forms_tags query %}
+{% load core_tags outcomes_tags crispy_forms_tags query %}
 
 {% block title %}Outcomes{% endblock %}
+
+{% block page_links %}
+    {% if inbox %}
+        {% button 'inbox' pattern='outcomes:inbox' classes='nav-item nav-link active' %}
+    {% else %}
+        {% button 'inbox' pattern='outcomes:list' classes='nav-item nav-link' %}
+    {% endif %}
+{% endblock %}
 
 {% block page_controls %}
     {% button 'create' pattern='outcomes:create' %}

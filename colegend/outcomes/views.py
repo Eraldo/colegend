@@ -33,10 +33,7 @@ class OutcomeListView(LoginRequiredMixin, OutcomeMixin, ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-
-        request = self.request
-        self.filter = self.filter_class(data=request.GET, queryset=queryset)
-
+        self.filter = self.filter_class(data=self.request.GET, queryset=queryset)
         return self.filter.qs
 
     def get_quick_create_form(self):
@@ -54,6 +51,7 @@ class OutcomeListView(LoginRequiredMixin, OutcomeMixin, ListView):
         context = super().get_context_data(**kwargs)
         context[self.context_filter_name] = self.filter
         context['quick_create_form'] = self.get_quick_create_form()
+        context['inbox'] = self.filter.data.get('inbox') == '2'
         return context
 
 
@@ -88,3 +86,17 @@ class OutcomeDeleteView(LoginRequiredMixin, OutcomeMixin, DeleteView):
     def get_success_url(self):
         outcome = self.get_object()
         return outcome.index_url
+
+
+class OutcomeInboxView(RedirectView):
+    pattern_name = 'outcomes:list'
+    query_string = True
+
+    def get_redirect_url(self, *args, **kwargs):
+        url = super().get_redirect_url(*args, **kwargs)
+        args = self.request.META.get('QUERY_STRING', '')
+        return '{url}{prefix}{suffix}'.format(
+            url=url,
+            prefix='&' if args else '?',
+            suffix='inbox=2',
+        )
