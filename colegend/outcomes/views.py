@@ -75,6 +75,12 @@ class OutcomeDetailView(LoginRequiredMixin, OutcomeMixin, DetailView):
 class OutcomeUpdateView(LoginRequiredMixin, OutcomeMixin, OwnedUpdateView):
     template_name = 'outcomes/update.html'
 
+    def get_success_url(self):
+        next_url = self.request.GET.get('next')
+        if next_url:
+            return next_url
+        return super().get_success_url()
+
 
 class OutcomeDeleteView(LoginRequiredMixin, OutcomeMixin, DeleteView):
     template_name = 'outcomes/delete.html'

@@ -117,3 +117,29 @@ class OutcomeQuickCreateForm(OwnedModelForm):
             Field('status', type="hidden"),
             Field('inbox', type="hidden"),
         )
+
+
+class OutcomeStatusForm(OwnedModelForm):
+    class Meta:
+        model = Outcome
+        fields = [
+            'owner',
+            'name',
+            'status',
+        ]
+
+    def __init__(self, *args, **kwargs):
+        request = kwargs.pop('request', None)
+        self.owner = kwargs.pop('owner', None)
+        super().__init__(*args, **kwargs)
+
+        self.helper = FormHelper()
+        outcome = self.instance
+        self.helper.form_action = outcome.update_url + '?next={}'.format(request.path)
+        self.helper.layout = Layout(
+            Field('owner', type="hidden"),
+            Field('name', type="hidden"),
+            Field('status', autofocus=True),
+        )
+        self.helper.add_input(Submit('update', _('Update')))
+        self.helper.add_input(Submit('close', _('Close'), data_dismiss="modal", css_class='btn btn-secondary'))

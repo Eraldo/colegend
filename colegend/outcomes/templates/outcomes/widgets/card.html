@@ -1,7 +1,8 @@
-{% load core_tags outcomes_tags buttons %}
+{% load core_tags outcomes_tags buttons crispy_forms_tags %}
 <div id="{{ id }}" class="widget-outcome-card card card-item bg-content hover-border-accent" data-url="{{ url }}"
      ondblclick="window.location=$(this).attr('data-url');">
-    <strong>{% status %}<a href="{{ url }}">{{ name }}</a></strong>
+    <span data-toggle="modal" data-target="#outcome-{{ id }}-modal">{% status %}</span>
+    <strong><a href="{{ url }}">{{ name }}</a></strong>
     {% include 'widgets/action-menu.html' with right=True class='pull-right' %}
     <div class="pull-right">
         {% estimate %}
@@ -14,4 +15,20 @@
         {% deadline %}
     </div>
     <div class="clearfix"></div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="outcome-{{ id }}-modal" tabindex="-1" role="dialog"
+     aria-labelledby="outcome-{{ id }}-modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" tabindex="-1">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                {% crispy status_form %}
+            </div>
+        </div>
+    </div>
 </div>

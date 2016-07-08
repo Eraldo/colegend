@@ -3,6 +3,7 @@ from django.template.loader import render_to_string
 from django.utils import timezone
 
 from colegend.core.templatetags.core_tags import icon, intuitive_duration
+from colegend.outcomes.forms import OutcomeStatusForm
 from colegend.outcomes.models import Outcome
 
 register = template.Library()
@@ -23,10 +24,12 @@ def outcome_link(context, outcome=None, **kwargs):
 @register.simple_tag(takes_context=True)
 def outcome(context, outcome=None, **kwargs):
     outcome = outcome or context.get('outcome', {})
+    request = context.get('request')
     context = {}
     if outcome:
         if isinstance(outcome, Outcome):
             context.update({
+                'id': outcome.id,
                 'name': outcome.name,
                 'description': outcome.description,
                 'status': outcome.status,
@@ -36,6 +39,7 @@ def outcome(context, outcome=None, **kwargs):
                 'deadline': outcome.deadline or '',
                 'estimate': outcome.estimate or '',
                 'url': outcome.detail_url,
+                'status_form': OutcomeStatusForm(instance=outcome, request=request),
                 'actions': [
                     {
                         'name': 'update',
@@ -51,7 +55,7 @@ def outcome(context, outcome=None, **kwargs):
             context.update(outcome)
     context.update(kwargs)
     template = 'outcomes/widgets/card.html'
-    return render_to_string(template, context=context)
+    return render_to_string(template, context=context, request=request)
 
 
 @register.simple_tag(takes_context=True)
