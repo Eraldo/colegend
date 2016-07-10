@@ -5,9 +5,9 @@
 
 {% block page_links %}
     {% if inbox %}
-        {% button 'inbox' pattern='outcomes:inbox' classes='nav-item nav-link active' %}
+        {% button 'inbox' pattern='outcomes:list' classes='nav-item nav-link active' %}
     {% else %}
-        {% button 'inbox' pattern='outcomes:list' classes='nav-item nav-link' %}
+        {% button 'inbox' pattern='outcomes:inbox' classes='nav-item nav-link' %}
     {% endif %}
 {% endblock %}
 
