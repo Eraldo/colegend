@@ -2,7 +2,7 @@
 {% load core_tags %}
 
 {% block title %}{{ page.title }}{% endblock %}
-{% block og_image %}{{ request.META.HTTP_HOST }}{{ image }}{% endblock %}
+{% block og_image %}{{ image }}{% endblock %}
 {% block og_description %}{{ page.lead }}{% endblock %}
 
 {% block breadcrumbs %}
