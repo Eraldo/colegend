@@ -105,7 +105,7 @@ def menu(context, user=None, name='main'):
                         },
                         {
                             'name': 'Events',
-                            'url': reverse('events:index'),
+                            'url': slugurl(context, slug='events'),
                         },
                         {
                             'name': 'Support',

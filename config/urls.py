@@ -57,7 +57,6 @@ urlpatterns = [
     url(r'^days/', include('colegend.dayentries.urls', namespace='dayentries')),
 
     url(r'^guides/', include('colegend.guides.urls')),
-    url(r'^events/', include('colegend.events.urls')),
     url(r'^chat/', include('colegend.chat.urls')),
     url(r'^guidelines/', include('colegend.guidelines.urls')),
 

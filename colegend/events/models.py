@@ -1,3 +1,4 @@
+from django.utils.translation import ugettext_lazy as _
 from wagtail.wagtailadmin.edit_handlers import StreamFieldPanel
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.models import Page
@@ -7,7 +8,7 @@ from colegend.cms.blocks import BASE_BLOCKS
 
 
 class EventsPage(Page):
-    template = 'pages/content.html'
+    template = 'events/calendar.html'
 
     content = StreamField(BASE_BLOCKS, blank=True)
 
@@ -20,4 +21,7 @@ class EventsPage(Page):
     )
 
     class Meta:
-        verbose_name = _('Content')
+        verbose_name = _('Events')
+
+    parent_page_types = ['home.HomePage']
+    # subpage_types = []
