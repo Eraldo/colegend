@@ -3,6 +3,7 @@ from classytags.core import Options
 from classytags.helpers import InclusionTag
 from django import template
 from django.template.defaultfilters import slugify
+from wagtail.wagtailimages.templatetags.wagtailimages_tags import image as wagtail_image
 
 from colegend.core.templatetags.core_tags import link
 
@@ -72,6 +73,10 @@ class Menu(InclusionTag):
             'page': context.get('page'),
         }
 
+
+@register.tag(name="cms_image")
+def cms_image(parser, token):
+    return wagtail_image(parser, token)
 
 # @register.tag
 # class Breadcrumb(InclusionTag):

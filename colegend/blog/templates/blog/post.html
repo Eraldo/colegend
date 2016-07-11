@@ -1,8 +1,10 @@
 {% extends 'blog/base.html' %}
-{% load core_tags %}
+{% load core_tags cms_tags %}
 
 {% block title %}{{ page.title }}{% endblock %}
-{% block og_image %}{{ image }}{% endblock %}
+{% if page.image %}
+    {% block og_image %}{% cms_image page.image min-200x200 as ogimage %}{{ ogimage.url }}{% endblock %}
+{% endif %}
 {% block og_description %}{{ page.lead }}{% endblock %}
 
 {% block breadcrumbs %}
