@@ -1,8 +1,5 @@
 {% extends "colegend.html" %}
 
-{% block meta_title %}
-    {% block page_title %}
-        {% block title %}
-        {% endblock %}
-    {% endblock %}
-{% endblock %}
+{% block meta_title %}{% block page_title %}{% block og_title %}{% block title %}{% endblock %}{% endblock %}{% endblock %}{% endblock %}
+
+{% block og_url %}{{ request.build_absolute_uri }}{% endblock %}

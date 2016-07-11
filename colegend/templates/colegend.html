@@ -11,10 +11,15 @@
     <meta name="author" content="">
 
     {# open graph: http://ogp.me/ #}
-    <meta property="og:image"
-          content="{% block og_image %}{% static 'images/coLegend_screenshot_small.png' %}{% endblock %}"/>
-    <meta property="og:site_name" content="coLegend' %}"/>
-
+    {% block og %}
+    <meta property="og:site_name" content="coLegend"/>
+    <meta property="og:locale" content="{% block og_locale %}en{% endblock %}"/>
+    <meta property="og:title" content="{% block og_title %}coLegend{% endblock %}"/>
+    <meta property="og:description" content="{% block og_description %}coLegend: Live a legendary life. Now.{% endblock %}"/>
+    <meta property="og:url" content="{% block og_url %}http://www.colegend.org{% endblock %}"/>
+        <meta property="og:image"
+              content="{% block og_image %}{% static 'images/coLegend_screenshot_small.png' %}{% endblock %}"/>
+    {% endblock %}
     <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
