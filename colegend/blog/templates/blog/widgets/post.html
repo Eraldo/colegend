@@ -1,9 +1,9 @@
 {% load core_tags %}
 <a href="{{ url }}" style="text-decoration: none">
     <div class="widget-blog-article text-center {{ classes }} card bg-content">
-        <div style="background-color: {{ color }}" class="card-img-top">
+        <div style="background-color: {{ color }}; overflow: hidden" class="card-img-top">
             {% if image %}
-                {% image url=image classes='card-img-top' %}
+                {% image url=image %}
             {% endif %}
         </div>
         <div class="card-block">

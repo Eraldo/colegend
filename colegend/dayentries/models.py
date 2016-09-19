@@ -45,6 +45,7 @@ class DayEntry(AutoUrlsMixin, TaggableBase, TimeStampedBase):
             return True
         else:
             return False
+
     @property
     def detail_url(self):
         return reverse('journals:day', kwargs={'date': self.date})

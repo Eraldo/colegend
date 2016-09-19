@@ -1,5 +1,7 @@
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
+
+from colegend.core.fields import MarkdownField
 from colegend.core.models import AutoOwnedBase, AutoUrlsMixin, OwnedQuerySet
 
 
@@ -13,6 +15,7 @@ class Journal(AutoUrlsMixin, AutoOwnedBase):
     """
 
     spellchecker = models.BooleanField(default=False)
+    content_template = MarkdownField(blank=True)
 
     objects = JournalQuerySet.as_manager()
 
