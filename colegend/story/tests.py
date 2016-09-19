@@ -1,6 +1,6 @@
 from urllib.request import Request
 from django.test import TestCase
-from users.tests.factories import UserFactory
+from colegend.users.tests.factories import UserFactory
 from .views import PrologueView
 
 
