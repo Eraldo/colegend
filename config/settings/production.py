@@ -124,6 +124,7 @@ EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
 INSTALLED_APPS += ('anymail', )
 ANYMAIL = {
     'MAILGUN_API_KEY': env('DJANGO_MAILGUN_API_KEY'),
+    'MAILGUN_SENDER_DOMAIN': env('MAILGUN_DOMAIN'),  # your Mailgun domain, if needed
 }
 EMAIL_BACKEND = "anymail.backends.mailgun.MailgunBackend"
 
