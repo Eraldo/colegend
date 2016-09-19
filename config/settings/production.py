@@ -120,14 +120,13 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 # EMAIL
 # ------------------------------------------------------------------------------
 EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
-MAILGUN_ACCESS_KEY = env('DJANGO_MAILGUN_API_KEY')
-MAILGUN_SERVER_NAME = env('DJANGO_MAILGUN_SERVER_NAME')
+# Anymail with Mailgun
+INSTALLED_APPS += ('anymail', )
+ANYMAIL = {
+    'MAILGUN_API_KEY': env('DJANGO_MAILGUN_API_KEY'),
+}
+EMAIL_BACKEND = "anymail.backends.mailgun.MailgunBackend"
 
-
-# MONITORING
-# ------------------------------------------------------------------------------
-NEW_RELIC_LICENSE_KEY = env('NEW_RELIC_LICENSE_KEY')
-NEW_RELIC_APP_NAME = env('NEW_RELIC_APP_NAME', default='coLegend')
 
 # TEMPLATE CONFIGURATION
 # ------------------------------------------------------------------------------
