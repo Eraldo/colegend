@@ -47,22 +47,6 @@ class Menu(InclusionTag):
         Argument('root', required=False),
     )
 
-    # def get_node(self, page, current_page, ancestors):
-    #     return {
-    #         'text': page.title,
-    #         'href': page.url if not page == current_page else None,
-    #     }
-    #
-    # def get_nodes(self, context):
-    #     current_page = context.get('page')
-    #     if current_page:
-    #         current_page = current_page.specific
-    #         ancestors = current_page.get_ancestors().live().in_menu().specific()
-    #         return [self.get_node(page, current_page=current_page, ancestors=ancestors) for page in ancestors] + [
-    #             self.get_node(current_page, current_page=current_page, ancestors=ancestors)]
-    #     else:
-    #         return []
-
     def get_context(self, context, root, **kwargs):
         nodes = []
         if root:
@@ -77,28 +61,3 @@ class Menu(InclusionTag):
 @register.tag(name="cms_image")
 def cms_image(parser, token):
     return wagtail_image(parser, token)
-
-# @register.tag
-# class Breadcrumb(InclusionTag):
-#     name = 'breadcrumb'
-#     template = 'widgets/breadcrumb.html'
-#
-#     def get_node(self, page, current_page, ancestors):
-#         return {
-#             'text': page.title,
-#             'href': page.url if not page == current_page else None,
-#         }
-#
-#     def get_nodes(self, context):
-#         current_page = context.get('page')
-#         if current_page:
-#             current_page = current_page.specific
-#             ancestors = current_page.get_ancestors().live().in_menu().specific()
-#             return [self.get_node(page, current_page=current_page, ancestors=ancestors) for page in ancestors] + [
-#                 self.get_node(current_page, current_page=current_page, ancestors=ancestors)]
-#         else:
-#             return []
-#
-#     def get_context(self, context, **kwargs):
-#         nodes = self.get_nodes(context)
-#         return {'links': nodes}
