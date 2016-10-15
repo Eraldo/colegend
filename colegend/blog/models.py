@@ -135,10 +135,10 @@ class BlogPostPage(Page):
         FieldPanel('date'),
     ]
 
-    search_fields = Page.search_fields + (
+    search_fields = Page.search_fields + [
         index.SearchField('lead'),
         index.SearchField('content'),
-    )
+    ]
 
     parent_page_types = ['blog.BlogPage']
     subpage_types = []

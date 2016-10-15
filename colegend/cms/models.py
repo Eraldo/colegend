@@ -35,9 +35,9 @@ class ContentPage(Page):
         StreamFieldPanel('content'),
     ]
 
-    search_fields = Page.search_fields + (
+    search_fields = Page.search_fields + [
         index.SearchField('content'),
-    )
+    ]
 
     class Meta:
         verbose_name = _('Content')

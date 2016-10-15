@@ -104,9 +104,9 @@ class DocumentationPage(Page):
         StreamFieldPanel('content'),
     ]
 
-    search_fields = Page.search_fields + (
+    search_fields = Page.search_fields + [
         index.SearchField('content'),
-    )
+    ]
 
     parent_page_types = ['support.DocumentationIndexPage', 'support.DocumentationPage']
     subpage_types = ['support.DocumentationPage']
