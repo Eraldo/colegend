@@ -86,6 +86,16 @@ fontawesome_icons = {
     #
     'content': 'align-left',
     'description': 'align-left',
+    #
+    'area-1': 'medkit',
+    'area-2': 'smile-o',
+    'area-3': 'sun-o',
+    'area-4': 'heart',
+    'area-5': 'microphone',
+    'area-6': 'university',
+    'area-7': 'moon-o',
+    #
+    'resources': 'file-text-o',
 }
 
 coicons = {

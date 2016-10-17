@@ -51,6 +51,10 @@ def menu(context, user=None, name='main'):
                             'name': 'Habits',
                             'locked': True,
                         },
+                        {
+                            'name': 'Resources',
+                            'url': slugurl(context, slug='personal-development-resources'),
+                        },
                     ],
                 },
                 {

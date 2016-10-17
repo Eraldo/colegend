@@ -1,0 +1,25 @@
+{% load core_tags %}
+<a href="{{ url }}" style="text-decoration: none">
+    <div class="widget-resource {{ classes }} card bg-content">
+        <div class="card-block">
+            <span class="large">{{ title }}</span>
+            <div class="text-black">
+                {{ lead }}
+            </div>
+            <div class="resource-tags small text-muted">
+                {% for tag in tags %}
+                    {{ tag }}
+                {% endfor %}
+            </div>
+            <div class="small text-muted">
+                {% icon 'area-1' %} {{ area_1 }},
+                {% icon 'area-2' %} {{ area_2 }},
+                {% icon 'area-3' %} {{ area_3 }},
+                {% icon 'area-4' %} {{ area_4 }},
+                {% icon 'area-5' %} {{ area_5 }},
+                {% icon 'area-6' %} {{ area_6 }},
+                {% icon 'area-7' %} {{ area_7 }}
+            </div>
+        </div>
+    </div>
+</a>
