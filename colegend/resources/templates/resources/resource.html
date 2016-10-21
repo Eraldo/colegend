@@ -1,5 +1,5 @@
 {% extends 'resources/base.html' %}
-{% load core_tags %}
+{% load i18n core_tags %}
 
 {% block title %}{{ page.title }}{% endblock %}
 
@@ -25,19 +25,19 @@
                     {% endfor %}
                 </p>
             </div>
-            {% icon 'area-1' %}
+            {% icon 'area-1' %} {% trans 'health' %}
             <progress class="progress progress-success" value="{{ page.area_1 }}" max="100"></progress>
-            {% icon 'area-2' %}
+            {% icon 'area-2' %} {% trans 'joy' %}
             <progress class="progress progress-success" value="{{ page.area_2 }}" max="100"></progress>
-            {% icon 'area-3' %}
+            {% icon 'area-3' %} {% trans 'power' %}
             <progress class="progress progress-success" value="{{ page.area_3 }}" max="100"></progress>
-            {% icon 'area-4' %}
+            {% icon 'area-4' %} {% trans 'connection' %}
             <progress class="progress progress-success" value="{{ page.area_4 }}" max="100"></progress>
-            {% icon 'area-5' %}
+            {% icon 'area-5' %} {% trans 'expression' %}
             <progress class="progress progress-success" value="{{ page.area_5 }}" max="100"></progress>
-            {% icon 'area-6' %}
+            {% icon 'area-6' %} {% trans 'mind' %}
             <progress class="progress progress-success" value="{{ page.area_6 }}" max="100"></progress>
-            {% icon 'area-7' %}
+            {% icon 'area-7' %} {% trans 'spirit' %}
             <progress class="progress progress-success" value="{{ page.area_7 }}" max="100"></progress>
         </div>
     </div>
