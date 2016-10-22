@@ -1,0 +1,56 @@
+{% extends 'journals/base.html' %}
+{% load static crispy_forms_tags dayentries_tags weekentries_tags core_tags %}
+
+{% block title %}Journal Search{% endblock %}
+
+{% block page_controls %}
+    <form class="form-inline" action="{% url 'journals:search' %}" method="get" style="display: inline">
+        <div class="input-group">
+            <input type="text" name="text" class="form-control form-control-sm" placeholder="Search.." value="{{ text }}">
+            <span class="input-group-btn">
+                <button class="btn btn-sm btn-secondary" type="submit">{% icon 'search' %}</button>
+            </span>
+        </div>
+    </form>
+{% endblock %}
+
+{% block content %}
+    <div class="results">
+        <div class="row">
+            <div class="col-md-12">
+                {% if weeks or days %}
+                    {% if weeks %}
+                        <h2>Weeks:</h2>
+                        {% for weekentry in weeks %}
+                            {% weekentry_line %}
+                        {% endfor %}
+                    {% endif %}
+                    {% if days %}
+                        <h2>Days:</h2>
+                        {% for dayentry in days %}
+                            {% dayentry_line %}
+                        {% endfor %}
+                    {% endif %}
+                {% else %}
+                    {% if text %}
+                        No results found for "{{ text }}".
+                    {% else %}
+                        Please enter a search term.
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% if text %}
+    {% block extra_script %}
+        {{ block.super }}
+        <script src="{% static 'components/mark.js/dist/mark.min.js' %}"></script>
+        <script>
+            var context = document.querySelector(".results");
+            var instance = new Mark(context);
+            instance.mark("{{ text }}"); // will mark the keyword
+        </script>
+    {% endblock %}
+{% endif %}

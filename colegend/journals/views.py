@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse
+from django.db.models import Q
 from django.shortcuts import redirect
 from django.utils import timezone
 from django.utils.dateparse import parse_date
@@ -218,4 +219,24 @@ class JournalWeekView(LoginRequiredMixin, TemplateView):
             context['weekentry'] = weekentry.first()
 
         context['settings_url'] = reverse('journals:settings', kwargs={'pk': user.journal.pk})
+        return context
+
+
+class JournalSearchView(LoginRequiredMixin, TemplateView):
+    template_name = 'journals/search.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        text = self.request.GET.get('text')
+        if text:
+            context['text'] = text
+            user = self.request.user
+            days = DayEntry.objects.owned_by(user).filter(
+                Q(keywords__icontains=text) | Q(content__icontains=text) | Q(locations__icontains=text) | Q(tags__name__icontains=text)
+            ).distinct()
+            context['days'] = days
+            weeks = WeekEntry.objects.owned_by(user).filter(
+                Q(keywords__icontains=text) | Q(content__icontains=text) | Q(tags__name__icontains=text)
+            ).distinct()
+            context['weeks'] = weeks
         return context

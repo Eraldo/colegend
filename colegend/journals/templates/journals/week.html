@@ -38,6 +38,15 @@
         </div>
     </div>
 
+    <form class="form-inline" action="{% url 'journals:search' %}" method="get" style="display: inline">
+        <div class="input-group">
+            <input type="text" name="text" class="form-control form-control-sm" placeholder="Search..">
+            <span class="input-group-btn">
+                <button class="btn btn-sm btn-secondary" type="submit">{% icon 'search' %}</button>
+            </span>
+        </div>
+    </form>
+
     <div class="pull-right">
         {% button 'settings' url=settings_url kind='secondary btn-sm' icon='gear' %}
     </div>
