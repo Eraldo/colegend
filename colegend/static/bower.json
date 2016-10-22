@@ -17,7 +17,7 @@
     "jquery-ui": "1.11.4",
     "fontawesome": "4.6.3",
     "typed.js": "master",
-    "eonasdan-bootstrap-datetimepicker": "4.17.37",
+    "eonasdan-bootstrap-datetimepicker": "4.17.43",
     "mark.js": "^8.4.0"
   },
   "private": true
