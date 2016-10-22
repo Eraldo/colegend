@@ -7,6 +7,7 @@ from django.views.generic import ListView, DetailView, DeleteView, CreateView, U
 
 from colegend.core.views import RolesRequiredMixin, OwnerRequiredMixin
 from colegend.dayentries.models import DayEntry
+from colegend.journals.weekentries.models import WeekEntry
 from .models import Journal
 from .forms import JournalForm, DatePickerForm
 
@@ -130,6 +131,11 @@ class JournalWeekView(LoginRequiredMixin, TemplateView):
             today = timezone.now().date()
             return today
 
+    def get_dates(self):
+        monday = self.get_monday()
+        sunday = self.get_sunday()
+        return '{} - {}'.format(monday, sunday)
+
     def get_entry(self, date=None):
         date = date or self.get_date()
         user = self.request.user
@@ -162,6 +168,11 @@ class JournalWeekView(LoginRequiredMixin, TemplateView):
         monday = date - timezone.timedelta(days=date.weekday())
         return monday
 
+    def get_sunday(self, date=None):
+        monday = self.get_monday()
+        sunday = monday + timezone.timedelta(days=6)
+        return sunday
+
     def get_week_dates(self):
         one_day = timezone.timedelta(1)
         monday = self.get_monday()
@@ -193,5 +204,18 @@ class JournalWeekView(LoginRequiredMixin, TemplateView):
         # Previous and next button context.
         context['next_url'] = self.get_next_url()
         context['previous_url'] = self.get_previous_url()
+        context['settings_url'] = reverse('journals:settings', kwargs={'pk': user.journal.pk})
+
+        date = self.get_date()
+        context['date'] = date
+        dates = self.get_dates()
+        context['dates'] = dates
+
+        weeknumber = date.isocalendar()[1]
+        context['weeknumber'] = weeknumber
+        weekentry = WeekEntry.objects.filter(year=date.year, week=weeknumber)
+        if weekentry:
+            context['weekentry'] = weekentry.first()
+
         context['settings_url'] = reverse('journals:settings', kwargs={'pk': user.journal.pk})
         return context

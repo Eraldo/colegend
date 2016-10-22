@@ -95,6 +95,7 @@ LOCAL_APPS = (
 
     'colegend.journals',
     'colegend.dayentries',
+    'colegend.journals.weekentries',
 
     # Manager
     'colegend.manager',

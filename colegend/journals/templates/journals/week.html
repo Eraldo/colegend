@@ -1,7 +1,7 @@
 {% extends 'journals/base.html' %}
-{% load core_tags buttons dayentries_tags tags_tags crispy_forms_tags %}
+{% load core_tags buttons dayentries_tags weekentries_tags tags_tags crispy_forms_tags %}
 
-{% block title %}Week{% endblock %}
+{% block title %}Week {{ weeknumber }}{% endblock %}
 
 {% block extra_head %}
     {{ block.super }}
@@ -44,6 +44,11 @@
 {% endblock %}
 
 {% block content_container %}
+    <div class="row">
+        <div class="col-md-12">
+            {% weekentry_line %}
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-8">
             {% for day in days %}

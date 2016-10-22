@@ -1,0 +1,14 @@
+{% extends 'weekentries/base.html' %}
+{% load buttons weekentries_tags %}
+
+{% block title %}Week Entries{% endblock %}
+
+{% block page_controls %}
+    {% button 'create' pattern='weekentries:create' %}
+{% endblock %}
+
+{% block content %}
+    {% for weekentry in weekentries %}
+        {% weekentry_link %}<br>
+    {% endfor %}
+{% endblock %}
