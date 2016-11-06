@@ -1,7 +1,9 @@
 from django.shortcuts import redirect
 from django.views.generic import TemplateView
 from django.utils.translation import ugettext_lazy as _
-
+from django.urls import reverse
+from django.utils import timezone
+from colegend.core.templatetags.core_tags import link
 from colegend.home.models import HomePage
 
 __author__ = 'eraldo'
@@ -34,7 +36,8 @@ class PageMixin:
             try:
                 return page_class.objects.get(**page_query_kwargs)
             except page_class.DoesNotExist:
-                raise page_class.DoesNotExist('{} object with keyword arguments: {} not found.'.format(page_class.__name__, page_query_kwargs))
+                raise page_class.DoesNotExist(
+                    '{} object with keyword arguments: {} not found.'.format(page_class.__name__, page_query_kwargs))
         else:
             return page_class.objects.first()
 
@@ -59,6 +62,19 @@ class HomeView(PageMixin, TemplateView):
         if not user.has_checkpoint('prologue'):
             return redirect("story:prologue")
         return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['next_step'] = self.get_next_step()
+        return context
+
+    def get_next_step(self):
+        user = self.request.user
+        # Has the user written his journal entry?
+        today = timezone.now().date()
+        dayentry = user.journal.dayentries.filter(date=today)
+        if not dayentry:
+            return link(_('Create a journal entry'), reverse('dayentries:create'))
 
 
 class JoinView(TemplateView):

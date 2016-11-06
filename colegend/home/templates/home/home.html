@@ -7,6 +7,12 @@
 
 {% block content %}
     {{ page.content|richtext }}
+    {% if next_step %}
+        <p>
+            Next step:
+            {{ next_step }}
+        </p>
+    {% endif %}
     <div class="row">
         <div id="conscious-update" class="col-lg-4">
             {% include "home/cards/_news_card.html" %}
