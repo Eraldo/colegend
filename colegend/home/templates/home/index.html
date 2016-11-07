@@ -7,11 +7,11 @@
 
 {% block content %}
     {{ page.content|richtext }}
-        {% if next_step %}
-        <p>
+    {% if next_step %}
+        <div class="card card-block bg-content">
             Next step:
             {{ next_step }}
-        </p>
+        </div>
     {% endif %}
     <div class="row">
         <div id="conscious-update" class="col-lg-4">

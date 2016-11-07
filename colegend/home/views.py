@@ -51,7 +51,7 @@ class PageMixin:
 class HomeView(PageMixin, TemplateView):
     page_class = HomePage
     page_query_kwargs = {'slug': 'home'}
-    template_name = "home/home.html"
+    template_name = "home/index.html"
 
     def get(self, request, *args, **kwargs):
         user = request.user
