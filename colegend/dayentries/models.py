@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from colegend.core.fields import MarkdownField, DateField
 from colegend.core.models import AutoUrlsMixin, TimeStampedBase
-from colegend.core.validators import validate_date_present_or_past
+from colegend.core.validators import validate_date_today_tomorrow_or_past
 from colegend.journals.models import Journal
 from colegend.tags.models import TaggableBase
 
@@ -20,7 +20,7 @@ class DayEntry(AutoUrlsMixin, TaggableBase, TimeStampedBase):
     A django model representing a user's daily journal entry.
     """
     journal = models.ForeignKey(Journal, related_name="dayentries")
-    date = DateField(default=timezone.datetime.today, validators=[validate_date_present_or_past])
+    date = DateField(default=timezone.datetime.today, validators=[validate_date_today_tomorrow_or_past])
     locations = models.CharField(max_length=255, help_text="Separated by ';'")
     keywords = models.CharField(
         max_length=255,
