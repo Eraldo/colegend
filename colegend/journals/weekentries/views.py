@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, RedirectView
 
+from colegend.core.views import OwnerRequiredMixin
 from colegend.dayentries.models import DayEntry
 from colegend.journals.weekentries.utils import get_current_year, get_current_week
 from .forms import WeekEntryForm
@@ -71,11 +72,11 @@ class WeekEntryCreateView(LoginRequiredMixin, WeekEntryMixin, CreateView):
         return initial
 
 
-class WeekEntryDetailView(LoginRequiredMixin, WeekEntryMixin, DetailView):
+class WeekEntryDetailView(LoginRequiredMixin, OwnerRequiredMixin, WeekEntryMixin, DetailView):
     template_name = 'weekentries/detail.html'
 
 
-class WeekEntryUpdateView(LoginRequiredMixin, WeekEntryMixin, UpdateView):
+class WeekEntryUpdateView(LoginRequiredMixin, OwnerRequiredMixin, WeekEntryMixin, UpdateView):
     template_name = 'weekentries/update.html'
 
     def get_form_kwargs(self):
@@ -84,7 +85,7 @@ class WeekEntryUpdateView(LoginRequiredMixin, WeekEntryMixin, UpdateView):
         return kwargs
 
 
-class WeekEntryDeleteView(LoginRequiredMixin, WeekEntryMixin, DeleteView):
+class WeekEntryDeleteView(LoginRequiredMixin, OwnerRequiredMixin, WeekEntryMixin, DeleteView):
     template_name = 'weekentries/delete.html'
 
     def get_success_url(self):

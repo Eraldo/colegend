@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, RedirectView
 
+from colegend.core.views import OwnerRequiredMixin
 from .forms import DayEntryForm
 from .models import DayEntry
 
@@ -66,11 +67,11 @@ class DayEntryCreateView(LoginRequiredMixin, DayEntryMixin, CreateView):
         return initial
 
 
-class DayEntryDetailView(LoginRequiredMixin, DayEntryMixin, DetailView):
+class DayEntryDetailView(LoginRequiredMixin, OwnerRequiredMixin, DayEntryMixin, DetailView):
     template_name = 'dayentries/detail.html'
 
 
-class DayEntryUpdateView(LoginRequiredMixin, DayEntryMixin, UpdateView):
+class DayEntryUpdateView(LoginRequiredMixin, OwnerRequiredMixin, DayEntryMixin, UpdateView):
     template_name = 'dayentries/update.html'
 
     def get_form_kwargs(self):
@@ -79,7 +80,7 @@ class DayEntryUpdateView(LoginRequiredMixin, DayEntryMixin, UpdateView):
         return kwargs
 
 
-class DayEntryDeleteView(LoginRequiredMixin, DayEntryMixin, DeleteView):
+class DayEntryDeleteView(LoginRequiredMixin, OwnerRequiredMixin, DayEntryMixin, DeleteView):
     template_name = 'dayentries/delete.html'
 
     def get_success_url(self):

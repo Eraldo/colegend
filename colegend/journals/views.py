@@ -214,7 +214,7 @@ class JournalWeekView(LoginRequiredMixin, TemplateView):
 
         weeknumber = date.isocalendar()[1]
         context['weeknumber'] = weeknumber
-        weekentry = WeekEntry.objects.filter(year=date.year, week=weeknumber)
+        weekentry = WeekEntry.objects.owned_by(user).filter(year=date.year, week=weeknumber)
         if weekentry:
             context['weekentry'] = weekentry.first()
 
