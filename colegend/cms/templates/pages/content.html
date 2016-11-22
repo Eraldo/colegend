@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
+{% load wagtailcore_tags %}
 
 {% block title %}{{ page.title }}{% endblock %}
 
-{% block content %}{{ page.content }}{% endblock %}
+{% block content %}{% include_block page.content %}{% endblock %}

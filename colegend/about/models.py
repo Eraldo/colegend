@@ -55,6 +55,9 @@ class AboutPage(UniquePageMixin, Page):
     process_teaser_text = RichTextField(
         blank=True,
     )
+    complete_teaser_text = RichTextField(
+        blank=True,
+    )
     feature_image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -131,6 +134,7 @@ class AboutPage(UniquePageMixin, Page):
                 FieldPanel('apps_teaser_text', classname="full"),
                 FieldPanel('community_teaser_text', classname="full"),
                 FieldPanel('process_teaser_text', classname="full"),
+                FieldPanel('complete_teaser_text', classname="full"),
                 ImageChooserPanel('feature_image'),
             ],
             heading="Features",

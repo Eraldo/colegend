@@ -1,5 +1,5 @@
 from wagtail.wagtailcore import blocks
-from wagtail.wagtailcore.blocks import RawHTMLBlock
+from wagtail.wagtailcore.blocks import RawHTMLBlock, StructBlock
 from wagtail.wagtailembeds.blocks import EmbedBlock as WagtailEmbedBlock
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 
@@ -68,7 +68,51 @@ BASE_BLOCKS = [
     ('embed', EmbedBlock()),
 ]
 
-ALL_BLOCKS = BASE_BLOCKS + [
+
+class ColumnsBlock(StructBlock):
+    left_column = blocks.StreamBlock(BASE_BLOCKS)
+    right_column = blocks.StreamBlock(BASE_BLOCKS, form_classname='pull-right')
+
+    def get_context(self, value):
+        context = super().get_context(value)
+        context['left_column'] = value.get('left_column')
+        context['right_column'] = value.get('right_column')
+        return context
+
+    class Meta:
+        icon = 'fa fa-columns'
+        label = 'Columns 1-1'
+        template = None
+
+
+class Columns1To1Block(ColumnsBlock):
+    class Meta:
+        label = 'Columns 1:1'
+        template = 'widgets/columns-1-1.html'
+
+
+class Columns1To2Block(ColumnsBlock):
+    class Meta:
+        label = 'Columns 1:2'
+        template = 'widgets/columns-1-2.html'
+
+
+class Columns2To1Block(ColumnsBlock):
+    class Meta:
+        label = 'Columns 2:1'
+        template = 'widgets/columns-2-1.html'
+
+
+COLUMN_BLOCKS = [
+    ('columns_1_to_1', Columns1To1Block()),
+    ('columns_1_to_2', Columns1To2Block()),
+    ('columns_2_to_1', Columns2To1Block()),
+]
+
+ALL_BLOCKS = BASE_BLOCKS + COLUMN_BLOCKS
+
+
+ALL_BLOCKS += [
     ('html', RawHTMLBlock()),
 ]
 
@@ -98,3 +142,4 @@ ALL_BLOCKS = BASE_BLOCKS + [
 #                    }
 #             context['list'] += [res]
 #         return context
+

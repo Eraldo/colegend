@@ -4,6 +4,7 @@ __author__ = 'Eraldo Energy'
 
 fontawesome_icons = {
     # apps
+    'mentor': 'compass',  # alt: 'check'
     'manager': 'briefcase',  # alt: 'check'
     # - status
     'open': 'square-o',

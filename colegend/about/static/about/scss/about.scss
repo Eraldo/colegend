@@ -41,3 +41,30 @@ section .speech-bubble p {
 //body
 //  background-image: url(../images/shattered.jpg)
 //  font: 100% $font-stack
+
+section.background {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 100%;
+  width: 100%;
+  .transition {
+    padding: 4em 0;
+    color: white;
+    font-size: 3em;
+    text-shadow: -2px 2px 8px rgba(0, 0, 0, 0.8);
+  }
+  .overlay {
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+  h1 {
+    font-size: 3em;
+    text-align: center;
+  }
+  h2 {
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+}

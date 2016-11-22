@@ -98,11 +98,11 @@
                            style="font-size: xx-large">Join for free</a>
                     </p>
                 </div>
-                <div class="carousel-image wow zoomIn back-tilted">
-                    <a href="#">
-                        <img src="{% static 'images/coLegendLogo.png' %}" alt="logo"/>
-                    </a>
-                </div>
+                {#                <div class="carousel-image wow zoomIn back-tilted">#}
+                {#                    <a href="#">#}
+                {#                        <img src="{% static 'images/coLegendLogo.png' %}" alt="logo"/>#}
+                {#                    </a>#}
+                {#                </div>#}
             </div>
             <!-- Set background for slide in css -->
             <div class="header-back zero" style="background-image: url('{{ colegend_header_image.url }}')">
@@ -193,32 +193,83 @@
 </section>
 
 <section id="services" class="container services">
+
+
+    <h1 class="text-center">
+        <img src="{% static 'images/coLegendLogo.png' %}" alt="CoLegend logo" class="img-responsive center-block">
+    </h1>
+    <h1 class="text-center" style="font-size: 2em; color:black">😇 YOUR PERSONAL DEVELOPMENT JOURNEY 😈</h1>
+    <br>
+    <h1 class="text-center">The most personal, effective and fun way to <br>becoming a real life legend.</h1>
+
+    <p class="text-center">
+        CoLegend delivers a personalized development experience that values people over place, and feedback over
+        content.
+        Using the time-tested mentoring method within a structured online community, you can quickly close the gap
+        between dream and reality.
+    </p>
+
+    <div class="navy-line"></div>
+    <h1 class="text-center">Vision</h1>
+
     <p id="vision"
        class="lead text-center text-main-dark">{% icon 'quote-left' color='grey' %} {{ page.vision_text }} {% icon 'quote-right' color='grey' %}</p>
     <div class="row text-center">
-        <div class="col-sm-4">
-            {#            <img class="img-circle" src="{% static 'website/images/mentor_140x140.jpg' %}" alt="Mentor"/>#}
+        <div class="navy-line"></div>
+        <h1>Core Values</h1>
+        <div class="col-sm-3">
             {% icon 'apps' classes='fa-4x text-category-6' %}
             <h2>Conscious Apps</h2>
             <span class="text-left">
                 {{ page.apps_teaser_text|richtext }}
             </span>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             {% icon 'community' classes='fa-4x text-category-4' %}
             <h2>Connected Community</h2>
             <span class="text-left">
                 {{ page.community_teaser_text|richtext }}
             </span>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             {% icon 'process' classes='fa-4x text-category-2' %}
-            <h2>Continuous Process</h2>
+            <h2>Committed Process</h2>
             <span class="text-left">
                 {{ page.process_teaser_text|richtext }}
             </span>
         </div>
+        <div class="col-sm-3">
+            {% icon 'balance-scale' classes='fa-4x text-category-7' %}
+            <h2>Complete Balance</h2>
+            <span class="text-left">
+                {{ page.complete_teaser_text|richtext }}
+            </span>
+        </div>
     </div>
+    <div class="navy-line"></div>
+    <h1 class="text-center">Apply Today for Your Journey</h1>
+    <p>
+        Apply now to join CoLegend and be part of an exciting new development experience, community, and movement.
+        You'll immediately be matched with a set of mentors who are exceptional in supporting your personal development
+        path.
+        Monthly Journey fees will only begin after you choose a Mentor to learn with.
+    </p>
+    <div class="text-center">
+        <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg" style="font-size: xx-large">Start Your
+            Journey</a>
+    </div>
+</section>
+<br><br>
+<section class="container text-center">
+    <hr>
+    <br><br><br><br>
+    <h3>
+        <i>
+            Our Mission is to unleash the legend in every individual, and thereby, enrich the world.
+        </i>
+    </h3>
+    <br><br><br><br>
+    <hr>
 </section>
 
 <section id="features" class="container features">
@@ -233,6 +284,9 @@
                 <small>+</small>
                 <br/>
                 <span class="text-category-2">A tested personal development process</span><br/>
+                <small>+</small>
+                <br/>
+                <span class="text-category-7">A set of Resources to life a balanced life</span><br/>
             </h1>
             <h1>
                 <small>=</small>
@@ -244,19 +298,18 @@
     <div class="row">
         <div class="col-md-3 text-center wow fadeInLeft">
             <div>
-                {% icon 'gatherings' classes='features-icon text-main' %}
+                {% icon 'mentor' classes='features-icon text-main' %}
 
-                <h2>Social Gatherings</h2>
+                <h2>Active Mentoring</h2>
 
-                <p>A space to make room for your biggest challenges, strongest feelings and emotions.</p>
+                <p>Get personalised Feedback and Quests from your chosen Mentor.</p>
             </div>
             <div class="m-t-lg">
-                {% icon 'vision' classes='features-icon text-main' %}
+                {% icon 'gatherings' classes='features-icon text-main' %}
 
-                <h2>Personal Vision</h2>
+                <h2>Supportive Community</h2>
 
-                <p>Envision a blueprint of what you really want so that your true desires don’t get out of your
-                    sight.</p>
+                <p>A space to make room for your biggest challenges, strongest feelings and emotions.</p>
             </div>
         </div>
         <div class="col-md-6 text-center  wow zoomIn">
@@ -286,12 +339,94 @@
     </div>
 </section>
 
+
+<section class="background"
+         style="background-image: url('{{ colegend_header_image.url }}');">
+    <h1 class="transition container">
+        Our Mission is to unleash the legend in every individual, and thereby, enrich the world.
+    </h1>
+    <div class="overlay">
+        <div class="content container">
+            <br>
+            <h1>
+                A Legendary Development Experience
+            </h1>
+            <h2>
+                UNLEASH THE LEGEND WITHIN YOU!
+            </h2>
+            <div class="row">
+                <div class="col-md-6">
+                    Our mission is to unlock the legendary potential in every individual, and thereby, enrich the world.
+                    View our Core Values.
+
+
+                    We combine the best parts of the mentoring method of development and we supercharge it into a
+                    legendary learning experience that places YOU at the center of it all.
+
+
+                    One-on-One Coaching and Feedback by a Mentor
+                    Custom Development Path based on Your Quest
+                    Encouragement and Accountability from your Tribe
+                    Vast selection of Learning Resources in the Academy
+                    Inspiration from the entire CoLegend community
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="background"
+         style="background-image: url('{{ conscious_header_image.url }}');">
+    <h3 class="transition container text-center">
+        Our Mission is to unleash the legend in every individual, and thereby, enrich the world.
+    </h3>
+    <div class="overlay">
+        <div class="content container">
+            foo
+            asdfasdfasdf
+            asdfasfasdfasfasdfasdfasdf
+            asfdasdf
+            <h1>goo asfdasdf asdf </h1>
+        </div>
+    </div>
+</section>
+<section class="background"
+         style="background-image: url('{{ connected_header_image.url }}');">
+    <h3 class="transition container text-center">
+        Our Mission is to unleash the legend in every individual, and thereby, enrich the world.
+    </h3>
+    <div class="overlay">
+        <div class="content container">
+            foo
+            asdfasdfasdf
+            asdfasfasdfasfasdfasdfasdf
+            asfdasdf
+            <h1>goo asfdasdf asdf </h1>
+        </div>
+    </div>
+</section>
+<section class="background"
+         style="background-image: url('{{ continuous_header_image.url }}');">
+    <h3 class="transition container text-center">
+        Our Mission is to unleash the legend in every individual, and thereby, enrich the world.
+    </h3>
+    <div class="overlay">
+        <div class="content container">
+            foo
+            asdfasdfasdf
+            asdfasfasdfasfasdfasdfasdf
+            asfdasdf
+            <h1>goo asfdasdf asdf </h1>
+        </div>
+    </div>
+</section>
+
+
 <section id="reasons" class="reasons bg-main-light">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="navy-line"></div>
-                <h1>7 reasons to join coLegend</h1>
+                <h1>7 reasons to join CoLegend</h1>
                 {{ page.reasons_intro|richtext }}
                 {% for reason in reasons %}
                     <div class="wow {% cycle 'fadeInLeftBig' 'fadeInRightBig' %}">
@@ -342,7 +477,7 @@
 {#            <img src="{% static 'img/seminar.png' %}" alt="agenda" class="img-responsive center-block">#}
 {#        </div>#}
 {#        <div class="col-md-2 features-text text-center wow zoomInDown">#}
-{#            <small>coLegend</small>#}
+{#            <small>CoLegend</small>#}
 {#            <h2>Once upon a time.. is now!</h2>#}
 {##}
 {#            <p>#}
@@ -579,7 +714,7 @@
             </div>
             <div class="col-sm-4 text-center">
                 {% icon 'project' classes='fa-4x text-main' %}
-                <h2>coLegend</h2>
+                <h2>CoLegend</h2>
                 <p class="text-center">
                     {% icon 'address' fixed=True %} Berlin, Germany<br>
                     {% icon 'phone' fixed=True %} +49 (176) 979944 80<br>
@@ -629,7 +764,7 @@
         </div>
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 text-center m-t-lg m-b-lg">
-                <p><strong>&copy; 2014 - {% now "Y" %} coLegend</strong><br/>
+                <p><strong>&copy; 2014 - {% now "Y" %} CoLegend</strong><br/>
                     <a href="mailto:connect@colegend.org" class="text-muted" target="_blank">Impressum</a> | Designed by
                     <a
                             href="http://www.eraldo.org" class="text-muted" target="_blank">Eraldo Webdesign & Corinna
