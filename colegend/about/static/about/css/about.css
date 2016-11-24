@@ -33,17 +33,45 @@ section.background {
   height: 100%;
   width: 100%; }
   section.background .transition {
-    padding: 4em 0;
+    padding: 6em 0;
     color: white;
-    font-size: 3em;
-    text-shadow: -2px 2px 8px rgba(0, 0, 0, 0.8); }
-  section.background .overlay {
-    background-color: rgba(255, 255, 255, 0.9); }
+    font-size: 2em;
+    text-shadow: -2px 2px 8px rgba(0, 0, 0, 0.8);
+    margin-top: 0; }
   section.background h1 {
-    font-size: 3em;
     text-align: center; }
+  section.background p {
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto; }
   section.background h2 {
     text-transform: uppercase;
     text-align: center; }
+  section.background h3 {
+    text-align: center; }
+  section.background .overlay {
+    background-color: rgba(255, 255, 255, 0.9); }
+    section.background .overlay .content {
+      padding-top: 4em;
+      padding-bottom: 4em; }
+      section.background .overlay .content .boxes .box {
+        min-height: 16em; }
+      section.background .overlay .content .small-boxes h2 {
+        font-size: x-large; }
+      section.background .overlay .content .box {
+        padding: 2em; }
+        section.background .overlay .content .box.left, section.background .overlay .content .box.left h2 {
+          text-align: right; }
+        section.background .overlay .content .box.right, section.background .overlay .content .box.right h2 {
+          text-align: left; }
+      section.background .overlay .content .overlay-highlight {
+        background-color: rgba(0, 0, 0, 0.05); }
+      section.background .overlay .content .overlay-highlight-2 {
+        background-color: rgba(0, 0, 0, 0.05); }
+        @media only screen and (min-width: 992px) {
+          section.background .overlay .content .overlay-highlight-2 {
+            background-color: rgba(0, 0, 0, 0.01); } }
+      section.background .overlay .content .icon-headline {
+        font-size: 5em; }
 
 /*# sourceMappingURL=about.css.map */

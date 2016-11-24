@@ -4,8 +4,11 @@ __author__ = 'Eraldo Energy'
 
 fontawesome_icons = {
     # apps
-    'mentor': 'compass',  # alt: 'check'
-    'manager': 'briefcase',  # alt: 'check'
+    'apps': 'cubes',
+    'mentor': 'compass',
+    'manager': 'briefcase',
+    'balance': 'balance-scale',
+    # 'games': 'trophy',
     # - status
     'open': 'square-o',
     'waiting': 'hourglass-half',
@@ -22,7 +25,7 @@ fontawesome_icons = {
     'journal': 'book',
     'story': 'magic',
     'vision': 'compass',
-    'accademy': 'graduation-cap',
+    'academy': 'graduation-cap',
     'challenges': 'star',
     'game': 'game-pad',
     # community
@@ -88,7 +91,7 @@ fontawesome_icons = {
     'content': 'align-left',
     'description': 'align-left',
     #
-    'area-1': 'medkit',
+    'area-1': 'apple',
     'area-2': 'smile-o',
     'area-3': 'sun-o',
     'area-4': 'heart',
@@ -101,10 +104,11 @@ fontawesome_icons = {
 
 coicons = {
     'game': 'black-dice',
+    'games': 'black-dice',
     'duo': 'dotted-duo',
     'tribe': 'dotted-square',
     'clan': 'dotted-circle',
-    'apps': 'lego',
+    # 'apps': 'lego',
     'project': 'logo',
     'roles': 'wizard',
 }

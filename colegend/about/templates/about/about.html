@@ -94,8 +94,7 @@
                     </h1>
                     <p>
                         1. step:<br>
-                        <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg"
-                           style="font-size: xx-large">Join for free</a>
+                        <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg">Join for free</a>
                     </p>
                 </div>
                 {#                <div class="carousel-image wow zoomIn back-tilted">#}
@@ -117,8 +116,7 @@
                     </h1>
                     <p> of what you truly want</p>
                     <p>
-                        <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg"
-                           style="font-size: xx-large">Join</a>
+                        <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg">Join</a>
                     </p>
                     {##}
                 </div>
@@ -136,8 +134,7 @@
                     </h1>
                     <p> with fellows who support you along the way</p>
                     <p>
-                        <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg"
-                           style="font-size: xx-large">Join</a>
+                        <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg">Join</a>
                     </p>
                 </div>
             </div>
@@ -154,8 +151,7 @@
                     </h1>
                     <p> a legendary life =]</p>
                     <p>
-                        <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg"
-                           style="font-size: xx-large">Join</a>
+                        <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg">Join</a>
                     </p>
                 </div>
             </div>
@@ -208,46 +204,8 @@
         Using the time-tested mentoring method within a structured online community, you can quickly close the gap
         between dream and reality.
     </p>
-
-    <div class="navy-line"></div>
-    <h1 class="text-center">Vision</h1>
-
-    <p id="vision"
-       class="lead text-center text-main-dark">{% icon 'quote-left' color='grey' %} {{ page.vision_text }} {% icon 'quote-right' color='grey' %}</p>
-    <div class="row text-center">
-        <div class="navy-line"></div>
-        <h1>Core Values</h1>
-        <div class="col-sm-3">
-            {% icon 'apps' classes='fa-4x text-category-6' %}
-            <h2>Conscious Apps</h2>
-            <span class="text-left">
-                {{ page.apps_teaser_text|richtext }}
-            </span>
-        </div>
-        <div class="col-sm-3">
-            {% icon 'community' classes='fa-4x text-category-4' %}
-            <h2>Connected Community</h2>
-            <span class="text-left">
-                {{ page.community_teaser_text|richtext }}
-            </span>
-        </div>
-        <div class="col-sm-3">
-            {% icon 'process' classes='fa-4x text-category-2' %}
-            <h2>Committed Process</h2>
-            <span class="text-left">
-                {{ page.process_teaser_text|richtext }}
-            </span>
-        </div>
-        <div class="col-sm-3">
-            {% icon 'balance-scale' classes='fa-4x text-category-7' %}
-            <h2>Complete Balance</h2>
-            <span class="text-left">
-                {{ page.complete_teaser_text|richtext }}
-            </span>
-        </div>
-    </div>
-    <div class="navy-line"></div>
-    <h1 class="text-center">Apply Today for Your Journey</h1>
+    <br>
+    <h2 class="text-center" style="font-size: 2em">Apply Today for Your Journey</h2>
     <p>
         Apply now to join CoLegend and be part of an exciting new development experience, community, and movement.
         You'll immediately be matched with a set of mentors who are exceptional in supporting your personal development
@@ -255,99 +213,235 @@
         Monthly Journey fees will only begin after you choose a Mentor to learn with.
     </p>
     <div class="text-center">
-        <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg" style="font-size: xx-large">Start Your
+        <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg">Start Your
             Journey</a>
     </div>
 </section>
 <br><br>
-<section class="container text-center">
-    <hr>
-    <br><br><br><br>
-    <h3>
-        <i>
-            Our Mission is to unleash the legend in every individual, and thereby, enrich the world.
-        </i>
-    </h3>
-    <br><br><br><br>
-    <hr>
-</section>
 
-<section id="features" class="container features">
-    <div class="row">
-        <div class="col-lg-12 text-center">
-            <div class="navy-line"></div>
-            <h1>
-                <span class="text-category-6"> A collection of useful apps</span><br/>
-                <small>+</small>
-                <br/>
-                <span class="text-category-4">A community of awesome people</span><br/>
-                <small>+</small>
-                <br/>
-                <span class="text-category-2">A tested personal development process</span><br/>
-                <small>+</small>
-                <br/>
-                <span class="text-category-7">A set of Resources to life a balanced life</span><br/>
-            </h1>
-            <h1>
-                <small>=</small>
-                <br>
-                L E G E N D A R Y
-            </h1>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3 text-center wow fadeInLeft">
-            <div>
-                {% icon 'mentor' classes='features-icon text-main' %}
 
-                <h2>Active Mentoring</h2>
-
-                <p>Get personalised Feedback and Quests from your chosen Mentor.</p>
-            </div>
-            <div class="m-t-lg">
-                {% icon 'gatherings' classes='features-icon text-main' %}
-
-                <h2>Supportive Community</h2>
-
-                <p>A space to make room for your biggest challenges, strongest feelings and emotions.</p>
-            </div>
-        </div>
-        <div class="col-md-6 text-center  wow zoomIn">
-            <img src="{{ feature_image.url }}" alt="{{ feature_image.name }}" class="img-responsive">
-        </div>
-        <div class="col-md-3 text-center wow fadeInRight">
-            <div>
-                {% icon 'manager' classes='features-icon text-main' %}
-
-                <h2>Organised Manager</h2>
-
-                <p>Organic Outcome Management. Keep track of what you want and know your next steps to get there.</p>
-            </div>
-            <div class="m-t-lg">
-                {% icon 'journal' classes='features-icon text-main' %}
-
-                <h2>Smart Journal</h2>
-
-                <p>Become more aware of your current life by reflecting on it in a smart and personalized way.</p>
-
-            </div>
-        </div>
-    </div>
-    <div class="text-center" style="margin-bottom: 2em">
-        <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg wow tada"
-           style="font-size: xx-large">Join</a><br/>
-    </div>
-</section>
+{#<section id="features" class="container features">#}
+{#    <div class="row">#}
+{#        <div class="col-lg-12 text-center">#}
+{#            <div class="navy-line"></div>#}
+{#            <h1>#}
+{#                <span class="text-category-6"> A collection of useful apps</span><br/>#}
+{#                <small>+</small>#}
+{#                <br/>#}
+{#                <span class="text-category-4">A community of awesome people</span><br/>#}
+{#                <small>+</small>#}
+{#                <br/>#}
+{#                <span class="text-category-2">A tested personal development process</span><br/>#}
+{#                <small>+</small>#}
+{#                <br/>#}
+{#                <span class="text-category-7">A set of Resources to life a balanced life</span><br/>#}
+{#            </h1>#}
+{#            <h1>#}
+{#                <small>=</small>#}
+{#                <br>#}
+{#                L E G E N D A R Y#}
+{#            </h1>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <div class="row">#}
+{#        <div class="col-sm-offset-0 col-sm-12 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">#}
+{#            <div class="challenge-module-row row text-center">#}
+{#                <div class="col-sm-offset-2 col-sm-4">#}
+{#                    <a href="#"#}
+{#                       class="btn btn-block btn-category bg-category-7 btn-lg center-block">#}
+{#                        Spirit#}
+{#                        <h1>{% icon "area-7" %}</h1>#}
+{#                    </a>#}
+{#                </div>#}
+{#                <div class="col-sm-4">#}
+{#                    <a href="#"#}
+{#                       class="btn btn-block btn-category bg-category-6 btn-lg center-block">#}
+{#                        Mind#}
+{#                        <h1>{% icon "area-6" %}</h1>#}
+{#                    </a>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="challenge-module-row row text-center">#}
+{#                <div class="col-sm-4">#}
+{#                    <a href="#"#}
+{#                       class="btn btn-block btn-category bg-category-5 btn-lg center-block">#}
+{#                        Expression#}
+{#                        <h1>{% icon "area-5" %}</h1>#}
+{#                    </a>#}
+{#                </div>#}
+{#                <div class="col-sm-4">#}
+{#                    <a href="#"#}
+{#                       class="btn btn-block btn-category bg-category-4 btn-lg center-block">#}
+{#                        Love#}
+{#                        <h1>{% icon "area-4" %}</h1>#}
+{#                    </a>#}
+{#                </div>#}
+{#                <div class="col-sm-4">#}
+{#                    <a href="#"#}
+{#                       class="btn btn-block btn-category bg-category-3 btn-lg center-block">#}
+{#                        Power#}
+{#                        <h1>{% icon "area-3" %}</h1>#}
+{#                    </a>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="challenge-module-row row text-center">#}
+{#                <div class="col-sm-offset-2 col-sm-4">#}
+{#                    <a href="#"#}
+{#                       class="btn btn-block btn-category bg-category-2 btn-lg center-block">#}
+{#                        Joy#}
+{#                        <h1>{% icon "area-2" %}</h1>#}
+{#                    </a>#}
+{#                </div>#}
+{#                <div class="col-sm-4">#}
+{#                    <a href="#"#}
+{#                       class="btn btn-block btn-category bg-category-1 btn-lg center-block">#}
+{#                        Health#}
+{#                        <h1>{% icon "area-1" %}</h1>#}
+{#                    </a>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <div class="row">#}
+{#        <div class="col-sm-offset-0 col-sm-12 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">#}
+{#            <div class="challenge-module-row row text-center">#}
+{#                <div class="col-sm-offset-2 col-sm-4">#}
+{#                    <h1>#}
+{#                        {% icon "area-7" classes='fa-2x text-category-7' %}#}
+{#                    </h1>#}
+{#                    <h2>#}
+{#                        Spirit#}
+{#                    </h2>#}
+{#                </div>#}
+{#                <div class="col-sm-4">#}
+{#                    <h1>#}
+{#                        {% icon "area-6" classes='fa-2x text-category-6' %}#}
+{#                    </h1>#}
+{#                    <h2>#}
+{#                        Mind#}
+{#                    </h2>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="challenge-module-row row text-center">#}
+{#                <div class="col-sm-4">#}
+{#                    <h1>#}
+{#                        {% icon "area-5" classes='fa-2x text-category-5' %}#}
+{#                    </h1>#}
+{#                    <h2>#}
+{#                        Expression#}
+{#                    </h2>#}
+{#                </div>#}
+{#                <div class="col-sm-4">#}
+{#                    <h1>#}
+{#                        {% icon "area-4" classes='fa-2x text-category-4' %}#}
+{#                    </h1>#}
+{#                    <h2>#}
+{#                        Connection#}
+{#                    </h2>#}
+{#                </div>#}
+{#                <div class="col-sm-4">#}
+{#                    <h1>#}
+{#                        {% icon "area-3" classes='fa-2x text-category-3' %}#}
+{#                    </h1>#}
+{#                    <h2>#}
+{#                        Power#}
+{#                    </h2>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="challenge-module-row row text-center">#}
+{#                <div class="col-sm-offset-2 col-sm-4">#}
+{#                    <h1>#}
+{#                        {% icon "area-2" classes='fa-2x text-category-2' %}#}
+{#                    </h1>#}
+{#                    <h2>#}
+{#                        Joy#}
+{#                    </h2>#}
+{#                </div>#}
+{#                <div class="col-sm-4">#}
+{#                    <h1>#}
+{#                        {% icon "area-1" classes='fa-2x text-category-1' %}#}
+{#                    </h1>#}
+{#                    <h2>#}
+{#                        Health#}
+{#                    </h2>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    <br><br><br><br>#}
+{##}
+{#    <div class="row">#}
+{#        <div class="col-md-4 text-center wow fadeInLeft">#}
+{#            <div>#}
+{#                {% icon 'academy' classes='fa-4x text-category-6' %}#}
+{#                {% icon 'apps' classes='fa-4x text-category-6' %}#}
+{##}
+{#                <h2>#}
+{#                    Conscious<br>#}
+{#                    Academy & Apps#}
+{#                </h2>#}
+{##}
+{#                <p>Get personalised Feedback and Quests from your chosen Mentor.</p>#}
+{#            </div>#}
+{#            <div class="m-t-lg">#}
+{#                {% icon 'community' classes='fa-4x text-category-4' %}#}
+{#                {% icon 'gatherings' classes='fa-4x text-category-4' %}#}
+{##}
+{#                <h2>#}
+{#                    Connected<br>#}
+{#                    Community & Gatherings#}
+{#                </h2>#}
+{##}
+{#                <p>A space to make room for your biggest challenges, strongest feelings and emotions.</p>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="col-md-4 text-center  wow zoomIn">#}
+{#            <br><br>#}
+{#            <img src="{{ feature_image.url }}" alt="{{ feature_image.name }}" class="img-responsive">#}
+{#        </div>#}
+{#        <div class="col-md-4 text-center wow fadeInRight">#}
+{#            <div>#}
+{#                {% icon 'mentor' classes='fa-4x text-category-2' %}#}
+{#                {% icon 'process' classes='fa-4x text-category-2' %}#}
+{##}
+{#                <h2>#}
+{#                    Committed<br>#}
+{#                    Mentoring & Process#}
+{#                </h2>#}
+{##}
+{#                <p>Organic Outcome Management. Keep track of what you want and know your next steps to get there.</p>#}
+{#            </div>#}
+{#            <div class="m-t-lg">#}
+{#                {% icon 'balance' classes='fa-4x text-category-7' %}#}
+{#                {% icon 'games' classes='fa-4x text-category-7' %}#}
+{##}
+{#                <h2>#}
+{#                    Complete<br>#}
+{#                    Balance & Games#}
+{#                </h2>#}
+{##}
+{#                <p>Become more aware of your current life by reflecting on it in a smart and personalized way.</p>#}
+{##}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="text-center" style="margin-bottom: 2em">#}
+{#        <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg wow tada">Join</a><br/>#}
+{#    </div>#}
+{#</section>#}
 
 
 <section class="background"
          style="background-image: url('{{ colegend_header_image.url }}');">
-    <h1 class="transition container">
-        Our Mission is to unleash the legend in every individual, and thereby, enrich the world.
-    </h1>
+    <div class="transition container">
+        <h1>
+            Our Mission is to unleash the legend in every individual, and thereby, enrich the world.
+        </h1>
+    </div>
     <div class="overlay">
         <div class="content container">
-            <br>
             <h1>
                 A Legendary Development Experience
             </h1>
@@ -355,103 +449,820 @@
                 UNLEASH THE LEGEND WITHIN YOU!
             </h2>
             <div class="row">
-                <div class="col-md-6">
-                    Our mission is to unlock the legendary potential in every individual, and thereby, enrich the world.
-                    View our Core Values.
-
-
-                    We combine the best parts of the mentoring method of development and we supercharge it into a
-                    legendary learning experience that places YOU at the center of it all.
-
-
-                    One-on-One Coaching and Feedback by a Mentor
-                    Custom Development Path based on Your Quest
-                    Encouragement and Accountability from your Tribe
-                    Vast selection of Learning Resources in the Academy
-                    Inspiration from the entire CoLegend community
+                <div class="flower-shape text-center col-lg-6 col-lg-push-6">
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-4">
+                            <div class="icon-headline">
+                                {% icon "mentor" classes='text-category-7' %}
+                            </div>
+                            <h5>
+                                {#                                <div class="h-icon">{% icon "mentor" classes='text-category-7' %}</div>#}
+                                Mentoring
+                            </h5>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="icon-headline">
+                                {% icon "academy" classes='text-category-6' %}
+                            </div>
+                            <h5>
+                                Academy
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="icon-headline">
+                                {% icon "gatherings" classes='text-category-5' %}
+                            </div>
+                            <h5>
+                                Gatherings
+                            </h5>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="icon-headline">
+                                {% icon "community" classes='text-category-4' %}
+                            </div>
+                            <h5>
+                                Community
+                            </h5>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="icon-headline">
+                                {% icon "apps" classes='text-category-3' %}
+                            </div>
+                            <h5>
+                                Apps
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-4">
+                            <div class="icon-headline">
+                                {% icon "games" classes='text-category-2' %}
+                            </div>
+                            <h5>
+                                Games
+                            </h5>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="icon-headline">
+                                {% icon "balance" classes='text-category-1' %}
+                            </div>
+                            <h5>
+                                Balance
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-lg-pull-6">
+                    <br>
+                    <p>
+                        Our mission is to unlock the legendary potential in every individual, and thereby, enrich the
+                        world.
+                        View our <a href="#">Core Values</a>.
+                    </p>
+                    <p>
+                        We combine the best parts of the mentoring method of development and we supercharge it into a
+                        <a href="#">legendary learning experience</a> that places YOU at the center of
+                        it all.
+                    </p>
+                    <br>
+                    <ul class="fa-ul">
+                        <li style="margin: 5px 0;"><i class="fa-li fa fa-plus-circle"></i>
+                            One-on-One Coaching and Feedback by a Mentor
+                        </li>
+                        <li style="margin: 5px 0;"><i class="fa-li fa fa-plus-circle"></i>
+                            Custom Development Path based on Your Quest
+                        </li>
+                        <li style="margin: 5px 0;"><i class="fa-li fa fa-plus-circle"></i>
+                            Encouragement and Accountability from your Tribe
+                        </li>
+                        <li style="margin: 5px 0;"><i class="fa-li fa fa-plus-circle"></i>
+                            Vast selection of Learning Resources in the Academy
+                        </li>
+                        <li style="margin: 5px 0;"><i class="fa-li fa fa-plus-circle"></i>
+                            Inspiration from the entire CoLegend community
+                        </li>
+                    </ul>
+                    <br>
+                    <div class="text-center">
+                        <a href="{% url "join" %}?next=/" class="btn btn-info-outline btn-lg">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <br>
+            {#            <h2 class="text-center">Vision</h2>#}
+            {##}
+            {#            <p id="vision"#}
+            {#               class="lead text-center text-main-dark">{% icon 'quote-left' color='grey' %} {{ page.vision_text }} {% icon 'quote-right' color='grey' %}</p>#}
+            <br><br>
+            <div class="row text-center">
+                <h2>Guided by our Core Values</h2>
+                <div class="col-lg-3 col-md-6">
+                    {% icon 'cog' classes='fa-4x text-main' %}
+                    <h5>Conscious</h5>
+                    <span class="text-left">
+                    {{ page.apps_teaser_text|richtext }}
+                    </span>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    {% icon 'globe' classes='fa-4x text-main' %}
+                    <h5>Connected</h5>
+                    <span class="text-left">
+                    {{ page.community_teaser_text|richtext }}
+                    </span>
+                </div>
+                <div class="clear-fix"></div>
+                <div class="col-lg-3 col-md-6">
+                    {% icon 'bullseye' classes='fa-4x text-main' %}
+                    <h5>Committed</h5>
+                    <span class="text-left">
+                    {{ page.process_teaser_text|richtext }}
+                    </span>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    {% icon 'check-circle-o' classes='fa-4x text-main' %}
+                    <h5>Complete</h5>
+                    <span class="text-left">
+                    {{ page.complete_teaser_text|richtext }}
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
 <section class="background"
          style="background-image: url('{{ conscious_header_image.url }}');">
-    <h3 class="transition container text-center">
-        Our Mission is to unleash the legend in every individual, and thereby, enrich the world.
-    </h3>
+    <div class="transition container">
+        <h1>
+            Our Vision is to create a connected movement around what we love: purpose driven personal development, life
+            balance and lifelong learning.
+        </h1>
+    </div>
     <div class="overlay">
         <div class="content container">
-            foo
-            asdfasdfasdf
-            asdfasfasdfasfasdfasdfasdf
-            asfdasdf
-            <h1>goo asfdasdf asdf </h1>
+            <h1>
+                Epic Stories of Life Change
+            </h1>
+            <h2>
+                HEAR DIRECTLY FROM LEGENDS AND MENTORS
+            </h2>
+            <p>
+                We're honored to provide a place where individuals can learn and grow within a strong supportive
+                community. Visit
+                <a href="#">CoLegend stories</a> to hear more from our legends.
+            </p>
+            <br><br>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    {% statement 'coralina' content=page.testimonial|richtext|add:"<span class='small text-muted pull-right'>Legend chapter 4</span>" %}<br>
+                </div>
+                <div class="col-lg-6">
+                    {% statement 'coralina' content=page.testimonial|richtext|add:"<span class='small text-muted pull-right'>Legend chapter 4</span>" direction='right' %}<br>
+                </div>
+                <div class="col-lg-6">
+                    {% statement 'coralina' content=page.testimonial|richtext|add:"<span class='small text-muted pull-right'>Legend chapter 4</span>" %}<br>
+                </div>
+                <div class="col-lg-6">
+                    {% statement 'coralina' content=page.testimonial|richtext|add:"<span class='small text-muted pull-right'>Legend chapter 4</span>" direction='right' %}<br>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
 <section class="background"
          style="background-image: url('{{ connected_header_image.url }}');">
-    <h3 class="transition container text-center">
-        Our Mission is to unleash the legend in every individual, and thereby, enrich the world.
-    </h3>
+    <div class="transition container">
+        <h1>
+            CURIOSITY
+            <br>
+            <br>
+            Allow our curiosity to create an ever-growing and multi-faceted mind.
+        </h1>
+    </div>
     <div class="overlay">
         <div class="content container">
-            foo
-            asdfasdfasdf
-            asdfasfasdfasfasdfasdfasdf
-            asfdasdf
-            <h1>goo asfdasdf asdf </h1>
-        </div>
-    </div>
-</section>
-<section class="background"
-         style="background-image: url('{{ continuous_header_image.url }}');">
-    <h3 class="transition container text-center">
-        Our Mission is to unleash the legend in every individual, and thereby, enrich the world.
-    </h3>
-    <div class="overlay">
-        <div class="content container">
-            foo
-            asdfasdfasdf
-            asdfasfasdfasfasdfasdfasdf
-            asfdasdf
-            <h1>goo asfdasdf asdf </h1>
-        </div>
-    </div>
-</section>
-
-
-<section id="reasons" class="reasons bg-main-light">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <div class="navy-line"></div>
-                <h1>7 reasons to join CoLegend</h1>
-                {{ page.reasons_intro|richtext }}
-                {% for reason in reasons %}
-                    <div class="wow {% cycle 'fadeInLeftBig' 'fadeInRightBig' %}">
-                        <span style="display: none;">{% cycle 'left' 'right' as direction %}</span>
-                        <div class="row">
-                            {% if direction == 'left' %}
-                                <div class="col-lg-8">
-                                    {% statement reason.npc reason.text|richtext direction=direction %}
-                                </div>
-                            {% elif direction == 'right' %}
-                                <div class="col-lg-8 col-lg-offset-4">
-                                    {% statement reason.npc reason.text|richtext direction=direction %}
-                                </div>
-                            {% endif %}
-                        </div>
-                    </div>
-                {% endfor %}
+            <h1>
+                CoLegend... How it Works
+            </h1>
+            <p>
+                The first few steps within CoLegend are common to everyone who applies but it quickly becomes customized
+                to your specific dreams and life goals. Here's a quick glance at those initial milestones. If you have
+                additional questions have a look at our
+                <a href="#">FAQ</a>.
+            </p>
+            <br>
+            <div class="row boxes">
+                <div class="col-lg-6 box left overlay-highlight">
+                    <h2>
+                        APPLY FOR YOUR JOURNEY
+                    </h2>
+                    <p>
+                        The application process is fun, fast and free. You provide a few details about yourself, your
+                        interests and goals. Then your application is matched with a set of Mentors who can best help
+                        you achieve your goals.<br>
+                        <a href="#">Start Your Journey Now!</a>
+                    </p>
+                </div>
+                <div class="col-lg-6 box right overlay-highlight-2">
+                    <h2>
+                        JOIN THE ACADEMY
+                    </h2>
+                    <p>
+                        CoLegend houses a rapidly growing collection of amazing development resources, including
+                        incredible tutorials and stories from amazing Legends.
+                        <br>
+                        <a href="#">Learn more about the Academy</a>
+                    </p>
+                </div>
+                <div class="col-lg-6 box left overlay-highlight-2">
+                    <h2>
+                        CHOOSE A MENTOR
+                    </h2>
+                    <p>
+                        Our system takes all of the information from your application and uses it to find the Mentors
+                        who best suit your preference. Review them all and choose the best fit for YOU.
+                        <br>
+                        <a href="#">Start Your Journey Now!</a>
+                    </p>
+                </div>
+                <div class="col-lg-6 box right overlay-highlight">
+                    <h2>
+                        BECOME A LEGEND
+                    </h2>
+                    <p>
+                        Your personalized development experience is about to begin. This is an exciting time for you and
+                        for your Mentor! Things will move faster now, so be ready!
+                        <br>
+                        <a href="#">View the Expectations of a Legend</a>
+                    </p>
+                </div>
+                <div class="col-lg-6 box left overlay-highlight">
+                    <h2>
+                        YOUR FIRST QUEST
+                    </h2>
+                    <p>
+                        You'll soon receive your first Quest from your Mentor. The early Chapters help you to become
+                        familiar with the mysterious ways of CoLegend. To see an example of what's in store, have a look
+                        at the Personal Development Chapter Guide.
+                        <br>
+                        <a href="#">View an example of a Legend Path</a>
+                    </p>
+                </div>
+                <div class="col-lg-6 box right overlay-highlight-2">
+                    <h2>
+                        MEET YOUR TRIBE
+                    </h2>
+                    <p>
+                        Each Tribe typically has about 16 Legends. We're confident you'll learn as much, if not more,
+                        from the other Legends as you will from your Mentor. They will provide you with valuable
+                        feedback, accountability and encouragement in every Chapter.
+                        <br>
+                        <a href="#">Read Stories from our Legends</a>
+                    </p>
+                </div>
+                <div class="col-lg-6 box left overlay-highlight-2">
+                    <h2>
+                        DEFINE YOUR LEGEND PURPOSE
+                    </h2>
+                    <p>
+                        CoLegend places YOU at the center of the development experience. Your Mentor will help you to
+                        define your personal vision and goals and will then customize the Chapters to help you
+                        accomplish your main Quest. This is a key difference from traditional, content-centric
+                        development models.
+                        <br>
+                        <a href="#">Learn more about the Development Experience</a>
+                    </p>
+                </div>
+                <div class="col-lg-6 box right overlay-highlight">
+                    <h2>
+                        DEVELOP AT YOUR OWN PACE
+                    </h2>
+                    <p>
+                        The pace of your progress is completely within your control. This is not a one-size fit, pass or
+                        fail, development model. We understand that each person's schedule and development pace is
+                        unique. Your Tribe will have Legends at many different Chapters.
+                        <br>
+                        <a href="#">View an example of a Development Path</a>
+                    </p>
+                </div>
             </div>
         </div>
-        <div class="text-center" style="margin: 2rem">
-            <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg wow tada"
-               style="font-size: xx-large">Join</a><br/>
+    </div>
+</section>
+
+<section class="background"
+         style="background-image: url('{{ conscious_header_image.url }}');">
+    <div class="transition container">
+        <h1>
+            GUIDANCE
+            <br>
+            <br>
+            The mind is not a vessel to be filled, but a fire to be kindled.
+        </h1>
+    </div>
+    <div class="overlay">
+        <div class="content container">
+            <h1>
+                Legend Mentors
+            </h1>
+            <h2>
+                WE ARE HONORED TO HAVE WORLD-CLASS MENTORS
+            </h2>
+            <p>
+                Below is a small sample of the Mentors in CoLegend. Visit our <a href="#">Meet the Mentors</a> page to
+                see a more
+                complete roster. Or learn more about the <a href="#">expectations of a Mentor</a> and the <a
+                    href="#">path to becoming a Mentor</a>.
+            </p>
+            <br>
+            {% for member in team_members %}
+                <div class="col-md-3 wow fadeInLeft">
+                    {% include 'about/widgets/team_member.html' with image=member.image name=member.name roles=member.roles social_accounts=member.social_accounts url=member.url %}
+                </div>
+            {% endfor %}
+            <div class="clearfix"></div>
+            <h3>
+                Interested in becoming a Mentor?
+            </h3>
+            <p>
+                Are you passionate about sharing your personal development talents and techniques with others? Are you
+                excited about mentoring others through their own development path? Perhaps you’re interested in one of
+                our existing subjects or would like to establish a new one? If so, then we would love to hear from you!
+                Learn more about the <a href="#">expectations of a Mentor</a> and the <a href="#">path to becoming a
+                Mentor</a> in CoLegend.
+            </p>
+            <div class="text-center">
+                <a href="{% url "join" %}?next=/" class="btn btn-info-outline btn-lg">Learn More</a>
+            </div>
+
         </div>
     </div>
 </section>
+
+<section class="background"
+         style="background-image: url('{{ conscious_header_image.url }}');">
+    <div class="transition container">
+        <h1>
+            COLLABORATION
+            <br>
+            <br>
+            Build a unified, collaborative environment that fosters creativity and experimentation
+        </h1>
+    </div>
+    <div class="overlay">
+        <div class="content container">
+            <h1>
+                COMMUNITY
+            </h1>
+            <h2>
+                PROFIT FROM AND GET INSPIRED BY COMMITTED FELLOW LEGENDS
+            </h2>
+            <p>
+                Going on a journey by yourself is only half as fun as when you can share your experiences with somebody
+                else and help each other in challenging times. On your Personal Development Journey you are in company
+                with a whole tribe of up to 16 committed fellow legends just like yourself. You will interact regularly
+                in a structured way so that each of you can profit the most of this shared experience.
+                Together you can merge your potentials into an ongoing legend!
+            </p>
+            <br>
+            <div class="text-center">
+                <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg">Join the Circle of Legends</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="background"
+         style="background-image: url('{{ continuous_header_image.url }}');">
+    <div class="transition container">
+        <h1>
+            CURISOSITY
+            <br>
+            <br>
+            Some quote.
+        </h1>
+    </div>
+    <div class="overlay">
+        <div class="content container">
+            <br>
+            <h1>
+                Academy
+            </h1>
+            <h2>
+                MORE PERSONAL DEVELOPMENT SUBJECTS ARE ADDED REGULARLY
+            </h2>
+            <p>
+                We’re getting started with Mentors familiar with various fields of personal development and self
+                exploration. As CoLegend grows, we will add in other subjects that benefit from the mentoring method of
+                development.
+            </p>
+            <p>
+                The Academy of CoLegend houses a vast, rapidly growing collection of amazing development resources,
+                including incredible tutorials and critiques from amazing Mentors. Watch a sneak peek into this ever
+                expanding treasure trove!
+            </p>
+            <br><br>
+            <div class="text-center">
+                What do you get in the Academy?
+                <img src="http://image.flaticon.com/icons/svg/26/26025.svg" alt="Academy video pluy button"
+                     class="img-responsive" style="display: block; margin: auto; height: 150px">
+                {#                <div class="video" style="height: 4em;">#}
+                {#                </div>#}
+                <i>Video is comming soon.</i>
+            </div>
+            <br><br>
+            <div class="row small-boxes">
+                <div class="col-md-6 box left overlay-highlight">
+                    <h2>
+                        Visioning
+                    </h2>
+                </div>
+                <div class="col-md-6 box right overlay-highlight-2">
+                    <h2>
+                        Dragon dreaming
+                    </h2>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-6 box left overlay-highlight-2">
+                    <h2>
+                        Goal setting
+                    </h2>
+                </div>
+                <div class="col-md-6 box right overlay-highlight">
+                    <h2>
+                        Radical honesty
+                    </h2>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-6 box left overlay-highlight">
+                    <h2>
+                        Financial education
+                    </h2>
+                </div>
+                <div class="col-md-6 box right overlay-highlight-2">
+                    <h2>
+                        Positive Psychology
+                    </h2>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-6 box left overlay-highlight-2">
+                    <h2>
+                        Compassionate communication (NVC)
+                    </h2>
+                </div>
+                <div class="col-md-6 box right overlay-highlight">
+                    <h2>
+                        Getting Things Done (GTD)
+                    </h2>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-6 box left overlay-highlight">
+                    <h2>
+                        Quantified self
+                    </h2>
+                </div>
+                <div class="col-md-6 box right overlay-highlight-2">
+                    <h2>
+                        Neuo-linguistic-programming (NLP)
+                    </h2>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-6 box left overlay-highlight-2">
+                    <h2>
+                        Guided-Meditation
+                    </h2>
+                </div>
+                <div class="col-md-6 box right overlay-highlight">
+                    <h2>
+                        Expressive-Dance
+                    </h2>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-6 box left overlay-highlight">
+                    <h2>
+                        Decision education
+                    </h2>
+                </div>
+                <div class="col-md-6 box right overlay-highlight-2">
+                    <h2>
+                        Hero’s Journey
+                    </h2>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <br><br>
+            <h3>
+                Interested in other Subjects?
+            </h3>
+            <p>
+                If you’re interested in a particular subject that we do not currently offer please let us know! We are
+                always looking to add new personal development subjects. So go ahead and <a href="#">start your journey
+                Now</a> as a
+                Legend. We are starting small and we’re growing fast!
+            </p>
+            <br><br>
+            <h2>
+                LEARN HOW TO UNLOCK THE ACADEMY
+            </h2>
+            <p>
+                We are now offering access to the Mentors’ tutorial and feedback videos in the Academy to anyone with a
+                completed application. <a href="#">Login to CoLegend now</a> to sign-up or <a href="#">visit this
+                page</a> for more details.
+            </p>
+            <br>
+            <div class="text-center">
+                <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg">Unlock the Academy Now!</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="background"
+         style="background-image: url('{{ conscious_header_image.url }}');">
+    <div class="transition container">
+        <h1>
+            TOOLS
+            <br>
+            <br>
+            Quote.
+        </h1>
+    </div>
+    <div class="overlay">
+        <div class="content container">
+            <h1>
+                TOOLS
+            </h1>
+            <h2>
+                TOOLS SUBHEADLINE
+            </h2>
+            <p>
+                It is our goal to make personal development a fun and exciting experience. For this we’re bringing all
+                kinds of already existing games together and also creating our own Personal Development Games(™). With
+                this you can grow in a playful way, trying out things you would not yet dare in real life and thus learn
+                about otherwise hard life lessons in a memorable and enjoyable way!
+            </p>
+            <br>
+            <div class="text-center">
+                <a href="{% url "join" %}?next=/" class="btn btn-info-outline btn-lg">Discover our Games</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="background"
+         style="background-image: url('{{ conscious_header_image.url }}');">
+    <div class="transition container">
+        <h1>
+            FUN
+            <br>
+            <br>
+            Inject the elements of fun, fancy, and fantasy into our development journey
+        </h1>
+    </div>
+    <div class="overlay">
+        <div class="content container">
+            <h1>
+                GAMES
+            </h1>
+            <h2>
+                PLAYFULLY TAPPING INTO YOUR FULL POTENTIAL
+            </h2>
+            <p>
+                It is our goal to make personal development a fun and exciting experience. For this we’re bringing all
+                kinds of already existing games together and also creating our own Personal Development Games(™). With
+                this you can grow in a playful way, trying out things you would not yet dare in real life and thus learn
+                about otherwise hard life lessons in a memorable and enjoyable way!
+            </p>
+            <br>
+            <div class="text-center">
+                <a href="{% url "join" %}?next=/" class="btn btn-info-outline btn-lg">Discover our Games</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="background"
+         style="background-image: url('{{ continuous_header_image.url }}');">
+    <div class="transition container">
+        <h1>
+            BALANCE
+            <br>
+            <br>
+            Quote
+        </h1>
+    </div>
+    <div class="overlay">
+        <div class="content container">
+            <br>
+            <h1>
+                LIFE AREAS
+            </h1>
+            <h2>
+                CREATING LIFE BALANCE
+            </h2>
+            <p>
+                Our Mentors are trained to keep an eye on a balanced set of life areas as each one has an effect on the
+                others. In a balanced state you are most resourceful and we have experienced it to be the most
+                sustainable way of having a joyful journey.
+            </p>
+            <div class="row">
+                <div class="flower-shape text-center col-lg-6 col-lg-offset-3">
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-4">
+                            <div class="icon-headline">
+                                {% icon "area-7" classes='text-category-7' %}
+                            </div>
+                            <h5>
+                                Spirit
+                            </h5>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="icon-headline">
+                                {% icon "area-6" classes='text-category-6' %}
+                            </div>
+                            <h5>
+                                Mind
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="icon-headline">
+                                {% icon "area-5" classes='text-category-5' %}
+                            </div>
+                            <h5>
+                                Expression
+                            </h5>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="icon-headline">
+                                {% icon "area-4" classes='text-category-4' %}
+                            </div>
+                            <h5>
+                                Connection
+                            </h5>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="icon-headline">
+                                {% icon "area-3" classes='text-category-3' %}
+                            </div>
+                            <h5>
+                                Power
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-4">
+                            <div class="icon-headline">
+                                {% icon "area-2" classes='text-category-2' %}
+                            </div>
+                            <h5>
+                                Joy
+                            </h5>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="icon-headline">
+                                {% icon "area-1" classes='text-category-1' %}
+                            </div>
+                            <h5>
+                                Health
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="row small-boxes">
+                <div class="col-md-6 box left overlay-highlight">
+                    <h2>
+                        Health
+                    </h2>
+                </div>
+                <div class="col-md-6 box right overlay-highlight-2">
+                    <h2>
+                        Joy
+                    </h2>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-6 box left overlay-highlight-2">
+                    <h2>
+                        Power
+                    </h2>
+                </div>
+                <div class="col-md-6 box right overlay-highlight">
+                    <h2>
+                        Love
+                    </h2>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-6 box left overlay-highlight">
+                    <h2>
+                        Expression
+                    </h2>
+                </div>
+                <div class="col-md-6 box right overlay-highlight-2">
+                    <h2>
+                        Mind
+                    </h2>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-6 box left overlay-highlight-2">
+                    <h2>
+                        Spirit
+                    </h2>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <br><br>
+            <br>
+            <div class="text-center">
+                <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg">Start Your
+                    Journey</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="background"
+         style="background-image: url('{{ conscious_header_image.url }}');">
+    <div class="transition container">
+        <h1>
+            YOUR LEGEND
+            <br>
+            <br>
+            Once upon a time is NOW.
+        </h1>
+    </div>
+    <div class="overlay">
+        <div class="content container">
+            <h1>
+                Apply to CoLegend Today!
+            </h1>
+            <h2>
+                APPLYING IS FAST
+            </h2>
+            <p>
+                We've got a fun application process that gets you started on your path through CoLegend. You'll provide
+                us with some basic information about you, your passions and what subject are interesting to you. We'll
+                match you to a set of Mentors who can best support you to achieve your goals.
+            </p>
+            <h2>
+                APPLYING IS EASY
+            </h2>
+            <p>
+                The application process is free, and you'll only begin paying the membership fee of just €78 per month
+                after you choose a Mentor. There is no long term commitment. You may cancel at any time.
+            </p>
+            <br>
+            <div class="text-center">
+                <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg">Apply Now</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{#<section id="reasons" class="reasons bg-main-light">#}
+{#    <div class="container">#}
+{#        <div class="row">#}
+{#            <div class="col-lg-12 text-center">#}
+{#                <div class="navy-line"></div>#}
+{#                <h1>7 reasons to join CoLegend</h1>#}
+{#                {{ page.reasons_intro|richtext }}#}
+{#                {% for reason in reasons %}#}
+{#                    <div class="wow {% cycle 'fadeInLeftBig' 'fadeInRightBig' %}">#}
+{#                        <span style="display: none;">{% cycle 'left' 'right' as direction %}</span>#}
+{#                        <div class="row">#}
+{#                            {% if direction == 'left' %}#}
+{#                                <div class="col-lg-8">#}
+{#                                    {% statement reason.npc reason.text|richtext direction=direction %}#}
+{#                                </div>#}
+{#                            {% elif direction == 'right' %}#}
+{#                                <div class="col-lg-8 col-lg-offset-4">#}
+{#                                    {% statement reason.npc reason.text|richtext direction=direction %}#}
+{#                                </div>#}
+{#                            {% endif %}#}
+{#                        </div>#}
+{#                    </div>#}
+{#                {% endfor %}#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="text-center" style="margin: 2rem">#}
+{#            <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg wow tada">Join</a><br/>#}
+{#        </div>#}
+{#    </div>#}
+{#</section>#}
 
 
 {#<section id="explore" class="container explore">#}
@@ -582,121 +1393,120 @@
 {##}
 {#</section>#}
 
-<section id="testimonials" class="navy-section testimonials" style="margin-top: 0">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 wow zoomIn">
-                <h1 class="text-center" style="margin-bottom: 2em">
-                    What our legends say ...
-                </h1>
-                {% statement 'coralina' content=page.testimonial|richtext|add:"<span class='small text-muted pull-right'>Coralina, 2015-10-04</small>" show_link=False %}
-            </div>
-        </div>
-    </div>
-</section>
+{#<section id="testimonials" class="navy-section testimonials" style="margin-top: 0">#}
+{#    <div class="container">#}
+{#        <div class="row">#}
+{#            <div class="col-lg-12 wow zoomIn">#}
+{#                <h1 class="text-center" style="margin-bottom: 2em">#}
+{#                    What our legends say ...#}
+{#                </h1>#}
+{#                {% statement 'coralina' content=page.testimonial|richtext|add:"<span class='small text-muted pull-right'>Coralina, 2015-10-04</small>" show_link=False %}#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</section>#}
 
-<section id="pricing" class="pricing">
-    <div class="container">
-        <div class="row m-b-lg">
-            <div class="col-lg-12 text-center">
-                <div class="navy-line"></div>
-                <h1>Pricing</h1>
+{#<section id="pricing" class="pricing">#}
+{#    <div class="container">#}
+{#        <div class="row m-b-lg">#}
+{#            <div class="col-lg-12 text-center">#}
+{#                <div class="navy-line"></div>#}
+{#                <h1>Pricing</h1>#}
+{##}
+{#                {{ page.pricing_intro|richtext }}#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="row">#}
+{#            <div class="col-lg-8 col-lg-offset-2">#}
+{#                <ul class="pricing-plan list-unstyled selected">#}
+{#                    <li class="pricing-title">#}
+{#                        Pricing - Pay as YOU wish#}
+{#                    </li>#}
+{#                    <li class="pricing-desc">#}
+{#                        <div class="text-left">#}
+{#                            {% statement 'tiger' content=page.tiger_statement|richtext %}#}
+{#                            <div class="row">#}
+{#                                <div class="col-md-6">#}
+{#                                    <div class="card text-xs-center">#}
+{#                                        <h6 class="card-header bg-main"#}
+{#                                            style="margin: 0;">#}
+{#                                            Transparent expenses#}
+{#                                        </h6>#}
+{#                                        <div class="card-block bg-content">#}
+{#                                            <h4 class="card-title">{% icon 'money' %}</h4>#}
+{#                                            <p class="card-text">#}
+{#                                                {% icon 'check' color='#1ab394' %} Website hosting<br>#}
+{#                                                {% icon 'check' color='#1ab394' %} coWorker compensation<br>#}
+{#                                            </p>#}
+{#                                            <a href="mailto:connect@colegend.org" target="_blank" class="">More#}
+{#                                                details</a>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-md-6">#}
+{#                                    <div class="card text-xs-center">#}
+{#                                        <h6 class="card-header bg-main"#}
+{#                                            style="margin: 0;">#}
+{#                                            Your support for us#}
+{#                                        </h6>#}
+{#                                        <div class="card-block bg-content">#}
+{#                                            <h4 class="card-title">{% icon 'clock-o' %} and {% icon 'eur' %}</h4>#}
+{#                                            <p>#}
+{#                                                You can support us with your time/energy and with a financial donation.#}
+{#                                            </p>#}
+{#                                            <div class="row">#}
+{#                                                <div class="col-xs-6">#}
+{#                                                    <a href="mailto:connect@colegend.org" class="btn btn-success"#}
+{#                                                       target="_blank">Contribute<br>energy</a>#}
+{#                                                </div>#}
+{#                                                <div class="col-xs-6">#}
+{#                                                    {% include 'widgets/donate.html' %}#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </li>#}
+{#                </ul>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="text-center" style="margin-top: 4em">#}
+{#            <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg wow tada">Join</a><br/>#}
+{#        </div>#}
+{#    </div>#}
+{#</section>#}
 
-                {{ page.pricing_intro|richtext }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-                <ul class="pricing-plan list-unstyled selected">
-                    <li class="pricing-title">
-                        Pricing - Pay as YOU wish
-                    </li>
-                    <li class="pricing-desc">
-                        <div class="text-left">
-                            {% statement 'tiger' content=page.tiger_statement|richtext %}
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="card text-xs-center">
-                                        <h6 class="card-header bg-main"
-                                            style="margin: 0;">
-                                            Transparent expenses
-                                        </h6>
-                                        <div class="card-block bg-content">
-                                            <h4 class="card-title">{% icon 'money' %}</h4>
-                                            <p class="card-text">
-                                                {% icon 'check' color='#1ab394' %} Website hosting<br>
-                                                {% icon 'check' color='#1ab394' %} coWorker compensation<br>
-                                            </p>
-                                            <a href="mailto:connect@colegend.org" target="_blank" class="">More
-                                                details</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card text-xs-center">
-                                        <h6 class="card-header bg-main"
-                                            style="margin: 0;">
-                                            Your support for us
-                                        </h6>
-                                        <div class="card-block bg-content">
-                                            <h4 class="card-title">{% icon 'clock-o' %} and {% icon 'eur' %}</h4>
-                                            <p>
-                                                You can support us with your time/energy and with a financial donation.
-                                            </p>
-                                            <div class="row">
-                                                <div class="col-xs-6">
-                                                    <a href="mailto:connect@colegend.org" class="btn btn-success"
-                                                       target="_blank">Contribute<br>energy</a>
-                                                </div>
-                                                <div class="col-xs-6">
-                                                    {% include 'widgets/donate.html' %}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="text-center" style="margin-top: 4em">
-            <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg wow tada"
-               style="font-size: xx-large">Join</a><br/>
-        </div>
-    </div>
-</section>
 
-
-<section id="team" class="gray-section team">
-    <div class="container">
-        <div class="row m-b-lg">
-            <div class="col-lg-12 text-center">
-                <div class="navy-line"></div>
-                <h1>Our Core Team</h1>
-
-                <p>Feel free to contact us.</p>
-            </div>
-        </div>
-        <div class="row">
-            {% for member in team_members %}
-                <div class="col-md-3 wow fadeInLeft">
-                    {% include 'about/widgets/team_member.html' with image=member.image name=member.name roles=member.roles social_accounts=member.social_accounts url=member.url %}
-                </div>
-            {% endfor %}
-
-        </div>
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 text-center m-t-lg m-b-lg">
-                <span class="lead">
-                    {{ page.roles_intro|richtext }}
-                </span>
-                {% button "Roles page" pattern='roles:index' classes='btn-info' size='small' icon='roles' external=True %}
-            </div>
-        </div>
-    </div>
-</section>
+{#<section id="team" class="gray-section team">#}
+{#    <div class="container">#}
+{#        <div class="row m-b-lg">#}
+{#            <div class="col-lg-12 text-center">#}
+{#                <div class="navy-line"></div>#}
+{#                <h1>Our Core Team</h1>#}
+{##}
+{#                <p>Feel free to contact us.</p>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="row">#}
+{#            {% for member in team_members %}#}
+{#                <div class="col-md-3 wow fadeInLeft">#}
+{#                    {% include 'about/widgets/team_member.html' with image=member.image name=member.name roles=member.roles social_accounts=member.social_accounts url=member.url %}#}
+{#                </div>#}
+{#            {% endfor %}#}
+{##}
+{#        </div>#}
+{#        <div class="row">#}
+{#            <div class="col-lg-8 col-lg-offset-2 text-center m-t-lg m-b-lg">#}
+{#                <span class="lead">#}
+{#                    {{ page.roles_intro|richtext }}#}
+{#                </span>#}
+{#                {% button "Roles page" pattern='roles:index' classes='btn-info' size='small' icon='roles' external=True %}#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</section>#}
 
 <section id="contact" class="contact">
     <div class="container">

@@ -50,21 +50,63 @@ section.background {
   height: 100%;
   width: 100%;
   .transition {
-    padding: 4em 0;
+    padding: 6em 0;
     color: white;
-    font-size: 3em;
+    font-size: 2em;
     text-shadow: -2px 2px 8px rgba(0, 0, 0, 0.8);
-  }
-  .overlay {
-    background-color: rgba(255, 255, 255, 0.9);
+    margin-top: 0;
   }
   h1 {
-    font-size: 3em;
     text-align: center;
+  }
+  p {
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
   }
   h2 {
     text-transform: uppercase;
     text-align: center;
   }
-
+  h3 {
+    text-align: center;
+  }
+  .overlay {
+    background-color: rgba(255, 255, 255, 0.9);
+    .content {
+      padding-top: 4em;
+      padding-bottom: 4em;
+      .boxes {
+        .box {
+          min-height: 16em;
+        }
+      }
+      .small-boxes {
+        h2 {
+          font-size: x-large;
+        }
+      }
+      .box {
+        padding: 2em;
+        &.left, &.left h2 {
+          text-align: right;
+        }
+        &.right, &.right h2 {
+          text-align: left;
+        }
+      }
+      .overlay-highlight {
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+      .overlay-highlight-2 {
+        background-color: rgba(0, 0, 0, 0.05);
+        @media only screen and (min-width: 992px) {
+          background-color: rgba(0, 0, 0, 0.01);
+        }
+      }
+      .icon-headline {
+        font-size: 5em;
+      }
+    }
+  }
 }
