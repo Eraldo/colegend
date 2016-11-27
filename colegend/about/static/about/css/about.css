@@ -85,7 +85,7 @@ section.background {
   section.background .source {
     padding: 0.5em; }
   section.background .features-list li {
-    margin: 5px 0; }
+    margin: 0.5em 0; }
 
 section.video-header {
   width: 100%;
