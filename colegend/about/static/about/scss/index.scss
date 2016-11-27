@@ -117,11 +117,12 @@ h1 {
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover {
   background: transparent;
   color: #fff;
-  border-top: 6px solid $navy;
+  //border-top: 6px solid $navy;
 }
 
 .navbar-default .navbar-nav > li > a:hover {
   color: $navy;
+  border-top: 6px solid $navy;
 }
 
 .navbar-default .navbar-nav > .active > a:focus {
@@ -466,7 +467,7 @@ li.pricing-title {
 }
 
 .contact {
-  background-image: url('../img/word_map.png');
+  background-image: url('../img/world_map.png');
   background-position: 50% 50%;
   background-repeat: no-repeat;
   //margin-top: 60px;
@@ -1278,7 +1279,9 @@ section.comments {
 
 // ERALDO Changes 2015-10-10
 .navbar-default .navbar-right {
-  background: rgba(0, 0, 0, 0.4);
+  @media (min-width: 768px) {
+    background: rgba(0, 0, 0, 0.4);
+  }
   border-radius: 5px;
 }
 
@@ -1326,10 +1329,18 @@ section.comments {
   transform: rotate(2deg);
 }
 
-#join {
-  margin: 18px 0px 0px 0px;
-}
-
-#login {
-  margin: 18px 10px 0px 20px;
+//#join {
+//  margin: 18px 0px 0px 20px;
+//}
+//
+//#login {
+//  margin: 18px 10px 0px 0px;
+//}
+.menu-actions {
+  display: inline;
+  margin-left: 1em;
+  margin-right: 1em;
+  a {
+    margin: 18px 0px 0px 0px;
+  }
 }

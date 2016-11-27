@@ -84,11 +84,11 @@ h1 {
 
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover {
   background: transparent;
-  color: #fff;
-  border-top: 6px solid #26c6da; }
+  color: #fff; }
 
 .navbar-default .navbar-nav > li > a:hover {
-  color: #26c6da; }
+  color: #26c6da;
+  border-top: 6px solid #26c6da; }
 
 .navbar-default .navbar-nav > .active > a:focus {
   background: transparent;
@@ -347,7 +347,7 @@ li.pricing-title {
   color: #26c6da; }
 
 .contact {
-  background-image: url("../img/word_map.png");
+  background-image: url("../img/world_map.png");
   background-position: 50% 50%;
   background-repeat: no-repeat; }
 
@@ -970,8 +970,10 @@ section.comments {
   .center-orientation .cssanimations .vertical-timeline-content.is-hidden {
     visibility: hidden; } }
 .navbar-default .navbar-right {
-  background: rgba(0, 0, 0, 0.4);
   border-radius: 5px; }
+  @media (min-width: 768px) {
+    .navbar-default .navbar-right {
+      background: rgba(0, 0, 0, 0.4); } }
 
 .navbar-scroll.navbar-default .navbar-right {
   background: transparent; }
@@ -1013,10 +1015,11 @@ section.comments {
   /* Chrome, Safari, Opera */
   transform: rotate(2deg); }
 
-#join {
-  margin: 18px 0px 0px 0px; }
-
-#login {
-  margin: 18px 10px 0px 20px; }
+.menu-actions {
+  display: inline;
+  margin-left: 1em;
+  margin-right: 1em; }
+  .menu-actions a {
+    margin: 18px 0px 0px 0px; }
 
 /*# sourceMappingURL=index.css.map */

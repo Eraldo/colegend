@@ -58,6 +58,19 @@ section.background {
   }
   h1 {
     text-align: center;
+    .cite {
+      font-size: small;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s 2s, opacity 2s linear;
+    }
+    &:hover {
+      .cite {
+        visibility: visible;
+        opacity: 1;
+        transition: opacity 2s linear;
+      }
+    }
   }
   p {
     max-width: 960px;
@@ -108,5 +121,49 @@ section.background {
         font-size: 5em;
       }
     }
+  }
+  .source {
+    padding: 0.5em;
+  }
+  .features-list {
+    li {
+      margin: 5px 0;
+    }
+  }
+}
+
+section.video-header {
+  width: 100%;
+  height: 100vh;
+  display: table;
+  text-align: center;
+  padding: 2em 0;
+  //cursor: pointer;
+  //display: block;
+  //top: 0;
+  //position: absolute;
+  //background-size: cover;
+  //text-align: center;
+  //overflow: hidden;
+  //padding: 0 7%;
+  //margin: 0;
+  //max-width: none;
+  //background-color: #373B44;
+  //height: 100vh;
+
+  .header-content {
+    display: table-cell;
+    vertical-align: middle;
+    //background-image: url('http://www.pngpix.com/wp-content/uploads/2016/07/PNGPIX-COM-Hot-Air-Balloon-PNG-Transparent-Image.png');
+    //background-size: contain;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+}
+
+@media (max-width: 47.9em) {
+  .navbar-nav .nav-item {
+    display: flex !important;
   }
 }

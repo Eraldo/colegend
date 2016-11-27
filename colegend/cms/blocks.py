@@ -1,3 +1,5 @@
+import re
+
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.blocks import RawHTMLBlock, StructBlock
 from wagtail.wagtailembeds.blocks import EmbedBlock as WagtailEmbedBlock
@@ -66,7 +68,29 @@ BASE_BLOCKS = [
     ('rich_text', RichTextBlock()),
     ('image', ImageBlock()),
     ('embed', EmbedBlock()),
+    ('html', RawHTMLBlock()),
 ]
+
+
+class SectionBlock(StructBlock):
+    content = blocks.StreamBlock(BASE_BLOCKS)
+
+    def get_context(self, value):
+        context = super().get_context(value)
+        context['content'] = value.get('content')
+        return context
+
+    class Meta:
+        icon = 'fa fa-square-o'
+        label = 'Section'
+        template = 'widgets/section.html'
+
+
+SECTION_BLOCKS = [
+    ('section', SectionBlock()),
+]
+
+CMS_BLOCKS = BASE_BLOCKS + SECTION_BLOCKS
 
 
 class ColumnsBlock(StructBlock):
@@ -109,37 +133,21 @@ COLUMN_BLOCKS = [
     ('columns_2_to_1', Columns2To1Block()),
 ]
 
-ALL_BLOCKS = BASE_BLOCKS + COLUMN_BLOCKS
+CMS_BLOCKS += COLUMN_BLOCKS
 
 
-ALL_BLOCKS += [
-    ('html', RawHTMLBlock()),
-]
-
-
-# class QABlock(StructBlock):
-#     question = CharBlock()
-#     answer = RichTextBlock()
+# class BlockFactory:
+#     base_blocks = [HeadingBlock, RichTextBlock, ImageBlock, EmbedBlock]
+#     extra_blocks = [RawHTMLBlock]
 #
+#     def get_blocks(self):
+#         print()
 #
-# class FAQBlock(StructBlock):
-#     title = CharBlock()
-#     faqs = ListBlock(QABlock())
-#
-#     class Meta:
-#         icon = 'fa fa-medkit'
-#         template = 'blocks/faq_block.html'
-#
-#     def get_context(self, value):
-#         context = super().get_context(value)
-#         context['titel'] = value.get('title')
-#         context['list'] = []
-#         for faq in value.get('faqs'):
-#             res = {'term': faq.get('question'),
-#                    'definitions': [{'text': faq.get('answer')}],
-#                    'opened': False,
-#                    'notoggle': False
-#                    }
-#             context['list'] += [res]
-#         return context
-
+#     @classmethod
+#     def camelcase_to_underscores(name):
+#         """
+#         Taken from a github page:
+#         http://stackoverflow.com/questions/1175208/elegant-python-function-to-convert-camelcase-to-snake-case
+#         """
+#         s1 = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
+#         return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1).lower()

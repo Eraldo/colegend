@@ -1,15 +1,19 @@
 from django.db import models
 from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
-from wagtail.wagtailadmin.edit_handlers import MultiFieldPanel, FieldPanel
-from wagtail.wagtailcore.fields import RichTextField
+from wagtail.wagtailadmin.edit_handlers import MultiFieldPanel, FieldPanel, StreamFieldPanel
+from wagtail.wagtailcore.fields import RichTextField, StreamField
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+from wagtail.wagtailsearch import index
 
+from colegend.cms.blocks import BASE_BLOCKS
 from colegend.cms.models import UniquePageMixin
 
 
 class AboutPage(UniquePageMixin, Page):
+    content = StreamField(BASE_BLOCKS, blank=True)
+
     vision_text = models.TextField(blank=True)
 
     colegend_header_image = models.ForeignKey(
@@ -117,6 +121,7 @@ class AboutPage(UniquePageMixin, Page):
         verbose_name = _('About')
 
     content_panels = Page.content_panels + [
+        StreamFieldPanel('content'),
         FieldPanel('vision_text', classname="full"),
         MultiFieldPanel(
             [
@@ -172,6 +177,10 @@ class AboutPage(UniquePageMixin, Page):
             heading="Contact",
             classname="collapsible"
         ),
+    ]
+
+    search_fields = Page.search_fields + [
+        index.SearchField('content'),
     ]
 
     def serve(self, request, *args, **kwargs):
