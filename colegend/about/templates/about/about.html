@@ -11,7 +11,7 @@
 
     {# open graph: http://ogp.me/ #}
     <meta property="og:image"
-          content="{% block og_image %}{% static 'images/coLegend-social-cover_2016.png' %}{% endblock %}"/>
+          content="{% block og_image %}{% static 'images/CoHotAirBalloon.v6.2880x1800.jpg' %}{% endblock %}"/>
     <meta property="og:site_name" content="colegend' %}"/>
     <meta property="og:description"
           content="Your Person Development Journey based on the values of 'conscious', 'connected' 'committed' and 'complete'."/>
@@ -213,9 +213,10 @@
 <section id="about" class="container services">
     <br><br>
     <h1 class="text-center">
-        <img src="{% static 'images/coLegendLogo.png' %}" alt="colegend logo" class="img-responsive center-block">
+{#        <img src="{% static 'images/coLegendLogo.png' %}" alt="colegend logo" class="img-responsive center-block">#}
+        <img src="{% static 'images/colegend-ypdj.png' %}" alt="colegend logo" class="img-responsive center-block">
     </h1>
-    <h1 class="text-center" style="font-size: 2em; color:black">😇 YOUR PERSONAL DEVELOPMENT JOURNEY 😈</h1>
+{#    <h1 class="text-center" style="font-size: 2em; color:black">😇 YOUR PERSONAL DEVELOPMENT JOURNEY 😈</h1>#}
     <br>
     <h1 class="text-center">The most personal, effective and fun way to <br>becoming a real life legend.</h1>
 
@@ -975,7 +976,7 @@
             <br><br>
             <div class="text-center">
                 What do you get in the Academy?
-                <img src="http://image.flaticon.com/icons/svg/26/26025.svg" alt="Academy video play button"
+                <img src="{% static 'images/play-button.svg' %}" alt="Academy video play button"
                      class="img-responsive" style="display: block; margin: auto; height: 150px">
                 {#                <div class="video" style="height: 4em;">#}
                 {#                </div>#}
