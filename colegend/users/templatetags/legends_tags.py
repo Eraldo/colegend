@@ -41,6 +41,22 @@ def npc(name, size='large', show_avatar=True, show_link=True, url=None):
             'name': 'Coralina',
             'file': 'Coralina.png',
         },
+        'testimonial_1': {
+            'name': 'Eraldo',
+            'file': 'eraldo.jpg',
+        },
+        'testimonial_2': {
+            'name': 'Corinna',
+            'file': 'corinna.jpg',
+        },
+        'testimonial_3': {
+            'name': 'Manuel',
+            'file': 'manuel.jpg',
+        },
+        'testimonial_4': {
+            'name': 'Viktor',
+            'file': 'viktor.jpg',
+        },
         'phoenix': {
             'name': 'Light Phoenix Oracle',
             'file': 'phoenix.png',

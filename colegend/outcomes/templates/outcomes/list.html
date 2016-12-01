@@ -13,25 +13,50 @@
 
 {% block page_controls %}
     {% button 'create' pattern='outcomes:create' %}
+    <div class="filters pull-right">
+        {% if filter.active %}
+            {% button 'Filtering is on' attributes='data-toggle="modal" data-target="#modal-filters" aria-hidden="true"' classes='btn-warning' icon='filter' %}
+        {% else %}
+            {% button 'filters' attributes='data-toggle="modal" data-target="#modal-filters" aria-hidden="true"' classes='btn-secondary' icon='filter' %}
+        {% endif %}
+
+        <div class="modal fade" id="modal-filters" tabindex="-1" role="dialog"
+             aria-labelledby="modal-filters-label" aria-hidden="true">
+            <div class="modal-dialog text-black" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="modal-filters-label">Filters</h4>
+                    </div>
+                    <div class="modal-body">
+                        {% crispy filter.form %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-md-10">
+{#    <div class="row">#}
+{#        <div class="col-md-10">#}
             {% crispy quick_create_form %}
             {% for outcome in outcomes %}
                 {% outcome %}
             {% endfor %}
             {% include 'widgets/pagination.html' %}
-            <br>
-        </div>
-        <div class="col-md-2 card bg-main-light">
-            <br>
-            <h6 class="text-main-dark">Filters</h6>
-            <hr>
-            {% crispy filter.form %}
-        </div>
-    </div>
+{#            <br>#}
+{#        </div>#}
+{#        <div class="col-md-2 card bg-main-light">#}
+{#            <br>#}
+{#            <h6 class="text-main-dark">Filters</h6>#}
+{#            <hr>#}
+{#            {% crispy filter.form %}#}
+{#        </div>#}
+{#    </div>#}
 {% endblock %}
 
 {% block extra_head %}

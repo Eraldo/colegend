@@ -34,6 +34,10 @@ class OutcomeListView(LoginRequiredMixin, OutcomeMixin, ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         self.filter = self.filter_class(data=self.request.GET, queryset=queryset)
+        filter_data = dict(self.filter.data.items())
+        if filter_data.get('inbox') == '1':
+            filter_data.pop('inbox')
+        self.filter.active = any([value for key, value in filter_data.items() if key != 'filter'])
         return self.filter.qs
 
     def get_quick_create_form(self):

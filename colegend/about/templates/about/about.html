@@ -234,7 +234,7 @@
         path.
         Monthly Journey fees will only begin after you choose a Mentor to learn with.
     </p>
-    <div class="text-center">
+    <div class="text-center wow pulse">
         <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg">Start Your
             Journey</a>
     </div>
@@ -541,11 +541,11 @@
                     <p>
                         Our mission is to unlock the legendary potential in every individual, and thereby, enrich the
                         world.
-                        View our <a href="#">Core Values</a>.
+                        View our <a href="#core-values">Core Values</a>.
                     </p>
                     <p>
                         We combine the best parts of the mentoring method of development and we supercharge it into a
-                        <a href="#">legendary learning experience</a> that places YOU at the center of
+                        <a href="{% slugurl 'legendary-development-experience' %}">legendary learning experience</a> that places YOU at the center of
                         it all.
                     </p>
                     <ul class="features-list fa-ul">
@@ -612,7 +612,7 @@
             {#               class="lead text-center text-main-dark">{% icon 'quote-left' color='grey' %} {{ page.vision_text }} {% icon 'quote-right' color='grey' %}</p>#}
             <br><br>
             <div class="row text-center">
-                <h3>GUIDED BY OUR CORE VALUES</h3>
+                <h3 id="core-values">GUIDED BY OUR CORE VALUES</h3>
                 <div class="col-lg-3 col-md-6">
                     {% icon 'cog' classes='fa-4x text-main' %}
                     <h5>Conscious</h5>
@@ -648,7 +648,7 @@
                 </div>
             </div>
             <br><br>
-            <div class="text-center">
+            <div class="text-center wow pulse">
                 <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg">Start Your
                     Journey</a>
             </div>
@@ -674,28 +674,29 @@
             </h2>
             <p>
                 We're honored to provide a place where individuals can learn and grow within a strong supportive
-                community. Visit
-                <a href="#">Colegend stories</a> to hear more from our legends.
+                community.
+{#                Visit#}
+{#                <a href="{% slugurl 'legend-stories' %}">colegend stories</a> to hear more from our legends.#}
             </p>
             <br><br>
 
             <div class="row">
                 <div class="col-lg-6">
-                    {% statement 'coralina' content=page.testimonial|richtext|add:"<span class='small text-muted pull-right'>Legend chapter 4</span>" %}<br>
+                    {% statement 'testimonial_1' content="<p>I spent a lot of time and money on all sorts of things. Little did I invest in my self. With colegend I got a glimpse of what I deeply want and what I am truly capable of given the right structure, people and tools. Suddenly - BAM! I fell in love with my legendary self and the journey has been the best investment I ever made.</p>"|add:"<span class='small text-muted pull-right'>Mentor</span>" %}<br>
                 </div>
                 <div class="col-lg-6">
-                    {% statement 'coralina' content=page.testimonial|richtext|add:"<span class='small text-muted pull-right'>Legend chapter 4</span>" direction='right' %}<br>
+                    {% statement 'testimonial_2' content="<p>After finishing my studies of Psychology I didn't really know what to do next. With colegend I actually found something to dig deeper into Personal Development on a personal and professional level and create something with meaning! And I can finally leave the 'running-with-the-mill'-way of life and instead live a more legendary one.</p>"|add:"<span class='small text-muted pull-right'>Mentor</span>" direction='right' %}<br>
                 </div>
                 <div class="col-lg-6">
-                    {% statement 'coralina' content=page.testimonial|richtext|add:"<span class='small text-muted pull-right'>Legend chapter 4</span>" %}<br>
+                    {% statement 'testimonial_3' content=page.testimonial|richtext|add:"<span class='small text-muted pull-right'>Legend</span>" %}<br>
                 </div>
                 <div class="col-lg-6">
-                    {% statement 'coralina' content=page.testimonial|richtext|add:"<span class='small text-muted pull-right'>Legend chapter 4</span>" direction='right' %}<br>
+                    {% statement 'testimonial_4' content="<p>Normally I'm not a fan of Coaching - until now Coaching was something like a 'wanna-be-therpay' or a 'wanna-be-therapist'. However with colegend it was really a lot of fun and their own game 'Fruits of Life' actually had substance to it.</p>"|add:"<span class='small text-muted pull-right'>Participant</span>" direction='right' %}<br>
                 </div>
             </div>
 
             <br>
-            <div class="text-center">
+            <div class="text-center wow pulse">
                 <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg">Start Your
                     Journey</a>
             </div>
@@ -724,7 +725,7 @@
                 The first few steps within colegend are common to everyone who applies but it quickly becomes customized
                 to your specific dreams and life goals. Here's a quick glance at those initial milestones. If you have
                 additional questions have a look at our
-                <a href="#">FAQ</a>.
+                <a href="{% slugurl 'faq' %}">FAQ</a>.
             </p>
             <br>
             <div class="row boxes">
@@ -736,7 +737,7 @@
                         The application process is fun, fast and free. You provide a few details about yourself, your
                         interests and goals. Then your application is matched with a set of Mentors who can best help
                         you achieve your goals.<br>
-                        <a href="#">Start Your Journey Now!</a>
+                        <a href="{% url "join" %}?next=/">Start Your Journey Now!</a>
                     </p>
                 </div>
                 <div class="col-lg-6 box right overlay-highlight-2">
@@ -747,7 +748,7 @@
                         Colegend houses a rapidly growing collection of amazing development resources, including
                         incredible tutorials and stories from amazing Legends.
                         <br>
-                        <a href="#">Learn more about the Academy</a>
+                        <a href="#academy">Learn more about the Academy</a>
                     </p>
                 </div>
                 <div class="col-lg-6 box left overlay-highlight-2">
@@ -758,7 +759,7 @@
                         Our system takes all of the information from your application and uses it to find the Mentors
                         who best suit your preference. Review them all and choose the best fit for YOU.
                         <br>
-                        <a href="#">Start Your Journey Now!</a>
+                        <a href="{% url "join" %}?next=/">Start Your Journey Now!</a>
                     </p>
                 </div>
                 <div class="col-lg-6 box right overlay-highlight">
@@ -769,7 +770,7 @@
                         Your personalized development experience is about to begin. This is an exciting time for you and
                         for your Mentor! Things will move faster now, so be ready!
                         <br>
-                        <a href="#">View the Expectations of a Legend</a>
+                        <a href="{% slugurl 'legends-calling' %}">View the Expectations of a Legend</a>
                     </p>
                 </div>
                 <div class="col-lg-6 box left overlay-highlight">
@@ -781,7 +782,7 @@
                         familiar with the mysterious ways of colegend. To see an example of what's in store, have a look
                         at the Personal Development Chapter Guide.
                         <br>
-                        <a href="#">View an example of a Legend Path</a>
+                        <a href="{% slugurl 'development-path' %}">View an example of a Legend Path</a>
                     </p>
                 </div>
                 <div class="col-lg-6 box right overlay-highlight-2">
@@ -793,7 +794,8 @@
                         from the other Legends as you will from your Mentor. They will provide you with valuable
                         feedback, accountability and encouragement in every Chapter.
                         <br>
-                        <a href="#">Read Stories from our Legends</a>
+                        <a href="{% url "join" %}?next=/">Start Your Journey Now!</a>
+{#                        <a href="{% slugurl 'legend-stories' %}">Read Stories from our Legends</a>#}
                     </p>
                 </div>
                 <div class="col-lg-6 box left overlay-highlight-2">
@@ -806,7 +808,7 @@
                         accomplish your main Quest. This is a key difference from traditional, content-centric
                         development models.
                         <br>
-                        <a href="#">Learn more about the Development Experience</a>
+                        <a href="{% slugurl 'development-path' %}">Learn more about the Development Experience</a>
                     </p>
                 </div>
                 <div class="col-lg-6 box right overlay-highlight">
@@ -818,12 +820,12 @@
                         fail, development model. We understand that each person's schedule and development pace is
                         unique. Your Tribe will have Legends at many different Chapters.
                         <br>
-                        <a href="#">View an example of a Development Path</a>
+                        <a href="{% slugurl 'development-path' %}">View an example of a Development Path</a>
                     </p>
                 </div>
             </div>
             <br>
-            <div class="text-center">
+            <div class="text-center wow pulse">
                 <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg">Start Your
                     Journey</a>
             </div>
@@ -850,18 +852,20 @@
                 Legend Mentors
             </h1>
             <h2>
-                WE ARE HONORED TO HAVE WORLD-CLASS MENTORS
+                WE ARE HONORED TO HAVE PASSIONATE MENTORS
             </h2>
             <p>
-                Below is a small sample of the Mentors in colegend. Visit our <a href="#">Meet the Mentors</a> page to
-                see a more
-                complete roster. Or learn more about the <a href="#">expectations of a Mentor</a> and the <a
-                    href="#">path to becoming a Mentor</a>.
+                Check out our Mentors below.
+{#                Visit our <a href="{% slugurl 'mentors' %}">Meet the Mentors</a> page to#}
+{#                Below is a small sample of the Mentors in colegend. Visit our <a href="{% slugurl 'mentors' %}">Meet the Mentors</a> page to#}
+{#                see a more complete roster. #}
+                Or learn more about the <a href="{% slugurl 'mentors-calling' %}">expectations of a Mentor</a> and the <a
+                    href="{% slugurl 'mentors-calling' %}">path to becoming a Mentor</a>.
             </p>
             <br>
             {% for member in team_members %}
-                <div class="col-md-3 wow fadeInLeft">
-                    {% include 'about/widgets/team_member.html' with image=member.image name=member.name roles=member.roles social_accounts=member.social_accounts url=member.url %}
+                <div class="col-md-3 wow fadeIn">
+                    {% include 'about/widgets/team_member.html' with image=member.image name=member.name social_accounts=member.social_accounts url=member.url %}
                 </div>
             {% endfor %}
             <div class="clearfix"></div>
@@ -872,13 +876,13 @@
                 Are you passionate about sharing your personal development talents and techniques with others? Are you
                 excited about mentoring others through their own development path? Perhaps you’re interested in one of
                 our existing subjects or would like to establish a new one? If so, then we would love to hear from you!
-                Learn more about the <a href="#">expectations of a Mentor</a> and the <a href="#">path to becoming a
+                Learn more about the <a href="{% slugurl 'mentors-calling' %}">expectations of a Mentor</a> and the <a href="{% slugurl 'mentors-calling' %}">path to becoming a
                 Mentor</a> in colegend.
             </p>
-            <div class="text-center">
-                <a href="{% url "join" %}?next=/" class="btn btn-info-outline btn-lg">Learn More</a>
+            <div class="text-center wow pulse">
+                <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg">Start Your
+                    Journey</a>
             </div>
-
         </div>
     </div>
 </section>
@@ -934,7 +938,7 @@
                 </div>
             </div>
             <br>
-            <div class="text-center">
+            <div class="text-center wow pulse">
                 <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg">Start your Journey</a>
             </div>
         </div>
@@ -955,7 +959,7 @@
         </h1>
     </div>
     <div class="overlay">
-        <div class="content container">
+        <div id="academy" class="content container">
             <br>
             <h1>
                 Academy
@@ -1068,9 +1072,7 @@
             </h3>
             <p>
                 If you’re interested in a particular subject that we do not currently offer please let us know! We are
-                always looking to add new personal development subjects. So go ahead and <a href="#">start your journey
-                Now</a> as a
-                Legend. We are starting small and we’re growing fast!
+                always looking to add new personal development subjects. We are starting small and we’re growing fast!
             </p>
             <br><br>
             <h2>
@@ -1078,11 +1080,12 @@
             </h2>
             <p>
                 We are now offering access to the Mentors’ tutorial and feedback videos in the Academy to anyone with a
-                completed application. <a href="#">Login to colegend now</a> to sign-up or <a href="#">visit this
-                page</a> for more details.
+                completed application.
+{#                <a href="#">Login to colegend now</a> to sign-up or <a href="#">visit this#}
+{#                page</a> for more details.#}
             </p>
             <br>
-            <div class="text-center">
+            <div class="text-center wow pulse">
                 <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg">Start Your
                     Journey</a>
             </div>
@@ -1148,7 +1151,7 @@
                 </div>
             </div>
             <br>
-            <div class="text-center">
+            <div class="text-center wow pulse">
                 <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg">Start Your
                     Journey</a>
             </div>
@@ -1195,7 +1198,7 @@
                 </div>
             </div>
             <br>
-            <div class="text-center">
+            <div class="text-center wow pulse">
                 <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg">Start Your
                     Journey</a>
             </div>
@@ -1358,7 +1361,7 @@
 {#            <br><br>#}
             <br>
             <br>
-            <div class="text-center">
+            <div class="text-center wow pulse">
                 <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg">Start Your
                     Journey</a>
             </div>
@@ -1516,7 +1519,7 @@
                 The application process is free, and you'll only begin paying the membership fee of just €80 per month
                 after you choose a Mentor. There is no long term commitment. You may cancel at any time.
             </p>
-            <div class="text-center">
+            <div class="text-center wow pulse">
                 <a href="{% url "join" %}?next=/" class="btn btn-success btn-lg">Start Your
                     Journey</a>
             </div>
