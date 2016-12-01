@@ -91,8 +91,8 @@ fontawesome_icons = {
     'content': 'align-left',
     'description': 'align-left',
     #
-    'area-1': 'apple',
-    'area-2': 'smile-o',
+    # 'area-1': 'apple', => see coicon
+    # 'area-2': 'smile-o',
     'area-3': 'sun-o',
     'area-4': 'heart',
     'area-5': 'microphone',
@@ -103,11 +103,12 @@ fontawesome_icons = {
 }
 
 coicons = {
-    'game': 'black-dice',
-    'games': 'black-dice',
+    'area-1': 'apple',
+    'area-2': 'smiley',
+    'game': 'dice',
+    'games': 'dice',
     'duo': 'dotted-duo',
     'tribe': 'dotted-square',
-    'clan': 'dotted-circle',
     # 'apps': 'lego',
     'project': 'logo',
     'roles': 'wizard',

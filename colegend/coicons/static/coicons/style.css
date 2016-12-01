@@ -1,54 +1,69 @@
 @font-face {
-    font-family: 'coicons';
-    src:    url('fonts/coicons.eot?sctkze');
-    src:    url('fonts/coicons.eot?sctkze#iefix') format('embedded-opentype'),
-        url('fonts/coicons.ttf?sctkze') format('truetype'),
-        url('fonts/coicons.woff?sctkze') format('woff'),
-        url('fonts/coicons.svg?sctkze#coicons') format('svg');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'coicons';
+  src:  url('fonts/coicons.eot?4xi2nc');
+  src:  url('fonts/coicons.eot?4xi2nc#iefix') format('embedded-opentype'),
+    url('fonts/coicons.ttf?4xi2nc') format('truetype'),
+    url('fonts/coicons.woff?4xi2nc') format('woff'),
+    url('fonts/coicons.svg?4xi2nc#coicons') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
 
-.coicon:before {
-    /* use !important to prevent issues with browser extensions that change fonts */
-    font-family: 'coicons' !important;
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
+.icon {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'coicons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
 
-    /* Better Font Rendering =========== */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+.co-l-foot:before {
+  content: "\e908";
+}
+.co-r-foot:before {
+  content: "\e909";
+}
+.co-feet2:before {
+  content: "\e90a";
+}
+.co-feet1:before {
+  content: "\e90b";
+}
+.co-dice:before {
+  content: "\e90c";
+}
+.co-coicon-smiley:before {
+  content: "\e90d";
+}
+.co-coicon-apple:before {
+  content: "\e90e";
+}
 .co-wizard:before {
-    content: "\e901";
+  content: "\e901";
 }
 .co-notepad:before {
-    content: "\e902";
-}
-.co-dotted-circle:before {
-    content: "\e903";
+  content: "\e902";
 }
 .co-dotted-square:before {
-    content: "\e904";
+  content: "\e904";
 }
 .co-dotted-duo:before {
-    content: "\e905";
+  content: "\e905";
 }
 .co-white-dice:before {
-    content: "\e906";
+  content: "\e906";
 }
 .co-lego:before {
-    content: "\e907";
-}
-.co-black-dice:before {
-    content: "\e908";
+  content: "\e907";
 }
 .co-logo:before {
-    content: "\e900";
+  content: "\e900";
 }
 

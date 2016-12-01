@@ -1,8 +1,7 @@
-@charset "UTF-8";
 @font-face {
   font-family: "coicons";
-  src: url("../fonts/coicons.eot?sctkze");
-  src: url("../fonts/coicons.eot?sctkze#iefix") format("embedded-opentype"), url("../fonts/coicons.ttf?sctkze") format("truetype"), url("../fonts/coicons.woff?sctkze") format("woff"), url("../fonts/coicons.svg?sctkze#coicons") format("svg");
+  src: url("../fonts/coicons.eot?4xi2nc");
+  src: url("../fonts/coicons.eot?4xi2nc#iefix") format("embedded-opentype"), url("../fonts/coicons.ttf?4xi2nc") format("truetype"), url("../fonts/coicons.woff?4xi2nc") format("woff"), url("../fonts/coicons.svg?4xi2nc#coicons") format("svg");
   font-weight: normal;
   font-style: normal; }
 .coicon {
@@ -20,31 +19,46 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale; }
 
+.co-l-foot:before {
+  content: "\e908"; }
+
+.co-r-foot:before {
+  content: "\e909"; }
+
+.co-feet2:before {
+  content: "\e90a"; }
+
+.co-feet1:before {
+  content: "\e90b"; }
+
+.co-dice:before {
+  content: "\e90c"; }
+
+.co-smiley:before {
+  content: "\e90d"; }
+
+.co-apple:before {
+  content: "\e90e"; }
+
 .co-wizard:before {
-  content: ""; }
+  content: "\e901"; }
 
 .co-notepad:before {
-  content: ""; }
-
-.co-dotted-circle:before {
-  content: ""; }
+  content: "\e902"; }
 
 .co-dotted-square:before {
-  content: ""; }
+  content: "\e904"; }
 
 .co-dotted-duo:before {
-  content: ""; }
+  content: "\e905"; }
 
 .co-white-dice:before {
-  content: ""; }
+  content: "\e906"; }
 
 .co-lego:before {
-  content: ""; }
-
-.co-black-dice:before {
-  content: ""; }
+  content: "\e907"; }
 
 .co-logo:before {
-  content: ""; }
+  content: "\e900"; }
 
 /*# sourceMappingURL=index.css.map */
