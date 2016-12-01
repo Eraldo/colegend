@@ -592,6 +592,12 @@ form .CodeMirror-fullscreen {
 }
 
 .widget-outcome-card {
+  .outcome-details {
+    display: inline;
+    font-size: 0.8em;
+    color: grey;
+  }
+
   .widget-action-menu {
     visibility: hidden;
   }

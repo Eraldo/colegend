@@ -413,6 +413,10 @@ form .CodeMirror-fullscreen {
 .widget-footer {
   height: 1em; }
 
+.widget-outcome-card .outcome-details {
+  display: inline;
+  font-size: 0.8em;
+  color: grey; }
 .widget-outcome-card .widget-action-menu {
   visibility: hidden; }
 .widget-outcome-card:hover .widget-action-menu {

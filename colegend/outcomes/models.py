@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from colegend.core.intuitive_duration.modelfields import IntuitiveDurationField
@@ -7,7 +8,14 @@ from colegend.tags.models import TaggableBase
 
 
 class OutcomeQuerySet(OwnedQuerySet):
-    pass
+    def scheduled(self, date=None):
+        date = date or timezone.now().date()
+        return self.filter(date=date)
+
+    def deadlined(self, date=None):
+        date = date or timezone.now().date()
+        return self.filter(deadline=date)
+
 
 
 class Outcome(AutoUrlsMixin, OwnedBase, TaggableBase, TimeStampedBase):

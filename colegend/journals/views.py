@@ -118,6 +118,11 @@ class JournalDayView(LoginRequiredMixin, TemplateView):
         create_url = reverse('dayentries:create')
         context['create_url'] = '{}?date={}'.format(create_url, date)
         context['settings_url'] = reverse('journals:settings', kwargs={'pk': user.journal.pk})
+
+        # Add the users daily outcomes
+        outcomes = user.outcomes.all()
+        context['scheduled_outcomes'] = outcomes.scheduled(date=date)
+        context['deadlined_outcomes'] = outcomes.deadlined(date=date)
         return context
 
 
