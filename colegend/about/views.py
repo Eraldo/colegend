@@ -88,11 +88,11 @@ class AboutView(PageMixin, TemplateView):
                     'url': user.get_absolute_url(),
                 }
             )
-        while len(member_data) < 4:
-            member_data.append({
-                'image': anonymous_image,
-                'name': 'Your Name',
-                'roles': ['your chosen roles'],
-            })
-        context['team_members'] = member_data
+        # while len(member_data) < 4:
+        #     member_data.append({
+        #         'image': anonymous_image,
+        #         'name': 'Your Name',
+        #         'roles': ['your chosen roles'],
+        #     })
+        context['mentors'] = member_data
         return context
