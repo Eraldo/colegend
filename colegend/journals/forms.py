@@ -11,7 +11,9 @@ class JournalForm(forms.ModelForm):
         model = Journal
         fields = [
             'spellchecker',
-            'content_template',
+            'day_template',
+            'week_template',
+            'month_template',
         ]
 
     def __init__(self, *args, **kwargs):
@@ -19,7 +21,9 @@ class JournalForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Field('spellchecker'),
-            Field('content_template'),
+            Field('day_template'),
+            Field('week_template'),
+            Field('month_template'),
         )
         self.helper.add_input(Submit('save', 'Save'))
 

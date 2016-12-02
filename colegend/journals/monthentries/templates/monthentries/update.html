@@ -1,0 +1,18 @@
+{% extends 'monthentries/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Update Month Entry{% endblock %}
+
+{% block content %}
+    {% crispy form %}
+{% endblock %}
+
+{% block extra_head %}
+    {{ block.super }}
+    {{ form.media.css }}
+{% endblock %}
+
+{% block extra_script %}
+    {{ block.super }}
+    {{ form.media.js }}
+{% endblock %}

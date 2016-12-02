@@ -76,7 +76,7 @@ def weekentry_line(context, weekentry=None, **kwargs):
             create_url = reverse('weekentries:create')
             week_number = date.isocalendar()[1]
             context['create_url'] = '{}?year={}&week={}'.format(create_url, date.year, week_number)
-            context['dates'] = context.get('dates')
+            context['dates'] = '{} - {}'.format(date, date + timezone.timedelta(6))
             context['week_number'] = week_number
             context['week'] = '{}-W{}'.format(date.year, week_number)
             context['class'] = 'active' if date == today else ''

@@ -1,0 +1,14 @@
+{% extends 'monthentries/base.html' %}
+{% load buttons monthentries_tags %}
+
+{% block title %}Month Entries{% endblock %}
+
+{% block page_controls %}
+    {% button 'create' pattern='monthentries:create' %}
+{% endblock %}
+
+{% block content %}
+    {% for monthentry in monthentries %}
+        {% monthentry_link %}<br>
+    {% endfor %}
+{% endblock %}

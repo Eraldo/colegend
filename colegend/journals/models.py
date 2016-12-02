@@ -15,7 +15,9 @@ class Journal(AutoUrlsMixin, AutoOwnedBase):
     """
 
     spellchecker = models.BooleanField(default=False)
-    content_template = MarkdownField(blank=True)
+    day_template = MarkdownField(blank=True)
+    week_template = MarkdownField(blank=True)
+    month_template = MarkdownField(blank=True)
 
     objects = JournalQuerySet.as_manager()
 

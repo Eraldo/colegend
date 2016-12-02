@@ -18,7 +18,13 @@
     <div class="results">
         <div class="row">
             <div class="col-md-12">
-                {% if weeks or days %}
+                {% if months or weeks or days %}
+                    {% if months %}
+                        <h2>Months:</h2>
+                        {% for monthentry in months %}
+                            {% monthentry_line %}
+                        {% endfor %}
+                    {% endif %}
                     {% if weeks %}
                         <h2>Weeks:</h2>
                         {% for weekentry in weeks %}

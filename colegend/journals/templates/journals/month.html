@@ -1,7 +1,7 @@
 {% extends 'journals/base.html' %}
-{% load core_tags buttons dayentries_tags weekentries_tags tags_tags crispy_forms_tags %}
+{% load core_tags buttons dayentries_tags monthentries_tags weekentries_tags tags_tags crispy_forms_tags %}
 
-{% block title %}Week {{ weeknumber }}{% endblock %}
+{% block title %}Month {{ monthnumber }}{% endblock %}
 
 {% block extra_head %}
     {{ block.super }}
@@ -31,8 +31,8 @@
         </button>
         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
             <a class="dropdown-item" href="{% url 'journals:day' date %}">Day</a>
-            <a class="dropdown-item disabled" href="#">Week</a>
-            <a class="dropdown-item" href="{% url 'journals:month' date %}">Month</a>
+            <a class="dropdown-item" href="{% url 'journals:week' date %}">Week</a>
+            <a class="dropdown-item disabled" href="#">Month</a>
             <a class="dropdown-item disabled" href="#">Quarter</a>
             <a class="dropdown-item disabled" href="#">Year</a>
         </div>
@@ -55,13 +55,13 @@
 {% block content_container %}
     <div class="row">
         <div class="col-md-12">
-            {% weekentry_line %}
+            {% monthentry_line %}
         </div>
     </div>
     <div class="row">
         <div class="col-md-8">
-            {% for day in days %}
-                {% dayentry_line day.entry date=day.date %}
+            {% for week in weeks %}
+                {% weekentry_line week.entry date=week.date %}
             {% endfor %}
         </div>
         <div class="col-md-4">
