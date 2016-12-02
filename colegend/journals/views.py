@@ -230,9 +230,9 @@ class JournalWeekView(LoginRequiredMixin, TemplateView):
 
         # Add the users daily outcomes
         outcomes = user.outcomes.all()
-        end = dates.split(' - ')[1]
-        context['scheduled_outcomes'] = outcomes.scheduled(date=date, end=end)
-        context['deadlined_outcomes'] = outcomes.deadlined(date=date, end=end)
+        start, end = dates.split(' - ')
+        context['scheduled_outcomes'] = outcomes.scheduled(date=start, end=end)
+        context['deadlined_outcomes'] = outcomes.deadlined(date=start, end=end)
         return context
 
 
