@@ -227,6 +227,12 @@ class JournalWeekView(LoginRequiredMixin, TemplateView):
             context['weekentry'] = weekentry.first()
 
         context['settings_url'] = reverse('journals:settings', kwargs={'pk': user.journal.pk})
+
+        # Add the users daily outcomes
+        outcomes = user.outcomes.all()
+        end = dates.split(' - ')[1]
+        context['scheduled_outcomes'] = outcomes.scheduled(date=date, end=end)
+        context['deadlined_outcomes'] = outcomes.deadlined(date=date, end=end)
         return context
 
 
@@ -331,6 +337,12 @@ class JournalMonthView(LoginRequiredMixin, TemplateView):
             context['monthentry'] = monthentry.first()
 
         context['settings_url'] = reverse('journals:settings', kwargs={'pk': user.journal.pk})
+
+        # Add the users daily outcomes
+        outcomes = user.outcomes.all()
+        start, end = dates.split(' - ')
+        context['scheduled_outcomes'] = outcomes.scheduled(date=start, end=end)
+        context['deadlined_outcomes'] = outcomes.deadlined(date=start, end=end)
         return context
 
 

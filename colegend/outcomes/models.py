@@ -8,14 +8,21 @@ from colegend.tags.models import TaggableBase
 
 
 class OutcomeQuerySet(OwnedQuerySet):
-    def scheduled(self, date=None):
+    def scheduled(self, date=None, end=None):
         date = date or timezone.now().date()
-        return self.filter(date=date)
+        if end:
+            queryset = self.filter(date__range=[date, end])
+        else:
+            queryset = self.filter(date=date)
+        return queryset.order_by('date')
 
-    def deadlined(self, date=None):
+    def deadlined(self, date=None, end=None):
         date = date or timezone.now().date()
-        return self.filter(deadline=date)
-
+        if end:
+            queryset = self.filter(deadline__range=[date, end])
+        else:
+            queryset = self.filter(deadline=date)
+        return queryset.order_by('deadline')
 
 
 class Outcome(AutoUrlsMixin, OwnedBase, TaggableBase, TimeStampedBase):
