@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse
+from django.template.loader import render_to_string
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, RedirectView
 
@@ -59,7 +60,7 @@ class WeekEntryCreateView(LoginRequiredMixin, WeekEntryMixin, CreateView):
         initial['week'] = week
 
         # default content
-        initial['content'] = journal.week_template or ' '
+        initial['content'] = journal.week_template or render_to_string('weekentries/template.md')
 
         start = timezone.datetime.strptime('{}-W{}-1'.format(year, week), "%Y-W%W-%w")
         end = start + timezone.timedelta(days=6)

@@ -2,6 +2,7 @@ from calendar import monthrange
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse
+from django.template.loader import render_to_string
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, RedirectView
 
@@ -61,7 +62,7 @@ class MonthEntryCreateView(LoginRequiredMixin, MonthEntryMixin, CreateView):
         initial['month'] = month
 
         # default content
-        initial['content'] = journal.month_template or ' '
+        initial['content'] = journal.month_template or render_to_string('monthentries/template.md')
 
         # prefill tags
         start = timezone.datetime.strptime('{}-M{}'.format(year, month), "%Y-M%m")

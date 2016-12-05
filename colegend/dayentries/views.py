@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse
+from django.template.loader import render_to_string
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, RedirectView
 
@@ -56,7 +57,7 @@ class DayEntryCreateView(LoginRequiredMixin, DayEntryMixin, CreateView):
         initial['date'] = date
 
         # default content
-        initial['content'] = journal.day_template or ' '
+        initial['content'] = journal.day_template or render_to_string('dayentries/template.md')
 
         # Prefill the entry based on the previous entry if found.
         previous = DayEntry.objects.owned_by(user).filter(date__lte=date).first()
