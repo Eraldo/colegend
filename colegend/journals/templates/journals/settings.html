@@ -3,6 +3,12 @@
 
 {% block title %}Journal Settings{% endblock %}
 
+{% block page_controls %}
+    <form action="." method="post" class="pull-right">{% csrf_token %}
+        <input type="submit" name="reset" class="btn btn-warning" value="Restore defaults">
+    </form>
+{% endblock %}
+
 {% block content %}
     {% crispy form %}
 {% endblock %}

@@ -28,3 +28,11 @@ class Journal(AutoUrlsMixin, AutoOwnedBase):
 
     def __str__(self):
         return "{}'s journal".format(self.owner)
+
+    def reset(self):
+        self.spellchecker = False
+        self.day_template = render_to_string('dayentries/template.md')
+        self.week_template = render_to_string('weekentries/template.md')
+        self.month_template = render_to_string('monthentries/template.md')
+        self.save()
+        return True

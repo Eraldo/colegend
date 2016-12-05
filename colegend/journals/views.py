@@ -1,5 +1,6 @@
 from calendar import monthrange
 
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse
 from django.db.models import Q
@@ -7,6 +8,7 @@ from django.shortcuts import redirect
 from django.utils import timezone
 from django.utils.dateparse import parse_date
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, RedirectView, TemplateView
+from django.utils.translation import ugettext_lazy as _
 
 from colegend.core.views import RolesRequiredMixin, OwnerRequiredMixin
 from colegend.dayentries.models import DayEntry
@@ -63,6 +65,15 @@ class JournalSettingsView(LoginRequiredMixin, OwnerRequiredMixin, JournalMixin, 
 
     def get_success_url(self):
         return self.get_object().index_url
+
+    def post(self, request, *args, **kwargs):
+        reset = request.POST.get('reset')
+        if reset:
+            journal = self.get_object()
+            journal.reset()
+            messages.success(request, _('Journal defaults have been restored.'))
+            return redirect('.')
+        return super().post(request, *args, **kwargs)
 
 
 class JournalDayView(LoginRequiredMixin, TemplateView):
