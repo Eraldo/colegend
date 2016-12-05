@@ -21,11 +21,12 @@ class JournalForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Field('spellchecker'),
-            Field('day_template'),
-            Field('week_template'),
-            Field('month_template'),
+            Field('day_template', required=False),
+            Field('week_template', required=False),
+            Field('month_template', required=False),
         )
         self.helper.add_input(Submit('save', 'Save'))
+        self.helper.attrs = {'novalidate': True}
 
 
 class DatePickerForm(forms.Form):

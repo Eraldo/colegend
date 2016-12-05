@@ -1,3 +1,4 @@
+from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
 
@@ -15,9 +16,9 @@ class Journal(AutoUrlsMixin, AutoOwnedBase):
     """
 
     spellchecker = models.BooleanField(default=False)
-    day_template = MarkdownField(blank=True)
-    week_template = MarkdownField(blank=True)
-    month_template = MarkdownField(blank=True)
+    day_template = MarkdownField(default=render_to_string('dayentries/template.md'))
+    week_template = MarkdownField(default=render_to_string('weekentries/template.md'))
+    month_template = MarkdownField(default=render_to_string('monthentries/template.md'))
 
     objects = JournalQuerySet.as_manager()
 

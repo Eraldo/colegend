@@ -62,7 +62,7 @@ class MonthEntryCreateView(LoginRequiredMixin, MonthEntryMixin, CreateView):
         initial['month'] = month
 
         # default content
-        initial['content'] = journal.month_template or render_to_string('monthentries/template.md')
+        initial['content'] = journal.month_template
 
         # prefill tags
         start = timezone.datetime.strptime('{}-M{}'.format(year, month), "%Y-M%m")
