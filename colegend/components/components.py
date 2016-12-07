@@ -13,7 +13,6 @@ class Component(template.Node):
 
     The tag is automatically named based on the class name.
     """
-    name = ''
     takes_context = True
 
     def get_component_name(self):
@@ -30,7 +29,7 @@ class Component(template.Node):
 
         :return: The name for the template tag to use in the template.
         """
-        if self.name:
+        if hasattr(self, 'name'):
             name = self.name
         else:
             class_name = self.__class__.__name__
@@ -38,9 +37,10 @@ class Component(template.Node):
             name = camelcase_to_underscores(camel_name)
             return name
 
-    def __init__(self, *args, **kwargs):
-        # self._decorated_function = 'foo'
+    @property
+    def _decorated_function(self):
         self.__name__ = self.get_component_name()
+        return self
 
     def __call__(self, parser, token):
         """
@@ -91,7 +91,7 @@ class Component(template.Node):
             bits = bits[:-2]
         params, varargs, varkw, defaults = getargspec(self.render_component)
         takes_context = self.takes_context
-        function_name = self.name
+        function_name = self.get_component_name()
         args, kwargs = parse_bits(
             parser, bits, params, varargs, varkw, defaults,
             takes_context, function_name
