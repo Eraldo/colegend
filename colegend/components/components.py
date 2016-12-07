@@ -43,25 +43,39 @@ class Component(template.Node):
         self.__name__ = self.get_component_name()
 
     def __call__(self, parser, token):
+        """
+        Pretending to be a callable function to as as a template tag.
+        Used by the template library.
+        :param parser:
+        :param token:
+        :return:
+        """
         self.token = token
         self.parser = parser
         self.parsed = self.parse_content(self.parser, self.token)
+        self.args, self.kwargs, self.variable = self.parsed
         return self
 
     def render(self, context):
+        """
+        Used by the template Node. (overwrite)
+        :param context:
+        :return:
+        """
         self.context = context
-        self.args, self.kwargs, variable = self.parsed
-        args, kwargs = self.get_resolved_arguments(context)
+        args, kwargs = self.get_resolved_arguments(context, self.args, self.kwargs)
         output = self.render_component(context, *args, **kwargs)
+        variable = self.variable
         if variable:
             context[variable] = output
             return ''
         else:
             return output
 
-    def get_resolved_arguments(self, context):
-        resolved_args = [var.resolve(context) for var in self.args]
-        resolved_kwargs = {k: v.resolve(context) for k, v in self.kwargs.items()}
+    @staticmethod
+    def get_resolved_arguments(context, args, kwargs):
+        resolved_args = [var.resolve(context) for var in args]
+        resolved_kwargs = {k: v.resolve(context) for k, v in kwargs.items()}
         return resolved_args, resolved_kwargs
 
     def parse_content(self, parser, token):
