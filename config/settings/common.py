@@ -123,6 +123,7 @@ LOCAL_APPS = (
     'colegend.sandbox',
 
     'colegend.cms',
+    'colegend.components',
     'colegend.coicons',
 )
 

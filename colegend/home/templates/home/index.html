@@ -1,11 +1,12 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags %}
+{% load static wagtailcore_tags components_tags %}
 
 {% block title %}Home{% endblock %}
 
 {% block content_class %}{% endblock %}
 
 {% block content %}
+    {% demo page=page %}
     {{ page.content|richtext }}
     {% if next_step %}
         <div class="card card-block bg-content">
