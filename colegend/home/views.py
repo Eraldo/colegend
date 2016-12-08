@@ -50,34 +50,5 @@ class PageMixin:
         return context
 
 
-class HomeView(PageMixin, TemplateView):
-    page_class = HomePage
-    page_query_kwargs = {'slug': 'home'}
-    template_name = "home/index.html"
-
-    def get(self, request, *args, **kwargs):
-        user = request.user
-        # Redirect anonymous users to the about page.
-        if not user.is_authenticated():
-            return redirect("about")
-        # Redirect if prologue is not completed.
-        if not user.has_checkpoint('prologue'):
-            return redirect("story:prologue")
-        return super().get(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['next_step'] = self.get_next_step()
-        return context
-
-    def get_next_step(self):
-        user = self.request.user
-        # Has the user written his journal entry?
-        today = timezone.now().date()
-        dayentry = user.journal.dayentries.filter(date=today)
-        if not dayentry:
-            return link(_('Create a journal entry'), reverse('dayentries:create'))
-
-
 class JoinView(TemplateView):
     template_name = "home/join.html"

@@ -43,7 +43,7 @@ urlpatterns = [
     # Your stuff: custom urls includes go here
     # url(r'^$', RedirectView.as_view(url='home/', permanent=False), name='index'),
 
-    url(r'^home/', include('colegend.home.urls')),
+    # url(r'^home/', include('colegend.home.urls')),
 
     url(r'^about/', include('colegend.about.urls')),
     url(r'^donations/', include('colegend.donations.urls', namespace='donations')),

@@ -47,3 +47,7 @@ class HomePage(UniquePageMixin, Page):
 
     def __str__(self):
         return self.title
+
+
+class JoinPage(Page):
+    template = 'home/join.html'

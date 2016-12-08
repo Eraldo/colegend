@@ -79,10 +79,7 @@ def register_backend_menu_item():
 
 @hooks.register('register_admin_menu_item')
 def register_frontend_menu_item():
-    try:
-        url = reverse('home')
-    except NoReverseMatch:
-        url = '/'
+    url = '/'
     return MenuItem(
         _('Frontend'),
         url=url,
