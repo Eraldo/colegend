@@ -6,11 +6,6 @@
 {% block content_class %}{% endblock %}
 
 {% block content %}
-    {{ demo }}
-    {% demo page %}
-{#    {% demo page as foo %}#}
-{#    {{ foo }}#}
-
     {{ page.content|richtext }}
     {% if next_step %}
         <div class="card card-block bg-content">
