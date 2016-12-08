@@ -1,4 +1,4 @@
-{% load staticfiles i18n wagtail%}
+{% load staticfiles i18n wagtail wagtailcore_tags %}
 
 <nav id="site-menu" class="navbar navbar-static-top navbar-light">
     <div class="container">
@@ -14,7 +14,7 @@
         <div class="collapse navbar-toggleable-xs" id="bs-navbar-collapse-1">
             <ul class="nav navbar-nav pull-right">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'join' %}">{% trans "Join" %}</a>
+                    <a class="nav-link" href="{% slugurl 'join' %}">{% trans "Join" %}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'account_login' %}">{% trans "Log In" %}</a>

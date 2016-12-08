@@ -1,5 +1,4 @@
 from django.db import models
-from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
 from wagtail.wagtailadmin.edit_handlers import MultiFieldPanel, FieldPanel, StreamFieldPanel
 from wagtail.wagtailcore.fields import RichTextField, StreamField
@@ -12,6 +11,8 @@ from colegend.cms.models import UniquePageMixin
 
 
 class AboutPage(UniquePageMixin, Page):
+    template = 'about/about.html'
+
     content = StreamField(BASE_BLOCKS, blank=True)
 
     vision_text = models.TextField(blank=True)
@@ -182,6 +183,3 @@ class AboutPage(UniquePageMixin, Page):
     search_fields = Page.search_fields + [
         index.SearchField('content'),
     ]
-
-    def serve(self, request, *args, **kwargs):
-        return redirect('about')

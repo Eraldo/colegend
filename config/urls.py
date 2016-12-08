@@ -8,8 +8,6 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 from django.views import defaults as default_views
 from django.views.generic import RedirectView, TemplateView
 
-from colegend.home.views import JoinView
-
 from wagtail.wagtailcore import urls as wagtail_urls
 from wagtail.wagtailadmin import urls as wagtailadmin_urls
 from wagtail.wagtaildocs import urls as wagtaildocs_urls
@@ -30,7 +28,6 @@ urlpatterns = [
     url(r'^{}/'.format(settings.ADMIN_URL), include(admin.site.urls)),
 
     # User management
-    url(r'^join/$', JoinView.as_view(), name='join'),
     url(r'^accounts/', include('allauth.urls')),
 
     url(r'^legends/', include('colegend.users.urls')),
@@ -43,9 +40,6 @@ urlpatterns = [
     # Your stuff: custom urls includes go here
     # url(r'^$', RedirectView.as_view(url='home/', permanent=False), name='index'),
 
-    # url(r'^home/', include('colegend.home.urls')),
-
-    url(r'^about/', include('colegend.about.urls')),
     url(r'^donations/', include('colegend.donations.urls', namespace='donations')),
     url(r'^roles/', include('colegend.roles.urls')),
     url(r'^category/', include('colegend.categories.urls', namespace='categories')),

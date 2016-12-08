@@ -1,7 +1,7 @@
 {% extends 'base/chat.html' %}
 
 {% load static i18n core_tags %}
-{% load crispy_forms_tags account socialaccount %}
+{% load crispy_forms_tags account socialaccount wagtailcore_tags %}
 
 {% block chat_title %}
     Welcome Back!
@@ -42,7 +42,7 @@
         {% icon 'facebook' fixed=True %}
         My friends will tell you who I am.
     </a>
-    <a href="{% url 'join' %}" class="list-group-item">
+    <a href="{% slugurl 'join' %}" class="list-group-item">
         {% icon 'sign-in' fixed=True %}
         Err, I am new here.. Where can I join?
     </a>

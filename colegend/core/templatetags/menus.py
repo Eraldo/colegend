@@ -105,7 +105,7 @@ def menu(context, user=None, name='main'):
                     'nodes': [
                         {
                             'name': 'About',
-                            'url': reverse('about'),
+                            'url': slugurl(context, 'about'),
                         },
                         {
                             'name': 'Events',
@@ -151,7 +151,7 @@ def menu(context, user=None, name='main'):
             menu_context['nodes'] = [
                 {
                     'name': 'Join',
-                    'url': reverse('join'),
+                    'url': slugurl(context, 'join'),
                 },
                 {
                     'name': 'Log in',
@@ -162,7 +162,7 @@ def menu(context, user=None, name='main'):
             menu_context['nodes'] = [
                 {
                     'name': 'Join',
-                    'url': reverse('join'),
+                    'url': slugurl(context, 'join'),
                 },
                 {
                     'name': 'Log in',

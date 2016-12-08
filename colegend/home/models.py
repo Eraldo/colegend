@@ -7,6 +7,7 @@ from django.utils import timezone
 from wagtail.wagtailadmin.edit_handlers import FieldPanel
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page
+from wagtail.wagtailcore.templatetags.wagtailcore_tags import slugurl
 
 from colegend.cms.models import UniquePageMixin
 from colegend.core.templatetags.core_tags import link
@@ -27,7 +28,7 @@ class HomePage(UniquePageMixin, Page):
         user = request.user
         # Redirect anonymous users to the about page.
         if not user.is_authenticated():
-            return redirect("about")
+            return redirect(slugurl(context={'request': request}, slug='about'))
         # Redirect if prologue is not completed.
         if not user.has_checkpoint('prologue'):
             return redirect("story:prologue")
