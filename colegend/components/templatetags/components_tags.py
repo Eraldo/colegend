@@ -5,11 +5,11 @@ register = template.Library()
 
 
 class DemoComponent(Component):
-    def render_component(self, context, page):
+    def render(self, context, page):
         return 'Hello {user} on {page} page'.format(
             user=context.get('user') or 'anonymous',
             page=page
         )
 
 
-register.tag(DemoComponent())
+register.tag(DemoComponent.as_tag())

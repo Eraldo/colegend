@@ -3,6 +3,8 @@ from django.views.generic import TemplateView
 from django.utils.translation import ugettext_lazy as _
 from django.urls import reverse
 from django.utils import timezone
+
+from colegend.components.templatetags.components_tags import DemoComponent
 from colegend.core.templatetags.core_tags import link
 from colegend.home.models import HomePage
 
@@ -66,6 +68,7 @@ class HomeView(PageMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['next_step'] = self.get_next_step()
+        context['demo'] = DemoComponent().render(context, page='HomePage')
         return context
 
     def get_next_step(self):
