@@ -46,173 +46,11 @@ $font-stack: "Nunito", "Ubuntu", Helvetica, sans-serif;
 
 $site-menu-color: $white;
 
-.text-white {
-  color: $white;
-}
-
-.text-black {
-  color: $black;
-}
-
-.text-main {
-  color: $main;
-}
-
-.text-main-light {
-  color: $main-light;
-}
-
-.text-main-superlight {
-  color: $main-superlight;
-}
-
-.text-main-dark {
-  color: $main-dark;
-}
-
-.text-accent {
-  color: $accent;
-}
-
-.text-accent-light {
-  color: $accent-light;
-}
-
-.text-accent-dark {
-  color: $accent-dark;
-}
-
-.bg-white {
-  background-color: $white;
-  color: $black;
-}
-
-.bg-black {
-  background-color: $black;
-  color: $white;
-}
-
-.bg-main {
-  background-color: $main;
-  color: $white;
-}
-
-.bg-main-light {
-  background-color: $main-light;
-}
-
-.bg-main-superlight {
-  background-color: $main-superlight;
-}
-
-.bg-main-dark {
-  background-color: $main-dark;
-  color: $white;
-}
-
-.bg-accent {
-  background-color: $accent;
-  color: $white;
-}
-
-.bg-accent-light {
-  background-color: $accent-light;
-}
-
-.bg-accent-dark {
-  background-color: $accent-dark;
-  color: $white;
-}
-
-// category colors
-
-$category-7: #9c27b0;
-
-// violet
-$category-6: #3f51b5;
-
-// indigo
-$category-5: #03a9f4;
-
-// dodgerblue
-$category-4: #4caf50;
-
-// green
-$category-3: #ffeb3b;
-
-// gold
-$category-2: #ff9800;
-
-// darkorange
-$category-1: #f44336;
-
 // crimson
 
 $conscious: $category-6;
 $connected: $category-4;
 $continuous: $category-2;
-
-.text-category-7 {
-  color: $category-7;
-}
-
-.text-category-6 {
-  color: $category-6;
-}
-
-.text-category-5 {
-  color: $category-5;
-}
-
-.text-category-4 {
-  color: $category-4;
-}
-
-.text-category-3 {
-  color: $category-3;
-}
-
-.text-category-2 {
-  color: $category-2;
-}
-
-.text-category-1 {
-  color: $category-1;
-}
-
-.bg-category-7 {
-  background-color: $category-7;
-  color: $white;
-}
-
-.bg-category-6 {
-  background-color: $category-6;
-  color: $white;
-}
-
-.bg-category-5 {
-  background-color: $category-5;
-  color: $white;
-}
-
-.bg-category-4 {
-  background-color: $category-4;
-  color: $white;
-}
-
-.bg-category-3 {
-  background-color: $category-3;
-}
-
-.bg-category-2 {
-  background-color: $category-2;
-  color: $white;
-}
-
-.bg-category-1 {
-  background-color: $category-1;
-  color: $white;
-}
 
 // Selection colors
 body {
@@ -317,6 +155,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .bg-content {
   background-color: $white;
+  color: $black;
 }
 
 //  coLegend text

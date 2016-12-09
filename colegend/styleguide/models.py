@@ -1,8 +1,10 @@
 from collections import OrderedDict
 
+from django.contrib.sites.models import Site
 from django.template import Template, Context
 from django.template.defaultfilters import slugify
 from django.template.loader import render_to_string
+from django.test import RequestFactory
 
 
 class BaseWidget:
@@ -35,10 +37,13 @@ class BaseWidget:
         raise NotImplementedError()
 
     def render_widget(self):
+        request = RequestFactory().get('/')
+        request.site = Site.objects.get_current()
         context = {
             'meta': self.render_meta(),
             'widget': self.render(),
             'columns': self.columns,
+            'request': request,
         }
         return render_to_string(self.widget_template, context=context)
 
@@ -56,6 +61,9 @@ class BaseWidget:
 class Widget(BaseWidget):
     def __init__(self, name, template, context={}, **kwargs):
         self.template = template
+        request = RequestFactory().get('/')
+        request.site = Site.objects.get_current()
+        context['request'] = request
         self.context = context
         super().__init__(name, **kwargs)
 

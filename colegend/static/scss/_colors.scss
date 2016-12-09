@@ -1,5 +1,10 @@
-$white: white;
 $black: black;
+$white: white;
+
+$base-colors: (
+  'black': $black,
+  'white': $white,
+);
 
 $lightblue-100: #b3e5fc;
 $lightblue-400: #29b6f6;
@@ -27,9 +32,42 @@ $main-light: $cyan-100;
 $main: $cyan-400;
 $main-dark: $cyan-700;
 
+$main-colors: (
+  'main-superlight': $main-superlight,
+  'main-light': $main-light,
+  'main': $main,
+  'main-dark': $main-dark,
+);
+
 $accent-light: $lightgreen-100;
 $accent: $lightgreen-400;
 $accent-dark: $lightgreen-700;
+
+$accent-colors: (
+  'accent-light': $lightgreen-100,
+  'accent': $lightgreen-400,
+  'accent-dark': $lightgreen-700,
+);
+
+// category colors
+
+$category-7: #9c27b0;
+$category-6: #3f51b5;
+$category-5: #03a9f4;
+$category-4: #4caf50;
+$category-3: #ffeb3b;
+$category-2: #ff9800;
+$category-1: #f44336;
+
+$category-colors: (
+  'category-7': $category-7,
+  'category-6': $category-6,
+  'category-5': $category-5,
+  'category-4': $category-4,
+  'category-3': $category-3,
+  'category-2': $category-2,
+  'category-1': $category-1,
+);
 
 $test-colors: (
   'grey': #ccc,
@@ -46,17 +84,19 @@ $content-colors: (
   'dark': #455A64,
 );
 
-$color-maps: $content-colors $test-colors;
+$color-maps: $category-colors $base-colors $main-colors $accent-colors $content-colors;
 @each $color-map in $color-maps {
   @each $name, $color in $color-map {
     .text-#{$name} {
-      font-size: $color;
+      color: $color;
     }
     .bg-#{$name} {
       background-color: $color;
 
-      @if lightness($color) > 20 {
+      @if lightness($color) < 80 {
         color: $white;
+      } @else {
+        color: $black;
       }
     }
   }
