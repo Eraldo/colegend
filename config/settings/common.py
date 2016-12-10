@@ -53,6 +53,8 @@ CMS_APPS = (
     'wagtail.wagtailadmin',
     'wagtail.wagtailcore',
 
+    'wagtail.contrib.wagtailroutablepage',
+
     'taggit',
     'modelcluster',
 )

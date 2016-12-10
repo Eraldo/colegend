@@ -1,5 +1,48 @@
 {% extends 'pages/content.html' %}
+{% load core_tags crispy_forms_tags wagtailroutablepage_tags %}
+
+{% block title %}Journal {{ scope.name }}{% endblock %}
+
+{% block extra_head %}
+    {{ block.super }}
+    {{ datepickerform.media.css }}
+{% endblock %}
 
 {% block page_controls %}
-afoo
+    <div class="btn-group" role="group" aria-label="previous and next">
+        {% button 'previous' url=previous_url classes='btn-secondary btn-sm' icon='previous' %}
+        {% button 'next' url=next_url classes='btn-secondary btn-sm' icon='next' %}
+    </div>
+    <div class="btn-group" role="group">
+        <button id="date-dropdown" type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+            {% icon 'date' %} Date
+        </button>
+        <div class="dropdown-menu widget-datepicker" aria-labelledby="date-dropdown">
+            {% crispy datepickerform %}
+        </div>
+    </div>
+    <div class="btn-group" role="group">
+        <button id="btnGroupDrop1" type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+            {% icon 'scope' %} Scope
+        </button>
+        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+            {% with current_scope=scope %}
+                {% for scope in scopes %}
+                    <a class="dropdown-item {% if scope.name == current_scope.name %}disabled{% endif %}" href="{% if scope == current_scope %}#{% else %}{% routablepageurl page scope.name %}{% endif %}">{{ scope.name }}</a>
+                {% endfor %}
+            {% endwith %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_script %}
+    {{ block.super }}
+    {{ datepickerform.media.js }}
+    <script type="text/javascript">
+        $('.dropdown-menu').find('form').click(function (e) {
+            e.stopPropagation();
+        });
+    </script>
 {% endblock %}
