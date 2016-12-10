@@ -30,11 +30,21 @@
         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
             {% with current_scope=scope %}
                 {% for scope in scopes %}
-                    <a class="dropdown-item {% if scope.name == current_scope.name %}disabled{% endif %}" href="{% if scope == current_scope %}#{% else %}{% routablepageurl page scope.name %}{% endif %}">{{ scope.name }}</a>
+                    <a class="dropdown-item {% if scope.name == current_scope.name %}disabled{% endif %}"
+                       href="{% if scope == current_scope %}#{% else %}{% routablepageurl page scope.name %}{% endif %}">{{ scope.name }}</a>
                 {% endfor %}
             {% endwith %}
         </div>
     </div>
+    <form class="form-inline" action="{% routablepageurl page 'search' %}" method="get" style="display: inline">
+        <div class="input-group">
+            <input type="text" name="text" class="form-control form-control-sm" placeholder="Search..">
+            <span class="input-group-btn">
+                <button class="btn btn-sm btn-secondary" type="submit">{% icon 'search' %}</button>
+            </span>
+        </div>
+    </form>
+
 {% endblock %}
 
 {% block extra_script %}

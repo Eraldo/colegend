@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.template.loader import render_to_string
 from django.template.response import TemplateResponse
 from django.utils import timezone
@@ -113,5 +114,31 @@ class JournalPage(RoutablePageMixin, Page):
         return TemplateResponse(
             request,
             self.get_template(request),
+            context
+        )
+
+    @route(r'^search/$')
+    def search(self, request, text=None):
+        context = super().get_context(request)
+        text = text or request.GET.get('text')
+        if text:
+            context['text'] = text
+            user = request.user
+            journal = user.journal
+            days = journal.dayentries.filter(
+                Q(keywords__icontains=text) | Q(content__icontains=text) | Q(locations__icontains=text) | Q(tags__name__icontains=text)
+            ).distinct()
+            context['days'] = days
+            weeks = journal.weekentries.filter(
+                Q(keywords__icontains=text) | Q(content__icontains=text) | Q(tags__name__icontains=text)
+            ).distinct()
+            context['weeks'] = weeks
+            months = journal.monthentries.filter(
+                Q(keywords__icontains=text) | Q(content__icontains=text) | Q(tags__name__icontains=text)
+            ).distinct()
+            context['months'] = months
+        return TemplateResponse(
+            request,
+            'journals/search.html',
             context
         )

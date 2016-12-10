@@ -1,10 +1,10 @@
 {% extends 'journals/base.html' %}
-{% load static crispy_forms_tags dayentries_tags weekentries_tags core_tags %}
+{% load static crispy_forms_tags dayentries_tags weekentries_tags monthentries_tags core_tags wagtailroutablepage_tags %}
 
 {% block title %}Journal Search{% endblock %}
 
 {% block page_controls %}
-    <form class="form-inline" action="{% url 'journals:search' %}" method="get" style="display: inline">
+    <form class="form-inline" action="{% routablepageurl page 'search' %}" method="get" style="display: inline">
         <div class="input-group">
             <input type="text" name="text" class="form-control form-control-sm" placeholder="Search.." value="{{ text }}">
             <span class="input-group-btn">
