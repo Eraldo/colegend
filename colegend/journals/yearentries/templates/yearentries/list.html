@@ -1,0 +1,14 @@
+{% extends 'yearentries/base.html' %}
+{% load buttons yearentries_tags %}
+
+{% block title %}Year Entries{% endblock %}
+
+{% block page_controls %}
+    {% button 'create' pattern='yearentries:create' %}
+{% endblock %}
+
+{% block content %}
+    {% for yearentry in yearentries %}
+        {% yearentry_link %}<br>
+    {% endfor %}
+{% endblock %}

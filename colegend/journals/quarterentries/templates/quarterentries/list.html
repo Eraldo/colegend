@@ -1,0 +1,14 @@
+{% extends 'quarterentries/base.html' %}
+{% load buttons quarterentries_tags %}
+
+{% block title %}Quarter Entries{% endblock %}
+
+{% block page_controls %}
+    {% button 'create' pattern='quarterentries:create' %}
+{% endblock %}
+
+{% block content %}
+    {% for quarterentry in quarterentries %}
+        {% quarterentry_link %}<br>
+    {% endfor %}
+{% endblock %}

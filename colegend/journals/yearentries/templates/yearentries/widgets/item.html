@@ -1,0 +1,36 @@
+{% load core_tags buttons tags_tags %}
+<div {% if id %}id="yearentry-widget-{{ id }}"{% endif %} class="yearentry-widget bg-content {{ class }}"
+     ondblclick="location='{% if detail_url %}{{ detail_url }}{% else %}{{ create_url }}{% endif %}'">
+    <div class="card card-item">
+        {% if actions %}
+            <!-- Action dropdown -->
+            <div class="btn-group pull-right">
+                <a href="#menu" type="button" data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false">{% icon 'actions' fixed=True color='grey' %}</a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    {% button 'update' url=update_url kind='default dropdown-item' %}
+                    {% button 'delete' url=delete_url kind='default dropdown-item' %}
+                </div>
+            </div>
+        {% else %}
+            <a href="{{ create_url }}" class="pull-right">{% icon 'create' fixed=True color='grey' %}</a>
+        {% endif %}
+        <span class="widget-year-number label label-pill label-default">{{ year }}</span>
+        <strong>{{ dates }}</strong>
+        {% if tags %}
+            <div class="pull-right">
+                {% for tag in tags %}
+                    {% tag %}
+                {% endfor %}
+            </div>
+        {% endif %}
+        <span class="clearfix"></span>
+        {{ keywords }}
+        {% if content %}
+            <div class="pull-right">
+                {% icon 'content' color='grey' %}
+            </div>
+        {% endif %}
+        <span class="clearfix"></span>
+    </div>
+</div>

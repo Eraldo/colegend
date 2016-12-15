@@ -1,0 +1,18 @@
+{% extends 'quarterentries/base.html' %}
+{% load static crispy_forms_tags %}
+
+{% block title %}Create Quarter Entry{% endblock %}
+
+{% block content %}
+    {% crispy form %}
+{% endblock %}
+
+{% block extra_head %}
+    {{ block.super }}
+    {{ form.media.css }}
+{% endblock %}
+
+{% block extra_script %}
+    {{ block.super }}
+    {{ form.media.js }}
+{% endblock %}
