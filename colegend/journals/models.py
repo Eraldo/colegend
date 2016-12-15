@@ -284,6 +284,14 @@ class JournalPage(RoutablePageMixin, Page):
                     Q(keywords__icontains=text) | Q(content__icontains=text) | Q(tags__name__icontains=text)
                 ).distinct()
                 context['months'] = months
+                quarters = journal.quarterentries.filter(
+                    Q(keywords__icontains=text) | Q(content__icontains=text) | Q(tags__name__icontains=text)
+                ).distinct()
+                context['quarters'] = quarters
+                years = journal.yearentries.filter(
+                    Q(keywords__icontains=text) | Q(content__icontains=text) | Q(tags__name__icontains=text)
+                ).distinct()
+                context['years'] = years
         return TemplateResponse(
             request,
             'journals/search.html',
