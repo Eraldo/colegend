@@ -6,6 +6,7 @@ from django.views.generic import ListView, DetailView, DeleteView, CreateView, U
 
 from colegend.core.views import OwnerRequiredMixin
 from colegend.dayentries.models import DayEntry
+from colegend.journals.models import JournalPage
 from colegend.journals.weekentries.utils import get_current_year, get_current_week
 from .forms import WeekEntryForm
 from .models import WeekEntry
@@ -24,6 +25,11 @@ class WeekEntryMixin(object):
         user = self.request.user
         form.fields['tags'].queryset = user.tags.all()
         return form
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page'] = JournalPage.objects.first()
+        return context
 
 
 class WeekEntryIndexView(RedirectView):
@@ -91,4 +97,4 @@ class WeekEntryDeleteView(LoginRequiredMixin, OwnerRequiredMixin, WeekEntryMixin
 
     def get_success_url(self):
         weekentry = self.get_object()
-        return reverse('journals:week', kwargs={'date': weekentry.date})
+        return weekentry.journal.index_url

@@ -10,7 +10,9 @@
 
 {% block page_controls %}
     <div class="btn-group" role="group" aria-label="previous and next">
+        {% routablepageurl page scope.name scope.previous as previous_url %}
         {% button 'previous' url=previous_url classes='btn-secondary btn-sm' icon='previous' %}
+        {% routablepageurl page scope.name scope.next as next_url %}
         {% button 'next' url=next_url classes='btn-secondary btn-sm' icon='next' %}
     </div>
     <div class="btn-group" role="group">
@@ -28,12 +30,10 @@
             {% icon 'scope' %} Scope
         </button>
         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-            {% with current_scope=scope %}
-                {% for scope in scopes %}
-                    <a class="dropdown-item {% if scope.name == current_scope.name %}disabled{% endif %}"
-                       href="{% if scope == current_scope %}#{% else %}{% routablepageurl page scope.name %}{% endif %}">{{ scope.name }}</a>
-                {% endfor %}
-            {% endwith %}
+            {% for filter_scope in scopes %}
+                <a class="dropdown-item {% if filter_scope.name == scope.name %}disabled{% endif %}"
+                   href="{% if filter_scope == scope %}#{% else %}{% routablepageurl page filter_scope.name date=filter_scope %}{% endif %}">{{ filter_scope.name }}</a>
+            {% endfor %}
         </div>
     </div>
     <form class="form-inline" action="{% routablepageurl page 'search' %}" method="get" style="display: inline">
@@ -44,7 +44,11 @@
             </span>
         </div>
     </form>
-
+    <div class="pull-right">
+        {% button 'import' url='#' classes='btn-secondary btn-sm' icon='import' %}
+        {% routablepageurl page 'settings' as settings_url %}
+        {% button 'settings' url=settings_url classes='btn-secondary btn-sm' icon='gear' %}
+    </div>
 {% endblock %}
 
 {% block extra_script %}

@@ -8,6 +8,7 @@ from django.views.generic import ListView, DetailView, DeleteView, CreateView, U
 
 from colegend.core.views import OwnerRequiredMixin
 from colegend.dayentries.models import DayEntry
+from colegend.journals.models import JournalPage
 from colegend.journals.monthentries.utils import get_current_year, get_current_month
 from .forms import MonthEntryForm
 from .models import MonthEntry
@@ -26,6 +27,11 @@ class MonthEntryMixin(object):
         user = self.request.user
         form.fields['tags'].queryset = user.tags.all()
         return form
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page'] = JournalPage.objects.first()
+        return context
 
 
 class MonthEntryIndexView(RedirectView):
@@ -95,4 +101,4 @@ class MonthEntryDeleteView(LoginRequiredMixin, OwnerRequiredMixin, MonthEntryMix
 
     def get_success_url(self):
         monthentry = self.get_object()
-        return reverse('journals:month', kwargs={'date': monthentry.date})
+        return monthentry.journal.index_url

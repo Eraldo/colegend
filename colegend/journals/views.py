@@ -14,13 +14,18 @@ from colegend.core.views import RolesRequiredMixin, OwnerRequiredMixin
 from colegend.dayentries.models import DayEntry
 from colegend.journals.monthentries.models import MonthEntry
 from colegend.journals.weekentries.models import WeekEntry
-from .models import Journal
+from .models import Journal, JournalPage
 from .forms import JournalForm, DatePickerForm
 
 
 class JournalMixin(object):
     model = Journal
     form_class = JournalForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page'] = JournalPage.objects.first()
+        return context
 
 
 class JournalIndexView(RedirectView):

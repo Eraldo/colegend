@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
+{% load wagtailroutablepage_tags %}
 
 {% block title %}Journal{% endblock %}
 
 {% block breadcrumbs %}
     {{ block.super }}
-    {% include 'widgets/breadcrumb.html' with pattern='journals:index' title='Journal' icon='journal' %}
+    {% if page %}
+        {% routablepageurl page 'day' as journal_url %}
+        {% include 'widgets/breadcrumb.html' with url=journal_url title='Journal' icon='journal' %}
+    {% endif %}
 {% endblock %}

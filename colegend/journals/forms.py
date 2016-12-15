@@ -14,6 +14,8 @@ class JournalForm(forms.ModelForm):
             'day_template',
             'week_template',
             'month_template',
+            'quarter_template',
+            'year_template',
         ]
 
     def __init__(self, *args, **kwargs):
@@ -24,6 +26,8 @@ class JournalForm(forms.ModelForm):
             Field('day_template', required=False),
             Field('week_template', required=False),
             Field('month_template', required=False),
+            Field('quarter_template', required=False),
+            Field('year_template', required=False),
         )
         self.helper.add_input(Submit('save', 'Save'))
         self.helper.attrs = {'novalidate': True}

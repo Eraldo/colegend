@@ -29,7 +29,7 @@ def menu(context, user=None, name='main'):
                         {
                             'name': 'Journal',
                             'locked': not user.has_checkpoint('storytime'),
-                            'url': reverse('journals:index'),
+                            'url': slugurl(context, slug='journal'),
                         },
                         {
                             'name': 'Story',

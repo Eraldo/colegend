@@ -1,10 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse
-from django.template.loader import render_to_string
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, RedirectView
 
 from colegend.core.views import OwnerRequiredMixin
+from colegend.journals.models import JournalPage
 from .forms import DayEntryForm
 from .models import DayEntry
 
@@ -22,6 +22,11 @@ class DayEntryMixin(object):
         user = self.request.user
         form.fields['tags'].queryset = user.tags.all()
         return form
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page'] = JournalPage.objects.first()
+        return context
 
 
 class DayEntryIndexView(RedirectView):
@@ -86,4 +91,4 @@ class DayEntryDeleteView(LoginRequiredMixin, OwnerRequiredMixin, DayEntryMixin, 
 
     def get_success_url(self):
         dayentry = self.get_object()
-        return reverse('journals:day', kwargs={'date': dayentry.date})
+        return dayentry.journal.index_url

@@ -8,7 +8,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from colegend.core.fields import MarkdownField
 from colegend.core.models import AutoUrlsMixin, TimeStampedBase
-from colegend.journals.models import Journal
+from colegend.journals.models import Journal, JournalPage
+from colegend.journals.scopes import Month
 from .utils import get_current_year, get_current_month
 from colegend.tags.models import TaggableBase
 
@@ -41,7 +42,7 @@ class MonthEntry(AutoUrlsMixin, TaggableBase, TimeStampedBase):
         ordering = ['-year', '-month']
 
     def __str__(self):
-        return '{}-M{} {}'.format(self.year, self.month, self.date.strftime("%b"))
+        return '{}-M{}'.format(self.year, self.month)
 
     def owned_by(self, user):
         if self.journal.owned_by(user):
@@ -70,6 +71,6 @@ class MonthEntry(AutoUrlsMixin, TaggableBase, TimeStampedBase):
     def number(self):
         return self.month
 
-    @property
-    def detail_url(self):
-        return reverse('monthentries:detail', kwargs={'pk': self.pk})
+    def get_absolute_url(self):
+        page = JournalPage.objects.first()
+        return page.url + page.reverse_subpage('month', kwargs={'date': Month(self.date)})

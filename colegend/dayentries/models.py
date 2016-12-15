@@ -6,7 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from colegend.core.fields import MarkdownField, DateField
 from colegend.core.models import AutoUrlsMixin, TimeStampedBase
 from colegend.core.validators import validate_date_today_tomorrow_or_past
-from colegend.journals.models import Journal
+from colegend.journals.models import Journal, JournalPage
 from colegend.tags.models import TaggableBase
 
 
@@ -48,4 +48,5 @@ class DayEntry(AutoUrlsMixin, TaggableBase, TimeStampedBase):
 
     @property
     def detail_url(self):
-        return reverse('journals:day', kwargs={'date': self.date})
+        page = JournalPage.objects.first()
+        return page.url + page.reverse_subpage('day', kwargs={'date': self.date})

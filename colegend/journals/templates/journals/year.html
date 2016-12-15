@@ -1,10 +1,17 @@
 {% extends 'journals/index.html' %}
-{% load dayentries_tags outcomes_tags %}
+{% load quarterentries_tags yearentries_tags outcomes_tags %}
 
 {% block content_container %}
     <div class="row">
+        <div class="col-md-12">
+            {% yearentry_line %}
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-8">
-            {% dayentry_card %}
+            {% for quarter in quarters %}
+                {% quarterentry_line quarter.entry date=quarter.date %}
+            {% endfor %}
         </div>
         <div class="col-md-4">
             <div class="content card bg-content">
@@ -14,7 +21,7 @@
                 <div class="card-block">
                     {% for outcome in scheduled_outcomes %}
                         {% outcome %}
-                    {% empty %}
+                        {% empty %}
                         Nothing scheduled.
                     {% endfor %}
                 </div>
@@ -26,7 +33,7 @@
                 <div class="card-block">
                     {% for outcome in deadlined_outcomes %}
                         {% outcome %}
-                    {% empty %}
+                        {% empty %}
                         No deadlines - Yeah!
                     {% endfor %}
                 </div>

@@ -6,7 +6,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from colegend.core.fields import MarkdownField
 from colegend.core.models import AutoUrlsMixin, TimeStampedBase
-from colegend.journals.models import Journal
+from colegend.journals.models import Journal, JournalPage
+from colegend.journals.scopes import Week
 from .utils import get_current_year, get_current_week
 from colegend.tags.models import TaggableBase
 
@@ -67,6 +68,7 @@ class WeekEntry(AutoUrlsMixin, TaggableBase, TimeStampedBase):
     def number(self):
         return self.date.isocalendar()[1]
 
-    @property
-    def detail_url(self):
-        return reverse('weekentries:detail', kwargs={'pk': self.pk})
+    def get_absolute_url(self):
+        page = JournalPage.objects.first()
+        return page.url + page.reverse_subpage('week', kwargs={'date': Week(self.date)})
+

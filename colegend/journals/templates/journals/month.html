@@ -1,56 +1,5 @@
-{% extends 'journals/base.html' %}
-{% load core_tags buttons dayentries_tags monthentries_tags weekentries_tags outcomes_tags tags_tags crispy_forms_tags %}
-
-{% block title %}Month {{ monthnumber }}{% endblock %}
-
-{% block extra_head %}
-    {{ block.super }}
-    {{ datepickerform.media.css }}
-{% endblock %}
-
-{% block page_controls %}
-    <div class="btn-group" role="group" aria-label="Basic example">
-        {% button 'previous' url=previous_url kind='secondary btn-sm' icon='previous' %}
-        {% button 'next' url=next_url kind='secondary btn-sm' icon='next' %}
-    </div>
-    <div class="btn-group" role="group">
-        <button id="date-dropdown" type="button" class="btn btn-secondary btn-sm dropdown-toggle"
-                data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-            {% icon 'date' %} Date
-        </button>
-        <div class="dropdown-menu widget-datepicker" aria-labelledby="date-dropdown">
-            {% crispy datepickerform %}
-        </div>
-    </div>
-    <div class="btn-group" role="group">
-        <button id="btnGroupDrop1" type="button" class="btn btn-secondary btn-sm dropdown-toggle"
-                data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-            {% icon 'scope' %} Scope
-        </button>
-        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-            <a class="dropdown-item" href="{% url 'journals:day' date %}">Day</a>
-            <a class="dropdown-item" href="{% url 'journals:week' date %}">Week</a>
-            <a class="dropdown-item disabled" href="#">Month</a>
-            <a class="dropdown-item disabled" href="#">Quarter</a>
-            <a class="dropdown-item disabled" href="#">Year</a>
-        </div>
-    </div>
-
-    <form class="form-inline" action="{% url 'journals:search' %}" method="get" style="display: inline">
-        <div class="input-group">
-            <input type="text" name="text" class="form-control form-control-sm" placeholder="Search..">
-            <span class="input-group-btn">
-                <button class="btn btn-sm btn-secondary" type="submit">{% icon 'search' %}</button>
-            </span>
-        </div>
-    </form>
-
-    <div class="pull-right">
-        {% button 'settings' url=settings_url kind='secondary btn-sm' icon='gear' %}
-    </div>
-{% endblock %}
+{% extends 'journals/index.html' %}
+{% load weekentries_tags monthentries_tags outcomes_tags %}
 
 {% block content_container %}
     <div class="row">
@@ -72,7 +21,7 @@
                 <div class="card-block">
                     {% for outcome in scheduled_outcomes %}
                         {% outcome %}
-                    {% empty %}
+                        {% empty %}
                         Nothing scheduled.
                     {% endfor %}
                 </div>
@@ -84,21 +33,11 @@
                 <div class="card-block">
                     {% for outcome in deadlined_outcomes %}
                         {% outcome %}
-                    {% empty %}
+                        {% empty %}
                         No deadlines - Yeah!
                     {% endfor %}
                 </div>
             </div>
         </div>
     </div>
-{% endblock %}
-
-{% block extra_script %}
-    {{ block.super }}
-    {{ datepickerform.media.js }}
-    <script type="text/javascript">
-        $('.dropdown-menu').find('form').click(function (e) {
-            e.stopPropagation();
-        });
-    </script>
 {% endblock %}

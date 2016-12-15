@@ -5,6 +5,8 @@ from .views import JournalIndexView, JournalListView, JournalCreateView, Journal
 
 from .weekentries.urls import urlpatterns as week_urlpatterns
 from .monthentries.urls import urlpatterns as month_urlpatterns
+from .quarterentries.urls import urlpatterns as quarter_urlpatterns
+from .yearentries.urls import urlpatterns as year_urlpatterns
 
 urlpatterns = [
     url(r'^$',
@@ -41,13 +43,12 @@ urlpatterns = [
     url(r'^month/(?P<date>[0-9]{4}-[0-9]{2}-[0-9]{2})/$',
         JournalMonthView.as_view(),
         name='month'),
-    # url(r'^week/(?P<year>[0-9]{4})-W(?P<week>[0-9]{2})/$',
-    #     JournalWeekView.as_view(),
-    #     name='week'),
 ]
 
 urlpatterns = [
     url(r'^', include(urlpatterns, namespace='journals')),
     url(r'^weeks/', include(week_urlpatterns, namespace='weekentries')),
     url(r'^months/', include(month_urlpatterns, namespace='monthentries')),
+    url(r'^quarters/', include(quarter_urlpatterns, namespace='quarterentries')),
+    url(r'^years/', include(year_urlpatterns, namespace='yearentries')),
 ]

@@ -4,6 +4,7 @@ from django.template.loader import render_to_string
 from django.utils import timezone
 
 from colegend.core.utils.markdown import render
+from colegend.journals.scopes import Week
 
 register = template.Library()
 
@@ -40,12 +41,12 @@ def weekentry_card(context, weekentry=None, **kwargs):
     else:
         date = kwargs.get('date', context.get('date'))
         if date:
+            week = Week(date)
             create_url = reverse('weekentries:create')
-            week_number = date.isocalendar()[1]
-            context['create_url'] = '{}?year={}&week={}'.format(create_url, date.year, week_number)
+            context['create_url'] = '{}?year={}&week={}'.format(create_url, week.start.year, week.number)
             context['dates'] = context.get('dates')
-            context['week_number'] = week_number
-            context['week'] = '{}-W{}'.format(date.year, week_number)
+            context['week_number'] = week.number
+            context['week'] = week
     context.update(kwargs)
     template = 'weekentries/widgets/card.html'
     return render_to_string(template, context=context)
@@ -73,13 +74,13 @@ def weekentry_line(context, weekentry=None, **kwargs):
     else:
         date = kwargs.get('date', context.get('date'))
         if date:
+            week = Week(date)
             create_url = reverse('weekentries:create')
-            week_number = date.isocalendar()[1]
-            context['create_url'] = '{}?year={}&week={}'.format(create_url, date.year, week_number)
-            context['dates'] = '{} - {}'.format(date, date + timezone.timedelta(6))
-            context['week_number'] = week_number
-            context['week'] = '{}-W{}'.format(date.year, week_number)
-            context['class'] = 'active' if date == today else ''
+            context['create_url'] = '{}?year={}&week={}'.format(create_url, week.start.year, week.number)
+            context['dates'] = '{0} - {1}'.format(week.start, week.end)
+            context['week_number'] = week.number
+            context['week'] = week
+            context['class'] = 'active' if week.date == today else ''
     context.update(kwargs)
     template = 'weekentries/widgets/item.html'
     return render_to_string(template, context=context)
