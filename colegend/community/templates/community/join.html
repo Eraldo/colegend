@@ -1,0 +1,15 @@
+{% extends 'community/index.html' %}
+{% load core_tags wagtailroutablepage_tags community_tags legends_tags %}
+
+{% block content %}
+    {% if mentors %}
+        Choose a mentor:<br>
+        {% for mentor in mentors %}
+            {% legend mentor %}<br>
+        {% endfor %}
+        Please contact your chosen mentor to join our community.
+    {% else %}
+        There are not available mentors.<br>
+        Please contact the staff to address this issue.
+    {% endif %}
+{% endblock %}

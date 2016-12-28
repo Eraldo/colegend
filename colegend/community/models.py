@@ -38,8 +38,8 @@ class CommunityPage(RoutablePageMixin, Page):
     @route(r'^join/$')
     def join(self, request):
         context = self.get_context(request)
-        context['duos'] = Duo.objects.open()
-        return self.render(request)
+        context['mentors'] = set([duo.mentor for duo in Duo.objects.open()])
+        return self.render(request, template='community/join.html', context=context)
 
 
 class TribeQuerySet(models.QuerySet):
