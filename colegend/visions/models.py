@@ -22,6 +22,8 @@ class VisionQuerySet(OwnedQuerySet):
             return self.get_or_create(owner=owner, scope=Vision.QUARTER)[0]
         elif scope == _('year'):
             return self.get_or_create(owner=owner, scope=Vision.YEAR)[0]
+        elif scope == _('someday'):
+            return self.get_or_create(owner=owner, scope=Vision.SOMEDAY)[0]
         else:
             return Vision.objects.none()
 
@@ -35,12 +37,14 @@ class Vision(AutoUrlsMixin, OwnedBase):
     MONTH = 3
     QUARTER = 4
     YEAR = 5
+    SOMEDAY = 6
     SCOPE_CHOICES = (
         (DAY, _('day')),
         (WEEK, _('week')),
         (MONTH, _('month')),
         (QUARTER, _('quarter')),
         (YEAR, _('year')),
+        (SOMEDAY, _('someday')),
     )
     SCOPE_MAP = OrderedDict(SCOPE_CHOICES)
     scope = models.PositiveSmallIntegerField(
