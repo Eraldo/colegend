@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% load i18n wagtailcore_tags %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block title %}{% trans "Your Legend Journey 2017" %}{% endblock title %}
+
+{% block content_class %}{% endblock %}
+
+{% block content %}
+    {% include_block page.content %}
+    <p>
+        {% include 'widgets/newsletter-signup.html' %}
+    </p>
+{% endblock content %}
