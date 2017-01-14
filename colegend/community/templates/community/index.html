@@ -1,0 +1,23 @@
+{% extends 'pages/content.html' %}
+{% load core_tags wagtailroutablepage_tags community_tags components_tags %}
+
+{% block title %}Community{% endblock %}
+
+{% block page_controls %}
+{% endblock %}
+
+{% block content %}
+    {% demo title='master' %}<br>
+    {% for tribe in tribes %}
+        {% tribe %}<br>
+        {% for clan in tribe.clans.all %}
+            &nbsp;&nbsp;{% clan %}<br>
+            {% for duo in clan.duos.all %}
+                &nbsp;&nbsp;&nbsp;&nbsp;{% duo %}<br>
+                {% for member in duo.members.all %}
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ member }}<br>
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+    {% endfor %}
+{% endblock %}
