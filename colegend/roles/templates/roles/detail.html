@@ -18,12 +18,12 @@
 {% endblock %}
 
 {% block content_container %}
-<div class="row">
-    <div class="col-md-8">
-        <div class="card bg-content card-block">
-            <h1>
-                {{ role }}
-            </h1>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card bg-content card-block">
+                <h1>
+                    {{ role }}
+                </h1>
                 {% if role.icon %}
                     <div class="pull-left" style="margin-right: 0.5em">
                         {% include 'roles/widgets/role.html' with image=role.icon.url class='bg-main-light' name=role.item url=role.detail_url %}
@@ -34,32 +34,42 @@
                         {% include 'roles/widgets/role.html' with image=default_image class='bg-main-light' name=role.item url=role.detail_url %}
                     </div>
                 {% endif %}
-            <p>
-                {{ role.description|markdown }}
-            </p>
-            <div class="clearfix"></div>
-        </div>
-    </div>
-    <div class="col-md-4 ">
-        <div class="card bg-content card-block">
-            <h4>
-                Energizers
-            </h4>
-            {% if energizers %}
-                {% for legend in energizers %}
-                    {% legend size='small' %}
-                {% endfor %}
-                <p></p>
-                {% contact_button name='Contact this group' %}
-            {% else %}
                 <p>
-                    We are looking for legends to energize this role.
+                    {{ role.description|markdown }}
                 </p>
-                <p>
-                    {% contact_button %}
-                </p>
-            {% endif %}
+                <div class="clearfix"></div>
+            </div>
         </div>
+        <div class="col-md-4 ">
+            <div class="card bg-content card-block">
+                <h4>
+                    Energizers
+                </h4>
+                {% if energizers %}
+                    {% for legend in energizers %}
+                        {% legend size='small' %}
+                    {% endfor %}
+                    <p></p>
+                    {% contact_button name='Contact this group' %}
+                {% else %}
+                    <p>
+                        We are looking for legends to energize this role.
+                    </p>
+                    <p>
+                        {% contact_button %}
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+        {% if role.metrics %}
+            <div class="col-md-4 ">
+                <div class="card bg-content card-block">
+                    <h4>
+                        Metrics
+                    </h4>
+                    <p>{{ role.metrics|markdown }}</p>
+                </div>
+            </div>
+        {% endif %}
     </div>
-</div>
 {% endblock %}

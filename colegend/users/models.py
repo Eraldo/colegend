@@ -15,6 +15,7 @@ from easy_thumbnails.fields import ThumbnailerImageField
 from phonenumber_field.modelfields import PhoneNumberField
 
 from colegend.checkpoints.models import Checkpoint
+from colegend.community.models import Duo
 from colegend.core.utils.media_paths import UploadToOwnedDirectory
 from colegend.roles.models import Role
 
@@ -99,6 +100,18 @@ class User(AbstractUser):
         blank=True,
     )
 
+    duo = models.ForeignKey(
+        verbose_name=_('duo'),
+        to=Duo,
+        related_name='members',
+        null=True, blank=True,
+        on_delete=models.SET_NULL
+    )
+
+    @property
+    def mentor(self):
+        return self.duo.mentor if self.duo else None
+
     def has_checkpoint(self, name):
         return self.checkpoints.contains_name(name)
 
@@ -159,4 +172,4 @@ def new_user_manager_notification(request, user, **kwargs):
     send_mail(subject, message, None, managers, fail_silently=False)
     # TODO: Fix backend isse: https://app.getsentry.com/eraldo/colegend-staging/issues/102969964/
     # Then remove fail_silently
-    slack_message('slack/message.slack', {'message': '@channel: {}'.format(message),}, fail_silently=True)
+    slack_message('slack/message.slack', {'message': '@channel: {}'.format(message), }, fail_silently=True)

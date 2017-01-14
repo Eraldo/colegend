@@ -865,7 +865,7 @@
                         href="{% slugurl 'mentors-calling' %}">path to becoming a Mentor</a>.
             </p>
             <br>
-            <div class="col-sm-12 col-md-offset-3">
+            <div class="col-sm-12 col-md-9 col-md-offset-3">
                 {% for member in mentors %}
                     <div class="col-md-3 wow fadeIn">
                         {% include 'about/widgets/team_member.html' with image=member.image name=member.name social_accounts=member.social_accounts url=member.url %}

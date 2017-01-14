@@ -14,6 +14,7 @@ class RoleForm(forms.ModelForm):
             'item',
             'icon',
             'description',
+            'metrics',
         ]
 
     def __init__(self, *args, **kwargs):
@@ -25,5 +26,6 @@ class RoleForm(forms.ModelForm):
             Field('item'),
             Field('icon'),
             Field('description'),
+            Field('metrics'),
         )
         self.helper.add_input(Submit('save', 'Save'))

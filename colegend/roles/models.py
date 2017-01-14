@@ -38,6 +38,7 @@ class Role(AutoUrlsMixin, models.Model):
         resize_source=dict(size=(100, 100)),
     )
     description = models.TextField(blank=True)
+    metrics = models.TextField(blank=True)
 
     objects = RoleQuerySet.as_manager()
 

@@ -4,11 +4,13 @@ from django.db import models
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils import timezone
-from wagtail.wagtailadmin.edit_handlers import FieldPanel
-from wagtail.wagtailcore.fields import RichTextField
+from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel
+from wagtail.wagtailcore.fields import RichTextField, StreamField
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.templatetags.wagtailcore_tags import slugurl
+from wagtail.wagtailsearch import index
 
+from colegend.cms.blocks import BASE_BLOCKS
 from colegend.cms.models import UniquePageMixin
 from colegend.core.templatetags.core_tags import link
 
@@ -51,4 +53,17 @@ class HomePage(UniquePageMixin, Page):
 
 
 class JoinPage(Page):
-    template = 'home/join.html'
+    template = 'home/join2017.html'
+
+    content = StreamField(BASE_BLOCKS, blank=True)
+
+    content_panels = Page.content_panels + [
+        StreamFieldPanel('content'),
+    ]
+
+    search_fields = Page.search_fields + [
+        index.SearchField('content'),
+    ]
+
+    class Meta:
+        verbose_name = _('Join')

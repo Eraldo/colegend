@@ -9,6 +9,7 @@
     <a href="{% url 'visions:detail' scope='month' %}" class="nav-item nav-link{% if vision.get_scope_display == 'month' %} active{% endif %}">Month</a>
     <a href="{% url 'visions:detail' scope='quarter' %}" class="nav-item nav-link{% if vision.get_scope_display == 'quarter' %} active{% endif %}">Quarter</a>
     <a href="{% url 'visions:detail' scope='year' %}" class="nav-item nav-link{% if vision.get_scope_display == 'year' %} active{% endif %}">Year</a>
+    <a href="{% url 'visions:detail' scope='someday' %}" class="nav-item nav-link{% if vision.get_scope_display == 'someday' %} active{% endif %}">Someday</a>
 {% endblock %}
 
 {% block page_controls %}

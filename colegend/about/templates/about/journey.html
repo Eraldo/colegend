@@ -1,0 +1,9 @@
+{% extends 'pages/content.html' %}
+
+{% block content %}
+    {% block content %}{% include_block page.content %}{% endblock %}
+    <p>
+        {% trans "We keep you updated via the newsletter:" %}<br>
+        {% include 'widgets/newsletter-signup.html' %}
+    </p>
+{% endblock %}
