@@ -44,6 +44,7 @@ fontawesome_icons = {
     'faq': 'question-circle-o',
     'personal-support': 'user-md',  # fa-life-ring
     'documentation': 'file-text-o',
+    'tutorial': 'graduation-cap',
     'tutorials': 'graduation-cap',
     'blog': 'newspaper-o',
     'styleguide': 'paint-brush',

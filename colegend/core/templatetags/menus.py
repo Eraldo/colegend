@@ -44,7 +44,7 @@ def menu(context, user=None, name='main'):
                             'locked': True,
                         },
                         {
-                            'name': 'Game',
+                            'name': 'Tutorial',
                             'url': reverse('games:index'),
                         },
                         {

@@ -73,7 +73,7 @@ class Game(AutoOwnedBase):
         return self.completed.last()
 
     def __str__(self):
-        return "{}'s game".format(self.owner)
+        return "{}'s tutorial game".format(self.owner)
 
     @staticmethod
     def get_absolute_url():

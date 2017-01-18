@@ -54,7 +54,7 @@ urlpatterns = [
     url(r'^chat/', include('colegend.chat.urls')),
     url(r'^guidelines/', include('colegend.guidelines.urls')),
 
-    url(r'^game/', include('colegend.games.urls')),
+    url(r'^tutorial/', include('colegend.games.urls')),
     url(r'^cards/', include('colegend.cards.urls', namespace='cards')),
     url(r'^story/', include('colegend.story.urls')),
 
