@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 # Create your models here.
@@ -53,7 +54,7 @@ class HomePage(UniquePageMixin, Page):
 
 
 class JoinPage(Page):
-    template = 'home/join2017.html'
+    template = 'home/join.html'
 
     content = StreamField(BASE_BLOCKS, blank=True)
 
@@ -67,3 +68,9 @@ class JoinPage(Page):
 
     class Meta:
         verbose_name = _('Join')
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        if settings.ACCOUNT_ALLOW_REGISTRATION:
+            context['open'] = True
+        return context
