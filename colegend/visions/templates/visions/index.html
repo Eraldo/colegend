@@ -1,0 +1,18 @@
+{% extends 'visions/base.html' %}
+{% load buttons visions_tags core_tags %}
+
+{% block title %}Visions{% endblock %}
+
+{% block content %}
+    {% card content=purpose title="Legend Purpose" %}
+
+    <h4>Scoped visions</h4>
+    <div class="row">
+        {% for vision in visions %}
+            <div class="col-md-4">
+                {% vision as vision_card %}
+                {% link content=vision_card url=vision.detail_url unstyled=True %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

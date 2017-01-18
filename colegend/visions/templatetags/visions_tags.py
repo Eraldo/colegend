@@ -1,6 +1,8 @@
 from django import template
 from django.template.loader import render_to_string
 
+from ..components.vision.component import VisionComponent
+
 register = template.Library()
 
 
@@ -14,3 +16,5 @@ def vision_link(context, vision=None, **kwargs):
     context.update(kwargs)
     template = 'visions/widgets/link.html'
     return render_to_string(template, context=context)
+
+register.tag(VisionComponent.as_tag())

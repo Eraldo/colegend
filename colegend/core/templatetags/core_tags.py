@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
 from django.utils.html import format_html
 
+from ..components.link.component import LinkComponent
 from colegend.core.intuitive_duration.utils import intuitive_duration_string
 from colegend.core.utils.icons import get_icon_class
 
@@ -182,12 +183,17 @@ def buttons(buttons, classes=None):
 
 
 @register.simple_tag()
-def card(content, header=None, title=None, footer=None, url=None, classes=None):
+def card(content, header='', title='', footer='', url='', classes=''):
     card_template = 'widgets/card.html'
     card_context = {
         'header': header,
         'content': content,
+        'title': title,
         'footer': footer,
-        'classes': classes or '',
+        'url': url,
+        'classes': classes,
     }
     return render_to_string(card_template, context=card_context)
+
+
+register.tag(LinkComponent.as_tag())
