@@ -13,6 +13,9 @@
                 {% vision as vision_card %}
                 {% link content=vision_card url=vision.detail_url unstyled=True %}
             </div>
+            {% if forloop.counter|divisibleby:3 %}
+                <div class="clearfix hidden-sm-down"></div>
+            {% endif %}
         {% endfor %}
     </div>
 {% endblock %}
