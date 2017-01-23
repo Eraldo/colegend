@@ -24,12 +24,13 @@ class WeekEntry(AutoUrlsMixin, TaggableBase, TimeStampedBase):
     journal = models.ForeignKey(Journal, related_name="weekentries")
     year = models.PositiveIntegerField(default=get_current_year, validators=[MaxValueValidator(4000)])
     week = models.PositiveIntegerField(default=get_current_week, validators=[MaxValueValidator(54)])
+    focus = models.TextField(blank=True)
+    content = MarkdownField()
     keywords = models.CharField(
         max_length=255,
         blank=True,
         help_text=_("What were the most important experiences/topics this week?")
     )
-    content = MarkdownField()
 
     objects = WeekEntryQuerySet.as_manager()
 

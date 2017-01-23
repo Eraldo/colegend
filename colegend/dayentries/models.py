@@ -22,6 +22,7 @@ class DayEntry(AutoUrlsMixin, TaggableBase, TimeStampedBase):
     journal = models.ForeignKey(Journal, related_name="dayentries")
     date = DateField(default=timezone.datetime.today, validators=[validate_date_today_tomorrow_or_past])
     locations = models.CharField(max_length=255, help_text="Separated by ';'")
+    focus = models.TextField(blank=True)
     keywords = models.CharField(
         max_length=255,
         blank=True,

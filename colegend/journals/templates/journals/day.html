@@ -1,5 +1,5 @@
 {% extends 'journals/index.html' %}
-{% load dayentries_tags outcomes_tags %}
+{% load dayentries_tags outcomes_tags core_tags %}
 
 {% block content_container %}
     <div class="row">
@@ -7,6 +7,7 @@
             {% dayentry_card %}
         </div>
         <div class="col-md-4">
+            {% card dayentry.focus|linebreaksbr header="Focus" %}
             <div class="content card bg-content">
                 <div class="card-header">
                     Scheduled

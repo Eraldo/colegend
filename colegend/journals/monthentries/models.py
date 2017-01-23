@@ -26,12 +26,13 @@ class MonthEntry(AutoUrlsMixin, TaggableBase, TimeStampedBase):
     journal = models.ForeignKey(Journal, related_name="monthentries")
     year = models.PositiveIntegerField(default=get_current_year, validators=[MaxValueValidator(4000)])
     month = models.PositiveIntegerField(default=get_current_month, validators=[MaxValueValidator(12)])
+    focus = models.TextField(blank=True)
+    content = MarkdownField()
     keywords = models.CharField(
         max_length=255,
         blank=True,
         help_text=_("What were the most important experiences/topics this month?")
     )
-    content = MarkdownField()
 
     objects = MonthEntryQuerySet.as_manager()
 

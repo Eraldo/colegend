@@ -23,12 +23,13 @@ class QuarterEntry(AutoUrlsMixin, TaggableBase, TimeStampedBase):
     journal = models.ForeignKey(Journal, related_name="quarterentries")
     year = models.PositiveIntegerField(default=get_current_year, validators=[MaxValueValidator(4000)])
     quarter = models.PositiveIntegerField(default=get_current_quarter, validators=[MaxValueValidator(4)])
+    focus = models.TextField(blank=True)
+    content = MarkdownField()
     keywords = models.CharField(
         max_length=255,
         blank=True,
         help_text=_("What were the most important experiences/topics this quarter?")
     )
-    content = MarkdownField()
 
     objects = QuarterEntryQuerySet.as_manager()
 

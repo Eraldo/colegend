@@ -22,12 +22,13 @@ class YearEntry(AutoUrlsMixin, TaggableBase, TimeStampedBase):
     """
     journal = models.ForeignKey(Journal, related_name="yearentries")
     year = models.PositiveIntegerField(default=get_current_year, validators=[MaxValueValidator(4000)])
+    focus = models.TextField(blank=True)
+    content = MarkdownField()
     keywords = models.CharField(
         max_length=255,
         blank=True,
         help_text=_("What were the most important experiences/topics this year?")
     )
-    content = MarkdownField()
 
     objects = YearEntryQuerySet.as_manager()
 
