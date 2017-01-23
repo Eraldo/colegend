@@ -16,6 +16,11 @@ class WeekEntryQuerySet(models.QuerySet):
     def owned_by(self, user):
         return self.filter(journal__owner=user)
 
+    def current(self):
+        today = timezone.now().date()
+        scope = Week(date=today)
+        return self.filter(year=scope.year.number, week=scope.number)
+
 
 class WeekEntry(AutoUrlsMixin, TaggableBase, TimeStampedBase):
     """

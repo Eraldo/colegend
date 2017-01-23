@@ -35,6 +35,58 @@ class CommunityPage(RoutablePageMixin, Page):
     def index(self, request):
         return self.render(request)
 
+    @route(r'^duo/$')
+    def duo(self, request):
+        context = self.get_context(request)
+        user = request.user
+        if user.is_authenticated:
+            duo = user.duo
+            if duo:
+                partner = duo.members.exclude(id=user.id).first()
+                if partner:
+                    context['partner'] = partner
+                    dayentry = partner.journal.dayentries.current().first()
+                    if dayentry:
+                        partner.focus = dayentry.focus
+            context['duo'] = user.duo
+        return self.render(request, template='community/duo.html', context=context)
+
+    @route(r'^clan/$')
+    def clan(self, request):
+        context = self.get_context(request)
+        user = request.user
+        if user.is_authenticated:
+            duo = user.duo
+            if duo:
+                clan = duo.clan
+                if clan:
+                    context['clan'] = clan
+                    partners = clan.members.exclude(id=user.id)
+                    if partners:
+                        context['partners'] = partners
+                        for partner in partners:
+                            weekentry = partner.journal.weekentries.current().first()
+                            if weekentry:
+                                partner.focus = weekentry.focus
+        return self.render(request, template='community/clan.html', context=context)
+
+    @route(r'^tribe/$')
+    def tribe(self, request):
+        context = self.get_context(request)
+        user = request.user
+        if user.is_authenticated:
+            tribe = user.tribe
+            if tribe:
+                context['tribe'] = tribe
+                partners = tribe.members.exclude(id=user.id)
+                if partners:
+                    context['partners'] = partners
+                    for partner in partners:
+                        monthentry = partner.journal.monthentries.current().first()
+                        if monthentry:
+                            partner.focus = monthentry.focus
+        return self.render(request, template='community/tribe.html', context=context)
+
     @route(r'^join/$')
     def join(self, request):
         context = self.get_context(request)

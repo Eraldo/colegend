@@ -109,6 +109,7 @@ coicons = {
     'game': 'dice',
     'games': 'dice',
     'duo': 'dotted-duo',
+    'clan': 'dotted-square',
     'tribe': 'dotted-square',
     # 'apps': 'lego',
     'project': 'logo',

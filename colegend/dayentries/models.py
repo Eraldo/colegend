@@ -14,6 +14,11 @@ class DayEntryQuerySet(models.QuerySet):
     def owned_by(self, user):
         return self.filter(journal__owner=user)
 
+    def current(self):
+        today = timezone.now().date()
+        return self.filter(date=today)
+
+
 
 class DayEntry(AutoUrlsMixin, TaggableBase, TimeStampedBase):
     """

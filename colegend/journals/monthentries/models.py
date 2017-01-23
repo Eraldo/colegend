@@ -18,6 +18,11 @@ class MonthEntryQuerySet(models.QuerySet):
     def owned_by(self, user):
         return self.filter(journal__owner=user)
 
+    def current(self):
+        today = timezone.now().date()
+        scope = Month(date=today)
+        return self.filter(year=scope.year.number, month=scope.number)
+
 
 class MonthEntry(AutoUrlsMixin, TaggableBase, TimeStampedBase):
     """

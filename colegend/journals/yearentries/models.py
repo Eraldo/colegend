@@ -1,6 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.core.validators import MaxValueValidator
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from colegend.core.fields import MarkdownField
@@ -14,6 +15,11 @@ from colegend.tags.models import TaggableBase
 class YearEntryQuerySet(models.QuerySet):
     def owned_by(self, user):
         return self.filter(journal__owner=user)
+
+    def current(self):
+        today = timezone.now().date()
+        scope = Year(date=today)
+        return self.filter(year=scope.number)
 
 
 class YearEntry(AutoUrlsMixin, TaggableBase, TimeStampedBase):
