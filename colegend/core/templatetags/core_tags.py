@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
 from django.utils.html import format_html
 
+from ..components.card.component import CardComponent
 from ..components.link.component import LinkComponent
 from colegend.core.intuitive_duration.utils import intuitive_duration_string
 from colegend.core.utils.icons import get_icon_class
@@ -197,3 +198,4 @@ def card(content, header='', title='', footer='', url='', classes=''):
 
 
 register.tag(LinkComponent.as_tag())
+register.tag(CardComponent.as_tag())

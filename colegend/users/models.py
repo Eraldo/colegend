@@ -78,6 +78,13 @@ class User(AbstractUser):
         resize_source=dict(size=(400, 400)),
     )
 
+    purpose = models.CharField(
+        verbose_name=_("legend purpose"),
+        max_length=255,
+        help_text=_("I am a legend, <what you are doing or being> as <the role you are doing it as>."),
+        default=_("I am a legend, defining my legend purpose as a member of colegend.")
+    )
+
     def get_avatar(self, size=None):
         if not size:
             size = 'medium'

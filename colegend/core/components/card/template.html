@@ -1,0 +1,31 @@
+{% load core_tags %}
+<div class="widget-card card bg-content {{ classes }}">
+    {% if header or closeable or actions %}
+        <div class="card-header">
+            {{ header }}
+        {% if actions %}
+            {% include 'widgets/action-menu.html' with right=True class='pull-right' %}
+        {% endif %}
+            {% if closeable %}
+                <div class="widget-close-button pull-right">
+                    <a onclick="$(this).closest('.card').hide('blind', {direction: 'up'});"
+                       class="close-button text-muted">
+                        {% icon 'close' %}
+                    </a>
+                </div>
+                {% if not header %}<br>{% endif %}
+            {% endif %}
+        </div>
+    {% endif %}
+    <div class="card-block">
+        {% if title %}
+            {% heading title level=4 classes='card-title' %}
+        {% endif %}
+        {{ content }}
+    </div>
+    {% if footer %}
+        <div class="card-footer">
+            {{ footer }}
+        </div>
+    {% endif %}
+</div>

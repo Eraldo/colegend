@@ -60,7 +60,7 @@ def complete_card(request, card):
 
     game_link = reverse('games:index')
     continue_message = _(
-        'If you want you can continue to play the <a id="continue-game-button" href="{link}">game</a>.').format(
+        'If you want you can continue the <a id="continue-game-button" href="{link}">tutorial</a>.').format(
         link=game_link)
     message = '{}<br>{}'.format(success_message, continue_message)
     messages.success(request, mark_safe(message))
