@@ -75,16 +75,20 @@ class CommunityPage(RoutablePageMixin, Page):
         context = self.get_context(request)
         user = request.user
         if user.is_authenticated():
-            tribe = user.tribe
-            if tribe:
-                context['tribe'] = tribe
-                partners = tribe.members.exclude(id=user.id)
-                if partners:
-                    context['partners'] = partners
-                    for partner in partners:
-                        monthentry = partner.journal.monthentries.current().first()
-                        if monthentry:
-                            partner.focus = monthentry.focus
+            duo = user.duo
+            if duo:
+                clan = duo.clan
+                if clan:
+                    tribe = clan.tribe
+                    if tribe:
+                        context['tribe'] = tribe
+                        partners = tribe.members.exclude(id=user.id)
+                        if partners:
+                            context['partners'] = partners
+                            for partner in partners:
+                                monthentry = partner.journal.monthentries.current().first()
+                                if monthentry:
+                                    partner.focus = monthentry.focus
         return self.render(request, template='community/tribe.html', context=context)
 
     @route(r'^join/$')
