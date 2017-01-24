@@ -102,7 +102,7 @@ class Tribe(models.Model):
     mentor = models.OneToOneField(
         verbose_name=_('mentor'),
         to=settings.AUTH_USER_MODEL,
-        limit_choices_to={'groups__name': 'mentors'},
+        limit_choices_to={'groups__name': 'Mentors'},
         related_name='tribe',
         on_delete=models.PROTECT
     )
