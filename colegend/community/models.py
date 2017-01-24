@@ -39,7 +39,7 @@ class CommunityPage(RoutablePageMixin, Page):
     def duo(self, request):
         context = self.get_context(request)
         user = request.user
-        if user.is_authenticated:
+        if user.is_authenticated():
             duo = user.duo
             if duo:
                 partner = duo.members.exclude(id=user.id).first()
@@ -55,7 +55,7 @@ class CommunityPage(RoutablePageMixin, Page):
     def clan(self, request):
         context = self.get_context(request)
         user = request.user
-        if user.is_authenticated:
+        if user.is_authenticated():
             duo = user.duo
             if duo:
                 clan = duo.clan
@@ -74,7 +74,7 @@ class CommunityPage(RoutablePageMixin, Page):
     def tribe(self, request):
         context = self.get_context(request)
         user = request.user
-        if user.is_authenticated:
+        if user.is_authenticated():
             tribe = user.tribe
             if tribe:
                 context['tribe'] = tribe

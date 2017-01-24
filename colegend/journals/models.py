@@ -99,7 +99,7 @@ class JournalPage(RoutablePageMixin, Page):
         context = self.get_context(request, scope)
 
         user = request.user
-        if user and user.is_authenticated:
+        if user and user.is_authenticated():
             dayentry = user.journal.dayentries.filter(date=scope.date).first()
             context['dayentry'] = dayentry
 
@@ -125,7 +125,7 @@ class JournalPage(RoutablePageMixin, Page):
         context = self.get_context(request, scope)
 
         user = request.user
-        if user and user.is_authenticated:
+        if user and user.is_authenticated():
             weekentry = user.journal.weekentries.filter(year=scope.start.year, week=scope.number).first()
             context['weekentry'] = weekentry
 
@@ -162,7 +162,7 @@ class JournalPage(RoutablePageMixin, Page):
         context = self.get_context(request, scope)
 
         user = request.user
-        if user and user.is_authenticated:
+        if user and user.is_authenticated():
             monthentry = user.journal.monthentries.filter(year=scope.date.year, month=scope.number).first()
             context['monthentry'] = monthentry
 
@@ -199,7 +199,7 @@ class JournalPage(RoutablePageMixin, Page):
         context = self.get_context(request, scope)
 
         user = request.user
-        if user and user.is_authenticated:
+        if user and user.is_authenticated():
             quarterentry = user.journal.quarterentries.filter(year=scope.date.year, quarter=scope.number).first()
             context['quarterentry'] = quarterentry
 
@@ -236,7 +236,7 @@ class JournalPage(RoutablePageMixin, Page):
         context = self.get_context(request, scope)
 
         user = request.user
-        if user and user.is_authenticated:
+        if user and user.is_authenticated():
             yearentry = user.journal.yearentries.filter(year=scope.number).first()
             context['yearentry'] = yearentry
 
