@@ -6,7 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from easy_thumbnails.fields import ThumbnailerImageField
 
 from colegend.core.fields import MarkdownField
-from colegend.core.models import OwnedBase, AutoUrlsMixin, OwnedQuerySet
+from colegend.core.models import OwnedBase, AutoUrlsMixin, OwnedQuerySet, TimeStampedBase
 from colegend.core.utils.media_paths import UploadToOwnedDirectory
 
 
@@ -28,7 +28,7 @@ class VisionQuerySet(OwnedQuerySet):
             return Vision.objects.none()
 
 
-class Vision(AutoUrlsMixin, OwnedBase):
+class Vision(AutoUrlsMixin, OwnedBase, TimeStampedBase):
     """
     A django model representing a user's vision.
     """
