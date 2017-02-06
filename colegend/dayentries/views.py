@@ -64,6 +64,9 @@ class DayEntryCreateView(LoginRequiredMixin, DayEntryMixin, CreateView):
         # default content
         initial['content'] = journal.day_template
 
+        # default focus
+        initial['focus'] = journal.focus_template
+
         # Prefill the entry based on the previous entry if found.
         previous = DayEntry.objects.owned_by(user).filter(date__lte=date).first()
         if previous:

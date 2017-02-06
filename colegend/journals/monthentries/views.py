@@ -70,6 +70,9 @@ class MonthEntryCreateView(LoginRequiredMixin, MonthEntryMixin, CreateView):
         # default content
         initial['content'] = journal.month_template
 
+        # default focus
+        initial['focus'] = journal.focus_template
+
         # prefill tags
         start = timezone.datetime.strptime('{}-M{}'.format(year, month), "%Y-M%m")
         days_in_month = monthrange(int(year), int(month))[1]

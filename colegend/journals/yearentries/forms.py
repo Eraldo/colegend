@@ -35,7 +35,7 @@ class YearEntryForm(forms.ModelForm):
         self.helper.layout = Layout(
             Field('journal', type='hidden'),
             Field('year'),
-            Field('focus', rows=2),
+            Field('focus', rows=3),
             Field('content', spellchecker=spellchecker, autofocus=True),
             Field('keywords'),
             Field('tags'),

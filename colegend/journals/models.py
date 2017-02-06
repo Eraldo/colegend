@@ -29,6 +29,7 @@ class Journal(AutoUrlsMixin, AutoOwnedBase):
     month_template = MarkdownField(default=render_to_string('monthentries/template.md'))
     quarter_template = MarkdownField(default=render_to_string('quarterentries/template.md'))
     year_template = MarkdownField(default=render_to_string('yearentries/template.md'))
+    focus_template = """1. [] \n2. [] \n3. [] """
 
     objects = JournalQuerySet.as_manager()
 

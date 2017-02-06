@@ -68,6 +68,9 @@ class WeekEntryCreateView(LoginRequiredMixin, WeekEntryMixin, CreateView):
         # default content
         initial['content'] = journal.week_template
 
+        # default focus
+        initial['focus'] = journal.focus_template
+
         start = timezone.datetime.strptime('{}-W{}-1'.format(year, week), "%Y-W%W-%w")
         end = start + timezone.timedelta(days=6)
         if start and end:

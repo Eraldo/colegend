@@ -37,7 +37,7 @@ class DayEntryForm(forms.ModelForm):
             Field('journal', type='hidden'),
             Field('date'),
             Field('locations', autofocus=True),
-            Field('focus', rows=2),
+            Field('focus', rows=3),
             Field('content', spellchecker=spellchecker),
             Field('keywords'),
             Field('tags'),
