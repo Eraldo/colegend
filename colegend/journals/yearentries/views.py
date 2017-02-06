@@ -65,6 +65,9 @@ class YearEntryCreateView(LoginRequiredMixin, YearEntryMixin, CreateView):
         # default content
         initial['content'] = journal.year_template
 
+        # default focus
+        initial['focus'] = journal.focus_template
+
         # prefill tags
         quarters = QuarterEntry.objects.owned_by(user).filter(year=scope.number)
         if quarters:

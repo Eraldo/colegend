@@ -37,7 +37,7 @@ class QuarterEntryForm(forms.ModelForm):
             Field('journal', type='hidden'),
             Field('year'),
             Field('quarter'),
-            Field('focus', rows=2),
+            Field('focus', rows=3),
             Field('content', spellchecker=spellchecker, autofocus=True),
             Field('keywords'),
             Field('tags'),
