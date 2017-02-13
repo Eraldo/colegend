@@ -26,8 +26,9 @@ class ComponentNode(template.Node):
         :param token:
         :return:
         """
-        self.args, self.kwargs, self.variable = self.parse_content(parser, token)
-        return self
+        node = ComponentNode(self.component)
+        node.args, node.kwargs, node.variable = node.parse_content(parser, token)
+        return node
 
     @property
     def _decorated_function(self):
