@@ -2,6 +2,7 @@ import inspect
 import os
 
 from django import template
+from django.template import Context
 from django.template import Template
 from django.template.library import parse_bits
 from django.template.loader import render_to_string, get_template
@@ -42,7 +43,9 @@ class ComponentNode(template.Node):
         """
         args, kwargs = self.get_resolved_arguments(context, self.args, self.kwargs)
         if self.takes_context:
-            output = self.component.render(context, *args, **kwargs)
+            component_context = Context()
+            component_context.update(context.flatten())
+            output = self.component.render(component_context, *args, **kwargs)
         else:
             output = self.component.render(*args, **kwargs)
 

@@ -183,7 +183,6 @@ def buttons(buttons, classes=None):
     return render_to_string(buttons_template, context=buttons_context)
 
 
-@register.simple_tag()
 def card(content, header='', title='', footer='', url='', classes=''):
     card_template = 'widgets/card.html'
     card_context = {
