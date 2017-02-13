@@ -2,8 +2,8 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.db.models import Count
-from django.template.loader import render_to_string
 from django.template.response import TemplateResponse
+from django.utils.html import format_html_join, format_html
 from django.utils.translation import ugettext_lazy as _
 from wagtail.contrib.wagtailroutablepage.models import route, RoutablePageMixin
 from wagtail.wagtailcore.models import Page
@@ -47,7 +47,7 @@ class CommunityPage(RoutablePageMixin, Page):
                     context['partner'] = partner
                     dayentry = partner.journal.dayentries.current().first()
                     if dayentry:
-                        partner.focus = dayentry.focus
+                        partner.focus = format_html_join('', '{0} [{1}]<br>', ((outcome, outcome.get_status_display()) for outcome in dayentry.outcomes))
             context['duo'] = user.duo
         return self.render(request, template='community/duo.html', context=context)
 
@@ -67,7 +67,9 @@ class CommunityPage(RoutablePageMixin, Page):
                         for partner in partners:
                             weekentry = partner.journal.weekentries.current().first()
                             if weekentry:
-                                partner.focus = weekentry.focus
+                                partner.focus = format_html_join('', '{0} [{1}]<br>',
+                                                                 ((outcome, outcome.get_status_display()) for outcome in
+                                                                  weekentry.outcomes))
         return self.render(request, template='community/clan.html', context=context)
 
     @route(r'^tribe/$')
@@ -88,7 +90,9 @@ class CommunityPage(RoutablePageMixin, Page):
                             for partner in partners:
                                 monthentry = partner.journal.monthentries.current().first()
                                 if monthentry:
-                                    partner.focus = monthentry.focus
+                                    partner.focus = format_html_join('', '{0} [{1}]<br>',
+                                                                     ((outcome, outcome.get_status_display()) for
+                                                                      outcome in monthentry.outcomes))
         return self.render(request, template='community/tribe.html', context=context)
 
     @route(r'^join/$')

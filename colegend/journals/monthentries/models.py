@@ -10,6 +10,7 @@ from colegend.core.fields import MarkdownField
 from colegend.core.models import AutoUrlsMixin, TimeStampedBase
 from colegend.journals.models import Journal, JournalPage
 from colegend.journals.scopes import Month
+from colegend.outcomes.models import Outcome
 from .utils import get_current_year, get_current_month
 from colegend.tags.models import TaggableBase
 
@@ -31,7 +32,36 @@ class MonthEntry(AutoUrlsMixin, TaggableBase, TimeStampedBase):
     journal = models.ForeignKey(Journal, related_name="monthentries")
     year = models.PositiveIntegerField(default=get_current_year, validators=[MaxValueValidator(4000)])
     month = models.PositiveIntegerField(default=get_current_month, validators=[MaxValueValidator(12)])
-    focus = models.TextField(blank=True)
+    outcome_1 = models.ForeignKey(
+        to=Outcome,
+        blank=True, null=True,
+        on_delete=models.SET_NULL,
+        related_name='month_focus_1',
+    )
+    outcome_2 = models.ForeignKey(
+        to=Outcome,
+        blank=True, null=True,
+        on_delete=models.SET_NULL,
+        related_name='month_focus_2',
+    )
+    outcome_3 = models.ForeignKey(
+        to=Outcome,
+        blank=True, null=True,
+        on_delete=models.SET_NULL,
+        related_name='month_focus_3',
+    )
+    outcome_4 = models.ForeignKey(
+        to=Outcome,
+        blank=True, null=True,
+        on_delete=models.SET_NULL,
+        related_name='month_focus_4',
+    )
+
+    @property
+    def outcomes(self):
+        outcomes = [self.outcome_1, self.outcome_2, self.outcome_3, self.outcome_4]
+        return [outcome for outcome in outcomes if outcome]
+
     content = MarkdownField()
     keywords = models.CharField(
         max_length=255,

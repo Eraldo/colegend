@@ -4,6 +4,8 @@ from django.shortcuts import redirect
 from django.template.loader import render_to_string
 from django.template.response import TemplateResponse
 from django.utils import timezone
+from django.utils.html import format_html, format_html_join
+from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from django.utils.dateparse import parse_date
 from django.db import models
@@ -11,6 +13,7 @@ from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin, route
 from wagtail.wagtailcore.models import Page
 from colegend.core.fields import MarkdownField
 from colegend.core.models import AutoOwnedBase, AutoUrlsMixin, OwnedQuerySet
+from colegend.core.templatetags.core_tags import card
 from colegend.journals import scopes
 
 
@@ -104,6 +107,10 @@ class JournalPage(RoutablePageMixin, Page):
             dayentry = user.journal.dayentries.filter(date=scope.date).first()
             context['dayentry'] = dayentry
 
+            if dayentry:
+                from colegend.outcomes.templatetags.outcomes_tags import outcome as outcome_tag
+                context['focus_outcomes'] = mark_safe(''.join([outcome_tag(context, outcome) for outcome in dayentry.outcomes]))
+
             outcomes = user.outcomes.all()
             context['scheduled_outcomes'] = outcomes.scheduled(date=scope.date)
             context['deadlined_outcomes'] = outcomes.deadlined(date=scope.date)
@@ -129,6 +136,10 @@ class JournalPage(RoutablePageMixin, Page):
         if user and user.is_authenticated():
             weekentry = user.journal.weekentries.filter(year=scope.start.year, week=scope.number).first()
             context['weekentry'] = weekentry
+
+            if weekentry:
+                from colegend.outcomes.templatetags.outcomes_tags import outcome as outcome_tag
+                context['focus_outcomes'] = mark_safe(''.join([outcome_tag(context, outcome) for outcome in weekentry.outcomes]))
 
             days = []
             day = scopes.Day(scope.start)
@@ -167,6 +178,10 @@ class JournalPage(RoutablePageMixin, Page):
             monthentry = user.journal.monthentries.filter(year=scope.date.year, month=scope.number).first()
             context['monthentry'] = monthentry
 
+            if monthentry:
+                from colegend.outcomes.templatetags.outcomes_tags import outcome as outcome_tag
+                context['focus_outcomes'] = mark_safe(''.join([outcome_tag(context, outcome) for outcome in monthentry.outcomes]))
+
             weeks = []
             week = scopes.Week(scope.start)
             while week.date <= scope.end:
@@ -204,6 +219,10 @@ class JournalPage(RoutablePageMixin, Page):
             quarterentry = user.journal.quarterentries.filter(year=scope.date.year, quarter=scope.number).first()
             context['quarterentry'] = quarterentry
 
+            if quarterentry:
+                from colegend.outcomes.templatetags.outcomes_tags import outcome as outcome_tag
+                context['focus_outcomes'] = mark_safe(''.join([outcome_tag(context, outcome) for outcome in quarterentry.outcomes]))
+
             months = []
             month = scopes.Month(scope.start)
             while month.date <= scope.end:
@@ -240,6 +259,10 @@ class JournalPage(RoutablePageMixin, Page):
         if user and user.is_authenticated():
             yearentry = user.journal.yearentries.filter(year=scope.number).first()
             context['yearentry'] = yearentry
+
+            if yearentry:
+                from colegend.outcomes.templatetags.outcomes_tags import outcome as outcome_tag
+                context['focus_outcomes'] = mark_safe(''.join([outcome_tag(context, outcome) for outcome in yearentry.outcomes]))
 
             quarters = []
             quarter = scopes.Quarter(scope.start)
