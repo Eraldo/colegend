@@ -1,5 +1,6 @@
 {% load core_tags outcomes_tags buttons crispy_forms_tags %}
-<div id="{{ id }}" class="widget-outcome-card card card-item bg-content hover-border-accent" data-url="{{ url }}" ondblclick="window.location=$(this).attr('data-url');">
+<div id="{{ id }}" class="widget-outcome-card card card-item bg-content hover-border-accent" data-url="{{ url }}"
+     ondblclick="window.location=$(this).attr('data-url');">
     <span data-toggle="modal" data-target="#outcome-{{ id }}-modal">{% status %}</span>
     <strong><a href="{{ url }}">{{ name }}</a></strong>
     <div class="outcome-details">

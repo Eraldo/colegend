@@ -1,3 +1,4 @@
+from dal_select2.views import Select2QuerySetView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, RedirectView
 from django.views.generic.edit import FormMixin
@@ -104,3 +105,26 @@ class OutcomeInboxView(RedirectView):
             prefix='&' if args else '?',
             suffix='inbox=2',
         )
+
+
+class OutcomeAutocompleteView(LoginRequiredMixin, OutcomeMixin, Select2QuerySetView):
+    """
+    A django view providing autocomplete data.
+    """
+    create_field = 'name'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        user = self.request.user
+        return queryset.owned_by(user)
+
+    def create_object(self, text):
+        """Create an object given a text."""
+        owner = self.request.user
+        return self.get_queryset().create(**{self.create_field: text}, owner=owner)
+
+    def has_add_permission(self, request):
+        """Return True if the user has the permission to add a model."""
+        if not request.user.is_authenticated():
+            return False
+        return True
