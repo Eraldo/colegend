@@ -9,12 +9,6 @@ This morning I am grateful for:
 
 My Legend Purpose: 
 
-Today's focus outcomes:
-
-1. 
-2. 
-3. 
-
 # Day
 ??:00 I woke up.
 
