@@ -116,7 +116,7 @@ class OutcomeAutocompleteView(LoginRequiredMixin, OutcomeMixin, Select2QuerySetV
     def get_queryset(self):
         queryset = super().get_queryset()
         user = self.request.user
-        return queryset.owned_by(user)
+        return queryset.owned_by(user).exclude(status=Outcome.CLOSED)
 
     def create_object(self, text):
         """Create an object given a text."""

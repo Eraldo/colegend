@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
 from django.utils.html import format_html
 
-from ..components.card.component import CardComponent
+from ..components.card import CardComponent
 from ..components.link.component import LinkComponent
 from colegend.core.intuitive_duration.utils import intuitive_duration_string
 from colegend.core.utils.icons import get_icon_class
@@ -113,7 +113,8 @@ render_icon = icon
 
 
 @register.simple_tag()
-def button(name, url=None, pattern=None, prefix='btn', content=None, classes='btn-primary', icon=None, size=None, locked=False, external=False, attributes=None):
+def button(name, url=None, pattern=None, prefix='btn', content=None, classes='btn-primary', icon=None, size=None,
+           locked=False, external=False, attributes=None):
     classes_dict = {
         'list': 'btn-secondary btn-sm',
         'create': 'btn-secondary btn-sm',
@@ -198,4 +199,7 @@ def card(content, header='', title='', footer='', url='', classes=''):
 
 
 register.tag(LinkComponent.as_tag())
-register.tag(CardComponent.as_tag())
+# CardComponent.register(register)
+# register.tag(CardComponent.as_tag())
+# register.tag(CardComponent.as_tag())
+# register.tag(NewCardComponent.as_tag())

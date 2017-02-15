@@ -13,7 +13,6 @@ from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin, route
 from wagtail.wagtailcore.models import Page
 from colegend.core.fields import MarkdownField
 from colegend.core.models import AutoOwnedBase, AutoUrlsMixin, OwnedQuerySet
-from colegend.core.templatetags.core_tags import card
 from colegend.journals import scopes
 
 
