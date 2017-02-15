@@ -1,5 +1,6 @@
 {% load core_tags %}
 <div class="widget-card card bg-content {{ classes }}">
+    {{ content }}
     {% if header or closeable or actions %}
         <div class="card-header">
             {{ header }}
@@ -21,7 +22,6 @@
         {% if title %}
             {% heading title level=4 classes='card-title' %}
         {% endif %}
-        {{ content }}
     </div>
     {% if footer %}
         <div class="card-footer">

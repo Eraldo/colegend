@@ -14,6 +14,8 @@ from colegend.components.utils import camelcase_to_underscores
 
 
 class ComponentNode(template.Node):
+    content = []
+
     def __init__(self, component):
         self.component = component
         # Needed for template tag naming.
@@ -27,8 +29,13 @@ class ComponentNode(template.Node):
         :param token:
         :return:
         """
-        node = ComponentNode(self.component)
+        component = self.component
+        node = ComponentNode(component)
         node.args, node.kwargs, node.variable = node.parse_content(parser, token)
+        if component.is_block:
+            content = parser.parse(('end_{}'.format(component.name),))
+            parser.delete_first_token()
+            node.content = content
         return node
 
     @property
@@ -45,6 +52,8 @@ class ComponentNode(template.Node):
         if self.takes_context:
             component_context = Context()
             component_context.update(context.flatten())
+            if self.content:
+                kwargs['content'] = self.content.render(component_context)
             output = self.component.render(component_context, *args, **kwargs)
         else:
             output = self.component.render(*args, **kwargs)
@@ -102,6 +111,8 @@ class Component:
     # defaults (relative path)
     template = 'template.html'
     style = 'style.css'
+    is_block = False
+    directives = []
 
     @property
     def name(self):
@@ -121,6 +132,13 @@ class Component:
         camel_name = class_name.replace('Component', '')
         name = camelcase_to_underscores(camel_name)
         return name
+
+    @classonlymethod
+    def register(cls, library):
+        library.tag(cls.as_tag())
+        # TODO: Replace with delegation to own directives to prevent loading too many tags into the library.
+        for directive in cls.directives:
+            library.tag(directive.as_tag())
 
     @classonlymethod
     def as_tag(cls):
@@ -148,12 +166,11 @@ class Component:
         return style
 
     def get_template(self, context, *args, **kwargs):
-        name = self.template
-        data = self.get_file_data(name)
+        data = self.get_file_data('{0}.html'.format(self.name)) or self.get_file_data(self.template)
         if data:
             template = Template(data)
         else:
-            template = get_template(name)
+            template = get_template(self.template)
         return template
 
     def get_context(self, context, *args, **kwargs):
