@@ -42,7 +42,7 @@
 {% block content_container %}
     {% include 'widgets/quote.html' with author='Harvey Fierstein' sharer='Millionaire Tiger Entrepreneur' text="Accept no one's definition of your life, but define yourself." %}
 
-    {% if not intro %}
+    {% if user == legend and not intro %}
         <p>
             {% include 'legends/chats/introduction.html' %}
         </p>
