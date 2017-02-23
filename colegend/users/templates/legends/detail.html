@@ -12,14 +12,41 @@
     {% for link in page_links %}
         {% button name=link.name url=link.url kind=link.kind locked=link.locked id=link.id %}
     {% endfor %}
+    {% if intro %}
+        <span class="pull-right">
+        <a href="" data-toggle="modal" data-target="#introModal"
+           class="link nav-item nav-link">
+        Intro
+        </a>
+    </span>
+        <!-- Modal -->
+        <div class="modal fade" id="introModal" tabindex="-1" role="dialog" aria-labelledby="introModalLabel"
+             aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="introModalLabel">Introduction</h4>
+                </div>
+                <div class="modal-body">
+                    {% include 'legends/chats/introduction.html' %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}
 
 {% block content_container %}
     {% include 'widgets/quote.html' with author='Harvey Fierstein' sharer='Millionaire Tiger Entrepreneur' text="Accept no one's definition of your life, but define yourself." %}
 
-    <p>
-        {% include 'legends/chats/introduction.html' %}
-    </p>
+    {% if not intro %}
+        <p>
+            {% include 'legends/chats/introduction.html' %}
+        </p>
+    {% endif %}
     <div class="row">
         <div class="col-md-3 text-center">
             {% static 'legends/images/coLegend-hero.png' as hero_avatar_url %}
