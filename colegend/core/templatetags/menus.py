@@ -33,6 +33,7 @@ def menu(context, user=None, name='main'):
             'nodes': [
                 {
                     'name': 'Manager',
+                    'locked': not user.has_checkpoint('manager') if user.is_authenticated() else True,
                     'url': reverse('manager:index'),
                 },
                 {
