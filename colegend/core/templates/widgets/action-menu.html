@@ -5,7 +5,13 @@
            aria-expanded="false">{% icon 'more' fixed=True color='grey' %}</a>
         <div class="dropdown-menu{% if right %} dropdown-menu-right{% endif %}">
             {% for action in actions %}
-                {% button action.name url=action.url kind='default dropdown-item' %}
+                {% if action.post_url %}
+                    <form action="{{ action.post_url }}" method="post">{% csrf_token %}
+                        <button type="submit" class="default dropdown-item">{% icon action.icon fixed=True %} {{ action.name }}</button>
+                    </form>
+                {% else %}
+                    {% button action.name url=action.url icon=action.icon kind='default dropdown-item' %}
+                {% endif %}
             {% endfor %}
         </div>
     </div>

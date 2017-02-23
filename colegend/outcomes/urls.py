@@ -1,7 +1,7 @@
 from django.conf.urls import url
 
 from .views import OutcomeIndexView, OutcomeListView, OutcomeCreateView, OutcomeDetailView, OutcomeUpdateView, \
-    OutcomeDeleteView, OutcomeInboxView, OutcomeAutocompleteView
+    OutcomeDeleteView, OutcomeInboxView, OutcomeAutocompleteView, OutcomeInboxToggleView
 
 urlpatterns = [
     url(r'^$',
@@ -25,6 +25,10 @@ urlpatterns = [
     url(r'^(?P<pk>[0-9]+)/delete/$',
         OutcomeDeleteView.as_view(),
         name='delete'),
+
+    url(r'^(?P<pk>[0-9]+)/toggle_inbox/$',
+        OutcomeInboxToggleView.as_view(),
+        name='toggle_inbox'),
 
     url(
         'autocomplete/$',
