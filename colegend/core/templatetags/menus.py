@@ -13,7 +13,9 @@ __author__ = 'Eraldo Energy'
 def get_community_url(group='duo'):
     community_page = CommunityPage.objects.first()
     if community_page:
-        url = community_page.url + community_page.reverse_subpage(group)
+        url = community_page.url
+        if group != 'community':
+            url += community_page.reverse_subpage(group)
     else:
         url = '#{0}'.format(group)
     return url
@@ -88,6 +90,11 @@ def menu(context, user=None, name='main'):
                     'name': 'Tribe',
                     # 'locked': True,
                     'url': get_community_url(group='tribe'),
+                },
+                {
+                    'name': 'Legends',
+                    # 'locked': True,
+                    'url': get_community_url(group='community'),
                 },
                 {
                     'name': 'Guide',
