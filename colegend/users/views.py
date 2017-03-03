@@ -42,7 +42,9 @@ class LegendDetailView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         user = self.request.user
         legend = self.get_object()
+        intro = False
         if user == legend:
+            intro = user.has_checkpoint('profile intro')
             page_links = [
                 {
                     'name': 'Outer Call',
@@ -73,10 +75,17 @@ class LegendDetailView(LoginRequiredMixin, DetailView):
                 id = '{}-button'.format(slug)
                 link.update({'kind': kind, 'id': id})
             context['page_links'] = page_links
+        context['intro'] = intro
         context['core_manager'] = legend.has_role('core manager')
         context['cloud_guide'] = legend.has_role('guide')
         context['roles'] = legend.roles.all()
         return context
+
+    def post(self, request, *args, **kwargs):
+        if 'intro' in request.POST:
+            user = request.user
+            user.add_checkpoint(name='profile intro')
+        return self.get(request, *args, **kwargs)
 
 
 class LegendUpdateView(LoginRequiredMixin, UpdateView):

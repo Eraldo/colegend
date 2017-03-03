@@ -1,5 +1,6 @@
 from dal_select2.views import Select2QuerySetView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, RedirectView
 from django.views.generic.edit import FormMixin
 
@@ -60,6 +61,18 @@ class OutcomeListView(LoginRequiredMixin, OutcomeMixin, ListView):
         return context
 
 
+class OutcomeAgendaView(OutcomeListView):
+    template_name = 'outcomes/agenda.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['quick_create_form'] = self.get_quick_create_form()
+        context['agenda'] = True
+        user = self.request.user
+        # context['focus_outcomes'] =
+        return context
+
+
 class OutcomeCreateView(LoginRequiredMixin, OutcomeMixin, OwnedCreateView):
     template_name = 'outcomes/create.html'
 
@@ -91,6 +104,17 @@ class OutcomeDeleteView(LoginRequiredMixin, OutcomeMixin, DeleteView):
     def get_success_url(self):
         outcome = self.get_object()
         return outcome.index_url
+
+
+class OutcomeInboxToggleView(OutcomeUpdateView):
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        outcome = self.get_object()
+        if outcome.owned_by(user):
+            outcome.inbox = not outcome.inbox
+            outcome.save()
+            return redirect(self.get_success_url())
+        return super().post(request)
 
 
 class OutcomeInboxView(RedirectView):

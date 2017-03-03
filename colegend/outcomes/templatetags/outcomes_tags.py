@@ -1,9 +1,9 @@
 from django import template
 from django.template.loader import render_to_string
+from django.urls import reverse
 from django.utils import timezone
 
 from colegend.core.templatetags.core_tags import icon, intuitive_duration
-from ..components.outcome.component import OutcomeComponent
 from colegend.outcomes.forms import OutcomeStatusForm
 from colegend.outcomes.models import Outcome
 
@@ -22,6 +22,7 @@ def outcome_link(context, outcome=None, **kwargs):
     return render_to_string(template, context=context)
 
 
+@register.simple_tag(takes_context=True)
 def outcome(context, outcome=None, **kwargs):
     outcome = outcome or context.get('outcome', {})
     request = context.get('request')
@@ -46,6 +47,14 @@ def outcome(context, outcome=None, **kwargs):
                         'url': outcome.update_url,
                     },
                     {
+                        'name': 'toggle inbox',
+                        'post_url': '{action_url}?next={next_url}'.format(
+                            action_url=reverse('outcomes:toggle_inbox', args=[outcome.id]),
+                            next_url=request.path
+                        ),
+                        'icon': 'inbox',
+                    },
+                    {
                         'name': 'delete',
                         'url': outcome.delete_url,
                     },
@@ -56,9 +65,6 @@ def outcome(context, outcome=None, **kwargs):
     context.update(kwargs)
     template = 'outcomes/widgets/card.html'
     return render_to_string(template, context=context, request=request)
-
-
-register.tag(OutcomeComponent.as_tag())
 
 
 @register.simple_tag(takes_context=True)

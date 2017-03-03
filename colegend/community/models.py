@@ -18,6 +18,8 @@ class CommunityPage(RoutablePageMixin, Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
+        from colegend.users.models import User
+        context['legends'] = User.objects.filter(is_active=True)
         context['tribes'] = Tribe.objects.all()
         context['clans'] = Clan.objects.all()
         context['duos'] = Duo.objects.all()

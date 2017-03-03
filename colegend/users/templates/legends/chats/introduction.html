@@ -24,6 +24,10 @@
     <p>
         So prepare to be amazed… by yourself!
     </p>
+    <form action="." method="post">{% csrf_token %}
+        <input type="hidden" name="intro" value="done">
+        <input type="submit" value="Okay" class="btn btn-success">
+    </form>
 {% endblock %}
 
 {% block chat_response %}

@@ -1,5 +1,5 @@
 {% extends 'pages/content.html' %}
-{% load core_tags wagtailroutablepage_tags community_tags components_tags %}
+{% load core_tags wagtailroutablepage_tags community_tags components_tags legends_tags %}
 
 {% block title %}Community{% endblock %}
 
@@ -7,16 +7,26 @@
 {% endblock %}
 
 {% block content %}
-    {% for tribe in tribes %}
-        {% tribe %}<br>
-        {% for clan in tribe.clans.all %}
-            &nbsp;&nbsp;{% clan %}<br>
-            {% for duo in clan.duos.all %}
-                &nbsp;&nbsp;&nbsp;&nbsp;{% duo %}<br>
-                {% for member in duo.members.all %}
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ member }}<br>
-                {% endfor %}
-            {% endfor %}
+    <div class="row text-center">
+        {% for legend in legends %}
+            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                <div style="display: inline-block">
+                    {% legend %}
+                </div>
+            </div>
         {% endfor %}
-    {% endfor %}
+    </div>
+
+{#    {% for tribe in tribes %}#}
+{#        {% tribe %}<br>#}
+{#        {% for clan in tribe.clans.all %}#}
+{#            &nbsp;&nbsp;{% clan %}<br>#}
+{#            {% for duo in clan.duos.all %}#}
+{#                &nbsp;&nbsp;&nbsp;&nbsp;{% duo %}<br>#}
+{#                {% for member in duo.members.all %}#}
+{#                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ member }}<br>#}
+{#                {% endfor %}#}
+{#            {% endfor %}#}
+{#        {% endfor %}#}
+{#    {% endfor %}#}
 {% endblock %}
