@@ -61,6 +61,18 @@ class OutcomeListView(LoginRequiredMixin, OutcomeMixin, ListView):
         return context
 
 
+class OutcomeAgendaView(OutcomeListView):
+    template_name = 'outcomes/agenda.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['quick_create_form'] = self.get_quick_create_form()
+        context['agenda'] = True
+        user = self.request.user
+        # context['focus_outcomes'] =
+        return context
+
+
 class OutcomeCreateView(LoginRequiredMixin, OutcomeMixin, OwnedCreateView):
     template_name = 'outcomes/create.html'
 
