@@ -92,6 +92,7 @@ LOCAL_APPS = (
     'colegend.community',
     'colegend.studio',
     'colegend.academy',
+    'colegend.journey',
 
     'colegend.support',
     'colegend.blog',

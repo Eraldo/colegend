@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags core_tags cms_tags %}
+
+{% block title %}{{ page.title }}{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% if page %}
+        {% pageurl page.get_parent as url %}
+        {% include 'widgets/breadcrumb.html' with url=url title=page.get_parent.title icon=page.get_parent.title %}
+    {% endif %}
+{% endblock %}
+
+{% block page_links %}
+    {% menu page.get_parent 'horizontal' %}
+{% endblock %}
+
+{% block content %}
+    {{ page.content|richtext }}
+{% endblock %}
