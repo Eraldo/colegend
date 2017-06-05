@@ -1,0 +1,6 @@
+{% extends "studio/base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+    {{ page.content|richtext }}
+{% endblock %}

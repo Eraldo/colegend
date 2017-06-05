@@ -1,11 +1,15 @@
-{% extends 'pages/content.html' %}
-{% load core_tags crispy_forms_tags wagtailroutablepage_tags %}
+{% extends 'journals/base.html' %}
+{% load core_tags crispy_forms_tags wagtailroutablepage_tags cms_tags %}
 
-{% block title %}Journal {{ scope.name }}{% endblock %}
+{% block title %}{{ scope.name | title }} {{ page.title }}{% endblock %}
 
 {% block extra_head %}
     {{ block.super }}
     {{ datepickerform.media.css }}
+{% endblock %}
+
+{% block page_links %}
+    {% menu page.get_parent 'horizontal' %}
 {% endblock %}
 
 {% block page_controls %}

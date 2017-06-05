@@ -83,12 +83,13 @@ LOCAL_APPS = (
     'colegend.donations',
 
     'colegend.core',  # common code library
-    'colegend.community',
 
     'colegend.about',
     'colegend.home',
     'colegend.arcade',
     'colegend.office',
+    'colegend.community',
+    'colegend.studio',
     'colegend.support',
     'colegend.blog',
 

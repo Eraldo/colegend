@@ -7,7 +7,7 @@
     {{ block.super }}
     {% if page %}
         {% pageurl page.get_parent as url %}
-        {% include 'widgets/breadcrumb.html' with url=url title=page.get_parent.title icon=page.get_parent.title %}
+        {% include 'widgets/breadcrumb.html' with url=url title='Studio' icon='studio' %}
     {% endif %}
 {% endblock %}
 
