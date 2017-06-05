@@ -127,6 +127,10 @@ def menu(context, user=None, name='main'):
                     'url': slugurl(context, 'about'),
                 },
                 {
+                    'name': 'News',
+                    'url': slugurl(context, slug='news'),
+                },
+                {
                     'name': 'Events',
                     'url': slugurl(context, slug='events'),
                 },
@@ -168,14 +172,6 @@ def menu(context, user=None, name='main'):
                 {
                     'name': 'Tutorial',
                     'url': reverse('games:index'),
-                },
-                {
-                    'name': 'Habits',
-                    'locked': True,
-                },
-                {
-                    'name': 'Resources',
-                    'url': slugurl(context, slug='personal-development-resources'),
                 },
             ],
         },

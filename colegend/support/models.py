@@ -12,13 +12,13 @@ from colegend.cms.models import UniquePageMixin
 from colegend.core.templatetags.core_tags import card, link, icon
 
 
-class SupportPage(UniquePageMixin, Page):
+class SupportPage(Page):
     template = 'support/index.html'
 
     class Meta:
         verbose_name = _('Support')
 
-    parent_page_types = ['home.HomePage']
+    parent_page_types = ['cms.RootPage']
 
     # subpage_types = []
 

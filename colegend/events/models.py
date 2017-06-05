@@ -23,5 +23,5 @@ class EventsPage(Page):
     class Meta:
         verbose_name = _('Events')
 
-    parent_page_types = ['home.HomePage']
+    parent_page_types = ['cms.RootPage']
     # subpage_types = []
