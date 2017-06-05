@@ -45,23 +45,23 @@ def menu(context, user=None, name='main'):
                 },
                 {
                     'name': 'Office',
-                    # 'url': reverse('office'),
+                    'url': slugurl(context, slug='office'),
                 },
                 {
                     'name': 'Community',
-                    # 'url': reverse('community'),
+                    'url': slugurl(context, slug='community'),
                 },
                 {
                     'name': 'Studio',
-                    # 'url': reverse('studio'),
+                    'url': slugurl(context, slug='studio'),
                 },
                 {
                     'name': 'Academy',
-                    # 'url': reverse('academy'),
+                    'url': slugurl(context, slug='academy'),
                 },
                 {
                     'name': 'Journey',
-                    # 'url': reverse('journey'),
+                    'url': slugurl(context, slug='journey'),
                 },
                 {
                     'name': 'Manager',
