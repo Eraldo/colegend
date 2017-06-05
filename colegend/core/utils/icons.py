@@ -5,6 +5,14 @@ __author__ = 'Eraldo Energy'
 fontawesome_icons = {
     # apps
     'apps': 'cubes',
+    'home': 'home',
+    'arcade': 'gamepad',
+    'office': 'briefcase',
+    'community': 'group',
+    'studio': 'microphone',
+    'academy': 'graduation-cap',
+    'journey': 'compass',
+    #
     'mentor': 'compass',
     'manager': 'briefcase',
     'balance': 'balance-scale',

@@ -34,6 +34,36 @@ def menu(context, user=None, name='main'):
             'name': 'Apps',
             'nodes': [
                 {
+                    'name': 'Home',
+                    # 'locked': True,
+                    'url': slugurl(context, slug='home'),
+                },
+                {
+                    'name': 'Arcade',
+                    # 'locked': True,
+                    'url': slugurl(context, slug='arcade'),
+                },
+                {
+                    'name': 'Office',
+                    # 'url': reverse('office'),
+                },
+                {
+                    'name': 'Community',
+                    # 'url': reverse('community'),
+                },
+                {
+                    'name': 'Studio',
+                    # 'url': reverse('studio'),
+                },
+                {
+                    'name': 'Academy',
+                    # 'url': reverse('academy'),
+                },
+                {
+                    'name': 'Journey',
+                    # 'url': reverse('journey'),
+                },
+                {
                     'name': 'Manager',
                     'locked': not user.has_checkpoint('manager') if user.is_authenticated() else True,
                     'url': reverse('manager:index'),
@@ -50,10 +80,6 @@ def menu(context, user=None, name='main'):
                 {
                     'name': 'Vision',
                     'url': reverse('visions:index'),
-                },
-                {
-                    'name': 'Academy',
-                    'locked': True,
                 },
                 {
                     'name': 'Tutorial',

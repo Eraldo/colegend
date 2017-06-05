@@ -18,8 +18,18 @@ from colegend.core.templatetags.core_tags import link
 from django.utils.translation import ugettext_lazy as _
 
 
-class HomePage(UniquePageMixin, Page):
+class HomePage(Page):
     template = 'home/index.html'
+
+    def serve(self, request, *args, **kwargs):
+        return redirect(self.get_first_child().url)
+
+    parent_page_types = ['cms.RootPage']
+    subpage_types = ['DashboardPage', 'HabitsPage', 'StatsPage']
+
+
+class DashboardPage(Page):
+    template = 'home/dashboard.html'
 
     content = RichTextField(blank=True)
 
@@ -27,15 +37,8 @@ class HomePage(UniquePageMixin, Page):
         FieldPanel('content', classname="full"),
     ]
 
-    def serve(self, request, *args, **kwargs):
-        user = request.user
-        # Redirect anonymous users to the about page.
-        if not user.is_authenticated():
-            return redirect(slugurl(context={'request': request}, slug='about'))
-        # Redirect if prologue is not completed.
-        if not user.has_checkpoint('prologue'):
-            return redirect("story:prologue")
-        return super().serve(request, *args, **kwargs)
+    parent_page_types = ['HomePage']
+    subpage_types = []
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
@@ -51,6 +54,32 @@ class HomePage(UniquePageMixin, Page):
 
     def __str__(self):
         return self.title
+
+
+class HabitsPage(Page):
+    template = 'home/habits.html'
+
+    content = RichTextField(blank=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('content', classname="full"),
+    ]
+
+    parent_page_types = ['HomePage']
+    subpage_types = []
+
+
+class StatsPage(Page):
+    template = 'home/stats.html'
+
+    content = RichTextField(blank=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('content', classname="full"),
+    ]
+
+    parent_page_types = ['HomePage']
+    subpage_types = []
 
 
 class JoinPage(Page):

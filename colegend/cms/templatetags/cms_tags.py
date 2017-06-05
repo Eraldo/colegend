@@ -45,15 +45,21 @@ class Menu(InclusionTag):
     template = 'widgets/navigation.html'
     options = Options(
         Argument('root', required=False),
+        Argument('kind', default='vertical', required=False),
     )
 
-    def get_context(self, context, root, **kwargs):
+    def get_context(self, context, root, kind, **kwargs):
         nodes = []
         if root:
             pages = root.get_children().live().in_menu()
             nodes = pages
+        if kind == 'vertical':
+            style = 'stacked'
+        else:
+            style = 'justified'
         return {
             'nodes': nodes,
+            'style': style,
             'page': context.get('page'),
         }
 

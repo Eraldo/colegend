@@ -1,0 +1,27 @@
+{% extends "home/base.html" %}
+
+{% block content_class %}{% endblock %}
+
+{% block content %}
+    {{ super.block }}
+    <div class="row">
+        <div class="col-lg-6">
+            {% if next_step %}
+                <div class="card card-block bg-content">
+                    Next step:
+                    {{ next_step }}
+                </div>
+            {% endif %}
+            {% include "home/cards/_news_card.html" %}
+            {% include "home/cards/_tool_card.html" %}
+            {% include "home/cards/_feature_card.html" %}
+        </div>
+        <div class="col-lg-6">
+            {% include "home/cards/_legend_card.html" %}
+            {% include "home/cards/_event_card.html" %}
+            {% include "home/cards/_role_card.html" %}
+            {% include "home/cards/_quote_card.html" %}
+            {% include "home/cards/_story_card.html" %}
+        </div>
+    </div>
+{% endblock %}
