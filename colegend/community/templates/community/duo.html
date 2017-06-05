@@ -1,19 +1,19 @@
-{% extends 'community/index.html' %}
-{% load core_tags wagtailroutablepage_tags community_tags legends_tags %}
+{% extends 'community/base.html' %}
+{#{% load core_tags wagtailroutablepage_tags community_tags legends_tags %}#}
 
-{% block title %}
-    Duo {{ duo.name }}
-{% endblock %}
+{#{% block title %}#}
+{#    Duo {{ duo.name }}#}
+{#{% endblock %}#}
 
 {% block content %}
-    {% if partner %}
-        <div style="display: inline-block">
-            {% legend legend=partner %}
-        </div>
-        <div style="display: inline-block">
-            {% card partner.focus|linebreaksbr header="Focus" %}
-        </div>
-    {% else %}
-        No duo partner yet.
-    {% endif %}
+{#    {% if partner %}#}
+{#        <div style="display: inline-block">#}
+{#            {% legend legend=partner %}#}
+{#        </div>#}
+{#        <div style="display: inline-block">#}
+{#            {% card partner.focus|linebreaksbr header="Focus" %}#}
+{#        </div>#}
+{#    {% else %}#}
+{#        No duo partner yet.#}
+{#    {% endif %}#}
 {% endblock %}

@@ -1,20 +1,20 @@
-{% extends 'community/index.html' %}
-{% load core_tags wagtailroutablepage_tags community_tags legends_tags %}
+{% extends 'community/base.html' %}
+{#{% load core_tags wagtailroutablepage_tags community_tags legends_tags %}#}
 
-{% block title %}
-    Tribe {{ tribe.name }}
-{% endblock %}
+{#{% block title %}#}
+{#    Tribe {{ tribe.name }}#}
+{#{% endblock %}#}
 
 {% block content %}
-    {% for partner in partners %}
-        <div style="display: inline-block">
-            {% legend legend=partner %}
-        </div>
-        <div style="display: inline-block">
-            {% card partner.focus|linebreaksbr header="Focus" %}
-        </div>
-        <br>
-        {% empty %}
-        You are not in a tribe yet.
-    {% endfor %}
+{#    {% for partner in partners %}#}
+{#        <div style="display: inline-block">#}
+{#            {% legend legend=partner %}#}
+{#        </div>#}
+{#        <div style="display: inline-block">#}
+{#            {% card partner.focus|linebreaksbr header="Focus" %}#}
+{#        </div>#}
+{#        <br>#}
+{#        {% empty %}#}
+{#        You are not in a tribe yet.#}
+{#    {% endfor %}#}
 {% endblock %}

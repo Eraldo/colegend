@@ -105,17 +105,20 @@ def menu(context, user=None, name='main'):
                 {
                     'name': 'Duo',
                     # 'locked': not user.has_checkpoint('community'),
-                    'url': get_community_url(group='duo'),
+                    # 'url': get_community_url(group='duo'),
+                    'url': slugurl(context, slug='duo'),
                 },
                 {
                     'name': 'Clan',
                     # 'locked': True,
-                    'url': get_community_url(group='clan'),
+                    # 'url': get_community_url(group='clan'),
+                    'url': slugurl(context, slug='clan'),
                 },
                 {
                     'name': 'Tribe',
                     # 'locked': True,
-                    'url': get_community_url(group='tribe'),
+                    # 'url': get_community_url(group='tribe'),
+                    'url': slugurl(context, slug='tribe'),
                 },
                 {
                     'name': 'Legends',
