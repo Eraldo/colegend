@@ -1,22 +1,23 @@
-{% extends 'resources/base.html' %}
+{% extends 'academy/base.html' %}
 {% load core_tags resources_tags %}
 
-{% block page_links %}
-    {% if not tag %}
-        {% button name='All' url='.' classes='nav-item nav-link active' %}
-    {% else %}
-        {% button name='All' url='.' classes='nav-item nav-link' %}
-    {% endif %}
-    {% with current_tag=tag %}
-        {% for tag in tags %}
-            {% if tag.slug == current_tag %}
-                {% button name=tag url='?tag='|add:tag.slug classes='nav-item nav-link active' %}
-            {% else %}
-                {% button name=tag url='?tag='|add:tag.slug classes='nav-item nav-link' %}
-            {% endif %}
-        {% endfor %}
-    {% endwith %}
-
+{% block page_controls %}
+    <div class="widget-subnavigation">
+        {% if not tag %}
+            {% button name='All' url='.' classes='nav-item nav-link active' %}
+        {% else %}
+            {% button name='All' url='.' classes='nav-item nav-link' %}
+        {% endif %}
+        {% with current_tag=tag %}
+            {% for tag in tags %}
+                {% if tag.slug == current_tag %}
+                    {% button name=tag url='?tag='|add:tag.slug classes='nav-item nav-link active' %}
+                {% else %}
+                    {% button name=tag url='?tag='|add:tag.slug classes='nav-item nav-link' %}
+                {% endif %}
+            {% endfor %}
+        {% endwith %}
+    </div>
 {% endblock %}
 
 {% block content %}

@@ -63,36 +63,6 @@ def menu(context, user=None, name='main'):
                     'name': 'Journey',
                     'url': slugurl(context, slug='journey'),
                 },
-                {
-                    'name': 'Manager',
-                    'locked': not user.has_checkpoint('manager') if user.is_authenticated() else True,
-                    'url': reverse('manager:index'),
-                },
-                {
-                    'name': 'Journal',
-                    'locked': not user.has_checkpoint('storytime') if user.is_authenticated() else True,
-                    'url': slugurl(context, slug='journal'),
-                },
-                {
-                    'name': 'Story',
-                    'url': reverse('story:index'),
-                },
-                {
-                    'name': 'Vision',
-                    'url': reverse('visions:index'),
-                },
-                {
-                    'name': 'Tutorial',
-                    'url': reverse('games:index'),
-                },
-                {
-                    'name': 'Habits',
-                    'locked': True,
-                },
-                {
-                    'name': 'Resources',
-                    'url': slugurl(context, slug='personal-development-resources'),
-                },
             ],
         },
         {
@@ -176,6 +146,36 @@ def menu(context, user=None, name='main'):
                     'name': 'Styleguide',
                     'locked': not user.is_staff,
                     'url': reverse('styleguide:index'),
+                },
+                {
+                    'name': 'Manager',
+                    'locked': not user.has_checkpoint('manager') if user.is_authenticated() else True,
+                    'url': reverse('manager:index'),
+                },
+                {
+                    'name': 'Journal',
+                    'locked': not user.has_checkpoint('storytime') if user.is_authenticated() else True,
+                    'url': slugurl(context, slug='journal'),
+                },
+                {
+                    'name': 'Story',
+                    'url': reverse('story:index'),
+                },
+                {
+                    'name': 'Vision',
+                    'url': reverse('visions:index'),
+                },
+                {
+                    'name': 'Tutorial',
+                    'url': reverse('games:index'),
+                },
+                {
+                    'name': 'Habits',
+                    'locked': True,
+                },
+                {
+                    'name': 'Resources',
+                    'url': slugurl(context, slug='personal-development-resources'),
                 },
             ],
         },
