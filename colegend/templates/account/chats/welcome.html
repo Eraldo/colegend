@@ -1,0 +1,43 @@
+{% extends 'base/chat.html' %}
+
+{% load static i18n core_tags %}
+{% load crispy_forms_tags account socialaccount wagtailcore_tags %}
+
+{% block chat_title %}
+    Welcome Adventurer!
+{% endblock %}
+
+{% block chat_content %}
+    <p>
+        Do I know you?
+    </p>
+{% endblock %}
+
+{% block chat_answers %}
+    <div class="">
+        <form class="login list-group-item" method="POST" action="{% url 'account_login' %}">
+            {% csrf_token %}
+            {{ form|crispy }}
+            {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}"
+                       value="{{ redirect_field_value }}"/>
+            {% endif %}
+            <button class="btn btn-primary" type="submit">{% trans "Answer" %}</button>
+            <a class="button secondaryAction"
+               href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+        </form>
+    </div>
+
+    <a href="{% provider_login_url "google" %}" class="list-group-item">
+        {% icon 'google-plus' fixed=True %}
+        My big brother will tell you who I am.
+    </a>
+    <a href="{% provider_login_url "facebook" method="oauth2" %}" class="list-group-item">
+        {% icon 'facebook' fixed=True %}
+        My friends will tell you who I am.
+    </a>
+    <a href="{% slugurl 'join' %}" class="list-group-item">
+        {% icon 'sign-in' fixed=True %}
+        Err, I am new here.. Where can I join?
+    </a>
+{% endblock %}

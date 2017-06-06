@@ -84,6 +84,7 @@ LOCAL_APPS = (
 
     'colegend.core',  # common code library
     'colegend.about',
+    'colegend.welcome',
 
     # main apps
     'colegend.home',

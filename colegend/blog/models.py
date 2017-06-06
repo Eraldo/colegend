@@ -15,7 +15,7 @@ from colegend.cms.blocks import BASE_BLOCKS
 from colegend.cms.models import UniquePageMixin
 
 
-class BlogPage(UniquePageMixin, Page):
+class BlogPage(Page):
     template = 'blog/index.html'
 
     @property

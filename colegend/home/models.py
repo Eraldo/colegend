@@ -102,6 +102,7 @@ class JoinPage(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
+        context['open'] = True
         if settings.ACCOUNT_ALLOW_REGISTRATION:
             context['open'] = True
         return context

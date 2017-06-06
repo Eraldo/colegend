@@ -10,7 +10,7 @@ from colegend.cms.blocks import BASE_BLOCKS
 from colegend.cms.models import UniquePageMixin
 
 
-class AboutPage(UniquePageMixin, Page):
+class AboutPage(Page):
     template = 'about/about.html'
 
     content = StreamField(BASE_BLOCKS, blank=True)
