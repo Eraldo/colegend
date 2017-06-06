@@ -51,6 +51,8 @@ class DashboardPage(Page):
         dayentry = user.journal.dayentries.filter(date=today)
         if not dayentry:
             return link(_('Create a journal entry'), reverse('dayentries:create'))
+        # else:
+        #     return link(_('Test'), reverse('dayentries:create'))
 
     def __str__(self):
         return self.title

@@ -13,6 +13,8 @@ fontawesome_icons = {
     'academy': 'graduation-cap',
     'journey': 'compass',
     #
+    'news': 'newspaper-o',
+    #
     'mentor': 'compass',
     'manager': 'briefcase',
     'balance': 'balance-scale',

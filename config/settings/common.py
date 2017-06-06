@@ -97,6 +97,7 @@ LOCAL_APPS = (
     'colegend.support',
     'colegend.blog',
     'colegend.resources',
+    'colegend.news',
 
     # common
     'colegend.categories',
