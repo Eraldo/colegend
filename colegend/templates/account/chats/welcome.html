@@ -4,30 +4,41 @@
 {% load crispy_forms_tags account socialaccount wagtailcore_tags %}
 
 {% block chat_title %}
-    Welcome Adventurer!
+    {% if name %}
+        Hey {{ name }}!
+    {% else %}
+        Welcome Adventurer!
+    {% endif %}
 {% endblock %}
 
 {% block chat_content %}
     <p>
+    {% if name %}
+        Welcome back!<br>
+        Speak your magic phrase to enter.
+    {% else %}
         Do I know you?
+    {% endif %}
     </p>
 {% endblock %}
 
 {% block chat_answers %}
     <div class="">
-        <form class="login list-group-item" method="POST" action="{% url 'account_login' %}">
+        <form class="login list-group-item" method="POST" action=".">
             {% csrf_token %}
-            {{ form|crispy }}
+            {% crispy form %}
             {% if redirect_field_value %}
                 <input type="hidden" name="{{ redirect_field_name }}"
                        value="{{ redirect_field_value }}"/>
             {% endif %}
             <button class="btn btn-primary" type="submit">{% trans "Answer" %}</button>
-            <a class="button secondaryAction"
-               href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+            {% if password %}
+                <a class="button secondaryAction"
+                   href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+            {% endif %}
         </form>
     </div>
-
+    {% if not name %}
     <a href="{% provider_login_url "google" %}" class="list-group-item">
         {% icon 'google-plus' fixed=True %}
         My big brother will tell you who I am.
@@ -40,4 +51,5 @@
         {% icon 'sign-in' fixed=True %}
         Err, I am new here.. Where can I join?
     </a>
+    {% endif %}
 {% endblock %}

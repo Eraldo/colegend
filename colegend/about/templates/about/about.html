@@ -61,7 +61,7 @@
                         <a id="login" href="{% slugurl 'home' %}" class="btn btn-success">Home</a>
                     {% else %}
                         <div class="btn-group" role="group">
-                            <a id="join" href="{% slugurl 'join' %}?next=/" class="btn btn-success">Join</a>
+                            <a id="enter" href="{% slugurl 'welcome' %}?next=/" class="btn btn-success">Enter</a>
                             <a id="login" href="{% url "account_login" %}?next=/" class="btn btn-secondary">Login</a>
                         </div>
                     {% endif %}
@@ -73,7 +73,7 @@
                 <li class="nav-item"><a class="page-scroll" href="#pricing">Commitment</a></li>
                 <li class="nav-item"><a class="page-scroll" href="#contact">Contact</a></li>
                 {#                        <div class="btn-group" role="group">#}
-                {#                            <a id="join" href="{% slugurl 'join' %}?next=/" class="btn btn-success">Join</a>#}
+                {#                            <a id="enter" href="{% slugurl 'welcome' %}?next=/" class="btn btn-success">Enter</a>#}
                 {#                            <a id="login" href="{% url "account_login" %}?next=/" class="btn btn-secondary">Login</a>#}
                 {#                        </div>#}
                 {##}
@@ -101,7 +101,7 @@
 {#                    </h1>#}
 {#                    <p>#}
 {#                        1. step:<br>#}
-{#                        <a href="{% slugurl 'join' %}?next=/" class="btn btn-success btn-lg">Join for free</a>#}
+{#                        <a href="{% slugurl 'welcome' %}?next=/" class="btn btn-success btn-lg">Enter for free</a>#}
 {#                    </p>#}
 {#                </div>#}
 {#                <div class="carousel-image wow zoomIn back-tilted">#}
@@ -123,7 +123,7 @@
 {#                    </h1>#}
 {#                    <p> of what you truly want</p>#}
 {#                    <p>#}
-{#                        <a href="{% slugurl 'join' %}?next=/" class="btn btn-success btn-lg">Join</a>#}
+{#                        <a href="{% slugurl 'welcome' %}?next=/" class="btn btn-success btn-lg">Enter</a>#}
 {#                    </p>#}
 {##}
 {#                </div>#}
@@ -141,7 +141,7 @@
 {#                    </h1>#}
 {#                    <p> with fellows who support you along the way</p>#}
 {#                    <p>#}
-{#                        <a href="{% slugurl 'join' %}?next=/" class="btn btn-success btn-lg">Join</a>#}
+{#                        <a href="{% slugurl 'welcome' %}?next=/" class="btn btn-success btn-lg">Enter</a>#}
 {#                    </p>#}
 {#                </div>#}
 {#            </div>#}
@@ -158,7 +158,7 @@
 {#                    </h1>#}
 {#                    <p> a legendary life =]</p>#}
 {#                    <p>#}
-{#                        <a href="{% slugurl 'join' %}?next=/" class="btn btn-success btn-lg">Join</a>#}
+{#                        <a href="{% slugurl 'welcome' %}?next=/" class="btn btn-success btn-lg">Enter</a>#}
 {#                    </p>#}
 {#                </div>#}
 {#            </div>#}
@@ -229,13 +229,13 @@
     <br>
     <h2 class="text-center" style="font-size: 2em">Apply Today for Your Journey</h2>
     <p>
-        Apply now to join colegend and be part of an exciting new development experience, community, and movement.
+        Apply now to enter colegend and be part of an exciting new development experience, community, and movement.
         You'll immediately be matched with a set of Mentors who are exceptional in supporting your personal development
         path.
         Monthly Journey fees will only begin after you choose a Mentor to learn with.
     </p>
     <div class="text-center wow pulse">
-        <a href="{% slugurl 'join' %}?next=/" class="btn btn-success btn-lg">Start Your
+        <a href="{% slugurl 'welcome' %}?next=/" class="btn btn-success btn-lg">Start Your
             Journey</a>
     </div>
 </section>
@@ -450,7 +450,7 @@
 {#        </div>#}
 {#    </div>#}
 {#    <div class="text-center" style="margin-bottom: 2em">#}
-{#        <a href="{% slugurl 'join' %}?next=/" class="btn btn-success btn-lg wow tada">Join</a><br/>#}
+{#        <a href="{% slugurl 'welcome' %}?next=/" class="btn btn-success btn-lg wow tada">Enter</a><br/>#}
 {#    </div>#}
 {#</section>#}
 
@@ -602,7 +602,7 @@
                     </ul>
                     {#                    <br>#}
                     {#                    <div class="text-center">#}
-                    {#                        <a href="{% slugurl 'join' %}?next=/" class="btn btn-info-outline btn-lg">Learn More</a>#}
+                    {#                        <a href="{% slugurl 'welcome' %}?next=/" class="btn btn-info-outline btn-lg">Learn More</a>#}
                     {#                    </div>#}
                 </div>
             </div>
@@ -650,7 +650,7 @@
             </div>
             <br><br>
             <div class="text-center wow pulse">
-                <a href="{% slugurl 'join' %}?next=/" class="btn btn-success btn-lg">Start Your
+                <a href="{% slugurl 'welcome' %}?next=/" class="btn btn-success btn-lg">Start Your
                     Journey</a>
             </div>
         </div>
@@ -698,7 +698,7 @@
 
             <br>
             <div class="text-center wow pulse">
-                <a href="{% slugurl 'join' %}?next=/" class="btn btn-success btn-lg">Start Your
+                <a href="{% slugurl 'welcome' %}?next=/" class="btn btn-success btn-lg">Start Your
                     Journey</a>
             </div>
         </div>
@@ -738,12 +738,12 @@
                         The application process is fun, fast and free. You provide a few details about yourself, your
                         interests and goals. Then your application is matched with a set of Mentors who can best help
                         you achieve your goals.<br>
-                        <a href="{% slugurl 'join' %}?next=/">Start Your Journey Now!</a>
+                        <a href="{% slugurl 'welcome' %}?next=/">Start Your Journey Now!</a>
                     </p>
                 </div>
                 <div class="col-lg-6 box right overlay-highlight-2">
                     <h2>
-                        JOIN THE ACADEMY
+                        ENTER THE ACADEMY
                     </h2>
                     <p>
                         Colegend houses a rapidly growing collection of amazing development resources, including
@@ -760,7 +760,7 @@
                         Our system takes all of the information from your application and uses it to find the Mentors
                         who best suit your preference. Review them all and choose the best fit for YOU.
                         <br>
-                        <a href="{% slugurl 'join' %}?next=/">Start Your Journey Now!</a>
+                        <a href="{% slugurl 'welcome' %}?next=/">Start Your Journey Now!</a>
                     </p>
                 </div>
                 <div class="col-lg-6 box right overlay-highlight">
@@ -795,7 +795,7 @@
                         from the other Legends as you will from your Mentor. They will provide you with valuable
                         feedback, accountability and encouragement in every Chapter.
                         <br>
-                        <a href="{% slugurl 'join' %}?next=/">Start Your Journey Now!</a>
+                        <a href="{% slugurl 'welcome' %}?next=/">Start Your Journey Now!</a>
                         {#                        <a href="{% slugurl 'legend-stories' %}">Read Stories from our Legends</a>#}
                     </p>
                 </div>
@@ -827,7 +827,7 @@
             </div>
             <br>
             <div class="text-center wow pulse">
-                <a href="{% slugurl 'join' %}?next=/" class="btn btn-success btn-lg">Start Your
+                <a href="{% slugurl 'welcome' %}?next=/" class="btn btn-success btn-lg">Start Your
                     Journey</a>
             </div>
         </div>
@@ -885,7 +885,7 @@
                 Mentor</a> in colegend.
             </p>
             <div class="text-center wow pulse">
-                <a href="{% slugurl 'join' %}?next=/" class="btn btn-success btn-lg">Start Your
+                <a href="{% slugurl 'welcome' %}?next=/" class="btn btn-success btn-lg">Start Your
                     Journey</a>
             </div>
         </div>
@@ -944,7 +944,7 @@
             </div>
             <br>
             <div class="text-center wow pulse">
-                <a href="{% slugurl 'join' %}?next=/" class="btn btn-success btn-lg">Start your Journey</a>
+                <a href="{% slugurl 'welcome' %}?next=/" class="btn btn-success btn-lg">Start your Journey</a>
             </div>
         </div>
     </div>
@@ -1091,7 +1091,7 @@
             </p>
             <br>
             <div class="text-center wow pulse">
-                <a href="{% slugurl 'join' %}?next=/" class="btn btn-success btn-lg">Start Your
+                <a href="{% slugurl 'welcome' %}?next=/" class="btn btn-success btn-lg">Start Your
                     Journey</a>
             </div>
         </div>
@@ -1157,7 +1157,7 @@
             </div>
             <br>
             <div class="text-center wow pulse">
-                <a href="{% slugurl 'join' %}?next=/" class="btn btn-success btn-lg">Start Your
+                <a href="{% slugurl 'welcome' %}?next=/" class="btn btn-success btn-lg">Start Your
                     Journey</a>
             </div>
         </div>
@@ -1204,7 +1204,7 @@
             </div>
             <br>
             <div class="text-center wow pulse">
-                <a href="{% slugurl 'join' %}?next=/" class="btn btn-success btn-lg">Start Your
+                <a href="{% slugurl 'welcome' %}?next=/" class="btn btn-success btn-lg">Start Your
                     Journey</a>
             </div>
         </div>
@@ -1367,7 +1367,7 @@
             <br>
             <br>
             <div class="text-center wow pulse">
-                <a href="{% slugurl 'join' %}?next=/" class="btn btn-success btn-lg">Start Your
+                <a href="{% slugurl 'welcome' %}?next=/" class="btn btn-success btn-lg">Start Your
                     Journey</a>
             </div>
 
@@ -1431,7 +1431,7 @@
 {#            <br>#}
 {#            <div>#}
 {#                <p class="text-center">#}
-{#                    Empty purse and still want to join? Learn about our <a href="#" data-toggle="modal"#}
+{#                    Empty purse and still want to enter? Learn about our <a href="#" data-toggle="modal"#}
 {#                                                                           data-target="#modal-affiliate">Affiliate#}
 {#                    Program</a> and the <a#}
 {#                        href="#" data-toggle="modal" data-target="#modal-scholarship">colegend Scholarship</a>.#}
@@ -1528,7 +1528,7 @@
 {#                after you choose a Mentor. There is no long term commitment. You may cancel at any time.#}
             </p>
             <div class="text-center wow pulse">
-                <a href="{% slugurl 'join' %}?next=/" class="btn btn-success btn-lg">Start Your
+                <a href="{% slugurl 'welcome' %}?next=/" class="btn btn-success btn-lg">Start Your
                     Journey</a>
             </div>
         </div>
@@ -1540,7 +1540,7 @@
 {#        <div class="row">#}
 {#            <div class="col-lg-12 text-center">#}
 {#                <div class="navy-line"></div>#}
-{#                <h1>7 reasons to join colegend</h1>#}
+{#                <h1>7 reasons to enter colegend</h1>#}
 {#                {{ page.reasons_intro|richtext }}#}
 {#                {% for reason in reasons %}#}
 {#                    <div class="wow {% cycle 'fadeInLeftBig' 'fadeInRightBig' %}">#}
@@ -1561,7 +1561,7 @@
 {#            </div>#}
 {#        </div>#}
 {#        <div class="text-center" style="margin: 2rem">#}
-{#            <a href="{% slugurl 'join' %}?next=/" class="btn btn-success btn-lg wow tada">Join</a><br/>#}
+{#            <a href="{% slugurl 'welcome' %}?next=/" class="btn btn-success btn-lg wow tada">Enter</a><br/>#}
 {#        </div>#}
 {#    </div>#}
 {#</section>#}
@@ -1594,7 +1594,7 @@
 {#            <h2>Once upon a time.. is now!</h2>#}
 {##}
 {#            <p>#}
-{#                <a id="join-quick" href="{% slugurl 'join' %}?next=/" class="btn btn-info btn-lg">Join</a><br/>#}
+{#                <a id="enter-quick" href="{% slugurl 'welcome' %}?next=/" class="btn btn-info btn-lg">Enter</a><br/>#}
 {#                <i>the circle of real life legends!</i>#}
 {#            </p>#}
 {#        </div>#}
@@ -1775,7 +1775,7 @@
 {#            </div>#}
 {#        </div>#}
 {#        <div class="text-center" style="margin-top: 4em">#}
-{#            <a href="{% slugurl 'join' %}?next=/" class="btn btn-success btn-lg wow tada">Join</a><br/>#}
+{#            <a href="{% slugurl 'welcome' %}?next=/" class="btn btn-success btn-lg wow tada">Enter</a><br/>#}
 {#        </div>#}
 {#    </div>#}
 {#</section>#}
@@ -1879,7 +1879,7 @@
 {#                        </li>#}
 {#                    </ul>#}
 {#                    <p>#}
-{#                        {% trans "Not quite read to join and want to stay up-to-date about the project?" %}#}
+{#                        {% trans "Not quite read to enter and want to stay up-to-date about the project?" %}#}
 {#                    </p>#}
 {#                    {% button "Subscribe to newsletter" url='http://colegend.us13.list-manage.com/subscribe?u=e6c12ce160532f8031b6b21ee&id=7aa5f1f50c' classes='btn-success' size='large' icon='blog' external=True %}#}
 {#                </div>#}
@@ -1960,7 +1960,7 @@
                     </li>
                 </ul>
                 <p>
-                    {% trans "Not quite read to join and want to stay up-to-date about the project?" %}
+                    {% trans "Not quite ready to enter and want to stay up-to-date about the project?" %}
                 </p>
                 {% button "Subscribe to newsletter" url='http://colegend.us13.list-manage.com/subscribe?u=e6c12ce160532f8031b6b21ee&id=7aa5f1f50c' classes='btn-success' size='large' icon='blog' external=True %}
             </div>

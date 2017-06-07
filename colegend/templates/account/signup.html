@@ -15,7 +15,13 @@
                 {#                    .{% endblocktrans %}</p>#}
                 <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
                     {% csrf_token %}
-                    {{ form|crispy }}
+                    {% if request.GET.email %}
+                        {{ form.username|as_crispy_field }}
+                        <input class="textinput textInput form-control" id="id_email" name="email" placeholder="E-mail address" type="hidden" value="{{ request.GET.email }}">
+                        {{ form.password1|as_crispy_field }}
+                    {% else %}
+                        {{ form|crispy }}
+                    {% endif %}
                     {% if redirect_field_value %}
                         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
                     {% endif %}
