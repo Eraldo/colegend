@@ -1,7 +1,6 @@
-from allauth.account.adapter import get_adapter
+from allauth.account.utils import perform_login
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth import login
 from django.shortcuts import redirect
 from django.urls import reverse
 from wagtail.wagtailcore.models import Page
@@ -36,9 +35,7 @@ class WelcomePage(Page):
                 if password:
                     self.password = password
                     if user.check_password(password):
-                        adapter = get_adapter(request)
-                        adapter.login(request, user)
-                        return redirect('/')
+                        return perform_login(request, user, email_verification=settings.ACCOUNT_EMAIL_VERIFICATION)
                     else:
                         messages.error(request, 'Something did not match. Please try again!')
             else:
