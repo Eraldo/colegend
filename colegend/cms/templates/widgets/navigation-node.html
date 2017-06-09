@@ -1,5 +1,5 @@
 <li class="nav-item" >
-    <a class="nav-link{% if node.url == page.url %} bg-accent-light{% endif %}" href="{{ node.url }}">{{ node }}</a>
+    <a class="nav-link{% if node.url == page.url %} bg-accent-light{% endif %}{% if node.locked %} disabled{% endif %}" href="{{ node.url }}">{{ node }}</a>
 </li>
 {% if not node.is_leaf and node.url == page.url or node in page.get_ancestors %}
     <ul>

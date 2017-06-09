@@ -55,14 +55,12 @@ class Outcome(AutoUrlsMixin, OwnedBase, TaggableBase, TimeStampedBase):
     DAILY = 0
     WEEKLY = 1
     MONTHLY = 2
-    QUARTERLY = 3
     YEARLY = 4
     SOMETIME = 5
     REVIEW_CHOICES = (
         (DAILY, _('daily')),
         (WEEKLY, _('weekly')),
         (MONTHLY, _('monthly')),
-        (QUARTERLY, _('quarterly')),
         (YEARLY, _('yearly')),
         (SOMETIME, _('sometime')),
     )

@@ -1,6 +1,51 @@
 {% extends "office/base.html" %}
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags cms_tags core_tags outcomes_tags crispy_forms_tags %}
+
+{% block title %}{{ scope.name | title }} {{ page.title }}{% endblock %}
+
+{% block page_controls %}
+    <div class="btn-group" role="group">
+        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+            {% icon 'scope' %} {{ scope.name | title }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+            {% for filter_scope in scopes %}
+                <a class="dropdown-item {% if filter_scope.name == scope.name %}disabled{% endif %}"
+                        {#                   href="{% if filter_scope == scope %}#{% else %}{% routablepageurl page filter_scope.name date=filter_scope %}{% endif %}">{{ filter_scope.name }}</a>#}
+                   href="{% if filter_scope == scope %}#{% else %}#found{% endif %}">{{ filter_scope.name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="btn-group" role="group">
+        <button id="date-dropdown" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+            {% icon 'calendar' %} {{ date }}
+        </button>
+        <div class="dropdown-menu widget-datepicker" aria-labelledby="date-dropdown">
+            {% crispy datepickerform %}
+        </div>
+    </div>
+
+{% endblock %}
 
 {% block content %}
     {{ page.content|richtext }}
+    <ul class="list-group">
+        <li class="list-group-item active">Focus</li>
+        <li class="list-group-item">
+            {% for outcome in focus_outcomes %}
+                {% outcome %}
+            {% endfor %}
+        </li>
+    </ul>
+    <br>
+    <ul class="list-group">
+        <li class="list-group-item active">Schedule</li>
+        <li class="list-group-item">
+            {% for outcome in scheduled_outcomes %}
+                {% outcome %}
+            {% endfor %}
+        </li>
+    </ul>
 {% endblock %}

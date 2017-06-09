@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from colegend.office.models import Focus
+
+
+@admin.register(Focus)
+class FocusAdmin(admin.ModelAdmin):
+    pass

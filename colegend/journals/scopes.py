@@ -16,7 +16,7 @@ class Scope:
             else:
                 raise ValueError('Provided date is not in a valid format.')
         else:
-            date = timezone.now().date()
+            date = timezone.localtime(timezone.now()).date()
         self.date = date
 
     def parse_date(self, string):

@@ -102,9 +102,9 @@ def review(context, review=None, **kwargs):
     elif review == Outcome.MONTHLY:
         review_context['symbol'] = 'M'
         review_context['class'] = 'bg-category-3'
-    elif review == Outcome.QUARTERLY:
-        review_context['symbol'] = 'Q'
-        review_context['class'] = 'bg-category-5'
+    # elif review == Outcome.QUARTERLY:
+    #     review_context['symbol'] = 'Q'
+    #     review_context['class'] = 'bg-category-5'
     elif review == Outcome.YEARLY:
         review_context['symbol'] = 'Y'
         review_context['class'] = 'bg-category-6'
