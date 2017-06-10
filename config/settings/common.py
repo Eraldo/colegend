@@ -323,7 +323,7 @@ ACCOUNT_ALLOW_REGISTRATION = env.bool("DJANGO_ACCOUNT_ALLOW_REGISTRATION", True)
 # Select the correct user model
 AUTH_USER_MODEL = 'users.User'
 LOGIN_REDIRECT_URL = '/'
-LOGIN_URL = 'account_login'
+LOGIN_URL = 'welcome'
 
 # Provider settings
 GOOGLE_ID = env('GOOGLE_ID')

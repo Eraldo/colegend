@@ -15,6 +15,8 @@ fontawesome_icons = {
     #
     'news': 'newspaper-o',
     #
+    'welcome': 'sign-in',
+    #
     'mentor': 'compass',
     'manager': 'briefcase',
     'balance': 'balance-scale',

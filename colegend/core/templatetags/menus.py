@@ -195,28 +195,12 @@ def menu(context, user=None, name='main'):
                 },
             ]
     else:
-        if name == 'main':
-            menu_context['nodes'] = [
-                {
-                    'name': 'Join',
-                    'url': slugurl(context, 'join'),
-                },
-                {
-                    'name': 'Log in',
-                    'url': reverse('account_login'),
-                },
-            ]
-        elif name == 'account':
-            menu_context['nodes'] = [
-                {
-                    'name': 'Join',
-                    'url': slugurl(context, 'join'),
-                },
-                {
-                    'name': 'Log in',
-                    'url': reverse('account_login'),
-                },
-            ]
+        menu_context['nodes'] = [
+            {
+                'name': 'welcome',
+                'url': slugurl(context, 'welcome'),
+            },
+        ]
     return render_to_string(template, context=menu_context)
 
 
