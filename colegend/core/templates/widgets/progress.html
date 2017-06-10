@@ -1,0 +1,5 @@
+{% load core_tags %}
+<div class="widget-progress {{ classes }}">
+    {{ name | title }}: {{ value }}/{{ max }}
+    <progress max="{{ max }}" value="{{ value }}" style="width: 100%"></progress>
+</div>

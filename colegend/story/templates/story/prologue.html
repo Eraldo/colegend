@@ -35,30 +35,24 @@
             Where^400 loneliness is merely an option that can be chosen at will.^400 <br>
             Where^400 every person is a designer and author of life.^400 <br>
             <br>
-            The time has come to open eyes and heart to a new life experience^500 and a new way of community. <br>
-            <br>
-            Our fellowship started out small: First there was the seed of an idea, slowly becoming a small plant,
-            stretching and drinking in the sunlight.^400 <br>
-            With every member that joins,^500 we grow into a bigger tree with even more delicious "fruit". <br>
-            We already thank you for^300 your courage and energy^300 and wish you,
-            <strong>{{ typed_username }}</strong>, a happy harvest. <br>
-            <br>
             <span class="text-info">
             [You start to wonder^100 what^200 he^100?^200 or^100 she^100?^200 is talking about.]^300 <br>
-            [Feeling as if you open your eyes for the first time,^300 you take a look around.]^600 <br>
+{#            [Feeling as if you open your eyes for the first time,^300 you take a look around.]^600 <br>#}
             </span>
             <br>
-            You stand in a forest at a clearing and right in the middle of it,
-            you see a marvelously growing tree.^300 .^300 .^1000 <br>
+            According to the prophecy more and more "Legends" will awake over time.
+            The fact that you, <strong>{{ typed_username }}</strong>, found your way here is a good sign that you are one of them.
             <br>
+            The time has come to open eyes and heart to a new life experience^500 and a new way of community.<br>
+            Here is your first Quest.^300 .^300 .^1000
         </p>
     </div>
     <span id="typed" class="lead"></span>
     <div class="after-typed">
         <span class="lead">
             <form action="" method="post">{% csrf_token %}
-                <button id="continue-to-welcome-tree" name="welcome-tree" type="submit" class="btn btn-primary">Walk to
-                    Welcome Tree
+                <button id="continue-to-welcome-tree" name="view-quest" type="submit" class="btn btn-primary">
+                    View First Quest
                 </button>
             </form>
         </span>

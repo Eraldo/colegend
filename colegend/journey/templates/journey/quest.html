@@ -1,6 +1,52 @@
 {% extends "journey/base.html" %}
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags core_tags %}
 
 {% block content %}
     {{ page.content|richtext }}
+    <a href="{% url 'story:prologue' %}">
+        <img class="img-responsive"
+             src="http://orig01.deviantart.net/db8b/f/2013/287/e/9/thoroughly_blue_by_anthonypismarov-d633xvt.jpg"
+             alt="Onboarding">
+    </a>
+    <div id="quest-header" class="text-center">
+        <button class="btn pull-left disabled">{% icon 'previous' %}</button>
+        <h1 style="display: inline-block">Onboarding</h1>
+        <button class="btn pull-right disabled">{% icon 'next' %}</button>
+    </div>
+    <h2>Introduction</h2>
+    <p>
+        Your journey has begun! Colegend has 7 apps for you to explore.<br>
+        From here on you can choose how to continue by opening the main menu and choosing 'Apps'.<br>
+        If you don't know where to go next, just visit the <a href="{% slugurl 'home' %}">Home app</a> and it will lead
+        you.<br>
+        The apps work together to create a holistic experience.
+    </p>
+    <p>
+        Complete all checkpoints below and fill the experience bar at the bottom of this page to get to the next Level!
+    </p>
+    <div class="list-group">
+        <a class="list-group-item active">
+            <h5>Checkpoints (2/3)</h5>
+        </a>
+        <a class="list-group-item list-group-item-action">
+            {% icon 'checked' fixed=True color='green' %}
+            Home level 2
+        </a>
+        <a class="list-group-item list-group-item-action">
+            {% icon 'checked' fixed=True color='green' %}
+            Community level 2
+        </a>
+        <a class="list-group-item list-group-item-action">
+            {% icon 'unchecked' fixed=True color='grey' %}
+            Personal Quest
+        </a>
+    </div>
+    <span class="small">*Hint: Clicking on a checkpoint will take you to the right app.</span>
+    <br>
+{% endblock %}
+
+{% block footer %}
+    <div class="container">
+        {% progress value=80 name='Experience' %}
+    </div>
 {% endblock %}

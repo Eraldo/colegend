@@ -1,5 +1,5 @@
 {% extends "story/base.html" %}
-{% load static core_tags %}
+{% load static core_tags wagtailcore_tags %}
 
 {% block title %}Welcome Tree{% endblock %}
 
@@ -31,7 +31,8 @@
         <p>
             You can read as many welcome leaves as you want. <br>
             As soon as you are done... <br>
-            <a id="success-button" href="{% url 'games:index' %}" class="btn btn-primary">continue</a>
+{#            <a id="success-button" href="{% url 'games:index' %}" class="btn btn-primary">continue</a>#}
+            <a id="success-button" href="{% slugurl 'journey' %}" class="btn btn-primary">continue</a>
         </p>
     </div>
 

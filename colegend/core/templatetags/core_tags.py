@@ -203,3 +203,18 @@ register.tag(LinkComponent.as_tag())
 # register.tag(CardComponent.as_tag())
 # register.tag(CardComponent.as_tag())
 # register.tag(NewCardComponent.as_tag())
+
+
+@register.simple_tag()
+def progress(value=0, max=100, name='Progress', classes=''):
+    progress_template = 'widgets/progress.html'
+    proress_context = {
+        'name': name,
+        'value': value,
+        'max': max,
+        'classes': classes,
+    }
+    return render_to_string(progress_template, context=proress_context)
+
+
+register.tag(LinkComponent.as_tag())

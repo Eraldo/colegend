@@ -8,6 +8,7 @@ from django.shortcuts import redirect
 from django.template.defaultfilters import slugify
 from django.utils import timezone
 from django.views.generic import TemplateView
+from wagtail.wagtailcore.templatetags.wagtailcore_tags import slugurl
 
 from colegend.games.views import complete_card
 from .models import WelcomeTreeLeaf
@@ -142,10 +143,10 @@ class PrologueView(LoginRequiredMixin, TemplateView):
             return 'night'
 
     def post(self, request, *args, **kwargs):
-        if 'welcome-tree' in request.POST:
+        if 'view-quest' in request.POST:
             user = request.user
             user.add_checkpoint(name='prologue')
-            return redirect('story:welcome-tree')
+            return redirect(slugurl({'request': request}, slug='quest'))
 
 
 class WelcomeTreeView(LoginRequiredMixin, TemplateView):
