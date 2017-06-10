@@ -12,10 +12,10 @@ from colegend.journals import scopes
 from colegend.journals.forms import DatePickerForm
 from colegend.outcomes.models import Outcome
 
-DAY = 1
-WEEK = 2
-MONTH = 3
-YEAR = 4
+DAY = 'day'
+WEEK = 'week'
+MONTH = 'month'
+YEAR = 'year'
 SCOPE_CHOICES = (
     (DAY, _('day')),
     (WEEK, _('week')),
@@ -25,10 +25,11 @@ SCOPE_CHOICES = (
 
 
 class Focus(OwnedBase):
-    scope = models.PositiveSmallIntegerField(
+    scope = models.CharField(
         _('scope'),
         choices=SCOPE_CHOICES,
         default=DAY,
+        max_length=5,
     )
     start = models.DateField()
 
@@ -96,7 +97,7 @@ class AgendaPage(RoutablePageMixin, Page):
         name = request.session.get('scope', scopes.Day().name)
         for scope in scopes.all:
             if scope().name == name:
-                return scope
+                return scope(self.get_date(request))
         raise ValueError('Scope "{0}" not found.'.format(name))
 
     def set_scope(self, request, name):
@@ -121,9 +122,6 @@ class AgendaPage(RoutablePageMixin, Page):
 
         context['scopes'] = scopes.all
 
-        scope = self.get_scope(request)
-        context['scope'] = scopes.Day()
-
         # set the date to the user requested date
         date_request = request.GET.get('date')
         if date_request:
@@ -131,6 +129,12 @@ class AgendaPage(RoutablePageMixin, Page):
         date = self.get_date(request)
         context['date'] = date
         context['datepickerform'] = DatePickerForm(initial={'date': date})
+
+        scope_request = request.GET.get('scope')
+        if scope_request:
+            scope = self.set_scope(request, scope_request)
+        scope = self.get_scope(request)
+        context['scope'] = scope
 
         update = request.GET.get('update')
         if update:
@@ -140,17 +144,14 @@ class AgendaPage(RoutablePageMixin, Page):
         if request.user.is_authenticated:
             # focus
             try:
-                focus = user.focuses.get(scope=DAY, start=date)
+                focus = user.focuses.get(scope=scope.name, start=date)
             except Focus.DoesNotExist:
                 focus = Focus.objects.none()
             if focus:
-                focus_outcomes = focus.outcomes
-                context['focus_outcomes'] = focus_outcomes
-            else:
-                focus_outcomes = Outcome.objects.none()
+                context['focus_outcomes'] = focus.outcomes
 
-            focus_outcome_options = user.outcomes.all()
-            focus_outcomes_form = self.get_focus_form(user, scope, date)
+            # form
+            focus_outcomes_form = self.get_focus_form(user=user, scope=scope)
             context['focus_outcomes_form'] = focus_outcomes_form
 
             # scheduled
@@ -160,16 +161,16 @@ class AgendaPage(RoutablePageMixin, Page):
     def __str__(self):
         return self.title
 
-    def get_focus_form(self, user, scope, date, data=None):
+    def get_focus_form(self, user, scope, data=None):
         from colegend.office.forms import FocusForm
         try:
-            instance = user.focuses.get(scope=DAY, start=date)
+            instance = user.focuses.get(scope=scope.name, start=scope.start)
         except Focus.DoesNotExist:
             instance = Focus.objects.none()
         if instance:
             form = FocusForm(owner=user, instance=instance, data=data)
         else:
-            initial = {'owner': user, 'socpe': scope, 'start': date}
+            initial = {'owner': user, 'socpe': scope, 'start': scope.start}
             form = FocusForm(owner=user, initial=initial, data=data)
         return form
 
@@ -178,9 +179,7 @@ class AgendaPage(RoutablePageMixin, Page):
         context = self.get_context(request)
         submitted = request.POST.get('save')
         if submitted:
-            # print('form', request.POST)
-            from colegend.office.forms import FocusForm
-            form = self.get_focus_form(request.user, context['scope'], context['date'], data=request.POST)
+            form = self.get_focus_form(user=request.user, scope=context['scope'], data=request.POST)
             if form.is_valid():
                 form.save()
                 return redirect(self.url)

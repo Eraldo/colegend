@@ -19,15 +19,14 @@
         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
             {% for filter_scope in scopes %}
                 <a class="dropdown-item {% if filter_scope.name == scope.name %}disabled{% endif %}"
-                        {#                   href="{% if filter_scope == scope %}#{% else %}{% routablepageurl page filter_scope.name date=filter_scope %}{% endif %}">{{ filter_scope.name }}</a>#}
-                   href="{% if filter_scope == scope %}#{% else %}#found{% endif %}">{{ filter_scope.name }}</a>
+                   href="{% if filter_scope == scope %}#{% else %}?scope={{ filter_scope.name }}{% endif %}">{{ filter_scope.name }}</a>
             {% endfor %}
         </div>
     </div>
     <div class="btn-group" role="group">
         <button id="date-dropdown" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-            {% icon 'calendar' %} {{ date }}
+            {% icon 'calendar' %} {{ scope.display }}
         </button>
         <div class="dropdown-menu widget-datepicker" aria-labelledby="date-dropdown">
             {% crispy datepickerform %}
@@ -38,7 +37,6 @@
 
 {% block content %}
     {{ page.content|richtext }}
-
     <div class="card bg-content">
         <div class="card-header">
             Focus
@@ -49,6 +47,8 @@
             {% else %}
                 {% for outcome in focus_outcomes %}
                     {% outcome %}
+                    {% empty %}
+                    Focus has not been set yet.
                 {% endfor %}
                 <form action="form" method="get">
                     <button class="btn btn-secondary">Update</button>
@@ -64,6 +64,8 @@
         <div class="card-block">
             {% for outcome in scheduled_outcomes %}
                 {% outcome %}
+                {% empty %}
+                No fixed appointments. :D
             {% endfor %}
         </div>
     </div>

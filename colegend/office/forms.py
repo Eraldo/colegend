@@ -4,7 +4,6 @@ from django import forms
 
 from colegend.office.models import Focus
 from colegend.outcomes.fields import OutcomeCreateFormField
-from colegend.outcomes.models import Outcome
 
 
 class FocusForm(forms.ModelForm):
@@ -56,3 +55,21 @@ class FocusForm(forms.ModelForm):
             message = 'Please chose an ontcome only once.'
             self.add_error(None, message)
         return super().clean()
+#
+#
+# class ScopePickerForm(forms.Form):
+#     scope = forms.ChoiceField(
+#         choices=SCOPE_CHOICES,
+#     )
+#
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         self.helper = FormHelper()
+#         self.helper.layout = Layout(
+#             Field('scope'),
+#         )
+#         self.helper.add_input(Submit('get', 'Go'))
+#         self.helper.form_class = 'form-inline'
+#         self.helper.form_show_labels = False
+#         self.helper.form_method = 'get'
+#         # self.helper.include_media = False
