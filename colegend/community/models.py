@@ -1,13 +1,11 @@
-from django.conf import settings
-from django.contrib.auth import get_user_model
 from django.db import models
 from django.db.models import Count
 from django.shortcuts import redirect
-from django.template.response import TemplateResponse
-from django.utils.html import format_html_join, format_html
 from django.utils.translation import ugettext_lazy as _
-from wagtail.contrib.wagtailroutablepage.models import route, RoutablePageMixin
+from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin
 from wagtail.wagtailcore.models import Page
+
+from colegend.journals.scopes import Day
 
 
 class CommunityPage(RoutablePageMixin, Page):
@@ -119,6 +117,15 @@ class DuoPage(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
+        user = request.user
+        if user.is_authenticated:
+            duo = user.duo
+            if duo:
+                print('{} has duo {}'.format(user, duo))
+                context['duo'] = duo
+                context['scope'] = Day()
+            else:
+                print('{} has no duo {}'.format(user, duo))
         return context
 
     def __str__(self):
@@ -172,22 +179,11 @@ class TribeQuerySet(models.QuerySet):
 
 
 class Tribe(models.Model):
-    mentor = models.OneToOneField(
-        verbose_name=_('mentor'),
-        to=settings.AUTH_USER_MODEL,
-        limit_choices_to={'groups__name': 'Mentors'},
-        related_name='tribe',
-        on_delete=models.PROTECT
-    )
     name = models.CharField(
         verbose_name=_('name'),
         max_length=255,
         default=_('new tribe')
     )
-
-    @property
-    def members(self):
-        return get_user_model().objects.filter(duo__clan__tribe=self.pk)
 
     objects = TribeQuerySet.as_manager()
 
@@ -199,25 +195,11 @@ class Tribe(models.Model):
 
 
 class Clan(models.Model):
-    tribe = models.ForeignKey(
-        verbose_name=_('tribe'),
-        to=Tribe,
-        related_name='clans',
-        on_delete=models.PROTECT
-    )
     name = models.CharField(
         verbose_name=_('name'),
         max_length=255,
         default=_('new clan'),
     )
-
-    @property
-    def mentor(self):
-        return self.tribe.mentor
-
-    @property
-    def members(self):
-        return get_user_model().objects.filter(duo__clan=self.pk)
 
     def __str__(self):
         return self.name
@@ -232,20 +214,11 @@ class DuoQuerySet(models.QuerySet):
 
 
 class Duo(models.Model):
-    clan = models.ForeignKey(
-        verbose_name=_('clan'),
-        to=Clan,
-        on_delete=models.PROTECT
-    )
     name = models.CharField(
         verbose_name=_('name'),
         max_length=255,
         default=_('new duo')
     )
-
-    @property
-    def mentor(self):
-        return self.clan.mentor
 
     objects = DuoQuerySet.as_manager()
 

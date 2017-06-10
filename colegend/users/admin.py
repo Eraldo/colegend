@@ -22,7 +22,7 @@ class UserAdmin(AuthUserAdmin):
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         (_('Personal info'), {'fields': ('name', 'gender', 'birthday', 'email', 'phone', 'address', 'occupation')}),
-        (_('Data'), {'fields': ('duo', )}),
+        (_('Data'), {'fields': ('duo', 'clan', 'tribe')}),
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
                                        'roles', 'checkpoints', 'groups', 'user_permissions')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),

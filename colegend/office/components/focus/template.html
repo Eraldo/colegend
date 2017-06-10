@@ -1,0 +1,6 @@
+{% load outcomes_tags %}
+{% for outcome in focus.outcomes %}
+    {% outcome %}
+    {% empty %}
+    Focus has not been set yet.
+{% endfor %}

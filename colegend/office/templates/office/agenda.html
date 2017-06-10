@@ -1,5 +1,5 @@
 {% extends "office/base.html" %}
-{% load wagtailcore_tags cms_tags core_tags outcomes_tags crispy_forms_tags %}
+{% load wagtailcore_tags cms_tags core_tags outcomes_tags crispy_forms_tags office_tags %}
 
 {% block title %}{{ scope.name | title }} {{ page.title }}{% endblock %}
 
@@ -40,19 +40,17 @@
     <div class="card bg-content">
         <div class="card-header">
             Focus
+            {% if not show_update_form %}
+                <form action="form" method="get" class="pull-right">
+                    <button class="btn btn-sm btn-secondary">Update</button>
+                </form>
+            {% endif %}
         </div>
         <div class="card-block">
             {% if show_update_form %}
                 {% crispy focus_outcomes_form %}
             {% else %}
-                {% for outcome in focus_outcomes %}
-                    {% outcome %}
-                    {% empty %}
-                    Focus has not been set yet.
-                {% endfor %}
-                <form action="form" method="get">
-                    <button class="btn btn-secondary">Update</button>
-                </form>
+                {% focus scope=scope %}
             {% endif %}
         </div>
     </div>

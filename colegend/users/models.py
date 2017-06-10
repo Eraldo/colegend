@@ -15,7 +15,7 @@ from easy_thumbnails.fields import ThumbnailerImageField
 from phonenumber_field.modelfields import PhoneNumberField
 
 from colegend.checkpoints.models import Checkpoint
-from colegend.community.models import Duo
+from colegend.community.models import Duo, Clan, Tribe
 from colegend.core.utils.media_paths import UploadToOwnedDirectory
 from colegend.roles.models import Role
 
@@ -110,6 +110,22 @@ class User(AbstractUser):
     duo = models.ForeignKey(
         verbose_name=_('duo'),
         to=Duo,
+        related_name='members',
+        null=True, blank=True,
+        on_delete=models.SET_NULL
+    )
+
+    clan = models.ForeignKey(
+        verbose_name=_('clan'),
+        to=Clan,
+        related_name='members',
+        null=True, blank=True,
+        on_delete=models.SET_NULL
+    )
+
+    tribe = models.ForeignKey(
+        verbose_name=_('tribe'),
+        to=Tribe,
         related_name='members',
         null=True, blank=True,
         on_delete=models.SET_NULL

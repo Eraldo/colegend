@@ -4,8 +4,8 @@ from .models import Tribe, Clan, Duo
 
 @admin.register(Duo)
 class DuoAdmin(admin.ModelAdmin):
-    list_display = ['name', 'clan']
-    list_filter = ['clan__tribe__mentor', 'clan__tribe']
+    list_display = ['name']
+    # list_filter = []
 
 
 class DuoInline(admin.TabularInline):
@@ -16,9 +16,9 @@ class DuoInline(admin.TabularInline):
 
 @admin.register(Clan)
 class ClanAdmin(admin.ModelAdmin):
-    list_display = ['name', 'tribe']
-    inlines = [DuoInline]
-    list_filter = ['tribe__mentor']
+    list_display = ['name']
+    # inlines = [DuoInline]
+    # list_filter = ['tribe__mentor']
 
 
 class ClanInline(admin.TabularInline):
@@ -29,5 +29,5 @@ class ClanInline(admin.TabularInline):
 
 @admin.register(Tribe)
 class TribeAdmin(admin.ModelAdmin):
-    list_display = ['name', 'mentor']
-    inlines = [ClanInline]
+    list_display = ['name']
+    # inlines = [ClanInline]

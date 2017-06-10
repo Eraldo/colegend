@@ -1,19 +1,34 @@
 {% extends 'community/base.html' %}
-{#{% load core_tags wagtailroutablepage_tags community_tags legends_tags %}#}
-
-{#{% block title %}#}
-{#    Duo {{ duo.name }}#}
-{#{% endblock %}#}
+{% load core_tags wagtailroutablepage_tags community_tags legends_tags office_tags %}
 
 {% block content %}
-{#    {% if partner %}#}
-{#        <div style="display: inline-block">#}
-{#            {% legend legend=partner %}#}
-{#        </div>#}
-{#        <div style="display: inline-block">#}
-{#            {% card partner.focus|linebreaksbr header="Focus" %}#}
-{#        </div>#}
-{#    {% else %}#}
-{#        No duo partner yet.#}
-{#    {% endif %}#}
+    <h1>{{ duo.name }}</h1>
+    <div class="row">
+        {% for member in duo.members.all %}
+            <div class="col-md-6">
+                <div id="duo-card" class="card bg-content">
+                    <div class="duo-card-header card-block">
+                        <div style="display: inline-block">
+                            {% legend member show_link=False %}
+                        </div>
+                        <div style="display: inline-block; vertical-align: top">
+                            <h4>
+                                {{ member | title }}
+                            </h4>
+                        </div>
+                        <p>
+                            <strong>
+                                {{ scope.name | title }} Focus
+                            </strong>
+                        </p>
+                        <div>
+                            {% with user=member %}
+                                {% focus scope=scope %}
+                            {% endwith %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
