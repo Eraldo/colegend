@@ -39,7 +39,6 @@ class Migration(migrations.Migration):
             secret=settings.FACEBOOK_KEY
         )
         site.socialapp_set.add(facebook_app)
-        print(facebook_app.secret)
 
     dependencies = [
         ('sites', '0001_initial'),

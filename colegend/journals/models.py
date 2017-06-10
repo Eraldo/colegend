@@ -271,7 +271,6 @@ class JournalPage(RoutablePageMixin, Page):
                     'entry': user.journal.quarterentries.filter(year=quarter.start.year, quarter=quarter.number).first()
                 })
                 quarter = quarter.next
-            print(quarters)
             context['quarters'] = quarters
 
             outcomes = user.outcomes.all()

@@ -9,7 +9,6 @@ class FocusComponent(Component):
             if user:
                 try:
                     scope = scope or Day()
-                    print(scope.name)
                     focus = user.focuses.get(scope=scope.name, start=scope.start)
                 except:
                     return context

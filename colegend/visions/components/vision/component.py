@@ -11,7 +11,6 @@ class VisionComponent(Component):
         if vision:
             context['title'] = '{scope} vision'.format(scope=vision.get_scope_display())
             if vision.modified:
-                print(vision.modified)
                 last_update = timesince(vision.modified)
                 # last_update = timesince(last_update)
                 context['last_update'] = format_html('<span class="small">Updated: {} ago</span>', last_update)
