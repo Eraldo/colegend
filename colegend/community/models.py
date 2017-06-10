@@ -20,93 +20,6 @@ class CommunityPage(RoutablePageMixin, Page):
 
     parent_page_types = ['cms.RootPage']
     subpage_types = ['DuoPage', 'ClanPage', 'TribePage', 'MentorPage']
-    #
-    # def get_context(self, request, *args, **kwargs):
-    #     context = super().get_context(request, *args, **kwargs)
-    #     from colegend.users.models import User
-    #     context['legends'] = User.objects.filter(is_active=True)
-    #     context['tribes'] = Tribe.objects.all()
-    #     context['clans'] = Clan.objects.all()
-    #     context['duos'] = Duo.objects.all()
-    #     return context
-    #
-    # def render(self, request, template=None, context=None):
-    #     request.is_preview = getattr(request, 'is_preview', False)
-    #     return TemplateResponse(
-    #         request,
-    #         template or self.get_template(request),
-    #         context or self.get_context(request)
-    #     )
-    #
-    # @route(r'^$')
-    # def index(self, request):
-    #     return self.render(request)
-    #
-    # @route(r'^duo/$')
-    # def duo(self, request):
-    #     context = self.get_context(request)
-    #     user = request.user
-    #     if user.is_authenticated():
-    #         duo = user.duo
-    #         if duo:
-    #             partner = duo.members.exclude(id=user.id).first()
-    #             if partner:
-    #                 context['partner'] = partner
-    #                 dayentry = partner.journal.dayentries.current().first()
-    #                 if dayentry:
-    #                     partner.focus = format_html_join('', '{0} [{1}]<br>', ((outcome, outcome.get_status_display()) for outcome in dayentry.outcomes))
-    #         context['duo'] = user.duo
-    #     return self.render(request, template='community/duo.html', context=context)
-    #
-    # @route(r'^clan/$')
-    # def clan(self, request):
-    #     context = self.get_context(request)
-    #     user = request.user
-    #     if user.is_authenticated():
-    #         duo = user.duo
-    #         if duo:
-    #             clan = duo.clan
-    #             if clan:
-    #                 context['clan'] = clan
-    #                 partners = clan.members.exclude(id=user.id)
-    #                 if partners:
-    #                     context['partners'] = partners
-    #                     for partner in partners:
-    #                         weekentry = partner.journal.weekentries.current().first()
-    #                         if weekentry:
-    #                             partner.focus = format_html_join('', '{0} [{1}]<br>',
-    #                                                              ((outcome, outcome.get_status_display()) for outcome in
-    #                                                               weekentry.outcomes))
-    #     return self.render(request, template='community/clan.html', context=context)
-    #
-    # @route(r'^tribe/$')
-    # def tribe(self, request):
-    #     context = self.get_context(request)
-    #     user = request.user
-    #     if user.is_authenticated():
-    #         duo = user.duo
-    #         if duo:
-    #             clan = duo.clan
-    #             if clan:
-    #                 tribe = clan.tribe
-    #                 if tribe:
-    #                     context['tribe'] = tribe
-    #                     partners = tribe.members.exclude(id=user.id)
-    #                     if partners:
-    #                         context['partners'] = partners
-    #                         for partner in partners:
-    #                             monthentry = partner.journal.monthentries.current().first()
-    #                             if monthentry:
-    #                                 partner.focus = format_html_join('', '{0} [{1}]<br>',
-    #                                                                  ((outcome, outcome.get_status_display()) for
-    #                                                                   outcome in monthentry.outcomes))
-    #     return self.render(request, template='community/tribe.html', context=context)
-    #
-    # @route(r'^join/$')
-    # def join(self, request):
-    #     context = self.get_context(request)
-    #     context['mentors'] = set([duo.mentor for duo in Duo.objects.open()])
-    #     return self.render(request, template='community/join.html', context=context)
 
 
 class DuoPage(Page):
@@ -121,11 +34,8 @@ class DuoPage(Page):
         if user.is_authenticated:
             duo = user.duo
             if duo:
-                print('{} has duo {}'.format(user, duo))
                 context['duo'] = duo
                 context['scope'] = Day()
-            else:
-                print('{} has no duo {}'.format(user, duo))
         return context
 
     def __str__(self):

@@ -1,6 +1,14 @@
 {% extends 'community/base.html' %}
 {% load core_tags wagtailroutablepage_tags community_tags legends_tags office_tags %}
 
+{% block page_controls %}
+    <div class="pull-right">
+        <form action="form" method="get" style="display: inline-block">
+            <button class="btn btn-sm btn-danger">Quit</button>
+        </form>
+    </div>
+{% endblock %}
+
 {% block content %}
     <h1>{{ duo.name }}</h1>
     <div class="row">
@@ -11,6 +19,10 @@
                         <div style="display: inline-block">
                             {% legend member show_link=False %}
                         </div>
+                        {% if member != user %}
+                            <a href="mailto:{{ member.email }}" target="_blank"
+                               class="btn btn-primary pull-right">{% icon 'envelope' %}</a>
+                        {% endif %}
                         <div style="display: inline-block; vertical-align: top">
                             <h4>
                                 {{ member | title }}
