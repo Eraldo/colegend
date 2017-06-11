@@ -3,9 +3,14 @@
 
 {% block page_controls %}
     <div class="pull-right">
-        <form action="form" method="get" style="display: inline-block">
-            <button class="btn btn-sm btn-danger">Quit</button>
+        <form action="list" method="get" style="display: inline-block">
+            <button class="btn btn-sm btn-secondary">List</button>
         </form>
+        {% if user.duo %}
+            <form action="quit" method="get" style="display: inline-block">
+                <button class="btn btn-sm btn-danger">Quit</button>
+            </form>
+        {% endif %}
     </div>
 {% endblock %}
 

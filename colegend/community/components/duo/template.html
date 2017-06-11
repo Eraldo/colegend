@@ -1,0 +1,14 @@
+{% load legends_tags wagtailroutablepage_tags %}
+<div class="card bg-content card-block">
+    {% if join_url %}
+        <div class="pull-right">
+            <form action="{{ join_url }}" method="POST">{% csrf_token %}
+                <button name="id" value="{{ duo.id }}" class="btn btn-primary">Join</button>
+            </form>
+        </div>
+    {% endif %}
+    <h5>{{ duo | title }}</h5>
+    {% for member in duo.members.all %}
+        {% legend legend=member size='small' %}
+    {% endfor %}
+</div>
