@@ -13,17 +13,17 @@
 
 {% block chat_content %}
     <p>
-    {% if name %}
-        Welcome back!<br>
-        Speak your magic phrase to enter.
-    {% else %}
-        Do I know you?
-    {% endif %}
+        {% if name %}
+            Welcome back!<br>
+            Speak your magic phrase to enter.
+        {% else %}
+            Do I know you?
+        {% endif %}
     </p>
 {% endblock %}
 
 {% block chat_answers %}
-    <div class="">
+    <div>
         <form class="login list-group-item" method="POST" action=".">
             {% csrf_token %}
             {% crispy form %}
@@ -39,17 +39,43 @@
         </form>
     </div>
     {% if not name %}
-    <a href="{% provider_login_url "google" %}" class="list-group-item">
-        {% icon 'google-plus' fixed=True %}
-        My big brother will tell you who I am.
-    </a>
-    <a href="{% provider_login_url "facebook" method="oauth2" %}" class="list-group-item">
-        {% icon 'facebook' fixed=True %}
-        My friends will tell you who I am.
-    </a>
-    <a href="{% slugurl 'join' %}" class="list-group-item">
-        {% icon 'sign-in' fixed=True %}
-        Err, I am new here.. Where can I join?
-    </a>
+        <a href="{% provider_login_url "google" %}" class="list-group-item">
+            {% icon 'google-plus' fixed=True %}
+            My big brother will tell you who I am.
+        </a>
+        <a href="{% provider_login_url "facebook" method="oauth2" %}" class="list-group-item">
+            {% icon 'facebook' fixed=True %}
+            My friends will tell you who I am.
+        </a>
+        <a href="{% slugurl 'join' %}" class="list-group-item" data-toggle="modal" data-target="#new-info-modal">
+            {% icon 'sign-in' fixed=True %}
+            Err, I am new here.. Where can I join?
+        </a>
+        <!-- Modal -->
+        <div class="modal fade" id="new-info-modal" tabindex="-1" role="dialog"
+             aria-labelledby="new-info-modal-label"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        The next step is entering your desire account email. :)
+                        <form class="login" method="POST" action=".">
+                            {% csrf_token %}
+                            {% crispy form %}
+                            {% if redirect_field_value %}
+                                <input type="hidden" name="{{ redirect_field_name }}"
+                                       value="{{ redirect_field_value }}"/>
+                            {% endif %}
+                            <button class="btn btn-primary" type="submit">{% trans "Answer" %}</button>
+                            {% if password %}
+                                <a class="button secondaryAction"
+                                   href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+                            {% endif %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     {% endif %}
 {% endblock %}

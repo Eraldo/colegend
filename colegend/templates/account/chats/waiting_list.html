@@ -1,0 +1,28 @@
+{% extends 'base/chat.html' %}
+
+{% load static i18n core_tags %}
+{% load crispy_forms_tags account socialaccount wagtailcore_tags %}
+
+{#{% block chat_title %}#}
+{#{% endblock %}#}
+
+{% block chat_content %}
+    <p>
+        We are currently full.<br>
+        I will send you your code as soon as we have another free spot. :)
+    </p>
+{% endblock %}
+
+{% block chat_answers %}
+    <a href="{% slugurl 'about' %}" class="list-group-item">
+        Okay
+    </a>
+    <form class="login list-group-item" method="POST" action=".">
+        {% csrf_token %}
+        <input name="email" value="{{ email }}" type="hidden"/>
+        <div class="form-group controls">
+            <input name="code" type="number" placeholder="Enter code" class="form-control"/>
+        </div>
+        <button class="btn btn-primary" type="submit">{% trans "Answer" %}</button>
+    </form>
+{% endblock %}

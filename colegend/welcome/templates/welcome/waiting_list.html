@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags core_tags cms_tags %}
+
+{% block title %}{{ page.title }}{% endblock %}
+
+{% block content %}
+    {{ page.content|richtext }}
+    {% include 'account/chats/waiting_list.html' %}
+{% endblock %}
