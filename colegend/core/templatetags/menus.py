@@ -66,60 +66,6 @@ def menu(context, user=None, name='main'):
             ],
         },
         {
-            'name': 'Community',
-            'nodes': [
-                {
-                    'name': 'Legend',
-                    'url': reverse('legends:detail', args=[user.username]) if user.is_authenticated() else '#profile',
-                },
-                {
-                    'name': 'Duo',
-                    # 'locked': not user.has_checkpoint('community'),
-                    # 'url': get_community_url(group='duo'),
-                    'url': slugurl(context, slug='duo'),
-                },
-                {
-                    'name': 'Clan',
-                    # 'locked': True,
-                    # 'url': get_community_url(group='clan'),
-                    'url': slugurl(context, slug='clan'),
-                },
-                {
-                    'name': 'Tribe',
-                    # 'locked': True,
-                    # 'url': get_community_url(group='tribe'),
-                    'url': slugurl(context, slug='tribe'),
-                },
-                {
-                    'name': 'Legends',
-                    # 'locked': True,
-                    'url': get_community_url(group='community'),
-                },
-                {
-                    'name': 'Guide',
-                    'locked': not user.has_checkpoint('cloud guide card') if user.is_authenticated() else True,
-                    'url': reverse('guides:index'),
-                },
-                {
-                    'name': 'Chat',
-                    'locked': not user.has_checkpoint('chat card') if user.is_authenticated() else True,
-                    'url': reverse('chat:index'),
-                    'external': user.has_checkpoint('chat') if user.is_authenticated() else True,
-                },
-                {
-                    'name': 'Virtual Room',
-                    'locked': not user.has_checkpoint('virtual room') if user.is_authenticated() else True,
-                    'url': reverse('chat:room'),
-                    'external': True,
-                },
-                {
-                    'name': 'Guidelines',
-                    'locked': not user.has_checkpoint('guidelines card') if user.is_authenticated() else True,
-                    'url': reverse('guidelines:index'),
-                },
-            ],
-        },
-        {
             'name': 'Project',
             'nodes': [
                 {
@@ -151,31 +97,89 @@ def menu(context, user=None, name='main'):
                     'locked': not user.is_staff,
                     'url': reverse('styleguide:index'),
                 },
-                {
-                    'name': 'Manager',
-                    'locked': not user.has_checkpoint('manager') if user.is_authenticated() else True,
-                    'url': reverse('manager:index'),
-                },
-                {
-                    'name': 'Journal',
-                    'locked': not user.has_checkpoint('storytime') if user.is_authenticated() else True,
-                    'url': slugurl(context, slug='journal'),
-                },
-                {
-                    'name': 'Story',
-                    'url': reverse('story:index'),
-                },
-                {
-                    'name': 'Vision',
-                    'url': reverse('visions:index'),
-                },
-                {
-                    'name': 'Tutorial',
-                    'url': reverse('games:index'),
-                },
             ],
         },
     ]
+    if user.is_superuser:
+        menu_context['nodes'] += [
+            {
+                'name': 'Lab',
+                'nodes': [
+                    {
+                        'name': 'Legend',
+                        'url': reverse('legends:detail',
+                                       args=[user.username]) if user.is_authenticated() else '#profile',
+                    },
+                    {
+                        'name': 'Duo',
+                        # 'locked': not user.has_checkpoint('community'),
+                        # 'url': get_community_url(group='duo'),
+                        'url': slugurl(context, slug='duo'),
+                    },
+                    {
+                        'name': 'Clan',
+                        # 'locked': True,
+                        # 'url': get_community_url(group='clan'),
+                        'url': slugurl(context, slug='clan'),
+                    },
+                    {
+                        'name': 'Tribe',
+                        # 'locked': True,
+                        # 'url': get_community_url(group='tribe'),
+                        'url': slugurl(context, slug='tribe'),
+                    },
+                    {
+                        'name': 'Legends',
+                        # 'locked': True,
+                        'url': get_community_url(group='community'),
+                    },
+                    {
+                        'name': 'Guide',
+                        'locked': not user.has_checkpoint('cloud guide card') if user.is_authenticated() else True,
+                        'url': reverse('guides:index'),
+                    },
+                    {
+                        'name': 'Chat',
+                        'locked': not user.has_checkpoint('chat card') if user.is_authenticated() else True,
+                        'url': reverse('chat:index'),
+                        'external': user.has_checkpoint('chat') if user.is_authenticated() else True,
+                    },
+                    {
+                        'name': 'Virtual Room',
+                        'locked': not user.has_checkpoint('virtual room') if user.is_authenticated() else True,
+                        'url': reverse('chat:room'),
+                        'external': True,
+                    },
+                    {
+                        'name': 'Guidelines',
+                        'locked': not user.has_checkpoint('guidelines card') if user.is_authenticated() else True,
+                        'url': reverse('guidelines:index'),
+                    },
+                    {
+                        'name': 'Manager',
+                        'locked': not user.has_checkpoint('manager') if user.is_authenticated() else True,
+                        'url': reverse('manager:index'),
+                    },
+                    {
+                        'name': 'Journal',
+                        'locked': not user.has_checkpoint('storytime') if user.is_authenticated() else True,
+                        'url': slugurl(context, slug='journal'),
+                    },
+                    {
+                        'name': 'Story',
+                        'url': reverse('story:index'),
+                    },
+                    {
+                        'name': 'Vision',
+                        'url': reverse('visions:index'),
+                    },
+                    {
+                        'name': 'Tutorial',
+                        'url': reverse('games:index'),
+                    },
+                ],
+            },
+        ]
     if user.is_authenticated():
         if name == 'main':
             pass
