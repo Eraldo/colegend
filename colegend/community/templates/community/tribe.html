@@ -1,20 +1,51 @@
 {% extends 'community/base.html' %}
-{#{% load core_tags wagtailroutablepage_tags community_tags legends_tags %}#}
+{% load core_tags wagtailroutablepage_tags community_tags legends_tags office_tags %}
 
-{#{% block title %}#}
-{#    Tribe {{ tribe.name }}#}
-{#{% endblock %}#}
+{% block page_controls %}
+    <div class="pull-right">
+        <form action="list" method="get" style="display: inline-block">
+            <button class="btn btn-sm btn-secondary">List</button>
+        </form>
+        {% if user.tribe %}
+            <form action="quit" method="get" style="display: inline-block">
+                <button class="btn btn-sm btn-danger">Quit</button>
+            </form>
+        {% endif %}
+    </div>
+{% endblock %}
 
 {% block content %}
-{#    {% for partner in partners %}#}
-{#        <div style="display: inline-block">#}
-{#            {% legend legend=partner %}#}
-{#        </div>#}
-{#        <div style="display: inline-block">#}
-{#            {% card partner.focus|linebreaksbr header="Focus" %}#}
-{#        </div>#}
-{#        <br>#}
-{#        {% empty %}#}
-{#        You are not in a tribe yet.#}
-{#    {% endfor %}#}
+    <h1>{{ tribe.name }}</h1>
+    <div class="row">
+        {% for member in tribe.members.all %}
+            <div class="col-md-6">
+                <div id="tribe-card" class="card bg-content">
+                    <div class="tribe-card-header card-block">
+                        <div style="display: inline-block">
+                            {% legend member show_link=False %}
+                        </div>
+                        {% if member != user %}
+                            <a href="mailto:{{ member.email }}" target="_blank"
+                               class="btn btn-primary pull-right">{% icon 'envelope' %}</a>
+                        {% endif %}
+                        <div style="display: inline-block; vertical-align: top">
+                            <h4>
+                                {{ member | title }}
+                            </h4>
+                        </div>
+                        <p>
+                            <strong>
+                                {{ scope.name | title }} Focus
+                            </strong>
+                        </p>
+                        <div>
+                            {% with user=member %}
+                                {% focus scope=scope %}
+                            {% endwith %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

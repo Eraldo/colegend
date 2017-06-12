@@ -1,0 +1,9 @@
+{% extends 'community/base.html' %}
+
+{% block content %}
+    <h1>Are you sure you want to quit Clan "{{ clan }}"?</h1>
+    <form method="post">{% csrf_token %}
+        <button type="submit" name="action" value="confirm" class="btn btn-sm btn-danger">Quit</button>
+        <button type="submit" name="action" value="cancel" class="btn btn-sm btn-secondary">Cancel</button>
+    </form>
+{% endblock %}

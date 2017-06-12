@@ -17,6 +17,13 @@ class UserCreationForm(AuthUserCreationForm):
         model = User
 
 
+class UserInline(admin.TabularInline):
+    fields = ['username', 'email']
+    model = User
+    extra = 0
+    # max_num = 4
+
+
 @admin.register(User)
 class UserAdmin(AuthUserAdmin):
     fieldsets = (

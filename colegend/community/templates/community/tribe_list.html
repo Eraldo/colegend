@@ -1,0 +1,21 @@
+{% extends 'community/base.html' %}
+{% load core_tags wagtailroutablepage_tags community_tags legends_tags office_tags %}
+
+{% block page_controls %}
+    {% if not user.tribe %}
+        <div class="pull-right">
+            <form action="{% routablepageurl page "create" %}" method="get" style="display: inline-block">
+                <button class="btn btn-sm btn-secondary">Create</button>
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <h1>Tribes</h1>
+    {% for tribe in tribes %}
+        <div>
+            {% tribe %}
+        </div>
+    {% endfor %}
+{% endblock %}

@@ -10,6 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 from colegend.core.models import OwnedBase
 from colegend.journals import scopes
 from colegend.journals.forms import DatePickerForm
+from colegend.journals.scopes import Day, Week, Month, Year
 from colegend.outcomes.models import Outcome
 
 DAY = 'day'
@@ -60,6 +61,15 @@ class Focus(OwnedBase):
         on_delete=models.SET_NULL,
         related_name='focus_4',
     )
+
+    def get_scope(self):
+        scope_map = {
+            DAY: Day,
+            WEEK: Week,
+            MONTH: Month,
+            YEAR: Year,
+        }
+        return scope_map.get(self.scope)(self.start)
 
     @property
     def outcomes(self):
@@ -170,7 +180,7 @@ class AgendaPage(RoutablePageMixin, Page):
         if instance:
             form = FocusForm(owner=user, instance=instance, data=data)
         else:
-            initial = {'owner': user, 'socpe': scope, 'start': scope.start}
+            initial = {'owner': user, 'scope': scope.name, 'start': scope.start}
             form = FocusForm(owner=user, initial=initial, data=data)
         return form
 

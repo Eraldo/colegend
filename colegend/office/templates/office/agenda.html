@@ -44,6 +44,10 @@
                 <form action="form" method="get" class="pull-right">
                     <button class="btn btn-sm btn-secondary">Update</button>
                 </form>
+            {% else %}
+                <form action="../" method="get" class="pull-right">
+                    <button class="btn btn-sm btn-secondary">Cancel</button>
+                </form>
             {% endif %}
         </div>
         <div class="card-block">
