@@ -1,6 +1,5 @@
 from django import template
 from django.contrib.staticfiles.templatetags.staticfiles import static
-from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
 from wagtail.wagtailcore.templatetags.wagtailcore_tags import slugurl
 
@@ -14,7 +13,7 @@ def legend(context, legend=None, size=None, show_avatar=True, show_link=True, ur
     legend = legend or context.get('legend', context.get('user'))
 
     name = legend if legend.is_authenticated() else 'Anonymous'
-    url = url or legend.get_absolute_url() if legend.is_authenticated() else slugurl(context, 'join')
+    url = url or legend.get_absolute_url() if legend.is_authenticated() else slugurl(context, 'welcome')
 
     legend_context = {
         'name': name,
