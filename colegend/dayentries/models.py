@@ -7,7 +7,6 @@ from colegend.core.fields import MarkdownField, DateField
 from colegend.core.models import AutoUrlsMixin, TimeStampedBase
 from colegend.core.validators import validate_date_today_tomorrow_or_past
 from colegend.journals.models import Journal, JournalPage
-from colegend.outcomes.models import Outcome
 from colegend.tags.models import TaggableBase
 
 
@@ -27,35 +26,6 @@ class DayEntry(AutoUrlsMixin, TaggableBase, TimeStampedBase):
     journal = models.ForeignKey(Journal, related_name="dayentries")
     date = DateField(default=timezone.datetime.today, validators=[validate_date_today_tomorrow_or_past])
     locations = models.CharField(max_length=255, help_text="Separated by ';'")
-    outcome_1 = models.ForeignKey(
-        to=Outcome,
-        blank=True, null=True,
-        on_delete=models.SET_NULL,
-        related_name='day_focus_1',
-    )
-    outcome_2 = models.ForeignKey(
-        to=Outcome,
-        blank=True, null=True,
-        on_delete=models.SET_NULL,
-        related_name='day_focus_2',
-    )
-    outcome_3 = models.ForeignKey(
-        to=Outcome,
-        blank=True, null=True,
-        on_delete=models.SET_NULL,
-        related_name='day_focus_3',
-    )
-    outcome_4 = models.ForeignKey(
-        to=Outcome,
-        blank=True, null=True,
-        on_delete=models.SET_NULL,
-        related_name='day_focus_4',
-    )
-
-    @property
-    def outcomes(self):
-        outcomes = [self.outcome_1, self.outcome_2, self.outcome_3, self.outcome_4]
-        return [outcome for outcome in outcomes if outcome]
 
     keywords = models.CharField(
         max_length=255,

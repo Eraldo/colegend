@@ -1,44 +1,10 @@
 {% extends 'journals/index.html' %}
-{% load weekentries_tags monthentries_tags outcomes_tags core_tags %}
+{% load weekentries_tags monthentries_tags core_tags %}
 
 {% block content_container %}
-    <div class="row">
-        <div class="col-md-12">
-            {% monthentry_line %}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-8">
-            {% for week in weeks %}
-                {% weekentry_line week.entry date=week.date %}
-            {% endfor %}
-        </div>
-        <div class="col-md-4">
-            {% card focus_outcomes header="Focus" %}
-            <div class="content card bg-content">
-                <div class="card-header">
-                    Scheduled
-                </div>
-                <div class="card-block">
-                    {% for outcome in scheduled_outcomes %}
-                        {% outcome %}
-                        {% empty %}
-                        Nothing scheduled.
-                    {% endfor %}
-                </div>
-            </div>
-            <div class="content card bg-content">
-                <div class="card-header">
-                    Deadlines
-                </div>
-                <div class="card-block">
-                    {% for outcome in deadlined_outcomes %}
-                        {% outcome %}
-                        {% empty %}
-                        No deadlines - Yeah!
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </div>
+    {% monthentry_line %}
+    <br>
+    {% for week in weeks %}
+        {% weekentry_line week.entry date=week.date %}
+    {% endfor %}
 {% endblock %}

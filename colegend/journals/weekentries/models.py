@@ -1,4 +1,3 @@
-from django.core.urlresolvers import reverse
 from django.core.validators import MaxValueValidator
 from django.db import models
 from django.utils import timezone
@@ -8,7 +7,6 @@ from colegend.core.fields import MarkdownField
 from colegend.core.models import AutoUrlsMixin, TimeStampedBase
 from colegend.journals.models import Journal, JournalPage
 from colegend.journals.scopes import Week
-from colegend.outcomes.models import Outcome
 from .utils import get_current_year, get_current_week
 from colegend.tags.models import TaggableBase
 
@@ -31,35 +29,6 @@ class WeekEntry(AutoUrlsMixin, TaggableBase, TimeStampedBase):
     year = models.PositiveIntegerField(default=get_current_year, validators=[MaxValueValidator(4000)])
     week = models.PositiveIntegerField(default=get_current_week, validators=[MaxValueValidator(54)])
     focus = models.TextField(blank=True)
-    outcome_1 = models.ForeignKey(
-        to=Outcome,
-        blank=True, null=True,
-        on_delete=models.SET_NULL,
-        related_name='week_focus_1',
-    )
-    outcome_2 = models.ForeignKey(
-        to=Outcome,
-        blank=True, null=True,
-        on_delete=models.SET_NULL,
-        related_name='week_focus_2',
-    )
-    outcome_3 = models.ForeignKey(
-        to=Outcome,
-        blank=True, null=True,
-        on_delete=models.SET_NULL,
-        related_name='week_focus_3',
-    )
-    outcome_4 = models.ForeignKey(
-        to=Outcome,
-        blank=True, null=True,
-        on_delete=models.SET_NULL,
-        related_name='week_focus_4',
-    )
-
-    @property
-    def outcomes(self):
-        outcomes = [self.outcome_1, self.outcome_2, self.outcome_3, self.outcome_4]
-        return [outcome for outcome in outcomes if outcome]
 
     content = MarkdownField()
     keywords = models.CharField(
