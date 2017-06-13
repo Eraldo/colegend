@@ -58,7 +58,7 @@ class DayEntryCreateView(LoginRequiredMixin, DayEntryMixin, CreateView):
 
 
         # Creation date is given or today as default.
-        date = self.request.GET.get('date', timezone.now().date())
+        date = self.request.GET.get('date', timezone.localtime(timezone.now()).date())
         initial['date'] = date
 
         # default content

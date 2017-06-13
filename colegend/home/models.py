@@ -17,6 +17,8 @@ from colegend.core.templatetags.core_tags import link
 
 from django.utils.translation import ugettext_lazy as _
 
+from colegend.office.models import DAY, AgendaPage
+
 
 class HomePage(Page):
     template = 'home/index.html'
@@ -46,13 +48,19 @@ class DashboardPage(Page):
         return context
 
     def get_next_step(self, user):
+        today = timezone.localtime(timezone.now()).date()
+
+        # Has the user set his focus?
+        focus = user.focuses.filter(scope=DAY, start=today)
+        agenda_page = AgendaPage.objects.first()
+        if not focus and agenda_page:
+            url = agenda_page.url + '?scope=day&date={}'.format(today)
+            return link(_('Setting focus'), url)
+
         # Has the user written his journal entry?
-        today = timezone.now().date()
         dayentry = user.journal.dayentries.filter(date=today)
         if not dayentry:
             return link(_('Create a journal entry'), reverse('dayentries:create'))
-        # else:
-        #     return link(_('Test'), reverse('dayentries:create'))
 
     def __str__(self):
         return self.title

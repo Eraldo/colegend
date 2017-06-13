@@ -1,4 +1,3 @@
-from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
@@ -10,12 +9,16 @@ from colegend.journals.models import Journal, JournalPage
 from colegend.tags.models import TaggableBase
 
 
+def get_today():
+    return timezone.localtime(timezone.now()).date()
+
+
 class DayEntryQuerySet(models.QuerySet):
     def owned_by(self, user):
         return self.filter(journal__owner=user)
 
     def current(self):
-        today = timezone.now().date()
+        today = get_today()
         return self.filter(date=today)
 
 
@@ -24,7 +27,7 @@ class DayEntry(AutoUrlsMixin, TaggableBase, TimeStampedBase):
     A django model representing a user's daily journal entry.
     """
     journal = models.ForeignKey(Journal, related_name="dayentries")
-    date = DateField(default=timezone.datetime.today, validators=[validate_date_today_tomorrow_or_past])
+    date = DateField(default=get_today, validators=[validate_date_today_tomorrow_or_past])
     locations = models.CharField(max_length=255, help_text="Separated by ';'")
 
     keywords = models.CharField(
