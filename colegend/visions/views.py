@@ -40,10 +40,10 @@ class VisionIndexView(TemplateView):
             context['purpose'] = user.purpose
             scopes = Vision.SCOPE_MAP.keys()
             context['visions'] = [Vision.objects.get_or_create(owner=user, scope=scope)[0] for scope in scopes]
-            context['actions'] = [{
-                'name': 'update',
-                'url': '#update-purpose',
-            }]
+            # context['actions'] = [{
+            #     'name': 'update',
+            #     'url': '#update-purpose',
+            # }]
         else:
             context['purpose'] = _("I am a legend, defining my legend purpose as a member of colegend.")
         return context
