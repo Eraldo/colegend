@@ -99,16 +99,32 @@
             </div>
             <div class="card bg-content">
                 <div class="card-header">
-                    Relations
+                    Partners
                 </div>
                 <div class="card-block">
-                    {% if legend.guiderelation.guide %}
-                        <p>
-                            Cloud Guide:
-                            {% legend legend.guiderelation.guide size='small' %}
-                        </p>
-                    {% else %}
-                        No relations yet.
+                    {% if legend.duo %}
+                        <h5>Duo</h5>
+                        {% for partner in legend.duo.members.all %}
+                            {% if partner != legend %}
+                                {% legend partner size='small' %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    {% if legend.clan %}
+                        <h5>Clan</h5>
+                        {% for partner in legend.clan.members.all %}
+                            {% if partner != legend %}
+                                {% legend partner size='small' %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    {% if legend.tribe %}
+                        <h5>Tribe</h5>
+                        {% for partner in legend.tribe.members.all %}
+                            {% if partner != legend %}
+                                {% legend partner size='small' %}
+                            {% endif %}
+                        {% endfor %}
                     {% endif %}
                 </div>
             </div>
@@ -175,7 +191,6 @@
                     <p id="legend-days">{{ legend.legend_days|default:"first" }} Legend
                         day{{ legend.legend_days|pluralize }}</p>
 
-                    <p class="text-muted">Animal</p>
                     <p id="legend-donations">{% trans 'Donations' %}: ¤{{ legend.donations.total|default:'0.00' }}</p>
                 </div>
             </div>
@@ -185,7 +200,7 @@
                     Biography
                 </div>
                 <div class="card-block">
-                    {{ legend.biography.text }}
+                    {{ legend.biography.text|truncatechars:42 }}
                 </div>
             </div>
 
