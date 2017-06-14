@@ -24,7 +24,7 @@ class Donation(AutoUrlsMixin, TimeStampedBase, OwnedBase):
     amount = models.DecimalField(
         verbose_name=_('amount'),
         max_digits=6, decimal_places=2,
-        help_text=_('€')
+        help_text=_('¤')
     )
     notes = models.TextField(
         verbose_name=_('notes'),
@@ -40,4 +40,4 @@ class Donation(AutoUrlsMixin, TimeStampedBase, OwnedBase):
         ordering = ['-date']
 
     def __str__(self):
-        return '{}: €{} {}'.format(self.date, self.amount, self.owner)
+        return '{}: ¤{} {}'.format(self.date, self.amount, self.owner)

@@ -26,7 +26,7 @@ class MetricsIndexView(LoginRequiredMixin, RolesRequiredMixin, TemplateView):
         legends = get_user_model().objects.count()
         metrics['legends'] = legends
 
-        metrics['donations'] = '€{}'.format(Donation.objects.aggregate(Sum('amount')).get('amount__sum'))
+        metrics['donations'] = '¤{}'.format(Donation.objects.aggregate(Sum('amount')).get('amount__sum'))
 
         metrics['total income/outcome'] = link('google docs file', url='https://drive.google.com/drive/u/0/folders/0B2HIrbU2jVlWUjNCZWJMVVhmb2s', external=True)
 
