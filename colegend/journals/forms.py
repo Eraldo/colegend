@@ -34,9 +34,10 @@ class JournalForm(forms.ModelForm):
 
 
 class DatePickerForm(forms.Form):
-    date = DateFormField(
-        # required = True,
-    )
+    date = forms.DateField()
+    # date = DateFormField(
+    #     # required = True,
+    # )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

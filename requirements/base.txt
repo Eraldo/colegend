@@ -1,6 +1,6 @@
 # Bleeding edge Django
 # ------------------------------------------------
-django==1.10.4
+django==1.11.2
 
 # Configuration
 # ------------------------------------------------
@@ -26,13 +26,13 @@ django-autocomplete-light==3.1.6
 
 # Markdown
 # ------------------------------------------------
-Markdown==2.6.6
-bleach==1.4.3
+Markdown==2.6.8
+bleach==2.0.0
 
 # Images
 # ------------------------------------------------
 Pillow==3.3.1
-easy-thumbnails==2.3
+easy-thumbnails==2.4.1
 django-gravatar2==1.4.0
 
 # Accounts
@@ -69,12 +69,12 @@ celery==3.1.23
 
 # CMS
 # ------------------------------------------------
-wagtail==1.8
+wagtail==1.10.1
 django-classy-tags==0.8.0
 
 # Views
 # ------------------------------------------------
-django-filter==0.15.3
+django-filter==1.0.4
 
 # slack IM
 # ------------------------------------------------

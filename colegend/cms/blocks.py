@@ -10,58 +10,13 @@ from wagtail.wagtailimages.blocks import ImageChooserBlock
 from colegend.core.templatetags.core_tags import image
 
 
-class RequestBlockMixin:
-    @staticmethod
-    def accepts_context(func):
-        """
-        Helper function used by _render_with_context and _render_basic_with_context. Return true
-        if the callable 'func' accepts a 'context' keyword argument
-        """
-        signature = inspect.signature(func)
-        try:
-            signature.bind_partial(context=None)
-            return True
-        except TypeError:
-            return False
-
-    def render(self, value, context=None):
-        """
-        Return a text rendering of 'value', suitable for display on templates. By default, this will
-        use a template (with the passed context, supplemented by the result of get_context) if a
-        'template' property is specified on the block, and fall back on render_basic otherwise.
-        """
-        template = getattr(self.meta, 'template', None)
-        if not template:
-            return self.render_basic(value, context=context)
-
-        if self.accepts_context(self.get_context):
-            new_context = self.get_context(value, context)
-        else:
-            new_context = dict(context)
-            new_context.update(self.get_context(value))
-
-        return mark_safe(render_to_string(template, new_context))
-
-    def get_context(self, value, context=None):
-        """
-        Return a dict of context variables (derived from the block value, or otherwise)
-        to be added to the template context when rendering this value through a template.
-        """
-        context = context or {}
-        context.update({
-            'self': value,
-            self.TEMPLATE_VAR: value,
-        })
-        return context
-
-
 class HeadingBlock(blocks.CharBlock):
     class Meta:
         classname = 'full title'
         icon = 'title'
         template = 'widgets/heading.html'
 
-    def get_context(self, value):
+    def get_context(self, value, parent_context=None):
         context = super().get_context(value)
         context['level'] = 1
         context['content'] = value
@@ -73,13 +28,13 @@ class RichTextBlock(blocks.RichTextBlock):
         icon = 'pilcrow'
         template = 'widgets/richtext.html'
 
-    def get_context(self, value):
-        context = super().get_context(value)
+    def get_context(self, value, parent_context=None):
+        context = super().get_context(value, parent_context)
         context['content'] = value
         return context
 
 
-class ImageBlock(RequestBlockMixin, ImageChooserBlock):
+class ImageBlock(ImageChooserBlock):
     class Meta:
         icon = 'image'
         template = 'widgets/image.html'
@@ -91,8 +46,8 @@ class ImageBlock(RequestBlockMixin, ImageChooserBlock):
             name=context.get('name'),
         )
 
-    def get_context(self, value, context=None):
-        context = super().get_context(value, context)
+    def get_context(self, value, parent_context=None):
+        context = super().get_context(value, parent_context)
         context['url'] = value.get_rendition('max-1200x1200').url
         context['name'] = value.title
         return context
@@ -103,8 +58,8 @@ class EmbedBlock(WagtailEmbedBlock):
         icon = 'media'
         template = 'widgets/embed.html'
 
-    def get_context(self, value):
-        context = super().get_context(value)
+    def get_context(self, value, parent_context=None):
+        context = super().get_context(value, parent_context)
         embed = value
         context['embed'] = embed
         return context
@@ -122,8 +77,8 @@ BASE_BLOCKS = [
 class SectionBlock(StructBlock):
     content = blocks.StreamBlock(BASE_BLOCKS)
 
-    def get_context(self, value):
-        context = super().get_context(value)
+    def get_context(self, value, parent_context=None):
+        context = super().get_context(value, parent_context)
         context['content'] = value.get('content')
         return context
 
@@ -144,8 +99,8 @@ class ColumnsBlock(StructBlock):
     left_column = blocks.StreamBlock(BASE_BLOCKS)
     right_column = blocks.StreamBlock(BASE_BLOCKS, form_classname='pull-right')
 
-    def get_context(self, value):
-        context = super().get_context(value)
+    def get_context(self, value, parent_context=None):
+        context = super().get_context(value, parent_context)
         context['left_column'] = value.get('left_column')
         context['right_column'] = value.get('right_column')
         return context

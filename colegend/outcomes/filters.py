@@ -38,3 +38,4 @@ class OutcomeFilter(django_filters.FilterSet):
     class Meta:
         model = Outcome
         form = OutcomeFilterForm
+        fields = ['name', 'description', 'status', 'review']

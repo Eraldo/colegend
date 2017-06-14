@@ -47,7 +47,7 @@ def dayentry_card(context, dayentry=None, **kwargs):
             context['weekday_number'] = date.isoweekday()
     context.update(kwargs)
     template = 'dayentries/widgets/card.html'
-    return render_to_string(template, context=context)
+    return render_to_string(template, context=context.flatten())
 
 
 @register.simple_tag(takes_context=True)

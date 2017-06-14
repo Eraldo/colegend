@@ -5,7 +5,7 @@
 
 {% block extra_head %}
     {{ block.super }}
-    {{ datepickerform.media.css }}
+{#    {{ datepickerform.media.css }}#}
 {% endblock %}
 
 {% block page_links %}
@@ -57,7 +57,7 @@
 
 {% block extra_script %}
     {{ block.super }}
-    {{ datepickerform.media.js }}
+{#    {{ datepickerform.media.js }}#}
     <script type="text/javascript">
         $('.dropdown-menu').find('form').click(function (e) {
             e.stopPropagation();
