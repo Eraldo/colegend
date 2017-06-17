@@ -75,11 +75,12 @@ class FocusForm(forms.ModelForm):
 
             # Creating update message
             action = _('updated') if update_reason else _('set')
-            subject = '{user} {action} his {scope} focus: ({scope_display})'.format(
+            subject = '{user} {action} {possessive_pronoun} {scope} focus: ({scope_display})'.format(
                 user=owner,
+                action=action,
+                possessive_pronoun=owner.get_pronoun(kind='possessive adjective'),
                 scope=instance.scope,
                 scope_display=instance.get_scope(),
-                action=action
             )
             message = subject + '\n\n'
             for field in changed_outcome_fields:

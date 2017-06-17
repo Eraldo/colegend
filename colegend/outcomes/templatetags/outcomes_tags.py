@@ -6,6 +6,7 @@ from django.utils import timezone
 from colegend.core.templatetags.core_tags import icon, intuitive_duration
 from colegend.outcomes.forms import OutcomeStatusForm
 from colegend.outcomes.models import Outcome
+from colegend.scopes.models import DAY, WEEK, MONTH, YEAR
 
 register = template.Library()
 
@@ -35,7 +36,7 @@ def outcome(context, outcome=None, **kwargs):
                 'description': outcome.description,
                 'status': outcome.status,
                 'inbox': outcome.inbox,
-                'review': outcome.review,
+                'scope': outcome.scope,
                 'date': outcome.date or '',
                 'deadline': outcome.deadline or '',
                 'estimate': outcome.estimate or '',
@@ -89,31 +90,25 @@ def status(context, status=None, **kwargs):
 
 
 @register.simple_tag(takes_context=True)
-def review(context, review=None, **kwargs):
-    review = review or context.get('review')
+def scope(context, scope=None, **kwargs):
+    scope = scope or context.get('scope')
     symbol = ''
-    review_context = {}
-    if review == Outcome.DAILY:
-        review_context['symbol'] = 'D'
-        review_context['class'] = 'bg-category-1'
-    elif review == Outcome.WEEKLY:
-        review_context['symbol'] = 'W'
-        review_context['class'] = 'bg-category-2'
-    elif review == Outcome.MONTHLY:
-        review_context['symbol'] = 'M'
-        review_context['class'] = 'bg-category-3'
-    # elif review == Outcome.QUARTERLY:
-    #     review_context['symbol'] = 'Q'
-    #     review_context['class'] = 'bg-category-5'
-    elif review == Outcome.YEARLY:
-        review_context['symbol'] = 'Y'
-        review_context['class'] = 'bg-category-6'
-    elif review == Outcome.SOMETIME:
-        review_context['symbol'] = 'S'
-        review_context['class'] = 'bg-category-7'
-    if review_context:
-        review_tempalte = 'outcomes/widgets/review.html'
-        symbol = render_to_string(review_tempalte, context=review_context)
+    scope_context = {}
+    if scope == DAY:
+        scope_context['symbol'] = 'D'
+        scope_context['class'] = 'bg-category-1'
+    elif scope == WEEK:
+        scope_context['symbol'] = 'W'
+        scope_context['class'] = 'bg-category-2'
+    elif scope == MONTH:
+        scope_context['symbol'] = 'M'
+        scope_context['class'] = 'bg-category-3'
+    elif scope == YEAR:
+        scope_context['symbol'] = 'Y'
+        scope_context['class'] = 'bg-category-6'
+    if scope_context:
+        scope_tempalte = 'outcomes/widgets/scope.html'
+        symbol = render_to_string(scope_tempalte, context=scope_context)
     return symbol
 
 

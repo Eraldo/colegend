@@ -874,7 +874,7 @@ widgets.append(
                     'description': 'This is my outcome description.\nSecond line.',
                     'status': 1,
                     'inbox': True,
-                    'review': 0,
+                    'scope': 1,
                     'date': timezone.now().today(),
                     'deadline': timezone.datetime(2020, 1, 7).date(),
                     'estimate': timezone.timedelta(days=4),

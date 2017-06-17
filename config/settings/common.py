@@ -73,6 +73,7 @@ THIRD_PARTY_APPS = (
     'dal_select2',
     'easy_thumbnails',
     'django_filters',
+    'rest_framework',
 )
 
 # Apps specific for this project go here.
@@ -138,6 +139,7 @@ LOCAL_APPS = (
     'colegend.cms',
     'colegend.components',
     'colegend.coicons',
+    'colegend.api',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -148,6 +150,7 @@ INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + CMS_APPS + THIRD_PARTY_APPS
 MIDDLEWARE_CLASSES = (
     # Make sure djangosecure.middleware.SecurityMiddleware is listed first
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -380,6 +383,30 @@ TAGGIT_CASE_INSENSITIVE = True
 # WAGTAIL_USER_CREATION_FORM = 'users.forms.CustomUserCreationForm'
 # WAGTAIL_USER_CUSTOM_FIELDS = ['country']
 # WAGTAIL_USAGE_COUNT_ENABLED = True
+
+
+# API
+# ------------------------------------------------------------------------------
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        # 'rest_framework.permissions.IsAuthenticated'
+        # 'rest_framework.permissions.IsAdminUser'
+    ],
+}
+# CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_WHITELIST = (
+    'localhost:8004',
+    '127.0.0.1:8004',
+    'colegend.org',
+    'localhost:8100',
+)
+# CORS_ORIGIN_REGEX_WHITELIST = (
+#     r'^(https?://)?(\w+\.)?colegend\.(org|com)$',
+#     r'^(https?://)?(\w+\.)?127\.0\.0\.1:8004$',
+# )
 
 
 # SLACK CHAT

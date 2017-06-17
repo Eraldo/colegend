@@ -15,7 +15,7 @@ class OutcomeComponent(Component):
                     'description': outcome.description,
                     'status': outcome.status,
                     'inbox': outcome.inbox,
-                    'review': outcome.review,
+                    'scope': outcome.scope,
                     'date': outcome.date or '',
                     'deadline': outcome.deadline or '',
                     'estimate': outcome.estimate or '',

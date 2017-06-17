@@ -2,6 +2,7 @@ import datetime
 
 import django_filters
 
+from colegend.scopes.models import SCOPE_CHOICES
 from .models import Outcome
 from .forms import OutcomeFilterForm
 
@@ -25,7 +26,7 @@ class OutcomeFilter(django_filters.FilterSet):
     name = django_filters.CharFilter(lookup_expr='icontains')
     description = django_filters.CharFilter(lookup_expr='icontains')
     status = django_filters.ChoiceFilter(choices=(('', 'all'),) + Outcome.STATUS_CHOICES)
-    review = django_filters.ChoiceFilter(choices=(('', 'all'),) + Outcome.REVIEW_CHOICES)
+    scope = django_filters.ChoiceFilter(choices=(('', 'all'),) + SCOPE_CHOICES)
     ESTIMATE_CHOICES = (
         ('1d', 'hour(s)'),
         ('1w', 'day(s)'),
@@ -38,4 +39,4 @@ class OutcomeFilter(django_filters.FilterSet):
     class Meta:
         model = Outcome
         form = OutcomeFilterForm
-        fields = ['name', 'description', 'status', 'review']
+        fields = ['name', 'description', 'status', 'scope']

@@ -172,6 +172,40 @@ class User(AbstractUser):
 
     registration_country = models.CharField(max_length=255, blank=True)
 
+    def get_pronoun(self, kind='subject'):
+        gender = self.gender or self.NEUTRAL
+
+        SUBJECT = 'subject'
+        OBJECT = 'object'
+        POSSESSIVE_ADJECTIVE = 'possessive adjective'
+        POSSESSIVE_PRONOUN = 'possessive pronoun'
+        REFLEXIVE_PRONOUN = 'reflexive pronoun'
+
+        gender_pronouns = {
+            self.MALE: {
+                SUBJECT: 'he',
+                OBJECT: 'him',
+                POSSESSIVE_ADJECTIVE: 'his',
+                POSSESSIVE_PRONOUN: 'his',
+                REFLEXIVE_PRONOUN: 'himself',
+            },
+            self.FEMALE: {
+                'subject': 'she',
+                'object': 'her',
+                'possessive adjective': 'her',
+                'possessive pronoun': 'hers',
+                'reflexive pronoun': 'herself',
+            },
+            self.NEUTRAL: {
+                'subject': 'it',
+                'object': 'it',
+                'possessive adjective': 'its',
+                'possessive pronoun': '',
+                'reflexive pronoun': 'itself',
+            },
+        }
+        return gender_pronouns.get(gender).get(kind)
+
 
 @receiver(user_signed_up)
 def new_user_manager_notification(request, user, **kwargs):

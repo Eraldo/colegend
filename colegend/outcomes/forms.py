@@ -9,6 +9,7 @@ from .models import Outcome
 
 from django.utils.translation import ugettext_lazy as _
 
+
 class OutcomeFilterForm(forms.ModelForm):
     class Meta:
         model = Outcome
@@ -17,7 +18,7 @@ class OutcomeFilterForm(forms.ModelForm):
             'description',
             'status',
             'inbox',
-            'review',
+            'scope',
             'date',
             'deadline',
             'estimate',
@@ -40,7 +41,7 @@ class OutcomeFilterForm(forms.ModelForm):
             Field('description'),
             Field('status'),
             Field('inbox'),
-            Field('review'),
+            Field('scope'),
             Field('date'),
             Field('deadline'),
             Field('estimate'),
@@ -58,7 +59,7 @@ class OutcomeForm(OwnedModelForm):
             'description',
             'status',
             'inbox',
-            'review',
+            'scope',
             'date',
             'deadline',
             'estimate',
@@ -79,7 +80,7 @@ class OutcomeForm(OwnedModelForm):
             Field('description'),
             Field('status'),
             Field('inbox'),
-            Field('review'),
+            Field('scope'),
             Field('date'),
             Field('deadline'),
             Field('estimate'),

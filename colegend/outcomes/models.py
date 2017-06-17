@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from colegend.core.intuitive_duration.modelfields import IntuitiveDurationField
 from colegend.core.models import OwnedBase, AutoUrlsMixin, OwnedQuerySet, TimeStampedBase
+from colegend.scopes.models import ScopeField
 from colegend.tags.models import TaggableBase
 
 
@@ -38,13 +39,15 @@ class Outcome(AutoUrlsMixin, OwnedBase, TaggableBase, TimeStampedBase):
         blank=True,
     )
 
-    OPEN = 0
-    WAITING = 1
-    CLOSED = 2
+    OPEN = 1
+    WAITING = 2
+    DONE = 3
+    CANCELED = 4
     STATUS_CHOICES = (
         (OPEN, _('open')),
         (WAITING, _('waiting')),
-        (CLOSED, _('closed')),
+        (DONE, _('done')),
+        (CANCELED, _('canceled')),
     )
     status = models.PositiveSmallIntegerField(
         _('status'),
@@ -52,26 +55,7 @@ class Outcome(AutoUrlsMixin, OwnedBase, TaggableBase, TimeStampedBase):
         default=OPEN,
     )
     inbox = models.BooleanField(default=True)
-    DAILY = 0
-    WEEKLY = 1
-    MONTHLY = 2
-    YEARLY = 4
-    SOMETIME = 5
-    REVIEW_CHOICES = (
-        (DAILY, _('daily')),
-        (WEEKLY, _('weekly')),
-        (MONTHLY, _('monthly')),
-        (YEARLY, _('yearly')),
-        (SOMETIME, _('sometime')),
-    )
-    review = models.PositiveSmallIntegerField(
-        _('review'),
-        choices=REVIEW_CHOICES,
-        blank=True,
-        null=True,
-        help_text=_('Minimum review frequency')
-    )
-
+    scope = ScopeField()
     date = models.DateField(
         _('date'),
         blank=True,

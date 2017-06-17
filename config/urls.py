@@ -65,6 +65,9 @@ urlpatterns = [
     url(r'^sandbox/', include('colegend.sandbox.urls')),
     url(r'^mockups/', include('colegend.mockups.urls')),
     url(r'^metrics/', include('colegend.metrics.urls', namespace='metrics')),
+
+    # API
+    url(r'^api/', include('colegend.api.urls')),
 ]
 # Static files
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
