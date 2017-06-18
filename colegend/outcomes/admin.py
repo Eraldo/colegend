@@ -4,4 +4,5 @@ from .models import Outcome
 
 @admin.register(Outcome)
 class OutcomeAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['name', 'scope', 'owner']
+    list_filter = ['scope', 'owner']

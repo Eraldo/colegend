@@ -80,6 +80,7 @@ django-filter==1.0.4
 # ------------------------------------------------
 djangorestframework==3.6.3
 django-cors-headers==2.1.0
+django-rest-auth==0.9.1
 
 # slack IM
 # ------------------------------------------------

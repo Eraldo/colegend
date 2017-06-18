@@ -6,7 +6,7 @@ from colegend.users.models import User
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ('url', 'id', 'username', 'email', 'name', 'groups', 'is_staff')
+        fields = ('url', 'id', 'username', 'email', 'name', 'avatar', 'date_joined', 'groups', 'is_staff')
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
