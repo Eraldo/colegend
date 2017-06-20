@@ -1,10 +1,21 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.template.loader import render_to_string
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, RedirectView
+from rest_framework import viewsets
 
 from colegend.core.views import RolesRequiredMixin
 from .models import Role
 from .forms import RoleForm
+from .serializers import RoleSerializer
+
+
+class RoleViewSet(viewsets.ModelViewSet):
+    queryset = Role.objects.all()
+    serializer_class = RoleSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        return user.roles.all()
 
 
 class RoleMixin(object):

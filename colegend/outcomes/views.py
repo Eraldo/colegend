@@ -1,13 +1,24 @@
 from dal_select2.views import Select2QuerySetView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
-from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, RedirectView
-from django.views.generic.edit import FormMixin
+from django.views.generic import ListView, DetailView, DeleteView, RedirectView
+from rest_framework import viewsets
 
 from colegend.core.views import OwnedCreateView, OwnedUpdateView, OwnedItemsMixin
 from .models import Outcome
 from .forms import OutcomeForm, OutcomeQuickCreateForm
 from .filters import OutcomeFilter
+from .serializers import OutcomeSerializer
+
+
+class OutcomeViewSet(viewsets.ModelViewSet):
+    queryset = Outcome.objects.all()
+    serializer_class = OutcomeSerializer
+    filter_fields = ['status', 'scope']
+
+    def get_queryset(self):
+        user = self.request.user
+        return user.outcomes.all()
 
 
 class OutcomeMixin(OwnedItemsMixin):
@@ -140,7 +151,7 @@ class OutcomeAutocompleteView(LoginRequiredMixin, OutcomeMixin, Select2QuerySetV
     def get_queryset(self):
         queryset = super().get_queryset()
         user = self.request.user
-        return queryset.owned_by(user).exclude(status=Outcome.CLOSED)
+        return queryset.owned_by(user).open()
 
     def create_object(self, text):
         """Create an object given a text."""

@@ -25,6 +25,14 @@ class OutcomeQuerySet(OwnedQuerySet):
             queryset = self.filter(deadline=date)
         return queryset.order_by('deadline')
 
+    def open(self):
+        queryset = self.exclude(status__in=[Outcome.DONE, Outcome.CANCELED])
+        return queryset
+
+    def closed(self):
+        queryset = self.filter(status__in=[Outcome.DONE, Outcome.CANCELED])
+        return queryset
+
 
 class Outcome(AutoUrlsMixin, OwnedBase, TaggableBase, TimeStampedBase):
     """
@@ -43,6 +51,9 @@ class Outcome(AutoUrlsMixin, OwnedBase, TaggableBase, TimeStampedBase):
     WAITING = 2
     DONE = 3
     CANCELED = 4
+    STATUSES_OPEN = [OPEN, WAITING]
+    STATUSES_CLOSED = [CANCELED, DONE]
+    STATUSES = STATUSES_OPEN + STATUSES_CLOSED
     STATUS_CHOICES = (
         (OPEN, _('open')),
         (WAITING, _('waiting')),

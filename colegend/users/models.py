@@ -131,10 +131,6 @@ class User(AbstractUser):
         on_delete=models.SET_NULL
     )
 
-    @property
-    def mentor(self):
-        return self.duo.mentor if self.duo else None
-
     def has_checkpoint(self, name):
         return self.checkpoints.contains_name(name)
 

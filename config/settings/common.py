@@ -403,9 +403,10 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated'
         # 'rest_framework.permissions.IsAdminUser'
     ],
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 }
 REST_AUTH_SERIALIZERS = {
-    'USER_DETAILS_SERIALIZER': 'colegend.users.serializers.UserSerializer',
+    'USER_DETAILS_SERIALIZER': 'colegend.users.serializers.OwnedUserSerializer',
 }
 # CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = (

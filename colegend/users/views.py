@@ -3,18 +3,40 @@ from __future__ import absolute_import, unicode_literals
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import Group
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.template.defaultfilters import slugify
 from django.utils.safestring import mark_safe
 from django.views.generic import DetailView, UpdateView, ListView
 from django.utils.translation import ugettext as _
+from rest_framework import viewsets
+from rest_framework.decorators import list_route
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
 from colegend.core.views import CheckpointsRequiredMixin
 from colegend.games.views import complete_card
 from colegend.users.forms import AvatarForm, LegendForm
+from .serializers import UserSerializer, GroupSerializer, OwnedUserSerializer
 
 from .models import User
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    @list_route(permission_classes=[IsAuthenticated])
+    def owned(self, request):
+        user = request.user
+        serializer = OwnedUserSerializer(user, context={'request': request})
+        return Response(serializer.data)
+
+
+class GroupViewSet(viewsets.ModelViewSet):
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
 
 
 class SettingsView(LoginRequiredMixin, DetailView):

@@ -79,13 +79,15 @@ def inbox(context, inbox=None, **kwargs):
 @register.simple_tag(takes_context=True)
 def status(context, status=None, **kwargs):
     status = status or context.get('status')
-    if status in [Outcome.OPEN, Outcome.WAITING, Outcome.CLOSED]:
+    if status in Outcome.STATUSES:
         if status == Outcome.OPEN:
             return icon('open')
         elif status == Outcome.WAITING:
             return icon('waiting', classes='text-category-7')
-        elif status == Outcome.CLOSED:
+        elif status == Outcome.DONE:
             return icon('closed', classes='text-category-4')
+        elif status == Outcome.CANCELED:
+            return icon('canceled', classes='text-category-4')
     return ''
 
 
