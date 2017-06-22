@@ -1,4 +1,4 @@
-# from allauth.account.views import ConfirmEmailView
+from allauth.account.views import ConfirmEmailView
 from django.conf.urls import url, include
 from rest_framework import routers
 
@@ -35,6 +35,6 @@ urlpatterns = [
     # Overwriting https://github.com/Tivix/django-rest-auth/blob/master/rest_auth/registration/urls.py#L12
     # TODO: Implementing a new view that handles this in my client.
     # (or just a notification telling the user that his email has been verified and can continue in the app)
-    # url(r'^account-confirm-email/(?P<key>[-:\w]+)/$', ConfirmEmailView.as_view(),
-    #     name='account_confirm_email'),
+    url(r'^account-confirm-email/(?P<key>[-:\w]+)/$', ConfirmEmailView.as_view(),
+        name='account_confirm_email'),
 ]

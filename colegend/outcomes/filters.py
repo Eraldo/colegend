@@ -7,7 +7,7 @@ from .models import Outcome
 from .forms import OutcomeFilterForm
 
 
-def filter_estimate(queryset, value):
+def filter_estimate(queryset, name, value):
     if value:
         if value == '1d':
             queryset = queryset.filter(estimate__lt=value)
@@ -34,7 +34,7 @@ class OutcomeFilter(django_filters.FilterSet):
         ('12M', 'month(s)'),
         ('0m', 'unestimated'),
     )
-    estimate = django_filters.ChoiceFilter(choices=(('', 'all'),) + ESTIMATE_CHOICES, action=filter_estimate)
+    estimate = django_filters.ChoiceFilter(choices=(('', 'all'),) + ESTIMATE_CHOICES, method=filter_estimate)
 
     class Meta:
         model = Outcome
