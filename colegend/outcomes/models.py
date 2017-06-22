@@ -47,10 +47,10 @@ class Outcome(AutoUrlsMixin, OwnedBase, TaggableBase, TimeStampedBase):
         blank=True,
     )
 
-    OPEN = 1
-    WAITING = 2
-    DONE = 3
-    CANCELED = 4
+    OPEN = 'open'
+    WAITING = 'waiting'
+    DONE = 'done'
+    CANCELED = 'canceled'
     STATUSES_OPEN = [OPEN, WAITING]
     STATUSES_CLOSED = [CANCELED, DONE]
     STATUSES = STATUSES_OPEN + STATUSES_CLOSED
@@ -60,10 +60,11 @@ class Outcome(AutoUrlsMixin, OwnedBase, TaggableBase, TimeStampedBase):
         (DONE, _('done')),
         (CANCELED, _('canceled')),
     )
-    status = models.PositiveSmallIntegerField(
+    status = models.CharField(
         _('status'),
         choices=STATUS_CHOICES,
         default=OPEN,
+        max_length=10,
     )
     inbox = models.BooleanField(default=True)
     scope = ScopeField()
