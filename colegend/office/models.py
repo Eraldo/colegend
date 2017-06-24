@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.db import models
 from django.shortcuts import redirect
 from django.template.response import TemplateResponse
@@ -188,10 +189,27 @@ class AgendaPage(RoutablePageMixin, Page):
     def focus_form(self, request):
         context = self.get_context(request)
         submitted = request.POST.get('save')
+        user = request.user
         if submitted:
-            form = self.get_focus_form(user=request.user, scope=context['scope'], data=request.POST)
+            form = self.get_focus_form(user=user, scope=context['scope'], data=request.POST)
             if form.is_valid():
+                new = not form.instance.pk
                 form.save()
+
+                if new:
+                    # Adding experience if setting for today or tomorrow.
+                    focus = form.instance
+                    if focus.scope == DAY:
+                        today = timezone.localtime(timezone.now()).date()
+                        tomorrow = today + timezone.timedelta(days=1)
+                        if focus.start == today or focus.start == tomorrow:
+                            app='office'
+                            level = 0
+                            amount = 1
+                            user.experience.create(owner=user, app=app, level=level, amount=amount)
+                            message = '+{amount} {app} EXP'.format(amount=amount, app=app)
+                            messages.success(request, message)
+                    # TODO: Adding higher scopes experience
                 return redirect(self.url)
             else:
                 context['focus_outcomes_form'] = form

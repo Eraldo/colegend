@@ -20,6 +20,8 @@ class QuestPage(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
+        user = request.user
+        context['experience'] = user.experience.total()
         return context
 
     def __str__(self):
