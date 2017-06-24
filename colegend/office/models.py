@@ -7,7 +7,7 @@ from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin, route
 from wagtail.wagtailcore.models import Page
 from django.utils.translation import ugettext_lazy as _
 
-from colegend.core.models import OwnedBase
+from colegend.core.models import OwnedBase, TimeStampedBase
 from colegend.journals import scopes
 from colegend.journals.forms import DatePickerForm
 from colegend.journals.scopes import Day, Week, Month, Year
@@ -25,7 +25,7 @@ SCOPE_CHOICES = (
 )
 
 
-class Focus(OwnedBase):
+class Focus(OwnedBase, TimeStampedBase):
     scope = models.CharField(
         _('scope'),
         choices=SCOPE_CHOICES,
