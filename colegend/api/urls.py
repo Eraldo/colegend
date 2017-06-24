@@ -4,6 +4,7 @@ from rest_framework import routers
 
 from colegend.checkpoints.views import CheckpointViewSet
 from colegend.community.views import DuoViewSet, ClanViewSet, TribeViewSet
+from colegend.experience.views import ExperienceViewSet
 from colegend.office.views import FocusViewSet
 from colegend.outcomes.views import OutcomeViewSet
 from colegend.roles.views import RoleViewSet
@@ -23,6 +24,7 @@ router.register(r'tribes', TribeViewSet)
 
 router.register(r'roles', RoleViewSet)
 router.register(r'checkpoints', CheckpointViewSet)
+router.register(r'experience', ExperienceViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),

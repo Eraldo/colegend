@@ -85,6 +85,7 @@ LOCAL_APPS = (
     'colegend.checkpoints',
     'colegend.roles',
     'colegend.donations',
+    'colegend.experience',
 
     'colegend.core',  # common code library
     'colegend.about',
