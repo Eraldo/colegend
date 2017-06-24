@@ -18,3 +18,11 @@
 {% block content %}
     {{ page.content|richtext }}
 {% endblock %}
+
+{% block footer %}
+    {% if experience %}
+        <div class="container">
+            {% progress value=experience name='Experience' %}
+        </div>
+    {% endif %}
+{% endblock %}

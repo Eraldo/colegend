@@ -167,6 +167,9 @@ class AgendaPage(RoutablePageMixin, Page):
 
             # scheduled
             context['scheduled_outcomes'] = user.outcomes.filter(date=date) | user.outcomes.filter(deadline=date)
+
+            # experience
+            context['experience'] = user.experience.total(app='office')
         return context
 
     def __str__(self):

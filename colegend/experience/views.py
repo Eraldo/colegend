@@ -20,25 +20,51 @@ class ExperienceViewSet(viewsets.ModelViewSet):
     def total(self, request):
         user = request.user
 
+        # Filtering by app and level if given.
+        kwargs = {}
         params = request.query_params
         app = params.get('app', None)
         level = params.get('level', None)
+        if app:
+            kwargs['app'] = app
+        if level is not None:
+            kwargs['level'] = level
 
-        # TODO: Implementing filtering.
-
-        amount = user.experience.total()
-        content = {'amount': amount}
+        amount = user.experience.total(**kwargs)
+        content = amount
         return Response(content)
 
     @list_route(permission_classes=[IsAuthenticated])
     def level(self, request):
         user = request.user
 
+        # Filtering by app if given.
+        kwargs = {}
         params = request.query_params
         app = params.get('app', None)
+        if app:
+            kwargs['app'] = app
 
-        # TODO: Implementing filtering.
+        level = user.experience.level(**kwargs)
+        content = level
+        return Response(content)
 
-        level = user.experience.level()
-        content = {'level': level}
+    @list_route(permission_classes=[IsAuthenticated])
+    def status(self, request):
+        user = request.user
+
+        # Filtering by app if given.
+        kwargs = {}
+        params = request.query_params
+        app = params.get('app', None)
+        if app:
+            kwargs['app'] = app
+
+        level = user.experience.level(**kwargs)
+        experience = user.experience.total(**kwargs)
+        content = {
+            'level': level,
+            'experience': experience,
+            'next': 100
+        }
         return Response(content)
