@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse
 from django.utils import timezone
@@ -56,7 +57,6 @@ class DayEntryCreateView(LoginRequiredMixin, DayEntryMixin, CreateView):
         journal = user.journal
         initial['journal'] = journal
 
-
         # Creation date is given or today as default.
         date = self.request.GET.get('date', timezone.localtime(timezone.now()).date())
         initial['date'] = date
@@ -74,6 +74,28 @@ class DayEntryCreateView(LoginRequiredMixin, DayEntryMixin, CreateView):
             initial['tags'] = previous.tags.all()
 
         return initial
+
+    def form_valid(self, form):
+        """
+        If the form is valid, save the associated model.
+        """
+        new = not form.instance.pk
+        self.object = form.save()
+
+        if new:
+            # Adding experience if creating for today or tomorrow.
+            user = self.request.user
+            today = timezone.localtime(timezone.now()).date()
+            yesterday = today - timezone.timedelta(days=1)
+            entry = self.object
+            if entry.date == today or entry.date == yesterday:
+                app = 'studio'
+                level = 0
+                amount = 1
+                user.experience.create(owner=user, app=app, level=level, amount=amount)
+                message = '+{amount} {app} EXP'.format(amount=amount, app=app)
+                messages.success(self.request, message)
+        return super().form_valid(form)
 
 
 class DayEntryDetailView(LoginRequiredMixin, OwnerRequiredMixin, DayEntryMixin, DetailView):

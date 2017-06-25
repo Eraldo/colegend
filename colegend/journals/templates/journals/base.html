@@ -1,18 +1,10 @@
 {% extends 'studio/base.html' %}
-{% load wagtailcore_tags cms_tags %}
+{% load wagtailcore_tags cms_tags core_tags %}
 
-{#{% block title %}{{ super.block }} {{ page.get_parent.title }}{% endblock %}#}
-{#{% block title %}{{ page.get_parent.title }}{% endblock %}#}
-
-{#{% block page_links %}#}
-{#    {% menu page.get_parent 'horizontal' %}#}
-{#{% endblock %}#}
-
-{#{% block breadcrumbs %}#}
-{#    {{ block.super }}#}
-{#    {% if page %}#}
-{#        {% routablepageurl page 'day' as journal_url %}#}
-{#        {% pageurl page as journal_url %}#}
-{#        {% include 'widgets/breadcrumb.html' with url=journal_url title='Studio' icon='studio' %}#}
-{#    {% endif %}#}
-{#{% endblock %}#}
+{% block footer %}
+    {% if experience %}
+        <div class="container">
+            {% progress value=experience name='Experience' %}
+        </div>
+    {% endif %}
+{% endblock %}

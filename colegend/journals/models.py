@@ -80,6 +80,8 @@ class JournalPage(RoutablePageMixin, Page):
         from colegend.journals.forms import DatePickerForm
         context['datepickerform'] = DatePickerForm(initial={'date': date})
 
+        # experience
+        context['experience'] = request.user.experience.total(app='studio')
         return context
 
     def get_date_redirect(self, request, scope):

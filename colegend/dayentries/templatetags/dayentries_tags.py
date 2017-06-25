@@ -1,5 +1,6 @@
 from django import template
 from django.core.urlresolvers import reverse
+from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.utils import timezone
 
@@ -39,6 +40,7 @@ def dayentry_card(context, dayentry=None, **kwargs):
             'tags': dayentry.tags.all(),
         }
     else:
+        context = context.flatten()
         date = kwargs.get('date', context.get('date'))
         if date:
             create_url = reverse('dayentries:create')
@@ -47,7 +49,7 @@ def dayentry_card(context, dayentry=None, **kwargs):
             context['weekday_number'] = date.isoweekday()
     context.update(kwargs)
     template = 'dayentries/widgets/card.html'
-    return render_to_string(template, context=context.flatten())
+    return render_to_string(template, context=context)
 
 
 @register.simple_tag(takes_context=True)
