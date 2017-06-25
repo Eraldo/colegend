@@ -519,9 +519,9 @@ form .CodeMirror-fullscreen {
   padding: 0.6rem; }
 
 .widget-datepicker {
-  min-width: 14.6rem; }
+  min-width: 16.1rem; }
   .widget-datepicker .datepicker-form input {
-    max-width: 7rem; }
+    max-width: 11rem; }
 
 .cms-icon-logo:before, div.cms .cms-toolbar-item-logo a.colegend-cms:before {
   content: initial; }

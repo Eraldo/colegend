@@ -524,10 +524,10 @@ form .CodeMirror-fullscreen {
 .widget-datepicker {
   @extend .card-item;
 
-  min-width: 14.6rem;
+  min-width: 16.1rem;
 
   .datepicker-form input {
-    max-width: 7rem;
+    max-width: 11rem;
   }
 }
 

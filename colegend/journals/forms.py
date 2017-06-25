@@ -34,16 +34,15 @@ class JournalForm(forms.ModelForm):
 
 
 class DatePickerForm(forms.Form):
-    date = forms.DateField()
-    # date = DateFormField(
-    #     # required = True,
-    # )
+    date = DateFormField(
+        # required = True,
+    )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
-            Field('date'),
+            Field('date', min_width=100),
         )
         self.helper.add_input(Submit('get', 'Go'))
 
