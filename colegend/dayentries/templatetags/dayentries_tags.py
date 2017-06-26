@@ -73,6 +73,7 @@ def dayentry_line(context, dayentry=None, **kwargs):
             'class': 'active' if dayentry.date == today else '',
         }
     else:
+        context = context.flatten()
         date = kwargs.get('date', context.get('date'))
         if date:
             create_url = reverse('dayentries:create')

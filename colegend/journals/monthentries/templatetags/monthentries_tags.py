@@ -39,6 +39,7 @@ def monthentry_card(context, monthentry=None, **kwargs):
             'tags': monthentry.tags.all(),
         }
     else:
+        context = context.flatten()
         date = kwargs.get('date', context.get('date'))
         if date:
             month = Month(date)
@@ -72,6 +73,7 @@ def monthentry_line(context, monthentry=None, **kwargs):
             'class': 'active' if monthentry.date == today else '',
         }
     else:
+        context = context.flatten()
         date = kwargs.get('date', context.get('date'))
         if date:
             month = Month(date)

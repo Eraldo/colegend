@@ -39,6 +39,7 @@ def weekentry_card(context, weekentry=None, **kwargs):
             'tags': weekentry.tags.all(),
         }
     else:
+        context = context.flatten()
         date = kwargs.get('date', context.get('date'))
         if date:
             week = Week(date)
@@ -72,6 +73,7 @@ def weekentry_line(context, weekentry=None, **kwargs):
             'class': 'active' if weekentry.date == today else '',
         }
     else:
+        context = context.flatten()
         date = kwargs.get('date', context.get('date'))
         if date:
             week = Week(date)

@@ -39,6 +39,7 @@ def yearentry_card(context, yearentry=None, **kwargs):
             'tags': yearentry.tags.all(),
         }
     else:
+        context = context.flatten()
         date = kwargs.get('date', context.get('date'))
         if date:
             year = Year(date)
@@ -72,6 +73,7 @@ def yearentry_line(context, yearentry=None, **kwargs):
             'class': 'active' if yearentry.year == today.year else '',
         }
     else:
+        context = context.flatten()
         date = kwargs.get('date', context.get('date'))
         if date:
             year = Year(date)

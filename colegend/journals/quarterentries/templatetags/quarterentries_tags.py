@@ -39,6 +39,7 @@ def quarterentry_card(context, quarterentry=None, **kwargs):
             'tags': quarterentry.tags.all(),
         }
     else:
+        context = context.flatten()
         date = kwargs.get('date', context.get('date'))
         if date:
             quarter = Quarter(date)
@@ -72,6 +73,7 @@ def quarterentry_line(context, quarterentry=None, **kwargs):
             'class': 'active' if quarterentry.number == Quarter(today).number else '',
         }
     else:
+        context = context.flatten()
         date = kwargs.get('date', context.get('date'))
         if date:
             quarter = Quarter(date)
