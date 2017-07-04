@@ -26,6 +26,12 @@ SCOPE_CHOICES = (
 )
 
 
+# class FocusOutcome(TimeStampedBase):
+#     focus = models.ForeignKey(Focus, on_delete=models.CASCADE)
+#     outcome = models.ForeignKey(Outcome, on_delete=models.CASCADE)
+#     priority = models.IntegerField(default=1)
+
+
 class Focus(OwnedBase, TimeStampedBase):
     scope = models.CharField(
         _('scope'),
@@ -33,7 +39,18 @@ class Focus(OwnedBase, TimeStampedBase):
         default=DAY,
         max_length=5,
     )
-    start = models.DateField()
+    start = models.DateField(
+        _('start'),
+    )
+    end = models.DateField(
+        _('end'),
+        blank=True
+    )
+
+    # outcomes = models.ManyToManyField(
+    #     to=Outcome,
+    #     through=FocusOutcome
+    # )
 
     outcome_1 = models.ForeignKey(
         to=Outcome,
@@ -86,6 +103,14 @@ class Focus(OwnedBase, TimeStampedBase):
 
     def __str__(self):
         return "{}'s {} focus outcomes {}".format(self.owner, self.get_scope_display(), self.start)
+
+    def save(self, *args, **kwargs):
+        # Adapting start date to scope.
+        # TODO: Refactoring to only set on creation.
+        scope = self.get_scope()
+        self.start = scope.start
+        self.end = scope.end
+        super().save(*args, **kwargs)
 
 
 class OfficePage(Page):

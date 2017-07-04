@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from colegend.journals.scopes import Day, Week, Month, Year
+
 DAY = 'day'
 WEEK = 'week'
 MONTH = 'month'
@@ -28,3 +30,13 @@ class ScopeField(models.CharField):
             max_length=max_length,
             *args, **kwargs
         )
+
+
+def get_scope_by_name(name):
+    scope_map = {
+        DAY: Day,
+        WEEK: Week,
+        MONTH: Month,
+        YEAR: Year,
+    }
+    return scope_map.get(name)

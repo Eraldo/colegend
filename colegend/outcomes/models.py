@@ -96,3 +96,15 @@ class Outcome(AutoUrlsMixin, OwnedBase, TaggableBase, TimeStampedBase):
 
     def __str__(self):
         return self.name
+
+    @property
+    def is_focus(self):
+        """Checking if the outcome is currently set as focus in a scope."""
+
+        today = timezone.localtime(timezone.now()).date()
+        if self.focus_1.filter(end__gte=today).exists() or \
+            self.focus_2.filter(end__gte=today).exists() or \
+            self.focus_3.filter(end__gte=today).exists() or \
+            self.focus_4.filter(end__gte=today).exists():
+            return True
+        return False

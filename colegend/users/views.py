@@ -26,12 +26,24 @@ from .models import User
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    filter_fields = ['email', 'username']
 
     @list_route(permission_classes=[IsAuthenticated])
     def owned(self, request):
         user = request.user
         serializer = OwnedUserSerializer(user, context={'request': request})
         return Response(serializer.data)
+
+    @list_route(permission_classes=[])
+    def exists(self, request):
+        # Check if the user exists.
+        found = False
+
+        # TODO: Refactor this workaround.
+        queryset = self.filter_queryset(self.get_queryset())
+        if len(queryset) == 1:
+            found = True
+        return Response(found)
 
 
 class GroupViewSet(viewsets.ModelViewSet):

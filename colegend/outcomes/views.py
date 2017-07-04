@@ -20,6 +20,9 @@ class OutcomeViewSet(viewsets.ModelViewSet):
         user = self.request.user
         return user.outcomes.all()
 
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
 
 class OutcomeMixin(OwnedItemsMixin):
     """

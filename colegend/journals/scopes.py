@@ -1,6 +1,5 @@
 from calendar import monthrange
 from math import ceil
-
 import datetime
 from django.utils import timezone
 from django.utils.dateparse import parse_date

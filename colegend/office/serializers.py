@@ -4,6 +4,8 @@ from .models import Focus
 
 
 class FocusSerializer(serializers.HyperlinkedModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.name')
+
     class Meta:
         model = Focus
         fields = [
