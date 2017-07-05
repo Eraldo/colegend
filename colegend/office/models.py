@@ -105,11 +105,11 @@ class Focus(OwnedBase, TimeStampedBase):
         return "{}'s {} focus outcomes {}".format(self.owner, self.get_scope_display(), self.start)
 
     def save(self, *args, **kwargs):
-        # Adapting start date to scope.
-        # TODO: Refactoring to only set on creation.
-        scope = self.get_scope()
-        self.start = scope.start
-        self.end = scope.end
+        if self.pk is None:  # Creation.
+            # Adapting start and end dates to scope.
+            scope = self.get_scope()
+            self.start = scope.start
+            self.end = scope.end
         super().save(*args, **kwargs)
 
 
