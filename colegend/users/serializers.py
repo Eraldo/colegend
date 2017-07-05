@@ -1,6 +1,17 @@
 from django.contrib.auth.models import Group
+from rest_auth.registration.serializers import RegisterSerializer
 from rest_framework import serializers
 from colegend.users.models import User
+
+
+class JoinSerializer(RegisterSerializer):
+    def validate_username(self, original_username):
+        # Add a number until the username does not exist yet.
+        username = original_username
+        suffix = 2
+        while User.objects.filter(username__iexact=username).exists():
+            username = original_username + str(suffix)
+        return super().validate_username(username)
 
 
 class OwnedUserSerializer(serializers.HyperlinkedModelSerializer):
