@@ -127,6 +127,7 @@ class OutcomeStatusForm(OwnedModelForm):
             'owner',
             'name',
             'status',
+            'scope',
         ]
 
     def __init__(self, *args, **kwargs):
@@ -140,6 +141,7 @@ class OutcomeStatusForm(OwnedModelForm):
         self.helper.layout = Layout(
             Field('owner', type="hidden"),
             Field('name', type="hidden"),
+            Field('scope', type="hidden"),
             Field('status', autofocus=True),
         )
         self.helper.add_input(Submit('update', _('Update')))
