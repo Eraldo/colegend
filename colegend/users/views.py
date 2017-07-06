@@ -18,7 +18,7 @@ from rest_framework.response import Response
 from colegend.core.views import CheckpointsRequiredMixin
 from colegend.games.views import complete_card
 from colegend.users.forms import AvatarForm, LegendForm
-from .serializers import UserSerializer, GroupSerializer, OwnedUserSerializer
+from .serializers import UserSerializer, GroupSerializer, OwnedUserSerializer, EmailSerializer
 
 from .models import User
 
@@ -34,6 +34,12 @@ class UserViewSet(viewsets.ModelViewSet):
         serializer = OwnedUserSerializer(user, context={'request': request})
         return Response(serializer.data)
 
+    @list_route(permission_classes=[IsAuthenticated])
+    def send(self, request):
+        user = request.user
+        serializer = EmailSerializer(user, data=request.data, context={'request': request})
+        return Response(serializer.data)
+
     @list_route(permission_classes=[])
     def exists(self, request):
         # Check if the user exists.
@@ -44,6 +50,15 @@ class UserViewSet(viewsets.ModelViewSet):
         if len(queryset) == 1:
             found = True
         return Response(found)
+
+
+class EmailViewSet(viewsets.ViewSet):
+
+    def create(self, request):
+        user = request.user
+        serializer = EmailSerializer(data=request.data, context={'request': request})
+        serializer.save()
+        return Response(serializer.data)
 
 
 class GroupViewSet(viewsets.ModelViewSet):

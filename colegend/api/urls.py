@@ -8,12 +8,13 @@ from colegend.experience.views import ExperienceViewSet
 from colegend.office.views import FocusViewSet
 from colegend.outcomes.views import OutcomeViewSet
 from colegend.roles.views import RoleViewSet
-from colegend.users.views import UserViewSet, GroupViewSet
+from colegend.users.views import UserViewSet, GroupViewSet, EmailViewSet
 from .views import FacebookLogin, GoogleLogin
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'groups', GroupViewSet)
+router.register(r'messages', EmailViewSet, base_name='messages')
 
 router.register(r'outcomes', OutcomeViewSet)
 router.register(r'focus', FocusViewSet)

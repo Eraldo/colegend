@@ -1,4 +1,5 @@
 from django.contrib.auth.models import Group
+from django.core.mail import EmailMessage
 from rest_auth.registration.serializers import RegisterSerializer
 from rest_framework import serializers
 from colegend.users.models import User
@@ -40,3 +41,19 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Group
         fields = ('url', 'id', 'name', 'user_set')
+
+
+class EmailSerializer(serializers.Serializer):
+    email = serializers.EmailField(required=True)
+    subject = serializers.CharField(required=True, max_length=200)
+    message = serializers.CharField(required=True, max_length=1000)
+    sender = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
+    def save(self, **kwargs):
+        if self.is_valid(raise_exception=True):
+            email = self.validated_data.get('email')
+            subject = self.validated_data.get('subject')
+            message = self.validated_data.get('message')
+            sender = self.validated_data.get('sender')
+            email = EmailMessage(subject=subject, body=message, to=[email], reply_to=[sender.email])
+            return email.send(fail_silently=False)
