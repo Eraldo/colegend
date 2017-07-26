@@ -5,6 +5,7 @@ from rest_framework import routers
 from colegend.checkpoints.views import CheckpointViewSet
 from colegend.community.views import DuoViewSet, ClanViewSet, TribeViewSet
 from colegend.experience.views import ExperienceViewSet
+from colegend.journals.views import JournalEntryViewSet
 from colegend.office.views import FocusViewSet
 from colegend.outcomes.views import OutcomeViewSet
 from colegend.roles.views import RoleViewSet
@@ -18,6 +19,8 @@ router.register(r'messages', EmailViewSet, base_name='messages')
 
 router.register(r'outcomes', OutcomeViewSet)
 router.register(r'focus', FocusViewSet)
+
+router.register(r'journal', JournalEntryViewSet)
 
 router.register(r'duos', DuoViewSet)
 router.register(r'clans', ClanViewSet)

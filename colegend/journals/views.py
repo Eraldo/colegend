@@ -9,13 +9,41 @@ from django.utils import timezone
 from django.utils.dateparse import parse_date
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, RedirectView, TemplateView
 from django.utils.translation import ugettext_lazy as _
+from rest_framework import viewsets
 
 from colegend.core.views import RolesRequiredMixin, OwnerRequiredMixin
 from colegend.dayentries.models import DayEntry
 from colegend.journals.monthentries.models import MonthEntry
+from colegend.journals.serializers import JournalEntrySerializer
 from colegend.journals.weekentries.models import WeekEntry
-from .models import Journal, JournalPage
+from colegend.scopes.models import DAY, get_scope_by_name
+from .models import Journal, JournalPage, JournalEntry
 from .forms import JournalForm, DatePickerForm
+
+
+class JournalEntryViewSet(viewsets.ModelViewSet):
+    queryset = JournalEntry.objects.all()
+    serializer_class = JournalEntrySerializer
+    filter_fields = ['scope', 'start']
+
+    def get_queryset(self):
+        user = self.request.user
+        return user.journal_entries.all()
+
+    def filter_queryset(self, queryset):
+        scope = self.request.query_params.get('scope')
+        start = self.request.query_params.get('start')
+        if scope and start and scope != DAY:
+            # Update start to match correct scope start date.
+            start = get_scope_by_name(scope)(start).start
+            params = self.request.query_params
+            params._mutable = True
+            params['start'] = str(start)
+            params._mutable = False
+        return super().filter_queryset(queryset)
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
 
 class JournalMixin(object):

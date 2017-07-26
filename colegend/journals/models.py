@@ -3,17 +3,68 @@ from django.db.models import Q
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
 from django.template.response import TemplateResponse
-from django.utils import timezone
-from django.utils.html import format_html, format_html_join
-from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from django.utils.dateparse import parse_date
 from django.db import models
 from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin, route
 from wagtail.wagtailcore.models import Page
 from colegend.core.fields import MarkdownField
-from colegend.core.models import AutoOwnedBase, AutoUrlsMixin, OwnedQuerySet
+from colegend.core.models import AutoOwnedBase, AutoUrlsMixin, OwnedQuerySet, TimeStampedBase, OwnedBase
 from colegend.journals import scopes
+from colegend.scopes.models import SCOPE_CHOICES, DAY
+from colegend.tags.models import TaggableBase
+
+
+# class JournalEntryQuerySet(models.QuerySet):
+#     def owned_by(self, user):
+#         return self.filter(journal__owner=user)
+#
+#     def current(self):
+#         today = get_today()
+#         return self.filter(start=today)
+
+
+class JournalEntry(OwnedBase, TaggableBase, TimeStampedBase):
+    """
+    A django model representing a user's journal entry.
+    """
+    scope = models.CharField(
+        _('scope'),
+        choices=SCOPE_CHOICES,
+        default=DAY,
+        max_length=5,
+    )
+    start = models.DateField(
+        _('start'),
+    )
+    # locations = models.CharField(max_length=255, help_text="Separated by ';'")
+
+    # keywords = models.CharField(
+    #     max_length=255,
+    #     blank=True,
+    #     help_text="What were the most important experiences/topics on this day?")
+    content = MarkdownField()
+
+    # objects = JournalEntryQuerySet.as_manager()
+
+    class Meta:
+        verbose_name = _('Journal Entry')
+        verbose_name_plural = _('Journal entries')
+        unique_together = ['owner', 'scope', 'start']
+        ordering = ['-start']
+        get_latest_by = 'start'
+        default_related_name = 'journal_entries'
+
+    def __str__(self):
+        return "{}'s {} journal entries {}".format(self.owner, self.get_scope_display(), self.start)
+
+    def save(self, *args, **kwargs):
+        if self.pk is None:  # Creation.
+            # Adapting start and end dates to scope.
+            scope = self.get_scope()
+            self.start = scope.start
+            self.end = scope.end
+        super().save(*args, **kwargs)
 
 
 class JournalQuerySet(OwnedQuerySet):
