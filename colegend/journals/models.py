@@ -11,7 +11,7 @@ from wagtail.wagtailcore.models import Page
 from colegend.core.fields import MarkdownField
 from colegend.core.models import AutoOwnedBase, AutoUrlsMixin, OwnedQuerySet, TimeStampedBase, OwnedBase
 from colegend.journals import scopes
-from colegend.scopes.models import SCOPE_CHOICES, DAY
+from colegend.scopes.models import SCOPE_CHOICES, DAY, get_scope_by_name
 from colegend.tags.models import TaggableBase
 
 
@@ -60,10 +60,9 @@ class JournalEntry(OwnedBase, TaggableBase, TimeStampedBase):
 
     def save(self, *args, **kwargs):
         if self.pk is None:  # Creation.
-            # Adapting start and end dates to scope.
-            scope = self.get_scope()
+            # Adapting start date to scope.
+            scope = get_scope_by_name(self.scope)(self.start)
             self.start = scope.start
-            self.end = scope.end
         super().save(*args, **kwargs)
 
 

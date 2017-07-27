@@ -4,12 +4,12 @@ from .models import JournalEntry
 
 
 class JournalEntrySerializer(serializers.HyperlinkedModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.name')
-
     class Meta:
         model = JournalEntry
         fields = [
             'url', 'id', 'owner',
             'scope', 'start',
+            'content',
             'created', 'modified',
         ]
+        read_only_fields = ['owner']
