@@ -9,6 +9,7 @@ from colegend.journals.views import JournalEntryViewSet
 from colegend.office.views import FocusViewSet
 from colegend.outcomes.views import OutcomeViewSet
 from colegend.roles.views import RoleViewSet
+from colegend.studio.views import InterviewEntryViewSet
 from colegend.users.views import UserViewSet, GroupViewSet, EmailViewSet
 from .views import FacebookLogin, GoogleLogin
 
@@ -21,6 +22,7 @@ router.register(r'outcomes', OutcomeViewSet)
 router.register(r'focus', FocusViewSet)
 
 router.register(r'journal', JournalEntryViewSet)
+router.register(r'interviews', InterviewEntryViewSet)
 
 router.register(r'duos', DuoViewSet)
 router.register(r'clans', ClanViewSet)
