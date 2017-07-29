@@ -4,6 +4,8 @@ from .models import Focus
 
 
 class FocusSerializer(serializers.HyperlinkedModelSerializer):
+    reason = serializers.CharField(allow_blank=True, write_only=True)
+
     class Meta:
         model = Focus
         fields = [
@@ -11,8 +13,13 @@ class FocusSerializer(serializers.HyperlinkedModelSerializer):
             'scope', 'start',
             'outcome_1', 'outcome_2', 'outcome_3', 'outcome_4',
             'created', 'modified',
+            'reason'
         ]
         read_only_fields = ['owner']
+
+    def create(self, validated_data):
+        validated_data.pop('reason', None)
+        return super().create(validated_data)
 
     # def validate(self, attrs):
     #     scope = attrs.get('scope')
