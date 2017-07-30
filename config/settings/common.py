@@ -417,6 +417,7 @@ CORS_ORIGIN_WHITELIST = (
     'localhost:8004',
     '127.0.0.1:8004',
     'colegend.org',
+    'colegend.com',
     'localhost:8100',
 )
 # CORS_ORIGIN_REGEX_WHITELIST = (
