@@ -2,13 +2,14 @@ from annoying.fields import AutoOneToOneField
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.utils import timezone
 
 
 class TimeStampedBase(models.Model):
     """
     Adds created and last modified fields to a model.
     """
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(default=timezone.now)
     modified = models.DateTimeField(auto_now=True)
 
     class Meta:
