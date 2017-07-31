@@ -19,47 +19,47 @@ def get_extra_content(entry):
 
 def migrate_old_to_new_journal_entries(apps, schema_editor):
     JournalEntry = apps.get_model('journals', 'JournalEntry')
-
-    DayEntry = apps.get_model('dayentries', 'DayEntry')
-    for entry in DayEntry.objects.all():
-        new_entry = JournalEntry.objects.create(
-            scope='day',
-            owner=entry.journal.owner,
-            start=entry.date,
-            content=get_extra_content(entry),
-            keywords=entry.keywords,
-            created=entry.created
-        )
-        new_entry.tags = entry.tags.all()
-        new_entry.save()
-
-    WeekEntry = apps.get_model('weekentries', 'WeekEntry')
-    for entry in WeekEntry.objects.all():
-        start = timezone.datetime.strptime('{}-W{}-1'.format(entry.year, entry.week), "%Y-W%W-%w").date()
-        new_entry = JournalEntry.objects.create(
-            scope='week',
-            owner=entry.journal.owner,
-            start=start,
-            content=get_extra_content(entry),
-            keywords=entry.keywords,
-            created=entry.created
-        )
-        new_entry.tags = entry.tags.all()
-        new_entry.save()
-
-    MonthEntry = apps.get_model('monthentries', 'MonthEntry')
-    for entry in MonthEntry.objects.all():
-        start = timezone.datetime.strptime('{}-M{}'.format(entry.year, entry.month), "%Y-M%m").date()
-        new_entry = JournalEntry.objects.create(
-            scope='month',
-            owner=entry.journal.owner,
-            start=start,
-            content=get_extra_content(entry),
-            keywords=entry.keywords,
-            created=entry.created
-        )
-        new_entry.tags = entry.tags.all()
-        new_entry.save()
+    #
+    # DayEntry = apps.get_model('dayentries', 'DayEntry')
+    # for entry in DayEntry.objects.all():
+    #     new_entry = JournalEntry.objects.create(
+    #         scope='day',
+    #         owner=entry.journal.owner,
+    #         start=entry.date,
+    #         content=get_extra_content(entry),
+    #         keywords=entry.keywords,
+    #         created=entry.created
+    #     )
+    #     new_entry.tags = entry.tags.all()
+    #     new_entry.save()
+    #
+    # WeekEntry = apps.get_model('weekentries', 'WeekEntry')
+    # for entry in WeekEntry.objects.all():
+    #     start = timezone.datetime.strptime('{}-W{}-1'.format(entry.year, entry.week), "%Y-W%W-%w").date()
+    #     new_entry = JournalEntry.objects.create(
+    #         scope='week',
+    #         owner=entry.journal.owner,
+    #         start=start,
+    #         content=get_extra_content(entry),
+    #         keywords=entry.keywords,
+    #         created=entry.created
+    #     )
+    #     new_entry.tags = entry.tags.all()
+    #     new_entry.save()
+    #
+    # MonthEntry = apps.get_model('monthentries', 'MonthEntry')
+    # for entry in MonthEntry.objects.all():
+    #     start = timezone.datetime.strptime('{}-M{}'.format(entry.year, entry.month), "%Y-M%m").date()
+    #     new_entry = JournalEntry.objects.create(
+    #         scope='month',
+    #         owner=entry.journal.owner,
+    #         start=start,
+    #         content=get_extra_content(entry),
+    #         keywords=entry.keywords,
+    #         created=entry.created
+    #     )
+    #     new_entry.tags = entry.tags.all()
+    #     new_entry.save()
 
 
 class Migration(migrations.Migration):
