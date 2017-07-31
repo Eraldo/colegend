@@ -39,11 +39,13 @@ class JournalEntry(OwnedBase, TaggableBase, TimeStampedBase):
     )
     # locations = models.CharField(max_length=255, help_text="Separated by ';'")
 
-    # keywords = models.CharField(
-    #     max_length=255,
-    #     blank=True,
-    #     help_text="What were the most important experiences/topics on this day?")
     content = MarkdownField()
+
+    keywords = models.CharField(
+        max_length=500,
+        blank=True,
+        help_text="What were the most important experiences/topics?"
+    )
 
     # objects = JournalEntryQuerySet.as_manager()
 
