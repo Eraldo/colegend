@@ -418,6 +418,7 @@ CORS_ORIGIN_WHITELIST = (
     '127.0.0.1:8004',
     'colegend.org',
     'colegend.com',
+    'app.colegend.com',
     'staging.colegend.com',
     'localhost:8100',
 )
