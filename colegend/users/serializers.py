@@ -24,15 +24,17 @@ class OwnedUserSerializer(serializers.HyperlinkedModelSerializer):
             'occupation', 'avatar', 'purpose',
             'date_joined',
             'duo', 'clan', 'tribe',
-            'groups', 'is_staff',
+            'groups', 'is_staff', 'is_superuser',
             'roles', 'checkpoints'
         ]
+        read_only_fields = ['is_staff', 'is_superuser']
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ('url', 'id', 'username', 'email', 'name', 'avatar', 'date_joined', 'is_staff')
+        fields = ['url', 'id', 'username', 'email', 'name', 'avatar', 'date_joined', 'is_staff']
+        read_only_fields = ['is_staff']
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
