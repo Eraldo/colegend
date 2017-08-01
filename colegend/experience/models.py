@@ -57,3 +57,9 @@ class Experience(OwnedBase, TimeStampedBase):
         return '{amount} EXP {app}#{level} ({owner})'.format(
             owner=self.owner, amount=self.amount, app=self.app, level=self.level
         )
+
+
+def add_experience(user, app, amount):
+    level = Experience.objects.level(app)
+    amount = 1
+    return user.experience.create(owner=user, app=app, level=level, amount=amount)

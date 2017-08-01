@@ -1,5 +1,6 @@
 from rest_framework import viewsets
 
+from colegend.experience.models import add_experience
 from colegend.scopes.models import DAY, get_scope_by_name
 from .serializers import InterviewEntrySerializer
 from .models import InterviewEntry
@@ -28,3 +29,6 @@ class InterviewEntryViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+        # Add experience.
+        user = serializer.instance.owner
+        add_experience(user, 'studio', 1)

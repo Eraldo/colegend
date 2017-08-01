@@ -12,6 +12,7 @@ from django.utils.translation import ugettext_lazy as _
 from rest_framework import viewsets
 
 from colegend.core.views import RolesRequiredMixin, OwnerRequiredMixin
+from colegend.experience.models import add_experience
 from colegend.journals.scopes import Week
 from colegend.journals.serializers import JournalEntrySerializer
 from colegend.scopes.models import DAY, get_scope_by_name, WEEK, MONTH
@@ -42,6 +43,9 @@ class JournalEntryViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+        # Add experience.
+        user = serializer.instance.owner
+        add_experience(user, 'studio', 1)
 
 
 class JournalMixin(object):

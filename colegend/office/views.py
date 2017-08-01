@@ -3,6 +3,7 @@ from itertools import zip_longest
 from rest_framework import viewsets
 from django.utils.translation import ugettext_lazy as _
 
+from colegend.experience.models import add_experience
 from colegend.scopes.models import get_scope_by_name, DAY, WEEK, MONTH
 from .serializers import FocusSerializer
 from .models import Focus
@@ -31,6 +32,9 @@ class FocusViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         self.perform_update(serializer)
+        # Add experience.
+        user = serializer.instance.owner
+        add_experience(user, 'office', 1)
 
     def perform_update(self, serializer, reason=''):
         # Gathering data for notification
