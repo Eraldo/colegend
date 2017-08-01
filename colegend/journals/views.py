@@ -12,11 +12,9 @@ from django.utils.translation import ugettext_lazy as _
 from rest_framework import viewsets
 
 from colegend.core.views import RolesRequiredMixin, OwnerRequiredMixin
-from colegend.dayentries.models import DayEntry
-from colegend.journals.monthentries.models import MonthEntry
+from colegend.journals.scopes import Week
 from colegend.journals.serializers import JournalEntrySerializer
-from colegend.journals.weekentries.models import WeekEntry
-from colegend.scopes.models import DAY, get_scope_by_name
+from colegend.scopes.models import DAY, get_scope_by_name, WEEK, MONTH
 from .models import Journal, JournalPage, JournalEntry
 from .forms import JournalForm, DatePickerForm
 
@@ -124,8 +122,8 @@ class JournalDayView(LoginRequiredMixin, TemplateView):
         date = date or self.get_date()
         user = self.request.user
         try:
-            return user.journal.dayentries.get(date=date)
-        except DayEntry.DoesNotExist:
+            return user.journal_entries.get(scope=DAY, start=date)
+        except JournalEntry.DoesNotExist:
             return None
 
     def get_object(self, queryset=None):
@@ -193,8 +191,8 @@ class JournalWeekView(LoginRequiredMixin, TemplateView):
         date = date or self.get_date()
         user = self.request.user
         try:
-            return user.journal.dayentries.get(date=date)
-        except DayEntry.DoesNotExist:
+            return user.journal_entries.get(scope=DAY, start=date)
+        except JournalEntry.DoesNotExist:
             return None
 
     def get_object(self, queryset=None):
@@ -266,7 +264,7 @@ class JournalWeekView(LoginRequiredMixin, TemplateView):
 
         weeknumber = date.isocalendar()[1]
         context['weeknumber'] = weeknumber
-        weekentry = WeekEntry.objects.owned_by(user).filter(year=date.year, week=weeknumber)
+        weekentry = user.journal_entries.filter(scope=WEEK, start=Week(date).start)
         if weekentry:
             context['weekentry'] = weekentry.first()
 
@@ -300,8 +298,8 @@ class JournalMonthView(LoginRequiredMixin, TemplateView):
         date = date or self.get_date()
         user = self.request.user
         try:
-            return user.journal.weekentries.get(year=date.year, week=date.isocalendar()[1])
-        except WeekEntry.DoesNotExist:
+            return user.journal_entries.get(scope=WEEK, year=date.year, week=date.isocalendar()[1])
+        except JournalEntry.DoesNotExist:
             return None
 
     def get_object(self, queryset=None):
@@ -376,7 +374,7 @@ class JournalMonthView(LoginRequiredMixin, TemplateView):
         #
         monthnumber = date.month
         context['monthnumber'] = monthnumber
-        monthentry = MonthEntry.objects.owned_by(user).filter(year=date.year, month=monthnumber)
+        monthentry = user.journal_entries.filter(scope=MONTH, year=date.year, month=monthnumber)
         if monthentry:
             context['monthentry'] = monthentry.first()
 
@@ -399,15 +397,15 @@ class JournalSearchView(LoginRequiredMixin, TemplateView):
         if text:
             context['text'] = text
             user = self.request.user
-            days = DayEntry.objects.owned_by(user).filter(
-                Q(keywords__icontains=text) | Q(content__icontains=text) | Q(locations__icontains=text) | Q(tags__name__icontains=text)
+            days = user.journal_entries.filter(scope=DAY).filter(
+                Q(keywords__icontains=text) | Q(content__icontains=text) | Q(tags__name__icontains=text)
             ).distinct()
             context['days'] = days
-            weeks = WeekEntry.objects.owned_by(user).filter(
+            weeks = user.journal_entries.filter(scope=WEEK).filter(
                 Q(keywords__icontains=text) | Q(content__icontains=text) | Q(tags__name__icontains=text)
             ).distinct()
             context['weeks'] = weeks
-            months = MonthEntry.objects.owned_by(user).filter(
+            months = user.journal_entries.filter(scope=MONTH).filter(
                 Q(keywords__icontains=text) | Q(content__icontains=text) | Q(tags__name__icontains=text)
             ).distinct()
             context['months'] = months
