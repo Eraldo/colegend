@@ -109,12 +109,8 @@ LOCAL_APPS = (
     'colegend.categories',
     'colegend.tags',
 
+    # Studio
     'colegend.journals',
-    'colegend.dayentries',
-    'colegend.journals.weekentries',
-    'colegend.journals.monthentries',
-    'colegend.journals.quarterentries',
-    'colegend.journals.yearentries',
 
     # Manager
     'colegend.manager',

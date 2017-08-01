@@ -11,7 +11,7 @@ from wagtail.wagtailcore.models import Page
 from colegend.core.fields import MarkdownField
 from colegend.core.models import AutoOwnedBase, AutoUrlsMixin, OwnedQuerySet, TimeStampedBase, OwnedBase
 from colegend.journals import scopes
-from colegend.scopes.models import SCOPE_CHOICES, DAY, get_scope_by_name
+from colegend.scopes.models import SCOPE_CHOICES, DAY, get_scope_by_name, WEEK, MONTH, QUARTER, YEAR
 from colegend.tags.models import TaggableBase
 
 
@@ -78,11 +78,11 @@ class Journal(AutoUrlsMixin, AutoOwnedBase):
     """
 
     spellchecker = models.BooleanField(default=False)
-    day_template = MarkdownField(default=render_to_string('dayentries/template.md'))
-    week_template = MarkdownField(default=render_to_string('weekentries/template.md'))
-    month_template = MarkdownField(default=render_to_string('monthentries/template.md'))
-    quarter_template = MarkdownField(default=render_to_string('quarterentries/template.md'))
-    year_template = MarkdownField(default=render_to_string('yearentries/template.md'))
+    day_template = MarkdownField(default=render_to_string('journals/dayentries_template.md'))
+    week_template = MarkdownField(default=render_to_string('journals/weekentries_template.md'))
+    month_template = MarkdownField(default=render_to_string('journals/monthentries_template.md'))
+    quarter_template = MarkdownField(default=render_to_string('journals/quarterentries_template.md'))
+    year_template = MarkdownField(default=render_to_string('journals/yearentries_template.md'))
     focus_template = """1. [] \n2. [] \n3. [] """
 
     objects = JournalQuerySet.as_manager()
@@ -100,11 +100,11 @@ class Journal(AutoUrlsMixin, AutoOwnedBase):
 
     def reset(self):
         self.spellchecker = False
-        self.day_template = render_to_string('dayentries/template.md')
-        self.week_template = render_to_string('weekentries/template.md')
-        self.month_template = render_to_string('monthentries/template.md')
-        self.quarter_template = render_to_string('quarterentries/template.md')
-        self.year_template = render_to_string('yearentries/template.md')
+        self.day_template = render_to_string('journals/dayentries_template.md')
+        self.week_template = render_to_string('journals/weekentries_template.md')
+        self.month_template = render_to_string('journals/monthentries_template.md')
+        self.quarter_template = render_to_string('journals/quarterentries_template.md')
+        self.year_template = render_to_string('journals/yearentries_template.md')
         self.save()
         return True
 
@@ -157,7 +157,7 @@ class JournalPage(RoutablePageMixin, Page):
 
         user = request.user
         if user and user.is_authenticated():
-            dayentry = user.journal.dayentries.filter(date=scope.date).first()
+            dayentry = user.journal_entries.filter(scope=scope.name, start=scope.start).first()
             context['dayentry'] = dayentry
 
             outcomes = user.outcomes.all()
@@ -183,7 +183,7 @@ class JournalPage(RoutablePageMixin, Page):
 
         user = request.user
         if user and user.is_authenticated():
-            weekentry = user.journal.weekentries.filter(year=scope.start.year, week=scope.number).first()
+            weekentry = user.journal_entries.filter(scope=scope.name, start=scope.start).first()
             context['weekentry'] = weekentry
 
             days = []
@@ -191,7 +191,7 @@ class JournalPage(RoutablePageMixin, Page):
             while day.date <= scope.end:
                 days.append({
                     'date': day.date,
-                    'entry': user.journal.dayentries.filter(date=day.date).first()
+                    'entry': user.journal_entries.filter(scope=scope.name, start=day.date).first()
                 })
                 day = day.next
             context['days'] = days
@@ -220,7 +220,7 @@ class JournalPage(RoutablePageMixin, Page):
 
         user = request.user
         if user and user.is_authenticated():
-            monthentry = user.journal.monthentries.filter(year=scope.date.year, month=scope.number).first()
+            monthentry = user.journal_entries.filter(scope=scope.name, year=scope.date.year, month=scope.number).first()
             context['monthentry'] = monthentry
 
             weeks = []
@@ -228,7 +228,7 @@ class JournalPage(RoutablePageMixin, Page):
             while week.date <= scope.end:
                 weeks.append({
                     'date': week.date,
-                    'entry': user.journal.weekentries.filter(year=week.start.year, week=week.number).first()
+                    'entry': user.journal_entries.filter(scope=week.name, start=week.start).first()
                 })
                 week = week.next
             context['weeks'] = weeks
@@ -257,7 +257,7 @@ class JournalPage(RoutablePageMixin, Page):
 
         user = request.user
         if user and user.is_authenticated():
-            quarterentry = user.journal.quarterentries.filter(year=scope.date.year, quarter=scope.number).first()
+            quarterentry = user.journal_entries.filter(scope=scope.name, start=scope.start).first()
             context['quarterentry'] = quarterentry
 
             months = []
@@ -265,7 +265,7 @@ class JournalPage(RoutablePageMixin, Page):
             while month.date <= scope.end:
                 months.append({
                     'date': month.date,
-                    'entry': user.journal.monthentries.filter(year=month.start.year, month=month.number).first()
+                    'entry': user.journal_entries.filter(scope=month.name, start=month.start).first()
                 })
                 month = month.next
             context['months'] = months
@@ -294,7 +294,7 @@ class JournalPage(RoutablePageMixin, Page):
 
         user = request.user
         if user and user.is_authenticated():
-            yearentry = user.journal.yearentries.filter(year=scope.number).first()
+            yearentry = user.journal_entries.filter(scope=scope.name, start=scope.start).first()
             context['yearentry'] = yearentry
 
             quarters = []
@@ -302,7 +302,7 @@ class JournalPage(RoutablePageMixin, Page):
             while quarter.date <= scope.end:
                 quarters.append({
                     'date': quarter.date,
-                    'entry': user.journal.quarterentries.filter(year=quarter.start.year, quarter=quarter.number).first()
+                    'entry': user.journal_entries.filter(scope=quarter.name, start=quarter.start).first()
                 })
                 quarter = quarter.next
             context['quarters'] = quarters
@@ -326,25 +326,24 @@ class JournalPage(RoutablePageMixin, Page):
             context['text'] = text
             user = request.user
             if user:
-                journal = user.journal
-                days = journal.dayentries.filter(
+                days = user.journal_entries.filter(scope=DAY).filter(
                     Q(keywords__icontains=text) | Q(content__icontains=text) | Q(locations__icontains=text) | Q(
                         tags__name__icontains=text)
                 ).distinct()
                 context['days'] = days
-                weeks = journal.weekentries.filter(
+                weeks = user.journal_entries.filter(scope=WEEK).filter(
                     Q(keywords__icontains=text) | Q(content__icontains=text) | Q(tags__name__icontains=text)
                 ).distinct()
                 context['weeks'] = weeks
-                months = journal.monthentries.filter(
+                months = user.journal_entries.filter(scope=MONTH).filter(
                     Q(keywords__icontains=text) | Q(content__icontains=text) | Q(tags__name__icontains=text)
                 ).distinct()
                 context['months'] = months
-                quarters = journal.quarterentries.filter(
+                quarters = user.journal_entries.filter(scope=QUARTER).filter(
                     Q(keywords__icontains=text) | Q(content__icontains=text) | Q(tags__name__icontains=text)
                 ).distinct()
                 context['quarters'] = quarters
-                years = journal.yearentries.filter(
+                years = user.journal_entries.filter(scope=YEAR).filter(
                     Q(keywords__icontains=text) | Q(content__icontains=text) | Q(tags__name__icontains=text)
                 ).distinct()
                 context['years'] = years

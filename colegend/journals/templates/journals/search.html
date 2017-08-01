@@ -1,5 +1,5 @@
 {% extends 'journals/base.html' %}
-{% load static crispy_forms_tags dayentries_tags weekentries_tags monthentries_tags quarterentries_tags yearentries_tags core_tags wagtailroutablepage_tags %}
+{% load static crispy_forms_tags journals_tags core_tags wagtailroutablepage_tags %}
 
 {% block title %}Journal Search{% endblock %}
 
@@ -22,31 +22,31 @@
                     {% if years %}
                         <h2>Years:</h2>
                         {% for yearentry in years %}
-                            {% yearentry_line %}
+                            {% journalentry_line %}
                         {% endfor %}
                     {% endif %}
                     {% if quarters %}
                         <h2>Quarters:</h2>
                         {% for quarterentry in quarters %}
-                            {% quarterentry_line %}
+                            {% journalentry_line %}
                         {% endfor %}
                     {% endif %}
                     {% if months %}
                         <h2>Months:</h2>
                         {% for monthentry in months %}
-                            {% monthentry_line %}
+                            {% journalentry_line %}
                         {% endfor %}
                     {% endif %}
                     {% if weeks %}
                         <h2>Weeks:</h2>
                         {% for weekentry in weeks %}
-                            {% weekentry_line %}
+                            {% journalentry_line %}
                         {% endfor %}
                     {% endif %}
                     {% if days %}
                         <h2>Days:</h2>
                         {% for dayentry in days %}
-                            {% dayentry_line %}
+                            {% journalentry_line %}
                         {% endfor %}
                     {% endif %}
                 {% else %}

@@ -58,9 +58,9 @@ class DashboardPage(Page):
             return link(_('Setting focus'), url)
 
         # Has the user written his journal entry?
-        dayentry = user.journal.dayentries.filter(date=today)
+        dayentry = user.journal_entries.filter(scope=DAY, start=today)
         if not dayentry:
-            return link(_('Create a journal entry'), reverse('dayentries:create'))
+            return link(_('Create a journal entry'), '#')
 
     def __str__(self):
         return self.title

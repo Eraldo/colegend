@@ -1,6 +1,6 @@
 {% load core_tags buttons markdown tags_tags %}
 
-<div {% if id %}id="weekentry-widget-{{ id }}"{% endif %} class="weekentry-widget">
+<div {% if id %}id="journalentry-widget-{{ id }}"{% endif %} class="journalentry-widget">
     <div class="content card bg-content">
         <div class="card-header">
             {% if actions %}
@@ -15,8 +15,11 @@
                 </div>
             {% endif %}
 
-            <span class="widget-weekweek label label-pill bg-category-{{ weekweek_number }}">{{ weekweek }}</span>
+            <span class="widget-weekday label label-pill bg-category-{{ weekday_number }}">{{ weekday }}</span>
             <strong>{{ date }}</strong>
+            {% if locations %}
+                <span>{% icon 'address' color='grey' %}{{ locations }}</span>
+            {% endif %}
             {% if tags %}
                 <div class="pull-right">
                     {% for tag in tags %}

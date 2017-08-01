@@ -1,5 +1,5 @@
 {% load core_tags buttons tags_tags %}
-<div {% if id %}id="dayentry-widget-{{ id }}"{% endif %} class="dayentry-widget bg-content {{ class }}"
+<div {% if id %}id="journalentry-widget-{{ id }}"{% endif %} class="journalentry-widget bg-content {{ class }}"
      ondblclick="location='{% if detail_url %}{{ detail_url }}{% else %}{{ create_url }}{% endif %}'">
     <div class="card card-item">
         {% if actions %}

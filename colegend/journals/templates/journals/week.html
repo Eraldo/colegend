@@ -1,10 +1,10 @@
 {% extends 'journals/index.html' %}
-{% load dayentries_tags weekentries_tags core_tags %}
+{% load journals_tags core_tags %}
 
 {% block content_container %}
-    {% weekentry_line %}
+    {% journalentry_line %}
     <br>
     {% for day in days %}
-        {% dayentry_line day.entry date=day.date %}
+        {% journalentry_line day.entry date=day.date %}
     {% endfor %}
 {% endblock %}

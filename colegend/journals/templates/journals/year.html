@@ -1,10 +1,10 @@
 {% extends 'journals/index.html' %}
-{% load quarterentries_tags yearentries_tags core_tags %}
+{% load journals_tags core_tags %}
 
 {% block content_container %}
-    {% yearentry_line %}
+    {% journalentry_line %}
     <br>
     {% for quarter in quarters %}
-        {% quarterentry_line quarter.entry date=quarter.date %}
+        {% journalentry_line quarter.entry date=quarter.date %}
     {% endfor %}
 {% endblock %}

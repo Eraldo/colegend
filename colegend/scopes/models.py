@@ -6,6 +6,7 @@ from colegend.journals.scopes import Day, Week, Month, Year
 DAY = 'day'
 WEEK = 'week'
 MONTH = 'month'
+QUARTER = 'quarter'
 YEAR = 'year'
 SCOPE_CHOICES = (
     (DAY, _('day')),
