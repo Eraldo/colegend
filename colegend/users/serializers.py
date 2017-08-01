@@ -33,7 +33,7 @@ class OwnedUserSerializer(serializers.HyperlinkedModelSerializer):
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ['url', 'id', 'username', 'email', 'name', 'avatar', 'date_joined', 'is_staff']
+        fields = ['url', 'id', 'username', 'email', 'name', 'avatar', 'purpose', 'date_joined', 'is_staff']
         read_only_fields = ['is_staff']
 
 
