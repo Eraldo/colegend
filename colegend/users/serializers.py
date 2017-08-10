@@ -6,6 +6,8 @@ from colegend.users.models import User
 
 
 class JoinSerializer(RegisterSerializer):
+    name = serializers.CharField()
+
     def validate_username(self, original_username):
         # Add a number until the username does not exist yet.
         username = original_username
@@ -13,6 +15,12 @@ class JoinSerializer(RegisterSerializer):
         while User.objects.filter(username__iexact=username).exists():
             username = original_username + str(suffix)
         return super().validate_username(username)
+
+    def custom_signup(self, request, user):
+        name = self.validated_data.get('name', '')
+        if name:
+            user.name = name
+            user.save()
 
 
 class OwnedUserSerializer(serializers.HyperlinkedModelSerializer):
@@ -22,7 +30,7 @@ class OwnedUserSerializer(serializers.HyperlinkedModelSerializer):
             'url', 'id', 'username', 'email', 'name',
             'gender', 'birthday', 'address', 'phone',
             'occupation', 'avatar', 'purpose',
-            'date_joined',
+            'date_joined', 'registration_country',
             'duo', 'clan', 'tribe',
             'groups', 'is_staff', 'is_superuser',
             'roles', 'checkpoints'

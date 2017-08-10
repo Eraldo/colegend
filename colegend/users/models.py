@@ -43,7 +43,9 @@ class User(AbstractUser):
     gender = models.CharField(
         verbose_name=_('gender'),
         max_length=1,
-        choices=GENDER_CHOICES)
+        choices=GENDER_CHOICES,
+        default=NEUTRAL
+    )
     birthday = models.DateField(
         verbose_name=_('birthday'),
         null=True, blank=True,
