@@ -64,7 +64,7 @@ def journalentry_line(context, journalentry=None, **kwargs):
             'date': journalentry.start,
             'weekday': journalentry.start.strftime('%a'),
             'weekday_number': journalentry.start.isoweekday(),
-            'locations': journalentry.locations,
+            'locations': '',
             'actions': True,
             # 'detail_url': journalentry.detail_url,
             'detail_url': '#detail',
