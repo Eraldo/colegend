@@ -9,7 +9,7 @@ class JournalEntrySerializer(serializers.HyperlinkedModelSerializer):
         fields = [
             'url', 'id', 'owner',
             'scope', 'start',
-            'content',
+            'content', 'keywords',
             'created', 'modified',
         ]
         read_only_fields = ['owner']
