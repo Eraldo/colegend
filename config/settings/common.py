@@ -77,6 +77,7 @@ THIRD_PARTY_APPS = (
     'rest_framework.authtoken',
     'rest_auth',
     'rest_auth.registration',
+    'graphene_django',
 )
 
 # Apps specific for this project go here.
