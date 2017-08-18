@@ -14,27 +14,24 @@ def convert_phone_number_to_string(field, registry=None):
 class UserType(DjangoObjectType):
     class Meta:
         model = User
+        filter_fields = ['name']
+        # interfaces = (graphene.relay.Node,)
 
 
-class Query(graphene.AbstractType):
+class Query(graphene.ObjectType):
     user = graphene.Field(
         UserType,
         id=graphene.Int(),
         name=graphene.String(),
     )
-    all_users = graphene.List(UserType)
+    users = graphene.List(UserType)
 
-    def resolve_all_users(self, args, context, info):
+    def resolve_users(self, info):
         return User.objects.all()
 
-    def resolve_user(self, args, context, info):
-        id = args.get('id')
-        name = args.get('name')
-
+    def resolve_user(self, info, id=None, name=None):
         if id is not None:
             return User.objects.get(id=id)
-
         if name is not None:
             return User.objects.get(name=name)
-
         return None

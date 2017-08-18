@@ -15,7 +15,15 @@ class Query(graphene.AbstractType):
         id=graphene.Int(),
         name=graphene.String(),
     )
-    all_outcomes = graphene.List(OutcomeType)
+    outcomes = graphene.List(OutcomeType)
 
-    def resolve_all_outcomes(self, args, context, info):
+    def resolve_outcomes(self, info):
         return Outcome.objects.all()
+
+    def resolve_outcome(self, info, id=None, name=None):
+        if id is not None:
+            return Outcome.objects.get(id=id)
+        if name is not None:
+            return Outcome.objects.get(name=name)
+        return None
+

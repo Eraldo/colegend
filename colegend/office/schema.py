@@ -9,20 +9,17 @@ class FocusType(DjangoObjectType):
         model = Focus
 
 
-class Query(graphene.AbstractType):
+class Query(graphene.ObjectType):
     focus = graphene.Field(
         FocusType,
         id=graphene.Int(),
     )
-    all_focuses = graphene.List(FocusType)
+    focuses = graphene.List(FocusType)
 
-    def resolve_all_focuses(self, args, context, info):
+    def resolve_focuses(self, info):
         return Focus.objects.all()
 
-    def resolve_focus(self, args, context, info):
-        id = args.get('id')
-
+    def resolve_focus(self, info, id=None):
         if id is not None:
             return Focus.objects.get(id=id)
-
         return None
