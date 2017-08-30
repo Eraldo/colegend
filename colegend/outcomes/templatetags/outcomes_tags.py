@@ -80,7 +80,7 @@ def inbox(context, inbox=None, **kwargs):
 def status(context, status=None, **kwargs):
     status = status or context.get('status')
     if status in Outcome.STATUSES:
-        if status == Outcome.OPEN:
+        if status == Outcome.CURRENT:
             return icon('open')
         elif status == Outcome.WAITING:
             return icon('waiting', classes='text-category-7')

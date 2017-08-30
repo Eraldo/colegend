@@ -47,23 +47,26 @@ class Outcome(AutoUrlsMixin, OwnedBase, TaggableBase, TimeStampedBase):
         blank=True,
     )
 
-    OPEN = 'open'
+    FUTURE = 'future'
     WAITING = 'waiting'
+    CURRENT = 'current'
     DONE = 'done'
     CANCELED = 'canceled'
-    STATUSES_OPEN = [OPEN, WAITING]
-    STATUSES_CLOSED = [CANCELED, DONE]
+
+    STATUSES_OPEN = [CURRENT, WAITING, FUTURE]
+    STATUSES_CLOSED = [DONE, CANCELED]
     STATUSES = STATUSES_OPEN + STATUSES_CLOSED
     STATUS_CHOICES = (
-        (OPEN, _('open')),
+        (FUTURE, _('canceled')),
         (WAITING, _('waiting')),
+        (CURRENT, _('open')),
         (DONE, _('done')),
         (CANCELED, _('canceled')),
     )
     status = models.CharField(
         _('status'),
         choices=STATUS_CHOICES,
-        default=OPEN,
+        default=CURRENT,
         max_length=10,
     )
     inbox = models.BooleanField(default=True)

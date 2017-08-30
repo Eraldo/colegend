@@ -9,7 +9,7 @@ class OutcomeType(DjangoObjectType):
         model = Outcome
 
 
-class Query(graphene.AbstractType):
+class Query(graphene.ObjectType):
     outcome = graphene.Field(
         OutcomeType,
         id=graphene.Int(),

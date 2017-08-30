@@ -23,12 +23,13 @@ fontawesome_icons = {
     'balance': 'balance-scale',
     # 'games': 'trophy',
     # - status
-    'open': 'square-o',
-    'waiting': 'hourglass-half',
     'state-undefined': 'circle-thin',
-    'closed': 'check-square-o',
+    'future': 'square',
+    'waiting': 'hourglass-half',
+    'current': 'square-o',
     'done': 'check',
     'canceled': 'ban',
+    'closed': 'check-square-o',
     #
     'date': 'calendar-o',
     'deadline': 'calendar-times-o',
