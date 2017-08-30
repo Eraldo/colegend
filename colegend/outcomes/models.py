@@ -26,11 +26,11 @@ class OutcomeQuerySet(OwnedQuerySet):
         return queryset.order_by('deadline')
 
     def open(self):
-        queryset = self.exclude(status__in=[Outcome.DONE, Outcome.CANCELED])
+        queryset = self.exclude(status__in=Outcome.STATUSES_CLOSED)
         return queryset
 
     def closed(self):
-        queryset = self.filter(status__in=[Outcome.DONE, Outcome.CANCELED])
+        queryset = self.filter(status__in=Outcome.STATUSES_CLOSED)
         return queryset
 
 
