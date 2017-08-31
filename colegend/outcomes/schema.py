@@ -1,5 +1,6 @@
 import graphene
 from graphene_django import DjangoObjectType
+from graphene_django.filter import DjangoFilterConnectionField
 
 from .models import Outcome
 
@@ -7,23 +8,12 @@ from .models import Outcome
 class OutcomeType(DjangoObjectType):
     class Meta:
         model = Outcome
+        filter_fields = {
+            'name': ['exact', 'icontains', 'istartswith'],
+        }
+        interfaces = [graphene.Node]
 
 
 class Query(graphene.ObjectType):
-    outcome = graphene.Field(
-        OutcomeType,
-        id=graphene.Int(),
-        name=graphene.String(),
-    )
-    outcomes = graphene.List(OutcomeType)
-
-    def resolve_outcomes(self, info):
-        return Outcome.objects.all()
-
-    def resolve_outcome(self, info, id=None, name=None):
-        if id is not None:
-            return Outcome.objects.get(id=id)
-        if name is not None:
-            return Outcome.objects.get(name=name)
-        return None
-
+    outcome = graphene.Node.Field(OutcomeType)
+    outcomes = DjangoFilterConnectionField(OutcomeType)

@@ -1,3 +1,5 @@
+from enum import Enum
+
 import graphene
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
@@ -5,6 +7,18 @@ from graphene_django.filter import DjangoFilterConnectionField
 from .models import User
 from graphene_django.converter import convert_django_field
 from phonenumber_field.modelfields import PhoneNumberField
+
+
+class App(Enum):
+    HOME = 'home'
+    ARCADE = 'arcade'
+    OFFICE = 'office'
+    COMMUNITY = 'community'
+    STUDIO = 'studio'
+    ACADEMY = 'academy'
+    JOURNEY = 'journey'
+
+AppType = graphene.Enum.from_enum(App)
 
 
 @convert_django_field.register(PhoneNumberField)
@@ -15,7 +29,11 @@ def convert_phone_number_to_string(field, registry=None):
 class UserType(DjangoObjectType):
     level = graphene.Field(
         graphene.Int,
-        app=graphene.Int(),
+        app=AppType(),
+    )
+    experience = graphene.Field(
+        graphene.Int,
+        app=AppType(),
     )
 
     class Meta:
@@ -25,10 +43,22 @@ class UserType(DjangoObjectType):
         }
         interfaces = [graphene.Node]
 
-    def resolve_level(self, info):
+    def resolve_level(self, info, app=None):
         user = info.context.user
+        kwargs = {}
+        if app is not None:
+            kwargs['app'] = app
         if user.is_authenticated:
-            return user.experience.level()
+            return user.experience.level(**kwargs)
+        return 0
+
+    def resolve_experience(self, info, app=None):
+        user = info.context.user
+        kwargs = {}
+        if app is not None:
+            kwargs['app'] = app
+        if user.is_authenticated:
+            return user.experience.total(**kwargs)
         return 0
 
 
