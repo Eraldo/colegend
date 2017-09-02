@@ -5,13 +5,19 @@ import colegend.outcomes.schema
 
 
 class Query(
-    colegend.users.schema.Query,
-    colegend.office.schema.Query,
-    colegend.outcomes.schema.Query,
+    colegend.users.schema.UserQuery,
+    colegend.office.schema.FocusQuery,
+    colegend.outcomes.schema.OutcomeQuery,
     graphene.ObjectType):
     # This class will inherit from multiple Queries
     # as we begin to add more apps to our project
     pass
 
 
-schema = graphene.Schema(query=Query)
+class Mutation(
+    colegend.users.schema.UserMutation,
+    graphene.ObjectType):
+    pass
+
+
+schema = graphene.Schema(query=Query, mutation=Mutation)

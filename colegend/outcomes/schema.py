@@ -14,6 +14,6 @@ class OutcomeType(DjangoObjectType):
         interfaces = [graphene.Node]
 
 
-class Query(graphene.ObjectType):
+class OutcomeQuery(graphene.ObjectType):
     outcome = graphene.Node.Field(OutcomeType)
     outcomes = DjangoFilterConnectionField(OutcomeType)

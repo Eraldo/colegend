@@ -1,10 +1,12 @@
 from enum import Enum
 
 import graphene
+from django.contrib.auth import authenticate
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 
 from .models import User
+from .filters import UserFilter
 from graphene_django.converter import convert_django_field
 from phonenumber_field.modelfields import PhoneNumberField
 
@@ -26,7 +28,7 @@ def convert_phone_number_to_string(field, registry=None):
     return graphene.String(description=field.help_text, required=not field.null)
 
 
-class UserType(DjangoObjectType):
+class UserNode(DjangoObjectType):
     level = graphene.Field(
         graphene.Int,
         app=AppType(),
@@ -38,9 +40,9 @@ class UserType(DjangoObjectType):
 
     class Meta:
         model = User
-        filter_fields = {
-            'name': ['exact', 'icontains', 'istartswith'],
-        }
+        # filter_fields = {
+        #     'name': ['exact', 'icontains', 'istartswith'],
+        # }
         interfaces = [graphene.Node]
 
     def resolve_level(self, info, app=None):
@@ -62,12 +64,12 @@ class UserType(DjangoObjectType):
         return 0
 
 
-class Query(graphene.ObjectType):
+class UserQuery(graphene.ObjectType):
     my_user = graphene.Field(
-        UserType
+        UserNode
     )
-    user = graphene.Node.Field(UserType)
-    users = DjangoFilterConnectionField(UserType)
+    user = graphene.Node.Field(UserNode)
+    users = DjangoFilterConnectionField(UserNode, filterset_class=UserFilter)
 
     def resolve_my_user(self, info):
         return info.context.user
@@ -96,3 +98,37 @@ class Query(graphene.ObjectType):
     #     if name is not None:
     #         return User.objects.get(name=name)
     #     return None
+
+
+class Login(graphene.relay.ClientIDMutation):
+    user = graphene.Field(UserNode)
+    token = graphene.String()
+
+    class Input:
+        email = graphene.String()
+        password = graphene.String()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, email, password):
+        user = authenticate(
+            email=email,
+            password=password,
+        )
+        return Login(user=user, token=user.auth_token)
+
+
+class Logout(graphene.relay.ClientIDMutation):
+    success = graphene.Boolean()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info):
+        user = info.context.user
+        # TODO: Log user out.
+        print(user.auth_token)
+        # logout(request={"user": user})
+        return Logout(success=False)
+
+
+class UserMutation(graphene.ObjectType):
+    login = Login.Field()
+    logout = Logout.Field()

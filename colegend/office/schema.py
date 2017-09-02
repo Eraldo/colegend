@@ -9,7 +9,7 @@ class FocusType(DjangoObjectType):
         model = Focus
 
 
-class Query(graphene.ObjectType):
+class FocusQuery(graphene.ObjectType):
     focus = graphene.Field(
         FocusType,
         id=graphene.Int(),
