@@ -413,6 +413,7 @@ REST_AUTH_REGISTER_SERIALIZERS = {
 GRAPHENE = {
     'MIDDLEWARE': [
         'graphene_django.debug.DjangoDebugMiddleware',
+        'colegend.api.middelware.AuthorizationMiddleware',
     ]
 }
 # CORS_ORIGIN_ALLOW_ALL = True
