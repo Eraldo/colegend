@@ -53,7 +53,11 @@ class AutoOwnedBase(OwnedCheckMixin, models.Model):
     Adds a owner (user) field to the model. 1-1
     The inheriting model is automatically created on retrieval.
     """
-    owner = AutoOneToOneField(settings.AUTH_USER_MODEL, primary_key=True)
+    owner = AutoOneToOneField(
+        to=settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
 
     class Meta:
         abstract = True
