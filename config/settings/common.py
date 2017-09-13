@@ -414,7 +414,9 @@ GRAPHENE = {
     'MIDDLEWARE': [
         'graphene_django.debug.DjangoDebugMiddleware',
         'colegend.api.middelware.AuthorizationMiddleware',
-    ]
+    ],
+    'SCHEMA': 'colegend.api.schema.schema',
+    'SCHEMA_OUTPUT': 'data/schema.json'  # defaults to schema.json
 }
 # CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = (
