@@ -11,6 +11,15 @@ from graphene_django.converter import convert_django_field
 from phonenumber_field.modelfields import PhoneNumberField
 
 
+class Size(Enum):
+    SMALL = 'small'
+    MEDIUM = 'medium'
+    LARGE = 'large'
+
+
+SizeType = graphene.Enum.from_enum(Size)
+
+
 class App(Enum):
     HOME = 'home'
     ARCADE = 'arcade'
@@ -19,6 +28,7 @@ class App(Enum):
     STUDIO = 'studio'
     ACADEMY = 'academy'
     JOURNEY = 'journey'
+
 
 AppType = graphene.Enum.from_enum(App)
 
@@ -36,6 +46,10 @@ class UserNode(DjangoObjectType):
     experience = graphene.Field(
         graphene.Int,
         app=AppType(),
+    )
+    avatar = graphene.Field(
+        graphene.String,
+        size=SizeType(),
     )
 
     class Meta:
@@ -63,6 +77,10 @@ class UserNode(DjangoObjectType):
             return user.experience.total(**kwargs)
         return 0
 
+    def resolve_avatar(self, info, size=Size.MEDIUM.value):
+        url = self.avatar[size].url
+        return info.context.build_absolute_uri(url)
+
 
 class UserQuery(graphene.ObjectType):
     my_user = graphene.Field(
@@ -74,30 +92,30 @@ class UserQuery(graphene.ObjectType):
     def resolve_my_user(self, info):
         return info.context.user
 
-    # def resolve_my_posts(self, args, context, info):
-    #     # context will reference to the Django request
-    #     if not context.user.is_authenticated():
-    #         return Post.objects.none()
-    #     else:
-    #         return Post.objects.filter(owner=context.user)
+        # def resolve_my_posts(self, args, context, info):
+        #     # context will reference to the Django request
+        #     if not context.user.is_authenticated():
+        #         return Post.objects.none()
+        #     else:
+        #         return Post.objects.filter(owner=context.user)
 
-    # user = graphene.Field(
-    #     UserType,
-    #     id=graphene.Int(),
-    #     name=graphene.String(),
-    # )
+        # user = graphene.Field(
+        #     UserType,
+        #     id=graphene.Int(),
+        #     name=graphene.String(),
+        # )
 
-    # users = graphene.List(UserType)
+        # users = graphene.List(UserType)
 
-    # def resolve_users(self, info):
-    #     return User.objects.all()
+        # def resolve_users(self, info):
+        #     return User.objects.all()
 
-    # def resolve_user(self, info, id=None, name=None):
-    #     if id is not None:
-    #         return User.objects.get(id=id)
-    #     if name is not None:
-    #         return User.objects.get(name=name)
-    #     return None
+        # def resolve_user(self, info, id=None, name=None):
+        #     if id is not None:
+        #         return User.objects.get(id=id)
+        #     if name is not None:
+        #         return User.objects.get(name=name)
+        #     return None
 
 
 class Login(graphene.relay.ClientIDMutation):

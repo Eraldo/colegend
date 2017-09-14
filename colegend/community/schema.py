@@ -133,12 +133,19 @@ class ClanMutation(graphene.ObjectType):
 
 
 class TribeNode(DjangoObjectType):
+    is_open = graphene.Field(
+        graphene.Boolean,
+    )
+
     class Meta:
         model = Tribe
         filter_fields = {
             'name': ['exact', 'istartswith', 'icontains'],
         }
         interfaces = [graphene.Node]
+
+    def resolve_is_open(self, info):
+        return self.is_open
 
 
 class TribeQuery(graphene.ObjectType):
