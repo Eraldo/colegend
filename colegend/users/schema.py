@@ -129,6 +129,31 @@ class Logout(graphene.relay.ClientIDMutation):
         return Logout(success=False)
 
 
+class UpdateUser(graphene.relay.ClientIDMutation):
+    user = graphene.Field(UserNode)
+
+    class Input:
+        name = graphene.String()
+        username = graphene.String()
+        gender = graphene.String()
+        purpose = graphene.String()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, username=None, name=None, gender=None, purpose=None):
+        user = info.context.user
+        if username:
+            user.username = username
+        if name:
+            user.name = name
+        if gender:
+            user.gender = gender
+        if purpose:
+            user.purpose = purpose
+        user.save()
+        return UpdateUser(user=user)
+
+
 class UserMutation(graphene.ObjectType):
     login = Login.Field()
     logout = Logout.Field()
+    update_user = UpdateUser.Field()

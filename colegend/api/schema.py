@@ -5,6 +5,7 @@ import colegend.users.schema
 import colegend.office.schema
 import colegend.outcomes.schema
 from colegend.checkpoints.schema import CheckpointQuery, CheckpointMutation
+from colegend.community.schema import CommunityQuery, CommunityMutation
 from colegend.journey.schema import HeroQuery, HeroMutation
 
 
@@ -16,6 +17,7 @@ class Query(
     HeroQuery,
     colegend.office.schema.FocusQuery,
     colegend.outcomes.schema.OutcomeQuery,
+    CommunityQuery,
     graphene.ObjectType):
     debug = graphene.Field(DjangoDebug, name='__debug')
 
@@ -24,6 +26,7 @@ class Mutation(
     colegend.users.schema.UserMutation,
     CheckpointMutation,
     HeroMutation,
+    CommunityMutation,
     graphene.ObjectType):
     pass
 
