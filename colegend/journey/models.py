@@ -18,6 +18,18 @@ class Hero(AutoOwnedBase, TimeStampedBase):
         return "{}'s hero".format(self.owner)
 
 
+class Demon(AutoOwnedBase, TimeStampedBase):
+    content = MarkdownField()
+
+    class Meta:
+        verbose_name = _('Demon')
+        verbose_name_plural = _('Demons')
+        default_related_name = 'demon'
+
+    def __str__(self):
+        return "{}'s demon".format(self.owner)
+
+
 class JourneyPage(Page):
     template = 'journey/base.html'
 
