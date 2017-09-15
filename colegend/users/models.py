@@ -3,7 +3,7 @@ from __future__ import unicode_literals, absolute_import
 from allauth.account.signals import user_signed_up
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser, Group
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMessage
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.dispatch import receiver
@@ -203,6 +203,13 @@ class User(AbstractUser):
             },
         }
         return gender_pronouns.get(gender).get(kind)
+
+    def contact(self, sender, subject=None, message=''):
+        if not subject:
+            subject = 'Message from {name}'.format(name=sender)
+        if self.email:
+            email = EmailMessage(subject=subject, body=message, to=[self.email], reply_to=[sender.email])
+            email.send()
 
 
 @receiver(user_signed_up)

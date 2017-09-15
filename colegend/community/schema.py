@@ -7,12 +7,19 @@ from .models import Duo, Clan, Tribe
 
 
 class DuoNode(DjangoObjectType):
+    is_open = graphene.Field(
+        graphene.Boolean,
+    )
+
     class Meta:
         model = Duo
         filter_fields = {
             'name': ['exact', 'istartswith', 'icontains'],
         }
         interfaces = [graphene.Node]
+
+    def resolve_is_open(self, info):
+        return self.is_open
 
 
 class DuoQuery(graphene.ObjectType):
@@ -70,12 +77,19 @@ class DuoMutation(graphene.ObjectType):
 
 
 class ClanNode(DjangoObjectType):
+    is_open = graphene.Field(
+        graphene.Boolean,
+    )
+
     class Meta:
         model = Clan
         filter_fields = {
             'name': ['exact', 'istartswith', 'icontains'],
         }
         interfaces = [graphene.Node]
+
+    def resolve_is_open(self, info):
+        return self.is_open
 
 
 class ClanQuery(graphene.ObjectType):

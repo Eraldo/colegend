@@ -4,6 +4,7 @@ import graphene
 from django.contrib.auth import authenticate
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
+from graphql_relay import from_global_id
 
 from .models import User
 from .filters import UserFilter
@@ -171,7 +172,26 @@ class UpdateUser(graphene.relay.ClientIDMutation):
         return UpdateUser(user=user)
 
 
+class ContactUser(graphene.relay.ClientIDMutation):
+    success = graphene.Boolean()
+
+    class Input:
+        id = graphene.ID()
+        subject = graphene.String()
+        message = graphene.String()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, id=None, subject=None, message=None):
+        # Sending email and returning True on success.
+        user = info.context.user
+        _type, id = from_global_id(id)
+        receiver = User.objects.get(id=id)
+        receiver.contact(user, subject, message)
+        return ContactUser(success=True)
+
+
 class UserMutation(graphene.ObjectType):
     login = Login.Field()
     logout = Logout.Field()
     update_user = UpdateUser.Field()
+    contact_user = ContactUser.Field()

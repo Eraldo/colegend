@@ -443,6 +443,10 @@ class Clan(models.Model):
     def is_full(self):
         return self.members.count() >= 4
 
+    @property
+    def is_open(self):
+        return not self.is_full
+
     def join(self, user):
         if not user.is_authenticated:
             raise Exception('Please authenticate to join "{0}".'.format(self))
@@ -496,6 +500,10 @@ class Duo(models.Model):
     @property
     def is_full(self):
         return self.members.count() >= 2
+
+    @property
+    def is_open(self):
+        return not self.is_full
 
     def join(self, user):
         if not user.is_authenticated:
