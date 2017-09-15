@@ -67,6 +67,7 @@ media/
 # local files
 local/
 backups/
+data/
 
 # py.test cache
  .cache
