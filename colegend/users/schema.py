@@ -55,9 +55,6 @@ class UserNode(DjangoObjectType):
 
     class Meta:
         model = User
-        # filter_fields = {
-        #     'name': ['exact', 'icontains', 'istartswith'],
-        # }
         interfaces = [graphene.Node]
 
     def resolve_level(self, info, app=None):
@@ -84,39 +81,12 @@ class UserNode(DjangoObjectType):
 
 
 class UserQuery(graphene.ObjectType):
-    my_user = graphene.Field(
-        UserNode
-    )
+    my_user = graphene.Field(UserNode)
     user = graphene.Node.Field(UserNode)
     users = DjangoFilterConnectionField(UserNode, filterset_class=UserFilter)
 
     def resolve_my_user(self, info):
         return info.context.user
-
-        # def resolve_my_posts(self, args, context, info):
-        #     # context will reference to the Django request
-        #     if not context.user.is_authenticated():
-        #         return Post.objects.none()
-        #     else:
-        #         return Post.objects.filter(owner=context.user)
-
-        # user = graphene.Field(
-        #     UserType,
-        #     id=graphene.Int(),
-        #     name=graphene.String(),
-        # )
-
-        # users = graphene.List(UserType)
-
-        # def resolve_users(self, info):
-        #     return User.objects.all()
-
-        # def resolve_user(self, info, id=None, name=None):
-        #     if id is not None:
-        #         return User.objects.get(id=id)
-        #     if name is not None:
-        #         return User.objects.get(name=name)
-        #     return None
 
 
 class Login(graphene.relay.ClientIDMutation):
@@ -156,9 +126,10 @@ class UpdateUser(graphene.relay.ClientIDMutation):
         username = graphene.String()
         gender = graphene.String()
         purpose = graphene.String()
+        status = graphene.String()
 
     @classmethod
-    def mutate_and_get_payload(cls, root, info, username=None, name=None, gender=None, purpose=None):
+    def mutate_and_get_payload(cls, root, info, username=None, name=None, gender=None, purpose=None, status=None):
         user = info.context.user
         if username:
             user.username = username
@@ -168,6 +139,8 @@ class UpdateUser(graphene.relay.ClientIDMutation):
             user.gender = gender
         if purpose:
             user.purpose = purpose
+        if status:
+            user.status = status
         user.save()
         return UpdateUser(user=user)
 

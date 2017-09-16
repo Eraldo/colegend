@@ -109,6 +109,12 @@ class User(AbstractUser):
         blank=True,
     )
 
+    status = models.TextField(
+        verbose_name=_("status"),
+        blank=True,
+    )
+
+
     duo = models.ForeignKey(
         verbose_name=_('duo'),
         to=Duo,

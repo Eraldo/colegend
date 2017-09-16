@@ -7,6 +7,7 @@ class UserFilter(django_filters.FilterSet):
     class Meta:
         model = User
         fields = {
+            'id': ['exact'],
             'name': ['exact', 'icontains', 'istartswith'],
         }
 

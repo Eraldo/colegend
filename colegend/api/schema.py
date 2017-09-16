@@ -6,6 +6,7 @@ import colegend.office.schema
 import colegend.outcomes.schema
 from colegend.checkpoints.schema import CheckpointQuery, CheckpointMutation
 from colegend.community.schema import CommunityQuery, CommunityMutation
+from colegend.home.schema import HomeQuery, HomeMutation
 from colegend.journey.schema import JourneyQuery, JourneyMutation
 
 
@@ -14,6 +15,7 @@ class Query(
     # as we begin to add more apps to our project
     colegend.users.schema.UserQuery,
     CheckpointQuery,
+    HomeQuery,
     JourneyQuery,
     colegend.office.schema.FocusQuery,
     colegend.outcomes.schema.OutcomeQuery,
@@ -25,6 +27,7 @@ class Query(
 class Mutation(
     colegend.users.schema.UserMutation,
     CheckpointMutation,
+    HomeMutation,
     JourneyMutation,
     CommunityMutation,
     graphene.ObjectType):
