@@ -59,7 +59,7 @@ class UserNode(DjangoObjectType):
         interfaces = [graphene.Node]
 
     def resolve_level(self, info, app=None):
-        print('>> level')
+        # print('>> level')
         user = info.context.user
         kwargs = {}
         if app is not None:
@@ -69,7 +69,7 @@ class UserNode(DjangoObjectType):
         return 0
 
     def resolve_experience(self, info, app=None):
-        print('>> experience')
+        # print('>> experience')
         user = info.context.user
         kwargs = {}
         if app is not None:
@@ -79,7 +79,7 @@ class UserNode(DjangoObjectType):
         return 0
 
     def resolve_avatar(self, info, size=Size.MEDIUM.value):
-        print('>> avatar')
+        # print('>> avatar')
         if not self.avatar:
             return ''
         url = self.avatar[size].url
