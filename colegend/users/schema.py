@@ -109,7 +109,7 @@ class UserQuery(graphene.ObjectType):
         return User.objects.filter(email=email).exists()
 
 
-class Join(graphene.relay.ClientIDMutation):
+class JoinMutation(graphene.relay.ClientIDMutation):
     user = graphene.Field(UserNode)
     token = graphene.String()
 
@@ -128,10 +128,10 @@ class Join(graphene.relay.ClientIDMutation):
             email=email,
             password=password,
         )
-        return Login(user=user, token=user.auth_token)
+        return JoinMutation(user=user, token=user.auth_token)
 
 
-class Login(graphene.relay.ClientIDMutation):
+class LoginMutation(graphene.relay.ClientIDMutation):
     user = graphene.Field(UserNode)
     token = graphene.String()
 
@@ -146,10 +146,10 @@ class Login(graphene.relay.ClientIDMutation):
             email=email,
             password=password,
         )
-        return Login(user=user, token=user.auth_token)
+        return LoginMutation(user=user, token=user.auth_token)
 
 
-class Logout(graphene.relay.ClientIDMutation):
+class LogoutMutation(graphene.relay.ClientIDMutation):
     success = graphene.Boolean()
 
     @classmethod
@@ -157,10 +157,10 @@ class Logout(graphene.relay.ClientIDMutation):
         # print('>> logout')
         user = info.context.user
         # logout(request=info.context)
-        return Logout(success=True)
+        return LogoutMutation(success=True)
 
 
-class UpdateUser(graphene.relay.ClientIDMutation):
+class UpdateUserMutation(graphene.relay.ClientIDMutation):
     user = graphene.Field(UserNode)
 
     class Input:
@@ -185,10 +185,10 @@ class UpdateUser(graphene.relay.ClientIDMutation):
         if status:
             user.status = status
         user.save()
-        return UpdateUser(user=user)
+        return UpdateUserMutation(user=user)
 
 
-class ContactUser(graphene.relay.ClientIDMutation):
+class ContactUserMutation(graphene.relay.ClientIDMutation):
     success = graphene.Boolean()
 
     class Input:
@@ -204,12 +204,12 @@ class ContactUser(graphene.relay.ClientIDMutation):
         _type, id = from_global_id(id)
         receiver = User.objects.get(id=id)
         receiver.contact(user, subject, message)
-        return ContactUser(success=True)
+        return ContactUserMutation(success=True)
 
 
 class UserMutation(graphene.ObjectType):
-    join = Join.Field()
-    login = Login.Field()
-    logout = Logout.Field()
-    update_user = UpdateUser.Field()
-    contact_user = ContactUser.Field()
+    join = JoinMutation.Field()
+    login = LoginMutation.Field()
+    logout = LogoutMutation.Field()
+    update_user = UpdateUserMutation.Field()
+    contact_user = ContactUserMutation.Field()

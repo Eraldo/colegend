@@ -1,3 +1,5 @@
+from enum import Enum
+
 from django.contrib import messages
 from django.db import models
 from django.shortcuts import redirect
@@ -13,6 +15,15 @@ from colegend.journals import scopes
 from colegend.journals.forms import DatePickerForm
 from colegend.journals.scopes import Day, Week, Month, Year
 from colegend.outcomes.models import Outcome
+
+
+class Status(Enum):
+    FUTURE = 'future'
+    WAITING = 'waiting'
+    CURRENT = 'current'
+    DONE = 'done'
+    CANCELED = 'canceled'
+
 
 DAY = 'day'
 WEEK = 'week'
@@ -231,13 +242,13 @@ class AgendaPage(RoutablePageMixin, Page):
                         today = timezone.localtime(timezone.now()).date()
                         tomorrow = today + timezone.timedelta(days=1)
                         if focus.start == today or focus.start == tomorrow:
-                            app='office'
+                            app = 'office'
                             level = 0
                             amount = 1
                             user.experience.create(owner=user, app=app, level=level, amount=amount)
                             message = '+{amount} {app} EXP'.format(amount=amount, app=app)
                             messages.success(request, message)
-                    # TODO: Adding higher scopes experience
+                            # TODO: Adding higher scopes experience
                 return redirect(self.url)
             else:
                 context['focus_outcomes_form'] = form
