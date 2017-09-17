@@ -1,10 +1,11 @@
 from enum import Enum
 
 import graphene
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, logout
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 from graphql_relay import from_global_id
+from rest_framework.authtoken.models import Token
 
 from .models import User
 from .filters import UserFilter
@@ -58,6 +59,7 @@ class UserNode(DjangoObjectType):
         interfaces = [graphene.Node]
 
     def resolve_level(self, info, app=None):
+        print('>> level')
         user = info.context.user
         kwargs = {}
         if app is not None:
@@ -67,6 +69,7 @@ class UserNode(DjangoObjectType):
         return 0
 
     def resolve_experience(self, info, app=None):
+        print('>> experience')
         user = info.context.user
         kwargs = {}
         if app is not None:
@@ -76,6 +79,7 @@ class UserNode(DjangoObjectType):
         return 0
 
     def resolve_avatar(self, info, size=Size.MEDIUM.value):
+        print('>> avatar')
         if not self.avatar:
             return ''
         url = self.avatar[size].url
@@ -83,12 +87,48 @@ class UserNode(DjangoObjectType):
 
 
 class UserQuery(graphene.ObjectType):
-    my_user = graphene.Field(UserNode)
-    user = graphene.Node.Field(UserNode)
     users = DjangoFilterConnectionField(UserNode, filterset_class=UserFilter)
+    user = graphene.Node.Field(UserNode)
+    my_user = graphene.Field(UserNode)
+    is_authenticated = graphene.Boolean()
+    user_exists = graphene.Boolean(email=graphene.String())
 
     def resolve_my_user(self, info):
-        return info.context.user
+        # print('>> my user')
+        user = info.context.user
+        if user.is_authenticated:
+            return user
+        return None
+
+    def resolve_is_authenticated(self, info):
+        # print('>> authenticated')
+        return info.context.user.is_authenticated
+
+    def resolve_user_exists(self, info, email):
+        # print('>> user exists')
+        return User.objects.filter(email=email).exists()
+
+
+class Join(graphene.relay.ClientIDMutation):
+    user = graphene.Field(UserNode)
+    token = graphene.String()
+
+    class Input:
+        email = graphene.String()
+        password = graphene.String()
+        username = graphene.String()
+        name = graphene.String()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, email, password, username, name='Someone'):
+        # print('>> join')
+        user = User.objects.create_user(username, email, password, name=name)
+        Token.objects.get_or_create(user=user)
+        user = authenticate(
+            email=email,
+            password=password,
+        )
+        return Login(user=user, token=user.auth_token)
 
 
 class Login(graphene.relay.ClientIDMutation):
@@ -101,6 +141,7 @@ class Login(graphene.relay.ClientIDMutation):
 
     @classmethod
     def mutate_and_get_payload(cls, root, info, email, password):
+        # print('>> login')
         user = authenticate(
             email=email,
             password=password,
@@ -113,11 +154,10 @@ class Logout(graphene.relay.ClientIDMutation):
 
     @classmethod
     def mutate_and_get_payload(cls, root, info):
+        # print('>> logout')
         user = info.context.user
-        # TODO: Log user out.
-        print(user.auth_token)
-        # logout(request={"user": user})
-        return Logout(success=False)
+        # logout(request=info.context)
+        return Logout(success=True)
 
 
 class UpdateUser(graphene.relay.ClientIDMutation):
@@ -132,6 +172,7 @@ class UpdateUser(graphene.relay.ClientIDMutation):
 
     @classmethod
     def mutate_and_get_payload(cls, root, info, username=None, name=None, gender=None, purpose=None, status=None):
+        # print('>> update user')
         user = info.context.user
         if username:
             user.username = username
@@ -157,6 +198,7 @@ class ContactUser(graphene.relay.ClientIDMutation):
 
     @classmethod
     def mutate_and_get_payload(cls, root, info, id=None, subject=None, message=None):
+        # print('>> contact user')
         # Sending email and returning True on success.
         user = info.context.user
         _type, id = from_global_id(id)
@@ -166,6 +208,7 @@ class ContactUser(graphene.relay.ClientIDMutation):
 
 
 class UserMutation(graphene.ObjectType):
+    join = Join.Field()
     login = Login.Field()
     logout = Logout.Field()
     update_user = UpdateUser.Field()

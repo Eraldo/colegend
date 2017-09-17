@@ -20,10 +20,12 @@ class SuggestedActionQuery(graphene.ObjectType):
     def resolve_suggested_action(self, info):
         user = info.context.user
         today = timezone.localtime(timezone.now()).date()
-        if not user.focuses.filter(scope=DAY, start=today).exists():
-            return SuggestedAction.SETTING_FOCUS.value
-        if not user.journal_entries.filter(scope=DAY, start=today).exists():
-            return SuggestedAction.WRITING_JOURNAL.value
+        if user.is_authenticated:
+            if not user.focuses.filter(scope=DAY, start=today).exists():
+                return SuggestedAction.SETTING_FOCUS.value
+            if not user.journal_entries.filter(scope=DAY, start=today).exists():
+                return SuggestedAction.WRITING_JOURNAL.value
+        return None
 
 
 class HomeQuery(
