@@ -93,14 +93,15 @@ class AddInterviewEntry(graphene.relay.ClientIDMutation):
     class Input:
         scope = ScopeType()
         start = graphene.types.datetime.DateTime()
-        content = graphene.String()
+        likes = graphene.String()
+        dislikes = graphene.String()
 
     @classmethod
-    def mutate_and_get_payload(cls, root, info, scope=Scope.DAY.value, start=None, content=''):
+    def mutate_and_get_payload(cls, root, info, scope=Scope.DAY.value, start=None, likes='', dislikes=''):
         user = info.context.user
         if not start:
             start = timezone.localdate(timezone.now())
-        entry = user.interview_entries.create(scope=scope, start=start, content=content)
+        entry = user.interview_entries.create(scope=scope, start=start, likes=likes, dislikes=dislikes)
         return AddInterviewEntry(interview_entry=entry)
 
 
