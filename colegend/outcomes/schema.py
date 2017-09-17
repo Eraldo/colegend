@@ -95,7 +95,6 @@ class UpdateOutcomeMutation(graphene.relay.ClientIDMutation):
 
 class DeleteOutcomeMutation(graphene.relay.ClientIDMutation):
     success = graphene.Boolean()
-    outcome = graphene.Field(OutcomeNode)
 
     class Input:
         id = graphene.ID()
@@ -107,9 +106,9 @@ class DeleteOutcomeMutation(graphene.relay.ClientIDMutation):
         # TODO: Checking permission. Workaround: Only my outcomes. ;)
         outcome = user.outcomes.get(id=id)
         if outcome.is_focus:
-            raise Exception('This outcome is set as a focus and can only be set to done canceled.')
+            raise Exception('This outcome is set as a focus and cannot be deleted.')
         outcome.delete()
-        return DeleteOutcomeMutation(success=True, outcome=outcome)
+        return DeleteOutcomeMutation(success=True)
 
 
 class OutcomeMutation(graphene.ObjectType):
