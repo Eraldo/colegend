@@ -1,7 +1,17 @@
+from enum import Enum
+
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from colegend.journals.scopes import Day, Week, Month, Year
+
+
+class Scope(Enum):
+    DAY = 'day'
+    WEEK = 'week'
+    MONTH = 'month'
+    YEAR = 'year'
+
 
 DAY = 'day'
 WEEK = 'week'

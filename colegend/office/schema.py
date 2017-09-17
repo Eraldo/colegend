@@ -1,5 +1,3 @@
-from enum import Enum
-
 import graphene
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
@@ -7,23 +5,13 @@ from graphene_django.filter import DjangoFilterConnectionField
 from .models import Focus
 
 
-class Scope(Enum):
-    DAY = 'day'
-    WEEK = 'week'
-    MONTH = 'month'
-    YEAR = 'year'
-
-
-ScopeType = graphene.Enum.from_enum(Scope)
-
-
 class FocusNode(DjangoObjectType):
     class Meta:
         model = Focus
         filter_fields = {
             'scope': ['exact'],
-            'start': ['exact', 'lt', 'gt'],
-            'end': ['exact', 'lt', 'gt'],
+            'start': ['exact', 'lt', 'gt', 'lte', 'gte'],
+            'end': ['exact', 'lt', 'gt', 'lte', 'gte'],
         }
         interfaces = [graphene.Node]
 

@@ -1,33 +1,34 @@
 import graphene
 from graphene_django.debug import DjangoDebug
 
-import colegend.users.schema
-import colegend.office.schema
-import colegend.outcomes.schema
 from colegend.checkpoints.schema import CheckpointQuery, CheckpointMutation
 from colegend.community.schema import CommunityQuery, CommunityMutation
 from colegend.home.schema import HomeQuery, HomeMutation
 from colegend.journey.schema import JourneyQuery, JourneyMutation
+from colegend.office.schema import FocusQuery
+from colegend.outcomes.schema import OutcomeQuery
+from colegend.studio.schema import StudioQuery, StudioMutation
+from colegend.users.schema import UserQuery, UserMutation
 
 
 class Query(
-    # This class will inherit from multiple Queries
-    # as we begin to add more apps to our project
-    colegend.users.schema.UserQuery,
+    UserQuery,
     CheckpointQuery,
     HomeQuery,
+    StudioQuery,
     JourneyQuery,
-    colegend.office.schema.FocusQuery,
-    colegend.outcomes.schema.OutcomeQuery,
     CommunityQuery,
+    FocusQuery,
+    OutcomeQuery,
     graphene.ObjectType):
     debug = graphene.Field(DjangoDebug, name='__debug')
 
 
 class Mutation(
-    colegend.users.schema.UserMutation,
+    UserMutation,
     CheckpointMutation,
     HomeMutation,
+    StudioMutation,
     JourneyMutation,
     CommunityMutation,
     graphene.ObjectType):
