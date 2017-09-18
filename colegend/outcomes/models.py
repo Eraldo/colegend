@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Q
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
@@ -32,6 +33,11 @@ class OutcomeQuerySet(OwnedQuerySet):
     def closed(self):
         queryset = self.filter(status__in=Outcome.STATUSES_CLOSED)
         return queryset
+
+    def search(self, query):
+        queryset = self.filter(Q(name__icontains=query) | Q(description__icontains=query))
+        return queryset
+
 
 
 class Outcome(AutoUrlsMixin, OwnedBase, TaggableBase, TimeStampedBase):

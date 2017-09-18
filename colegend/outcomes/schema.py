@@ -4,6 +4,7 @@ from graphene_django.filter import DjangoFilterConnectionField
 from graphql_relay import from_global_id
 
 from colegend.office.types import StatusType
+from colegend.outcomes.filters import OutcomeFilter
 from colegend.scopes.schema import ScopeType
 from .models import Outcome
 
@@ -11,21 +12,12 @@ from .models import Outcome
 class OutcomeNode(DjangoObjectType):
     class Meta:
         model = Outcome
-        filter_fields = {
-            'name': ['exact', 'icontains', 'istartswith'],
-            'status': ['exact'],
-            'scope': ['exact'],
-            'inbox': ['exact'],
-            'date': ['exact', 'lt', 'gt', 'lte', 'gte'],
-            'deadline': ['exact', 'lt', 'gt', 'lte', 'gte'],
-            'estimate': ['exact'],
-        }
         interfaces = [graphene.Node]
 
 
 class OutcomeQuery(graphene.ObjectType):
     outcome = graphene.Node.Field(OutcomeNode)
-    outcomes = DjangoFilterConnectionField(OutcomeNode)
+    outcomes = DjangoFilterConnectionField(OutcomeNode, filterset_class=OutcomeFilter)
 
 
 class CreateOutcomeMutation(graphene.relay.ClientIDMutation):

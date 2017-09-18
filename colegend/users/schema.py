@@ -1,7 +1,7 @@
 from enum import Enum
 
 import graphene
-from django.contrib.auth import authenticate, logout
+from django.contrib.auth import authenticate
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 from graphql_relay import from_global_id

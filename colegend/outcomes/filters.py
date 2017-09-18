@@ -22,21 +22,54 @@ def filter_estimate(queryset, name, value):
     return queryset
 
 
+# class OutcomeFilter(django_filters.FilterSet):
+#     name = django_filters.CharFilter(lookup_expr='icontains')
+#     description = django_filters.CharFilter(lookup_expr='icontains')
+#     status = django_filters.ChoiceFilter(choices=(('', 'all'),) + Outcome.STATUS_CHOICES)
+#     scope = django_filters.ChoiceFilter(choices=(('', 'all'),) + SCOPE_CHOICES)
+#     ESTIMATE_CHOICES = (
+#         ('1d', 'hour(s)'),
+#         ('1w', 'day(s)'),
+#         ('1M', 'week(s)'),
+#         ('12M', 'month(s)'),
+#         ('0m', 'unestimated'),
+#     )
+#     estimate = django_filters.ChoiceFilter(choices=(('', 'all'),) + ESTIMATE_CHOICES, method=filter_estimate)
+#
+#     class Meta:
+#         model = Outcome
+#         form = OutcomeFilterForm
+#         fields = ['name', 'description', 'status', 'scope']
+
+
 class OutcomeFilter(django_filters.FilterSet):
-    name = django_filters.CharFilter(lookup_expr='icontains')
-    description = django_filters.CharFilter(lookup_expr='icontains')
-    status = django_filters.ChoiceFilter(choices=(('', 'all'),) + Outcome.STATUS_CHOICES)
-    scope = django_filters.ChoiceFilter(choices=(('', 'all'),) + SCOPE_CHOICES)
-    ESTIMATE_CHOICES = (
-        ('1d', 'hour(s)'),
-        ('1w', 'day(s)'),
-        ('1M', 'week(s)'),
-        ('12M', 'month(s)'),
-        ('0m', 'unestimated'),
-    )
-    estimate = django_filters.ChoiceFilter(choices=(('', 'all'),) + ESTIMATE_CHOICES, method=filter_estimate)
+    # name = django_filters.CharFilter(lookup_expr='icontains')
+    # description = django_filters.CharFilter(lookup_expr='icontains')
+    # status = django_filters.ChoiceFilter(choices=(('', 'all'),) + Outcome.STATUS_CHOICES)
+    # scope = django_filters.ChoiceFilter(choices=(('', 'all'),) + SCOPE_CHOICES)
+    # ESTIMATE_CHOICES = (
+    #     ('1d', 'hour(s)'),
+    #     ('1w', 'day(s)'),
+    #     ('1M', 'week(s)'),
+    #     ('12M', 'month(s)'),
+    #     ('0m', 'unestimated'),
+    # )
+    # estimate = django_filters.ChoiceFilter(choices=(('', 'all'),) + ESTIMATE_CHOICES, method=filter_estimate)
+    search = django_filters.CharFilter(method='search_filter')
 
     class Meta:
         model = Outcome
-        form = OutcomeFilterForm
-        fields = ['name', 'description', 'status', 'scope']
+        fields = {
+            'name': ['exact', 'icontains', 'istartswith'],
+            'status': ['exact'],
+            'scope': ['exact'],
+            'inbox': ['exact'],
+            'date': ['exact', 'lt', 'gt', 'lte', 'gte'],
+            'deadline': ['exact', 'lt', 'gt', 'lte', 'gte'],
+            'estimate': ['exact'],
+            'description': ['icontains'],
+        }
+
+    def search_filter(self, queryset, name, value):
+        return queryset.search(value)
+
