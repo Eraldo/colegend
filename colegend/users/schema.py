@@ -7,6 +7,8 @@ from graphene_django.filter import DjangoFilterConnectionField
 from graphql_relay import from_global_id
 from rest_framework.authtoken.models import Token
 
+from colegend.outcomes.filters import OutcomeFilter
+from colegend.outcomes.schema import OutcomeNode
 from .models import User
 from .filters import UserFilter
 from graphene_django.converter import convert_django_field
@@ -53,6 +55,9 @@ class UserNode(DjangoObjectType):
         graphene.String,
         size=SizeType(),
     )
+
+    # Workaround: https://github.com/graphql-python/graphene-django/issues/273
+    outcomes = DjangoFilterConnectionField(OutcomeNode, filterset_class=OutcomeFilter)
 
     class Meta:
         model = User

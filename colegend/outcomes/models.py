@@ -39,7 +39,6 @@ class OutcomeQuerySet(OwnedQuerySet):
         return queryset
 
 
-
 class Outcome(AutoUrlsMixin, OwnedBase, TaggableBase, TimeStampedBase):
     """
     A django model representing a user's outcome.

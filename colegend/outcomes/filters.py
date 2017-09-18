@@ -1,10 +1,6 @@
-import datetime
-
 import django_filters
 
-from colegend.scopes.models import SCOPE_CHOICES
 from .models import Outcome
-from .forms import OutcomeFilterForm
 
 
 def filter_estimate(queryset, name, value):
@@ -56,6 +52,8 @@ class OutcomeFilter(django_filters.FilterSet):
     # )
     # estimate = django_filters.ChoiceFilter(choices=(('', 'all'),) + ESTIMATE_CHOICES, method=filter_estimate)
     search = django_filters.CharFilter(method='search_filter')
+    open = django_filters.BooleanFilter(method='open_filter')
+    closed = django_filters.BooleanFilter(method='closed_filter')
 
     class Meta:
         model = Outcome
@@ -73,3 +71,14 @@ class OutcomeFilter(django_filters.FilterSet):
     def search_filter(self, queryset, name, value):
         return queryset.search(value)
 
+    def open_filter(self, queryset, name, value):
+        if value:
+            return queryset.open()
+        else:
+            return queryset.closed()
+
+    def closed_filter(self, queryset, name, value):
+        if value:
+            return queryset.closed()
+        else:
+            return queryset.open()
