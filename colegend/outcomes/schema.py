@@ -73,21 +73,21 @@ class UpdateOutcomeMutation(graphene.relay.ClientIDMutation):
         _type, id = from_global_id(id)
         # TODO: Checking permission. Workaround: Only my outcomes. ;)
         outcome = user.outcomes.get(id=id)
-        if name:
+        if name is not None:
             outcome.name = name
-        if description:
+        if description is not None:
             outcome.description = description
-        if status:
+        if status is not None:
             outcome.status = status
-        if inbox:
+        if inbox is not None:
             outcome.inbox = inbox
-        if scope:
+        if scope is not None:
             outcome.scope = scope
-        if date:
+        if date is not None:
             outcome.date = date
-        if deadline:
+        if deadline is not None:
             outcome.deadline = deadline
-        if estimate:
+        if estimate is not None:
             outcome.estimate = estimate
         outcome.save()
         return UpdateOutcomeMutation(success=True, outcome=outcome)
