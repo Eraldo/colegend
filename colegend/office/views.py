@@ -50,43 +50,43 @@ class FocusViewSet(viewsets.ModelViewSet):
         new_outcomes = serializer.instance.outcomes
 
         # Sending message to group
-        self.notify_partners(focus, reason, old_outcomes, new_outcomes)
+        notify_partners(focus, reason, old_outcomes, new_outcomes)
 
-    @staticmethod
-    def notify_partners(focus, reason, old_outcomes, new_outcomes):
-        # Notifying group partner(s) about focus creation/update.
 
-        # Stop if there there was an update without outcome changes.
-        if reason and old_outcomes == new_outcomes:
-            return
+def notify_partners(focus, reason, old_outcomes, new_outcomes):
+    # Notifying group partner(s) about focus creation/update.
 
-        owner = focus.owner
-        action = _('updated') if reason else _('set')
-        subject = '{user} {action} {possessive_pronoun} {scope} focus: ({scope_display})'.format(
-            user=owner,
-            action=action,
-            possessive_pronoun=owner.get_pronoun(kind='possessive adjective'),
-            scope=focus.scope,
-            scope_display=focus.get_scope(),
-        )
-        message = subject + '\n\n'
-        for index, [old_outcome, new_outcome] in enumerate(zip_longest(old_outcomes, new_outcomes)):
-            if old_outcome != new_outcome:
-                title = 'Outcome {0}'.format(index + 1)
-                if reason:
-                    message += '{title}: {old} => {new}\n'.format(title=title, old=old_outcome, new=new_outcome)
-                else:
-                    message += '{title}: {new}\n'.format(title=title, new=new_outcome)
-        if reason:
-            message += '\nUpdate Reason:\n{reason}'.format(reason=reason)
+    # Stop if there there was an update without outcome changes.
+    if reason and old_outcomes == new_outcomes:
+        return
 
-        # Notifying group partners
-        group = None
-        if focus.scope == DAY:
-            group = owner.duo
-        elif focus.scope == WEEK:
-            group = owner.clan
-        elif focus.scope == MONTH:
-            group = owner.tribe
-        if group:
-            group.notify_partners(owner, subject, message)
+    owner = focus.owner
+    action = _('updated') if reason else _('set')
+    subject = '{user} {action} {possessive_pronoun} {scope} focus: ({scope_display})'.format(
+        user=owner,
+        action=action,
+        possessive_pronoun=owner.get_pronoun(kind='possessive adjective'),
+        scope=focus.scope,
+        scope_display=focus.get_scope(),
+    )
+    message = subject + '\n\n'
+    for index, [old_outcome, new_outcome] in enumerate(zip_longest(old_outcomes, new_outcomes)):
+        if old_outcome != new_outcome:
+            title = 'Outcome {0}'.format(index + 1)
+            if reason:
+                message += '{title}: {old} => {new}\n'.format(title=title, old=old_outcome, new=new_outcome)
+            else:
+                message += '{title}: {new}\n'.format(title=title, new=new_outcome)
+    if reason:
+        message += '\nUpdate Reason:\n{reason}'.format(reason=reason)
+
+    # Notifying group partners
+    group = None
+    if focus.scope == DAY:
+        group = owner.duo
+    elif focus.scope == WEEK:
+        group = owner.clan
+    elif focus.scope == MONTH:
+        group = owner.tribe
+    if group:
+        group.notify_partners(owner, subject, message)

@@ -7,6 +7,7 @@ from colegend.office.filters import FocusFilter
 from colegend.outcomes.schema import OutcomeQuery, OutcomeMutation
 from colegend.scopes.schema import ScopeType
 from .models import Focus
+from .views import notify_partners
 
 
 class FocusNode(DjangoObjectType):
@@ -48,6 +49,8 @@ class UpdateFocusMutation(graphene.relay.ClientIDMutation):
         else:
             raise Exception('ID or scope and start needed to get focus.')
 
+        old_outcomes = focus.outcomes
+
         if outcome_1 is not None:
             focus.outcome_1 = user.outcomes.get(id=from_global_id(outcome_1)[1])
         if outcome_2 is not None:
@@ -56,10 +59,13 @@ class UpdateFocusMutation(graphene.relay.ClientIDMutation):
             focus.outcome_3 = user.outcomes.get(id=from_global_id(outcome_3)[1])
         if outcome_4 is not None:
             focus.outcome_4 = user.outcomes.get(id=from_global_id(outcome_4)[1])
-        if reason is not None:
-            focus.reason = reason
         focus.save()
-        # TODO: Inform users of update! (using reason if not new.
+
+        new_outcomes = focus.outcomes
+
+        # Informing users of update! (using reason if not new).
+        notify_partners(focus, reason, old_outcomes, new_outcomes)
+
         return UpdateFocusMutation(success=True, focus=focus)
 
 
