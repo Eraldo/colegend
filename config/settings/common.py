@@ -424,8 +424,10 @@ CORS_ORIGIN_WHITELIST = (
     '127.0.0.1:8004',
     'colegend.org',
     'colegend.com',
-    'app.colegend.com',
-    'staging.colegend.com',
+    'app.colegend.org',
+    'app.colegend.com',  # .com to be removed
+    'staging.colegend.org',
+    'staging.colegend.com',  # .com to be removed
     'localhost:8100',
 )
 # CORS_ORIGIN_REGEX_WHITELIST = (

@@ -114,7 +114,6 @@ class User(AbstractUser):
         blank=True,
     )
 
-
     duo = models.ForeignKey(
         verbose_name=_('duo'),
         to=Duo,
