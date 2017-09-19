@@ -5,6 +5,7 @@ from colegend.checkpoints.schema import CheckpointQuery, CheckpointMutation
 from colegend.community.schema import CommunityQuery, CommunityMutation
 from colegend.home.schema import HomeQuery, HomeMutation
 from colegend.journey.schema import JourneyQuery, JourneyMutation
+from colegend.metrics.schema import MetricsQuery
 from colegend.outcomes.schema import OutcomeQuery
 from colegend.office.schema import OfficeQuery, OfficeMutation
 from colegend.studio.schema import StudioQuery, StudioMutation
@@ -20,6 +21,7 @@ class Query(
     CommunityQuery,
     JourneyQuery,
     OutcomeQuery,
+    MetricsQuery,
     graphene.ObjectType):
     debug = graphene.Field(DjangoDebug, name='__debug')
 
