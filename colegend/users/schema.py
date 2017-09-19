@@ -7,6 +7,8 @@ from graphene_django.filter import DjangoFilterConnectionField
 from graphql_relay import from_global_id
 from rest_framework.authtoken.models import Token
 
+from colegend.office.filters import FocusFilter
+from colegend.office.schema import FocusNode
 from colegend.outcomes.filters import OutcomeFilter
 from colegend.outcomes.schema import OutcomeNode
 from .models import User
@@ -58,6 +60,7 @@ class UserNode(DjangoObjectType):
 
     # Workaround: https://github.com/graphql-python/graphene-django/issues/273
     outcomes = DjangoFilterConnectionField(OutcomeNode, filterset_class=OutcomeFilter)
+    focuses = DjangoFilterConnectionField(FocusNode, filterset_class=FocusFilter)
 
     class Meta:
         model = User

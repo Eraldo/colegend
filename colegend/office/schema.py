@@ -3,6 +3,7 @@ from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 from graphql_relay import from_global_id
 
+from colegend.office.filters import FocusFilter
 from colegend.outcomes.schema import OutcomeQuery, OutcomeMutation
 from colegend.scopes.schema import ScopeType
 from .models import Focus
@@ -11,17 +12,12 @@ from .models import Focus
 class FocusNode(DjangoObjectType):
     class Meta:
         model = Focus
-        filter_fields = {
-            'scope': ['exact'],
-            'start': ['exact', 'lt', 'gt', 'lte', 'gte'],
-            'end': ['exact', 'lt', 'gt', 'lte', 'gte'],
-        }
         interfaces = [graphene.Node]
 
 
 class FocusQuery(graphene.ObjectType):
     focus = graphene.Node.Field(FocusNode)
-    focuses = DjangoFilterConnectionField(FocusNode)
+    focuses = DjangoFilterConnectionField(FocusNode, filterset_class=FocusFilter)
 
 
 class UpdateFocusMutation(graphene.relay.ClientIDMutation):
@@ -32,17 +28,17 @@ class UpdateFocusMutation(graphene.relay.ClientIDMutation):
         id = graphene.ID()
         scope = ScopeType()
         start = graphene.types.datetime.DateTime()
-        outcome1 = graphene.ID()
-        outcome2 = graphene.ID()
-        outcome3 = graphene.ID()
-        outcome4 = graphene.ID()
+        outcome_1 = graphene.ID()
+        outcome_2 = graphene.ID()
+        outcome_3 = graphene.ID()
+        outcome_4 = graphene.ID()
         reason = graphene.String()
 
     @classmethod
     def mutate_and_get_payload(
         cls, root, info, id=None,
         scope=None, start=None,
-        outcome1=None, outcome2=None, outcome3=None, outcome4=None, reason=None):
+        outcome_1=None, outcome_2=None, outcome_3=None, outcome_4=None, reason=None):
         user = info.context.user
         if id is not None and reason is not None:
             _type, id = from_global_id(id)
@@ -52,17 +48,18 @@ class UpdateFocusMutation(graphene.relay.ClientIDMutation):
         else:
             raise Exception('ID or scope and start needed to get focus.')
 
-        if outcome1 is not None:
-            focus.outcome1 = outcome1
-        if outcome2 is not None:
-            focus.outcome2 = outcome2
-        if outcome3 is not None:
-            focus.outcome3 = outcome3
-        if outcome4 is not None:
-            focus.outcome4 = outcome4
+        if outcome_1 is not None:
+            focus.outcome_1 = user.outcomes.get(id=from_global_id(outcome_1)[1])
+        if outcome_2 is not None:
+            focus.outcome_2 = user.outcomes.get(id=from_global_id(outcome_2)[1])
+        if outcome_3 is not None:
+            focus.outcome_3 = user.outcomes.get(id=from_global_id(outcome_3)[1])
+        if outcome_4 is not None:
+            focus.outcome_4 = user.outcomes.get(id=from_global_id(outcome_4)[1])
         if reason is not None:
             focus.reason = reason
         focus.save()
+        # TODO: Inform users of update! (using reason if not new.
         return UpdateFocusMutation(success=True, focus=focus)
 
 
