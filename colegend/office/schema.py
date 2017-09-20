@@ -3,6 +3,7 @@ from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 from graphql_relay import from_global_id
 
+from colegend.experience.models import add_experience
 from colegend.office.filters import FocusFilter
 from colegend.outcomes.schema import OutcomeQuery, OutcomeMutation
 from colegend.scopes.schema import ScopeType
@@ -46,6 +47,8 @@ class UpdateFocusMutation(graphene.relay.ClientIDMutation):
             focus = user.focuses.get(id=id)
         elif scope is not None and start is not None:
             focus, created = user.focuses.get_or_create(scope=scope, start=start)
+            if created:
+                add_experience(user, 'office', 1)
         else:
             raise Exception('ID or scope and start needed to get focus.')
 

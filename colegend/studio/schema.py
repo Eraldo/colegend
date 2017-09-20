@@ -4,6 +4,7 @@ from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 from graphql_relay import from_global_id
 
+from colegend.experience.models import add_experience
 from colegend.scopes.models import Scope, get_scope_by_name
 from colegend.scopes.schema import ScopeType
 from colegend.journals.models import JournalEntry
@@ -27,7 +28,7 @@ class JournalEntryQuery(graphene.ObjectType):
     journal_entries = DjangoFilterConnectionField(JournalEntryNode)
 
 
-class AddJournalEntry(graphene.relay.ClientIDMutation):
+class AddJournalEntryMutation(graphene.relay.ClientIDMutation):
     journal_entry = graphene.Field(JournalEntryNode)
 
     class Input:
@@ -42,10 +43,11 @@ class AddJournalEntry(graphene.relay.ClientIDMutation):
         if not start:
             start = get_scope_by_name(scope)().start
         entry = user.journal_entries.create(scope=scope, start=start, content=content, keywords=keywords)
-        return AddJournalEntry(journal_entry=entry)
+        add_experience(user, 'studio', 1)
+        return AddJournalEntryMutation(journal_entry=entry)
 
 
-class UpdateJournalEntry(graphene.relay.ClientIDMutation):
+class UpdateJournalEntryMutation(graphene.relay.ClientIDMutation):
     success = graphene.Boolean()
     journal_entry = graphene.Field(JournalEntryNode)
 
@@ -64,12 +66,12 @@ class UpdateJournalEntry(graphene.relay.ClientIDMutation):
         if content:
             entry.content = content
         entry.save()
-        return UpdateJournalEntry(success=True, journal_entry=entry)
+        return UpdateJournalEntryMutation(success=True, journal_entry=entry)
 
 
 class JournalEntryMutation(graphene.ObjectType):
-    add_journal_entry = AddJournalEntry.Field()
-    update_journal_entry = UpdateJournalEntry.Field()
+    add_journal_entry = AddJournalEntryMutation.Field()
+    update_journal_entry = UpdateJournalEntryMutation.Field()
 
 
 class InterviewEntryNode(DjangoObjectType):
