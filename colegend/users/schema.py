@@ -2,6 +2,8 @@ from enum import Enum
 
 import graphene
 from django.contrib.auth import authenticate
+from django.core.mail import EmailMessage
+from django_slack import slack_message
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 from graphql_relay import from_global_id
@@ -197,6 +199,7 @@ class UpdateUserMutation(graphene.relay.ClientIDMutation):
 
 
 class ContactUserMutation(graphene.relay.ClientIDMutation):
+    # Contacting another user.
     success = graphene.Boolean()
 
     class Input:
@@ -207,12 +210,43 @@ class ContactUserMutation(graphene.relay.ClientIDMutation):
     @classmethod
     def mutate_and_get_payload(cls, root, info, id=None, subject=None, message=None):
         # print('>> contact user')
-        # Sending email and returning True on success.
         user = info.context.user
         _type, id = from_global_id(id)
         receiver = User.objects.get(id=id)
         receiver.contact(user, subject, message)
         return ContactUserMutation(success=True)
+
+
+class SendFeedbackMutation(graphene.relay.ClientIDMutation):
+    # Sending feedback to the project.
+    success = graphene.Boolean()
+    user = graphene.Field(UserNode)
+
+    class Input:
+        subject = graphene.String()
+        message = graphene.String()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, subject=None, message=None):
+        user = info.context.user
+        sender = user
+        cls.send_feeback(user, subject, message)
+        return SendFeedbackMutation(success=True, user=user)
+
+    @staticmethod
+    def send_feeback(sender, subject='', message=''):
+        # TODO: Getting managers via dynamic role filtering.
+        managers = ['connect@colegend.org']
+
+        if subject:
+            message = '{subject}\n{message}'.format(subject=subject, message=message)
+
+        subject = 'Feedback from {name} ({username})'.format(name=sender.name, username=sender.username)
+
+        email = EmailMessage(subject=subject, body=message, to=managers, reply_to=[sender.email])
+        email.send()
+
+        slack_message('slack/message.slack', {'message': '@channel: {}'.format(message), }, fail_silently=True)
 
 
 class UserMutation(graphene.ObjectType):
@@ -221,3 +255,4 @@ class UserMutation(graphene.ObjectType):
     logout = LogoutMutation.Field()
     update_user = UpdateUserMutation.Field()
     contact_user = ContactUserMutation.Field()
+    send_feedback = SendFeedbackMutation.Field()

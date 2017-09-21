@@ -55,13 +55,15 @@ class UpdateOutcomeMutation(graphene.relay.ClientIDMutation):
         date = graphene.types.datetime.DateTime()
         deadline = graphene.types.datetime.DateTime()
         estimate = graphene.String()
+        deletions = graphene.List(graphene.String)
 
     @classmethod
     def mutate_and_get_payload(
         cls, root, info, id,
         name=None, description=None, status=None, inbox=None,
-        scope=None, date=None, deadline=None, estimate=None):
+        scope=None, date=None, deadline=None, estimate=None, deletions=None):
         user = info.context.user
+        print('>>', deletions)
         _type, id = from_global_id(id)
         # TODO: Checking permission. Workaround: Only my outcomes. ;)
         outcome = user.outcomes.get(id=id)
@@ -81,6 +83,9 @@ class UpdateOutcomeMutation(graphene.relay.ClientIDMutation):
             outcome.deadline = deadline
         if estimate is not None:
             outcome.estimate = estimate
+        if deletions is not None:
+            for field in deletions:
+                setattr(outcome, field, None)
         outcome.save()
         return UpdateOutcomeMutation(success=True, outcome=outcome)
 
