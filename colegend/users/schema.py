@@ -59,6 +59,9 @@ class UserNode(DjangoObjectType):
         graphene.String,
         size=SizeType(),
     )
+    notes = graphene.Field(
+        graphene.String,
+    )
 
     # Workaround: https://github.com/graphql-python/graphene-django/issues/273
     outcomes = DjangoFilterConnectionField(OutcomeNode, filterset_class=OutcomeFilter)
@@ -94,6 +97,13 @@ class UserNode(DjangoObjectType):
             return ''
         url = self.avatar[size].url
         return info.context.build_absolute_uri(url)
+
+    def resolve_notes(self, info):
+        # print('>> notes')
+        user = info.context.user
+        if not user.is_superuser:
+            return ''
+        return self.notes
 
 
 class UserQuery(graphene.ObjectType):
@@ -247,6 +257,24 @@ class SendFeedbackMutation(graphene.relay.ClientIDMutation):
         email.send()
 
         slack_message('slack/message.slack', {'message': '@channel: {}'.format(message), }, fail_silently=True)
+
+
+class AddUserNoteMutation(graphene.relay.ClientIDMutation):
+    user = graphene.Field(UserNode)
+
+    class Input:
+        id = graphene.ID()
+        note = graphene.String()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, id, note=''):
+        # print('>> add note to user')
+        viewer = info.context.user
+        if viewer.is_superuser:
+            _type, id = from_global_id(id)
+            user = User.objects.get(id=id)
+            user.add_note(note)
+        return UpdateUserMutation(user=user)
 
 
 class UserMutation(graphene.ObjectType):

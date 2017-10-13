@@ -69,9 +69,31 @@ class UpdateJournalEntryMutation(graphene.relay.ClientIDMutation):
         return UpdateJournalEntryMutation(success=True, journal_entry=entry)
 
 
+class AddJournalEntryNoteMutation(graphene.relay.ClientIDMutation):
+    journal_entry = graphene.Field(JournalEntryNode)
+
+    class Input:
+        scope = ScopeType()
+        content = graphene.String()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, scope=Scope.DAY.value, content=''):
+        user = info.context.user
+        start = get_scope_by_name(scope)().start
+        entry, created = user.journal_entries.get_or_create(scope=scope, start=start)
+        if content:
+            entry.content += '{prefix}{content}'.format(
+                prefix='\n' if entry.content else '',
+                content=content
+            )
+        entry.save()
+        return AddJournalEntryNoteMutation(journal_entry=entry)
+
+
 class JournalEntryMutation(graphene.ObjectType):
     add_journal_entry = AddJournalEntryMutation.Field()
     update_journal_entry = UpdateJournalEntryMutation.Field()
+    add_journal_entry_note = AddJournalEntryNoteMutation.Field()
 
 
 class InterviewEntryNode(DjangoObjectType):

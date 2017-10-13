@@ -87,6 +87,20 @@ class User(AbstractUser):
         default=_("I am a legend, defining my legend purpose as a member of colegend.")
     )
 
+    notes = models.TextField(
+        verbose_name=_("notes"),
+        help_text=_("Staff notes."),
+        blank=True
+    )
+
+    def add_note(self, note):
+        if note:
+            self.notes += '[{timestamp}] {note}\n'.format(
+                timestamp=timezone.localtime(timezone.now()).isoformat(),
+                note=note
+            )
+            self.save()
+
     def get_avatar(self, size=None):
         if not size:
             size = 'medium'

@@ -3,7 +3,8 @@ from django.shortcuts import redirect
 from wagtail.wagtailcore.models import Page
 from django.utils.translation import ugettext_lazy as _
 
-from colegend.core.models import OwnedBase, TimeStampedBase
+from colegend.core.fields import MarkdownField
+from colegend.core.models import OwnedBase, TimeStampedBase, AutoOwnedBase
 from colegend.scopes.models import SCOPE_CHOICES, DAY, get_scope_by_name
 
 
@@ -49,6 +50,35 @@ class InterviewEntry(OwnedBase, TimeStampedBase):
             scope = get_scope_by_name(self.scope)(self.start)
             self.start = scope.start
         super().save(*args, **kwargs)
+
+
+class Story(AutoOwnedBase):
+    class Meta:
+        verbose_name = _('Story')
+        verbose_name_plural = _('Stories')
+        default_related_name = 'story'
+
+    def __str__(self):
+        return "{}'s story".format(self.owner)
+
+
+class Chapter(TimeStampedBase):
+    story = models.ForeignKey(
+        to=Story,
+        on_delete=models.CASCADE,
+    )
+    title = models.TextField(
+        _('scope'),
+    )
+    content = MarkdownField()
+
+    class Meta:
+        verbose_name = _('Chapter')
+        verbose_name_plural = _('Chapters')
+        default_related_name = 'chapters'
+
+    def __str__(self):
+        return "{}".format(self.title)
 
 
 class StudioPage(Page):

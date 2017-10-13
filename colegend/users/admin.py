@@ -33,6 +33,7 @@ class UserAdmin(AuthUserAdmin):
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
                                        'roles', 'checkpoints', 'groups', 'user_permissions')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
+        (_('Meta'), {'fields': ('notes',)}),
     )
     list_display = ('username', 'name', 'email', 'phone', 'is_staff')
     list_filter = ('is_staff', 'is_superuser', 'is_active', 'roles', 'checkpoints', 'groups')

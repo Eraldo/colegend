@@ -380,6 +380,11 @@ class Tribe(models.Model):
         default=_('new tribe')
     )
 
+    notes = models.TextField(
+        verbose_name=_("notes"),
+        blank=True
+    )
+
     objects = TribeQuerySet.as_manager()
 
     def __str__(self):
@@ -431,6 +436,11 @@ class Clan(models.Model):
         verbose_name=_('name'),
         max_length=255,
         default=_('new clan'),
+    )
+
+    notes = models.TextField(
+        verbose_name=_("notes"),
+        blank=True
     )
 
     def __str__(self):
@@ -487,6 +497,11 @@ class Duo(models.Model):
         verbose_name=_('name'),
         max_length=255,
         default=_('new duo')
+    )
+
+    notes = models.TextField(
+        verbose_name=_("notes"),
+        blank=True
     )
 
     objects = DuoQuerySet.as_manager()
