@@ -42,47 +42,51 @@ class WelcomePage(RoutablePageMixin, Page):
 
     @route(r'^$')
     def index(self, request, *args, **kwargs):
-        email = request.POST.get('email')
-        if email:
-            self.email = email
-            try:
-                user = User.objects.get(email=email)
-            except User.DoesNotExist:
-                user = User.objects.none()
-            if user:
-                self.name = user.name
-                self.email = user.email
-                password = request.POST.get('password')
-                if password:
-                    self.password = password
-                    if user.check_password(password):
-                        return perform_login(request, user, email_verification=settings.ACCOUNT_EMAIL_VERIFICATION)
-                    else:
-                        messages.error(request, 'Something did not match. Please try again!')
-            else:
-                # Adding email to waiting list.
-                try:
-                    WaitingUser.objects.create(email=email)
-                except IntegrityError:
-                    pass
-                next_url = self.url + self.reverse_subpage('waiting_list') + '?email={0}'.format(email)
-                return redirect(next_url)
-        return super().serve(request, *args, **kwargs)
+        return redirect('https://app.colegend.com')
 
-    def get_context(self, request, *args, **kwargs):
-        context = super().get_context(request, *args, **kwargs)
-        if settings.ACCOUNT_ALLOW_REGISTRATION:
-            context['open'] = True
-            context['name'] = self.name
-            if not self.email:
-                context['form'] = WelcomeEmailForm()
-            else:
-                data = {'email': self.email, 'password': self.password}
-                if self.password:
-                    context['form'] = WelcomePasswordForm(data)
-                else:
-                    context['form'] = WelcomePasswordForm(initial=data)
-        return context
+    # @route(r'^$')
+    # def index(self, request, *args, **kwargs):
+    #     email = request.POST.get('email')
+    #     if email:
+    #         self.email = email
+    #         try:
+    #             user = User.objects.get(email=email)
+    #         except User.DoesNotExist:
+    #             user = User.objects.none()
+    #         if user:
+    #             self.name = user.name
+    #             self.email = user.email
+    #             password = request.POST.get('password')
+    #             if password:
+    #                 self.password = password
+    #                 if user.check_password(password):
+    #                     return perform_login(request, user, email_verification=settings.ACCOUNT_EMAIL_VERIFICATION)
+    #                 else:
+    #                     messages.error(request, 'Something did not match. Please try again!')
+    #         else:
+    #             # Adding email to waiting list.
+    #             try:
+    #                 WaitingUser.objects.create(email=email)
+    #             except IntegrityError:
+    #                 pass
+    #             next_url = self.url + self.reverse_subpage('waiting_list') + '?email={0}'.format(email)
+    #             return redirect(next_url)
+    #     return super().serve(request, *args, **kwargs)
+    #
+    # def get_context(self, request, *args, **kwargs):
+    #     context = super().get_context(request, *args, **kwargs)
+    #     if settings.ACCOUNT_ALLOW_REGISTRATION:
+    #         context['open'] = True
+    #         context['name'] = self.name
+    #         if not self.email:
+    #             context['form'] = WelcomeEmailForm()
+    #         else:
+    #             data = {'email': self.email, 'password': self.password}
+    #             if self.password:
+    #                 context['form'] = WelcomePasswordForm(data)
+    #             else:
+    #                 context['form'] = WelcomePasswordForm(initial=data)
+    #     return context
 
     @route(r'^waiting-list/$')
     def waiting_list(self, request):
