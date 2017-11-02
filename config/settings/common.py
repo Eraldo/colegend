@@ -449,7 +449,6 @@ SLACK_CHANNEL = env("SLACK_CHANNEL", default='core')
 SLACK_BACKEND = 'django_slack.backends.Urllib2Backend'
 SLACK_USERNAME = 'coLegend'
 SLACK_ICON_EMOJI = ':co:'
-SLACK_LINK_NAMES = '1'
 
 
 SIMPLEMDE_OPTIONS = {

@@ -39,7 +39,7 @@ django-gravatar2==1.4.0
 # ------------------------------------------------
 # For user registration, either via email or social
 # Well-built with regular release cycles!
-django-allauth==0.27.0
+django-allauth==0.34.0
 
 # Database
 # ------------------------------------------------
@@ -53,7 +53,7 @@ django-autoslug==1.9.3
 
 # Time zones support
 # ------------------------------------------------
-pytz==2017.2
+pytz==2017.3
 
 # Redis support
 # ------------------------------------------------
@@ -81,17 +81,9 @@ django-filter==1.0.4
 djangorestframework==3.6.3
 django-cors-headers==2.1.0
 django-rest-auth==0.9.1
-graphene-django==2.0.dev2017083101
+graphene-django==2.0
 
 
 # slack IM
 # ------------------------------------------------
-# django-slack==4.1.1
-# Using from pull request (to make it compatible with python3)
-# https://github.com/lamby/django-slack/pull/20
--e git+git://github.com/Eraldo/django-slack.git@python3-support-eraldo#egg=django-slack
-
-# Prologue (story/prologue)
-# ------------------------------------------------
-# WAITING: Replace with geoip2 in django 1.9 https://docs.djangoproject.com/en/1.9/ref/contrib/gis/geoip2/
-pygeoip==0.3.2
+django-slack==5.10.2
