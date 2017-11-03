@@ -45,7 +45,7 @@ class JournalEntryViewSet(viewsets.ModelViewSet):
         serializer.save(owner=self.request.user)
         # Add experience.
         user = serializer.instance.owner
-        add_experience(user, 'studio', 1)
+        add_experience(user, 'studio')
 
 
 class JournalMixin(object):

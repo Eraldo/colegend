@@ -48,7 +48,7 @@ class UpdateFocusMutation(graphene.relay.ClientIDMutation):
         elif scope is not None and start is not None:
             focus, created = user.focuses.get_or_create(scope=scope, start=start)
             if created:
-                add_experience(user, 'office', 1)
+                add_experience(user, 'office')
         else:
             raise Exception('ID or scope and start needed to get focus.')
 

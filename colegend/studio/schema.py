@@ -43,7 +43,7 @@ class AddJournalEntryMutation(graphene.relay.ClientIDMutation):
         if not start:
             start = get_scope_by_name(scope)().start
         entry = user.journal_entries.create(scope=scope, start=start, content=content, keywords=keywords)
-        add_experience(user, 'studio', 1)
+        add_experience(user, 'studio')
         return AddJournalEntryMutation(journal_entry=entry)
 
 

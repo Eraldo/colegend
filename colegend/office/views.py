@@ -34,7 +34,7 @@ class FocusViewSet(viewsets.ModelViewSet):
         self.perform_update(serializer)
         # Add experience.
         user = serializer.instance.owner
-        add_experience(user, 'office', 1)
+        add_experience(user, 'office')
 
     def perform_update(self, serializer, reason=''):
         # Gathering data for notification
