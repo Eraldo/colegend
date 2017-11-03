@@ -78,7 +78,7 @@ class UserNode(DjangoObjectType):
         if app is not None:
             kwargs['app'] = app
         if user.is_authenticated:
-            return user.experience.level(**kwargs)
+            return self.experience.level(**kwargs)
         return 0
 
     def resolve_experience(self, info, app=None):
@@ -88,7 +88,7 @@ class UserNode(DjangoObjectType):
         if app is not None:
             kwargs['app'] = app
         if user.is_authenticated:
-            return user.experience.total(**kwargs)
+            return self.experience.total(**kwargs)
         return 0
 
     def resolve_avatar(self, info, size=Size.MEDIUM.value):

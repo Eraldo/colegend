@@ -21,28 +21,32 @@ APP_CHOICES = (
     (JOURNEY, _('journey')),
 )
 
+ACTION_CHOICES = APP_CHOICES
+
 
 class ExperienceQuerySet(OwnedQuerySet):
-    def total(self, app=None, level=None):
+    def total(self, action=None, level=None):
         queryset = self
-        if app:
-            queryset = queryset.filter(app=app)
+        if action:
+            queryset = queryset.filter(action=action)
         if level is not None:
-            queryset = queryset.filter(level=level)
+            # TODO: Subtract experience below selected level.
+            pass
         return queryset.aggregate(Sum('amount')).get('amount__sum') or 0
 
-    def level(self, app=JOURNEY):
-        return self.filter(app=app).aggregate(Max('level')).get('level__max') or 0
+    def level(self):
+        # TODO: Implement level calculation. (or use table)
+        # Workaround: Levelup every 100 exp.
+        experience = self.total() or 0
+        level = int(experience / 100)
+        return level
 
 
 class Experience(OwnedBase, TimeStampedBase):
-    app = models.CharField(
-        _('app'),
-        choices=APP_CHOICES,
-        max_length=10,
-    )
-    level = models.IntegerField(
-        verbose_name=_('level'),
+    action = models.CharField(
+        _('action'),
+        choices=ACTION_CHOICES,
+        max_length=100,
     )
     amount = models.IntegerField(
         verbose_name=_('amount'),
@@ -54,12 +58,11 @@ class Experience(OwnedBase, TimeStampedBase):
         default_related_name = 'experience'
 
     def __str__(self):
-        return '{amount} EXP {app}#{level} ({owner})'.format(
-            owner=self.owner, amount=self.amount, app=self.app, level=self.level
+        return '{amount} EXP {action} ({owner})'.format(
+            owner=self.owner, amount=self.amount, action=self.action
         )
 
 
-def add_experience(user, app, amount):
-    level = Experience.objects.level(app)
+def add_experience(user, action):
     amount = 1
-    return user.experience.create(owner=user, app=app, level=level, amount=amount)
+    return user.experience.create(owner=user, action=action, amount=amount)
