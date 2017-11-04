@@ -3,6 +3,7 @@ from graphene_django.debug import DjangoDebug
 
 from colegend.checkpoints.schema import CheckpointQuery, CheckpointMutation
 from colegend.community.schema import CommunityQuery, CommunityMutation
+from colegend.events.schema import EventQuery, EventMutation
 from colegend.home.schema import HomeQuery, HomeMutation
 from colegend.journey.schema import JourneyQuery, JourneyMutation
 from colegend.metrics.schema import MetricsQuery
@@ -22,6 +23,7 @@ class Query(
     JourneyQuery,
     OutcomeQuery,
     MetricsQuery,
+    EventQuery,
     graphene.ObjectType):
     debug = graphene.Field(DjangoDebug, name='__debug')
 
@@ -34,6 +36,7 @@ class Mutation(
     StudioMutation,
     JourneyMutation,
     CommunityMutation,
+    EventMutation,
     graphene.ObjectType):
     pass
 

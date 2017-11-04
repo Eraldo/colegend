@@ -1,3 +1,4 @@
+from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from wagtail.wagtailadmin.edit_handlers import StreamFieldPanel
 from wagtail.wagtailcore.fields import StreamField
@@ -5,6 +6,38 @@ from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsearch import index
 
 from colegend.cms.blocks import BASE_BLOCKS
+from colegend.core.fields import MarkdownField
+from colegend.core.models import TimeStampedBase
+
+
+class Event(TimeStampedBase):
+    name = models.CharField(
+        _('name'),
+        max_length=255,
+    )
+    start = models.DateTimeField(
+        _('start'),
+    )
+    end = models.DateTimeField(
+        _('end'),
+        null=True, blank=True
+    )
+    location = models.CharField(
+        _('location'),
+        max_length=255,
+        blank=True
+    )
+    image_url = models.URLField(
+        _('image url'),
+        blank=True
+    )
+    content = MarkdownField()
+
+    class Meta:
+        default_related_name = 'events'
+
+    def __str__(self):
+        return self.name
 
 
 class EventsPage(Page):

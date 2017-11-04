@@ -189,9 +189,10 @@ class UpdateUserMutation(graphene.relay.ClientIDMutation):
         gender = graphene.String()
         purpose = graphene.String()
         status = graphene.String()
+        registration_country = graphene.String()
 
     @classmethod
-    def mutate_and_get_payload(cls, root, info, username=None, name=None, gender=None, purpose=None, status=None):
+    def mutate_and_get_payload(cls, root, info, username=None, name=None, gender=None, purpose=None, status=None, registration_country=None):
         # print('>> update user')
         user = info.context.user
         if username:
@@ -204,6 +205,8 @@ class UpdateUserMutation(graphene.relay.ClientIDMutation):
             user.purpose = purpose
         if status:
             user.status = status
+        if registration_country:
+            user.registration_country = registration_country
         user.save()
         return UpdateUserMutation(user=user)
 
