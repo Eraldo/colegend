@@ -14,6 +14,7 @@ class EventNode(DjangoObjectType):
             'start': ['exact', 'lt', 'gt', 'lte', 'gte'],
             'end': ['exact', 'lt', 'gt', 'lte', 'gte'],
             'content': ['exact', 'icontains'],
+            'description': ['exact', 'icontains'],
 
         }
         interfaces = [graphene.Node]
@@ -22,6 +23,13 @@ class EventNode(DjangoObjectType):
 class EventQuery(graphene.ObjectType):
     event = graphene.Node.Field(EventNode)
     events = DjangoFilterConnectionField(EventNode)
+    next_event = graphene.Field(EventNode)
+
+    def resolve_next_event(self, info):
+        user = info.context.user
+        today = timezone.localtime(timezone.now()).date()
+        event = Event.objects.filter(start__gte=today).first()
+        return event
 
 
 class AddEvent(graphene.relay.ClientIDMutation):
@@ -33,13 +41,12 @@ class AddEvent(graphene.relay.ClientIDMutation):
         end = graphene.types.datetime.DateTime()
         location = graphene.String()
         image_url = graphene.String()
+        description = graphene.String()
         content = graphene.String()
 
     @classmethod
     def mutate_and_get_payload(cls, root, info, *args, **kwargs):
         user = info.context.user
-        if not kwargs.get('start'):
-            kwargs['start'] = timezone.localtime(timezone.now())
         event = Event.objects.create(*args, **kwargs)
         return AddEvent(event=event)
 

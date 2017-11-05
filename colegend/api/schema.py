@@ -7,6 +7,7 @@ from colegend.events.schema import EventQuery, EventMutation
 from colegend.home.schema import HomeQuery, HomeMutation
 from colegend.journey.schema import JourneyQuery, JourneyMutation
 from colegend.metrics.schema import MetricsQuery
+from colegend.news.schema import NewsQuery, NewsMutation
 from colegend.outcomes.schema import OutcomeQuery
 from colegend.office.schema import OfficeQuery, OfficeMutation
 from colegend.studio.schema import StudioQuery, StudioMutation
@@ -24,6 +25,7 @@ class Query(
     OutcomeQuery,
     MetricsQuery,
     EventQuery,
+    NewsQuery,
     graphene.ObjectType):
     debug = graphene.Field(DjangoDebug, name='__debug')
 
@@ -37,6 +39,7 @@ class Mutation(
     JourneyMutation,
     CommunityMutation,
     EventMutation,
+    NewsMutation,
     graphene.ObjectType):
     pass
 
