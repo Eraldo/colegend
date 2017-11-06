@@ -152,6 +152,14 @@ class User(AbstractUser):
         on_delete=models.SET_NULL
     )
 
+    mentor = models.ForeignKey(
+        verbose_name=_('mentor'),
+        to='self',
+        related_name='mentees',
+        null=True, blank=True,
+        on_delete=models.SET_NULL
+    )
+
     def has_checkpoint(self, name):
         return self.checkpoints.contains_name(name)
 
