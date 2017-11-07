@@ -1,5 +1,4 @@
 import graphene
-from django.utils import timezone
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 

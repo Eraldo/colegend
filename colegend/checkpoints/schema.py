@@ -17,6 +17,20 @@ class CheckpointNode(DjangoObjectType):
 class CheckpointQuery(graphene.ObjectType):
     checkpoint = graphene.Node.Field(CheckpointNode)
     checkpoints = DjangoFilterConnectionField(CheckpointNode)
+    has_checkpoint = graphene.Boolean(name=graphene.String())
+    has_checkpoints = graphene.Boolean(names=graphene.String())
+
+    def resolve_has_checkpoint(self, info, name):
+        user = info.context.user
+        return user.has_checkpoint(name=name)
+
+    def resolve_has_checkpoints(self, info, names):
+        user = info.context.user
+        checkpoints = [name.strip() for name in names.split(',')]
+        for checkpoint in checkpoints:
+            if not user.has_checkpoint(checkpoint):
+                return False
+        return True
 
 
 class AddCheckpoint(graphene.relay.ClientIDMutation):
