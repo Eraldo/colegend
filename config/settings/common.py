@@ -126,6 +126,7 @@ LOCAL_APPS = (
     'colegend.biography',
     'colegend.guides',
     'colegend.events',
+    'colegend.tutorials',
 
     'colegend.games',
     'colegend.cards',
