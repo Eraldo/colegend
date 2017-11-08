@@ -9,6 +9,7 @@ class Tutorial(TimeStampedBase):
     name = models.CharField(
         _('name'),
         max_length=255,
+        unique=True
     )
     video_url = models.URLField(
         _('video url'),
