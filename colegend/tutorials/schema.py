@@ -1,5 +1,4 @@
 import graphene
-from django.utils import timezone
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 
@@ -17,12 +16,15 @@ class TutorialNode(DjangoObjectType):
 
 
 class TutorialQuery(graphene.ObjectType):
-    # tutorial = graphene.Node.Field(TutorialNode)
-    tutorial = graphene.Field(TutorialNode, name=graphene.String())
+    tutorial = graphene.Node.Field(TutorialNode)
+    tutorial_by_name = graphene.Field(TutorialNode, name=graphene.String())
     tutorials = DjangoFilterConnectionField(TutorialNode)
 
-    def resolve_tutorial(self, info, name):
-        return Tutorial.objects.get(name__iexact=name)
+    def resolve_tutorial_by_name(self, info, name):
+        try:
+            return Tutorial.objects.get(name__iexact=name)
+        except Tutorial.DoesNotExist:
+            return None
 
 
 class TutorialMutation(graphene.ObjectType):
