@@ -13,8 +13,8 @@ from django.utils.translation import ugettext_lazy as _
 from colegend.core.models import OwnedBase, TimeStampedBase
 from colegend.journals import scopes
 from colegend.journals.forms import DatePickerForm
-from colegend.journals.scopes import Day, Week, Month, Year
 from colegend.outcomes.models import Outcome
+from colegend.scopes.models import get_scope_by_name
 
 
 class Status(Enum):
@@ -92,13 +92,7 @@ class Focus(OwnedBase, TimeStampedBase):
     )
 
     def get_scope(self):
-        scope_map = {
-            DAY: Day,
-            WEEK: Week,
-            MONTH: Month,
-            YEAR: Year,
-        }
-        return scope_map.get(self.scope)(self.start)
+        return get_scope_by_name(self.scope)(self.start)
 
     @property
     def outcomes(self):

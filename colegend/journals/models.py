@@ -37,7 +37,6 @@ class JournalEntry(OwnedBase, TaggableBase, TimeStampedBase):
     start = models.DateField(
         _('start'),
     )
-    # locations = models.CharField(max_length=255, help_text="Separated by ';'")
 
     content = MarkdownField()
 
@@ -46,6 +45,33 @@ class JournalEntry(OwnedBase, TaggableBase, TimeStampedBase):
         blank=True,
         help_text="What were the most important experiences/topics?"
     )
+
+    @property
+    def end(self):
+        return self.get_scope().end
+
+    def get_scope(self):
+        return get_scope_by_name(self.scope)(self.start)
+
+    # @property
+    # def children(self):
+    #     # Get smaller scope entities.
+    #     child_scope_map = {
+    #         'week': 'day',
+    #         'month': 'week',
+    #         'year': 'month',
+    #     }
+    #     child_scope_name = child_scope_map.get(self.scope)
+    #     print(child_scope_name)
+    #     if child_scope_name:
+    #         start = get_scope_by_name(child_scope_name)(self.start).start
+    #         end = self.end
+    #         print(start)
+    #         print(end)
+    #         return self.owner.journal_entries.filter(
+    #             scope=child_scope_name,
+    #             start__range=(start, end)
+    #         )
 
     # objects = JournalEntryQuerySet.as_manager()
 
@@ -58,13 +84,14 @@ class JournalEntry(OwnedBase, TaggableBase, TimeStampedBase):
         default_related_name = 'journal_entries'
 
     def __str__(self):
-        return "{}'s {} journal entries {}".format(self.owner, self.get_scope_display(), self.start)
+        return "{} {}".format(self.get_scope_display(), self.start)
 
     def save(self, *args, **kwargs):
         if self.pk is None:  # Creation.
             # Adapting start date to scope.
-            scope = get_scope_by_name(self.scope)(self.start)
+            scope = self.get_scope()
             self.start = scope.start
+            # self.end = scope.end
         super().save(*args, **kwargs)
 
 
