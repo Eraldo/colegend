@@ -106,14 +106,14 @@ class Focus(OwnedBase, TimeStampedBase):
         return [outcome for outcome in outcomes if outcome]
 
     class Meta:
-        verbose_name = _('Focus outcomes')
-        verbose_name_plural = _('Focus Outcomes')
+        verbose_name = _('Focus')
+        verbose_name_plural = _('Focuses')
         unique_together = ['owner', 'scope', 'start']
         ordering = ['start']
         default_related_name = 'focuses'
 
     def __str__(self):
-        return "{}'s {} focus outcomes {}".format(self.owner, self.get_scope_display(), self.start)
+        return "{}'s {} focus {}".format(self.owner, self.get_scope_display(), self.start)
 
     def save(self, *args, **kwargs):
         if self.pk is None:  # Creation.

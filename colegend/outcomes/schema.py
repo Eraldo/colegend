@@ -63,7 +63,6 @@ class UpdateOutcomeMutation(graphene.relay.ClientIDMutation):
         name=None, description=None, status=None, inbox=None,
         scope=None, date=None, deadline=None, estimate=None, deletions=None):
         user = info.context.user
-        print('>>', deletions)
         _type, id = from_global_id(id)
         # TODO: Checking permission. Workaround: Only my outcomes. ;)
         outcome = user.outcomes.get(id=id)
