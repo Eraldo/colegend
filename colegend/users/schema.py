@@ -110,11 +110,19 @@ class UserQuery(graphene.ObjectType):
     users = DjangoFilterConnectionField(UserNode, filterset_class=UserFilter)
     user = graphene.Node.Field(UserNode)
     my_user = graphene.Field(UserNode)
+    viewer = graphene.Field(UserNode)
     is_authenticated = graphene.Boolean()
     user_exists = graphene.Boolean(email=graphene.String())
 
     def resolve_my_user(self, info):
         # print('>> my user')
+        user = info.context.user
+        if user.is_authenticated:
+            return user
+        return None
+
+    def resolve_viewer(self, info):
+        # print('>> viewer')
         user = info.context.user
         if user.is_authenticated:
             return user

@@ -67,8 +67,10 @@ class Chapter(TimeStampedBase):
         to=Story,
         on_delete=models.CASCADE,
     )
-    title = models.TextField(
-        _('scope'),
+    name = models.CharField(
+        _('name'),
+        max_length=255,
+        blank=True
     )
     content = MarkdownField()
 
@@ -76,9 +78,10 @@ class Chapter(TimeStampedBase):
         verbose_name = _('Chapter')
         verbose_name_plural = _('Chapters')
         default_related_name = 'chapters'
+        ordering = ['-created']
 
     def __str__(self):
-        return "{}".format(self.title)
+        return "{}".format(self.name)
 
 
 class StudioPage(Page):

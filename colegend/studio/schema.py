@@ -1,4 +1,5 @@
 import graphene
+from django.core.exceptions import ValidationError
 from django.utils import timezone
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
@@ -8,7 +9,7 @@ from colegend.experience.models import add_experience
 from colegend.scopes.models import Scope, get_scope_by_name
 from colegend.scopes.schema import ScopeType
 from colegend.journals.models import JournalEntry
-from .models import InterviewEntry
+from .models import InterviewEntry, Chapter, Story
 
 
 class JournalEntryNode(DjangoObjectType):
@@ -156,9 +157,86 @@ class InterviewEntryMutation(graphene.ObjectType):
     update_interview_entry = UpdateInterviewEntry.Field()
 
 
+class StoryNode(DjangoObjectType):
+    class Meta:
+        model = Story
+        filter_fields = {
+            'owner': ['exact'],
+        }
+        interfaces = [graphene.Node]
+
+
+class StoryQuery(graphene.ObjectType):
+    story = graphene.Node.Field(StoryNode)
+    stories = DjangoFilterConnectionField(StoryNode)
+
+
+class ChapterNode(DjangoObjectType):
+    class Meta:
+        model = Chapter
+        filter_fields = {
+            'name': ['exact', 'istartswith', 'icontains'],
+            'content': ['exact', 'icontains'],
+        }
+        interfaces = [graphene.Node]
+
+
+class ChapterQuery(graphene.ObjectType):
+    chapter = graphene.Node.Field(ChapterNode)
+    chapters = DjangoFilterConnectionField(ChapterNode)
+
+
+class AddChapter(graphene.relay.ClientIDMutation):
+    chapter = graphene.Field(ChapterNode)
+
+    class Input:
+        name = graphene.String()
+        content = graphene.String()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, name='', content=''):
+        user = info.context.user
+        if not (name or content):
+            raise ValidationError('Please provide at leat "name" or "content"')
+        chapter = Chapter.objects.create(story=user.story, name=name, content=content)
+        today = timezone.localtime(timezone.now()).date()
+        if not user.story.chapters.filter(created__year=today.year, created__month=today.month).exists():
+            add_experience(user, 'studio', 4)
+        return AddChapter(chapter=chapter)
+
+
+class UpdateChapter(graphene.relay.ClientIDMutation):
+    success = graphene.Boolean()
+    chapter = graphene.Field(ChapterNode)
+
+    class Input:
+        id = graphene.ID()
+        name = graphene.String()
+        content = graphene.String()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, id, name=None, content=None):
+        user = info.context.user
+        _type, id = from_global_id(id)
+        chapter = user.story.chapters.get(id=id)
+        if name is not None:
+            chapter.name = name
+        if content is not None:
+            chapter.content = content
+        chapter.save()
+        return UpdateChapter(success=True, chapter=chapter)
+
+
+class ChapterMutation(graphene.ObjectType):
+    add_chapter = AddChapter.Field()
+    update_chapter= UpdateChapter.Field()
+
+
 class StudioQuery(
     InterviewEntryQuery,
     JournalEntryQuery,
+    StoryQuery,
+    ChapterQuery,
     graphene.ObjectType):
     pass
 
@@ -166,5 +244,6 @@ class StudioQuery(
 class StudioMutation(
     InterviewEntryMutation,
     JournalEntryMutation,
+    ChapterMutation,
     graphene.ObjectType):
     pass

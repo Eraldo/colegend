@@ -63,6 +63,5 @@ class Experience(OwnedBase, TimeStampedBase):
         )
 
 
-def add_experience(user, action):
-    amount = 1
+def add_experience(user, action, amount=1):
     return user.experience.create(owner=user, action=action, amount=amount)
