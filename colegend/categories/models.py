@@ -1,6 +1,4 @@
 from django.db import models
-from orderable.models import Orderable
-
 from colegend.core.models import AutoUrlsMixin
 
 
