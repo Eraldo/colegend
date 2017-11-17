@@ -1,6 +1,6 @@
 import django_filters
 
-from .models import Outcome
+from .models import Outcome, Step
 
 
 def filter_estimate(queryset, name, value):
@@ -82,3 +82,13 @@ class OutcomeFilter(django_filters.FilterSet):
             return queryset.closed()
         else:
             return queryset.open()
+
+
+class StepFilter(django_filters.FilterSet):
+    class Meta:
+        model = Step
+        fields = {
+            'name': ['exact', 'icontains', 'istartswith'],
+            'completed_at': ['exact', 'lt', 'gt', 'lte', 'gte'],
+            'order': ['exact'],
+        }

@@ -5,7 +5,7 @@ from graphql_relay import from_global_id
 
 from colegend.experience.models import add_experience
 from colegend.office.filters import FocusFilter
-from colegend.outcomes.schema import OutcomeQuery, OutcomeMutation
+from colegend.outcomes.schema import OutcomeQuery, OutcomeMutation, StepQuery, StepMutation
 from colegend.scopes.schema import ScopeType
 from .models import Focus
 from .views import notify_partners
@@ -80,6 +80,7 @@ class FocusMutation(graphene.ObjectType):
 
 class OfficeQuery(
     OutcomeQuery,
+    StepQuery,
     FocusQuery,
     graphene.ObjectType):
     pass
@@ -87,6 +88,7 @@ class OfficeQuery(
 
 class OfficeMutation(
     OutcomeMutation,
+    StepMutation,
     FocusMutation,
     graphene.ObjectType):
     pass

@@ -134,12 +134,19 @@ class Step(TimeStampedBase, OrderedModel):
 
     def toggle(self):
         if self.completed_at:
-            self.completed_at = None
+            self.mark_incomplete()
         else:
+            self.mark_complete()
+
+    def mark_complete(self):
+        if not self.completed_at:
             timestamp = timezone.now()
             self.completed_at = timestamp
+            self.save(update_fields=['completed_at'])
+
+    def mark_incomplete(self):
+        self.completed_at = None
         self.save(update_fields=['completed_at'])
-        return timestamp
 
     class Meta(OrderedModel.Meta):
         default_related_name = 'steps'

@@ -4,9 +4,10 @@ from graphene_django.filter import DjangoFilterConnectionField
 from graphql_relay import from_global_id
 
 from colegend.office.types import StatusType
-from colegend.outcomes.filters import OutcomeFilter
+from colegend.outcomes.filters import OutcomeFilter, StepFilter
 from colegend.scopes.schema import ScopeType
-from .models import Outcome
+# from colegend.users.schema import UserNode
+from .models import Outcome, Step
 
 
 class OutcomeNode(DjangoObjectType):
@@ -111,3 +112,84 @@ class OutcomeMutation(graphene.ObjectType):
     create_outcome = CreateOutcomeMutation.Field()
     update_outcome = UpdateOutcomeMutation.Field()
     delete_outcome = DeleteOutcomeMutation.Field()
+
+
+class StepNode(DjangoObjectType):
+    class Meta:
+        model = Step
+        interfaces = [graphene.Node]
+
+
+class StepQuery(graphene.ObjectType):
+    step = graphene.Node.Field(StepNode)
+    steps = DjangoFilterConnectionField(StepNode, filterset_class=StepFilter)
+
+
+class CreateStepMutation(graphene.relay.ClientIDMutation):
+    success = graphene.Boolean()
+    step = graphene.Field(StepNode)
+    # viewer = graphene.Field(UserNode)
+
+    class Input:
+        outcome = graphene.ID()
+        name = graphene.String()
+        order = graphene.Int()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, **kwargs):
+        user = info.context.user
+        step = user.steps.create(**kwargs)
+        # return CreateStepMutation(success=True, step=step, viewer=user)
+        return CreateStepMutation(success=True, step=step)
+
+
+class UpdateStepMutation(graphene.relay.ClientIDMutation):
+    success = graphene.Boolean()
+    step = graphene.Field(StepNode)
+    # viewer = graphene.Field(UserNode)
+
+    class Input:
+        id = graphene.ID()
+        name = graphene.String()
+        toggle = graphene.Boolean()
+        order = graphene.Int()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, id, name=None, toggle=None, order=None):
+        user = info.context.user
+        _type, id = from_global_id(id)
+        # TODO: Checking permission.
+        step = Step.objects.get(id=id)
+        if name is not None:
+            step.name = name
+        if toggle is not None:
+            step.toggle()
+        if order is not None:
+            step.order = order
+        step.save()
+        # return UpdateStepMutation(success=True, step=step, viewer=user)
+        return UpdateStepMutation(success=True, step=step)
+
+
+class DeleteStepMutation(graphene.relay.ClientIDMutation):
+    success = graphene.Boolean()
+    # viewer = graphene.Field(UserNode)
+
+    class Input:
+        id = graphene.ID()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, id):
+        user = info.context.user
+        _type, id = from_global_id(id)
+        # TODO: Checking permission.
+        step = Step.objects.get(id=id)
+        step.delete()
+        # return DeleteStepMutation(success=True, viewer=user)
+        return DeleteStepMutation(success=True)
+
+
+class StepMutation(graphene.ObjectType):
+    create_step = CreateStepMutation.Field()
+    update_step = UpdateStepMutation.Field()
+    delete_step = DeleteStepMutation.Field()
