@@ -120,7 +120,8 @@ class Outcome(AutoUrlsMixin, OwnedBase, TaggableBase, TimeStampedBase):
 
 class Step(TimeStampedBase, OrderedModel):
     outcome = models.ForeignKey(
-        to=Outcome
+        to=Outcome,
+        on_delete=models.CASCADE
     )
     name = models.CharField(
         _('name'),
@@ -150,6 +151,7 @@ class Step(TimeStampedBase, OrderedModel):
 
     class Meta(OrderedModel.Meta):
         default_related_name = 'steps'
+        unique_together = ['outcome', 'name']
 
     def __str__(self):
         return self.name

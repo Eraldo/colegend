@@ -6,7 +6,7 @@ from graphql_relay import from_global_id
 from colegend.office.types import StatusType
 from colegend.outcomes.filters import OutcomeFilter, StepFilter
 from colegend.scopes.schema import ScopeType
-# from colegend.users.schema import UserNode
+
 from .models import Outcome, Step
 
 
@@ -128,7 +128,6 @@ class StepQuery(graphene.ObjectType):
 class CreateStepMutation(graphene.relay.ClientIDMutation):
     success = graphene.Boolean()
     step = graphene.Field(StepNode)
-    # viewer = graphene.Field(UserNode)
 
     class Input:
         outcome = graphene.ID()
@@ -136,17 +135,17 @@ class CreateStepMutation(graphene.relay.ClientIDMutation):
         order = graphene.Int()
 
     @classmethod
-    def mutate_and_get_payload(cls, root, info, **kwargs):
+    def mutate_and_get_payload(cls, root, info, outcome, name, order=None):
         user = info.context.user
-        step = user.steps.create(**kwargs)
-        # return CreateStepMutation(success=True, step=step, viewer=user)
+        _type, id = from_global_id(outcome)
+        outcome = user.outcomes.get(id=id)
+        step = outcome.steps.create(name=name)
         return CreateStepMutation(success=True, step=step)
 
 
 class UpdateStepMutation(graphene.relay.ClientIDMutation):
     success = graphene.Boolean()
     step = graphene.Field(StepNode)
-    # viewer = graphene.Field(UserNode)
 
     class Input:
         id = graphene.ID()
@@ -167,13 +166,11 @@ class UpdateStepMutation(graphene.relay.ClientIDMutation):
         if order is not None:
             step.order = order
         step.save()
-        # return UpdateStepMutation(success=True, step=step, viewer=user)
         return UpdateStepMutation(success=True, step=step)
 
 
 class DeleteStepMutation(graphene.relay.ClientIDMutation):
     success = graphene.Boolean()
-    # viewer = graphene.Field(UserNode)
 
     class Input:
         id = graphene.ID()
@@ -185,7 +182,6 @@ class DeleteStepMutation(graphene.relay.ClientIDMutation):
         # TODO: Checking permission.
         step = Step.objects.get(id=id)
         step.delete()
-        # return DeleteStepMutation(success=True, viewer=user)
         return DeleteStepMutation(success=True)
 
 
