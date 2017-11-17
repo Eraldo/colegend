@@ -5,7 +5,7 @@ from django.shortcuts import redirect
 from django.views.generic import UpdateView, CreateView
 from django.utils.translation import ugettext as _
 
-from colegend.games.views import complete_card
+# from colegend.games.views import complete_card
 
 from .models import Biography
 from .forms import BiographyForm
@@ -32,7 +32,7 @@ class BiographyCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         user = self.request.user
         # update the game
-        complete_card(self.request, 'biography')
+        # complete_card(self.request, 'biography')
         return super().form_valid(form)
 
 

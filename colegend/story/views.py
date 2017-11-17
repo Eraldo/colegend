@@ -10,7 +10,7 @@ from django.utils import timezone
 from django.views.generic import TemplateView
 from wagtail.wagtailcore.templatetags.wagtailcore_tags import slugurl
 
-from colegend.games.views import complete_card
+# from colegend.games.views import complete_card
 from .models import WelcomeTreeLeaf
 
 
@@ -23,12 +23,12 @@ class StoryView(LoginRequiredMixin, TemplateView):
         prologue_buttons = [
             {
                 'name': 'Prologue',
-                'url': reverse('story:prologue'),
+                # 'url': reverse('story:prologue'),
                 'locked': False,
             },
             {
                 'name': 'Welcome Tree',
-                'url': reverse('story:welcome-tree'),
+                # 'url': reverse('story:welcome-tree'),
                 'locked': not user.has_checkpoint('prologue'),
             },
         ]
@@ -38,17 +38,17 @@ class StoryView(LoginRequiredMixin, TemplateView):
         chapter1_buttons = [
             {
                 'name': 'Entering Leyenda',
-                'url': reverse('story:leyenda'),
+                # 'url': reverse('story:leyenda'),
                 'locked': not user.has_checkpoint('storytime card'),
             },
             {
                 'name': 'Pioneer Journal',
-                'url': reverse('story:poineer-journal'),
+                # 'url': reverse('story:poineer-journal'),
                 'locked': not user.has_checkpoint('leyenda'),
             },
             {
                 'name': 'The Journal',
-                'url': reverse('story:your-journal'),
+                # 'url': reverse('story:your-journal'),
                 'locked': not user.has_checkpoint('pioneer journal'),
             },
         ]
@@ -190,7 +190,7 @@ class LeyendaView(LoginRequiredMixin, TemplateView):
             user = request.user
             if not user.has_checkpoint(name='leyenda'):
                 user.add_checkpoint(name='leyenda')
-            return redirect('story:poineer-journal')
+            # return redirect('story:poineer-journal')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -206,7 +206,7 @@ class PioneerJournalView(LoginRequiredMixin, TemplateView):
             user = request.user
             if not user.has_checkpoint('pioneer journal'):
                 user.add_checkpoint('pioneer journal')
-            return redirect('story:your-journal')
+            # return redirect('story:your-journal')
 
 
 class YourJournalView(LoginRequiredMixin, TemplateView):
@@ -217,8 +217,8 @@ class YourJournalView(LoginRequiredMixin, TemplateView):
             user = request.user
             if not user.has_checkpoint('your journal'):
                 user.add_checkpoint('your journal')
-                complete_card(request, 'storytime')
-            return redirect('story:index')
+                # complete_card(request, 'storytime')
+            # return redirect('story:index')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

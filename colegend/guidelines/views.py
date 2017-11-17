@@ -4,7 +4,7 @@ from django.shortcuts import redirect
 # Create your views here.
 from django.views.generic import TemplateView
 
-from colegend.games.views import complete_card
+# from colegend.games.views import complete_card
 
 
 class GuidelinesIntroductionView(LoginRequiredMixin, TemplateView):
@@ -31,7 +31,8 @@ class GuidelinesView(LoginRequiredMixin, TemplateView):
         if 'accept' in request.POST:
             user = request.user
             if not user.has_checkpoint('guidelines'):
-                complete_card(request, 'guidelines')
+                pass
+                # complete_card(request, 'guidelines')
             return redirect('guidelines:index')
         return self.get(request, *args, **kwargs)
 

@@ -49,20 +49,20 @@ urlpatterns = [
     url(r'^vision/', include('colegend.visions.urls')),
     url(r'^journal/', include('colegend.journals.urls')),
 
-    url(r'^guides/', include('colegend.guides.urls')),
-    url(r'^chat/', include('colegend.chat.urls')),
+    # url(r'^guides/', include('colegend.guides.urls')),
+    # url(r'^chat/', include('colegend.chat.urls')),
     url(r'^guidelines/', include('colegend.guidelines.urls')),
 
-    url(r'^tutorial/', include('colegend.games.urls')),
-    url(r'^cards/', include('colegend.cards.urls', namespace='cards')),
-    url(r'^story/', include('colegend.story.urls')),
+    # url(r'^tutorial/', include('colegend.games.urls')),
+    # url(r'^cards/', include('colegend.cards.urls', namespace='cards')),
+    # url(r'^story/', include('colegend.story.urls')),
 
     # Added robots.txt file for crawlers (google/etc)
     url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
 
     url(r'^styleguide/', include('colegend.styleguide.urls', namespace='styleguide')),
-    url(r'^sandbox/', include('colegend.sandbox.urls')),
-    url(r'^mockups/', include('colegend.mockups.urls')),
+    # url(r'^sandbox/', include('colegend.sandbox.urls')),
+    # url(r'^mockups/', include('colegend.mockups.urls')),
     url(r'^metrics/', include('colegend.metrics.urls', namespace='metrics')),
 
     # API

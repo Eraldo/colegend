@@ -40,8 +40,8 @@ class RootPage(UniquePageMixin, Page):
         if not user.is_authenticated():
             return redirect(slugurl(context={'request': request}, slug='about'))
         # Redirect if prologue is not completed.
-        if not user.has_checkpoint('prologue'):
-            return redirect("story:prologue")
+        # if not user.has_checkpoint('prologue'):
+        #     return redirect("story:prologue")
         # Redirecto to first subpage
         return redirect(self.get_first_child().url)
 

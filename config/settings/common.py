@@ -67,7 +67,8 @@ THIRD_PARTY_APPS = (
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
     'django_gravatar', # TODO: Researching if this is still in the project?
-    'orderable',
+    # 'orderable',  # old! [2017-11-15]
+    'ordered_model',
     'simplemde',
     'dal',
     'dal_select2',

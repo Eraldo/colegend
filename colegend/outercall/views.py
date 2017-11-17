@@ -5,7 +5,7 @@ from django.shortcuts import redirect
 from django.views.generic import UpdateView, CreateView
 from django.utils.translation import ugettext as _
 
-from colegend.games.views import complete_card
+# from colegend.games.views import complete_card
 
 from .models import OuterCall
 from .forms import OuterCallForm
@@ -30,7 +30,7 @@ class OuterCallCreateView(LoginRequiredMixin, CreateView):
         return initial
 
     def form_valid(self, form):
-        complete_card(self.request, 'outer call')
+        # complete_card(self.request, 'outer call')
         return super().form_valid(form)
 
 

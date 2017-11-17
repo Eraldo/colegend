@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models import Q
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from ordered_model.models import OrderedModel
 
 from colegend.core.intuitive_duration.modelfields import IntuitiveDurationField
 from colegend.core.models import OwnedBase, AutoUrlsMixin, OwnedQuerySet, TimeStampedBase
@@ -84,8 +85,7 @@ class Outcome(AutoUrlsMixin, OwnedBase, TaggableBase, TimeStampedBase):
     )
     deadline = models.DateField(
         _('deadline'),
-        blank=True,
-        null=True,
+        blank=True, null=True,
     )
 
     estimate = IntuitiveDurationField(
@@ -116,3 +116,33 @@ class Outcome(AutoUrlsMixin, OwnedBase, TaggableBase, TimeStampedBase):
             self.focus_4.filter(end__gte=today).exists():
             return True
         return False
+
+
+class Step(TimeStampedBase, OrderedModel):
+    outcome = models.ForeignKey(
+        to=Outcome
+    )
+    name = models.CharField(
+        _('name'),
+        max_length=255,
+    )
+    completed_at = models.DateTimeField(
+        _('completed at'),
+        null=True, blank=True,
+    )
+    order_with_respect_to = 'outcome'
+
+    def toggle(self):
+        if self.completed_at:
+            self.completed_at = None
+        else:
+            timestamp = timezone.now()
+            self.completed_at = timestamp
+        self.save(update_fields=['completed_at'])
+        return timestamp
+
+    class Meta(OrderedModel.Meta):
+        default_related_name = 'steps'
+
+    def __str__(self):
+        return self.name

@@ -4,7 +4,7 @@ from django.http import Http404
 from django.shortcuts import redirect
 from django.views.generic import TemplateView, UpdateView, DetailView, ListView, RedirectView
 
-from colegend.games.views import complete_card
+# from colegend.games.views import complete_card
 from colegend.guides.models import GuideRelation
 from .forms import GuideManageForm
 
@@ -85,7 +85,8 @@ class GuideView(LoginRequiredMixin, DetailView):
         if not user.has_checkpoint('cloud guide'):
             relation = self.get_object()
             if relation.done:
-                complete_card(request, 'cloud guide')
+                pass
+                # complete_card(request, 'cloud guide')
         return super().get(request, *args, **kwargs)
 
     def get_object(self, queryset=None):

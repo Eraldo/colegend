@@ -136,18 +136,18 @@ def menu(context, user=None, name='main'):
                     {
                         'name': 'Guide',
                         'locked': not user.has_checkpoint('cloud guide card') if user.is_authenticated() else True,
-                        'url': reverse('guides:index'),
+                        # 'url': reverse('guides:index'),
                     },
                     {
                         'name': 'Chat',
                         'locked': not user.has_checkpoint('chat card') if user.is_authenticated() else True,
-                        'url': reverse('chat:index'),
+                        # 'url': reverse('chat:index'),
                         'external': user.has_checkpoint('chat') if user.is_authenticated() else True,
                     },
                     {
                         'name': 'Virtual Room',
                         'locked': not user.has_checkpoint('virtual room') if user.is_authenticated() else True,
-                        'url': reverse('chat:room'),
+                        # 'url': reverse('chat:room'),
                         'external': True,
                     },
                     {
@@ -167,7 +167,7 @@ def menu(context, user=None, name='main'):
                     },
                     {
                         'name': 'Story',
-                        'url': reverse('story:index'),
+                        # 'url': reverse('story:index'),
                     },
                     {
                         'name': 'Vision',
@@ -175,7 +175,7 @@ def menu(context, user=None, name='main'):
                     },
                     {
                         'name': 'Tutorial',
-                        'url': reverse('games:index'),
+                        # 'url': reverse('games:index'),
                     },
                 ],
             },

@@ -16,7 +16,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from colegend.core.views import CheckpointsRequiredMixin
-from colegend.games.views import complete_card
+# from colegend.games.views import complete_card
 from colegend.users.forms import AvatarForm, LegendForm
 from .serializers import UserSerializer, GroupSerializer, OwnedUserSerializer, EmailSerializer
 
@@ -182,7 +182,8 @@ class LegendUpdateView(LoginRequiredMixin, UpdateView):
         user = request.user
         if not user.has_checkpoint('about'):
             # update game
-            complete_card(request, 'about')
+            pass
+            # complete_card(request, 'about')
         else:
             message = _('changes saved')
             messages.success(self.request, message)
@@ -203,7 +204,8 @@ class LegendAvatarView(LoginRequiredMixin, CheckpointsRequiredMixin, UpdateView)
         user = request.user
         if not user.has_checkpoint('profile picture'):
             # update game
-            complete_card(request, 'profile picture')
+            pass
+            # complete_card(request, 'profile picture')
         else:
             message = _('changes saved')
             messages.success(self.request, message)
