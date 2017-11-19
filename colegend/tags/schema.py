@@ -32,7 +32,7 @@ class CreateTag(graphene.relay.ClientIDMutation):
         description = graphene.String()
 
     @classmethod
-    def mutate_and_get_payload(cls, root, info, *args, name, description=None):
+    def mutate_and_get_payload(cls, root, info, name, description=None):
         user = info.context.user
         if len(name) < 2:
             raise Exception('Please enter a tag name with at least two characters.')
