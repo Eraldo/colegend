@@ -23,7 +23,8 @@ class TagQuery(graphene.ObjectType):
     tags = DjangoFilterConnectionField(TagNode)
 
 
-class AddTag(graphene.relay.ClientIDMutation):
+class CreateTag(graphene.relay.ClientIDMutation):
+    success = graphene.Boolean()
     tag = graphene.Field(TagNode)
 
     class Input:
@@ -31,10 +32,12 @@ class AddTag(graphene.relay.ClientIDMutation):
         description = graphene.String()
 
     @classmethod
-    def mutate_and_get_payload(cls, root, info, *args, **kwargs):
+    def mutate_and_get_payload(cls, root, info, *args, name, description=None):
         user = info.context.user
-        tag = user.tags.create(*args, **kwargs)
-        return AddTag(tag=tag)
+        if len(name) < 2:
+            raise Exception('Please enter a tag name with at least two characters.')
+        tag = user.tags.create(name=name, description=description)
+        return CreateTag(success=True, tag=tag)
 
 
 class DeleteTag(graphene.relay.ClientIDMutation):
@@ -47,11 +50,11 @@ class DeleteTag(graphene.relay.ClientIDMutation):
     def mutate_and_get_payload(cls, root, info, id):
         user = info.context.user
         _type, id = from_global_id(id)
-        tag = user.objects.tags.get(id=id)
+        tag = user.tags.get(id=id)
         tag.delete()
         return DeleteTag(success=True)
 
 
 class TagMutation(graphene.ObjectType):
-    add_tag = AddTag.Field()
+    create_tag = CreateTag.Field()
     delete_tag = DeleteTag.Field()
