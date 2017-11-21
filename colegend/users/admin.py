@@ -31,7 +31,9 @@ class UserAdmin(AuthUserAdmin):
         (_('Personal info'), {'fields': ('name', 'gender', 'birthday', 'email', 'phone', 'address', 'occupation')}),
         (_('Data'), {'fields': ('duo', 'clan', 'tribe')}),
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
-                                       'roles', 'checkpoints', 'groups', 'user_permissions')}),
+                                       # TODO: There is a bug in the admin when showing 'user_permissions'
+                                       # 'roles', 'checkpoints', 'groups', 'user_permissions')}),
+                                       'roles', 'checkpoints', 'groups')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
         (_('Meta'), {'fields': ('notes',)}),
     )
