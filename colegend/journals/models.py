@@ -38,11 +38,13 @@ class JournalEntry(OwnedBase, TaggableBase, TimeStampedBase):
         _('start'),
     )
 
-    content = MarkdownField()
+    content = MarkdownField(
+        _('content'),
+        blank=True
+    )
 
     keywords = models.CharField(
         max_length=500,
-        blank=True,
         help_text="What were the most important experiences/topics?"
     )
 
