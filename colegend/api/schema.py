@@ -12,6 +12,7 @@ from colegend.outcomes.schema import OutcomeQuery
 from colegend.office.schema import OfficeQuery, OfficeMutation
 from colegend.roles.schema import RoleQuery, RoleMutation
 from colegend.studio.schema import StudioQuery, StudioMutation
+from colegend.tags.schema import TagQuery, TagMutation
 from colegend.tutorials.schema import TutorialQuery, TutorialMutation
 from colegend.users.schema import UserQuery, UserMutation
 
@@ -30,6 +31,7 @@ class Query(
     NewsQuery,
     RoleQuery,
     TutorialQuery,
+    TagQuery,
     graphene.ObjectType):
     debug = graphene.Field(DjangoDebug, name='__debug')
 
@@ -46,6 +48,7 @@ class Mutation(
     NewsMutation,
     RoleMutation,
     TutorialMutation,
+    TagMutation,
     graphene.ObjectType):
     pass
 
