@@ -1,23 +1,68 @@
 from django.conf import settings
+from django.core.validators import MaxValueValidator
 from django.db import models
 
 # Create your models here.
 from django.shortcuts import redirect
-from django.urls import reverse
 from django.utils import timezone
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel
 from wagtail.wagtailcore.fields import RichTextField, StreamField
 from wagtail.wagtailcore.models import Page
-from wagtail.wagtailcore.templatetags.wagtailcore_tags import slugurl
 from wagtail.wagtailsearch import index
 
 from colegend.cms.blocks import BASE_BLOCKS
-from colegend.cms.models import UniquePageMixin
+from colegend.core.models import TimeStampedBase, OwnedBase
 from colegend.core.templatetags.core_tags import link
 
 from django.utils.translation import ugettext_lazy as _
 
 from colegend.office.models import DAY, AgendaPage
+
+
+class Scan(OwnedBase, TimeStampedBase):
+    date = models.DateField(
+        _('date'),
+        default=timezone.now
+    )
+    area_1 = models.PositiveSmallIntegerField(
+        _('area 1'),
+        validators=[MaxValueValidator(100)]
+    )
+    area_2 = models.PositiveSmallIntegerField(
+        _('area 2'),
+        validators=[MaxValueValidator(100)]
+    )
+    area_3 = models.PositiveSmallIntegerField(
+        _('area 3'),
+        validators=[MaxValueValidator(100)]
+    )
+    area_4 = models.PositiveSmallIntegerField(
+        _('area 4'),
+        validators=[MaxValueValidator(100)]
+    )
+    area_5 = models.PositiveSmallIntegerField(
+        _('area 5'),
+        validators=[MaxValueValidator(100)]
+    )
+    area_6 = models.PositiveSmallIntegerField(
+        _('area 6'),
+        validators=[MaxValueValidator(100)]
+    )
+    area_7 = models.PositiveSmallIntegerField(
+        _('area 7'),
+        validators=[MaxValueValidator(100)]
+    )
+
+    class Meta:
+        verbose_name = _('scan')
+        verbose_name_plural = _('scans')
+        default_related_name = 'scans'
+        unique_together = ['owner', 'date']
+        get_latest_by = 'date'
+        ordering = ['-date']
+
+    def __str__(self):
+        return 'Scan {0}'.format(self.date)
 
 
 class HomePage(Page):
