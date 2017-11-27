@@ -40,6 +40,28 @@ class CreateTag(graphene.relay.ClientIDMutation):
         return CreateTag(success=True, tag=tag)
 
 
+class UpdateTag(graphene.relay.ClientIDMutation):
+    success = graphene.Boolean()
+    tag = graphene.Field(TagNode)
+
+    class Input:
+        id = graphene.ID()
+        name = graphene.String()
+        description = graphene.String()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, id, name=None, description=None):
+        user = info.context.user
+        _type, id = from_global_id(id)
+        tag = user.tags.get(id=id)
+        if name is not None:
+            tag.name = name
+        if description is not None:
+            tag.description = description
+        tag.save()
+        return DeleteTag(success=True, tag=tag)
+
+
 class DeleteTag(graphene.relay.ClientIDMutation):
     success = graphene.Boolean()
 
@@ -57,4 +79,5 @@ class DeleteTag(graphene.relay.ClientIDMutation):
 
 class TagMutation(graphene.ObjectType):
     create_tag = CreateTag.Field()
+    update_tag = UpdateTag.Field()
     delete_tag = DeleteTag.Field()
