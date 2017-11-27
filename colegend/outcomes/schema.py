@@ -169,7 +169,7 @@ class UpdateStepMutation(graphene.relay.ClientIDMutation):
         if toggle is not None:
             step.toggle()
         if order is not None:
-            step.order = order
+            step.to(order)
         step.save()
         return UpdateStepMutation(success=True, step=step)
 
