@@ -62,13 +62,13 @@ class CreateScan(graphene.relay.ClientIDMutation):
 
     class Input:
         date = graphene.types.datetime.DateTime()
-        area_1 = graphene.String()
-        area_2 = graphene.String()
-        area_3 = graphene.String()
-        area_4 = graphene.String()
-        area_5 = graphene.String()
-        area_6 = graphene.String()
-        area_7 = graphene.String()
+        area_1 = graphene.Int()
+        area_2 = graphene.Int()
+        area_3 = graphene.Int()
+        area_4 = graphene.Int()
+        area_5 = graphene.Int()
+        area_6 = graphene.Int()
+        area_7 = graphene.Int()
 
     @classmethod
     def mutate_and_get_payload(cls, root, info, *args, **kwargs):
@@ -83,13 +83,13 @@ class UpdateScan(graphene.relay.ClientIDMutation):
 
     class Input:
         id = graphene.ID()
-        area_1 = graphene.String()
-        area_2 = graphene.String()
-        area_3 = graphene.String()
-        area_4 = graphene.String()
-        area_5 = graphene.String()
-        area_6 = graphene.String()
-        area_7 = graphene.String()
+        area_1 = graphene.Int()
+        area_2 = graphene.Int()
+        area_3 = graphene.Int()
+        area_4 = graphene.Int()
+        area_5 = graphene.Int()
+        area_6 = graphene.Int()
+        area_7 = graphene.Int()
 
     @classmethod
     def mutate_and_get_payload(cls, root, info, id, area_1=None, area_2=None, area_3=None, area_4=None, area_5=None, area_6=None, area_7=None):
