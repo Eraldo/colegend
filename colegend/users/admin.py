@@ -27,15 +27,38 @@ class UserInline(admin.TabularInline):
 @admin.register(User)
 class UserAdmin(AuthUserAdmin):
     fieldsets = (
-        (None, {'fields': ('username', 'password')}),
-        (_('Personal info'), {'fields': ('name', 'gender', 'birthday', 'email', 'phone', 'address', 'occupation')}),
-        (_('Data'), {'fields': ('duo', 'clan', 'tribe')}),
-        (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
-                                       # TODO: There is a bug in the admin when showing 'user_permissions'
-                                       # 'roles', 'checkpoints', 'groups', 'user_permissions')}),
-                                       'roles', 'checkpoints', 'groups')}),
-        (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
-        (_('Meta'), {'fields': ('notes',)}),
+        (None, {
+            'fields': (
+                'username', 'password'
+            )
+        }),
+        (_('Personal info'), {
+            'fields': (
+                'name', 'gender', 'birthday',
+                'email', 'phone', 'address',
+                'occupation'
+            )
+        }),
+        (_('Data'), {
+            'fields': (
+                'avatar', 'purpose', 'status',
+                'duo', 'clan', 'tribe', 'mentor'
+            )
+        }),
+        (_('Permissions'), {
+            'fields': (
+                'is_active', 'is_staff', 'is_superuser',
+                # TODO: There is a bug in the admin when showing 'user_permissions'
+                # 'roles', 'checkpoints', 'groups', 'user_permissions')}),
+                'roles', 'checkpoints', 'groups')
+        }),
+        (_('Important dates'), {
+            'fields': ('last_login', 'date_joined')
+        }),
+        (_('Meta'), {
+            'fields': ('notes',),
+            'classes': ('collapse',),
+        }),
     )
     list_display = ('username', 'name', 'email', 'phone', 'is_staff')
     list_filter = ('is_staff', 'is_superuser', 'is_active', 'roles', 'checkpoints', 'groups')
