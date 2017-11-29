@@ -3,6 +3,7 @@ from enum import Enum
 import graphene
 from django.utils import timezone
 
+from colegend.experience.models import add_experience
 from colegend.scopes.models import DAY
 
 from graphene_django import DjangoObjectType
@@ -74,6 +75,7 @@ class CreateScan(graphene.relay.ClientIDMutation):
     def mutate_and_get_payload(cls, root, info, *args, **kwargs):
         user = info.context.user
         scan = user.scans.create(*args, **kwargs)
+        add_experience(user, 'home')
         return CreateScan(success=True, scan=scan)
 
 
