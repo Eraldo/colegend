@@ -28,6 +28,10 @@ class News(TimeStampedBase):
         _('image url'),
         blank=True
     )
+    video_url = models.URLField(
+        _('video url'),
+        blank=True
+    )
     description = models.TextField(
         _('short description'),
         blank=True

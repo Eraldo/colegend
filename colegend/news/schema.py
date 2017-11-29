@@ -31,7 +31,7 @@ class NewsQuery(graphene.ObjectType):
         return news
 
 
-class AddNews(graphene.relay.ClientIDMutation):
+class CreateNews(graphene.relay.ClientIDMutation):
     news = graphene.Field(NewsNode)
 
     class Input:
@@ -39,6 +39,7 @@ class AddNews(graphene.relay.ClientIDMutation):
         author = graphene.ID()
         date = graphene.types.datetime.DateTime()
         image_url = graphene.String()
+        video_url = graphene.String()
         description = graphene.String()
         content = graphene.String()
 
@@ -48,8 +49,8 @@ class AddNews(graphene.relay.ClientIDMutation):
         if not kwargs.get('author'):
             kwargs['author'] = user
         news = News.objects.create(*args, **kwargs)
-        return AddNews(news=news)
+        return CreateNews(news=news)
 
 
 class NewsMutation(graphene.ObjectType):
-    add_news = AddNews.Field()
+    create_news = CreateNews.Field()

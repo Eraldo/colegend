@@ -32,7 +32,7 @@ class EventQuery(graphene.ObjectType):
         return event
 
 
-class AddEvent(graphene.relay.ClientIDMutation):
+class CreateEvent(graphene.relay.ClientIDMutation):
     event = graphene.Field(EventNode)
 
     class Input:
@@ -41,6 +41,7 @@ class AddEvent(graphene.relay.ClientIDMutation):
         end = graphene.types.datetime.DateTime()
         location = graphene.String()
         image_url = graphene.String()
+        video_url = graphene.String()
         description = graphene.String()
         content = graphene.String()
 
@@ -48,8 +49,8 @@ class AddEvent(graphene.relay.ClientIDMutation):
     def mutate_and_get_payload(cls, root, info, *args, **kwargs):
         user = info.context.user
         event = Event.objects.create(*args, **kwargs)
-        return AddEvent(event=event)
+        return CreateEvent(event=event)
 
 
 class EventMutation(graphene.ObjectType):
-    add_event = AddEvent.Field()
+    create_event = CreateEvent.Field()
