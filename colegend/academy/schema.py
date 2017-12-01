@@ -32,6 +32,7 @@ class BookReviewNode(DjangoObjectType):
     class Meta:
         model = BookReview
         filter_fields = {
+            'owner': ['exact'],
             'book': ['exact'],
             'content': ['exact', 'icontains'],
             'area_1': ['exact', 'lt', 'gt', 'lte', 'gte'],
