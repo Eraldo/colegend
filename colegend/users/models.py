@@ -78,6 +78,7 @@ class User(AbstractUser):
         verbose_name=_('avatar'),
         upload_to=UploadToOwnedDirectory('avatars', ),
         resize_source=dict(size=(400, 400)),
+        blank=True
     )
 
     purpose = models.CharField(
