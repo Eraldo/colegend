@@ -34,8 +34,8 @@ class InterviewEntry(OwnedBase, TimeStampedBase):
     # gratitude = models.TextField(help_text=_('I am thankful for...'))
 
     class Meta:
-        verbose_name = _('Interview Entry')
-        verbose_name_plural = _('Interview entries')
+        verbose_name = _('Interview')
+        verbose_name_plural = _('Interviews')
         unique_together = ['owner', 'scope', 'start']
         ordering = ['-start']
         get_latest_by = 'start'
