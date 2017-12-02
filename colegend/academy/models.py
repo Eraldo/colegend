@@ -1,11 +1,18 @@
 from django.core.validators import MaxValueValidator
 from django.db import models
+from django.db.models import Avg, Q
 from django.shortcuts import redirect
 from wagtail.wagtailcore.models import Page
 
 from colegend.core.fields import MarkdownField
 from colegend.core.models import TimeStampedBase, OwnedBase
 from django.utils.translation import ugettext_lazy as _
+
+
+class BookQuerySet(models.QuerySet):
+    def search(self, query):
+        queryset = self.filter(Q(name__icontains=query) | Q(author__icontains=query) | Q(content__icontains=query))
+        return queryset
 
 
 class Book(TimeStampedBase):
@@ -32,6 +39,12 @@ class Book(TimeStampedBase):
     featured = models.BooleanField(
         default=False
     )
+
+    @property
+    def rating(self):
+        return self.book_reviews.aggregate(Avg('rating')).get('rating__avg') or 0
+
+    objects = BookQuerySet.as_manager()
 
     class Meta:
         default_related_name = 'books'
