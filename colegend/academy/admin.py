@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Book, BookReview
+from .models import Book, BookReview, BookTag
 
 
 class BookReviewInline(admin.TabularInline):
@@ -8,10 +8,15 @@ class BookReviewInline(admin.TabularInline):
     extra = 0
 
 
+@admin.register(BookTag)
+class BookTagAdmin(admin.ModelAdmin):
+    pass
+
+
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
     list_display = ['name', 'author', 'featured']
-    list_filter = ['featured', 'public']
+    list_filter = ['featured', 'public', 'tags']
     readonly_fields = ['created']
     inlines = [BookReviewInline]
 

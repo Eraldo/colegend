@@ -9,6 +9,26 @@ from colegend.core.models import TimeStampedBase, OwnedBase
 from django.utils.translation import ugettext_lazy as _
 
 
+class BookTag(models.Model):
+    """
+    A django model representing a book's text-tag.
+    """
+    name = models.CharField(
+        _('name'),
+        max_length=255,
+        unique=True
+    )
+
+    class Meta:
+        verbose_name = _('Tag')
+        verbose_name_plural = _('Tags')
+        ordering = ['name']
+        default_related_name = 'tags'
+
+    def __str__(self):
+        return self.name
+
+
 class BookQuerySet(models.QuerySet):
     def search(self, query):
         queryset = self.filter(Q(name__icontains=query) | Q(author__icontains=query) | Q(content__icontains=query))
@@ -41,6 +61,10 @@ class Book(TimeStampedBase):
     )
     featured = models.BooleanField(
         default=False
+    )
+    tags = models.ManyToManyField(
+        to=BookTag,
+        blank=True,
     )
     notes = models.TextField(
         verbose_name=_("notes"),

@@ -5,6 +5,7 @@ from .models import Book, BookReview
 
 class BookFilter(django_filters.FilterSet):
     search = django_filters.CharFilter(method='search_filter')
+    tags = django_filters.CharFilter(method='tags_filter')
 
     class Meta:
         model = Book
@@ -18,6 +19,10 @@ class BookFilter(django_filters.FilterSet):
 
     def search_filter(self, queryset, name, value):
         return queryset.search(value)
+
+    def tags_filter(self, queryset, name, value):
+        print(value, type(value))
+        return queryset
 
 
 class BookReviewFilter(django_filters.FilterSet):
