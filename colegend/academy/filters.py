@@ -13,6 +13,7 @@ class BookFilter(django_filters.FilterSet):
             'author': ['exact', 'istartswith', 'icontains'],
             'content': ['exact', 'icontains'],
             'featured': ['exact'],
+            'public': ['exact'],
         }
 
     def search_filter(self, queryset, name, value):

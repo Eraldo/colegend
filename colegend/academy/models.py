@@ -36,8 +36,16 @@ class Book(TimeStampedBase):
     content = MarkdownField(
         blank=True
     )
+    public = models.BooleanField(
+        default=False
+    )
     featured = models.BooleanField(
         default=False
+    )
+    notes = models.TextField(
+        verbose_name=_("notes"),
+        help_text=_("Staff notes."),
+        blank=True
     )
 
     @property

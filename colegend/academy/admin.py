@@ -11,7 +11,7 @@ class BookReviewInline(admin.TabularInline):
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
     list_display = ['name', 'author', 'featured']
-    list_filter = ['featured']
+    list_filter = ['featured', 'public']
     readonly_fields = ['created']
     inlines = [BookReviewInline]
 
