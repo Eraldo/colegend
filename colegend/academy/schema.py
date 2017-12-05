@@ -2,8 +2,23 @@ import graphene
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 
-from .models import Book, BookReview
+from .models import Book, BookReview, BookTag
 from .filters import BookFilter, BookReviewFilter
+
+
+class BookTagNode(DjangoObjectType):
+
+    class Meta:
+        model = BookTag
+        interfaces = [graphene.Node]
+        filter_fields = {
+            'name': ['exact', 'istartswith', 'icontains'],
+        }
+
+
+class BookTagQuery(graphene.ObjectType):
+    book_tag = graphene.Node.Field(BookTagNode)
+    book_tags = DjangoFilterConnectionField(BookTagNode)
 
 
 class BookNode(DjangoObjectType):
@@ -48,6 +63,7 @@ class BookReviewQuery(graphene.ObjectType):
 
 
 class AcademyQuery(
+    BookTagQuery,
     BookQuery,
     BookReviewQuery,
     graphene.ObjectType):

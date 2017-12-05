@@ -1,4 +1,5 @@
 import django_filters
+from graphql_relay import from_global_id
 
 from .models import Book, BookReview
 
@@ -21,7 +22,10 @@ class BookFilter(django_filters.FilterSet):
         return queryset.search(value)
 
     def tags_filter(self, queryset, name, value):
-        print(value, type(value))
+        for id in value.split(','):
+            _type, id = from_global_id(id)
+            print(id)
+            queryset = queryset.filter(tags__id__exact=id)
         return queryset
 
 

@@ -17,6 +17,7 @@ class BookTagAdmin(admin.ModelAdmin):
 class BookAdmin(admin.ModelAdmin):
     list_display = ['name', 'author', 'featured']
     list_filter = ['featured', 'public', 'tags']
+    filter_horizontal = ['tags']
     readonly_fields = ['created']
     inlines = [BookReviewInline]
 
