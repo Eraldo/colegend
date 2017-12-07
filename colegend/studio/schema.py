@@ -13,6 +13,10 @@ from .models import InterviewEntry, Chapter, Story
 
 
 class JournalEntryNode(DjangoObjectType):
+    end = graphene.Field(
+        graphene.types.datetime.DateTime
+    )
+
     class Meta:
         model = JournalEntry
         filter_fields = {
@@ -22,6 +26,9 @@ class JournalEntryNode(DjangoObjectType):
             'keywords': ['exact', 'icontains'],
         }
         interfaces = [graphene.Node]
+
+    def resolve_end(self, info):
+        return self.end
 
 
 class JournalEntryQuery(graphene.ObjectType):
