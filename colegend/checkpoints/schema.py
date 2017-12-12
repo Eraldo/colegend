@@ -22,10 +22,14 @@ class CheckpointQuery(graphene.ObjectType):
 
     def resolve_has_checkpoint(self, info, name):
         user = info.context.user
+        if not user.is_authenticated():
+            return False
         return user.has_checkpoint(name=name)
 
     def resolve_has_checkpoints(self, info, names):
         user = info.context.user
+        if not user.is_authenticated():
+            return False
         checkpoints = [name.strip() for name in names.split(',')]
         for checkpoint in checkpoints:
             if not user.has_checkpoint(checkpoint):
@@ -42,6 +46,8 @@ class AddCheckpoint(graphene.relay.ClientIDMutation):
     @classmethod
     def mutate_and_get_payload(cls, root, info, name):
         user = info.context.user
+        if not user.is_authenticated():
+            return AddCheckpoint(checkpoint=Checkpoint.objects.none())
         checkpoint = user.add_checkpoint(name)
         return AddCheckpoint(checkpoint=checkpoint)
 
