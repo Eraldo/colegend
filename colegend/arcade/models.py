@@ -1,5 +1,68 @@
+from django.db import models
 from django.shortcuts import redirect
 from wagtail.wagtailcore.models import Page
+
+from colegend.core.fields import MarkdownField
+from colegend.core.models import TimeStampedBase
+from django.utils.translation import ugettext_lazy as _
+
+from colegend.scopes.models import ScopeField
+
+
+class AdventureTag(models.Model):
+    """
+    A django model representing an adventures's text-tag.
+    """
+    name = models.CharField(
+        _('name'),
+        max_length=255,
+        unique=True
+    )
+
+    class Meta:
+        verbose_name = _('Tag')
+        verbose_name_plural = _('Tags')
+        ordering = ['name']
+        default_related_name = 'tags'
+
+    def __str__(self):
+        return self.name
+
+
+class Adventure(TimeStampedBase):
+    name = models.CharField(
+        _('name'),
+        max_length=255,
+        unique=True
+    )
+    scope = ScopeField(
+    )
+    public = models.BooleanField(
+        default=False
+    )
+    image_url = models.URLField(
+        _('image url'),
+        blank=True
+    )
+    content = MarkdownField(
+        blank=True
+    )
+    tags = models.ManyToManyField(
+        to=AdventureTag,
+        blank=True,
+    )
+    notes = models.TextField(
+        verbose_name=_("notes"),
+        help_text=_("Staff notes."),
+        blank=True
+    )
+
+    class Meta:
+        default_related_name = 'adventures'
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name
 
 
 class ArcadePage(Page):
