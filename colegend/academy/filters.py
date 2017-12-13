@@ -24,7 +24,6 @@ class BookFilter(django_filters.FilterSet):
     def tags_filter(self, queryset, name, value):
         for id in value.split(','):
             _type, id = from_global_id(id)
-            print(id)
             queryset = queryset.filter(tags__id__exact=id)
         return queryset
 

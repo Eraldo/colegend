@@ -30,7 +30,7 @@ class BookNode(DjangoObjectType):
         model = Book
         interfaces = [graphene.Node]
 
-    def resolve_rating(self, info, app=None):
+    def resolve_rating(self, info):
         return self.rating
 
 
@@ -54,12 +54,6 @@ class BookReviewNode(DjangoObjectType):
 class BookReviewQuery(graphene.ObjectType):
     book_review = graphene.Node.Field(BookReviewNode)
     book_reviews = DjangoFilterConnectionField(BookReviewNode, filterset_class=BookReviewFilter)
-    featured_book_review = graphene.Field(BookReviewNode)
-
-    def resolve_featured_book_review(self, info):
-        user = info.context.user
-        book_review = BookReview.objects.filter(featured=True).first()
-        return book_review
 
 
 class AcademyQuery(

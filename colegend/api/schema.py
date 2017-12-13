@@ -2,6 +2,7 @@ import graphene
 from graphene_django.debug import DjangoDebug
 
 from colegend.academy.schema import AcademyQuery, AcademyMutation
+from colegend.arcade.schema import ArcadeQuery, ArcadeMutation
 from colegend.checkpoints.schema import CheckpointQuery, CheckpointMutation
 from colegend.community.schema import CommunityQuery, CommunityMutation
 from colegend.events.schema import EventQuery, EventMutation
@@ -21,6 +22,7 @@ class Query(
     UserQuery,
     CheckpointQuery,
     HomeQuery,
+    ArcadeQuery,
     StudioQuery,
     OfficeQuery,
     CommunityQuery,
@@ -40,6 +42,7 @@ class Mutation(
     UserMutation,
     CheckpointMutation,
     HomeMutation,
+    ArcadeMutation,
     OfficeMutation,
     StudioMutation,
     CommunityMutation,

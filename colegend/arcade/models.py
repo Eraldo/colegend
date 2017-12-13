@@ -1,9 +1,12 @@
+from django.conf import settings
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
+from django.db.models import Avg
 from django.shortcuts import redirect
 from wagtail.wagtailcore.models import Page
 
 from colegend.core.fields import MarkdownField
-from colegend.core.models import TimeStampedBase
+from colegend.core.models import TimeStampedBase, OwnedBase
 from django.utils.translation import ugettext_lazy as _
 
 from colegend.scopes.models import ScopeField
@@ -56,6 +59,14 @@ class Adventure(TimeStampedBase):
         help_text=_("Staff notes."),
         blank=True
     )
+    adventurers = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        through='AdventureReview'
+    )
+
+    @property
+    def rating(self):
+        return self.adventure_reviews.aggregate(Avg('rating')).get('rating__avg') or 0
 
     class Meta:
         default_related_name = 'adventures'
@@ -63,6 +74,30 @@ class Adventure(TimeStampedBase):
 
     def __str__(self):
         return self.name
+
+
+class AdventureReview(OwnedBase, TimeStampedBase):
+    adventure = models.ForeignKey(
+        to=Adventure,
+        on_delete=models.CASCADE
+    )
+    rating = models.PositiveSmallIntegerField(
+        _('rating'),
+        validators=[MinValueValidator(1), MaxValueValidator(5)]
+    )
+    content = MarkdownField(
+        blank=True
+    )
+    image_url = models.URLField(
+        _('image url'),
+        blank=True
+    )
+
+    class Meta:
+        default_related_name = 'adventure_reviews'
+
+    def __str__(self):
+        return '{adventure}/{user}'.format(adventure=self.adventure, user=self.owner)
 
 
 class ArcadePage(Page):
