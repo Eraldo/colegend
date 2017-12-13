@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
-from django.db.models import Avg
+from django.db.models import Avg, Q
 from django.shortcuts import redirect
 from wagtail.wagtailcore.models import Page
 
@@ -30,6 +30,12 @@ class AdventureTag(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class AdventureQuerySet(models.QuerySet):
+    def search(self, query):
+        queryset = self.filter(Q(name__icontains=query) | Q(content__icontains=query))
+        return queryset
 
 
 class Adventure(TimeStampedBase):
@@ -68,6 +74,8 @@ class Adventure(TimeStampedBase):
     def rating(self):
         return self.adventure_reviews.aggregate(Avg('rating')).get('rating__avg') or 0
 
+    objects = AdventureQuerySet.as_manager()
+
     class Meta:
         default_related_name = 'adventures'
         ordering = ['name']
@@ -95,6 +103,7 @@ class AdventureReview(OwnedBase, TimeStampedBase):
 
     class Meta:
         default_related_name = 'adventure_reviews'
+        unique_together = ['owner', 'adventure']
 
     def __str__(self):
         return '{adventure}/{user}'.format(adventure=self.adventure, user=self.owner)

@@ -32,7 +32,7 @@ class EventQuery(graphene.ObjectType):
         return event
 
 
-class CreateEvent(graphene.relay.ClientIDMutation):
+class CreateEventMutation(graphene.relay.ClientIDMutation):
     event = graphene.Field(EventNode)
 
     class Input:
@@ -49,8 +49,8 @@ class CreateEvent(graphene.relay.ClientIDMutation):
     def mutate_and_get_payload(cls, root, info, *args, **kwargs):
         user = info.context.user
         event = Event.objects.create(*args, **kwargs)
-        return CreateEvent(event=event)
+        return CreateEventMutation(event=event)
 
 
 class EventMutation(graphene.ObjectType):
-    create_event = CreateEvent.Field()
+    create_event = CreateEventMutation.Field()
