@@ -1,6 +1,6 @@
-from django.utils.safestring import mark_safe
-import markdown
-import bleach
+# from django.utils.safestring import mark_safe
+# import markdown
+# import bleach
 
 
 def render(text):
