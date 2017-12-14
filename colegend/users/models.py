@@ -4,9 +4,9 @@ from allauth.account.signals import user_signed_up
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser, Group
 from django.core.mail import send_mail, EmailMessage
-from django.core.urlresolvers import reverse
 from django.db import models
 from django.dispatch import receiver
+from django.urls import reverse
 from django.utils import timezone
 from django_slack import slack_message
 from django.utils.translation import ugettext_lazy as _
