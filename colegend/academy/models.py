@@ -76,6 +76,18 @@ class Book(TimeStampedBase):
     def rating(self):
         return self.book_reviews.aggregate(Avg('rating')).get('rating__avg') or 0
 
+    @property
+    def area_ratings(self):
+        return self.book_reviews.aggregate(
+            area_1=Avg('area_1'),
+            area_2=Avg('area_2'),
+            area_3=Avg('area_3'),
+            area_4=Avg('area_4'),
+            area_5=Avg('area_5'),
+            area_6=Avg('area_6'),
+            area_7=Avg('area_7'),
+        )
+
     objects = BookQuerySet.as_manager()
 
     class Meta:

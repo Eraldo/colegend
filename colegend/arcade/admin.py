@@ -9,7 +9,7 @@ class AdventureTagAdmin(admin.ModelAdmin):
 
 class AdventureReviewInline(admin.TabularInline):
     model = AdventureReview
-    extra = 1
+    extra = 0
 
 
 @admin.register(Adventure)
