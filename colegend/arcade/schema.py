@@ -4,6 +4,7 @@ from graphene_django.filter import DjangoFilterConnectionField
 from graphql_relay import from_global_id
 
 from colegend.api.models import DjangoUserFilterConnectionField
+from colegend.experience.models import add_experience
 from .models import Adventure, AdventureReview, AdventureTag
 from .filters import AdventureFilter, AdventureReviewFilter
 from .forms import AdventureReviewForm
@@ -81,6 +82,7 @@ class CreateAdventureReviewMutation(graphene.relay.ClientIDMutation):
         })
         if form.is_valid():
             review = form.save()
+            add_experience(user, 'arcade')
         else:
             raise Exception(form.errors.as_json())
         return CreateAdventureReviewMutation(review=review)
