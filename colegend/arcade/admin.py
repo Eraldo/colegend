@@ -14,8 +14,9 @@ class AdventureReviewInline(admin.TabularInline):
 
 @admin.register(Adventure)
 class AdventureAdmin(admin.ModelAdmin):
-    list_display = ['name', 'scope']
+    list_display = ['name', 'scope', 'public']
     list_filter = ['public', 'scope', 'tags']
+    list_editable = ['public']
     filter_horizontal = ['tags']
     readonly_fields = ['created']
     inlines = [AdventureReviewInline]
