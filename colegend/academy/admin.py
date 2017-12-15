@@ -20,6 +20,7 @@ class BookAdmin(admin.ModelAdmin):
     list_editable = ['public']
     filter_horizontal = ['tags']
     readonly_fields = ['created']
+    search_fields = ['name', 'author']
     inlines = [BookReviewInline]
 
 
