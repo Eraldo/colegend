@@ -15,8 +15,9 @@ class BookTagAdmin(admin.ModelAdmin):
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
-    list_display = ['name', 'author', 'featured']
-    list_filter = ['featured', 'public', 'tags']
+    list_display = ['name', 'author', 'public','featured']
+    list_filter = ['public', 'featured', 'tags']
+    list_editable = ['public']
     filter_horizontal = ['tags']
     readonly_fields = ['created']
     inlines = [BookReviewInline]
