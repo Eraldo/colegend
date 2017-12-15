@@ -60,6 +60,10 @@ class Adventure(TimeStampedBase):
         to=AdventureTag,
         blank=True,
     )
+    level = models.PositiveSmallIntegerField(
+        _('level'),
+        default=0,
+    )
     notes = models.TextField(
         verbose_name=_("notes"),
         help_text=_("Staff notes."),
