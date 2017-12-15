@@ -2,6 +2,11 @@ from django.contrib import admin
 from .models import Book, BookReview, BookTag
 
 
+class TaggedBookInline(admin.TabularInline):
+    model = Book.tags.through
+    extra = 0
+
+
 class BookReviewInline(admin.TabularInline):
     fields = ['owner', 'rating', 'area_1', 'area_2', 'area_3', 'area_4', 'area_5', 'area_6', 'area_7']
     model = BookReview
@@ -10,12 +15,12 @@ class BookReviewInline(admin.TabularInline):
 
 @admin.register(BookTag)
 class BookTagAdmin(admin.ModelAdmin):
-    pass
+    inlines = [TaggedBookInline]
 
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
-    list_display = ['name', 'author', 'public','featured']
+    list_display = ['name', 'author', 'public', 'featured']
     list_filter = ['public', 'featured', 'tags']
     list_editable = ['public']
     filter_horizontal = ['tags']
@@ -29,5 +34,3 @@ class BookReviewAdmin(admin.ModelAdmin):
     list_display = ['book', 'owner']
     list_filter = ['owner', 'book']
     readonly_fields = ['created']
-
-
