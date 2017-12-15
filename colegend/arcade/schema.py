@@ -37,7 +37,12 @@ class AdventureNode(DjangoObjectType):
         interfaces = [graphene.Node]
 
     def resolve_rating(self, info):
-        return self.rating
+        user = info.context.user
+        try:
+            review = user.adventure_reviews.get(adventure=self.id)
+            return review.rating
+        except AdventureReview.DoesNotExist:
+            return
 
     def resolve_completed(self, info):
         user = info.context.user
