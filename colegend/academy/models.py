@@ -47,10 +47,12 @@ class Book(TimeStampedBase):
     )
     image_url = models.URLField(
         _('image url'),
+        max_length=1000,
         blank=True
     )
     url = models.URLField(
         _('url'),
+        max_length=1000,
         blank=True
     )
     content = MarkdownField(

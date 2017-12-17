@@ -35,10 +35,12 @@ class Event(TimeStampedBase):
     )
     image_url = models.URLField(
         _('image url'),
+        max_length=1000,
         blank=True
     )
     video_url = models.URLField(
         _('video url'),
+        max_length=1000,
         blank=True
     )
     description = models.TextField(

@@ -13,6 +13,7 @@ class Tutorial(TimeStampedBase):
     )
     video_url = models.URLField(
         _('video url'),
+        max_length=1000,
         blank=True
     )
     content = MarkdownField()

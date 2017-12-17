@@ -51,6 +51,7 @@ class Adventure(TimeStampedBase):
     )
     image_url = models.URLField(
         _('image url'),
+        max_length=1000,
         blank=True
     )
     content = MarkdownField(
@@ -102,6 +103,7 @@ class AdventureReview(OwnedBase, TimeStampedBase):
     )
     image_url = models.URLField(
         _('image url'),
+        max_length=1000,
         blank=True
     )
 
