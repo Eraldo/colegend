@@ -13,6 +13,8 @@ from wagtail.wagtailadmin import urls as wagtailadmin_urls
 from wagtail.wagtaildocs import urls as wagtaildocs_urls
 from wagtail.wagtailsearch import urls as wagtailsearch_urls
 
+from colegend.about.views import AcademyView
+
 __author__ = 'Eraldo Energy'
 
 BACKEND_NAME = 'coLegend backend'
@@ -67,6 +69,10 @@ urlpatterns = [
 
     # API
     url(r'^api/', include('colegend.api.urls')),
+
+    # temp content
+    url(r'^academy/', AcademyView.as_view()),
+    url(r'^coacademy/', AcademyView.as_view()),
 ]
 # Static files
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
