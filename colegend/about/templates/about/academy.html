@@ -3,54 +3,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    {# open graph: http://ogp.me/ #}
-    <meta property="og:image"
-          content="{% block og_image %}{% static 'images/CoHotAirBalloon.v6.2880x1800.jpg' %}{% endblock %}"/>
-    <meta property="og:site_name" content="colegend' %}"/>
-    <meta property="og:description"
-          content="Your Person Development Journey based on the values of 'conscious', 'connected' 'committed' and 'complete'."/>
-    <!-- Add Your favicon here -->
-    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+  {# open graph: http://ogp.me/ #}
+  <meta property="og:image"
+        content="{% block og_image %}{% static 'images/CoHotAirBalloon.v6.2880x1800.jpg' %}{% endblock %}"/>
+  <meta property="og:site_name" content="colegend' %}"/>
+  <meta property="og:description"
+        content="Your Person Development Journey based on the values of 'conscious', 'connected' 'committed' and 'complete'."/>
+  <!-- Add Your favicon here -->
+  <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
 
-    <title>colegend - About</title>
+  <title>colegend - About</title>
 
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="{% static 'components/bootstrap/dist/css/bootstrap.min.css' %}">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="{% static 'components/bootstrap/dist/css/bootstrap.min.css' %}">
 
 
-    <!-- Animation CSS -->
-    <link href="{% static 'css/animate.min.css' %}" rel="stylesheet">
+  <!-- Animation CSS -->
+  <link href="{% static 'css/animate.min.css' %}" rel="stylesheet">
 
-    <!-- Fontawesome CSS -->
-    <link href="{% static 'components/fontawesome/css/font-awesome.min.css' %}" rel="stylesheet">
-    <link href="{% static 'coicons/css/index.css' %}" rel="stylesheet">
+  <!-- Fontawesome CSS -->
+  <link href="{% static 'components/fontawesome/css/font-awesome.min.css' %}" rel="stylesheet">
+  <link href="{% static 'coicons/css/index.css' %}" rel="stylesheet">
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <!-- Custom styles for this template -->
-    <link href="{% static 'about/css/index.css' %}" rel="stylesheet">
-    <link href="{% static 'about/css/about.css' %}" rel="stylesheet">
-    <link href="{% static 'css/colegend.css' %}" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="{% static 'about/css/index.css' %}" rel="stylesheet">
+  <link href="{% static 'about/css/about.css' %}" rel="stylesheet">
+  <link href="{% static 'css/colegend.css' %}" rel="stylesheet">
   <style>
     section.background .overlay .content .boxes .box {
       min-height: 12em;
     }
+
     #vertical-timeline.light-timeline:before {
       background: lightgrey;
     }
+
     .fa-li.fa {
       color: #1ab394;
     }
+
     .fa-ul {
       padding-left: 2em;
     }
@@ -58,53 +61,54 @@
 </head>
 <body id="page-top" class="bg-main-superlight">
 <div class="navbar-wrapper">
-    <nav class="navbar navbar-default bg-faded navbar-fixed-top" role="navigation" style="padding: 0;">
-        {#        <div style="padding: 0">#}
-        <a class="navbar-brand" href="#page-top">
-            <img id="logo" class="img-responsive" src="{% static 'images/coLegendLogo_86x18.png' %}">
-        </a>
-        <button type="button" class="navbar-toggler hidden-md-up pull-right" data-toggle="collapse"
-                data-target="#navbar">
-            &#9776;
-        </button>
+  <nav class="navbar navbar-default bg-faded navbar-fixed-top" role="navigation" style="padding: 0;">
+    {#        <div style="padding: 0">#}
+    <a class="navbar-brand" href="#page-top">
+      <img id="logo" class="img-responsive" src="{% static 'images/coLegendLogo_86x18.png' %}">
+    </a>
+    <button type="button" class="navbar-toggler hidden-md-up pull-right" data-toggle="collapse"
+            data-target="#navbar">
+      &#9776;
+    </button>
 
-        <div id="navbar" class="navbar-collapse collapse navbar-toggleable-sm">
-            <ul class="nav navbar-nav navbar-right pull-right">
-                <div class="menu-actions pull-right">
-                  <div class="btn-group" role="group">
-                    <a id="enter" href="https://goo.gl/forms/TwWew3iRL4zoGQIA3" target="_blank" class="btn btn-success">Apply</a>
-                  </div>
-                </div>
-                <li class="nav-item" style=""><a class="page-scroll" href="#about">About</a></li>
-                <li class="nav-item"><a class="page-scroll" href="#features">Features</a></li>
-                <li class="nav-item"><a class="page-scroll" href="#journey">Agenda</a></li>
-                {#                    <li class="nav-item"><a class="page-scroll" href="#mentors">Mentors</a></li>#}
-                <li class="nav-item"><a class="page-scroll" href="#pricing">Commitment</a></li>
-                <li class="nav-item"><a class="page-scroll" href="#contact">Contact</a></li>
-                {#                        <div class="btn-group" role="group">#}
-                {#                            <a id="enter" href="{% slugurl 'welcome' %}?next=/" class="btn btn-success">Enter</a>#}
-                {#                            <a id="login" href="{% url "account_login" %}?next=/" class="btn btn-secondary">Login</a>#}
-                {#                        </div>#}
-                {##}
-            </ul>
+    <div id="navbar" class="navbar-collapse collapse navbar-toggleable-sm">
+      <ul class="nav navbar-nav navbar-right pull-right">
+        <div class="menu-actions pull-right">
+          <div class="btn-group" role="group">
+            <a id="enter" href="https://goo.gl/forms/TwWew3iRL4zoGQIA3" target="_blank"
+               class="btn btn-success">Apply</a>
+          </div>
         </div>
-        {#        </div>#}
-    </nav>
+        <li class="nav-item" style=""><a class="page-scroll" href="#about">About</a></li>
+        <li class="nav-item"><a class="page-scroll" href="#features">Features</a></li>
+        <li class="nav-item"><a class="page-scroll" href="#journey">Agenda</a></li>
+        {#                    <li class="nav-item"><a class="page-scroll" href="#mentors">Mentors</a></li>#}
+        <li class="nav-item"><a class="page-scroll" href="#pricing">Commitment</a></li>
+        <li class="nav-item"><a class="page-scroll" href="#contact">Contact</a></li>
+        {#                        <div class="btn-group" role="group">#}
+        {#                            <a id="enter" href="{% slugurl 'welcome' %}?next=/" class="btn btn-success">Enter</a>#}
+        {#                            <a id="login" href="{% url "account_login" %}?next=/" class="btn btn-secondary">Login</a>#}
+        {#                        </div>#}
+        {##}
+      </ul>
+    </div>
+    {#        </div>#}
+  </nav>
 
 </div>
 
 {#<img src="{% static 'about/img/sections/About-Page-0-Video.jpeg' %}" alt="" class="img-responsive">#}
 <section class="background video-header"
          style="background-image: url('{% static 'about/img/sections/About-Page-0-Video.jpeg' %}')">
-    <div class="header-content" style="background-image: url('{% static 'about/img/CoHotAirBalloon.v6.png' %}');">
-    </div>
+  <div class="header-content" style="background-image: url('{% static 'about/img/CoHotAirBalloon.v6.png' %}');">
+  </div>
 </section>
 
 <section id="about" class="container services">
-    <br><br>
-{#    <h1 class="text-center">#}
-{#        <img src="{% static 'images/colegend-ypdj.png' %}" alt="colegend logo" class="img-responsive center-block">#}
-{#    </h1>#}
+  <br><br>
+  {#    <h1 class="text-center">#}
+  {#        <img src="{% static 'images/colegend-ypdj.png' %}" alt="colegend logo" class="img-responsive center-block">#}
+  {#    </h1>#}
   <br>
   <h1 class="text-center">The most personal, effective and fun way to <br>becoming a real life legend.</h1>
 
@@ -122,212 +126,217 @@
     Life Coaching, Personal Development Seminars, Gamification of Learning, Yoga and holistic Eastern theories are new
     strategies of coping and adapting to new realities and show the developing trend. Let´s fill these words with deep
     personal meaning and enjoy the ride.
-    That is what we do at coAcademy 2018 - we want to plunge into a pool of playful personal development with you, take
+    That is what we do at coAcademy 2018 - we want to plunge into a pool of playful personal development with you, take full
     authorship of our own lives and make 2018 a legendary year for all of us.
   </p>
   <br>
-    <h2 class="text-center" style="font-size: 2em">Be a part of the coAcademy 2018</h2>
-    <div class="text-center wow pulse">
-        <a href="https://goo.gl/forms/TwWew3iRL4zoGQIA3" target="_blank" class="btn btn-success btn-lg">Apply</a>
-    </div>
+  <h2 class="text-center" style="font-size: 2em">Be a part of the coAcademy 2018</h2>
+  <div class="text-center wow pulse">
+    <a href="https://goo.gl/forms/TwWew3iRL4zoGQIA3" target="_blank" class="btn btn-success btn-lg">Apply</a>
+  </div>
 </section>
 <br><br>
 
 
 <section class="background"
          style="background-image: url('{% static 'about/img/sections/About-Page-2-vision.jpeg' %}');">
-    <div class="transition container">
-        <h1>
-            Our Vision is to create a connected movement around what we love: purpose driven personal development, life
-            balance and lifelong learning.
-        </h1>
-    </div>
-    <div class="overlay">
-        <div class="content container">
-          <h1>
-            Living Your Legend
-          </h1>
-          <h2>
-            BEST OF PERSONAL DEVELOPMENT
-          </h2>
-          <p>
-            The science of happiness tells us that it’s way easier to get somewhere when you’re having fun and see a
-            deeper meaning in what you’re doing.
-          </p>
-          <p>
-            Playful personal development is an approach that uses that knowledge to integrate joy, openness and
-            creativity into the process of developing yourself more and more to become the person you really want and to
-            fulfill your own legendary potential.
-          </p>
-          <p>
-            Isn´t there enough work to do in our “normal everyday lives”?<br>
-            - So let´s create a playful place that offers the potential to grow beyond our perceived borders.
-          </p>
-          <p>
-            In the coAcademy we provide the best of personal development in form of a playful learning experience.
-          </p>
-          <br>
-          <div class="row text-center">
-            <h3 id="core-values">GUIDED BY OUR CORE VALUES</h3>
-            <div class="col-lg-3 col-md-6">
-              {% icon 'cog' classes='fa-4x text-main' %}
-              <h5>Conscious</h5>
-              <div class="text-left">
-                Become more aware of your life, uncover your deep desires and explore your legendary life
-                vision.
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-              {% icon 'globe' classes='fa-4x text-main' %}
-              <h5>Connected</h5>
-              <div class="text-left">
-                Feel connected and get active support by being part of a larger community of benevolent fellows
-                legends.
-              </div>
-            </div>
-            <div class="clear-fix"></div>
-            <div class="col-lg-3 col-md-6">
-              {% icon 'bullseye' classes='fa-4x text-main' %}
-              <h5>Committed</h5>
-              <div class="text-left">
-                Set the frame, commit to your goals and work towards achieving your Legend Quest together with
-                the support of your Mentors.
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-              {% icon 'check-circle-o' classes='fa-4x text-main' %}
-              <h5>Complete</h5>
-              <div class="text-left">
-                Live a balanced way so that you can tap into your full resource potential and sustainably enjoy
-                your legend journey.
-              </div>
-            </div>
+  <div class="transition container">
+    <h1>
+      Our Vision is to create a connected movement around what we love: purpose driven personal development, life
+      balance and lifelong learning.
+    </h1>
+  </div>
+  <div class="overlay">
+    <div class="content container">
+      <h1>
+        Living Your Legend
+      </h1>
+      <h2>
+        BEST OF PERSONAL DEVELOPMENT
+      </h2>
+      <p>
+        The science of happiness tells us that it’s way easier to get somewhere when you’re having fun and see a
+        deeper meaning in what you’re doing.
+      </p>
+      <p>
+        Playful personal development is an approach that uses that knowledge to integrate joy, openness and
+        creativity into the process of developing yourself more and more to become the person you really want and to
+        fulfill your own legendary potential.
+      </p>
+      <p>
+        Isn´t there enough work to do in our “normal everyday lives”?<br>
+        - So let´s create a playful place that offers the potential to grow beyond our perceived borders.
+      </p>
+      <p>
+        In the coAcademy we provide the best of personal development in form of a playful learning experience.
+      </p>
+      <br>
+      <div class="row text-center">
+        <h3 id="core-values">GUIDED BY OUR CORE VALUES</h3>
+        <div class="col-lg-3 col-md-6">
+          {% icon 'cog' classes='fa-4x text-main' %}
+          <h5>Conscious</h5>
+          <div class="text-left">
+            Become more aware of your life, uncover your deep desires and explore your legendary life
+            vision.
           </div>
-             <br>
-            <div class="text-center wow pulse">
-                <a href="https://goo.gl/forms/TwWew3iRL4zoGQIA3" target="_blank" class="btn btn-success btn-lg">Apply</a>
-            </div>
         </div>
+        <div class="col-lg-3 col-md-6">
+          {% icon 'globe' classes='fa-4x text-main' %}
+          <h5>Connected</h5>
+          <div class="text-left">
+            Feel connected and get active support by being part of a larger community of benevolent fellows
+            legends.
+          </div>
+        </div>
+        <div class="clear-fix"></div>
+        <div class="col-lg-3 col-md-6">
+          {% icon 'bullseye' classes='fa-4x text-main' %}
+          <h5>Committed</h5>
+          <div class="text-left">
+            Set the frame, commit to your goals and work towards achieving your Legend Quest together with
+            the support of your Mentors.
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          {% icon 'check-circle-o' classes='fa-4x text-main' %}
+          <h5>Complete</h5>
+          <div class="text-left">
+            Live a balanced way so that you can tap into your full resource potential and sustainably enjoy
+            your legend journey.
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="text-center wow pulse">
+        <a href="https://goo.gl/forms/TwWew3iRL4zoGQIA3" target="_blank" class="btn btn-success btn-lg">Apply</a>
+      </div>
     </div>
+  </div>
 </section>
 
 <section class="background"
          style="background-image: url('{% static 'about/img/sections/About-Page-1-mission.jpeg' %}');">
-    <div class="transition container">
-        <h1>
-            Our Mission is to unleash the legend in every individual, and thereby, enrich the world.
-        </h1>
-    </div>
-    <div class="overlay">
-        <div id="features" class="content container">
-            <h1>
-                A Playful Development Experience
-            </h1>
-            <h2>
-                UNLEASH THE LEGEND WITHIN YOU!
-            </h2>
-                      <div class="row">
-                <div class="flower-shape text-center col-lg-6 col-lg-push-6">
-                    <div class="row">
-                        <div class="col-sm-offset-2 col-sm-4">
-                            <div class="icon-headline">
-                                {% icon "mentor" classes='text-category-7' %}
-                            </div>
-                            <h5>
-                                {#                                <div class="h-icon">{% icon "mentor" classes='text-category-7' %}</div>#}
-                                Vision
-                            </h5>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="icon-headline">
-                                {% icon "academy" classes='text-category-6' %}
-                            </div>
-                            <h5>
-                                Methods
-                            </h5>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="icon-headline">
-                                {% icon "gatherings" classes='text-category-5' %}
-                            </div>
-                            <h5>
-                                Sharing
-                            </h5>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="icon-headline">
-                                {% icon "community" classes='text-category-4' %}
-                            </div>
-                            <h5>
-                                Gatherings
-                            </h5>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="icon-headline">
-                                {% icon "apps" classes='text-category-3' %}
-                            </div>
-                            <h5>
-                                Tools
-                            </h5>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-offset-2 col-sm-4">
-                            <div class="icon-headline">
-                                {% icon "games" classes='text-category-2' %}
-                            </div>
-                            <h5>
-                                Games
-                            </h5>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="icon-headline">
-                                {% icon "balance" classes='text-category-1' %}
-                            </div>
-                            <h5>
-                                Habits
-                            </h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-lg-pull-6">
-                  <br>
-                               <ul class="features-list fa-ul" style="max-width: 960px; margin: auto">
+  <div class="transition container">
+    <h1>
+      Our Mission is to unleash the legend in every individual, and thereby, enrich the world.
+    </h1>
+  </div>
+  <div class="overlay">
+    <div id="features" class="content container">
+      <h1>
+        A Playful Development Experience
+      </h1>
+      <h2>
+        UNLEASH THE LEGEND WITHIN YOU!
+      </h2>
+      <div class="row">
+        <div class="flower-shape text-center col-lg-6 col-lg-push-6">
+          <div class="row">
+            <div class="col-sm-offset-2 col-sm-4">
+              <div class="icon-headline">
+                {% icon "mentor" classes='text-category-7' %}
+              </div>
+              <h5>
+                {#                                <div class="h-icon">{% icon "mentor" classes='text-category-7' %}</div>#}
+                Vision
+              </h5>
+            </div>
+            <div class="col-sm-4">
+              <div class="icon-headline">
+                {% icon "academy" classes='text-category-6' %}
+              </div>
+              <h5>
+                Methods
+              </h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="icon-headline">
+                {% icon "gatherings" classes='text-category-5' %}
+              </div>
+              <h5>
+                Sharing
+              </h5>
+            </div>
+            <div class="col-sm-4">
+              <div class="icon-headline">
+                {% icon "community" classes='text-category-4' %}
+              </div>
+              <h5>
+                Gatherings
+              </h5>
+            </div>
+            <div class="col-sm-4">
+              <div class="icon-headline">
+                {% icon "apps" classes='text-category-3' %}
+              </div>
+              <h5>
+                Tools
+              </h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-offset-2 col-sm-4">
+              <div class="icon-headline">
+                {% icon "games" classes='text-category-2' %}
+              </div>
+              <h5>
+                Games
+              </h5>
+            </div>
+            <div class="col-sm-4">
+              <div class="icon-headline">
+                {% icon "balance" classes='text-category-1' %}
+              </div>
+              <h5>
+                Habits
+              </h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-lg-pull-6">
+          <br>
+          <ul class="features-list fa-ul" style="max-width: 960px; margin: auto">
 
             <strong>So in a nutshell you will…</strong>
-{#            <strong>So in a nutshell:</strong> We combine the best of personal development so you#}
+            {#            <strong>So in a nutshell:</strong> We combine the best of personal development so you#}
             <li>
               <i class="fa-li fa fa-plus-circle"></i>
-              Find out what it is you truly want and explore your life vision (Vision)
+{#              (Vision)              #}
+              Find out what it is you truly want and explore your life vision
             </li>
             <li>
               <i class="fa-li fa fa-plus-circle"></i>
-              Learn about concepts and methods in 7 holistically arranged life areas (Methods)
+{#              (Methods)#}
+              Learn about concepts and methods in 7 holistically arranged life areas
             </li>
             <li>
               <i class="fa-li fa fa-plus-circle"></i>
-              Get a commitment boost with structured and encouraging Gatherings (Gatherings)
+{#              (Gatherings)#}
+              Get a commitment boost with structured and encouraging Gatherings
             </li>
             <li>
               <i class="fa-li fa fa-plus-circle"></i>
+{#              (community)#}
               Experience the dynamics in your support and sharing groups, challenging and supporting each other
-              (community)
             </li>
             <li>
               <i class="fa-li fa fa-plus-circle"></i>
+{#              (App)#}
               Apply what you learned in your own real life and work towards achieving your goals with the support of our
-              App (App)
+              App
             </li>
             <li>
               <i class="fa-li fa fa-plus-circle"></i>
-              Playfully develop yourself further with personal development games (Joy, Games)
+{#              (Joy, Games)#}
+              Playfully develop yourself further with personal development games
             </li>
             <li>
               <i class="fa-li fa fa-plus-circle"></i>
+{#              (balance)#}
               Tap into your full resource potential and enjoy your personal development journey in a balanced way
-              (balance)
             </li>
             {#            <br><br>#}
 
@@ -347,377 +356,416 @@
             {#            </div>#}
           </ul>
 
-                    <br>
-{#                    <p>#}
-{#                        We combine the best parts of the mentoring method of development and we supercharge it into a#}
-{#                        <a href="{% slugurl 'legendary-development-experience' %}">legendary learning experience</a>#}
-{#                        that places YOU at the center of#}
-{#                        it all.#}
-{#                    </p>#}
-{#                    <ul class="features-list fa-ul">#}
-{#                        <li>#}
-{#                            <i class="fa-li fa fa-plus-circle"></i>#}
-{#                            Feedback and Coaching by a Mentor for your Development Path#}
-{#                        </li>#}
-{#                        <li>#}
-{#                            <i class="fa-li fa fa-plus-circle"></i>#}
-{#                            Vast selection of Learning Resources in the Academy#}
-{#                        </li>#}
-{#                        <li>#}
-{#                            <i class="fa-li fa fa-plus-circle"></i>#}
-{#                            Commitment boost with structured and encouraging Gatherings#}
-{#                        </li>#}
-{#                        <li>#}
-{#                            <i class="fa-li fa fa-plus-circle"></i>#}
-{#                            Inspiration from and connection with the entire colegend community#}
-{#                        </li>#}
-{#                        <li>#}
-{#                            <i class="fa-li fa fa-plus-circle"></i>#}
-{#                            Powerful Apps for more Purpose and Consciousness in your life#}
-{#                        </li>#}
-{#                        <li>#}
-{#                            <i class="fa-li fa fa-plus-circle"></i>#}
-{#                            Personal Development Games for Motivation and Creativity#}
-{#                        </li>#}
-{#                        <li>#}
-{#                            <i class="fa-li fa fa-plus-circle"></i>#}
-{#                            7 Life Areas for Balance and Sustainability#}
-{#                        </li>#}
+          <br>
+          {#                    <p>#}
+          {#                        We combine the best parts of the mentoring method of development and we supercharge it into a#}
+          {#                        <a href="{% slugurl 'legendary-development-experience' %}">legendary learning experience</a>#}
+          {#                        that places YOU at the center of#}
+          {#                        it all.#}
+          {#                    </p>#}
+          {#                    <ul class="features-list fa-ul">#}
+          {#                        <li>#}
+          {#                            <i class="fa-li fa fa-plus-circle"></i>#}
+          {#                            Feedback and Coaching by a Mentor for your Development Path#}
+          {#                        </li>#}
+          {#                        <li>#}
+          {#                            <i class="fa-li fa fa-plus-circle"></i>#}
+          {#                            Vast selection of Learning Resources in the Academy#}
+          {#                        </li>#}
+          {#                        <li>#}
+          {#                            <i class="fa-li fa fa-plus-circle"></i>#}
+          {#                            Commitment boost with structured and encouraging Gatherings#}
+          {#                        </li>#}
+          {#                        <li>#}
+          {#                            <i class="fa-li fa fa-plus-circle"></i>#}
+          {#                            Inspiration from and connection with the entire colegend community#}
+          {#                        </li>#}
+          {#                        <li>#}
+          {#                            <i class="fa-li fa fa-plus-circle"></i>#}
+          {#                            Powerful Apps for more Purpose and Consciousness in your life#}
+          {#                        </li>#}
+          {#                        <li>#}
+          {#                            <i class="fa-li fa fa-plus-circle"></i>#}
+          {#                            Personal Development Games for Motivation and Creativity#}
+          {#                        </li>#}
+          {#                        <li>#}
+          {#                            <i class="fa-li fa fa-plus-circle"></i>#}
+          {#                            7 Life Areas for Balance and Sustainability#}
+          {#                        </li>#}
 
-                        {#                        <li>#}
-                        {#                            <i class="fa-li fa fa-plus-circle"></i>#}
-                        {#                            One-on-One Coaching and Feedback by a Mentor#}
-                        {#                        </li>#}
-                        {#                        <li>#}
-                        {#                            <i class="fa-li fa fa-plus-circle"></i>#}
-                        {#                            Custom Development Path based on Your Quest#}
-                        {#                        </li>#}
-                        {#                        <li>#}
-                        {#                            <i class="fa-li fa fa-plus-circle"></i>#}
-                        {#                            Encouragement and Accountability from your Tribe#}
-                        {#                        </li>#}
-                        {#                        <li>#}
-                        {#                            <i class="fa-li fa fa-plus-circle"></i>#}
-                        {#                            Vast selection of Learning Resources in the Academy#}
-                        {#                        </li>#}
-                        {#                        <li>#}
-                        {#                            <i class="fa-li fa fa-plus-circle"></i>#}
-                        {#                            Inspiration from the entire colegend community#}
-                        {#                        </li>#}
-{#                    </ul>#}
-                    {#                    <br>#}
-                    {#                    <div class="text-center">#}
-                    {#                        <a href="{% slugurl 'welcome' %}?next=/" class="btn btn-info-outline btn-lg">Learn More</a>#}
-                    {#                    </div>#}
-                </div>
-            </div>
-{#            <br>#}
-            {#            <h2 class="text-center">Vision</h2>#}
-            {##}
-            {#            <p id="vision"#}
-            {#               class="lead text-center text-main-dark">{% icon 'quote-left' color='grey' %} {{ page.vision_text }} {% icon 'quote-right' color='grey' %}</p>#}
-{#            <br><br>#}
-            <div class="text-center wow pulse">
-                <a href="https://goo.gl/forms/TwWew3iRL4zoGQIA3" target="_blank" class="btn btn-success btn-lg">Apply</a>
-            </div>
+          {#                        <li>#}
+          {#                            <i class="fa-li fa fa-plus-circle"></i>#}
+          {#                            One-on-One Coaching and Feedback by a Mentor#}
+          {#                        </li>#}
+          {#                        <li>#}
+          {#                            <i class="fa-li fa fa-plus-circle"></i>#}
+          {#                            Custom Development Path based on Your Quest#}
+          {#                        </li>#}
+          {#                        <li>#}
+          {#                            <i class="fa-li fa fa-plus-circle"></i>#}
+          {#                            Encouragement and Accountability from your Tribe#}
+          {#                        </li>#}
+          {#                        <li>#}
+          {#                            <i class="fa-li fa fa-plus-circle"></i>#}
+          {#                            Vast selection of Learning Resources in the Academy#}
+          {#                        </li>#}
+          {#                        <li>#}
+          {#                            <i class="fa-li fa fa-plus-circle"></i>#}
+          {#                            Inspiration from the entire colegend community#}
+          {#                        </li>#}
+          {#                    </ul>#}
+          {#                    <br>#}
+          {#                    <div class="text-center">#}
+          {#                        <a href="{% slugurl 'welcome' %}?next=/" class="btn btn-info-outline btn-lg">Learn More</a>#}
+          {#                    </div>#}
         </div>
+      </div>
+      {#            <br>#}
+      {#            <h2 class="text-center">Vision</h2>#}
+      {##}
+      {#            <p id="vision"#}
+      {#               class="lead text-center text-main-dark">{% icon 'quote-left' color='grey' %} {{ page.vision_text }} {% icon 'quote-right' color='grey' %}</p>#}
+      {#            <br><br>#}
+      <div class="text-center wow pulse">
+        <a href="https://goo.gl/forms/TwWew3iRL4zoGQIA3" target="_blank" class="btn btn-success btn-lg">Apply</a>
+      </div>
     </div>
+  </div>
 </section>
 
 <section class="background"
          style="background-image: url('{% static 'about/img/sections/About-Page-3-curiosity.jpeg' %}');">
-    <div class="transition container">
-        <h1>
-            CURIOSITY
-            <br>
-            <br>
-            <div class="quote">
-                Satisfaction of one's curiosity is one of the greatest sources of happiness in life.
-                <div class="cite">Linus Pauling</div>
-            </div>
-        </h1>
-    </div>
-    <div class="overlay">
-        <div id="journey" class="content container">
-          <h1>
-            Structure & Content
-          </h1>
-          <h2>
-            How does it work and when do we meet
-          </h2>
-          <p>
-            For 9 months - starting in January - we meet once a month for a weekend in a group of up to 16
-            participants and 2 to 4 process leaders.
-          </p>
-          <p>
-            We will systematically build up our competencies and skills to live a fulfilled life, conscious of our needs
-            and passions and connected with like minded people around us.
-          </p>
-          <p>
-            7 Life Areas build the integral framework and topic agenda over the full period of 9 months:
-            Health, joy, power, connection, expression, mind and spirit.
-            For each one you will learn about matching concepts and methods, get input from experts and learn how to
-            apply them practically in your real life.
-          </p>
-{#          <br>#}
-          <div id="vertical-timeline" class="vertical-container light-timeline center-orientation">
-            <div class="vertical-timeline-block">
-              <div class="vertical-timeline-icon navy-bg">
-                <i class="fa fa-calendar"></i>
-              </div>
-              <div class="vertical-timeline-content">
-                <h2>My Tribe</h2>
-                <p>
-                  Main topics:<br>
-                  Individual & Group Introduction, Wishes & Fears, Vision & Goals
-                </p>
-                <span class="vertical-date">
-                              20.-21.01.18
-                            </span>
-              </div>
-            </div>
-            <div class="vertical-timeline-block">
-              <div class="vertical-timeline-icon bg-category-1">
-                <i class="fa fa-calendar"></i>
-              </div>
-              <div class="vertical-timeline-content">
-                <h2>My Health</h2>
-                <p>
-                  Main topics:<br>
-                  Fitness, Nutrition, Rest, Security
-                </p>
-                <span class="vertical-date">
-                              03.-04.02.18
-                            </span>
-              </div>
-            </div>
-            <div class="vertical-timeline-block">
-              <div class="vertical-timeline-icon bg-category-2">
-                <i class="fa fa-calendar"></i>
-              </div>
-              <div class="vertical-timeline-content">
-                <h2>My Joy</h2>
-                <p>
-                  Main topics:<br>
-                  Positivity, Sexuality, Entertainment, Gratitude
-                </p>
-                <span class="vertical-date">
-                              03.-04.03.18
-                            </span>
-              </div>
-            </div>
-            <div class="vertical-timeline-block">
-              <div class="vertical-timeline-icon bg-category-3">
-                <i class="fa fa-calendar"></i>
-              </div>
-              <div class="vertical-timeline-content">
-                <h2>My Power</h2>
-                <p>
-                  Main topics:<br>
-                  Wealth, Career, Success, Confidence
-                </p>
-                <span class="vertical-date">
+  <div class="transition container">
+    <h1>
+      CURIOSITY
+      <br>
+      <br>
+      <div class="quote">
+        Satisfaction of one's curiosity is one of the greatest sources of happiness in life.
+        <div class="cite">Linus Pauling</div>
+      </div>
+    </h1>
+  </div>
+  <div class="overlay">
+    <div id="journey" class="content container">
+      <h1>
+        Structure & Content
+      </h1>
+      <h2>
+        How does it work and when do we meet
+      </h2>
+      <p>
+        For 9 months - starting in January - we meet once a month for a weekend in a group of up to 16
+        participants and 2 to 4 process leaders.
+      </p>
+      <p>
+        We will systematically build up our competencies and skills to live a fulfilled life, conscious of our needs
+        and passions and connected with like minded people around us.
+      </p>
+      <p>
+        7 Life Areas build the integral framework and topic agenda over the full period of 9 months:
+        Health, joy, power, connection, expression, mind and spirit.
+        For each one you will learn about matching concepts and methods, get input from experts and learn how to
+        apply them practically in your real life.
+      </p>
+      {#          <br>#}
+      <div id="vertical-timeline" class="vertical-container light-timeline center-orientation">
+        <div class="vertical-timeline-block">
+          <div class="vertical-timeline-icon navy-bg">
+            <i class="fa fa-calendar"></i>
+          </div>
+          <div class="vertical-timeline-content">
+            <h2>My Tribe</h2>
+            <p>
+              We will introduce you to your new <b>tribe</b>, <b>sharing group</b> and <b>commitment partner</b>. You
+              get to know your fellow
+              academs. We explore and share our <b>wishes</b>, <b>fears</b>, <b>goals</b> and <b>visions</b>.
+            </p>
+            <span class="vertical-date">
+              <div>Weekend 1</div>
+              20.-21.01.18
+            </span>
+          </div>
+        </div>
+        <div class="vertical-timeline-block">
+          <div class="vertical-timeline-icon bg-category-1">
+            <i class="fa fa-calendar"></i>
+          </div>
+          <div class="vertical-timeline-content">
+            <h2>My Health</h2>
+            <p>
+              We will take a look at our <b>basic needs</b> and share <b>best practises</b>. You get guidance to build
+              <b>powerful habits</b>, boost your fitness, ensure you are well rested and feel secure.
+            </p>
+            <span class="vertical-date">
+              <div>Weekend 2</div>
+              03.-04.02.18
+            </span>
+          </div>
+        </div>
+        <div class="vertical-timeline-block">
+          <div class="vertical-timeline-icon bg-category-2">
+            <i class="fa fa-calendar"></i>
+          </div>
+          <div class="vertical-timeline-content">
+            <h2>My Joy</h2>
+            <p>
+              {#              Positivity, Sexuality, Entertainment, Gratitude#}
+              One key to having a great life is simply to <b>enjoy</b> it! All of it! We will focus on our instrinsic
+              <b>positive forces</b>, our <b>sexual energy</b> and have fun <b>playing games</b> and doing real <b>life
+              adventures</b>. To
+              round it up we
+              will make room for <b>gratitude</b> to relive the best moments. :D
+            </p>
+            <span class="vertical-date">
+              <div>Weekend 3</div>
+              03.-04.03.18
+            </span>
+          </div>
+        </div>
+        <div class="vertical-timeline-block">
+          <div class="vertical-timeline-icon bg-category-3">
+            <i class="fa fa-calendar"></i>
+          </div>
+          <div class="vertical-timeline-content">
+            <h2>My Power</h2>
+            <p>
+              {#              Wealth, Career, Success, Confidence#}
+              We will deal with <b>financial</b> and personal <b>success</b>. Learning to say <b>YES</b> and <b>NO</b>
+              in accordance with your personal <b>desires</b> is a huge challenge for many people. We will face it and
+              tap into our <b>core confidence</b> while staying <b>present</b> and aware of our environment.
+            </p>
+            <span class="vertical-date">
+              <div>Weekend 4</div>
                               07.-08.04.18
                             </span>
-              </div>
-            </div>
-            <div class="vertical-timeline-block">
-              <div class="vertical-timeline-icon bg-category-4">
-                <i class="fa fa-calendar"></i>
-              </div>
-              <div class="vertical-timeline-content">
-                <h2>My Connections</h2>
-                <p>
-                  Main topics:<br>
-                  Love, Relationships, Emotions, Empathy
-                </p>
-                <span class="vertical-date">
+          </div>
+        </div>
+        <div class="vertical-timeline-block">
+          <div class="vertical-timeline-icon bg-category-4">
+            <i class="fa fa-calendar"></i>
+          </div>
+          <div class="vertical-timeline-content">
+            <h2>My Connection</h2>
+            <p>
+              {#              Love, Relationships, Emotions, Empathy#}
+              Who are the <b>important people</b> in your life? We will explore and <b>take care</b> of our <b>social
+              garden</b>. We will focus on <b>sharing love</b> and <b>giving empathy</b> to our self and others. We will
+              plant seeds for <b>new
+              relationships</b> and
+              nourish existing ones.
+            </p>
+            <span class="vertical-date">
+              <div>Weekend 5</div>
                               05.-06.05.18
                             </span>
-              </div>
-            </div>
-            <div class="vertical-timeline-block">
-              <div class="vertical-timeline-icon bg-category-5">
-                <i class="fa fa-calendar"></i>
-              </div>
-              <div class="vertical-timeline-content">
-                <h2>My Expression</h2>
-                <p>
-                  Main topics:<br>
-                  Communication, Arts, Voice, Honesty
-                </p>
-                <span class="vertical-date">
+          </div>
+        </div>
+        <div class="vertical-timeline-block">
+          <div class="vertical-timeline-icon bg-category-5">
+            <i class="fa fa-calendar"></i>
+          </div>
+          <div class="vertical-timeline-content">
+            <h2>My Expression</h2>
+            <p>
+              {#              Communication, Arts, Voice, Honesty#}
+              Listen up! We will practise <b>active listening</b> and <b>radically honest communication</b>. We will <b>voice</b>
+              what we want and <b>ask</b> to understand more. We will explore different <b>mediums</b> and
+              <b>styles</b> to expand our palette and practise the <b>art</b>
+              bridging the gap between your inner and outer world. If you want to <b>express yourself</b>, make an
+              impression.
+            </p>
+            <span class="vertical-date">
+              <div>Weekend 6</div>
                               02.-03.06.18
                             </span>
-              </div>
-            </div>
-            <div class="vertical-timeline-block">
-              <div class="vertical-timeline-icon bg-category-6">
-                <i class="fa fa-calendar"></i>
-              </div>
-              <div class="vertical-timeline-content">
-                <h2>My Mind</h2>
-                <p>
-                  Main topics:<br>
-                  Education, Organization, Systems, Thinking
-                </p>
-                <span class="vertical-date">
+          </div>
+        </div>
+        <div class="vertical-timeline-block">
+          <div class="vertical-timeline-icon bg-category-6">
+            <i class="fa fa-calendar"></i>
+          </div>
+          <div class="vertical-timeline-content">
+            <h2>My Mind</h2>
+            <p>
+              {#              Education, Organization, Systems, Thinking#}
+              How well do you <b>understand</b> the world you are in? You will <b>learn</b> stuff not taught at
+              school!
+              We will <b>educate</b> ourselves by learning alternative <b>strategies</b> of how to <b>manage</b> and <b>organize</b>
+              ourselves to "<i>make</i> time" for what we want.
+              We will pause in order to <b>plan</b> and set <b>priorities</b>.
+              {#              We will tune your personal organisation system#}
+              {#              We will zoom out and inspect your priorities#}
+              {#              We will set outcomes and   #}
+              {#              We will plan and #}
+              {#              organised#}
+              We will <b>think</b> of <b>experiments</b> to test our <b>assumptions</b>.
+              {#              Motto: If you want more time, make more time.#}
+              Most people don't plan to fail, they fail to plan!
+            </p>
+            <span class="vertical-date">
+              <div>Weekend 7</div>
                               07.-08.07.18
                             </span>
-              </div>
-            </div>
-            <div class="vertical-timeline-block">
-              <div class="vertical-timeline-icon bg-category-7">
-                <i class="fa fa-calendar"></i>
-              </div>
-              <div class="vertical-timeline-content">
-                <h2>My Spirit</h2>
-                <p>
-                  Main topics:<br>
-                  Purpose, Intuition, Belief, Balance
-                </p>
-                <span class="vertical-date">
+          </div>
+        </div>
+        <div class="vertical-timeline-block">
+          <div class="vertical-timeline-icon bg-category-7">
+            <i class="fa fa-calendar"></i>
+          </div>
+          <div class="vertical-timeline-content">
+            <h2>My Spirit</h2>
+            <p>
+{#              Purpose, Intuition, Belief, Balance#}
+              We will explore and root ourselves in our life <b>purpose</b> so that our default actions and decisions well gravitate towards it.
+              We will dive <b>deep</b> into our unique belief system and make sure our new sense of self becomes <b>intuitive</b>.
+              Finally we will round things up by making sure we attain dynamic <b>balance</b> to sustain our journey.
+            </p>
+            <span class="vertical-date">
+              <div>Weekend 8</div>
                               04.-05.08.18
                             </span>
-              </div>
-            </div>
-            <div class="vertical-timeline-block">
-              <div class="vertical-timeline-icon navy-bg">
-                <i class="fa fa-calendar"></i>
-              </div>
-              <div class="vertical-timeline-content">
-                <h2>My Legend</h2>
-                <p>
-                  Main topics:<br>
-                  Recap & Transfer
-                </p>
-                <span class="vertical-date">
+          </div>
+        </div>
+        <div class="vertical-timeline-block">
+          <div class="vertical-timeline-icon navy-bg">
+            <i class="fa fa-calendar"></i>
+          </div>
+          <div class="vertical-timeline-content">
+            <h2>My Legend</h2>
+            <p>
+{#              Recap & Transfer#}
+              We will <b>recap</b> and bring everthing together that we did and harvest the fruits of our investment.
+              We will take a look at the <b>future</b> and deal with the <b>transfer</b> of our experiences to have <b>lasting impact</b>.
+            </p>
+            <span class="vertical-date">
+              <div>Weekend 9</div>
                             01.-02.09.18
                           </span>
-              </div>
-            </div>
           </div>
-          {#          <div class="row boxes">#}
-{#            <div class="col-lg-6 box right overlay-highlight">#}
-{#              <h2>#}
-{#                <span class="pull-left">My Tribe</span>#}
-{#                <span class="pull-right">20.-21.01.18</span>#}
-{#              </h2>#}
-{#              <span class="clearfix"></span>#}
-{#              <p>#}
-{#                Individual & Group Introduction, Fears & Wishes, Vision & Goals#}
-{#              </p>#}
-{#            </div>#}
-{#            <div class="col-lg-6 box right overlay-highlight-2">#}
-{#              <h2>#}
-{#                <span class="pull-left">My Health</span>#}
-{#                <span class="pull-right">03.-04.02.18</span>#}
-{#              </h2>#}
-{#              <span class="clearfix"></span>#}
-{#              <p>#}
-{#                Fitness, Nutrition, Rest, Security#}
-{#              </p>#}
-{#            </div>#}
-{#            <div class="col-lg-6 box right overlay-highlight-2">#}
-{#              <h2>#}
-{#                <span class="pull-left">My Joy</span>#}
-{#                <span class="pull-right">03.-04.03.18</span>#}
-{#              </h2>#}
-{#              <span class="clearfix"></span>#}
-{#              <p>#}
-{#                Positivity, Sexuality, Entertainment, Gratitude#}
-{#              </p>#}
-{#            </div>#}
-{#            <div class="col-lg-6 box right overlay-highlight">#}
-{#              <h2>#}
-{#                <span class="pull-left">My Power</span>#}
-{#                <span class="pull-right">07.-08.04.18</span>#}
-{#              </h2>#}
-{#              <span class="clearfix"></span>#}
-{#              <p>#}
-{#                Wealth, Career, Success, Confidence#}
-{#              </p>#}
-{#            </div>#}
-{#            <div class="col-lg-6 box right overlay-highlight">#}
-{#              <h2>#}
-{#                <span class="pull-left">My Connections</span>#}
-{#                <span class="pull-right">05.-06.05.18</span>#}
-{#              </h2>#}
-{#              <span class="clearfix"></span>#}
-{#              <p>#}
-{#                Love, Relationships, Emotions, Empathy#}
-{#              </p>#}
-{#            </div>#}
-{#            <div class="col-lg-6 box right overlay-highlight-2">#}
-{#              <h2>#}
-{#                <span class="pull-left">My Expression</span>#}
-{#                <span class="pull-right">02.-03.06.18</span>#}
-{#              </h2>#}
-{#              <span class="clearfix"></span>#}
-{#              <p>#}
-{#                Communication, Arts, Voice, Honesty#}
-{#              </p>#}
-{#            </div>#}
-{#            <div class="col-lg-6 box right overlay-highlight-2">#}
-{#              <h2>#}
-{#                <span class="pull-left">My Mind</span>#}
-{#                <span class="pull-right">07.-08.07.18</span>#}
-{#              </h2>#}
-{#              <span class="clearfix"></span>#}
-{#              <p>#}
-{#                Education, Organization, Systems, Thinking#}
-{#              </p>#}
-{#            </div>#}
-{#            <div class="col-lg-6 box right overlay-highlight">#}
-{#              <h2>#}
-{#                <span class="pull-left">My Spirit</span>#}
-{#                <span class="pull-right">04.-05.08.18</span>#}
-{#              </h2>#}
-{#              <span class="clearfix"></span>#}
-{#              <p>#}
-{#                Purpose, Intuition, Belief, Balance#}
-{#              </p>#}
-{#            </div>#}
-{#            <div class="col-lg-6 box right overlay-highlight">#}
-{#              <h2>#}
-{#                <span class="pull-left">My Legend</span>#}
-{#                <span class="pull-right">01.-02.09.18</span>#}
-{#              </h2>#}
-{#              <span class="clearfix"></span>#}
-{#              <p>#}
-{#                Recap & Transfer#}
-{#              </p>#}
-{#            </div>#}
-{#            <div class="col-lg-6 box right overlay-highlight-2">#}
-{#              <h2>#}
-{#                <span class="pull-left">My Future</span>#}
-{#              </h2>#}
-{#              <span class="clearfix"></span>#}
-{#              <p>#}
-{#                Ongoing: guiding app & regular virtual commitment group meetings#}
-{#              </p>#}
-{#            </div>#}
-{#          </div>#}
-{#          <br>#}
-          <h3>
-            General meeting structure
-          </h3>
-          <p>
-            The monthly meetings officially begin Saturdays at 10-18. “Officially”, meaning that people who want to meet
-            earlier than that to use their early morning power can do so and take part in some morning fitness or
-            meditation - depending on their likings. This is the same for Sundays, “officially” going from 11-15
-            o’clock. Additionally, Saturday evenings we can go have a joined dinner and enjoy a casual open-ending.
-          </p>
-          <p>
-            Additionally, in between those intensive weekends you will have an app to guide your ongoing personal
-            development process. That also means having committed sharing partners with whom you can meet regularly
-            virtually outside of the monthly meetings to reflect on your ongoing journey together.
-          </p>
-          <div class="text-center wow pulse">
-                <a href="https://goo.gl/forms/TwWew3iRL4zoGQIA3" target="_blank" class="btn btn-success btn-lg">Apply</a>
-            </div>
         </div>
+      </div>
+      {#          <div class="row boxes">#}
+      {#            <div class="col-lg-6 box right overlay-highlight">#}
+      {#              <h2>#}
+      {#                <span class="pull-left">My Tribe</span>#}
+      {#                <span class="pull-right">20.-21.01.18</span>#}
+      {#              </h2>#}
+      {#              <span class="clearfix"></span>#}
+      {#              <p>#}
+      {#                Individual & Group Introduction, Fears & Wishes, Vision & Goals#}
+      {#              </p>#}
+      {#            </div>#}
+      {#            <div class="col-lg-6 box right overlay-highlight-2">#}
+      {#              <h2>#}
+      {#                <span class="pull-left">My Health</span>#}
+      {#                <span class="pull-right">03.-04.02.18</span>#}
+      {#              </h2>#}
+      {#              <span class="clearfix"></span>#}
+      {#              <p>#}
+      {#                Fitness, Nutrition, Rest, Security#}
+      {#              </p>#}
+      {#            </div>#}
+      {#            <div class="col-lg-6 box right overlay-highlight-2">#}
+      {#              <h2>#}
+      {#                <span class="pull-left">My Joy</span>#}
+      {#                <span class="pull-right">03.-04.03.18</span>#}
+      {#              </h2>#}
+      {#              <span class="clearfix"></span>#}
+      {#              <p>#}
+      {#                Positivity, Sexuality, Entertainment, Gratitude#}
+      {#              </p>#}
+      {#            </div>#}
+      {#            <div class="col-lg-6 box right overlay-highlight">#}
+      {#              <h2>#}
+      {#                <span class="pull-left">My Power</span>#}
+      {#                <span class="pull-right">07.-08.04.18</span>#}
+      {#              </h2>#}
+      {#              <span class="clearfix"></span>#}
+      {#              <p>#}
+      {#                Wealth, Career, Success, Confidence#}
+      {#              </p>#}
+      {#            </div>#}
+      {#            <div class="col-lg-6 box right overlay-highlight">#}
+      {#              <h2>#}
+      {#                <span class="pull-left">My Connections</span>#}
+      {#                <span class="pull-right">05.-06.05.18</span>#}
+      {#              </h2>#}
+      {#              <span class="clearfix"></span>#}
+      {#              <p>#}
+      {#                Love, Relationships, Emotions, Empathy#}
+      {#              </p>#}
+      {#            </div>#}
+      {#            <div class="col-lg-6 box right overlay-highlight-2">#}
+      {#              <h2>#}
+      {#                <span class="pull-left">My Expression</span>#}
+      {#                <span class="pull-right">02.-03.06.18</span>#}
+      {#              </h2>#}
+      {#              <span class="clearfix"></span>#}
+      {#              <p>#}
+      {#                Communication, Arts, Voice, Honesty#}
+      {#              </p>#}
+      {#            </div>#}
+      {#            <div class="col-lg-6 box right overlay-highlight-2">#}
+      {#              <h2>#}
+      {#                <span class="pull-left">My Mind</span>#}
+      {#                <span class="pull-right">07.-08.07.18</span>#}
+      {#              </h2>#}
+      {#              <span class="clearfix"></span>#}
+      {#              <p>#}
+      {#                Education, Organization, Systems, Thinking#}
+      {#              </p>#}
+      {#            </div>#}
+      {#            <div class="col-lg-6 box right overlay-highlight">#}
+      {#              <h2>#}
+      {#                <span class="pull-left">My Spirit</span>#}
+      {#                <span class="pull-right">04.-05.08.18</span>#}
+      {#              </h2>#}
+      {#              <span class="clearfix"></span>#}
+      {#              <p>#}
+      {#                Purpose, Intuition, Belief, Balance#}
+      {#              </p>#}
+      {#            </div>#}
+      {#            <div class="col-lg-6 box right overlay-highlight">#}
+      {#              <h2>#}
+      {#                <span class="pull-left">My Legend</span>#}
+      {#                <span class="pull-right">01.-02.09.18</span>#}
+      {#              </h2>#}
+      {#              <span class="clearfix"></span>#}
+      {#              <p>#}
+      {#                Recap & Transfer#}
+      {#              </p>#}
+      {#            </div>#}
+      {#            <div class="col-lg-6 box right overlay-highlight-2">#}
+      {#              <h2>#}
+      {#                <span class="pull-left">My Future</span>#}
+      {#              </h2>#}
+      {#              <span class="clearfix"></span>#}
+      {#              <p>#}
+      {#                Ongoing: guiding app & regular virtual commitment group meetings#}
+      {#              </p>#}
+      {#            </div>#}
+      {#          </div>#}
+      {#          <br>#}
+      <h3>
+        General meeting structure
+      </h3>
+      <p>
+        The monthly meetings officially begin Saturdays at 10-18. “Officially”, meaning that people who want to meet
+        earlier than that to use their early morning power can do so and take part in some morning fitness or
+        meditation - depending on their likings. This is the same for Sundays, “officially” going from 11-15
+        o’clock. Additionally, Saturday evenings we can go have a joined dinner and enjoy a casual open-ending.
+      </p>
+      <p>
+        Additionally, in between those intensive weekends you will have an app to guide your ongoing personal
+        development process. That also means having committed sharing partners with whom you can meet regularly
+        virtually outside of the monthly meetings to reflect on your ongoing journey together.
+      </p>
+      <div class="text-center wow pulse">
+        <a href="https://goo.gl/forms/TwWew3iRL4zoGQIA3" target="_blank" class="btn btn-success btn-lg">Apply</a>
+      </div>
     </div>
+  </div>
 </section>
 
 {#<section class="background"#}
@@ -743,9 +791,9 @@
 {#            </h2>#}
 {#            <p>#}
 {#                Check out our Mentors below.#}
-                {#                Visit our <a href="{% slugurl 'mentors' %}">Meet the Mentors</a> page to#}
-                {#                Below is a small sample of the Mentors in colegend. Visit our <a href="{% slugurl 'mentors' %}">Meet the Mentors</a> page to#}
-                {#                see a more complete roster. #}
+{#                Visit our <a href="{% slugurl 'mentors' %}">Meet the Mentors</a> page to#}
+{#                Below is a small sample of the Mentors in colegend. Visit our <a href="{% slugurl 'mentors' %}">Meet the Mentors</a> page to#}
+{#                see a more complete roster. #}
 {#                Or learn more about the <a href="{% slugurl 'mentors-calling' %}">expectations of a Mentor</a> and the#}
 {#                <a#}
 {#                        href="{% slugurl 'mentors-calling' %}">path to becoming a Mentor</a>.#}
@@ -779,170 +827,174 @@
 
 <section class="background"
          style="background-image: url('{% static 'about/img/sections/About-Page-5-collaboration.jpg' %}');">
-    <div class="transition container">
-        <h1>
-            COLLABORATION
-            <br>
-            <br>
-            <div class="quote">
-                You can experience your higher self by diving into a cultivated community.
-                <div class="cite">Eraldo Energy</div>
-            </div>
-        </h1>
-    </div>
-    <div class="overlay">
-        <div class="content container">
-            <h1>
-                Supportive Organic Community
-            </h1>
-            <h2>
-                PROFIT FROM AND GET INSPIRED BY COMMITTED FELLOW LEGENDS
-            </h2>
-            <br>
-            <div class="row">
-                <div class="col-lg-6">
-                    {#                    <h5 class="text-center">#}
-                    {#                        OUR ORGANIC COMMUNITY STRUCTURE#}
-                    {#                    </h5>#}
-                  <h4>
-                    What is the Community and for who is it?
-                  </h4>
-                    <p>
-                        The quality of your journey is not only determined by where you go and how you get there. The
-                        people you
-                        travel with can make all the difference.
-                    </p>
-                    <p>
-                        On your Personal Development Journey you are in good company: Committed fellow legends that you
-                        pair up
-                        with in a close duo, a supporting clan and a connected tribe - your legend family that you can
-                        open up
-                        to and get inspired by.
-                    </p>
-                    <p>
-                        Lead by your Mentor you can interact regularly in a structured way so that each of you can
-                        profit the
-                        most of this shared experience. Together you can merge your potentials into an ongoing legend!
-                    </p>
-                </div>
-                <div class="col-lg-6">
-                    <img src="{% static 'about/img/community-cell.png' %}" alt="community anatomy"
-                         class="img-responsive center-block">
-                </div>
-            </div>
-                    <ul class="features-list fa-ul" style="max-width: 960px; margin: auto">
-          <strong>
-            The coAcademy is for people who want to…
-          </strong>
-            <li>
-              <i class="fa-li fa fa-plus-circle"></i>
-              lead a more balanced life, listening to their mind, heart and body
-            </li>
-            <li>
-              <i class="fa-li fa fa-plus-circle"></i>
-              challenge themselves to really turn their life around and have fun while doing it
-            </li>
-            <li>
-              <i class="fa-li fa fa-plus-circle"></i>
-              have leading functions in organisations and want to have a better overview of inter- and intrapersonal processes as well as group dynamics
-            </li>
-            <li>
-              <i class="fa-li fa fa-plus-circle"></i>
-              have a deeper connection to themselves and others
-            </li>
-            <li>
-              <i class="fa-li fa fa-plus-circle"></i>
-              truly get to know and express what they’re feeling and thinking
-            </li>
-            <li>
-              <i class="fa-li fa fa-plus-circle"></i>
-              deepen their coaching skills or generally are interested in learning about different methods and exercises of personal development
-            </li>
-            <li>
-              <i class="fa-li fa fa-plus-circle"></i>
-              develop themselves, discover their real purpose in life and find out what it is they’re truly capable of
-            </li>
-          </ul>
-
-            <br>
-            <div class="text-center wow pulse">
-                <a href="https://goo.gl/forms/TwWew3iRL4zoGQIA3" target="_blank" class="btn btn-success btn-lg">Apply</a>
-            </div>
+  <div class="transition container">
+    <h1>
+      COLLABORATION
+      <br>
+      <br>
+      <div class="quote">
+        You can experience your higher self by diving into a cultivated community.
+        <div class="cite">Eraldo Energy</div>
+      </div>
+    </h1>
+  </div>
+  <div class="overlay">
+    <div class="content container">
+      <h1>
+        Supportive Organic Community
+      </h1>
+      <h2>
+        PROFIT FROM AND GET INSPIRED BY COMMITTED FELLOW LEGENDS
+      </h2>
+      <br>
+      <div class="row">
+        <div class="col-lg-6">
+          {#                    <h5 class="text-center">#}
+          {#                        OUR ORGANIC COMMUNITY STRUCTURE#}
+          {#                    </h5>#}
+          <h4>
+            What is the Community and for who is it?
+          </h4>
+          <p>
+            The quality of your journey is not only determined by where you go and how you get there. The
+            people you
+            travel with can make all the difference.
+          </p>
+          <p>
+            On your Personal Development Journey you are in good company: Committed fellow legends that you
+            pair up
+            with in a close duo, a supporting clan and a connected tribe - your legend family that you can
+            open up
+            to and get inspired by.
+          </p>
+          <p>
+            Lead by your Mentor you can interact regularly in a structured way so that each of you can
+            profit the
+            most of this shared experience. Together you can merge your potentials into an ongoing legend!
+          </p>
         </div>
+        <div class="col-lg-6">
+          <img src="{% static 'about/img/community-cell.png' %}" alt="community anatomy"
+               class="img-responsive center-block">
+        </div>
+      </div>
+      <ul class="features-list fa-ul" style="max-width: 960px; margin: auto">
+        <strong>
+          The coAcademy is for people who want to…
+        </strong>
+        <li>
+          <i class="fa-li fa fa-plus-circle"></i>
+          lead a more balanced life, listening to their mind, heart and body
+        </li>
+        <li>
+          <i class="fa-li fa fa-plus-circle"></i>
+          challenge themselves to really turn their life around and have fun while doing it
+        </li>
+        <li>
+          <i class="fa-li fa fa-plus-circle"></i>
+          have leading functions in organisations and want to have a better overview of inter- and intrapersonal
+          processes as well as group dynamics
+        </li>
+        <li>
+          <i class="fa-li fa fa-plus-circle"></i>
+          have a deeper connection to themselves and others
+        </li>
+        <li>
+          <i class="fa-li fa fa-plus-circle"></i>
+          truly get to know and express what they’re feeling and thinking
+        </li>
+        <li>
+          <i class="fa-li fa fa-plus-circle"></i>
+          deepen their coaching skills or generally are interested in learning about different methods and exercises of
+          personal development
+        </li>
+        <li>
+          <i class="fa-li fa fa-plus-circle"></i>
+          develop themselves, discover their real purpose in life and find out what it is they’re truly capable of
+        </li>
+      </ul>
+
+      <br>
+      <div class="text-center wow pulse">
+        <a href="https://goo.gl/forms/TwWew3iRL4zoGQIA3" target="_blank" class="btn btn-success btn-lg">Apply</a>
+      </div>
     </div>
+  </div>
 </section>
 
 <section class="background"
          style="background-image: url('{% static 'about/img/sections/About-Page-6-Academy.jpg' %}');">
-    <div class="transition container">
-        <h1>
-            KNOWLEDGE
-            <br>
-            <br>
-            <div class="quote">
-                Education is the key to self-development and empowerment.
-                <div class="cite">Lailah Gifty Akita</div>
-            </div>
-        </h1>
+  <div class="transition container">
+    <h1>
+      KNOWLEDGE
+      <br>
+      <br>
+      <div class="quote">
+        Education is the key to self-development and empowerment.
+        <div class="cite">Lailah Gifty Akita</div>
+      </div>
+    </h1>
+  </div>
+  <div class="overlay">
+    <div id="academy" class="content container">
+      <br>
+      <h1>
+        Academy
+      </h1>
+      {#          <h2>Academs</h2>#}
+      <h2>Education</h2>
+      <p>
+        We will cover many different perspectives and methods for all areas of life. A lot of insights will be generated
+        by doing actual experiments and sharing our experiences.<br>
+        By the end of the journey you will have a good and practical understanding of many core approaches like:
+      </p>
+      <ul class="features-list fa-ul" style="max-width: 960px; margin: auto">
+        <li>
+          <i class="fa-li fa fa-graduation-cap"></i>
+          Progressive Habit Building
+        </li>
+        <li>
+          <i class="fa-li fa fa-graduation-cap"></i>
+          Positive Psychology
+        </li>
+        <li>
+          <i class="fa-li fa fa-graduation-cap"></i>
+          Self-Organisation (GTD based)
+        </li>
+        <li>
+          <i class="fa-li fa fa-graduation-cap"></i>
+          Compassionate Communication (NVC)
+        </li>
+        <li>
+          <i class="fa-li fa fa-graduation-cap"></i>
+          Self-responsible Language
+        </li>
+        <li>
+          <i class="fa-li fa fa-graduation-cap"></i>
+          Decision Education
+        </li>
+        <li>
+          <i class="fa-li fa fa-graduation-cap"></i>
+          Hero's Journey
+        </li>
+        <li>
+          <i class="fa-li fa fa-graduation-cap"></i>
+          and more
+        </li>
+      </ul>
+      <h2>
+        Certificate
+      </h2>
+      <p>
+        You will get a certificate of completion at the end of your journey. However the real treasure will be your
+        actual results. ;)
+      </p>
+      <br>
+      <div class="text-center wow pulse">
+        <a href="https://goo.gl/forms/TwWew3iRL4zoGQIA3" target="_blank" class="btn btn-success btn-lg">Apply</a>
+      </div>
     </div>
-    <div class="overlay">
-        <div id="academy" class="content container">
-          <br>
-          <h1>
-            Academy
-          </h1>
-{#          <h2>Academs</h2>#}
-          <h2>Education</h2>
-          <p>
-            We will cover many different perspectives and methods for all areas of life. A lot of insights will be generated by doing actual experiments and sharing our experiences.<br>
-            By the end of the journey you will have a good and practical understanding of many core approaches like:
-          </p>
-          <ul class="features-list fa-ul" style="max-width: 960px; margin: auto">
-            <li>
-              <i class="fa-li fa fa-graduation-cap"></i>
-              Progressive Habit Building
-            </li>
-            <li>
-              <i class="fa-li fa fa-graduation-cap"></i>
-              Positive Psychology
-            </li>
-            <li>
-              <i class="fa-li fa fa-graduation-cap"></i>
-              Self-Organisation (GTD based)
-            </li>
-            <li>
-              <i class="fa-li fa fa-graduation-cap"></i>
-              Compassionate Communication (NVC)
-            </li>
-            <li>
-              <i class="fa-li fa fa-graduation-cap"></i>
-              Self-responsible Language
-            </li>
-            <li>
-              <i class="fa-li fa fa-graduation-cap"></i>
-              Decision Education
-            </li>
-            <li>
-              <i class="fa-li fa fa-graduation-cap"></i>
-              Hero's Journey
-            </li>
-            <li>
-              <i class="fa-li fa fa-graduation-cap"></i>
-              and more
-            </li>
-          </ul>
-          <h2>
-            Certificate
-          </h2>
-          <p>
-            You will get a certificate of completion at the end of your journey. However the real treasure will be your actual results. ;)
-          </p>
-            <br>
-            <div class="text-center wow pulse">
-                <a href="https://goo.gl/forms/TwWew3iRL4zoGQIA3" target="_blank" class="btn btn-success btn-lg">Apply</a>
-            </div>
-        </div>
-    </div>
+  </div>
 </section>
 
 {#<section class="background"#}
@@ -1019,441 +1071,441 @@
 
 <section class="background"
          style="background-image: url('{% static 'about/img/sections/About-Page-8-Fun.jpg' %}');">
-    <div class="transition container">
-        <h1>
-            FUN
-            <br>
-            <br>
-            <div class="quote">
-                We do not stop playing because we grow old, we grow old because we stop playing!
-                <div class="cite">Benjamin Franklin</div>
-            </div>
-        </h1>
-    </div>
-    <div class="overlay">
-        <div class="content container">
-            <h1>
-                Playful Personal Development
-            </h1>
-            <h2>
-                PLAYFULLY TAPPING INTO YOUR FULL POTENTIAL
-            </h2>
-            <div class="row">
-                <div class="col-md-6">
-                  <p>
-                    A new approach to develop yourself more and more to become the person you really want, to fulfill
-                    your own potential with passion and ease rather than feeling exhausted and hard working. Isn´t there
-                    enough work to do in our “normal everyday lives”? - So let´s create a playful place that offers the
-                    potential to grow beyond our perceived borders.. We integrate joy, exhilaration and adventure into
-                    the process of learning about personal development methods, really applying them and finding out
-                    what it is you truly want and how you can get there. Because it’s way easier to get somewhere when
-                    you’re actually having fun doing it.
-                  </p>
-                </div>
-                <div class="col-md-6">
-                    <img src="{% static 'about/img/CardsOfLife.png' %}" alt="cards of life"
-                         class="img-responsive center-block">
-                </div>
-            </div>
-            <br>
-            <div class="text-center wow pulse">
-                <a href="https://goo.gl/forms/TwWew3iRL4zoGQIA3" target="_blank" class="btn btn-success btn-lg">Apply</a>
-            </div>
+  <div class="transition container">
+    <h1>
+      FUN
+      <br>
+      <br>
+      <div class="quote">
+        We do not stop playing because we grow old, we grow old because we stop playing!
+        <div class="cite">Benjamin Franklin</div>
+      </div>
+    </h1>
+  </div>
+  <div class="overlay">
+    <div class="content container">
+      <h1>
+        Playful Personal Development
+      </h1>
+      <h2>
+        PLAYFULLY TAPPING INTO YOUR FULL POTENTIAL
+      </h2>
+      <div class="row">
+        <div class="col-md-6">
+          <p>
+            A new approach to develop yourself more and more to become the person you really want, to fulfill
+            your own potential with passion and ease rather than feeling exhausted and hard working. Isn´t there
+            enough work to do in our “normal everyday lives”? - So let´s create a playful place that offers the
+            potential to grow beyond our perceived borders.. We integrate joy, exhilaration and adventure into
+            the process of learning about personal development methods, really applying them and finding out
+            what it is you truly want and how you can get there. Because it’s way easier to get somewhere when
+            you’re actually having fun doing it.
+          </p>
         </div>
+        <div class="col-md-6">
+          <img src="{% static 'about/img/CardsOfLife.png' %}" alt="cards of life"
+               class="img-responsive center-block">
+        </div>
+      </div>
+      <br>
+      <div class="text-center wow pulse">
+        <a href="https://goo.gl/forms/TwWew3iRL4zoGQIA3" target="_blank" class="btn btn-success btn-lg">Apply</a>
+      </div>
     </div>
+  </div>
 </section>
 
 <section class="background"
          style="background-image: url('{% static 'about/img/sections/About-Page-9-balance.jpg' %}');">
-    <div class="transition container">
-        <h1>
-            BALANCE
-            <br>
-            <br>
-            <div class="quote">
-                The key to keeping your balance <br class="hidden-md-down">is knowing when you've lost it.
-                <div class="cite"></div>
-            </div>
+  <div class="transition container">
+    <h1>
+      BALANCE
+      <br>
+      <br>
+      <div class="quote">
+        The key to keeping your balance <br class="hidden-md-down">is knowing when you've lost it.
+        <div class="cite"></div>
+      </div>
 
-        </h1>
-    </div>
-    <div class="overlay">
-        <div class="content container">
-            <br>
-            <h1>
-                LIFE AREAS
-            </h1>
-            <h2>
-                CREATING LIFE BALANCE
-            </h2>
-            <p>
-              The 7 Life Areas build the integral framework over the full period of 9 months: Health, joy, power,
-              connection, expression, mind and spirit. For each one you will learn about matching concepts and methods,
-              get input from experts and learn how to apply them practically in your real life. Additionally, in between
-              those intensive weekends you will have an app to guide your ongoing personal development process. That
-              also means having committed sharing partners with whom you will meet regularly virtually outside of the
-              monthly meetings to reflect on your ongoing journey together.
-            </p>
-            <div class="row">
-                <div class="flower-shape text-center col-lg-8 col-lg-offset-2">
-                    <div class="row">
-                        <div class="col-sm-offset-2 col-sm-4">
-                            <div class="icon-headline">
-                                {% icon "area-7" classes='text-category-7' %}
-                            </div>
-                            <h5>
-                                Spirit
-                            </h5>
-                            Purpose, Intuition, <br>Belief, Balance
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="icon-headline">
-                                {% icon "area-6" classes='text-category-6' %}
-                            </div>
-                            <h5>
-                                Mind
-                            </h5>
-                            Education, Organisation, <br>Vision, Thinking
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="icon-headline">
-                                {% icon "area-5" classes='text-category-5' %}
-                            </div>
-                            <h5>
-                                Expression
-                            </h5>
-                            Communication, Honesty, <br>Art, Voice
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="icon-headline">
-                                {% icon "area-4" classes='text-category-4' %}
-                            </div>
-                            <h5>
-                                Connection
-                            </h5>
-                            Love, Relationships, <br>Emotions, Empathy
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="icon-headline">
-                                {% icon "area-3" classes='text-category-3' %}
-                            </div>
-                            <h5>
-                                Power
-                            </h5>
-                            Wealth, Career, <br>Success, Confidence
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-offset-2 col-sm-4">
-                            <div class="icon-headline">
-                                {% icon "area-2" classes='text-category-2' %}
-                            </div>
-                            <h5>
-                                Joy
-                            </h5>
-                            Positivity, Entertainment, <br>Sexuality, Gratitude
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="icon-headline">
-                                {% icon "area-1" classes='text-category-1' %}
-                            </div>
-                            <h5>
-                                Health
-                            </h5>
-                            Fitness, Nutrition, <br>Rest, Security
-                        </div>
-                    </div>
-                </div>
+    </h1>
+  </div>
+  <div class="overlay">
+    <div class="content container">
+      <br>
+      <h1>
+        LIFE AREAS
+      </h1>
+      <h2>
+        CREATING LIFE BALANCE
+      </h2>
+      <p>
+        The 7 Life Areas build the integral framework over the full period of 9 months: Health, joy, power,
+        connection, expression, mind and spirit. For each one you will learn about matching concepts and methods,
+        get input from experts and learn how to apply them practically in your real life. Additionally, in between
+        those intensive weekends you will have an app to guide your ongoing personal development process. That
+        also means having committed sharing partners with whom you will meet regularly virtually outside of the
+        monthly meetings to reflect on your ongoing journey together.
+      </p>
+      <div class="row">
+        <div class="flower-shape text-center col-lg-8 col-lg-offset-2">
+          <div class="row">
+            <div class="col-sm-offset-2 col-sm-4">
+              <div class="icon-headline">
+                {% icon "area-7" classes='text-category-7' %}
+              </div>
+              <h5>
+                Spirit
+              </h5>
+              Purpose, Intuition, <br>Belief, Balance
             </div>
-            {##}
-            {#            <br>#}
-            {##}
-            {#            <div class="row small-boxes">#}
-            {#                <div class="col-md-6 box left overlay-highlight">#}
-            {#                    <h2>#}
-            {#                        Health#}
-            {#                    </h2>#}
-            {#                    Fitness, Nutrition, Rest, Security#}
-            {#                </div>#}
-            {#                <div class="col-md-6 box right overlay-highlight-2">#}
-            {#                    <h2>#}
-            {#                        Joy#}
-            {#                    </h2>#}
-            {#                    Positivity, Entertainment, Sexuality, Ease#}
-            {#                </div>#}
-            {#                <div class="clearfix"></div>#}
-            {#                <div class="col-md-6 box left overlay-highlight-2">#}
-            {#                    <h2>#}
-            {#                        Power#}
-            {#                    </h2>#}
-            {#                    Wealth, Career, Success, Confidence#}
-            {#                </div>#}
-            {#                <div class="col-md-6 box right overlay-highlight">#}
-            {#                    <h2>#}
-            {#                        Love#}
-            {#                    </h2>#}
-            {#                    Love, Relationships, Emotions, Gratitude#}
-            {#                </div>#}
-            {#                <div class="clearfix"></div>#}
-            {#                <div class="col-md-6 box left overlay-highlight">#}
-            {#                    <h2>#}
-            {#                        Expression#}
-            {#                    </h2>#}
-            {#                    Communication, Honesty, Art, Voice#}
-            {#                </div>#}
-            {#                <div class="col-md-6 box right overlay-highlight-2">#}
-            {#                    <h2>#}
-            {#                        Mind#}
-            {#                    </h2>#}
-            {#                    Purpose, Intuition, Belief, Hope#}
-            {#                </div>#}
-            {#                <div class="clearfix"></div>#}
-            {#                <div class="col-md-6 box left overlay-highlight-2">#}
-            {#                    <h2>#}
-            {#                        Spirit#}
-            {#                    </h2>#}
-            {#                    Purpose, Intuition, Belief, Hope#}
-            {#                </div>#}
-            {#                <div class="clearfix"></div>#}
-            {#            </div>#}
-            {#            <br><br>#}
-            <br>
-            <br>
-            <div class="text-center wow pulse">
-                <a href="https://goo.gl/forms/TwWew3iRL4zoGQIA3" target="_blank" class="btn btn-success btn-lg">Apply</a>
+            <div class="col-sm-4">
+              <div class="icon-headline">
+                {% icon "area-6" classes='text-category-6' %}
+              </div>
+              <h5>
+                Mind
+              </h5>
+              Education, Organisation, <br>Vision, Thinking
             </div>
-
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="icon-headline">
+                {% icon "area-5" classes='text-category-5' %}
+              </div>
+              <h5>
+                Expression
+              </h5>
+              Communication, Honesty, <br>Art, Voice
+            </div>
+            <div class="col-sm-4">
+              <div class="icon-headline">
+                {% icon "area-4" classes='text-category-4' %}
+              </div>
+              <h5>
+                Connection
+              </h5>
+              Love, Relationships, <br>Emotions, Empathy
+            </div>
+            <div class="col-sm-4">
+              <div class="icon-headline">
+                {% icon "area-3" classes='text-category-3' %}
+              </div>
+              <h5>
+                Power
+              </h5>
+              Wealth, Career, <br>Success, Confidence
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-offset-2 col-sm-4">
+              <div class="icon-headline">
+                {% icon "area-2" classes='text-category-2' %}
+              </div>
+              <h5>
+                Joy
+              </h5>
+              Positivity, Entertainment, <br>Sexuality, Gratitude
+            </div>
+            <div class="col-sm-4">
+              <div class="icon-headline">
+                {% icon "area-1" classes='text-category-1' %}
+              </div>
+              <h5>
+                Health
+              </h5>
+              Fitness, Nutrition, <br>Rest, Security
+            </div>
+          </div>
         </div>
+      </div>
+      {##}
+      {#            <br>#}
+      {##}
+      {#            <div class="row small-boxes">#}
+      {#                <div class="col-md-6 box left overlay-highlight">#}
+      {#                    <h2>#}
+      {#                        Health#}
+      {#                    </h2>#}
+      {#                    Fitness, Nutrition, Rest, Security#}
+      {#                </div>#}
+      {#                <div class="col-md-6 box right overlay-highlight-2">#}
+      {#                    <h2>#}
+      {#                        Joy#}
+      {#                    </h2>#}
+      {#                    Positivity, Entertainment, Sexuality, Ease#}
+      {#                </div>#}
+      {#                <div class="clearfix"></div>#}
+      {#                <div class="col-md-6 box left overlay-highlight-2">#}
+      {#                    <h2>#}
+      {#                        Power#}
+      {#                    </h2>#}
+      {#                    Wealth, Career, Success, Confidence#}
+      {#                </div>#}
+      {#                <div class="col-md-6 box right overlay-highlight">#}
+      {#                    <h2>#}
+      {#                        Love#}
+      {#                    </h2>#}
+      {#                    Love, Relationships, Emotions, Gratitude#}
+      {#                </div>#}
+      {#                <div class="clearfix"></div>#}
+      {#                <div class="col-md-6 box left overlay-highlight">#}
+      {#                    <h2>#}
+      {#                        Expression#}
+      {#                    </h2>#}
+      {#                    Communication, Honesty, Art, Voice#}
+      {#                </div>#}
+      {#                <div class="col-md-6 box right overlay-highlight-2">#}
+      {#                    <h2>#}
+      {#                        Mind#}
+      {#                    </h2>#}
+      {#                    Purpose, Intuition, Belief, Hope#}
+      {#                </div>#}
+      {#                <div class="clearfix"></div>#}
+      {#                <div class="col-md-6 box left overlay-highlight-2">#}
+      {#                    <h2>#}
+      {#                        Spirit#}
+      {#                    </h2>#}
+      {#                    Purpose, Intuition, Belief, Hope#}
+      {#                </div>#}
+      {#                <div class="clearfix"></div>#}
+      {#            </div>#}
+      {#            <br><br>#}
+      <br>
+      <br>
+      <div class="text-center wow pulse">
+        <a href="https://goo.gl/forms/TwWew3iRL4zoGQIA3" target="_blank" class="btn btn-success btn-lg">Apply</a>
+      </div>
+
     </div>
+  </div>
 </section>
 
 <section class="background"
          style="background-image: url('{% static 'about/img/sections/About-Page-10-pricing.jpeg' %}');">
-    <div class="transition container">
-        <h1>
-            YOUR LEGEND
-            <br>
-            <br>
-            Once upon a time is NOW.
-        </h1>
-    </div>
-    <div class="overlay">
-        <div id="pricing" class="content container">
-            <h1>
-                Commitment
-            </h1>
-{#            <br>#}
-{#            <div class="row">#}
-{#                <div class="col-md-6 col-md-offset-3">#}
-{#                    <ul class="list-group">#}
-{#                        <li class="list-group-item bg-main-dark text-center">#}
-{#                            Membership value per month#}
-{#                        </li>#}
-{#                        <li class="list-group-item">#}
-{#                            <span class="pull-right">¤240.00</span>#}
-{#                            Personal Mentor#}
-{#                        </li>#}
-{#                        <li class="list-group-item">#}
-{#                            <span class="pull-right">¤40.00</span>#}
-{#                            Personal Development Workshop#}
-{#                        </li>#}
-{#                        <li class="list-group-item">#}
-{#                            <span class="pull-right">¤10.00</span>#}
-{#                            Community Gathering#}
-{#                        </li>#}
-{#                        <li class="list-group-item">#}
-{#                            <span class="pull-right">¤20.00</span>#}
-{#                            Access to Academy#}
-{#                        </li>#}
-{#                        <li class="list-group-item">#}
-{#                            <span class="pull-right">¤9.99</span>#}
-{#                            Tools / Apps#}
-{#                        </li>#}
-{#                        <li class="list-group-item" style="border-top: double">#}
-{#                            <span class="pull-right"><strong>¤319.99</strong></span>#}
-{#                            <strong>Total Value</strong>#}
-{#                        </li>#}
-{#                        <li class="list-group-item bgx-main-light text-center" style="border: 4px solid #5cb85c">#}
-{#                            <span class="text-success"#}
-{#                                  style="padding: 0.5em;"><strong>Your Journey Packge: <span>¤120</span></strong></span>#}
-{#                        </li>#}
-{#                    </ul>#}
-{#                </div>#}
-{#            </div>#}
-{#            <br>#}
-{#            <div>#}
-{#                <p class="text-center">#}
-{#                    Empty purse and still want to enter? Learn about our <a href="#" data-toggle="modal"#}
-{#                                                                           data-target="#modal-affiliate">Affiliate#}
-{#                    Program</a> and the <a#}
-{#                        href="#" data-toggle="modal" data-target="#modal-scholarship">colegend Scholarship</a>.#}
-{#                </p>#}
-{#                <div class="modal fade" id="modal-affiliate" tabindex="-1" role="dialog"#}
-{#                     aria-labelledby="modal-affiliate-label" aria-hidden="true">#}
-{#                    <div class="modal-dialog" role="document">#}
-{#                        <div class="modal-content">#}
-{#                            <div class="modal-header">#}
-{#                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
-{#                                    <span aria-hidden="true">&times;</span>#}
-{#                                </button>#}
-{#                                <h4 class="modal-title" id="modal-affiliate-label">Our Affiliate Program</h4>#}
-{#                            </div>#}
-{#                            <div class="modal-body">#}
-{#                                <p>#}
-{#                                    For each new legend you bring into colegend you, as well as your referee, get ¤10#}
-{#                                    off the membership fee for every month that new legend is active. On top of that you#}
-{#                                    can invite as many legends as you want and thus can decrease your membership#}
-{#                                    further.#}
-{#                                </p>#}
-{#                            </div>#}
-{#                            <div class="modal-footer">#}
-{#                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#                <div class="modal fade" id="modal-scholarship" tabindex="-1" role="dialog"#}
-{#                     aria-labelledby="modal-scholarship-label" aria-hidden="true">#}
-{#                    <div class="modal-dialog" role="document">#}
-{#                        <div class="modal-content">#}
-{#                            <div class="modal-header">#}
-{#                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
-{#                                    <span aria-hidden="true">&times;</span>#}
-{#                                </button>#}
-{#                                <h4 class="modal-title" id="modal-scholarship-label">Our Scholarship</h4>#}
-{#                            </div>#}
-{#                            <div class="modal-body">#}
-{#                                <p>#}
-{#                                    So if our monthly fee is currently not something you can stomach and affiliation is#}
-{#                                    not an option and you still want to start your journey with colegend, please <a#}
-{#                                        href="mailto:connect@colegend.org" target="_blank">apply for our Scholarship</a>.#}
-{#                                </p>#}
-{#                            </div>#}
-{#                            <div class="modal-footer">#}
-{#                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#            <br><br>#}
-            {#            <div class="row">#}
-            {#                <div class="col-md-6 col-md-offset-3">#}
-            {#                    <div class="card text-xs-center">#}
-            {#                        <h6 class="card-header bg-main"#}
-            {#                            style="margin: 0;">#}
-            {#                            Your support for us#}
-            {#                        </h6>#}
-            {#                        <div class="card-block bg-content">#}
-            {#                            <h4 class="card-title">{% icon 'clock-o' %} and {% icon 'eur' %}</h4>#}
-            {#                            <p>#}
-            {#                                You can support us with your time/energy and with a financial donation.#}
-            {#                            </p>#}
-            {#                            <div class="row">#}
-            {#                                <div class="col-xs-6">#}
-            {#                                    <a href="mailto:connect@colegend.org" class="btn btn-success"#}
-            {#                                       target="_blank">Contribute<br>energy</a>#}
-            {#                                </div>#}
-            {#                                <div class="col-xs-6">#}
-            {#                                    {% include 'widgets/donate.html' %}#}
-            {#                                </div>#}
-            {#                            </div>#}
-            {#                        </div>#}
-            {#                    </div>#}
-            {#                </div>#}
-            {#            </div>#}
-            {#            <br>#}
-{#            <h2>#}
-{#                APPLYING IS FAST#}
-{#            </h2>#}
-          <h2>
-            How do I invest?
-          </h2>
-          <p>
-              The prerequisite for you participating in the coAcademy is your commitment<br>
-              + to actively engage in your personal development process<br>
-              + to at least take part in 6 weekends and use the coApp in between to stay connected with your sharing
-              partners
-            </p>
-            <p>
-              We want to make it possible for everybody in any financial situation to participate in our coAcademy. So
-              if you’re hesitating to participate because of money issues, please do contact us and we will figure out a
-              solution.
-            </p>
-          <div class="row">
-            <div class="col-lg-4 wow zoomIn animated" style="visibility: visible;">
-                <ul class="pricing-plan list-unstyled selected">
-                    <li class="pricing-title">
-                        Early Morning Bird
-                    </li>
-                    <li class="pricing-desc">
-                        Apply until 31st of December*: 630€
-                    </li>
-                    <li class="pricing-price">
-                        <span>70€</span> / month
-                    </li>
-{#                    <li>#}
-{#                        <a class="btn btn-primary btn-xs" href="#">Apply</a>#}
-{#                    </li>#}
-                </ul>
-            </div>
-
-            <div class="col-lg-4 wow zoomIn animated" style="visibility: visible;">
-                <ul class="pricing-plan list-unstyled">
-                    <li class="pricing-title">
-                        Midday Bird
-                    </li>
-                    <li class="pricing-desc">
-                        Apply until 7th of January*: 810€
-                    </li>
-                    <li class="pricing-price">
-                        <span>90€</span> / month
-                    </li>
-{#                    <li class="plan-action">#}
-{#                        <a class="btn btn-primary btn-xs" href="#">Apply</a>#}
-{#                    </li>#}
-                </ul>
-            </div>
-
-            <div class="col-lg-4 wow zoomIn animated" style="visibility: visible;">
-                <ul class="pricing-plan list-unstyled">
-                    <li class="pricing-title">
-                        Bird
-                    </li>
-                    <li class="pricing-desc">
-                        Apply until 17th of January*: 990€
-                    </li>
-                    <li class="pricing-price">
-                        <span>110€</span> / month
-                    </li>
-{#                    <li>#}
-{#                        <a class="btn btn-primary btn-xs" href="#">Apply</a>#}
-{#                    </li>#}
-                </ul>
-            </div>
+  <div class="transition container">
+    <h1>
+      YOUR LEGEND
+      <br>
+      <br>
+      Once upon a time is NOW.
+    </h1>
+  </div>
+  <div class="overlay">
+    <div id="pricing" class="content container">
+      <h1>
+        Commitment
+      </h1>
+      {#            <br>#}
+      {#            <div class="row">#}
+      {#                <div class="col-md-6 col-md-offset-3">#}
+      {#                    <ul class="list-group">#}
+      {#                        <li class="list-group-item bg-main-dark text-center">#}
+      {#                            Membership value per month#}
+      {#                        </li>#}
+      {#                        <li class="list-group-item">#}
+      {#                            <span class="pull-right">¤240.00</span>#}
+      {#                            Personal Mentor#}
+      {#                        </li>#}
+      {#                        <li class="list-group-item">#}
+      {#                            <span class="pull-right">¤40.00</span>#}
+      {#                            Personal Development Workshop#}
+      {#                        </li>#}
+      {#                        <li class="list-group-item">#}
+      {#                            <span class="pull-right">¤10.00</span>#}
+      {#                            Community Gathering#}
+      {#                        </li>#}
+      {#                        <li class="list-group-item">#}
+      {#                            <span class="pull-right">¤20.00</span>#}
+      {#                            Access to Academy#}
+      {#                        </li>#}
+      {#                        <li class="list-group-item">#}
+      {#                            <span class="pull-right">¤9.99</span>#}
+      {#                            Tools / Apps#}
+      {#                        </li>#}
+      {#                        <li class="list-group-item" style="border-top: double">#}
+      {#                            <span class="pull-right"><strong>¤319.99</strong></span>#}
+      {#                            <strong>Total Value</strong>#}
+      {#                        </li>#}
+      {#                        <li class="list-group-item bgx-main-light text-center" style="border: 4px solid #5cb85c">#}
+      {#                            <span class="text-success"#}
+      {#                                  style="padding: 0.5em;"><strong>Your Journey Packge: <span>¤120</span></strong></span>#}
+      {#                        </li>#}
+      {#                    </ul>#}
+      {#                </div>#}
+      {#            </div>#}
+      {#            <br>#}
+      {#            <div>#}
+      {#                <p class="text-center">#}
+      {#                    Empty purse and still want to enter? Learn about our <a href="#" data-toggle="modal"#}
+      {#                                                                           data-target="#modal-affiliate">Affiliate#}
+      {#                    Program</a> and the <a#}
+      {#                        href="#" data-toggle="modal" data-target="#modal-scholarship">colegend Scholarship</a>.#}
+      {#                </p>#}
+      {#                <div class="modal fade" id="modal-affiliate" tabindex="-1" role="dialog"#}
+      {#                     aria-labelledby="modal-affiliate-label" aria-hidden="true">#}
+      {#                    <div class="modal-dialog" role="document">#}
+      {#                        <div class="modal-content">#}
+      {#                            <div class="modal-header">#}
+      {#                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+      {#                                    <span aria-hidden="true">&times;</span>#}
+      {#                                </button>#}
+      {#                                <h4 class="modal-title" id="modal-affiliate-label">Our Affiliate Program</h4>#}
+      {#                            </div>#}
+      {#                            <div class="modal-body">#}
+      {#                                <p>#}
+      {#                                    For each new legend you bring into colegend you, as well as your referee, get ¤10#}
+      {#                                    off the membership fee for every month that new legend is active. On top of that you#}
+      {#                                    can invite as many legends as you want and thus can decrease your membership#}
+      {#                                    further.#}
+      {#                                </p>#}
+      {#                            </div>#}
+      {#                            <div class="modal-footer">#}
+      {#                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>#}
+      {#                            </div>#}
+      {#                        </div>#}
+      {#                    </div>#}
+      {#                </div>#}
+      {#                <div class="modal fade" id="modal-scholarship" tabindex="-1" role="dialog"#}
+      {#                     aria-labelledby="modal-scholarship-label" aria-hidden="true">#}
+      {#                    <div class="modal-dialog" role="document">#}
+      {#                        <div class="modal-content">#}
+      {#                            <div class="modal-header">#}
+      {#                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+      {#                                    <span aria-hidden="true">&times;</span>#}
+      {#                                </button>#}
+      {#                                <h4 class="modal-title" id="modal-scholarship-label">Our Scholarship</h4>#}
+      {#                            </div>#}
+      {#                            <div class="modal-body">#}
+      {#                                <p>#}
+      {#                                    So if our monthly fee is currently not something you can stomach and affiliation is#}
+      {#                                    not an option and you still want to start your journey with colegend, please <a#}
+      {#                                        href="mailto:connect@colegend.org" target="_blank">apply for our Scholarship</a>.#}
+      {#                                </p>#}
+      {#                            </div>#}
+      {#                            <div class="modal-footer">#}
+      {#                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>#}
+      {#                            </div>#}
+      {#                        </div>#}
+      {#                    </div>#}
+      {#                </div>#}
+      {#            </div>#}
+      {#            <br><br>#}
+      {#            <div class="row">#}
+      {#                <div class="col-md-6 col-md-offset-3">#}
+      {#                    <div class="card text-xs-center">#}
+      {#                        <h6 class="card-header bg-main"#}
+      {#                            style="margin: 0;">#}
+      {#                            Your support for us#}
+      {#                        </h6>#}
+      {#                        <div class="card-block bg-content">#}
+      {#                            <h4 class="card-title">{% icon 'clock-o' %} and {% icon 'eur' %}</h4>#}
+      {#                            <p>#}
+      {#                                You can support us with your time/energy and with a financial donation.#}
+      {#                            </p>#}
+      {#                            <div class="row">#}
+      {#                                <div class="col-xs-6">#}
+      {#                                    <a href="mailto:connect@colegend.org" class="btn btn-success"#}
+      {#                                       target="_blank">Contribute<br>energy</a>#}
+      {#                                </div>#}
+      {#                                <div class="col-xs-6">#}
+      {#                                    {% include 'widgets/donate.html' %}#}
+      {#                                </div>#}
+      {#                            </div>#}
+      {#                        </div>#}
+      {#                    </div>#}
+      {#                </div>#}
+      {#            </div>#}
+      {#            <br>#}
+      {#            <h2>#}
+      {#                APPLYING IS FAST#}
+      {#            </h2>#}
+      <h2>
+        How do I invest?
+      </h2>
+      <p>
+        The prerequisite for you participating in the coAcademy is your commitment<br>
+        + to actively engage in your personal development process<br>
+        + to at least take part in 6 weekends and use the coApp in between to stay connected with your sharing
+        partners
+      </p>
+      <p>
+        We want to make it possible for everybody in any financial situation to participate in our coAcademy. So
+        if you’re hesitating to participate because of money issues, please do contact us and we will figure out a
+        solution.
+      </p>
+      <div class="row">
+        <div class="col-lg-4 wow zoomIn animated" style="visibility: visible;">
+          <ul class="pricing-plan list-unstyled selected">
+            <li class="pricing-title">
+              Early Morning Bird
+            </li>
+            <li class="pricing-desc">
+              Apply until 31st of December*: 630€
+            </li>
+            <li class="pricing-price">
+              <span>70€</span> / month
+            </li>
+            {#                    <li>#}
+            {#                        <a class="btn btn-primary btn-xs" href="#">Apply</a>#}
+            {#                    </li>#}
+          </ul>
         </div>
-          <br>
-          <div class="clearfix"></div>
-            <p class="text-center">
-              *(the date you fill out and send off our application form)
-{#              Early Morning Bird: apply until 31st of December*: 630€ (70€ per month)<br>#}
-{#              Early Midday Bird: Apply until 7th of January*: 810€ (90€ per month)<br>#}
-{#              Regular Bird: Apply until 17th of January*: 990€ (110€ per month)<br>#}
-{#              *(the date you fill out and send off our application form)#}
-            </p>
-            <h2>
-                APPLYING IS EASY
-            </h2>
-            <p class="text-center">
-                It´s easy! Just fill out our application form where you will find some interesting questions.
-            </p>
-            <div class="text-center wow pulse">
-                <a href="https://goo.gl/forms/TwWew3iRL4zoGQIA3" target="_blank" class="btn btn-success btn-lg">Apply</a>
-            </div>
+
+        <div class="col-lg-4 wow zoomIn animated" style="visibility: visible;">
+          <ul class="pricing-plan list-unstyled">
+            <li class="pricing-title">
+              Midday Bird
+            </li>
+            <li class="pricing-desc">
+              Apply until 7th of January*: 810€
+            </li>
+            <li class="pricing-price">
+              <span>90€</span> / month
+            </li>
+            {#                    <li class="plan-action">#}
+            {#                        <a class="btn btn-primary btn-xs" href="#">Apply</a>#}
+            {#                    </li>#}
+          </ul>
         </div>
+
+        <div class="col-lg-4 wow zoomIn animated" style="visibility: visible;">
+          <ul class="pricing-plan list-unstyled">
+            <li class="pricing-title">
+              Bird
+            </li>
+            <li class="pricing-desc">
+              Apply until 17th of January*: 990€
+            </li>
+            <li class="pricing-price">
+              <span>110€</span> / month
+            </li>
+            {#                    <li>#}
+            {#                        <a class="btn btn-primary btn-xs" href="#">Apply</a>#}
+            {#                    </li>#}
+          </ul>
+        </div>
+      </div>
+      <br>
+      <div class="clearfix"></div>
+      <p class="text-center">
+        *(the date you fill out and send off our application form)
+        {#              Early Morning Bird: apply until 31st of December*: 630€ (70€ per month)<br>#}
+        {#              Early Midday Bird: Apply until 7th of January*: 810€ (90€ per month)<br>#}
+        {#              Regular Bird: Apply until 17th of January*: 990€ (110€ per month)<br>#}
+        {#              *(the date you fill out and send off our application form)#}
+      </p>
+      <h2>
+        APPLYING IS EASY
+      </h2>
+      <p class="text-center">
+        It´s easy! Just fill out our application form where you will find some interesting questions.
+      </p>
+      <div class="text-center wow pulse">
+        <a href="https://goo.gl/forms/TwWew3iRL4zoGQIA3" target="_blank" class="btn btn-success btn-lg">Apply</a>
+      </div>
     </div>
+  </div>
 </section>
 
 {#<section id="reasons" class="reasons bg-main-light">#}
@@ -1823,98 +1875,98 @@
 {#</section>#}
 
 <section id="contact" class="contact">
-    <div class="container">
-        <div class="row m-b-lg">
-            <div class="col-lg-12 text-center">
-                <div class="navy-line"></div>
-                <h1>Contact Us</h1>
-            </div>
-        </div>
-        <div class="row m-b-lg">
-            <div class="col-sm-4 text-center">
-                {% icon 'smile-o' classes='fa-4x text-main' %}
-                <h2>Personal Contact</h2>
-                {{ page.contact_teaser|richtext }}
-            </div>
-            <div class="col-sm-4 text-center">
-                {% icon 'project' classes='fa-4x text-main' %}
-                <h2>colegend</h2>
-                <p class="text-center">
-                    {% icon 'address' fixed=True %} Berlin, Germany<br>
-                    {% icon 'phone' fixed=True %} +49 (176) 979944 80<br>
-                    {% icon 'phone' fixed=True %} +49 (178) 3472667
-                </p>
-            </div>
-            <div class="col-sm-4 text-center">
+  <div class="container">
+    <div class="row m-b-lg">
+      <div class="col-lg-12 text-center">
+        <div class="navy-line"></div>
+        <h1>Contact Us</h1>
+      </div>
+    </div>
+    <div class="row m-b-lg">
+      <div class="col-sm-4 text-center">
+        {% icon 'smile-o' classes='fa-4x text-main' %}
+        <h2>Personal Contact</h2>
+        {{ page.contact_teaser|richtext }}
+      </div>
+      <div class="col-sm-4 text-center">
+        {% icon 'project' classes='fa-4x text-main' %}
+        <h2>colegend</h2>
+        <p class="text-center">
+          {% icon 'address' fixed=True %} Berlin, Germany<br>
+          {% icon 'phone' fixed=True %} +49 (176) 979944 80<br>
+          {% icon 'phone' fixed=True %} +49 (178) 3472667
+        </p>
+      </div>
+      <div class="col-sm-4 text-center">
                 <span class="fa-stack fa-lg fa-3x">
                 {% icon 'thumbs-o-down' classes='text-main' %}
                 {% icon 'thumbs-o-up' classes='text-main' %}
                 </span>
-                <h2>We {% icon 'heart' classes='text-category-1' %} Feedback</h2>
-                {{ page.feedback_teaser|richtext }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                {% button "Send us mail" url='mailto:connect@colegend.org' classes='btn-success' size='large' icon='send' external=True %}
-                {#                <a href="" class="btn btn-primary">Send us mail</a>#}
+        <h2>We {% icon 'heart' classes='text-category-1' %} Feedback</h2>
+        {{ page.feedback_teaser|richtext }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        {% button "Send us mail" url='mailto:connect@colegend.org' classes='btn-success' size='large' icon='send' external=True %}
+        {#                <a href="" class="btn btn-primary">Send us mail</a>#}
 
-                <p class="m-t-sm">
-                    And follow us on social platforms ...
-                </p>
-                <ul class="list-inline social-icon">
-                    <li>
-                        <a href="https://plus.google.com/+ColegendOrgPage" target="_blank">
+        <p class="m-t-sm">
+          And follow us on social platforms ...
+        </p>
+        <ul class="list-inline social-icon">
+          <li>
+            <a href="https://plus.google.com/+ColegendOrgPage" target="_blank">
                         <span class="fa-stack fa-lg">
                             {% icon 'circle' classes='fa-stack-2x text-main' %}
                             {% icon 'google-plus' classes='fa-stack-1x fa-inverse' %}
                         </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.facebook.com/colegend.org" target="_blank">
+            </a>
+          </li>
+          <li>
+            <a href="https://www.facebook.com/colegend.org" target="_blank">
                             <span class="fa-stack fa-lg">
                                 {% icon 'circle' classes='fa-stack-2x text-main' %}
                                 {% icon 'facebook' classes='fa-stack-1x fa-inverse' %}
                             </span>
-                        </a>
-                    </li>
-                </ul>
-                <p>
-                    {% trans "Not quite ready to enter and want to stay up-to-date about the project?" %}
-                </p>
-                {% button "Subscribe to newsletter" url='http://colegend.us13.list-manage.com/subscribe?u=e6c12ce160532f8031b6b21ee&id=7aa5f1f50c' classes='btn-success' size='large' icon='blog' external=True %}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 text-center m-t-lg m-b-lg">
-                <p><strong>&copy; 2014 - {% now "Y" %} colegend</strong><br/>
-                    <a href="mailto:connect@colegend.org" class="text-muted" target="_blank">Impressum</a> | Designed by
-                    <a
-                            href="http://www.eraldo.org" class="text-muted" target="_blank">Eraldo Webdesign & Corinna
-                        UX</a> |
-                    Crafted with <span class="text-category-1">♥</span>
-                </p>
-            </div>
-        </div>
+            </a>
+          </li>
+        </ul>
+        <p>
+          {% trans "Not quite ready to enter and want to stay up-to-date about the project?" %}
+        </p>
+        {% button "Subscribe to newsletter" url='http://colegend.us13.list-manage.com/subscribe?u=e6c12ce160532f8031b6b21ee&id=7aa5f1f50c' classes='btn-success' size='large' icon='blog' external=True %}
+      </div>
     </div>
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 text-center m-t-lg m-b-lg">
+        <p><strong>&copy; 2014 - {% now "Y" %} colegend</strong><br/>
+          <a href="mailto:connect@colegend.org" class="text-muted" target="_blank">Impressum</a> | Designed by
+          <a
+            href="http://www.eraldo.org" class="text-muted" target="_blank">Eraldo Webdesign & Corinna
+            UX</a> |
+          Crafted with <span class="text-category-1">♥</span>
+        </p>
+      </div>
+    </div>
+  </div>
 </section>
 
 <div class="hidden-xs-down" id="audio-box" style="position: fixed; bottom: -0; left: 0; z-index: 10000">
-    <audio id="audioplayer" src="{% static 'audio/colegend_song.mp3' %}" controls loop></audio>
+  <audio id="audioplayer" src="{% static 'audio/colegend_song.mp3' %}" controls loop></audio>
 </div>
 
 <div class="feedback-button-container">
-    <div class="hidden-xs-down">
-        <a href="mailto:connect@colegend.org" target="_blank">
-            <img id="feedback-button" src="{% static 'images/feedback.png' %}" alt="Feedback"/>
-        </a>
-    </div>
-    <div class="hidden-sm-up">
-        <a href="mailto:connect@colegend.org" target="_blank">
-            <img id="feedback-button-mobile" src="{% static 'images/feedback.png' %}" alt="Feedback"/>
-        </a>
-    </div>
+  <div class="hidden-xs-down">
+    <a href="mailto:connect@colegend.org" target="_blank">
+      <img id="feedback-button" src="{% static 'images/feedback.png' %}" alt="Feedback"/>
+    </a>
+  </div>
+  <div class="hidden-sm-up">
+    <a href="mailto:connect@colegend.org" target="_blank">
+      <img id="feedback-button-mobile" src="{% static 'images/feedback.png' %}" alt="Feedback"/>
+    </a>
+  </div>
 </div>
 
 <script src="{% static 'js/jquery-2.1.1.js' %}"></script>
