@@ -11,7 +11,7 @@
 
   {# open graph: http://ogp.me/ #}
   <meta property="og:image"
-        content="{% block og_image %}{% static 'images/CoHotAirBalloon.v6.2880x1800.jpg' %}{% endblock %}"/>
+        content="{% block og_image %}{% static 'about/img/CoHotAirBalloon.v7-academy.788x1000.png' %}{% endblock %}"/>
   <meta property="og:site_name" content="colegend' %}"/>
   <meta property="og:description"
         content="Your Person Development Journey based on the values of 'conscious', 'connected' 'committed' and 'complete'."/>
@@ -99,8 +99,9 @@
 
 {#<img src="{% static 'about/img/sections/About-Page-0-Video.jpeg' %}" alt="" class="img-responsive">#}
 <section class="background video-header"
-         style="background-image: url('{% static 'about/img/sections/About-Page-0-Video.jpeg' %}')">
+         style="background-image: url('{% static 'about/img/sections/About-Page-0-Video.jpeg' %}'); padding: 0;">
   <div class="header-content" style="background-image: url('{% static 'about/img/CoHotAirBalloon.v7-academy.788x1000.png' %}');">
+    <iframe width="100%" height="101%" src="https://www.youtube.com/embed/-USh9B-jxQo" frameborder="0"></iframe>
   </div>
 </section>
 
@@ -1948,9 +1949,9 @@
   </div>
 </section>
 
-<div class="hidden-xs-down" id="audio-box" style="position: fixed; bottom: -0; left: 0; z-index: 10000">
-  <audio id="audioplayer" src="{% static 'audio/colegend_song.mp3' %}" controls loop></audio>
-</div>
+{#<div class="hidden-xs-down" id="audio-box" style="position: fixed; bottom: -0; left: 0; z-index: 10000">#}
+{#  <audio id="audioplayer" src="{% static 'audio/colegend_song.mp3' %}" controls loop></audio>#}
+{#</div>#}
 
 <div class="feedback-button-container">
   <div class="hidden-xs-down">
