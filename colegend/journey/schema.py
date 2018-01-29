@@ -24,13 +24,29 @@ class UpdateHero(graphene.relay.ClientIDMutation):
     hero = graphene.Field(HeroNode)
 
     class Input:
+        values = graphene.String()
+        powers = graphene.String()
+        skills = graphene.String()
+        habits = graphene.String()
+        principles = graphene.String()
+        wishes = graphene.String()
+        goals = graphene.String()
+        people = graphene.String()
+        resources = graphene.String()
+        achievements = graphene.String()
+        questions = graphene.String()
+        experiments = graphene.String()
+        projects = graphene.String()
+        bucket = graphene.String()
         content = graphene.String()
 
     @classmethod
-    def mutate_and_get_payload(cls, root, info, content):
+    def mutate_and_get_payload(cls, root, info, **kwargs):
         user = info.context.user
         hero = user.hero
-        hero.content = content
+        for key, value in kwargs.items():
+            if value is not None:
+                setattr(hero, key, value)
         hero.save()
         return UpdateHero(success=True, hero=hero)
 
@@ -58,13 +74,17 @@ class UpdateDemon(graphene.relay.ClientIDMutation):
     demon = graphene.Field(DemonNode)
 
     class Input:
+        tensions = graphene.String()
+        fears = graphene.String()
         content = graphene.String()
 
     @classmethod
-    def mutate_and_get_payload(cls, root, info, content):
+    def mutate_and_get_payload(cls, root, info, **kwargs):
         user = info.context.user
         demon = user.demon
-        demon.content = content
+        for key, value in kwargs.items():
+            if value is not None:
+                setattr(demon, key, value)
         demon.save()
         return UpdateDemon(success=True, demon=demon)
 

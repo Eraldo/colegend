@@ -7,7 +7,21 @@ from colegend.core.models import AutoOwnedBase, TimeStampedBase
 
 
 class Hero(AutoOwnedBase, TimeStampedBase):
-    content = MarkdownField()
+    values = MarkdownField(blank=True)
+    powers = MarkdownField(blank=True)
+    skills = MarkdownField(blank=True)
+    habits = MarkdownField(blank=True)
+    principles = MarkdownField(blank=True)
+    wishes = MarkdownField(blank=True)
+    goals = MarkdownField(blank=True)
+    people = MarkdownField(blank=True)
+    resources = MarkdownField(blank=True)
+    achievements = MarkdownField(blank=True)
+    questions = MarkdownField(blank=True)
+    experiments = MarkdownField(blank=True)
+    projects = MarkdownField(blank=True)
+    bucket = MarkdownField(blank=True, help_text="bucket list")
+    content = MarkdownField(blank=True)
 
     class Meta:
         verbose_name = _('Hero')
@@ -19,7 +33,9 @@ class Hero(AutoOwnedBase, TimeStampedBase):
 
 
 class Demon(AutoOwnedBase, TimeStampedBase):
-    content = MarkdownField()
+    tensions = MarkdownField(blank=True)
+    fears = MarkdownField(blank=True)
+    content = MarkdownField(blank=True)
 
     class Meta:
         verbose_name = _('Demon')
