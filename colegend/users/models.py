@@ -123,7 +123,7 @@ class User(AbstractUser):
         print(self.name, self.email)
         email_md5 = hashlib.md5(self.email.encode('utf-8')).hexdigest() if self.email else ''
         name = quote_plus(self.name) if self.name else 'foo'
-        return 'https://www.gravatar.com/avatar/{email_md5}?d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/{name}/{size}/{bg_color}/{fg_color}'.format(
+        return 'https://www.gravatar.com/avatar/{email_md5}?s={size}&d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/{name}/{size}/{bg_color}/{fg_color}'.format(
             email_md5=email_md5,
             name=name,
             size=400,
