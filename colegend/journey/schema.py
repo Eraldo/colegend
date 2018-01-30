@@ -24,6 +24,8 @@ class UpdateHero(graphene.relay.ClientIDMutation):
     hero = graphene.Field(HeroNode)
 
     class Input:
+        name = graphene.String()
+        avatar = graphene.String()
         values = graphene.String()
         powers = graphene.String()
         skills = graphene.String()
@@ -66,7 +68,7 @@ class DemonNode(DjangoObjectType):
 
 class DemonQuery(graphene.ObjectType):
     demon = graphene.Node.Field(DemonNode)
-    demones = DjangoFilterConnectionField(DemonNode)
+    demons = DjangoFilterConnectionField(DemonNode)
 
 
 class UpdateDemon(graphene.relay.ClientIDMutation):
@@ -74,6 +76,8 @@ class UpdateDemon(graphene.relay.ClientIDMutation):
     demon = graphene.Field(DemonNode)
 
     class Input:
+        name = graphene.String()
+        avatar = graphene.String()
         tensions = graphene.String()
         fears = graphene.String()
         content = graphene.String()

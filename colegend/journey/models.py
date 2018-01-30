@@ -1,3 +1,4 @@
+from django.db import models
 from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
 from wagtail.wagtailcore.models import Page
@@ -7,6 +8,16 @@ from colegend.core.models import AutoOwnedBase, TimeStampedBase
 
 
 class Hero(AutoOwnedBase, TimeStampedBase):
+    name = models.CharField(
+        verbose_name=_("name"),
+        max_length=255,
+        blank=True
+    )
+    avatar = models.URLField(
+        _('avatar'),
+        max_length=1000,
+        blank=True
+    )
     values = MarkdownField(blank=True)
     powers = MarkdownField(blank=True)
     skills = MarkdownField(blank=True)
@@ -33,6 +44,16 @@ class Hero(AutoOwnedBase, TimeStampedBase):
 
 
 class Demon(AutoOwnedBase, TimeStampedBase):
+    name = models.CharField(
+        verbose_name=_("name"),
+        max_length=255,
+        blank=True
+    )
+    avatar = models.URLField(
+        _('avatar'),
+        max_length=1000,
+        blank=True
+    )
     tensions = MarkdownField(blank=True)
     fears = MarkdownField(blank=True)
     content = MarkdownField(blank=True)
