@@ -94,7 +94,7 @@ class UserNode(DjangoObjectType):
     def resolve_avatar(self, info, size=Size.MEDIUM.value):
         # print('>> avatar')
         if not self.avatar:
-            return ''
+            return self.get_avatar_fallback()
         url = self.avatar[size].url
         return info.context.build_absolute_uri(url)
 

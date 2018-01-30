@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals, absolute_import
+
+import hashlib
+from urllib.parse import quote_plus
+
 from allauth.account.signals import user_signed_up
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser, Group
@@ -114,6 +118,18 @@ class User(AbstractUser):
                 return self.avatar
             avatar = None
         return avatar
+
+    def get_avatar_fallback(self):
+        print(self.name, self.email)
+        email_md5 = hashlib.md5(self.email.encode('utf-8')).hexdigest() if self.email else ''
+        name = quote_plus(self.name) if self.name else 'foo'
+        return 'https://www.gravatar.com/avatar/{email_md5}?d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/{name}/{size}/{bg_color}/{fg_color}'.format(
+            email_md5=email_md5,
+            name=name,
+            size=400,
+            bg_color='A5D6A7',
+            fg_color='fff',
+        )
 
     roles = models.ManyToManyField(
         Role,
