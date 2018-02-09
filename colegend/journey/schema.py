@@ -41,6 +41,7 @@ class UpdateHero(graphene.relay.ClientIDMutation):
         projects = graphene.String()
         bucket = graphene.String()
         content = graphene.String()
+        routines = graphene.String()
 
     @classmethod
     def mutate_and_get_payload(cls, root, info, **kwargs):

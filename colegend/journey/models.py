@@ -33,6 +33,7 @@ class Hero(AutoOwnedBase, TimeStampedBase):
     projects = MarkdownField(blank=True)
     bucket = MarkdownField(blank=True, help_text="bucket list")
     content = MarkdownField(blank=True)
+    routines = MarkdownField(blank=True)
 
     class Meta:
         verbose_name = _('Hero')
