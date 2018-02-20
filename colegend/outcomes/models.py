@@ -93,6 +93,10 @@ class Outcome(AutoUrlsMixin, OwnedBase, TaggableBase, TimeStampedBase):
         blank=True,
         null=True
     )
+    completed_at = models.DateTimeField(
+        _('completed at'),
+        null=True, blank=True,
+    )
 
     objects = OutcomeQuerySet.as_manager()
 
@@ -104,6 +108,14 @@ class Outcome(AutoUrlsMixin, OwnedBase, TaggableBase, TimeStampedBase):
 
     def __str__(self):
         return self.name
+
+    @property
+    def is_active(self):
+        return self.status in self.STATUSES_OPEN
+
+    @property
+    def is_inactive(self):
+        return self.status in self.STATUSES_CLOSED
 
     @property
     def is_focus(self):

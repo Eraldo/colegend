@@ -21,6 +21,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 from colegend.checkpoints.models import Checkpoint
 from colegend.community.models import Duo, Clan, Tribe
 from colegend.core.utils.media_paths import UploadToOwnedDirectory
+from colegend.outcomes.models import Step
 from colegend.roles.models import Role
 
 
@@ -199,6 +200,11 @@ class User(AbstractUser):
         now = timezone.now()
         days = (now - date_joined).days
         return days
+
+    @property
+    def steps(self):
+        steps = Step.objects.filter(outcome__owner=self)
+        return steps
 
     def __str__(self):
         return self.username

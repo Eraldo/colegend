@@ -68,6 +68,7 @@ class OutcomeFilter(django_filters.FilterSet):
             'deadline': ['exact', 'lt', 'gt', 'lte', 'gte'],
             'estimate': ['exact'],
             'description': ['icontains'],
+            'completed_at': ['exact', 'lt', 'gt', 'lte', 'gte'],
         }
 
     def search_filter(self, queryset, name, value):

@@ -11,8 +11,8 @@ from rest_framework.authtoken.models import Token
 
 from colegend.office.filters import FocusFilter
 from colegend.office.schema import FocusNode
-from colegend.outcomes.filters import OutcomeFilter
-from colegend.outcomes.schema import OutcomeNode
+from colegend.outcomes.filters import OutcomeFilter, StepFilter
+from colegend.outcomes.schema import OutcomeNode, StepNode
 from .models import User
 from .filters import UserFilter
 from graphene_django.converter import convert_django_field
@@ -65,6 +65,7 @@ class UserNode(DjangoObjectType):
 
     # Workaround: https://github.com/graphql-python/graphene-django/issues/273
     outcomes = DjangoFilterConnectionField(OutcomeNode, filterset_class=OutcomeFilter)
+    steps = DjangoFilterConnectionField(StepNode, filterset_class=StepFilter)
     focuses = DjangoFilterConnectionField(FocusNode, filterset_class=FocusFilter)
 
     class Meta:

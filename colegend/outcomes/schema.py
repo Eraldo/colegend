@@ -1,4 +1,5 @@
 import graphene
+from django.utils import timezone
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 from graphql_relay import from_global_id
@@ -73,6 +74,8 @@ class UpdateOutcomeMutation(graphene.relay.ClientIDMutation):
         if description is not None:
             outcome.description = description
         if status is not None:
+            if status == outcome.DONE and not outcome.completed_at:
+                outcome.completed_at = timezone.now()
             outcome.status = status
         if inbox is not None:
             outcome.inbox = inbox
