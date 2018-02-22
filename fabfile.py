@@ -1,8 +1,8 @@
-from datetime import datetime
+from datetime import datetime as _datetime
 
-from fabric.api import cd, env, require, local, run
+from fabric.api import cd, env, local, run
 from fabric.colors import blue
-from fabvenv import virtualenv
+from fabvenv import virtualenv as _venv
 
 
 def development():
@@ -67,13 +67,13 @@ def production():
 
 
 def backup():
-    """fab [environment] backup"""
+    """Create a database backup: fab [environment] backup"""
     if env.name == 'development':
         local('pg_dump -Fc {db_name} '
               '> {backup_path}/{db_name}-{environment}_`date +%Y-%m-%d_%H%M%S`.dump'.format(**env))
     elif env.name in ['staging', 'production']:
         with cd(env.backup_path):
-            env.timestamp = datetime.now().strftime('%Y-%m-%d_%H%M%S')
+            env.timestamp = _datetime.now().strftime('%Y-%m-%d_%H%M%S')
             env.backup_file = '{backup_path}/{db_name}-{environment}_{timestamp}.dump'.format(**env)
 
             print(blue('=> dumping database'))
@@ -84,88 +84,85 @@ def backup():
 
 
 def migrate():
-    with virtualenv(env.virtualenv_path):
+    """Migrate the database: fab [environment] migrate"""
+    with _venv(env.virtualenv_path):
         run("{path}/manage.py migrate {settings}".format(**env))
 
 
 def enable_debug():
-    with virtualenv(env.virtualenv_path):
+    """Enable django debug mode: fab [environment] enable_debug"""
+    with _venv(env.virtualenv_path):
         run("sed -i -e 's/DJANGO_DEBUG=False/DJANGO_DEBUG=True/' {path}/.env".format(**env))
     restart()
 
 
 def disable_debug():
-    with virtualenv(env.virtualenv_path):
+    """Disable django debug mode: fab [environment] disable_debug"""
+    with _venv(env.virtualenv_path):
         run("sed -i -e 's/DJANGO_DEBUG=True/DJANGO_DEBUG=False/' {path}/.env".format(**env))
     restart()
 
 
-def test():
-    """fab [environment] test"""
-    with virtualenv('colegend/env'):
-        print(blue('test'))
-        run('python')
-
-
 def logs():
-    """fab [environment] push"""
+    """Show last server log file entries: fab [environment] logs"""
     local('git push origin {push_branch}'.format(**env))
 
 
 def deploy():
+    """Deploy the project: fab [environment] deploy"""
     with cd(env.path):
         run('git pull {push_remote} {push_branch}'.format(**env))
-        with virtualenv(env.virtualenv_path):
+        with _venv(env.virtualenv_path):
             run('pip install -Ur {requirements}'.format(**env))
             run('./manage.py collectstatic --noinput {settings}'.format(**env))
-            run('cp staticfiles '.format(**env))
             # run('./manage.py compilemessages %(settings)s'.format(**env))
     migrate()
     restart()
-    ping()
+    # ping()
 
 
 def ping():
+    """Ping the url for a status code: fab [environment] ping"""
     run('echo {after_deploy_url} returned:  '
         '\>\>\>  $(curl --write-out %{{http_code}} --silent --output /dev/null {after_deploy_url})'.format(**env))
 
 
 def stop():
-    """fab [environment] stop"""
+    """Stop the webserver: fab [environment] stop"""
     run(env.stop_cmd)
 
 
 def start():
-    """fab [environment] start"""
+    """Start the webserver: fab [environment] start"""
     run(env.start_cmd)
 
 
 def restart():
-    """fab [environment] restart"""
+    """Restart the webserver: fab [environment] restart"""
     run(env.restart_cmd)
 
 
 def push():
-    """fab [environment] push"""
+    """Push local code to the repository: fab [environment] push"""
     local('git push origin {push_branch}'.format(**env))
 
 
 def ps():
-    """fab [environment] ps"""
+    """Show the running server processes: fab [environment] ps"""
     run('htop')
 
 
 def logs():
-    """fab [environment] ps"""
+    """Show server logs: fab [environment] ps"""
     run('zcat -f ~/service/gunicorn/log/main/* | tai64nlocal | less | tail')
 
 
 def open():
-    """fab [environment] open"""
+    """Open the project url: fab [environment] open"""
     local('open {after_deploy_url}'.format(**env))
 
 
 def create_superuser():
-    """fab [environment] create_superuser"""
-    with virtualenv(env.virtualenv_path):
+    """Create a django superuser: fab [environment] create_superuser"""
+    with _venv(env.virtualenv_path):
         run('{path}/manage.py createsuperuser {settings}'.format(**env))
