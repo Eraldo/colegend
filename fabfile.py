@@ -147,6 +147,13 @@ def push():
     local('git push origin {push_branch}'.format(**env))
 
 
+def update():
+    """Update the server repository: fab [environment] update"""
+    with cd(env.path):
+        run('git pull {push_remote} {push_branch}'.format(**env))
+    restart()
+
+
 def ps():
     """Show the running server processes: fab [environment] ps"""
     run('htop')
