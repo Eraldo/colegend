@@ -16,3 +16,8 @@ ipdb==0.10.1
 # Management tasks
 # ------------------------------------------------
 invoke==0.12.2
+
+# Server automation
+# ------------------------------------------------
+Fabric3==1.12.post1
+fabric-virtualenv==0.3.0
