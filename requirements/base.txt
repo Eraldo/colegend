@@ -91,3 +91,10 @@ django-slack==5.10.2
 # Management
 # ------------------------------------------------
 django-crontab==0.7.1
+
+# Maintenance
+django-extensions==1.7.4
+
+# django-debug-toolbar that works with Django 1.5+
+# ------------------------------------------------
+django-debug-toolbar==1.9.1
