@@ -230,3 +230,4 @@ CRONJOBS = [
     ('0 0 4 * *', 'django.core.management.call_command', ['monthly'])
 ]
 CRONTAB_DJANGO_PROJECT_NAME='colegend'
+CRONTAB_DJANGO_SETTINGS_MODULE='config.settings.production'
