@@ -169,6 +169,12 @@ def open():
     local('open {after_deploy_url}'.format(**env))
 
 
+def shell():
+    """Open a shell: fab [environment] shell"""
+    with _venv(env.virtualenv_path):
+        run('{path}/manage.py shell {settings}'.format(**env))
+
+
 def create_superuser():
     """Create a django superuser: fab [environment] create_superuser"""
     with _venv(env.virtualenv_path):
