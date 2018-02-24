@@ -229,3 +229,4 @@ INSTALLED_APPS += ('django_crontab',)
 CRONJOBS = [
     ('0 0 4 * *', 'django.core.management.call_command', ['monthly'])
 ]
+CRONTAB_DJANGO_PROJECT_NAME='colegend'
