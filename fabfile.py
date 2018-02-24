@@ -172,7 +172,7 @@ def open():
 def shell():
     """Open a shell: fab [environment] shell"""
     with _venv(env.virtualenv_path):
-        run('{path}/manage.py shell {settings}'.format(**env))
+        run('{path}/manage.py shell_plus {settings}'.format(**env))
 
 
 def create_superuser():

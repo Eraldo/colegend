@@ -462,3 +462,8 @@ SIMPLEMDE_OPTIONS = {
     'tabSize': 4,
     'spellChecker': False,
 }
+
+
+# django-extensions
+# ------------------------------------------------------------------------------
+INSTALLED_APPS += ('django_extensions', )
