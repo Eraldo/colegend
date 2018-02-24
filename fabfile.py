@@ -173,3 +173,21 @@ def create_superuser():
     """Create a django superuser: fab [environment] create_superuser"""
     with _venv(env.virtualenv_path):
         run('{path}/manage.py createsuperuser {settings}'.format(**env))
+
+
+def show_crontab():
+    """Show the current crontab entries: fab [environment] show_crontab"""
+    with _venv(env.virtualenv_path):
+        run('{path}/manage.py crontab show {settings}'.format(**env))
+
+
+def add_crontab():
+    """Update the crontab entries: fab [environment] add_crontab"""
+    with _venv(env.virtualenv_path):
+        run('{path}/manage.py crontab add {settings}'.format(**env))
+
+
+def remove_crontab():
+    """Remove the crontab entries: fab [environment] remove_crontab"""
+    with _venv(env.virtualenv_path):
+        run('{path}/manage.py crontab remove {settings}'.format(**env))

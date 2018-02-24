@@ -5,7 +5,7 @@ Production Configurations
 - Use djangosecure
 - Use Amazon's S3 for storing static files and uploaded media
 - Use mailgun to send emails
-- Use Redis on Heroku
+- # Use Redis on Heroku
 
 - Use sentry for error logging
 - Use opbeat for error reporting
@@ -32,18 +32,17 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # django-secure
 # ------------------------------------------------------------------------------
-INSTALLED_APPS += ("djangosecure", )
+INSTALLED_APPS += ("djangosecure",)
 # raven sentry client
 # See https://docs.getsentry.com/hosted/clients/python/integrations/django/
-INSTALLED_APPS += ('raven.contrib.django.raven_compat', )
+INSTALLED_APPS += ('raven.contrib.django.raven_compat',)
 SECURITY_MIDDLEWARE = (
     'djangosecure.middleware.SecurityMiddleware',
 )
 RAVEN_MIDDLEWARE = ('raven.contrib.django.raven_compat.middleware.Sentry404CatchMiddleware',
                     'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',)
 MIDDLEWARE_CLASSES = SECURITY_MIDDLEWARE + \
-    RAVEN_MIDDLEWARE + MIDDLEWARE_CLASSES
-
+                     RAVEN_MIDDLEWARE + MIDDLEWARE_CLASSES
 
 # opbeat integration
 # ------------------------------------------------------------------------------
@@ -55,9 +54,8 @@ OPBEAT = {
     'SECRET_TOKEN': env('DJANGO_OPBEAT_SECRET_TOKEN')
 }
 MIDDLEWARE_CLASSES = (
-    'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
-) + MIDDLEWARE_CLASSES
-
+                         'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
+                     ) + MIDDLEWARE_CLASSES
 
 # set this to 60 seconds and then to 518400 when you can prove it works
 SECURE_HSTS_SECONDS = 60
@@ -76,10 +74,10 @@ SECURE_SSL_REDIRECT = env.bool("DJANGO_SECURE_SSL_REDIRECT", default=True)
 # Hosts/domain names that are valid for this site
 # See https://docs.djangoproject.com/en/1.6/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['colegend.org'])
-CSRF_TRUSTED_ORIGINS=ALLOWED_HOSTS
+CSRF_TRUSTED_ORIGINS = ALLOWED_HOSTS
 # END SITE CONFIGURATION
 
-INSTALLED_APPS += ("gunicorn", )
+INSTALLED_APPS += ("gunicorn",)
 
 # STORAGE CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -117,18 +115,16 @@ MEDIA_URL = 'https://s3.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
 # ------------------------
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
-
 # EMAIL
 # ------------------------------------------------------------------------------
 EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
 # Anymail with Mailgun
-INSTALLED_APPS += ('anymail', )
+INSTALLED_APPS += ('anymail',)
 ANYMAIL = {
     'MAILGUN_API_KEY': env('DJANGO_MAILGUN_API_KEY'),
     'MAILGUN_SENDER_DOMAIN': env('MAILGUN_DOMAIN'),  # your Mailgun domain, if needed
 }
 EMAIL_BACKEND = "anymail.backends.mailgun.MailgunBackend"
-
 
 # TEMPLATE CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -147,18 +143,17 @@ DATABASES['default'] = env.db("DATABASE_URL")
 # CACHING
 # ------------------------------------------------------------------------------
 # Heroku URL does not pass the DB number, so we parse it in
-CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "{0}/{1}".format(env.cache_url('REDIS_URL', default="redis://127.0.0.1:6379"), 0),
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-            "IGNORE_EXCEPTIONS": True,  # mimics memcache behavior.
-                                        # http://niwinz.github.io/django-redis/latest/#_memcached_exceptions_behavior
-        }
-    }
-}
-
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django_redis.cache.RedisCache",
+#         "LOCATION": "{0}/{1}".format(env.cache_url('REDIS_URL', default="redis://127.0.0.1:6379"), 0),
+#         "OPTIONS": {
+#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
+#             "IGNORE_EXCEPTIONS": True,  # mimics memcache behavior.
+#             # http://niwinz.github.io/django-redis/latest/#_memcached_exceptions_behavior
+#         }
+#     }
+# }
 
 # SENTRY Configuration
 # ------------------------------------------------------------------------------
@@ -227,3 +222,10 @@ ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
 # EASY THUMBNAILS
 # ------------------------------------------------------------------------------
 THUMBNAIL_DEFAULT_STORAGE = DEFAULT_FILE_STORAGE
+
+# CRONTAB
+# ------------------------------------------------------------------------------
+INSTALLED_APPS += ('django_crontab',)
+CRONJOBS = [
+    ('0 0 4 * *', 'django.core.management.call_command', ['monthly'])
+]

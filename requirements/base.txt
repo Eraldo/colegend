@@ -84,7 +84,10 @@ django-cors-headers==2.1.0
 django-rest-auth==0.9.1
 graphene-django==2.0
 
-
 # slack IM
 # ------------------------------------------------
 django-slack==5.10.2
+
+# Management
+# ------------------------------------------------
+django-crontab==0.7.1
