@@ -48,8 +48,9 @@ class UserAdmin(AuthUserAdmin):
         (_('Permissions'), {
             'fields': (
                 'is_active', 'is_staff', 'is_superuser',
-                # TODO: There is a bug in the admin when showing 'user_permissions'
-                'roles', 'checkpoints', 'groups', 'user_permissions')
+                'is_premium', 'balance',
+                'roles', 'checkpoints', 'groups', 'user_permissions',
+            )
         }),
         (_('Important dates'), {
             'fields': ('last_login', 'date_joined')

@@ -141,6 +141,20 @@ class User(AbstractUser):
         blank=True,
     )
 
+    balance = models.SmallIntegerField(
+        verbose_name=_('balance'),
+        default=0,
+        help_text=_('¤')
+    )
+
+    is_premium = models.BooleanField(
+        verbose_name=_('premium'),
+        default=False,
+        help_text=_(
+            'Designates whether this user has access to premium content.'
+        ),
+    )
+
     status = models.TextField(
         verbose_name=_("status"),
         blank=True,
