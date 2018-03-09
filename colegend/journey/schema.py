@@ -2,7 +2,7 @@ import graphene
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 
-from .models import Hero, Demon
+from .models import Hero, Demon, Quote
 
 
 class HeroNode(DjangoObjectType):
@@ -98,9 +98,34 @@ class DemonMutation(graphene.ObjectType):
     update_demon = UpdateDemon.Field()
 
 
+class QuoteNode(DjangoObjectType):
+    class Meta:
+        model = Quote
+        filter_fields = {
+            'name': ['exact', 'icontains', 'istartswith'],
+            'content': ['exact', 'icontains', 'istartswith'],
+            'author': ['exact', 'icontains', 'istartswith'],
+            'category': ['exact'],
+            'accepted': ['exact'],
+            'used_as_daily': ['exact', 'lt', 'gt', 'lte', 'gte'],
+        }
+        interfaces = [graphene.Node]
+
+
+class QuoteQuery(graphene.ObjectType):
+    quote = graphene.Node.Field(QuoteNode)
+    quotes = DjangoFilterConnectionField(QuoteNode)
+    daily_quote = graphene.Field(QuoteNode)
+
+    def resolve_daily_quote(self, info):
+        return Quote.objects.daily_quote()
+
+
+
 class JourneyQuery(
     HeroQuery,
     DemonQuery,
+    QuoteQuery,
     graphene.ObjectType):
     pass
 

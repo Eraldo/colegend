@@ -1,8 +1,11 @@
+from django.conf import settings
 from django.db import models
 from django.shortcuts import redirect
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from wagtail.wagtailcore.models import Page
 
+from colegend.categories.models import Category
 from colegend.core.fields import MarkdownField
 from colegend.core.models import AutoOwnedBase, TimeStampedBase
 
@@ -66,6 +69,104 @@ class Demon(AutoOwnedBase, TimeStampedBase):
 
     def __str__(self):
         return "{}'s demon".format(self.owner)
+
+
+class QuoteQuerySet(models.QuerySet):
+    def accepted(self):
+        return self.filter(accepted=True)
+
+    def pending(self):
+        return self.filter(accepted=False)
+
+    def random(self):
+        return self.accepted().order_by('?').first()
+
+    def owned_by(self, user):
+        return self.filter(provider=user)
+
+    def daily_quote(self, date=None):
+        # Use only accepted quotes.
+        quotes = self.accepted()
+
+        # Fetch past quote if a date was given.
+        if date:
+            try:
+                return quotes.get(used_as_daily=date)
+            except Quote.DoesNotExist:
+                return None
+
+        # Get or assign today's quote:
+        # Check if there already is a quote for today
+        # If not..
+        # then assign one using a 'new' quote.
+        # If there are no new ones..
+        # then use the last used quote.
+
+        today = timezone.now().date()
+        try:
+            current_quote = quotes.get(used_as_daily=today)
+        except Quote.DoesNotExist:
+            # There is no quote for today yet.. so assign one.
+            current_quote = quotes.order_by('used_as_daily').first()
+            if current_quote:
+                current_quote.used_as_daily = today
+                current_quote.save()
+        return current_quote
+
+
+class Quote(TimeStampedBase):
+    """A motivational quote."""
+
+    name = models.CharField(
+        verbose_name=_("name"),
+        max_length=255,
+        unique=True,
+        help_text=_("What is the quote about?")
+    )
+    content = MarkdownField(blank=True)
+    author = models.CharField(
+        verbose_name=_('author'),
+        max_length=255,
+        blank=True
+    )
+    category = models.ManyToManyField(
+        verbose_name=_('category'),
+        to=Category
+    )
+    provider = models.ForeignKey(
+        verbose_name=_('provider'),
+        to=settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        blank=True, null=True
+    )
+    accepted = models.BooleanField(
+        verbose_name=_('accepted'),
+        default=False
+    )
+    used_as_daily = models.DateField(
+        null=True, blank=True,
+        unique=True
+    )
+
+    objects = QuoteQuerySet.as_manager()
+
+    def __str__(self):
+        return self.name
+
+    @property
+    def pending(self):
+        return not self.accepted
+
+    def accept(self, save=True):
+        self.accepted = True
+        if save:
+            self.save()
+        # Notify user
+        if self.provider:
+            self.provider.contact(subject='Your quote "{}" has been accepted. EOM'.format(self.name))
+
+    class Meta:
+        default_related_name = 'quotes'
 
 
 class JourneyPage(Page):

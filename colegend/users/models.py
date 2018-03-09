@@ -25,6 +25,9 @@ from colegend.outcomes.models import Step
 from colegend.roles.models import Role
 
 
+SYSTEM_USER_USERNAME='colegend'
+
+
 class User(AbstractUser):
     """
     A django model representing a coLegend user/member called 'Legend'.
@@ -269,6 +272,8 @@ class User(AbstractUser):
         return gender_pronouns.get(gender).get(kind)
 
     def contact(self, sender, subject=None, message=''):
+        if not sender:
+            sender = User.objects.get_or_create(username=SYSTEM_USER_USERNAME)
         if not subject:
             subject = 'Message from {name}'.format(name=sender)
         if self.email:
