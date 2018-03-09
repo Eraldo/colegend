@@ -5,6 +5,7 @@ from graphene_django.filter import DjangoFilterConnectionField
 from graphql_relay import from_global_id
 
 from colegend.office.types import StatusType
+from colegend.outcomes.elo import calculate_elo
 from colegend.outcomes.filters import OutcomeFilter, StepFilter
 from colegend.scopes.schema import ScopeType
 
@@ -20,6 +21,26 @@ class OutcomeNode(DjangoObjectType):
 class OutcomeQuery(graphene.ObjectType):
     outcome = graphene.Node.Field(OutcomeNode)
     outcomes = DjangoFilterConnectionField(OutcomeNode, filterset_class=OutcomeFilter)
+    outcome_match = graphene.List(OutcomeNode)
+
+    def resolve_outcome_match(self, info):
+        user = info.context.user
+        contestant = user.outcomes.order_by('comparisons').first()
+
+        if contestant:
+            score = contestant.score
+            candidates = user.outcomes.exclude(pk=contestant.pk)
+
+            # Only provisional ones if possible.
+            provisioned = candidates.filter(comparisons__gte=10)
+            candidates = provisioned or candidates
+
+            # Find an equal or better competitor. Or a worse one if there is none.
+            better = candidates.filter(score__gte=score).order_by('score').first()
+            worse = candidates.filter(score__lt=score).order_by('-score').first()
+            competitor = better or worse
+
+            return [contestant, competitor]
 
 
 class CreateOutcomeMutation(graphene.relay.ClientIDMutation):
@@ -116,10 +137,47 @@ class DeleteOutcomeMutation(graphene.relay.ClientIDMutation):
         return DeleteOutcomeMutation(success=True)
 
 
+class MatchOutcomesMutation(graphene.relay.ClientIDMutation):
+    success = graphene.Boolean()
+    contestant = graphene.Field(OutcomeNode)
+    competitor = graphene.Field(OutcomeNode)
+
+    class Input:
+        contestant = graphene.ID()
+        competitor = graphene.ID()
+        success = graphene.Boolean()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, contestant, competitor, success):
+        user = info.context.user
+        _type, contestant = from_global_id(contestant)
+        _type, competitor = from_global_id(competitor)
+
+        # print(contestant, competitor, success)
+        try:
+            contestant = user.outcomes.get(id=contestant)
+            competitor = user.outcomes.get(id=competitor)
+        except Exception as error:
+            raise Exception(error)
+
+        # New score for competitor
+        if not contestant.is_provisional:
+            competitor.score = calculate_elo(competitor.score, contestant.score, not success)
+            competitor.save(update_fields=['score', 'comparisons'])
+
+        # New score for contestant
+        contestant.score = calculate_elo(contestant.score, competitor.score, success)
+        contestant.comparisons = contestant.comparisons + 1
+        contestant.save(update_fields=['score', 'comparisons'])
+
+        return MatchOutcomesMutation(success=True, contestant=contestant, competitor=competitor)
+
+
 class OutcomeMutation(graphene.ObjectType):
     create_outcome = CreateOutcomeMutation.Field()
     update_outcome = UpdateOutcomeMutation.Field()
     delete_outcome = DeleteOutcomeMutation.Field()
+    match_outcomes = MatchOutcomesMutation.Field()
 
 
 class StepNode(DjangoObjectType):

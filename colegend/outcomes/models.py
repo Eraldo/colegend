@@ -97,6 +97,18 @@ class Outcome(AutoUrlsMixin, OwnedBase, TaggableBase, TimeStampedBase):
         _('completed at'),
         null=True, blank=True,
     )
+    score = models.PositiveSmallIntegerField(
+        verbose_name=_('score'),
+        default=1000,
+    )
+    comparisons = models.PositiveSmallIntegerField(
+        verbose_name=_('sore comparisons'),
+        default=0,
+    )
+
+    @property
+    def is_provisional(self):
+        return self.comparisons < 10
 
     objects = OutcomeQuerySet.as_manager()
 
@@ -104,7 +116,7 @@ class Outcome(AutoUrlsMixin, OwnedBase, TaggableBase, TimeStampedBase):
         verbose_name = _('outcome')
         verbose_name_plural = _('outcomes')
         default_related_name = 'outcomes'
-        ordering = ['-modified']
+        ordering = ['-score', '-modified']
 
     def __str__(self):
         return self.name
