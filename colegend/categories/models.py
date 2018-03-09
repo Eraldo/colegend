@@ -1,5 +1,6 @@
 from django.db import models
 from colegend.core.models import AutoUrlsMixin
+from django.utils.translation import ugettext_lazy as _
 
 
 class Category(AutoUrlsMixin, models.Model):
@@ -7,7 +8,7 @@ class Category(AutoUrlsMixin, models.Model):
     name = models.CharField(max_length=255)
 
     class Meta:
-        verbose_name_plural = 'categories'
+        verbose_name_plural = _('categories')
         ordering = ['-order']
 
     def __str__(self):
