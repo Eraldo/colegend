@@ -105,7 +105,7 @@ class QuoteNode(DjangoObjectType):
             'name': ['exact', 'icontains', 'istartswith'],
             'content': ['exact', 'icontains', 'istartswith'],
             'author': ['exact', 'icontains', 'istartswith'],
-            'category': ['exact'],
+            'categories': ['exact'],
             'accepted': ['exact'],
             'used_as_daily': ['exact', 'lt', 'gt', 'lte', 'gte'],
         }

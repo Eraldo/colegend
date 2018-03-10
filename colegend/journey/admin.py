@@ -14,4 +14,6 @@ class DemonAdmin(admin.ModelAdmin):
 
 @admin.register(Quote)
 class QuoteAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['name', 'author', 'used_as_daily', 'provider', 'accepted']
+    list_filter = ['accepted', 'categories', 'provider']
+    filter_horizontal = ['categories']

@@ -129,8 +129,8 @@ class Quote(TimeStampedBase):
         max_length=255,
         blank=True
     )
-    category = models.ManyToManyField(
-        verbose_name=_('category'),
+    categories = models.ManyToManyField(
+        verbose_name=_('categories'),
         to=Category
     )
     provider = models.ForeignKey(
