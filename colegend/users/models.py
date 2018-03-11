@@ -124,7 +124,6 @@ class User(AbstractUser):
         return avatar
 
     def get_avatar_fallback(self):
-        print(self.name, self.email)
         email_md5 = hashlib.md5(self.email.encode('utf-8')).hexdigest() if self.email else ''
         name = quote_plus(self.name) if self.name else 'Anonymous'
         return 'https://www.gravatar.com/avatar/{email_md5}?s={size}&d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/{name}/{size}/{bg_color}/{fg_color}'.format(
