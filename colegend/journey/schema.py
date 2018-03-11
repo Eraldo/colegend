@@ -121,7 +121,6 @@ class QuoteQuery(graphene.ObjectType):
         return Quote.objects.daily_quote()
 
 
-
 class JourneyQuery(
     HeroQuery,
     DemonQuery,
