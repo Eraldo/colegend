@@ -111,6 +111,7 @@ def logs():
 def deploy():
     """Deploy the project: fab [environment] deploy"""
     with cd(env.path):
+        push()
         run('git pull {push_remote} {push_branch}'.format(**env))
         with _venv(env.virtualenv_path):
             run('pip install -Ur {requirements}'.format(**env))
@@ -173,6 +174,16 @@ def shell():
     """Open a shell: fab [environment] shell"""
     with _venv(env.virtualenv_path):
         run('{path}/manage.py shell_plus {settings}'.format(**env))
+
+
+def run_command(command):
+    """
+    Run a management command: fab [environment] run_command my_command
+    Example: fab production run_command:'./manage.py check'
+    """
+    with cd(env.path):
+        with _venv(env.virtualenv_path):
+            run('{command} {settings}'.format(command=command, settings=env.settings))
 
 
 def create_superuser():
