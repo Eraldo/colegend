@@ -25,11 +25,12 @@ class OutcomeQuery(graphene.ObjectType):
 
     def resolve_outcome_match(self, info):
         user = info.context.user
-        contestant = user.outcomes.order_by('comparisons').first()
+        outcomes = user.outcomes.open()
+        contestant = outcomes.order_by('comparisons').first()
 
         if contestant:
             score = contestant.score
-            candidates = user.outcomes.exclude(pk=contestant.pk)
+            candidates = outcomes.exclude(pk=contestant.pk)
 
             # Only provisional ones if possible.
             provisioned = candidates.filter(comparisons__gte=10)
