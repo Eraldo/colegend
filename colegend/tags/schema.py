@@ -1,10 +1,21 @@
+import django_filters
 import graphene
-from django.utils import timezone
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 from graphql_relay import from_global_id
 
 from .models import Tag
+
+
+class TagsFilter(django_filters.BaseCSVFilter, django_filters.CharFilter):
+    def filter(self, queryset, value):
+        # value is either a list or an 'empty' value
+        values = value or []
+
+        for value in values:
+            _type, id = from_global_id(value)
+            queryset = queryset.filter(tags__id__exact=id)
+        return queryset
 
 
 class TagNode(DjangoObjectType):
