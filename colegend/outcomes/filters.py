@@ -36,8 +36,6 @@ class OutcomeFilter(django_filters.FilterSet):
     tags = django_filters.CharFilter(method='tags_filter')
     open = django_filters.BooleanFilter(method='open_filter')
     closed = django_filters.BooleanFilter(method='closed_filter')
-    order = django_filters.CharFilter(method='order_filter')
-
     order_by = django_filters.OrderingFilter(
         fields=(
             ('modified', 'modified'),
@@ -81,10 +79,6 @@ class OutcomeFilter(django_filters.FilterSet):
             _type, id = from_global_id(id)
             queryset = queryset.filter(tags__id__exact=id)
         return queryset
-
-    def order_filter(self, queryset, name, value):
-        args = value.split(',')
-        return queryset.order_by(*args)
 
 
 class StepFilter(django_filters.FilterSet):
