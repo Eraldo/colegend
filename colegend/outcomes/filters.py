@@ -32,10 +32,18 @@ class OutcomeFilter(django_filters.FilterSet):
     #     ('0m', 'unestimated'),
     # )
     # estimate = django_filters.ChoiceFilter(choices=(('', 'all'),) + ESTIMATE_CHOICES, method=filter_estimate)
-    search = django_filters.CharFilter(method='search_filter')
+    search = django_filters.CharFilter(method='search_filter', label='Text search')
     tags = django_filters.CharFilter(method='tags_filter')
     open = django_filters.BooleanFilter(method='open_filter')
     closed = django_filters.BooleanFilter(method='closed_filter')
+    order = django_filters.CharFilter(method='order_filter')
+
+    order_by = django_filters.OrderingFilter(
+        fields=(
+            ('modified', 'modified'),
+            ('score', 'score'),
+        )
+    )
 
     class Meta:
         model = Outcome
@@ -73,6 +81,10 @@ class OutcomeFilter(django_filters.FilterSet):
             _type, id = from_global_id(id)
             queryset = queryset.filter(tags__id__exact=id)
         return queryset
+
+    def order_filter(self, queryset, name, value):
+        args = value.split(',')
+        return queryset.order_by(*args)
 
 
 class StepFilter(django_filters.FilterSet):
