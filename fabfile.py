@@ -110,14 +110,15 @@ def logs():
 
 def deploy():
     """Deploy the project: fab [environment] deploy"""
+    push()
     with cd(env.path):
-        push()
         run('git pull {push_remote} {push_branch}'.format(**env))
         with _venv(env.virtualenv_path):
             run('pip install -Ur {requirements}'.format(**env))
+        migrate()
+        with _venv(env.virtualenv_path):
             run('./manage.py collectstatic --noinput {settings}'.format(**env))
             # run('./manage.py compilemessages %(settings)s'.format(**env))
-    migrate()
     restart()
     # ping()
 
