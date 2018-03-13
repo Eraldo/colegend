@@ -53,9 +53,9 @@ class Outcome(AutoUrlsMixin, OwnedBase, TaggableBase, TimeStampedBase):
         blank=True,
     )
 
-    FUTURE = 'future'
-    WAITING = 'waiting'
     CURRENT = 'current'
+    WAITING = 'waiting'
+    FUTURE = 'future'
     DONE = 'done'
     CANCELED = 'canceled'
 
@@ -63,9 +63,9 @@ class Outcome(AutoUrlsMixin, OwnedBase, TaggableBase, TimeStampedBase):
     STATUSES_CLOSED = [DONE, CANCELED]
     STATUSES = STATUSES_OPEN + STATUSES_CLOSED
     STATUS_CHOICES = (
-        (FUTURE, _('canceled')),
-        (WAITING, _('waiting')),
         (CURRENT, _('open')),
+        (WAITING, _('waiting')),
+        (FUTURE, _('canceled')),
         (DONE, _('done')),
         (CANCELED, _('canceled')),
     )
@@ -116,7 +116,7 @@ class Outcome(AutoUrlsMixin, OwnedBase, TaggableBase, TimeStampedBase):
         verbose_name = _('outcome')
         verbose_name_plural = _('outcomes')
         default_related_name = 'outcomes'
-        ordering = ['-score', '-modified']
+        ordering = ['status', '-score', '-modified']
 
     def __str__(self):
         return self.name

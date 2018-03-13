@@ -96,8 +96,13 @@ class UpdateOutcomeMutation(graphene.relay.ClientIDMutation):
         if description is not None:
             outcome.description = description
         if status is not None:
+            # Adding a completion date if newly completed.
             if status == outcome.DONE and not outcome.completed_at:
                 outcome.completed_at = timezone.now()
+            # Resetting score on status change.
+            if status != outcome.status:
+                outcome.score = 1000
+                outcome.comparisons = 0
             outcome.status = status
         if inbox is not None:
             outcome.inbox = inbox
