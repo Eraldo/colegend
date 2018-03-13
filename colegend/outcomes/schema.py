@@ -25,7 +25,7 @@ class OutcomeQuery(graphene.ObjectType):
 
     def resolve_outcome_match(self, info):
         user = info.context.user
-        outcomes = user.outcomes.open()
+        outcomes = user.outcomes.filter(status=Outcome.CURRENT)
         contestant = outcomes.order_by('comparisons').first()
 
         if contestant:
