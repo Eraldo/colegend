@@ -42,7 +42,7 @@ class WelcomePage(RoutablePageMixin, Page):
 
     @route(r'^$')
     def index(self, request, *args, **kwargs):
-        return redirect('https://app.colegend.com')
+        return redirect('https://app.colegend.org')
 
     # @route(r'^$')
     # def index(self, request, *args, **kwargs):
