@@ -179,11 +179,29 @@ class MatchOutcomesMutation(graphene.relay.ClientIDMutation):
         return MatchOutcomesMutation(success=True, contestant=contestant, competitor=competitor)
 
 
+class ResetOutcomesScoreMutation(graphene.relay.ClientIDMutation):
+    success = graphene.Boolean()
+
+    class Input:
+        id = graphene.ID()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, id):
+        user = info.context.user
+        outcomes = user.outcomes
+        if id:
+            _type, id = from_global_id(id)
+            outcomes = outcomes.filter(id=id)
+        outcomes.update(score=1000)
+        return DeleteOutcomeMutation(success=True)
+
+
 class OutcomeMutation(graphene.ObjectType):
     create_outcome = CreateOutcomeMutation.Field()
     update_outcome = UpdateOutcomeMutation.Field()
     delete_outcome = DeleteOutcomeMutation.Field()
     match_outcomes = MatchOutcomesMutation.Field()
+    reset_outcomes_score = ResetOutcomesScoreMutation.Field()
 
 
 class StepNode(DjangoObjectType):

@@ -42,6 +42,8 @@ class OutcomeFilter(django_filters.FilterSet):
         fields=(
             ('modified', 'modified'),
             ('score', 'score'),
+            ('created', 'created'),
+            ('name', 'name'),
         )
     )
 

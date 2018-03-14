@@ -116,7 +116,7 @@ class Outcome(AutoUrlsMixin, OwnedBase, TaggableBase, TimeStampedBase):
         verbose_name = _('outcome')
         verbose_name_plural = _('outcomes')
         default_related_name = 'outcomes'
-        ordering = ['status', '-score', '-modified']
+        ordering = ['-score']
 
     def __str__(self):
         return self.name
