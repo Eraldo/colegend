@@ -2,10 +2,10 @@ import inspect
 
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
-from wagtail.wagtailcore import blocks
-from wagtail.wagtailcore.blocks import RawHTMLBlock, StructBlock
-from wagtail.wagtailembeds.blocks import EmbedBlock as WagtailEmbedBlock
-from wagtail.wagtailimages.blocks import ImageChooserBlock
+from wagtail.core import blocks
+from wagtail.core.blocks import RawHTMLBlock, StructBlock
+from wagtail.embeds.blocks import EmbedBlock as WagtailEmbedBlock
+from wagtail.images.blocks import ImageChooserBlock
 
 from colegend.core.templatetags.core_tags import image
 

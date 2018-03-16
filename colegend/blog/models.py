@@ -4,15 +4,14 @@ from django.utils.translation import ugettext_lazy as _
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.fields import ParentalKey
 from taggit.models import Tag, TagBase, ItemBase
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel
-from wagtail.wagtailcore.fields import StreamField
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
-from wagtail.wagtailsearch import index
-from wagtail.wagtailsnippets.models import register_snippet
+from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
+from wagtail.core.fields import StreamField
+from wagtail.core.models import Page
+from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.search import index
+from wagtail.snippets.models import register_snippet
 
 from colegend.cms.blocks import BASE_BLOCKS
-from colegend.cms.models import UniquePageMixin
 
 
 class BlogPage(Page):
@@ -63,7 +62,11 @@ class BlogTag(TagBase):
 
 class TaggedBlogPostPage(ItemBase):
     content_object = ParentalKey('BlogPostPage', related_name='tagged_items')
-    tag = models.ForeignKey(BlogTag, related_name="%(app_label)s_%(class)s_items")
+    tag = models.ForeignKey(
+        to=BlogTag,
+        related_name="%(app_label)s_%(class)s_items",
+        on_delete=models.CASCADE
+    )
 
 
 class BlogPostPage(Page):

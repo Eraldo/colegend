@@ -6,8 +6,8 @@ from django.shortcuts import redirect
 from django.template.response import TemplateResponse
 from django.utils import timezone
 from django.utils.dateparse import parse_date
-from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin, route
-from wagtail.wagtailcore.models import Page
+from wagtail.contrib.routable_page.models import RoutablePageMixin, route
+from wagtail.core.models import Page
 from django.utils.translation import ugettext_lazy as _
 
 from colegend.core.models import OwnedBase, TimeStampedBase

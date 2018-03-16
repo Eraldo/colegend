@@ -5,6 +5,7 @@ from .views import OuterCallCreateView, OuterCallUpdateView
 
 __author__ = 'eraldo'
 
+app_name='outer-call'
 urlpatterns = [
     url(r'^$',
         RedirectView.as_view(url='create/', permanent=False),

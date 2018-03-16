@@ -3,7 +3,7 @@ from django.conf.urls import url, include
 from .views import RoleIndexView, RoleListView, RoleCreateView, RoleDetailView, RoleUpdateView, \
     RoleDeleteView
 
-
+app_name = 'roles'
 urlpatterns = [
     url(r'^$',
         RoleIndexView.as_view(),
@@ -23,7 +23,4 @@ urlpatterns = [
     url(r'^(?P<pk>[0-9]+)/delete/$',
         RoleDeleteView.as_view(),
         name='delete'),
-]
-urlpatterns = [
-    url(r'^', include(urlpatterns, namespace='roles')),
 ]

@@ -17,7 +17,11 @@ class Tag(AutoUrlsMixin, OwnedBase):
 
     description = models.TextField(blank=True)
 
-    category = models.ForeignKey(Category, blank=True, null=True)
+    category = models.ForeignKey(
+        to=Category,
+        on_delete=models.SET_NULL,
+        blank=True, null=True
+    )
 
     objects = TagQuerySet.as_manager()
 

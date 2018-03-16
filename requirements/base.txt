@@ -1,6 +1,6 @@
 # Bleeding edge Django
 # ------------------------------------------------
-django==1.11.10
+django==2.0.3
 
 # Configuration
 # ------------------------------------------------
@@ -11,7 +11,7 @@ whitenoise==3.2.1
 # Forms
 # ------------------------------------------------
 django-braces==1.9.0
-django-crispy-forms==1.6.0
+django-crispy-forms==1.7.2
 django-floppyforms==1.5.2
 django-bootstrap3-datetimepicker-2==2.4.2
 
@@ -22,7 +22,7 @@ django-annoying==0.10.3
 django-phonenumber-field==1.0.0
 django-ordered-model==1.4.3
 django-orderable==4.0.4
-django-simplemde==0.0.9
+django-simplemde==0.1.2
 django-autocomplete-light==3.2.9
 
 # Markdown
@@ -32,7 +32,7 @@ bleach==2.1.1
 
 # Images
 # ------------------------------------------------
-Pillow==4.1.1
+Pillow==5.0.0
 easy-thumbnails==2.4.1
 django-gravatar2==1.4.0
 
@@ -54,7 +54,7 @@ django-autoslug==1.9.3
 
 # Time zones support
 # ------------------------------------------------
-pytz==2017.3
+pytz==2018.3
 
 # Redis support
 # ------------------------------------------------
@@ -63,14 +63,14 @@ redis>=2.10.0
 
 # Celery
 # ------------------------------------------------
-celery==3.1.23
+celery==4.1.0
 
 
 # Your custom requirements go here
 
 # CMS
 # ------------------------------------------------
-wagtail==1.13.1
+wagtail==2.0
 django-classy-tags==0.8.0
 
 # Views
@@ -79,7 +79,7 @@ django-filter==1.0.4
 
 # API
 # ------------------------------------------------
-djangorestframework==3.6.3
+djangorestframework==3.7.7
 django-cors-headers==2.1.0
 django-rest-auth==0.9.1
 graphene-django==2.0
@@ -93,7 +93,7 @@ django-slack==5.10.2
 django-crontab==0.7.1
 
 # Maintenance
-django-extensions==1.7.4
+django-extensions==2.0.6
 
 # django-debug-toolbar that works with Django 1.5+
 # ------------------------------------------------

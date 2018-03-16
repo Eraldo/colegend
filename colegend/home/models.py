@@ -5,10 +5,10 @@ from django.db import models
 # Create your models here.
 from django.shortcuts import redirect
 from django.utils import timezone
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel
-from wagtail.wagtailcore.fields import RichTextField, StreamField
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailsearch import index
+from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
+from wagtail.core.fields import RichTextField, StreamField
+from wagtail.core.models import Page
+from wagtail.search import index
 
 from colegend.cms.blocks import BASE_BLOCKS
 from colegend.core.models import TimeStampedBase, OwnedBase

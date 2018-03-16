@@ -1,4 +1,4 @@
-# from wagtail.wagtailcore import blocks
+# from wagtail.core import blocks
 #
 # from colegend.cms.blocks import BASE_BLOCKS, SectionBlock, Columns1To1Block
 #

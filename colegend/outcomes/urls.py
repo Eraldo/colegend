@@ -3,6 +3,7 @@ from django.conf.urls import url
 from .views import OutcomeIndexView, OutcomeListView, OutcomeCreateView, OutcomeDetailView, OutcomeUpdateView, \
     OutcomeDeleteView, OutcomeInboxView, OutcomeAutocompleteView, OutcomeInboxToggleView, OutcomeAgendaView
 
+app_name = 'outcomes'
 urlpatterns = [
     url(r'^$',
         OutcomeIndexView.as_view(),

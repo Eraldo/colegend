@@ -1,7 +1,7 @@
 from annoying.fields import AutoOneToOneField
 from django.conf import settings
-from django.core.urlresolvers import reverse
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 
 
@@ -32,7 +32,10 @@ class OwnedBase(OwnedCheckMixin, models.Model):
     """
     Adds a owner (user) field to the model. 1-*
     """
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL)
+    owner = models.ForeignKey(
+        to=settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
 
     class Meta:
         abstract = True
@@ -42,7 +45,10 @@ class SingleOwnedBase(OwnedCheckMixin, models.Model):
     """
     Adds a owner (user) field to the model. 1-1
     """
-    owner = models.OneToOneField(settings.AUTH_USER_MODEL)
+    owner = models.OneToOneField(
+        to=settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
 
     class Meta:
         abstract = True

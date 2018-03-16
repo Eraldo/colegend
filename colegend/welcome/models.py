@@ -1,19 +1,15 @@
 from random import randint
 
-from allauth.account.utils import perform_login
-from django.conf import settings
 from django.contrib import messages
-from django.db import IntegrityError
 from django.shortcuts import redirect
 from django.template.response import TemplateResponse
 from django.urls import reverse
 from django.db import models
-from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin, route
-from wagtail.wagtailcore.models import Page
+from wagtail.contrib.routable_page.models import RoutablePageMixin, route
+from wagtail.core.models import Page
 
 from colegend.core.models import TimeStampedBase
 from colegend.users.models import User
-from colegend.welcome.forms import WelcomeEmailForm, WelcomePasswordForm
 
 
 def generate_code():

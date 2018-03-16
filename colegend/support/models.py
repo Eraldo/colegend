@@ -1,11 +1,11 @@
 from django.template.defaultfilters import slugify
 from django.utils.html import format_html
 from django.utils.translation import ugettext_lazy as _
-from wagtail.wagtailadmin.edit_handlers import StreamFieldPanel
-from wagtail.wagtailcore.fields import StreamField
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailsearch import index
+from wagtail.admin.edit_handlers import StreamFieldPanel
+from wagtail.core.fields import StreamField
+from wagtail.core.models import Page
+from wagtail.core.models import Page
+from wagtail.search import index
 
 from colegend.cms.blocks import BASE_BLOCKS
 from colegend.cms.models import UniquePageMixin

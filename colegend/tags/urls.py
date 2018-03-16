@@ -3,6 +3,7 @@ from django.conf.urls import url
 from .views import TagIndexView, TagListView, TagCreateView, TagDetailView, TagUpdateView, \
     TagDeleteView, TagAutocompleteView
 
+app_name = 'tags'
 urlpatterns = [
     url(r'^$',
         TagIndexView.as_view(),

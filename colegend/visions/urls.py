@@ -3,6 +3,7 @@ from django.conf.urls import url, include
 from .views import VisionIndexView, VisionListView, VisionCreateView, VisionDetailView, VisionUpdateView, \
     VisionDeleteView
 
+app_name = 'visions'
 urlpatterns = [
     url(r'^$',
         VisionIndexView.as_view(),
@@ -24,7 +25,4 @@ urlpatterns = [
             VisionDeleteView.as_view(),
             name='delete'),
     ])),
-]
-urlpatterns = [
-    url(r'^', include(urlpatterns, namespace='visions')),
 ]

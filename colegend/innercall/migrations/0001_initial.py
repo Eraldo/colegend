@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                                                       help_text='10 = very strong, 1 = not strong at all')),
                 ('wishes', models.TextField(verbose_name='What are your wishes for this platform?')),
                 ('other', models.TextField(verbose_name='Is there anything else you want to share? :)')),
-                ('owner', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
+                ('owner', models.OneToOneField(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
             ],
             options={
                 'abstract': False,

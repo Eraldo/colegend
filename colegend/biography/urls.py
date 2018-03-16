@@ -5,6 +5,7 @@ from .views import BiographyCreateView, BiographyUpdateView
 
 __author__ = 'eraldo'
 
+app_name = 'biography'
 urlpatterns = [
     url(r'^$',
         RedirectView.as_view(url='create/', permanent=False),

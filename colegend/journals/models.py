@@ -6,8 +6,8 @@ from django.template.response import TemplateResponse
 from django.utils.translation import ugettext_lazy as _
 from django.utils.dateparse import parse_date
 from django.db import models
-from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin, route
-from wagtail.wagtailcore.models import Page
+from wagtail.contrib.routable_page.models import RoutablePageMixin, route
+from wagtail.core.models import Page
 from colegend.core.fields import MarkdownField
 from colegend.core.models import AutoOwnedBase, AutoUrlsMixin, OwnedQuerySet, TimeStampedBase, OwnedBase
 from colegend.journals import scopes
@@ -185,7 +185,7 @@ class JournalPage(RoutablePageMixin, Page):
         context = self.get_context(request, scope)
 
         user = request.user
-        if user and user.is_authenticated():
+        if user and user.is_authenticated:
             dayentry = user.journal_entries.filter(scope=scope.name, start=scope.start).first()
             context['dayentry'] = dayentry
 
@@ -211,7 +211,7 @@ class JournalPage(RoutablePageMixin, Page):
         context = self.get_context(request, scope)
 
         user = request.user
-        if user and user.is_authenticated():
+        if user and user.is_authenticated:
             weekentry = user.journal_entries.filter(scope=scope.name, start=scope.start).first()
             context['weekentry'] = weekentry
 
@@ -248,7 +248,7 @@ class JournalPage(RoutablePageMixin, Page):
         context = self.get_context(request, scope)
 
         user = request.user
-        if user and user.is_authenticated():
+        if user and user.is_authenticated:
             monthentry = user.journal_entries.filter(scope=scope.name, year=scope.date.year, month=scope.number).first()
             context['monthentry'] = monthentry
 
@@ -285,7 +285,7 @@ class JournalPage(RoutablePageMixin, Page):
         context = self.get_context(request, scope)
 
         user = request.user
-        if user and user.is_authenticated():
+        if user and user.is_authenticated:
             quarterentry = user.journal_entries.filter(scope=scope.name, start=scope.start).first()
             context['quarterentry'] = quarterentry
 
@@ -322,7 +322,7 @@ class JournalPage(RoutablePageMixin, Page):
         context = self.get_context(request, scope)
 
         user = request.user
-        if user and user.is_authenticated():
+        if user and user.is_authenticated:
             yearentry = user.journal_entries.filter(scope=scope.name, start=scope.start).first()
             context['yearentry'] = yearentry
 

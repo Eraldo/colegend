@@ -1,6 +1,6 @@
 from django.db import models
 from django.shortcuts import redirect
-from wagtail.wagtailcore.models import Page
+from wagtail.core.models import Page
 from django.utils.translation import ugettext_lazy as _
 
 from colegend.core.fields import MarkdownField

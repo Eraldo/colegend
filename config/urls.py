@@ -8,10 +8,10 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 from django.views import defaults as default_views
 from django.views.generic import RedirectView, TemplateView
 
-from wagtail.wagtailcore import urls as wagtail_urls
-from wagtail.wagtailadmin import urls as wagtailadmin_urls
-from wagtail.wagtaildocs import urls as wagtaildocs_urls
-from wagtail.wagtailsearch import urls as wagtailsearch_urls
+from wagtail.admin import urls as wagtailadmin_urls
+from wagtail.documents import urls as wagtaildocs_urls
+from wagtail.core import urls as wagtail_urls
+from wagtail.search import urls as wagtailsearch_urls
 
 from colegend.about.views import AcademyView
 
@@ -27,27 +27,27 @@ urlpatterns = [
         RedirectView.as_view(url=staticfiles_storage.url('images/favicon.ico'), permanent=True)),
 
     # Django Admin, use {% url 'admin:index' %}
-    url(r'^{}/'.format(settings.ADMIN_URL), include(admin.site.urls)),
+    url(r'^{}/'.format(settings.ADMIN_URL), admin.site.urls),
 
     # User management
     url(r'^accounts/', include('allauth.urls')),
 
     url(r'^legends/', include('colegend.users.urls')),
-    url(r'^outer-call/', include('colegend.outercall.urls', namespace='outer-call')),
-    url(r'^inner-call/', include('colegend.innercall.urls', namespace='inner-call')),
-    url(r'^biography/', include('colegend.biography.urls', namespace='biography')),
+    url(r'^outer-call/', include('colegend.outercall.urls')),
+    url(r'^inner-call/', include('colegend.innercall.urls')),
+    url(r'^biography/', include('colegend.biography.urls')),
 
-    url(r'^tags/', include('colegend.tags.urls', namespace='tags')),
+    url(r'^tags/', include('colegend.tags.urls')),
 
     # Your stuff: custom urls includes go here
     # url(r'^$', RedirectView.as_view(url='home/', permanent=False), name='index'),
 
-    url(r'^donations/', include('colegend.donations.urls', namespace='donations')),
+    url(r'^donations/', include('colegend.donations.urls')),
     url(r'^roles/', include('colegend.roles.urls')),
-    url(r'^category/', include('colegend.categories.urls', namespace='categories')),
+    url(r'^category/', include('colegend.categories.urls')),
 
-    url(r'^manager/', include('colegend.manager.urls', namespace='manager')),
-    url(r'^outcomes/', include('colegend.outcomes.urls', namespace='outcomes')),
+    url(r'^manager/', include('colegend.manager.urls')),
+    url(r'^outcomes/', include('colegend.outcomes.urls')),
     url(r'^vision/', include('colegend.visions.urls')),
     url(r'^journal/', include('colegend.journals.urls')),
 
@@ -62,10 +62,10 @@ urlpatterns = [
     # Added robots.txt file for crawlers (google/etc)
     url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
 
-    url(r'^styleguide/', include('colegend.styleguide.urls', namespace='styleguide')),
+    url(r'^styleguide/', include('colegend.styleguide.urls')),
     # url(r'^sandbox/', include('colegend.sandbox.urls')),
     # url(r'^mockups/', include('colegend.mockups.urls')),
-    url(r'^metrics/', include('colegend.metrics.urls', namespace='metrics')),
+    url(r'^metrics/', include('colegend.metrics.urls')),
 
     # API
     url(r'^api/', include('colegend.api.urls')),

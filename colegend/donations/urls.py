@@ -3,6 +3,7 @@ from django.conf.urls import url
 from .views import DonationIndexView, DonationListView, DonationCreateView, DonationDetailView, DonationUpdateView, \
     DonationDeleteView, TopSupportersListView
 
+app_name = 'donations'
 urlpatterns = [
     url(r'^$',
         DonationIndexView.as_view(),

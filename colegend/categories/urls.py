@@ -3,6 +3,7 @@ from django.conf.urls import url
 from .views import CategoryIndexView, CategoryListView, CategoryCreateView, CategoryDetailView, CategoryUpdateView, \
     CategoryDeleteView
 
+app_name = 'categories'
 urlpatterns = [
     url(r'^$',
         CategoryIndexView.as_view(),

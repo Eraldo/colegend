@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('modified', models.DateTimeField(auto_now=True)),
                 ('biography', models.TextField(blank=True)),
-                ('owner', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
+                ('owner', models.OneToOneField(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
             ],
             options={
                 'abstract': False,

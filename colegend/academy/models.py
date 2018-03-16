@@ -2,7 +2,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.db.models import Avg, Q
 from django.shortcuts import redirect
-from wagtail.wagtailcore.models import Page
+from wagtail.core.models import Page
 
 from colegend.core.fields import MarkdownField
 from colegend.core.models import TimeStampedBase, OwnedBase

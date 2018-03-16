@@ -1,11 +1,11 @@
 from django.db import ProgrammingError
 from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
-from wagtail.wagtailadmin.edit_handlers import StreamFieldPanel
-from wagtail.wagtailcore.fields import StreamField
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailcore.templatetags.wagtailcore_tags import slugurl
-from wagtail.wagtailsearch import index
+from wagtail.admin.edit_handlers import StreamFieldPanel
+from wagtail.core.fields import StreamField
+from wagtail.core.models import Page
+from wagtail.core.templatetags.wagtailcore_tags import slugurl
+from wagtail.search import index
 
 from colegend.cms.blocks import BASE_BLOCKS
 
@@ -37,7 +37,7 @@ class RootPage(UniquePageMixin, Page):
     def serve(self, request, *args, **kwargs):
         user = request.user
         # Redirect anonymous users to the about page.
-        if not user.is_authenticated():
+        if not user.is_authenticated:
             return redirect(slugurl(context={'request': request}, slug='about'))
         # Redirect if prologue is not completed.
         # if not user.has_checkpoint('prologue'):

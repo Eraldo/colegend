@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 ('trigger', models.TextField(verbose_name='How did you find out about coLegend?')),
                 ('referrer', models.CharField(max_length=255, blank=True, verbose_name='Who was your contact person?',
                                               help_text='If someone told you about coLegend: Who was it?')),
-                ('owner', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
+                ('owner', models.OneToOneField(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
             ],
             options={
                 'abstract': False,

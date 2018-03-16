@@ -4,11 +4,11 @@ from django.utils.translation import ugettext_lazy as _
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.fields import ParentalKey
 from taggit.models import TagBase, ItemBase
-from wagtail.wagtailadmin.edit_handlers import StreamFieldPanel, MultiFieldPanel, FieldPanel
-from wagtail.wagtailcore.fields import StreamField
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailsearch import index
-from wagtail.wagtailsnippets.models import register_snippet
+from wagtail.admin.edit_handlers import StreamFieldPanel, MultiFieldPanel, FieldPanel
+from wagtail.core.fields import StreamField
+from wagtail.core.models import Page
+from wagtail.search import index
+from wagtail.snippets.models import register_snippet
 
 from colegend.cms.blocks import BASE_BLOCKS
 
@@ -61,7 +61,11 @@ class ResourceTag(TagBase):
 
 class TaggedResourcePage(ItemBase):
     content_object = ParentalKey('ResourcePage', related_name='tagged_items')
-    tag = models.ForeignKey(ResourceTag, related_name="%(app_label)s_%(class)s_items")
+    tag = models.ForeignKey(
+        to=ResourceTag,
+        related_name="%(app_label)s_%(class)s_items",
+        on_delete=models.CASCADE
+    )
 
 
 class ResourcePage(Page):

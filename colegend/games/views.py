@@ -1,6 +1,6 @@
 # from django.contrib.auth.mixins import LoginRequiredMixin
 # from django.contrib import messages
-# from django.core.urlresolvers import reverse
+# from django.urls import reverse
 # from django.shortcuts import redirect
 # from django.template.loader import render_to_string
 # from django.utils.safestring import mark_safe

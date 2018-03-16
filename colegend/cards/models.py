@@ -1,4 +1,4 @@
-# from django.core.urlresolvers import reverse
+# from django.urls import reverse
 # from django.db import models
 # from easy_thumbnails.fields import ThumbnailerImageField
 # from colegend.categories.models import Category

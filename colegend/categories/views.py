@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, RedirectView
 
 from colegend.core.views import RolesRequiredMixin

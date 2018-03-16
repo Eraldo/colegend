@@ -9,7 +9,7 @@ from django.db import migrations, models
 import django.db.models.deletion
 import modelcluster.contrib.taggit
 import modelcluster.fields
-import wagtail.wagtailcore.fields
+import wagtail.core.fields
 
 
 class Migration(migrations.Migration):
@@ -37,7 +37,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
                 ('lead', models.TextField(blank=True, verbose_name='Lead text')),
-                ('content', wagtail.wagtailcore.fields.StreamField((('heading', colegend.cms.blocks.HeadingBlock()), ('rich_text', colegend.cms.blocks.RichTextBlock()), ('image', colegend.cms.blocks.ImageBlock()), ('embed', colegend.cms.blocks.EmbedBlock())), blank=True)),
+                ('content', wagtail.core.fields.StreamField((('heading', colegend.cms.blocks.HeadingBlock()), ('rich_text', colegend.cms.blocks.RichTextBlock()), ('image', colegend.cms.blocks.ImageBlock()), ('embed', colegend.cms.blocks.EmbedBlock())), blank=True)),
                 ('date', models.DateField(default=datetime.date(2016, 6, 25), help_text='This date may be displayed on the blog post. It is not used to schedule posts to go live at a later date.', verbose_name='Display date')),
                 ('color', models.CharField(blank=True, choices=[('#f72e74', 'pink'), ('#FFAB40', 'orange'), ('#eede39', 'yellow'), ('#a8e141', 'green'), ('#6bdaed', 'cyan'), ('#3197d6', 'blue'), ('#ad86fc', 'purple'), ('#455A64', 'dark')], max_length=80, verbose_name='Color')),
                 ('image', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='wagtailimages.Image', verbose_name='Image')),

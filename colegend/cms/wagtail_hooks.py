@@ -1,10 +1,10 @@
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.core.urlresolvers import reverse, NoReverseMatch
+from django.urls import reverse, NoReverseMatch
 from django.utils.html import format_html_join
-from wagtail.wagtailadmin.menu import MenuItem
-from wagtail.wagtailadmin.site_summary import SummaryItem
-from wagtail.wagtailcore import hooks
+from wagtail.admin.menu import MenuItem
+from wagtail.admin.site_summary import SummaryItem
+from wagtail.core import hooks
 from django.utils.translation import ugettext_lazy as _
 
 from colegend.core.templatetags.core_tags import icon

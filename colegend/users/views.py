@@ -4,7 +4,7 @@ from __future__ import absolute_import, unicode_literals
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import Group
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.shortcuts import redirect
 from django.template.defaultfilters import slugify
 from django.utils.safestring import mark_safe

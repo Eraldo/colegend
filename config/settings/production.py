@@ -41,8 +41,8 @@ SECURITY_MIDDLEWARE = (
 )
 RAVEN_MIDDLEWARE = ('raven.contrib.django.raven_compat.middleware.Sentry404CatchMiddleware',
                     'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',)
-MIDDLEWARE_CLASSES = SECURITY_MIDDLEWARE + \
-                     RAVEN_MIDDLEWARE + MIDDLEWARE_CLASSES
+MIDDLEWARE = SECURITY_MIDDLEWARE + \
+                     RAVEN_MIDDLEWARE + MIDDLEWARE
 
 # opbeat integration
 # ------------------------------------------------------------------------------
@@ -53,9 +53,9 @@ OPBEAT = {
     'APP_ID': env('DJANGO_OPBEAT_APP_ID'),
     'SECRET_TOKEN': env('DJANGO_OPBEAT_SECRET_TOKEN')
 }
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
                          'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
-                     ) + MIDDLEWARE_CLASSES
+                     ) + MIDDLEWARE
 
 # set this to 60 seconds and then to 518400 when you can prove it works
 SECURE_HSTS_SECONDS = 60

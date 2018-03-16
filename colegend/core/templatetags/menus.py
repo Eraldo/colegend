@@ -1,7 +1,7 @@
 from django import template
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.template.loader import render_to_string
-from wagtail.wagtailcore.templatetags.wagtailcore_tags import slugurl
+from wagtail.core.templatetags.wagtailcore_tags import slugurl
 
 from colegend.community.models import CommunityPage
 
@@ -108,7 +108,7 @@ def menu(context, user=None, name='main'):
                     {
                         'name': 'Legend',
                         'url': reverse('legends:detail',
-                                       args=[user.username]) if user.is_authenticated() else '#profile',
+                                       args=[user.username]) if user.is_authenticated else '#profile',
                     },
                     {
                         'name': 'Duo',
@@ -135,34 +135,34 @@ def menu(context, user=None, name='main'):
                     },
                     {
                         'name': 'Guide',
-                        'locked': not user.has_checkpoint('cloud guide card') if user.is_authenticated() else True,
+                        'locked': not user.has_checkpoint('cloud guide card') if user.is_authenticated else True,
                         # 'url': reverse('guides:index'),
                     },
                     {
                         'name': 'Chat',
-                        'locked': not user.has_checkpoint('chat card') if user.is_authenticated() else True,
+                        'locked': not user.has_checkpoint('chat card') if user.is_authenticated else True,
                         # 'url': reverse('chat:index'),
-                        'external': user.has_checkpoint('chat') if user.is_authenticated() else True,
+                        'external': user.has_checkpoint('chat') if user.is_authenticated else True,
                     },
                     {
                         'name': 'Virtual Room',
-                        'locked': not user.has_checkpoint('virtual room') if user.is_authenticated() else True,
+                        'locked': not user.has_checkpoint('virtual room') if user.is_authenticated else True,
                         # 'url': reverse('chat:room'),
                         'external': True,
                     },
                     {
                         'name': 'Guidelines',
-                        'locked': not user.has_checkpoint('guidelines card') if user.is_authenticated() else True,
+                        'locked': not user.has_checkpoint('guidelines card') if user.is_authenticated else True,
                         'url': reverse('guidelines:index'),
                     },
                     {
                         'name': 'Manager',
-                        'locked': not user.has_checkpoint('manager') if user.is_authenticated() else True,
+                        'locked': not user.has_checkpoint('manager') if user.is_authenticated else True,
                         'url': reverse('manager:index'),
                     },
                     {
                         'name': 'Journal',
-                        'locked': not user.has_checkpoint('storytime') if user.is_authenticated() else True,
+                        'locked': not user.has_checkpoint('storytime') if user.is_authenticated else True,
                         'url': slugurl(context, slug='journal'),
                     },
                     {
@@ -180,7 +180,7 @@ def menu(context, user=None, name='main'):
                 ],
             },
         ]
-    if user.is_authenticated():
+    if user.is_authenticated:
         if name == 'main':
             pass
         elif name == 'account':

@@ -2,7 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-from wagtail.wagtailcore.models import Page
+from wagtail.core.models import Page
 
 from colegend.core.fields import MarkdownField
 from colegend.core.models import TimeStampedBase
@@ -18,7 +18,9 @@ class News(TimeStampedBase):
         max_length=255,
     )
     author = models.ForeignKey(
-        to=settings.AUTH_USER_MODEL
+        to=settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        blank=True, null=True
     )
     date = models.DateTimeField(
         _('date'),

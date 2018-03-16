@@ -8,7 +8,6 @@ from django.template.library import parse_bits
 from django.template.loader import render_to_string, get_template
 from django.templatetags.static import static
 from django.utils.decorators import classonlymethod
-from django.utils.inspect import getargspec
 
 from colegend.components.utils import camelcase_to_underscores
 
@@ -84,7 +83,7 @@ class ComponentNode(template.Node):
             target_var = bits[-1]
             bits = bits[:-2]
 
-        params, varargs, varkw, defaults = getargspec(self.component.render)
+        params, varargs, varkw, defaults = inspect.signature(self.component.render)
 
         if params[0] == 'context':
             takes_context = True

@@ -1,6 +1,6 @@
 from allauth.account.signals import user_signed_up
 from django.conf import settings
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db import models
 from django.dispatch import receiver
 from django.utils.translation import ugettext as _
@@ -28,7 +28,9 @@ class GuideRelation(AutoOwnedBase, TimeStampedBase):
     guide = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='guidee_relations',
-        null=True)
+        null=True,
+        on_delete=models.SET_NULL
+    )
     outer_call_checked = models.BooleanField(
         verbose_name=_("Talked about Outer Call"),
         default=False)

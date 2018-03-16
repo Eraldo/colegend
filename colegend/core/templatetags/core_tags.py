@@ -1,10 +1,9 @@
 from django import template
 from django.core.exceptions import ValidationError
-from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
+from django.urls import reverse
 from django.utils.html import format_html
 
-from ..components.card import CardComponent
 from ..components.link.component import LinkComponent
 from colegend.core.intuitive_duration.utils import intuitive_duration_string
 from colegend.core.utils.icons import get_icon_class

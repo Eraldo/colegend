@@ -3,12 +3,12 @@ from os import path
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.conf import settings
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.shortcuts import redirect
 from django.template.defaultfilters import slugify
 from django.utils import timezone
 from django.views.generic import TemplateView
-from wagtail.wagtailcore.templatetags.wagtailcore_tags import slugurl
+from wagtail.core.templatetags.wagtailcore_tags import slugurl
 
 # from colegend.games.views import complete_card
 from .models import WelcomeTreeLeaf

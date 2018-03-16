@@ -3,6 +3,7 @@ from django.conf.urls import url, include
 from .views import JournalIndexView, JournalListView, JournalCreateView, JournalDetailView, JournalUpdateView, \
     JournalDeleteView, JournalDayView, JournalWeekView, JournalSettingsView, JournalSearchView, JournalMonthView
 
+app_name = 'journals'
 urlpatterns = [
     url(r'^$',
         JournalIndexView.as_view(),
@@ -38,8 +39,4 @@ urlpatterns = [
     url(r'^month/(?P<date>[0-9]{4}-[0-9]{2}-[0-9]{2})/$',
         JournalMonthView.as_view(),
         name='month'),
-]
-
-urlpatterns = [
-    url(r'^', include(urlpatterns, namespace='journals')),
 ]

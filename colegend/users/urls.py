@@ -5,6 +5,7 @@ from django.conf.urls import url, include
 from django.views.generic import RedirectView
 from .views import SettingsView, LegendAvatarView, LegendUpdateView, LegendDetailView, LegendListView
 
+app_name = 'legends'
 urlpatterns = [
     # URL pattern for the UserListView
     url(
@@ -42,7 +43,4 @@ urlpatterns = [
         LegendAvatarView.as_view(),
         name='avatar'
     ),
-]
-urlpatterns = [
-    url(r'^', include(urlpatterns, namespace='legends')),
 ]

@@ -5,6 +5,7 @@ from .views import InnerCallCreateView, InnerCallUpdateView
 
 __author__ = 'eraldo'
 
+app_name = 'inner-call'
 urlpatterns = [
     url(r'^$',
         RedirectView.as_view(url='create/', permanent=False),
