@@ -12,5 +12,5 @@ hitch==0.5.7
 
 # py.test
 # ------------------------------------------------
-pytest-django==3.0.0
-pytest-sugar==0.7.1
+pytest-django==3.1.2
+pytest-sugar==0.9.1
