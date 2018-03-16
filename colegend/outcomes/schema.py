@@ -117,7 +117,7 @@ class UpdateOutcomeMutation(graphene.relay.ClientIDMutation):
         if tags is not None:
             tag_ids = [from_global_id(id)[1] for id in tags]
             tags = [user.tags.get(id=id) for id in tag_ids]
-            outcome.tags = tags
+            outcome.tags.set(tags)
         if deletions is not None:
             for field in deletions:
                 setattr(outcome, field, None)
