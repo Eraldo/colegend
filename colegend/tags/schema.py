@@ -70,7 +70,7 @@ class UpdateTag(graphene.relay.ClientIDMutation):
         if description is not None:
             tag.description = description
         tag.save()
-        return DeleteTag(success=True, tag=tag)
+        return UpdateTag(success=True, tag=tag)
 
 
 class DeleteTag(graphene.relay.ClientIDMutation):
