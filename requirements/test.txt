@@ -5,7 +5,7 @@
 # ------------------------------------------------
 coverage==4.2
 flake8==3.0.4
-django-test-plus==1.0.15
+django-test-plus==1.0.22
 django_coverage_plugin==1.3.1
 factory_boy==2.7.0
 hitch==0.5.7
