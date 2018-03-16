@@ -42,7 +42,7 @@ SECURITY_MIDDLEWARE = (
 RAVEN_MIDDLEWARE = ('raven.contrib.django.raven_compat.middleware.Sentry404CatchMiddleware',
                     'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',)
 MIDDLEWARE = SECURITY_MIDDLEWARE + \
-                     RAVEN_MIDDLEWARE + MIDDLEWARE
+             RAVEN_MIDDLEWARE + MIDDLEWARE
 
 # opbeat integration
 # ------------------------------------------------------------------------------
@@ -54,8 +54,8 @@ OPBEAT = {
     'SECRET_TOKEN': env('DJANGO_OPBEAT_SECRET_TOKEN')
 }
 MIDDLEWARE = (
-                         'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
-                     ) + MIDDLEWARE
+                 'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
+             ) + MIDDLEWARE
 
 # set this to 60 seconds and then to 518400 when you can prove it works
 SECURE_HSTS_SECONDS = 60
@@ -229,5 +229,5 @@ INSTALLED_APPS += ('django_crontab',)
 CRONJOBS = [
     ('0 0 4 * *', 'django.core.management.call_command', ['monthly'])
 ]
-CRONTAB_DJANGO_PROJECT_NAME='colegend'
-CRONTAB_DJANGO_SETTINGS_MODULE='config.settings.production'
+CRONTAB_DJANGO_PROJECT_NAME = 'colegend'
+CRONTAB_DJANGO_SETTINGS_MODULE = 'config.settings.production'
