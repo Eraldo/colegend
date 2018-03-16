@@ -14,5 +14,5 @@ invoke==0.12.2
 
 # Server automation
 # ------------------------------------------------
-Fabric3==1.12.post1
+Fabric3==1.14.post1
 fabric-virtualenv==0.3.0
