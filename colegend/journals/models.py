@@ -15,13 +15,10 @@ from colegend.scopes.models import SCOPE_CHOICES, DAY, get_scope_by_name, WEEK, 
 from colegend.tags.models import TaggableBase
 
 
-# class JournalEntryQuerySet(models.QuerySet):
-#     def owned_by(self, user):
-#         return self.filter(journal__owner=user)
-#
-#     def current(self):
-#         today = get_today()
-#         return self.filter(start=today)
+class JournalEntryQuerySet(models.QuerySet):
+    def search(self, query):
+        queryset = self.filter(Q(keywords__icontains=query) | Q(content__icontains=query))
+        return queryset
 
 
 class JournalEntry(OwnedBase, TaggableBase, TimeStampedBase):
@@ -55,27 +52,7 @@ class JournalEntry(OwnedBase, TaggableBase, TimeStampedBase):
     def get_scope(self):
         return get_scope_by_name(self.scope)(self.start)
 
-    # @property
-    # def children(self):
-    #     # Get smaller scope entities.
-    #     child_scope_map = {
-    #         'week': 'day',
-    #         'month': 'week',
-    #         'year': 'month',
-    #     }
-    #     child_scope_name = child_scope_map.get(self.scope)
-    #     print(child_scope_name)
-    #     if child_scope_name:
-    #         start = get_scope_by_name(child_scope_name)(self.start).start
-    #         end = self.end
-    #         print(start)
-    #         print(end)
-    #         return self.owner.journal_entries.filter(
-    #             scope=child_scope_name,
-    #             start__range=(start, end)
-    #         )
-
-    # objects = JournalEntryQuerySet.as_manager()
+    objects = JournalEntryQuerySet.as_manager()
 
     class Meta:
         verbose_name = _('Journal Entry')

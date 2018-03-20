@@ -9,6 +9,7 @@ from colegend.experience.models import add_experience
 from colegend.scopes.models import Scope, get_scope_by_name
 from colegend.scopes.schema import ScopeType
 from colegend.journals.models import JournalEntry
+from colegend.studio.filters import JournalEntryFilter
 from .models import InterviewEntry, Chapter, Story
 
 
@@ -19,12 +20,6 @@ class JournalEntryNode(DjangoObjectType):
 
     class Meta:
         model = JournalEntry
-        filter_fields = {
-            'scope': ['exact'],
-            'start': ['exact', 'lt', 'gt', 'lte', 'gte'],
-            'content': ['exact', 'icontains'],
-            'keywords': ['exact', 'icontains'],
-        }
         interfaces = [graphene.Node]
 
     def resolve_end(self, info):
@@ -33,7 +28,7 @@ class JournalEntryNode(DjangoObjectType):
 
 class JournalEntryQuery(graphene.ObjectType):
     journal_entry = graphene.Node.Field(JournalEntryNode)
-    journal_entries = DjangoFilterConnectionField(JournalEntryNode)
+    journal_entries = DjangoFilterConnectionField(JournalEntryNode, filterset_class=JournalEntryFilter)
 
 
 class AddJournalEntryMutation(graphene.relay.ClientIDMutation):

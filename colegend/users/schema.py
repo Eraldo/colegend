@@ -13,6 +13,8 @@ from colegend.office.filters import FocusFilter
 from colegend.office.schema import FocusNode
 from colegend.outcomes.filters import OutcomeFilter, StepFilter
 from colegend.outcomes.schema import OutcomeNode, StepNode
+from colegend.studio.filters import JournalEntryFilter
+from colegend.studio.schema import JournalEntryNode
 from .models import User
 from .filters import UserFilter
 from graphene_django.converter import convert_django_field
@@ -67,6 +69,7 @@ class UserNode(DjangoObjectType):
     outcomes = DjangoFilterConnectionField(OutcomeNode, filterset_class=OutcomeFilter)
     steps = DjangoFilterConnectionField(StepNode, filterset_class=StepFilter)
     focuses = DjangoFilterConnectionField(FocusNode, filterset_class=FocusFilter)
+    journal_entries = DjangoFilterConnectionField(JournalEntryNode, filterset_class=JournalEntryFilter)
 
     class Meta:
         model = User
