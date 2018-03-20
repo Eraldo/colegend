@@ -1,6 +1,7 @@
 import django_filters
 from graphql_relay import from_global_id
 
+from colegend.core.filters import SearchFilter
 from colegend.tags.schema import TagsFilter
 from .models import Outcome, Step
 
@@ -33,7 +34,7 @@ class OutcomeFilter(django_filters.FilterSet):
     #     ('0m', 'unestimated'),
     # )
     # estimate = django_filters.ChoiceFilter(choices=(('', 'all'),) + ESTIMATE_CHOICES, method=filter_estimate)
-    search = django_filters.CharFilter(method='search_filter', label='Text search')
+    search = SearchFilter()
     # tags = django_filters.CharFilter(method='tags_filter')
     tags = TagsFilter()
     open = django_filters.BooleanFilter(method='open_filter')
@@ -62,9 +63,6 @@ class OutcomeFilter(django_filters.FilterSet):
             'score': ['exact', 'lt', 'gt', 'lte', 'gte'],
             'comparisons': ['exact', 'lt', 'gt', 'lte', 'gte'],
         }
-
-    def search_filter(self, queryset, name, value):
-        return queryset.search(value)
 
     def open_filter(self, queryset, name, value):
         if value:
