@@ -9,5 +9,6 @@ class UserFilter(django_filters.FilterSet):
         fields = {
             'id': ['exact'],
             'name': ['exact', 'icontains', 'istartswith'],
+            'username': ['exact', 'icontains', 'istartswith'],
         }
 
