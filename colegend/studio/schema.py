@@ -64,9 +64,9 @@ class UpdateJournalEntryMutation(graphene.relay.ClientIDMutation):
         user = info.context.user
         _type, id = from_global_id(id)
         entry = user.journal_entries.get(id=id)
-        if keywords:
+        if keywords is not None:
             entry.keywords = keywords
-        if content:
+        if content is not None:
             entry.content = content
         entry.save()
         return UpdateJournalEntryMutation(success=True, journal_entry=entry)
