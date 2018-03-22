@@ -1,5 +1,0 @@
-{% block test %}
-- name: Test Base
-  scenario:
-#  - Load website
-{% endblock %}

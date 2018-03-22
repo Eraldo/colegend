@@ -1,6 +1,0 @@
-{% extends "base.test" %}
-{% block test %}
-- name: Stub
-  scenario:
-  - Load website
-{% endblock %}
