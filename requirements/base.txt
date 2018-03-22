@@ -1,22 +1,23 @@
 # Bleeding edge Django
 # ------------------------------------------------
-django==2.0.3
+django==2.0.3  # pyup: < 2.1  # https://www.djangoproject.com/
 
 # Configuration
 # ------------------------------------------------
-django-environ==0.4.4
-whitenoise==3.3.1
+django-environ==0.4.4  # https://github.com/joke2k/django-environ
+whitenoise==3.3.1  # https://github.com/evansd/whitenoise
+argon2-cffi==18.1.0  # https://github.com/hynek/argon2_cffi
 
 # Forms
 # ------------------------------------------------
 django-braces==1.9.0
-django-crispy-forms==1.7.2
+django-crispy-forms==1.7.2  # https://github.com/django-crispy-forms/django-crispy-forms
 django-floppyforms==1.5.2
 django-bootstrap3-datetimepicker-2==2.4.2
 
 # Models
 # ------------------------------------------------
-django-model-utils==2.5.2
+django-model-utils==3.1.1  # https://github.com/jazzband/django-model-utils
 django-annoying==0.10.3
 django-phonenumber-field==1.0.0
 django-ordered-model==1.4.3
@@ -31,7 +32,7 @@ bleach==2.1.3
 
 # Images
 # ------------------------------------------------
-Pillow==5.0.0
+Pillow==5.0.0  # https://github.com/python-pillow/Pillow
 easy-thumbnails==2.5
 django-gravatar2==1.4.0
 
@@ -39,30 +40,30 @@ django-gravatar2==1.4.0
 # ------------------------------------------------
 # For user registration, either via email or social
 # Well-built with regular release cycles!
-django-allauth==0.34.0
+django-allauth==0.35.0  # https://github.com/pennersr/django-allauth
 
 # Database
 # ------------------------------------------------
 # Python-PostgreSQL Database Adapter
-psycopg2==2.7.3.1
+psycopg2-binary==2.7.4  # https://github.com/psycopg/psycopg2
 
 # Unicode slugification
 # ------------------------------------------------
-awesome-slugify==1.6.5
+awesome-slugify==1.6.5  # https://github.com/dimka665/awesome-slugify
 django-autoslug==1.9.3
 
 # Time zones support
 # ------------------------------------------------
-pytz==2018.3
+pytz==2018.3  # https://github.com/stub42/pytz
 
 # Redis support
 # ------------------------------------------------
-django-redis==4.4.4
-redis>=2.10.0
+django-redis==4.9.0  # https://github.com/niwinz/django-redis
+redis>=2.10.5  # https://github.com/antirez/redis
 
 # Celery
 # ------------------------------------------------
-celery==4.1.0
+celery==3.1.25  # pyup: <4.0  # https://github.com/celery/celery
 
 
 # Your custom requirements go here
@@ -78,7 +79,8 @@ django-filter==1.0.4
 
 # API
 # ------------------------------------------------
-djangorestframework==3.7.7
+djangorestframework==3.7.7  # https://github.com/encode/django-rest-framework
+# coreapi==2.3.3  # https://github.com/core-api/python-client
 django-cors-headers==2.1.0
 django-rest-auth==0.9.1
 graphene-django==2.0
@@ -92,8 +94,9 @@ django-slack==5.10.2
 django-crontab==0.7.1
 
 # Maintenance
-django-extensions==2.0.6
+# ------------------------------------------------
+django-extensions==2.0.6  # https://github.com/django-extensions/django-extensions
 
 # django-debug-toolbar that works with Django 1.5+
 # ------------------------------------------------
-django-debug-toolbar==1.9.1
+django-debug-toolbar==1.9.1  # https://github.com/jazzband/django-debug-toolbar

@@ -1,25 +1,13 @@
-# Pro-tip: Try not to put anything here. There should be no dependency in
-#	production that isn't in development.
+# PRECAUTION: avoid production dependencies that aren't in development.
 -r base.txt
 
-# WSGI Handler
-# ------------------------------------------------
-gunicorn==19.6.0
+gunicorn==19.7.1  # https://github.com/benoitc/gunicorn
+boto3==1.6.2  # pyup: update minor  # https://github.com/boto/boto3
+psycopg2==2.7.4 --no-binary psycopg2  # https://github.com/psycopg/psycopg2
+raven==6.6.0  # https://github.com/getsentry/raven-python
+# opbeat==3.4.0
 
-# Static and Media Storage
-# ------------------------------------------------
-boto==2.42.0
-django-storages-redux==1.3.2
-
-
-# Email backends for Mailgun, Postmark, SendGrid and more
-# -------------------------------------------------------
-django-anymail==0.5
-
-# Raven is the Sentry client
-# --------------------------
-raven==6.6.0
-
-# Opbeat agent for performance monitoring
-# -----------------------------------------
-opbeat==3.4.0
+# Django
+# ------------------------------------------------------------------------------
+django-storages==1.6.5  # https://github.com/jschneier/django-storages
+django-anymail==2.0  # https://github.com/anymail/django-anymail

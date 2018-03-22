@@ -2,29 +2,21 @@
 '''
 Test settings
 '''
+from .base import *  # noqa
+from .base import env
 
-# noinspection PyUnresolvedReferences
-from .common import *  # noqa
-
-# DEBUG
+# GENERAL
 # ------------------------------------------------------------------------------
-DEBUG = env.bool('DJANGO_DEBUG', default=True)
-TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
-
-# SECRET CONFIGURATION
-# ------------------------------------------------------------------------------
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
-# Note: This key only used for development and testing.
+# https://docs.djangoproject.com/en/dev/ref/settings/#debug
+DEBUG = False
+# https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 SECRET_KEY = env("DJANGO_SECRET_KEY", default='CHANGEME!!!yxmo^0oxyt2sdw*fb%)&-sb7$q_n0ouv_u8yh&ljecar&-m)a7')
+# https://docs.djangoproject.com/en/dev/ref/settings/#test-runner
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
-# Mail settings
+# CACHES
 # ------------------------------------------------------------------------------
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = 1025
-
-# CACHING
-# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#caches
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
@@ -32,11 +24,38 @@ CACHES = {
     }
 }
 
-# TESTING
+# PASSWORDS
 # ------------------------------------------------------------------------------
-TEST_RUNNER = 'django.test.runner.DiscoverRunner'
+# https://docs.djangoproject.com/en/dev/ref/settings/#password-hashers
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.MD5PasswordHasher',
+]
 
-# Your local stuff: Below this line define 3rd party library settings
+# TEMPLATES
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#templates
+TEMPLATES[0]['OPTIONS']['debug'] = DEBUG  # noqa F405
+TEMPLATES[0]['OPTIONS']['loaders'] = [  # noqa F405
+    (
+        'django.template.loaders.cached.Loader',
+        [
+            'django.template.loaders.filesystem.Loader',
+            'django.template.loaders.app_directories.Loader',
+        ],
+    ),
+]
+
+# EMAIL
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
+EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
+# https://docs.djangoproject.com/en/dev/ref/settings/#email-host
+EMAIL_HOST = 'localhost'
+# https://docs.djangoproject.com/en/dev/ref/settings/#email-port
+EMAIL_PORT = 1025
+
+# Custom local stuff:
+# ------------------------------------------------------------------------------
 
 # Slack
 # ------------------------------------------------------------------------------

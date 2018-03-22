@@ -1,160 +1,156 @@
 # -*- coding: utf-8 -*-
 '''
 Production Configurations
-
-- Use djangosecure
-- Use Amazon's S3 for storing static files and uploaded media
-- Use mailgun to send emails
-- # Use Redis on Heroku
-
-- Use sentry for error logging
-- Use opbeat for error reporting
-
 '''
-from __future__ import absolute_import, unicode_literals
-
 import logging
 
-from boto.s3.connection import OrdinaryCallingFormat
-from django.utils import six
-# noinspection PyUnresolvedReferences
-from .common import *  # noqa
+from .base import *  # noqa
+from .base import env
 
-# SECRET CONFIGURATION
+# GENERAL
 # ------------------------------------------------------------------------------
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
-# Raises ImproperlyConfigured exception if DJANGO_SECRET_KEY not in os.environ
+# https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 SECRET_KEY = env("DJANGO_SECRET_KEY")
-
-# This ensures that Django will be able to detect a secure connection
-# properly on Heroku.
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-# security & error handling
-# ------------------------------------------------------------------------------
-# raven sentry client
-# See https://docs.getsentry.com/hosted/clients/python/integrations/django/
-INSTALLED_APPS += ('raven.contrib.django.raven_compat',)
-SECURITY_MIDDLEWARE = (
-    'django.middleware.security.SecurityMiddleware',
-)
-RAVEN_MIDDLEWARE = ('raven.contrib.django.raven_compat.middleware.Sentry404CatchMiddleware',
-                    'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',)
-MIDDLEWARE = SECURITY_MIDDLEWARE + \
-             RAVEN_MIDDLEWARE + MIDDLEWARE
-
-# opbeat integration
-# ------------------------------------------------------------------------------
-# See https://opbeat.com/languages/django/
-INSTALLED_APPS += ('opbeat.contrib.django',)
-OPBEAT = {
-    'ORGANIZATION_ID': env('DJANGO_OPBEAT_ORGANIZATION_ID'),
-    'APP_ID': env('DJANGO_OPBEAT_APP_ID'),
-    'SECRET_TOKEN': env('DJANGO_OPBEAT_SECRET_TOKEN')
-}
-MIDDLEWARE = (
-                 'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
-             ) + MIDDLEWARE
-
-# set this to 60 seconds and then to 518400 when you can prove it works
-SECURE_HSTS_SECONDS = 60
-SECURE_HSTS_INCLUDE_SUBDOMAINS = env.bool(
-    "DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS", default=True)
-SECURE_FRAME_DENY = env.bool("DJANGO_SECURE_FRAME_DENY", default=True)
-SECURE_CONTENT_TYPE_NOSNIFF = env.bool(
-    "DJANGO_SECURE_CONTENT_TYPE_NOSNIFF", default=True)
-SECURE_BROWSER_XSS_FILTER = True
-SESSION_COOKIE_SECURE = False
-SESSION_COOKIE_HTTPONLY = True
-SECURE_SSL_REDIRECT = env.bool("DJANGO_SECURE_SSL_REDIRECT", default=True)
-
-# SITE CONFIGURATION
-# ------------------------------------------------------------------------------
-# Hosts/domain names that are valid for this site
-# See https://docs.djangoproject.com/en/1.6/ref/settings/#allowed-hosts
+# https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['colegend.org'])
-CSRF_TRUSTED_ORIGINS = ALLOWED_HOSTS
-# END SITE CONFIGURATION
 
-INSTALLED_APPS += ("gunicorn",)
-
-# STORAGE CONFIGURATION
+# DATABASES
 # ------------------------------------------------------------------------------
-# Uploaded Media Files
-# ------------------------
-# See: http://django-storages.readthedocs.org/en/latest/index.html
-INSTALLED_APPS += (
-    'storages',
-)
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+DATABASES['default'] = env.db('DATABASE_URL')  # noqa F405
+# DATABASES['default']['ATOMIC_REQUESTS'] = True  # noqa F405
+# DATABASES['default']['CONN_MAX_AGE'] = env.int('CONN_MAX_AGE', default=60)  # noqa F405
 
-AWS_ACCESS_KEY_ID = env('DJANGO_AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = env('DJANGO_AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = env('DJANGO_AWS_STORAGE_BUCKET_NAME')
-AWS_AUTO_CREATE_BUCKET = True
-AWS_QUERYSTRING_AUTH = False
-AWS_S3_CALLING_FORMAT = OrdinaryCallingFormat()
 
-# AWS cache settings, don't change unless you know what you're doing:
-AWS_EXPIRY = 60 * 60 * 24 * 7
-
-# TODO See: https://github.com/jschneier/django-storages/issues/47
-# Revert the following and use str after the above-mentioned bug is fixed in
-# either django-storage-redux or boto
-AWS_HEADERS = {
-    'Cache-Control': six.b('max-age=%d, s-maxage=%d, must-revalidate' % (
-        AWS_EXPIRY, AWS_EXPIRY))
-}
-
-# URL that handles the media served from MEDIA_ROOT, used for managing
-# stored files.
-MEDIA_URL = 'https://s3.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
-
-# Static Assets
-# ------------------------
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-
-# EMAIL
+# CACHES
 # ------------------------------------------------------------------------------
-EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
-# Anymail with Mailgun
-INSTALLED_APPS += ('anymail',)
-ANYMAIL = {
-    'MAILGUN_API_KEY': env('DJANGO_MAILGUN_API_KEY'),
-    'MAILGUN_SENDER_DOMAIN': env('MAILGUN_DOMAIN'),  # your Mailgun domain, if needed
-}
-EMAIL_BACKEND = "anymail.backends.mailgun.MailgunBackend"
-
-# TEMPLATE CONFIGURATION
-# ------------------------------------------------------------------------------
-# See:
-# https://docs.djangoproject.com/en/dev/ref/templates/api/#django.template.loaders.cached.Loader
-TEMPLATES[0]['OPTIONS']['loaders'] = [
-    ('django.template.loaders.cached.Loader', [
-        'django.template.loaders.filesystem.Loader', 'django.template.loaders.app_directories.Loader', ]),
-]
-
-# DATABASE CONFIGURATION
-# ------------------------------------------------------------------------------
-# Raises ImproperlyConfigured exception if DATABASE_URL not in os.environ
-DATABASES['default'] = env.db("DATABASE_URL")
-
-# CACHING
-# ------------------------------------------------------------------------------
-# Heroku URL does not pass the DB number, so we parse it in
 # CACHES = {
-#     "default": {
-#         "BACKEND": "django_redis.cache.RedisCache",
-#         "LOCATION": "{0}/{1}".format(env.cache_url('REDIS_URL', default="redis://127.0.0.1:6379"), 0),
-#         "OPTIONS": {
-#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
-#             "IGNORE_EXCEPTIONS": True,  # mimics memcache behavior.
+#     'default': {
+#         'BACKEND': 'django_redis.cache.RedisCache',
+#         'LOCATION': f'{env("REDIS_URL", default="redis://127.0.0.1:6379")}/{0}',
+#         'OPTIONS': {
+#             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+#             # Mimicing memcache behavior.
 #             # http://niwinz.github.io/django-redis/latest/#_memcached_exceptions_behavior
+#             'IGNORE_EXCEPTIONS': True,
 #         }
 #     }
 # }
 
-# SENTRY Configuration
+
+# SECURITY
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#secure-proxy-ssl-header
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# https://docs.djangoproject.com/en/dev/ref/settings/#secure-ssl-redirect
+# TODO: Check if this works -- I had False before
+SECURE_SSL_REDIRECT = env.bool('DJANGO_SECURE_SSL_REDIRECT', default=True)
+# https://docs.djangoproject.com/en/dev/ref/settings/#session-cookie-secure
+# TODO: Check!
+SESSION_COOKIE_SECURE = True
+# https://docs.djangoproject.com/en/dev/ref/settings/#session-cookie-httponly
+SESSION_COOKIE_HTTPONLY = True
+# https://docs.djangoproject.com/en/dev/ref/settings/#csrf-cookie-secure
+CSRF_COOKIE_SECURE = True
+# https://docs.djangoproject.com/en/dev/ref/settings/#csrf-cookie-httponly
+CSRF_COOKIE_HTTPONLY = True
+# https://docs.djangoproject.com/en/dev/topics/security/#ssl-https
+# https://docs.djangoproject.com/en/dev/ref/settings/#secure-hsts-seconds
+# TODO: set this to 60 seconds first and then to 518400 once you prove the former works
+SECURE_HSTS_SECONDS = 60
+# https://docs.djangoproject.com/en/dev/ref/settings/#secure-hsts-include-subdomains
+SECURE_HSTS_INCLUDE_SUBDOMAINS = env.bool('DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS', default=True)
+# https://docs.djangoproject.com/en/dev/ref/settings/#secure-hsts-preload
+SECURE_HSTS_PRELOAD = env.bool('DJANGO_SECURE_HSTS_PRELOAD', default=True)
+# https://docs.djangoproject.com/en/dev/ref/middleware/#x-content-type-options-nosniff
+SECURE_CONTENT_TYPE_NOSNIFF = env.bool('DJANGO_SECURE_CONTENT_TYPE_NOSNIFF', default=True)
+# https://docs.djangoproject.com/en/dev/ref/settings/#secure-browser-xss-filter
+SECURE_BROWSER_XSS_FILTER = True
+# https://docs.djangoproject.com/en/dev/ref/settings/#x-frame-options
+X_FRAME_OPTIONS = 'DENY'
+
+# STORAGES
+# ------------------------------------------------------------------------------
+# https://django-storages.readthedocs.io/en/latest/#installation
+INSTALLED_APPS += ['storages']  # noqa F405
+# https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#settings
+AWS_ACCESS_KEY_ID = env('DJANGO_AWS_ACCESS_KEY_ID')
+# https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#settings
+AWS_SECRET_ACCESS_KEY = env('DJANGO_AWS_SECRET_ACCESS_KEY')
+# https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#settings
+AWS_STORAGE_BUCKET_NAME = env('DJANGO_AWS_STORAGE_BUCKET_NAME')
+# https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#settings
+AWS_AUTO_CREATE_BUCKET = True
+# https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#settings
+AWS_QUERYSTRING_AUTH = False
+# DO NOT change these unless you know what you're doing.
+_AWS_EXPIRY = 60 * 60 * 24 * 7
+# https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#settings
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': f'max-age={_AWS_EXPIRY}, s-maxage={_AWS_EXPIRY}, must-revalidate',
+}
+
+# STATIC
+# ------------------------
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# MEDIA
+# ------------------------------------------------------------------------------
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+MEDIA_URL = f'https://s3.amazonaws.com/{AWS_STORAGE_BUCKET_NAME}/'
+
+# TEMPLATES
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#templates
+TEMPLATES[0]['OPTIONS']['loaders'] = [  # noqa F405
+    (
+        'django.template.loaders.cached.Loader',
+        [
+            'django.template.loaders.filesystem.Loader',
+            'django.template.loaders.app_directories.Loader',
+        ]
+    ),
+]
+
+# EMAIL
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#default-from-email
+DEFAULT_FROM_EMAIL = env('DJANGO_DEFAULT_FROM_EMAIL', default='coLegend <connect@colegend.org>')
+# https://docs.djangoproject.com/en/dev/ref/settings/#server-email
+SERVER_EMAIL = env('DJANGO_SERVER_EMAIL', default=DEFAULT_FROM_EMAIL)
+# https://docs.djangoproject.com/en/dev/ref/settings/#email-subject-prefix
+EMAIL_SUBJECT_PREFIX = env("DJANGO_EMAIL_SUBJECT_PREFIX", default='[coLegend] ')
+
+# Anymail (Mailgun)
+# ------------------------------------------------------------------------------
+# https://anymail.readthedocs.io/en/stable/installation/#installing-anymail
+INSTALLED_APPS += ['anymail']  # noqa F405
+EMAIL_BACKEND = 'anymail.backends.mailgun.EmailBackend'
+# https://anymail.readthedocs.io/en/stable/installation/#anymail-settings-reference
+ANYMAIL = {
+    'MAILGUN_API_KEY': env('MAILGUN_API_KEY'),
+    'MAILGUN_SENDER_DOMAIN': env('MAILGUN_DOMAIN')
+}
+
+# Gunicorn
+# ------------------------------------------------------------------------------
+INSTALLED_APPS += ['gunicorn']  # noqa F405
+
+# WhiteNoise
+# ------------------------------------------------------------------------------
+# http://whitenoise.evans.io/en/latest/django.html#enable-whitenoise
+MIDDLEWARE = ['whitenoise.middleware.WhiteNoiseMiddleware'] + MIDDLEWARE  # noqa F405
+
+# raven
+# ------------------------------------------------------------------------------
+# https://docs.sentry.io/clients/python/integrations/django/
+INSTALLED_APPS += ['raven.contrib.django.raven_compat']  # noqa F405
+RAVEN_MIDDLEWARE = [
+    'raven.contrib.django.raven_compat.middleware.Sentry404CatchMiddleware'
+    'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',
+]
+MIDDLEWARE = RAVEN_MIDDLEWARE + MIDDLEWARE
+
+# Sentry
 # ------------------------------------------------------------------------------
 SENTRY_DSN = env('DJANGO_SENTRY_DSN')
 SENTRY_CLIENT = env('DJANGO_SENTRY_CLIENT', default='raven.contrib.django.raven_compat.DjangoClient')
@@ -205,13 +201,31 @@ LOGGING = {
         },
     },
 }
+
 SENTRY_CELERY_LOGLEVEL = env.int('DJANGO_SENTRY_LOG_LEVEL', logging.INFO)
 RAVEN_CONFIG = {
     'CELERY_LOGLEVEL': env.int('DJANGO_SENTRY_LOG_LEVEL', logging.INFO),
     'DSN': SENTRY_DSN
 }
 
+# opbeat integration
+# ------------------------------------------------------------------------------
+# See https://opbeat.com/languages/django/
+# INSTALLED_APPS += ['opbeat.contrib.django']
+# OPBEAT = {
+#     'ORGANIZATION_ID': env('DJANGO_OPBEAT_ORGANIZATION_ID'),
+#     'APP_ID': env('DJANGO_OPBEAT_APP_ID'),
+#     'SECRET_TOKEN': env('DJANGO_OPBEAT_SECRET_TOKEN')
+# }
+# MIDDLEWARE = ['opbeat.contrib.django.middleware.OpbeatAPMMiddleware'] + MIDDLEWARE
+
+
+# SECURITY
+# ------------------------------------------------------------------------------
+CSRF_TRUSTED_ORIGINS = ALLOWED_HOSTS
+
 # Your production stuff: Below this line define 3rd party library settings
+# ------------------------------------------------------------------------------
 
 
 # ALLAUTH
@@ -220,11 +234,12 @@ ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
 
 # EASY THUMBNAILS
 # ------------------------------------------------------------------------------
-THUMBNAIL_DEFAULT_STORAGE = DEFAULT_FILE_STORAGE
+# THUMBNAIL_DEFAULT_STORAGE = DEFAULT_FILE_STORAGE
+
 
 # CRONTAB
 # ------------------------------------------------------------------------------
-INSTALLED_APPS += ('django_crontab',)
+INSTALLED_APPS += ['django_crontab']
 CRONJOBS = [
     ('0 0 4 * *', 'django.core.management.call_command', ['monthly'])
 ]

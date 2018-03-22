@@ -5,32 +5,26 @@ Local settings
 - Run in Debug mode
 - Use console backend for emails
 - Add Django Debug Toolbar
-- Add django-extensions as app
 '''
+from .base import *  # noqa
+from .base import env
 
-# noinspection PyUnresolvedReferences
-from .common import *  # noqa
-
-# DEBUG
+# GENERAL
 # ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#debug
 DEBUG = env.bool('DJANGO_DEBUG', default=True)
-TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
-
-# SECRET CONFIGURATION
-# ------------------------------------------------------------------------------
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
-# Note: This key only used for development and testing.
+# https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 SECRET_KEY = env("DJANGO_SECRET_KEY", default='CHANGEME!!!yxmo^0oxyt2sdw*fb%)&-sb7$q_n0ouv_u8yh&ljecar&-m)a7')
+# https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
+ALLOWED_HOSTS = [
+    "localhost",
+    "0.0.0.0",
+    "127.0.0.1",
+]
 
-# Mail settings
+# CACHES
 # ------------------------------------------------------------------------------
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# EMAIL_HOST = 'localhost'
-# EMAIL_PORT = 1025
-
-
-# CACHING
-# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#caches
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
@@ -38,31 +32,54 @@ CACHES = {
     }
 }
 
+# TEMPLATES
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#templates
+TEMPLATES[0]['OPTIONS']['debug'] = DEBUG  # noqa F405
+
+# EMAIL
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
+EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
+# https://docs.djangoproject.com/en/dev/ref/settings/#email-host
+EMAIL_HOST = 'localhost'
+# https://docs.djangoproject.com/en/dev/ref/settings/#email-port
+EMAIL_PORT = 1025
+
 # django-debug-toolbar
 # ------------------------------------------------------------------------------
-MIDDLEWARE += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
-INSTALLED_APPS += ('debug_toolbar', )
-
-INTERNAL_IPS = ('127.0.0.1', '10.0.2.2',)
-
+# https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#prerequisites
+INSTALLED_APPS += ['debug_toolbar']  # noqa F405
+# https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#middleware
+MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware']  # noqa F405
+# https://django-debug-toolbar.readthedocs.io/en/latest/configuration.html#debug-toolbar-config
 DEBUG_TOOLBAR_CONFIG = {
     'DISABLE_PANELS': [
-        # 'debug_toolbar.panels.redirects.RedirectsPanel',
+        'debug_toolbar.panels.redirects.RedirectsPanel',
     ],
     'SHOW_TEMPLATE_CONTEXT': True,
-    'JQUERY_URL': ''
 }
-DEBUG_TOOLBAR_PATCH_SETTINGS = False
+# https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#internal-ips
+INTERNAL_IPS = ['127.0.0.1', '10.0.2.2']
+# DEBUG_TOOLBAR_PATCH_SETTINGS = False
+
+# Celery
+# ------------------------------------------------------------------------------
+# http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-task_always_eager
+CELERY_ALWAYS_EAGER = True
+
+# Custom stuff...
+# ------------------------------------------------------------------------------
 
 # TESTING
 # ------------------------------------------------------------------------------
-TEST_RUNNER = 'django.test.runner.DiscoverRunner'
+# TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 # Your local stuff: Below this line define 3rd party library settings
 
 # CMS
 # ------------------------------------------------------------------------------
-INSTALLED_APPS += ('wagtail.contrib.styleguide', )
+# INSTALLED_APPS += ['wagtail.contrib.styleguide']
 
 # Slack
 # ------------------------------------------------------------------------------
