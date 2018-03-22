@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from django import forms
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 from django.contrib.auth.forms import UserChangeForm as AuthUserChangeForm, UserCreationForm as AuthUserCreationForm
@@ -12,9 +13,26 @@ class UserChangeForm(AuthUserChangeForm):
         model = User
 
 
+# class UserCreationForm(AuthUserCreationForm):
+#     class Meta(AuthUserCreationForm.Meta):
+#         model = User
+
 class UserCreationForm(AuthUserCreationForm):
+
+    error_message = AuthUserCreationForm.error_messages.update({
+        'duplicate_username': 'This username has already been taken.'
+    })
+
     class Meta(AuthUserCreationForm.Meta):
         model = User
+
+    def clean_username(self):
+        username = self.cleaned_data["username"]
+        try:
+            User.objects.get(username=username)
+        except User.DoesNotExist:
+            return username
+        raise forms.ValidationError(self.error_messages['duplicate_username'])
 
 
 class UserInline(admin.TabularInline):
@@ -63,5 +81,6 @@ class UserAdmin(AuthUserAdmin):
     list_display = ('username', 'name', 'email', 'phone', 'balance', 'is_premium', 'is_staff')
     list_filter = ('is_premium', 'is_staff', 'is_superuser', 'is_active', 'roles', 'checkpoints', 'groups')
     filter_horizontal = ('roles', 'checkpoints', 'groups', 'user_permissions')
+    search_fields = ['name']
     form = UserChangeForm
     add_form = UserCreationForm
