@@ -61,6 +61,7 @@ class User(AbstractUser):
 
     address = models.TextField(
         verbose_name=_('address'),
+        blank=True
     )
 
     @property
@@ -84,7 +85,7 @@ class User(AbstractUser):
 
     avatar = ThumbnailerImageField(
         verbose_name=_('avatar'),
-        upload_to=UploadToOwnedDirectory('avatars', ),
+        upload_to=UploadToOwnedDirectory('avatars'),
         resize_source=dict(size=(400, 400)),
         blank=True
     )
