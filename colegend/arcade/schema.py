@@ -48,6 +48,11 @@ class AdventureNode(DjangoObjectType):
         user = info.context.user
         return user.adventure_reviews.filter(adventure=self.id).exists()
 
+    def resolve_image(self, info):
+        if self.image:
+            return info.context.build_absolute_uri(self.image.url)
+        return ''
+
 
 class AdventureQuery(graphene.ObjectType):
     adventure = graphene.Node.Field(AdventureNode)

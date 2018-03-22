@@ -3,12 +3,14 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.db.models import Avg, Q
 from django.shortcuts import redirect
+from easy_thumbnails.fields import ThumbnailerImageField
 from wagtail.core.models import Page
 
 from colegend.core.fields import MarkdownField
 from colegend.core.models import TimeStampedBase, OwnedBase
 from django.utils.translation import ugettext_lazy as _
 
+from colegend.core.utils.media_paths import UploadToAppModelDirectory
 from colegend.scopes.models import ScopeField
 
 
@@ -48,6 +50,11 @@ class Adventure(TimeStampedBase):
     )
     public = models.BooleanField(
         default=False
+    )
+    image = ThumbnailerImageField(
+        upload_to=UploadToAppModelDirectory(),
+        blank=True,
+        resize_source=dict(size=(400, 400)),
     )
     image_url = models.URLField(
         _('image url'),

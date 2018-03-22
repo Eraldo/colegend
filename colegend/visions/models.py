@@ -55,7 +55,7 @@ class Vision(AutoUrlsMixin, OwnedBase, TimeStampedBase):
 
     image = ThumbnailerImageField(
         verbose_name=_('image'),
-        upload_to=UploadToOwnedDirectory('vision', ),
+        upload_to=UploadToOwnedDirectory('vision'),
         resize_source=dict(size=(1200, 1200)),
         blank=True
     )
