@@ -83,6 +83,15 @@ def backup():
         local('scp {hosts[0]}:{backup_file} backups/{environment}/'.format(**env))
 
 
+def restore(file_path):
+    """Restore database backup: fab [environment] restore"""
+    if env.name == 'development':
+        local('pg_restore -c -d {db_name} {file_path}`.dump'
+              .format(file_path=file_path, **env))
+    elif env.name in ['staging', 'production']:
+        print(blue('=> remote restore script not yet implemented'))
+
+
 def migrate():
     """Migrate the database: fab [environment] migrate"""
     with _venv(env.virtualenv_path):
