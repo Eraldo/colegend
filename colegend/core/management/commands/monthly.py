@@ -52,3 +52,11 @@ class Command(BaseCommand):
         for user in User.objects.all():
             experience = user.experience.filter(created__year=yesterday.year, created__month=yesterday.month).total()
             self.stdout.write('{user}: {experience}'.format(user=user, experience=experience))
+
+    def hero_demon_update_reminder(self):
+        """
+        Remind the users to update their hero/demon if they have not been updated for a while (> 30 days).
+        :return:
+        """
+        # TODO implement
+        pass
