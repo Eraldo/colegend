@@ -35,6 +35,7 @@ class Hero(AutoOwnedBase, TimeStampedBase):
     experiments = MarkdownField(blank=True)
     projects = MarkdownField(blank=True)
     bucket = MarkdownField(blank=True, help_text="bucket list")
+    inspirations = MarkdownField(blank=True)
     content = MarkdownField(blank=True)
     routines = MarkdownField(blank=True)
 
