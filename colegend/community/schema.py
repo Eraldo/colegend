@@ -27,6 +27,26 @@ class DuoQuery(graphene.ObjectType):
     duos = DjangoFilterConnectionField(DuoNode)
 
 
+class UpdateDuoMutation(graphene.relay.ClientIDMutation):
+    duo = graphene.Field(DuoNode)
+
+    class Input:
+        id = graphene.ID()
+        name = graphene.String()
+        notes = graphene.String()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, id, name=None, notes=None):
+        _type, id = from_global_id(id)
+        duo = Duo.objects.get(id=id)
+        if name is not None:
+            duo.name = name
+        if notes is not None:
+            duo.notes = notes
+        duo.save()
+        return UpdateDuoMutation(duo=duo)
+
+
 class JoinDuoMutation(graphene.relay.ClientIDMutation):
     duo = graphene.Field(DuoNode)
 
@@ -71,6 +91,7 @@ class AddDuoMutation(graphene.relay.ClientIDMutation):
 
 
 class DuoMutation(graphene.ObjectType):
+    update_duo = UpdateDuoMutation.Field()
     add_duo = AddDuoMutation.Field()
     join_duo = JoinDuoMutation.Field()
     quit_duo = QuitDuoMutation.Field()
@@ -95,6 +116,26 @@ class ClanNode(DjangoObjectType):
 class ClanQuery(graphene.ObjectType):
     clan = graphene.Node.Field(ClanNode)
     clans = DjangoFilterConnectionField(ClanNode)
+
+
+class UpdateClanMutation(graphene.relay.ClientIDMutation):
+    clan = graphene.Field(ClanNode)
+
+    class Input:
+        id = graphene.ID()
+        name = graphene.String()
+        notes = graphene.String()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, id, name=None, notes=None):
+        _type, id = from_global_id(id)
+        clan = Clan.objects.get(id=id)
+        if name is not None:
+            clan.name = name
+        if notes is not None:
+            clan.notes = notes
+        clan.save()
+        return UpdateClanMutation(clan=clan)
 
 
 class JoinClanMutation(graphene.relay.ClientIDMutation):
@@ -141,6 +182,7 @@ class AddClanMutation(graphene.relay.ClientIDMutation):
 
 
 class ClanMutation(graphene.ObjectType):
+    update_clan = UpdateClanMutation.Field()
     add_clan = AddClanMutation.Field()
     join_clan = JoinClanMutation.Field()
     quit_clan = QuitClanMutation.Field()
