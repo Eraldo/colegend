@@ -26,6 +26,7 @@ class UpdateHero(graphene.relay.ClientIDMutation):
     class Input:
         name = graphene.String()
         avatar = graphene.String()
+        mission = graphene.String()
         values = graphene.String()
         powers = graphene.String()
         skills = graphene.String()

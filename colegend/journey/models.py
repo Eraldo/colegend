@@ -21,6 +21,7 @@ class Hero(AutoOwnedBase, TimeStampedBase):
         max_length=1000,
         blank=True
     )
+    mission = MarkdownField(blank=True)
     values = MarkdownField(blank=True)
     powers = MarkdownField(blank=True)
     skills = MarkdownField(blank=True)
