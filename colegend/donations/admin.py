@@ -4,4 +4,5 @@ from .models import Donation
 
 @admin.register(Donation)
 class DonationAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['date', 'amount', 'owner']
+    list_filter = ['owner']
