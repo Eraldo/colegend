@@ -21,6 +21,12 @@ class Hero(AutoOwnedBase, TimeStampedBase):
         max_length=1000,
         blank=True
     )
+    year_topic = models.CharField(
+        verbose_name=_("year topic"),
+        max_length=255,
+        blank=True
+    )
+    vision = MarkdownField(blank=True)
     mission = MarkdownField(blank=True)
     values = MarkdownField(blank=True)
     powers = MarkdownField(blank=True)
@@ -37,8 +43,13 @@ class Hero(AutoOwnedBase, TimeStampedBase):
     projects = MarkdownField(blank=True)
     bucket = MarkdownField(blank=True, help_text="bucket list")
     inspirations = MarkdownField(blank=True)
-    content = MarkdownField(blank=True)
+    roles = MarkdownField(blank=True)
+    strategy = MarkdownField(blank=True)
     routines = MarkdownField(blank=True)
+    blueprint_day = MarkdownField(blank=True)
+    blueprint_week = MarkdownField(blank=True)
+    blueprint_month = MarkdownField(blank=True)
+    content = MarkdownField(blank=True)
 
     class Meta:
         verbose_name = _('Hero')
@@ -46,7 +57,7 @@ class Hero(AutoOwnedBase, TimeStampedBase):
         default_related_name = 'hero'
 
     def __str__(self):
-        return "{}'s hero".format(self.owner)
+        return self.name or f"{self.owner}'s hero"
 
 
 class Demon(AutoOwnedBase, TimeStampedBase):
@@ -70,7 +81,7 @@ class Demon(AutoOwnedBase, TimeStampedBase):
         default_related_name = 'demon'
 
     def __str__(self):
-        return "{}'s demon".format(self.owner)
+        return self.name or f"{self.owner}'s demon"
 
 
 class QuoteQuerySet(models.QuerySet):

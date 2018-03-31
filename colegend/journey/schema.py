@@ -26,6 +26,8 @@ class UpdateHero(graphene.relay.ClientIDMutation):
     class Input:
         name = graphene.String()
         avatar = graphene.String()
+        year_topic = graphene.String()
+        vision = graphene.String()
         mission = graphene.String()
         values = graphene.String()
         powers = graphene.String()
@@ -41,9 +43,14 @@ class UpdateHero(graphene.relay.ClientIDMutation):
         experiments = graphene.String()
         projects = graphene.String()
         bucket = graphene.String()
-        content = graphene.String()
+        roles = graphene.String()
+        strategy = graphene.String()
         inspirations = graphene.String()
         routines = graphene.String()
+        blueprint_day = graphene.String()
+        blueprint_week = graphene.String()
+        blueprint_month = graphene.String()
+        content = graphene.String()
 
     @classmethod
     def mutate_and_get_payload(cls, root, info, **kwargs):

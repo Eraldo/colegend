@@ -4,12 +4,12 @@ from .models import Hero, Demon, Quote
 
 @admin.register(Hero)
 class HeroAdmin(admin.ModelAdmin):
-    pass
+    list_filter = ['owner']
 
 
 @admin.register(Demon)
 class DemonAdmin(admin.ModelAdmin):
-    pass
+    list_filter = ['owner']
 
 
 @admin.register(Quote)
