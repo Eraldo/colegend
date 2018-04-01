@@ -9,7 +9,7 @@ class AuthorizationMiddleware:
     def resolve(self, next, root, info, **args):
         if not info.context.user.is_authenticated:
             token = info.context.META.get('HTTP_AUTHORIZATION')
-            if token:
+            if token and token != 'null':
                 user = Token.objects.select_related('user').get(key=token).user
                 if user and user.is_active:
                     info.context.user = user
