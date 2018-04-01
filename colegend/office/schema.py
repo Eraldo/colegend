@@ -42,9 +42,6 @@ class UpdateFocusMutation(graphene.relay.ClientIDMutation):
         scope=None, start=None,
         outcome_1=None, outcome_2=None, outcome_3=None, outcome_4=None, reason=None):
         user = info.context.user
-        if start:
-            # Converting datetime (input parameter type) to date.
-            start = start.date()
         if id is not None and reason is not None:
             _type, id = from_global_id(id)
             focus = user.focuses.get(id=id)
