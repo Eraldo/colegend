@@ -29,7 +29,7 @@ class UpdateFocusMutation(graphene.relay.ClientIDMutation):
     class Input:
         id = graphene.ID()
         scope = ScopeType()
-        start = graphene.types.datetime.DateTime()
+        start = graphene.types.datetime.Date()
         outcome_1 = graphene.ID()
         outcome_2 = graphene.ID()
         outcome_3 = graphene.ID()

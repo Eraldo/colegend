@@ -62,7 +62,7 @@ class CreateScan(graphene.relay.ClientIDMutation):
     scan = graphene.Field(ScanNode)
 
     class Input:
-        date = graphene.types.datetime.DateTime()
+        date = graphene.types.datetime.Date()
         area_1 = graphene.Int()
         area_2 = graphene.Int()
         area_3 = graphene.Int()

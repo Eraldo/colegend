@@ -54,8 +54,8 @@ class CreateOutcomeMutation(graphene.relay.ClientIDMutation):
         status = StatusType()
         inbox = graphene.Boolean()
         scope = ScopeType()
-        date = graphene.types.datetime.DateTime()
-        deadline = graphene.types.datetime.DateTime()
+        date = graphene.types.datetime.Date()
+        deadline = graphene.types.datetime.Date()
         estimate = graphene.String()
 
     @classmethod
@@ -76,8 +76,8 @@ class UpdateOutcomeMutation(graphene.relay.ClientIDMutation):
         status = StatusType()
         inbox = graphene.Boolean()
         scope = ScopeType()
-        date = graphene.types.datetime.DateTime()
-        deadline = graphene.types.datetime.DateTime()
+        date = graphene.types.datetime.Date()
+        deadline = graphene.types.datetime.Date()
         estimate = graphene.String()
         tags = graphene.List(graphene.String)
         deletions = graphene.List(graphene.String)

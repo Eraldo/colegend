@@ -15,7 +15,7 @@ from .models import InterviewEntry, Chapter, Story
 
 class JournalEntryNode(DjangoObjectType):
     end = graphene.Field(
-        graphene.types.datetime.DateTime
+        graphene.types.datetime.Date
     )
 
     class Meta:
@@ -36,7 +36,7 @@ class AddJournalEntryMutation(graphene.relay.ClientIDMutation):
 
     class Input:
         scope = ScopeType()
-        start = graphene.types.datetime.DateTime()
+        start = graphene.types.datetime.Date()
         keywords = graphene.String()
         content = graphene.String()
 
@@ -119,7 +119,7 @@ class AddInterviewEntry(graphene.relay.ClientIDMutation):
 
     class Input:
         scope = ScopeType()
-        start = graphene.types.datetime.DateTime()
+        start = graphene.types.datetime.Date()
         likes = graphene.String()
         dislikes = graphene.String()
 
