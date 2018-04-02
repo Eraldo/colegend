@@ -1,7 +1,6 @@
 from allauth.account.views import ConfirmEmailView
 from django.conf.urls import url, include
 from django.views.decorators.csrf import csrf_exempt
-from graphene_django.views import GraphQLView
 from rest_framework import routers
 
 from colegend.api.schema import schema
@@ -14,7 +13,7 @@ from colegend.outcomes.views import OutcomeViewSet
 from colegend.roles.views import RoleViewSet
 from colegend.studio.views import InterviewEntryViewSet
 from colegend.users.views import UserViewSet, GroupViewSet, EmailViewSet
-from .views import FacebookLogin, GoogleLogin
+from .views import FacebookLogin, GoogleLogin, GraphQLView
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)

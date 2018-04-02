@@ -9,6 +9,7 @@ from colegend.community.schema import CommunityQuery, CommunityMutation
 from colegend.events.schema import EventQuery, EventMutation
 from colegend.home.schema import HomeQuery, HomeMutation
 from colegend.journey.schema import JourneyQuery, JourneyMutation
+from colegend.lab.schema import LabMutations
 from colegend.metrics.schema import MetricsQuery
 from colegend.news.schema import NewsQuery, NewsMutation
 from colegend.office.schema import OfficeQuery, OfficeMutation
@@ -55,6 +56,7 @@ class Mutation(
     RoleMutation,
     TutorialMutation,
     TagMutation,
+    LabMutations,
     graphene.ObjectType):
     pass
 

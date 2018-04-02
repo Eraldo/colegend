@@ -142,6 +142,7 @@ LOCAL_APPS = [
     'colegend.styleguide',
     'colegend.metrics',
     'colegend.sandbox',
+    'colegend.lab',
 ]
 CMS_APPS = [
     'wagtail.contrib.forms',
