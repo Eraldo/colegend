@@ -160,6 +160,16 @@ class Quote(TimeStampedBase):
         null=True, blank=True,
         unique=True
     )
+    liked_by = models.ManyToManyField(
+        to=settings.AUTH_USER_MODEL,
+        related_name='liked_quotes',
+        blank=True,
+    )
+    disliked_by = models.ManyToManyField(
+        to=settings.AUTH_USER_MODEL,
+        related_name='disliked_quotes',
+        blank=True,
+    )
 
     objects = QuoteQuerySet.as_manager()
 
@@ -176,7 +186,15 @@ class Quote(TimeStampedBase):
             self.save()
         # Notify user
         if self.provider:
-            self.provider.contact(subject='Your quote "{}" has been accepted. EOM'.format(self.name))
+            self.provider.contact(subject=f'Your quote "{self.name}" has been accepted. EOM')
+
+    def like(self, user):
+        self.disliked_by.remove(user)
+        self.liked_by.add(user)
+
+    def dislike(self, user):
+        self.liked_by.remove(user)
+        self.disliked_by.add(user)
 
     class Meta:
         default_related_name = 'quotes'

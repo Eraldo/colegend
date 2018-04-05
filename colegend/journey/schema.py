@@ -1,6 +1,7 @@
 import graphene
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
+from graphql_relay import from_global_id
 
 from .models import Hero, Demon, Quote
 
@@ -108,6 +109,13 @@ class DemonMutation(graphene.ObjectType):
 
 
 class QuoteNode(DjangoObjectType):
+    liked = graphene.Field(
+        graphene.Boolean
+    )
+    disliked = graphene.Field(
+        graphene.Boolean
+    )
+
     class Meta:
         model = Quote
         filter_fields = {
@@ -120,6 +128,14 @@ class QuoteNode(DjangoObjectType):
         }
         interfaces = [graphene.Node]
 
+    def resolve_liked(self, info):
+        user = info.context.user
+        return user.liked_quotes.filter(id=self.id).exists()
+
+    def resolve_disliked(self, info):
+        user = info.context.user
+        return user.disliked_quotes.filter(id=self.id).exists()
+
 
 class QuoteQuery(graphene.ObjectType):
     quote = graphene.Node.Field(QuoteNode)
@@ -128,6 +144,72 @@ class QuoteQuery(graphene.ObjectType):
 
     def resolve_daily_quote(self, info):
         return Quote.objects.daily_quote()
+#
+#
+# class FeedbackQuoteMutation(graphene.relay.ClientIDMutation):
+#     success = graphene.Boolean()
+#     quote = graphene.Field(QuoteNode)
+#
+#     class Input:
+#         id = graphene.ID()
+#         liked = graphene.Boolean()
+#         disliked = graphene.Boolean()
+#
+#     @classmethod
+#     def mutate_and_get_payload(cls, root, info, id, liked=None, disliked=None):
+#         user = info.context.user
+#         _type, id = from_global_id(id)
+#         quote = Quote.objects.get(id=id)
+#
+#         # Make sure either liked or disliked was selected.
+#         if liked is None and disliked is None:
+#             raise Exception('Please provide feedback.')
+#         if liked is not None and disliked is not None:
+#             raise Exception('Please either like or dislike.')
+#
+#         if liked is not None:
+#             quote.like(user)
+#         elif disliked is not None:
+#             quote.dislike(user)
+#
+#         return FeedbackQuoteMutation(success=True, quote=quote)
+
+
+class LikeQuoteMutation(graphene.relay.ClientIDMutation):
+    success = graphene.Boolean()
+    quote = graphene.Field(QuoteNode)
+
+    class Input:
+        id = graphene.ID()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, id):
+        user = info.context.user
+        _type, id = from_global_id(id)
+        quote = Quote.objects.get(id=id)
+        quote.like(user)
+        return LikeQuoteMutation(success=True, quote=quote)
+
+
+class DislikeQuoteMutation(graphene.relay.ClientIDMutation):
+    success = graphene.Boolean()
+    quote = graphene.Field(QuoteNode)
+
+    class Input:
+        id = graphene.ID()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, id):
+        user = info.context.user
+        _type, id = from_global_id(id)
+        quote = Quote.objects.get(id=id)
+        quote.dislike(user)
+        return DislikeQuoteMutation(success=True, quote=quote)
+
+
+class QuoteMutation(graphene.ObjectType):
+    like_quote = LikeQuoteMutation.Field()
+    dislike_quote = DislikeQuoteMutation.Field()
 
 
 class JourneyQuery(
@@ -141,5 +223,6 @@ class JourneyQuery(
 class JourneyMutation(
     HeroMutation,
     DemonMutation,
+    QuoteMutation,
     graphene.ObjectType):
     pass
