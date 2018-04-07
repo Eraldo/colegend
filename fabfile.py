@@ -28,7 +28,7 @@ def staging():
     """fab staging [command]"""
     env.name = 'staging'
     env.environment = env.name
-    env.hosts = ['eraldo@eraldo.org']
+    env.hosts = ['colegend.org']
     env.path = 'staging.colegend.org/project'
     env.virtualenv_path = 'staging.colegend.org/env'
     env.backup_path = './backups/staging'
@@ -49,7 +49,8 @@ def production():
     """fab production [command]"""
     env.name = 'production'
     env.environment = env.name
-    env.hosts = ['eraldo@eraldo.org']
+    env.hosts = ['colegend.org']
+    env.use_ssh_config = True
     env.path = '~/colegend/colegend'
     env.virtualenv_path = '~/colegend/env'
     env.backup_path = '~/colegend/backups'
@@ -110,11 +111,6 @@ def disable_debug():
     with _venv(env.virtualenv_path):
         run("sed -i -e 's/DJANGO_DEBUG=True/DJANGO_DEBUG=False/' {path}/.env".format(**env))
     restart()
-
-
-def logs():
-    """Show last server log file entries: fab [environment] logs"""
-    local('git push origin {push_branch}'.format(**env))
 
 
 def deploy():
