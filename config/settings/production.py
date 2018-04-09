@@ -241,7 +241,8 @@ ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
 # ------------------------------------------------------------------------------
 INSTALLED_APPS += ['django_crontab']
 CRONJOBS = [
-    ('0 0 4 * *', 'django.core.management.call_command', ['monthly'])
+    ('0 0 4 * *', 'django.core.management.call_command', ['monthly']),
+    ('0 2 * * *', 'django.core.management.call_command', ['daily'])
 ]
 CRONTAB_DJANGO_PROJECT_NAME = 'colegend'
 CRONTAB_DJANGO_SETTINGS_MODULE = 'config.settings.production'
