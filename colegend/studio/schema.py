@@ -29,6 +29,13 @@ class JournalEntryNode(DjangoObjectType):
 class JournalEntryQuery(graphene.ObjectType):
     journal_entry = graphene.Node.Field(JournalEntryNode)
     journal_entries = DjangoFilterConnectionField(JournalEntryNode, filterset_class=JournalEntryFilter)
+    journal_streak = graphene.Int()
+
+    def resolve_journal_streak(self, info):
+        user = info.context.user
+        if user.is_authenticated:
+            return user.journal.streak
+        return 0
 
 
 class AddJournalEntryMutation(graphene.relay.ClientIDMutation):
@@ -43,9 +50,33 @@ class AddJournalEntryMutation(graphene.relay.ClientIDMutation):
     @classmethod
     def mutate_and_get_payload(cls, root, info, scope=Scope.DAY.value, start=None, content='', keywords=''):
         user = info.context.user
+
         if not start:
             start = get_scope_by_name(scope)().start
+
         entry = user.journal_entries.create(scope=scope, start=start, content=content, keywords=keywords)
+
+        # Updating streak
+        today = timezone.localtime(timezone.now()).date()
+        if entry.scope == Scope.DAY.value and entry.start == today:
+            # Only update if:
+            # + This is today's day-entry.
+            # + The entry for the previous entry exists.
+            try:
+                previous_entry = entry.get_previous_by_start()
+            except JournalEntry.DoesNotExist:
+                previous_entry = None
+            if user.journal.streak == 0 or previous_entry and previous_entry.start == today - timezone.timedelta(days=1):
+                # First day of streak or successful chain.
+                user.journal.streak += 1
+            else:
+                # Resetting streak
+                # TODO: Fix bug.. creating a new entry without a previous one sets the streak to 0! (vs 1)
+                user.journal.streak = 0
+            user.journal.save(update_fields=['streak'])
+        # TODO: Refactory to use in both add or create mutation along with more strict checking criteria.
+        # TODO: Easy streak increment plus daily reset task (cron).
+
         add_experience(user, 'studio')
         return AddJournalEntryMutation(journal_entry=entry)
 

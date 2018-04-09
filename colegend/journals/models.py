@@ -87,9 +87,15 @@ class Journal(AutoUrlsMixin, AutoOwnedBase):
     day_template = MarkdownField(default=render_to_string('journals/dayentries_template.md'))
     week_template = MarkdownField(default=render_to_string('journals/weekentries_template.md'))
     month_template = MarkdownField(default=render_to_string('journals/monthentries_template.md'))
-    quarter_template = MarkdownField(default=render_to_string('journals/quarterentries_template.md'))
     year_template = MarkdownField(default=render_to_string('journals/yearentries_template.md'))
-    focus_template = """1. [] \n2. [] \n3. [] """
+    streak = models.PositiveSmallIntegerField(
+        _('streak'),
+        default=0,
+    )
+    streak_max = models.PositiveSmallIntegerField(
+        _('best streak'),
+        default=0,
+    )
 
     objects = JournalQuerySet.as_manager()
 
@@ -109,7 +115,6 @@ class Journal(AutoUrlsMixin, AutoOwnedBase):
         self.day_template = render_to_string('journals/dayentries_template.md')
         self.week_template = render_to_string('journals/weekentries_template.md')
         self.month_template = render_to_string('journals/monthentries_template.md')
-        self.quarter_template = render_to_string('journals/quarterentries_template.md')
         self.year_template = render_to_string('journals/yearentries_template.md')
         self.save()
         return True
