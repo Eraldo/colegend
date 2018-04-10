@@ -10,4 +10,4 @@ class JournalEntryAdmin(admin.ModelAdmin):
 
 @admin.register(Journal)
 class JournalAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['owner', 'streak', 'streak_max']
