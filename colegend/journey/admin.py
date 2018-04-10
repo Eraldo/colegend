@@ -16,4 +16,5 @@ class DemonAdmin(admin.ModelAdmin):
 class QuoteAdmin(admin.ModelAdmin):
     list_display = ['name', 'author', 'used_as_daily', 'provider', 'accepted']
     list_filter = ['accepted', 'categories', 'provider']
+    search_fields = ['name', 'author']
     filter_horizontal = ['categories', 'liked_by', 'disliked_by']
