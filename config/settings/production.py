@@ -3,6 +3,7 @@
 Production Configurations
 '''
 import logging
+import re
 
 from .base import *  # noqa
 from .base import env
@@ -207,6 +208,11 @@ RAVEN_CONFIG = {
     'CELERY_LOGLEVEL': env.int('DJANGO_SENTRY_LOG_LEVEL', logging.INFO),
     'DSN': SENTRY_DSN
 }
+IGNORABLE_404_URLS = (
+    re.compile(r'\.(php|cgi|aspx)$'),
+    re.compile(r'^/wp-content'),
+    re.compile(r'^/op69okl'),
+)
 
 # opbeat integration
 # ------------------------------------------------------------------------------
