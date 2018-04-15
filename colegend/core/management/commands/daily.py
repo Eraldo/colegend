@@ -36,7 +36,12 @@ class Command(BaseCommand):
             # TODO: Checking if he wrote his journal day entry.
             if streak and user.pk not in writer_ids:
                 # Resetting streak. :|
+
+                # Updating the maximum streak if appropriate
+                user.journal.streak_max = max(user.journal.streak_max, user.journal.streak)
+
                 user.journal.streak = 0
                 user.journal.save()
+
                 message = f'[{user}] Reset streak from {streak} to 0'
                 self.stdout.write(message)
