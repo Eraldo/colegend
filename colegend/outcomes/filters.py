@@ -35,7 +35,6 @@ class OutcomeFilter(django_filters.FilterSet):
     # )
     # estimate = django_filters.ChoiceFilter(choices=(('', 'all'),) + ESTIMATE_CHOICES, method=filter_estimate)
     search = SearchFilter()
-    # tags = django_filters.CharFilter(method='tags_filter')
     tags = TagsFilter()
     open = django_filters.BooleanFilter(method='open_filter')
     closed = django_filters.BooleanFilter(method='closed_filter')

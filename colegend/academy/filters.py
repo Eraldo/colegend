@@ -9,6 +9,15 @@ from .models import Book, BookReview
 class BookFilter(django_filters.FilterSet):
     search = SearchFilter()
     tags = TagsFilter()
+    order_by = django_filters.OrderingFilter(
+        fields=(
+            ('modified', 'modified'),
+            ('created', 'created'),
+            ('name', 'name'),
+            ('author', 'author'),
+            ('rating', 'rating'),
+        )
+    )
 
     class Meta:
         model = Book

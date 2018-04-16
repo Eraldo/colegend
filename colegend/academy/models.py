@@ -1,6 +1,8 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.db.models import Avg, Q
+from django.db.models.signals import post_save, post_delete
+from django.dispatch import receiver
 from django.shortcuts import redirect
 from wagtail.core.models import Page
 
@@ -74,9 +76,17 @@ class Book(TimeStampedBase):
         blank=True
     )
 
-    @property
-    def rating(self):
-        return self.book_reviews.aggregate(Avg('rating')).get('rating__avg') or 0
+    rating = models.FloatField(
+        _('rating'),
+        default=0
+    )
+
+    def calculate_rating(self):
+        rating = self.book_reviews.aggregate(Avg('rating')).get('rating__avg')
+        return round(rating, 2) if rating else 0
+
+    def update_rating(self):
+        self.rating = self.calculate_rating()
 
     @property
     def area_ratings(self):
@@ -158,6 +168,13 @@ class BookReview(OwnedBase, TimeStampedBase):
 
     def __str__(self):
         return 'Book review'
+
+
+@receiver(post_save, sender=BookReview)
+@receiver(post_delete, sender=BookReview)
+def reset_book_rating(sender, instance, *args, **kwargs):
+    instance.book.update_rating()
+    instance.book.save()
 
 
 class AcademyPage(Page):

@@ -20,7 +20,7 @@ class BookTagAdmin(admin.ModelAdmin):
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
-    list_display = ['name', 'author', 'public', 'featured']
+    list_display = ['name', 'author', 'rating', 'public', 'featured']
     list_filter = ['public', 'featured', 'tags']
     list_editable = ['public']
     filter_horizontal = ['tags']
