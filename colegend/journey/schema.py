@@ -3,7 +3,43 @@ from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 from graphql_relay import from_global_id
 
-from .models import Hero, Demon, Quote
+from .models import Hero, Demon, Quote, Quest, QuestObjective, UserQuestStatus
+
+
+class QuestNode(DjangoObjectType):
+    class Meta:
+        model = Quest
+        interfaces = [graphene.Node]
+
+
+class QuestObjectiveNode(DjangoObjectType):
+    class Meta:
+        model = QuestObjective
+        interfaces = [graphene.Node]
+
+
+class UserQuestStatusNode(DjangoObjectType):
+    class Meta:
+        model = UserQuestStatus
+        interfaces = [graphene.Node]
+
+
+class UserQuestStatusQuery(graphene.ObjectType):
+    # user_quest_status = graphene.Node.Field(UserQuestStatusNode)
+    # user_quest_statuses = DjangoFilterConnectionField(UserQuestStatusNode)
+    current_quest_status = graphene.Field(UserQuestStatusNode)
+
+    def resolve_current_quest_status(self, info):
+        user = info.context.user
+        # Getting the status of the current or next quest.
+        current_quest = user.quest_statuses.first()
+        if not current_quest:
+            first_quest = Quest.objects.first()
+            if first_quest:
+                current_quest = user.quest_statuses.create(
+                    quest=first_quest,
+                )
+        return current_quest
 
 
 class HeroNode(DjangoObjectType):
@@ -216,6 +252,7 @@ class JourneyQuery(
     HeroQuery,
     DemonQuery,
     QuoteQuery,
+    UserQuestStatusQuery,
     graphene.ObjectType):
     pass
 

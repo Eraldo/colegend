@@ -3,11 +3,83 @@ from django.db import models
 from django.shortcuts import redirect
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from ordered_model.models import OrderedModel
 from wagtail.core.models import Page
 
 from colegend.categories.models import Category
 from colegend.core.fields import MarkdownField
-from colegend.core.models import AutoOwnedBase, TimeStampedBase
+from colegend.core.models import AutoOwnedBase, TimeStampedBase, OwnedBase
+
+
+class Quest(OrderedModel):
+    name = models.CharField(
+        _('name'),
+        max_length=255,
+    )
+    video_url = models.URLField(
+        _('video url'),
+        max_length=1000,
+        blank=True
+    )
+    content = MarkdownField(
+        verbose_name=_('content')
+    )
+
+    # Reverse: objectives
+
+    # questers = models.ManyToManyField(
+    #     settings.AUTH_USER_MODEL,
+    #     through='UserQuestStatus'
+    # )
+
+    class Meta(OrderedModel.Meta):
+        default_related_name = 'quests'
+
+    def __str__(self):
+        return self.name
+
+
+class QuestObjective(OrderedModel):
+    quest = models.ForeignKey(
+        to=Quest,
+        on_delete=models.CASCADE
+    )
+    name = models.CharField(
+        _('name'),
+        max_length=255,
+    )
+    code = models.CharField(
+        _('code'),
+        max_length=255,
+    )
+
+    order_with_respect_to = 'quest'
+
+    class Meta(OrderedModel.Meta):
+        default_related_name = 'objectives'
+
+    def __str__(self):
+        return self.name
+
+
+class UserQuestStatus(OwnedBase, TimeStampedBase):
+    quest = models.ForeignKey(
+        to=Quest,
+        on_delete=models.CASCADE
+    )
+    completed_objectives = models.ManyToManyField(
+        to=QuestObjective,
+        blank=True
+    )
+
+    class Meta:
+        default_related_name = 'quest_statuses'
+        unique_together = ['owner', 'quest']
+        verbose_name = _("Quest status")
+        verbose_name_plural = _("Quest statuses")
+
+    def __str__(self):
+        return f'{self.quest} / {self.owner}'
 
 
 class Hero(AutoOwnedBase, TimeStampedBase):
