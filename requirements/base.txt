@@ -84,7 +84,9 @@ djangorestframework==3.7.7  # https://github.com/encode/django-rest-framework
 django-cors-headers==2.1.0
 django-rest-auth==0.9.1
 graphene==2.1  # Maybe I can remove this because it gets installed by graphene-django
-graphene-django==2.0
+# graphene-django==2.0
+# Waiting for issue: https://github.com/graphql-python/graphene-django/issues/162#issuecomment-359986792
+-e git+https://github.com/graphql-python/graphene-django#egg=graphene-django
 
 # slack IM
 # ------------------------------------------------

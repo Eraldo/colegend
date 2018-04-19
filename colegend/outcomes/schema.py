@@ -4,6 +4,7 @@ from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 from graphql_relay import from_global_id
 
+from colegend.api.models import CountableConnectionBase
 from colegend.office.types import StatusType
 from colegend.outcomes.elo import calculate_elo
 from colegend.outcomes.filters import OutcomeFilter, StepFilter
@@ -16,6 +17,7 @@ class OutcomeNode(DjangoObjectType):
     class Meta:
         model = Outcome
         interfaces = [graphene.Node]
+        connection_class = CountableConnectionBase
 
 
 class OutcomeQuery(graphene.ObjectType):
