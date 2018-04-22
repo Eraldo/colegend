@@ -5,18 +5,140 @@ from django.db import models
 # Create your models here.
 from django.shortcuts import redirect
 from django.utils import timezone
+from ordered_model.models import OrderedModel
 from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Page
 from wagtail.search import index
 
 from colegend.cms.blocks import BASE_BLOCKS
+from colegend.core.fields import MarkdownField
+from colegend.core.intuitive_duration.modelfields import IntuitiveDurationField
 from colegend.core.models import TimeStampedBase, OwnedBase
 from colegend.core.templatetags.core_tags import link
 
 from django.utils.translation import ugettext_lazy as _
 
 from colegend.office.models import DAY, AgendaPage
+from colegend.scopes.models import ScopeField
+
+
+class Habit(OwnedBase, TimeStampedBase):
+    name = models.CharField(
+        _('name'),
+        max_length=255,
+    )
+    scope = ScopeField()
+    icon = models.CharField(
+        _('icon'),
+        max_length=255,
+        blank=True
+    )
+    content = MarkdownField(
+        verbose_name=_('content'),
+        blank=True
+    )
+    duration = IntuitiveDurationField(
+        _('duration'),
+        blank=True,
+        null=True
+    )
+
+    # Reverse: owner, reminders, track_events
+
+    class Meta:
+        default_related_name = 'habits'
+
+    def __str__(self):
+        return self.name
+
+
+class HabitTrackEvent(TimeStampedBase):
+    habit = models.ForeignKey(
+        to=Habit,
+        on_delete=models.CASCADE
+    )
+
+    class Meta:
+        default_related_name = 'track_events'
+
+    def __str__(self):
+        return f'[{self.created}] {self.habit}'
+
+
+class HabitReminder(TimeStampedBase):
+    habit = models.ForeignKey(
+        to=Habit,
+        on_delete=models.CASCADE
+    )
+
+    # Day?: Time
+    time = models.TimeField(
+        _('time'),
+    )
+
+    # Week?: Weekdays
+    # monday = models.BooleanField(
+    #     verbose_name=_('Monday'),
+    #     default=True
+    # )
+    # tuesday = models.BooleanField(
+    #     verbose_name=_('Tuesday'),
+    #     default=True
+    # )
+    # # etc
+    # Or: https://github.com/goinnn/django-multiselectfield
+
+    # Alternative: Using CRON syntax?
+    # cron = models.CharField(
+    #     _('date'),
+    # )
+
+    # Month?: Date (on day 21.) | on first/second/etc Weekday
+    # date = models.DateField(
+    #     _('date'),
+    # )
+
+    class Meta:
+        default_related_name = 'reminders'
+
+    def __str__(self):
+        return f'{self.time}'
+
+
+class Routine(OwnedBase, TimeStampedBase):
+    name = models.CharField(
+        _('name'),
+        max_length=255,
+    )
+    scope = ScopeField()
+    content = MarkdownField(
+        verbose_name=_('content'),
+        blank=True
+    )
+
+    # Related reminders
+    # TODO: Habits
+    habits = models.ManyToManyField(
+        to=Habit, through='RoutineHabit')
+
+    class Meta:
+        default_related_name = 'routines'
+
+    def __str__(self):
+        return self.name
+
+
+class RoutineHabit(OrderedModel):
+    routine = models.ForeignKey(Routine, on_delete=models.CASCADE)
+    habit = models.ForeignKey(Habit, on_delete=models.CASCADE)
+    order_with_respect_to = 'routine'
+
+    class Meta:
+        ordering = ('routine', 'order')
+
+    def __str__(self):
+        return f'{self.routine}/{self.habit}'
 
 
 class Scan(OwnedBase, TimeStampedBase):

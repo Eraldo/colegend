@@ -3,14 +3,21 @@ from enum import Enum
 import graphene
 from django.utils import timezone
 
+from colegend.core.intuitive_duration.modelfields import IntuitiveDurationField
 from colegend.experience.models import add_experience
 from colegend.scopes.models import DAY
 
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 from graphql_relay import from_global_id
+from graphene_django.converter import convert_django_field
 
-from .models import Scan
+from .models import Scan, Habit, HabitTrackEvent, HabitReminder, Routine, RoutineHabit
+
+
+@convert_django_field.register(IntuitiveDurationField)
+def convert_phone_number_to_string(field, registry=None):
+    return graphene.String(description=field.help_text, required=not field.null)
 
 
 class SuggestedAction(Enum):
@@ -35,6 +42,36 @@ class SuggestedActionQuery(graphene.ObjectType):
         return None
 
 
+class HabitNode(DjangoObjectType):
+    class Meta:
+        model = Habit
+        interfaces = [graphene.Node]
+
+
+class HabitTrackEventNode(DjangoObjectType):
+    class Meta:
+        model = HabitTrackEvent
+        interfaces = [graphene.Node]
+
+
+class HabitReminderNode(DjangoObjectType):
+    class Meta:
+        model = HabitReminder
+        interfaces = [graphene.Node]
+
+
+class RoutineNode(DjangoObjectType):
+    class Meta:
+        model = Routine
+        interfaces = [graphene.Node]
+
+
+class RoutineHabitNode(DjangoObjectType):
+    class Meta:
+        model = RoutineHabit
+        interfaces = [graphene.Node]
+
+
 class ScanNode(DjangoObjectType):
     class Meta:
         model = Scan
@@ -50,6 +87,11 @@ class ScanNode(DjangoObjectType):
             'owner': ['exact'],
         }
         interfaces = [graphene.Node]
+
+
+class HabitsQuery(graphene.ObjectType):
+    habit = graphene.Node.Field(HabitNode)
+    routine = graphene.Node.Field(RoutineNode)
 
 
 class ScanQuery(graphene.ObjectType):
@@ -140,6 +182,7 @@ class ScanMutation(graphene.ObjectType):
 class HomeQuery(
     SuggestedActionQuery,
     ScanQuery,
+    HabitsQuery,
     graphene.ObjectType):
     pass
 
