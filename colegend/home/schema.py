@@ -4,6 +4,7 @@ import graphene
 from django.utils import timezone
 
 from colegend.core.intuitive_duration.modelfields import IntuitiveDurationField
+from colegend.core.intuitive_duration.utils import intuitive_duration_string, parse_intuitive_duration
 from colegend.core.utils.icons import Icon
 from colegend.experience.models import add_experience
 
@@ -56,6 +57,12 @@ class HabitNode(DjangoObjectType):
         model = Habit
         interfaces = [graphene.Node]
 
+    def resolve_duration(self, info, raw=False):
+        duration = self.duration
+        if raw:
+            return duration
+        return intuitive_duration_string(duration) if duration is not None else ''
+
 
 class HabitTrackEventNode(DjangoObjectType):
     class Meta:
@@ -76,19 +83,14 @@ class CreateHabit(graphene.relay.ClientIDMutation):
     class Input:
         name = graphene.String()
         scope = ScopeType()
-        # area_1 = graphene.Int()
-        # area_2 = graphene.Int()
-        # area_3 = graphene.Int()
-        # area_4 = graphene.Int()
-        # area_5 = graphene.Int()
-        # area_6 = graphene.Int()
-        # area_7 = graphene.Int()
+        icon = graphene.String()
+        duration = graphene.String()
+        content = graphene.String()
 
     @classmethod
     def mutate_and_get_payload(cls, root, info, *args, **kwargs):
         user = info.context.user
         habit = user.habits.create(*args, **kwargs)
-        add_experience(user, 'home')
         return CreateHabit(success=True, habit=habit)
 
 
@@ -98,34 +100,27 @@ class UpdateHabit(graphene.relay.ClientIDMutation):
 
     class Input:
         id = graphene.ID()
-        area_1 = graphene.Int()
-        area_2 = graphene.Int()
-        area_3 = graphene.Int()
-        area_4 = graphene.Int()
-        area_5 = graphene.Int()
-        area_6 = graphene.Int()
-        area_7 = graphene.Int()
+        name = graphene.String()
+        scope = ScopeType()
+        icon = graphene.String()
+        duration = graphene.String()
+        content = graphene.String()
 
     @classmethod
-    def mutate_and_get_payload(cls, root, info, id, area_1=None, area_2=None, area_3=None, area_4=None, area_5=None,
-                               area_6=None, area_7=None):
+    def mutate_and_get_payload(cls, root, info, id, name=None, scope=None, icon=None, duration=None, content=None):
         user = info.context.user
         _type, id = from_global_id(id)
         habit = user.habits.get(id=id)
-        if area_1 is not None:
-            habit.area_1 = area_1
-        if area_2 is not None:
-            habit.area_2 = area_2
-        if area_3 is not None:
-            habit.area_3 = area_3
-        if area_4 is not None:
-            habit.area_4 = area_4
-        if area_5 is not None:
-            habit.area_5 = area_5
-        if area_6 is not None:
-            habit.area_6 = area_6
-        if area_7 is not None:
-            habit.area_7 = area_7
+        if name is not None:
+            habit.name = name
+        if scope is not None:
+            habit.scope = scope
+        if icon is not None:
+            habit.icon = icon
+        if duration is not None:
+            habit.duration = parse_intuitive_duration(duration)
+        if content is not None:
+            habit.content = content
         habit.save()
         return UpdateHabit(success=True, habit=habit)
 
@@ -145,7 +140,7 @@ class DeleteHabit(graphene.relay.ClientIDMutation):
         return DeleteHabit(success=True)
 
 
-class HabitMutation(graphene.ObjectType):
+class HabitMutations(graphene.ObjectType):
     create_habit = CreateHabit.Field()
     update_habit = UpdateHabit.Field()
     delete_habit = DeleteHabit.Field()
@@ -281,5 +276,6 @@ class HomeQuery(
 
 class HomeMutation(
     ScanMutation,
+    HabitMutations,
     graphene.ObjectType):
     pass
