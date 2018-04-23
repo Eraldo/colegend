@@ -12,18 +12,9 @@ class Scope(Enum):
     MONTH = 'month'
     YEAR = 'year'
 
-
-DAY = 'day'
-WEEK = 'week'
-MONTH = 'month'
-QUARTER = 'quarter'
-YEAR = 'year'
-SCOPE_CHOICES = (
-    (DAY, _('day')),
-    (WEEK, _('week')),
-    (MONTH, _('month')),
-    (YEAR, _('year')),
-)
+    @staticmethod
+    def get_choices():
+        return [(scope.value, _(scope.value)) for scope in Scope]
 
 
 class ScopeField(models.CharField):
@@ -31,8 +22,8 @@ class ScopeField(models.CharField):
 
     def __init__(self, *args, **kwargs):
         verbose_name = kwargs.pop('verbose_name', _('scope'))
-        choices = kwargs.pop('choices', SCOPE_CHOICES)
-        default = kwargs.pop('default', DAY)
+        choices = kwargs.pop('choices', Scope.get_choices())
+        default = kwargs.pop('default', Scope.DAY.value)
         max_length = kwargs.pop('max_length', 5)
         super().__init__(
             verbose_name=verbose_name,
@@ -45,9 +36,9 @@ class ScopeField(models.CharField):
 
 def get_scope_by_name(name):
     scope_map = {
-        DAY: Day,
-        WEEK: Week,
-        MONTH: Month,
-        YEAR: Year,
+        Scope.DAY.value: Day,
+        Scope.WEEK.value: Week,
+        Scope.MONTH.value: Month,
+        Scope.YEAR.value: Year,
     }
     return scope_map.get(name)

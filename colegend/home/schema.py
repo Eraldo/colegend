@@ -4,19 +4,25 @@ import graphene
 from django.utils import timezone
 
 from colegend.core.intuitive_duration.modelfields import IntuitiveDurationField
+from colegend.core.utils.icons import Icon
 from colegend.experience.models import add_experience
-from colegend.scopes.models import DAY
 
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 from graphql_relay import from_global_id
 from graphene_django.converter import convert_django_field
 
+from colegend.scopes.models import Scope
+from colegend.scopes.schema import ScopeType
 from .models import Scan, Habit, HabitTrackEvent, HabitReminder, Routine, RoutineHabit
+
+
+IconType = graphene.Enum.from_enum(Icon)
 
 
 @convert_django_field.register(IntuitiveDurationField)
 def convert_phone_number_to_string(field, registry=None):
+    # https://github.com/graphql-python/graphene-django/issues/348
     return graphene.String(description=field.help_text, required=not field.null)
 
 
@@ -35,14 +41,17 @@ class SuggestedActionQuery(graphene.ObjectType):
         user = info.context.user
         today = timezone.localtime(timezone.now()).date()
         if user.is_authenticated:
-            if not user.focuses.filter(scope=DAY, start=today).exists():
+            if not user.focuses.filter(scope=Scope.DAY.value, start=today).exists():
                 return SuggestedAction.SETTING_FOCUS.value
-            if not user.journal_entries.filter(scope=DAY, start=today).exists():
+            if not user.journal_entries.filter(scope=Scope.DAY.value, start=today).exists():
                 return SuggestedAction.WRITING_JOURNAL.value
         return None
 
 
 class HabitNode(DjangoObjectType):
+    # https://github.com/graphql-python/graphene-django/issues/348
+    duration = graphene.String()
+
     class Meta:
         model = Habit
         interfaces = [graphene.Node]
@@ -58,6 +67,88 @@ class HabitReminderNode(DjangoObjectType):
     class Meta:
         model = HabitReminder
         interfaces = [graphene.Node]
+
+
+class CreateHabit(graphene.relay.ClientIDMutation):
+    success = graphene.Boolean()
+    habit = graphene.Field(HabitNode)
+
+    class Input:
+        name = graphene.String()
+        scope = ScopeType()
+        # area_1 = graphene.Int()
+        # area_2 = graphene.Int()
+        # area_3 = graphene.Int()
+        # area_4 = graphene.Int()
+        # area_5 = graphene.Int()
+        # area_6 = graphene.Int()
+        # area_7 = graphene.Int()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, *args, **kwargs):
+        user = info.context.user
+        habit = user.habits.create(*args, **kwargs)
+        add_experience(user, 'home')
+        return CreateHabit(success=True, habit=habit)
+
+
+class UpdateHabit(graphene.relay.ClientIDMutation):
+    success = graphene.Boolean()
+    habit = graphene.Field(HabitNode)
+
+    class Input:
+        id = graphene.ID()
+        area_1 = graphene.Int()
+        area_2 = graphene.Int()
+        area_3 = graphene.Int()
+        area_4 = graphene.Int()
+        area_5 = graphene.Int()
+        area_6 = graphene.Int()
+        area_7 = graphene.Int()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, id, area_1=None, area_2=None, area_3=None, area_4=None, area_5=None,
+                               area_6=None, area_7=None):
+        user = info.context.user
+        _type, id = from_global_id(id)
+        habit = user.habits.get(id=id)
+        if area_1 is not None:
+            habit.area_1 = area_1
+        if area_2 is not None:
+            habit.area_2 = area_2
+        if area_3 is not None:
+            habit.area_3 = area_3
+        if area_4 is not None:
+            habit.area_4 = area_4
+        if area_5 is not None:
+            habit.area_5 = area_5
+        if area_6 is not None:
+            habit.area_6 = area_6
+        if area_7 is not None:
+            habit.area_7 = area_7
+        habit.save()
+        return UpdateHabit(success=True, habit=habit)
+
+
+class DeleteHabit(graphene.relay.ClientIDMutation):
+    success = graphene.Boolean()
+
+    class Input:
+        id = graphene.ID()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, id):
+        user = info.context.user
+        _type, id = from_global_id(id)
+        habit = user.habits.get(id=id)
+        habit.delete()
+        return DeleteHabit(success=True)
+
+
+class HabitMutation(graphene.ObjectType):
+    create_habit = CreateHabit.Field()
+    update_habit = UpdateHabit.Field()
+    delete_habit = DeleteHabit.Field()
 
 
 class RoutineNode(DjangoObjectType):
@@ -136,7 +227,8 @@ class UpdateScan(graphene.relay.ClientIDMutation):
         area_7 = graphene.Int()
 
     @classmethod
-    def mutate_and_get_payload(cls, root, info, id, area_1=None, area_2=None, area_3=None, area_4=None, area_5=None, area_6=None, area_7=None):
+    def mutate_and_get_payload(cls, root, info, id, area_1=None, area_2=None, area_3=None, area_4=None, area_5=None,
+                               area_6=None, area_7=None):
         user = info.context.user
         _type, id = from_global_id(id)
         scan = user.scans.get(id=id)

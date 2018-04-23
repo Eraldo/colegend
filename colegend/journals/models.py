@@ -11,7 +11,7 @@ from wagtail.core.models import Page
 from colegend.core.fields import MarkdownField
 from colegend.core.models import AutoOwnedBase, AutoUrlsMixin, OwnedQuerySet, TimeStampedBase, OwnedBase
 from colegend.journals import scopes
-from colegend.scopes.models import SCOPE_CHOICES, DAY, get_scope_by_name, WEEK, MONTH, QUARTER, YEAR
+from colegend.scopes.models import get_scope_by_name, Scope
 from colegend.tags.models import TaggableBase
 
 
@@ -27,8 +27,8 @@ class JournalEntry(OwnedBase, TaggableBase, TimeStampedBase):
     """
     scope = models.CharField(
         _('scope'),
-        choices=SCOPE_CHOICES,
-        default=DAY,
+        choices=Scope.get_choices(),
+        default=Scope.DAY.value,
         max_length=5,
     )
     start = models.DateField(
@@ -337,24 +337,20 @@ class JournalPage(RoutablePageMixin, Page):
             context['text'] = text
             user = request.user
             if user:
-                days = user.journal_entries.filter(scope=DAY).filter(
+                days = user.journal_entries.filter(scope=Scope.DAY.value).filter(
                     Q(keywords__icontains=text) | Q(content__icontains=text) | Q(locations__icontains=text) | Q(
                         tags__name__icontains=text)
                 ).distinct()
                 context['days'] = days
-                weeks = user.journal_entries.filter(scope=WEEK).filter(
+                weeks = user.journal_entries.filter(scope=Scope.WEEK.value).filter(
                     Q(keywords__icontains=text) | Q(content__icontains=text) | Q(tags__name__icontains=text)
                 ).distinct()
                 context['weeks'] = weeks
-                months = user.journal_entries.filter(scope=MONTH).filter(
+                months = user.journal_entries.filter(scope=Scope.MONTH.value).filter(
                     Q(keywords__icontains=text) | Q(content__icontains=text) | Q(tags__name__icontains=text)
                 ).distinct()
                 context['months'] = months
-                quarters = user.journal_entries.filter(scope=QUARTER).filter(
-                    Q(keywords__icontains=text) | Q(content__icontains=text) | Q(tags__name__icontains=text)
-                ).distinct()
-                context['quarters'] = quarters
-                years = user.journal_entries.filter(scope=YEAR).filter(
+                years = user.journal_entries.filter(scope=Scope.YEAR.value).filter(
                     Q(keywords__icontains=text) | Q(content__icontains=text) | Q(tags__name__icontains=text)
                 ).distinct()
                 context['years'] = years

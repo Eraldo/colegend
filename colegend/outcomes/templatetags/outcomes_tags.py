@@ -6,7 +6,7 @@ from django.utils import timezone
 from colegend.core.templatetags.core_tags import icon, intuitive_duration
 from colegend.outcomes.forms import OutcomeStatusForm
 from colegend.outcomes.models import Outcome
-from colegend.scopes.models import DAY, WEEK, MONTH, YEAR
+from colegend.scopes.models import Scope
 
 register = template.Library()
 
@@ -96,16 +96,16 @@ def scope(context, scope=None, **kwargs):
     scope = scope or context.get('scope')
     symbol = ''
     scope_context = {}
-    if scope == DAY:
+    if scope == Scope.DAY.value:
         scope_context['symbol'] = 'D'
         scope_context['class'] = 'bg-category-1'
-    elif scope == WEEK:
+    elif scope == Scope.WEEK.value:
         scope_context['symbol'] = 'W'
         scope_context['class'] = 'bg-category-2'
-    elif scope == MONTH:
+    elif scope == Scope.MONTH.value:
         scope_context['symbol'] = 'M'
         scope_context['class'] = 'bg-category-3'
-    elif scope == YEAR:
+    elif scope == Scope.YEAR.value:
         scope_context['symbol'] = 'Y'
         scope_context['class'] = 'bg-category-6'
     if scope_context:

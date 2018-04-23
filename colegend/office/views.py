@@ -4,7 +4,7 @@ from rest_framework import viewsets
 from django.utils.translation import ugettext_lazy as _
 
 from colegend.experience.models import add_experience
-from colegend.scopes.models import get_scope_by_name, DAY, WEEK, MONTH
+from colegend.scopes.models import get_scope_by_name, Scope
 from .serializers import FocusSerializer
 from .models import Focus
 
@@ -21,7 +21,7 @@ class FocusViewSet(viewsets.ModelViewSet):
     def filter_queryset(self, queryset):
         scope = self.request.query_params.get('scope')
         start = self.request.query_params.get('start')
-        if scope and start and scope != DAY:
+        if scope and start and scope != Scope.DAY.value:
             # Update start to match correct scope start date.
             start = get_scope_by_name(scope)(start).start
             params = self.request.query_params
@@ -82,11 +82,11 @@ def notify_partners(focus, reason, old_outcomes, new_outcomes):
 
     # Notifying group partners
     group = None
-    if focus.scope == DAY:
+    if focus.scope == Scope.DAY.value:
         group = owner.duo
-    elif focus.scope == WEEK:
+    elif focus.scope == Scope.WEEK.value:
         group = owner.clan
-    elif focus.scope == MONTH:
+    elif focus.scope == Scope.MONTH.value:
         group = owner.tribe
     if group:
         group.notify_partners(owner, subject, message)

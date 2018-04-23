@@ -15,7 +15,7 @@ from colegend.core.views import RolesRequiredMixin, OwnerRequiredMixin
 from colegend.experience.models import add_experience
 from colegend.journals.scopes import Week
 from colegend.journals.serializers import JournalEntrySerializer
-from colegend.scopes.models import DAY, get_scope_by_name, WEEK, MONTH
+from colegend.scopes.models import Scope, get_scope_by_name
 from .models import Journal, JournalPage, JournalEntry
 from .forms import JournalForm, DatePickerForm
 
@@ -32,7 +32,7 @@ class JournalEntryViewSet(viewsets.ModelViewSet):
     def filter_queryset(self, queryset):
         scope = self.request.query_params.get('scope')
         start = self.request.query_params.get('start')
-        if scope and start and scope != DAY:
+        if scope and start and scope != Scope.DAY.value:
             # Update start to match correct scope start date.
             start = get_scope_by_name(scope)(start).start
             params = self.request.query_params
@@ -126,7 +126,7 @@ class JournalDayView(LoginRequiredMixin, TemplateView):
         date = date or self.get_date()
         user = self.request.user
         try:
-            return user.journal_entries.get(scope=DAY, start=date)
+            return user.journal_entries.get(scope=Scope.DAY.value, start=date)
         except JournalEntry.DoesNotExist:
             return None
 
@@ -195,7 +195,7 @@ class JournalWeekView(LoginRequiredMixin, TemplateView):
         date = date or self.get_date()
         user = self.request.user
         try:
-            return user.journal_entries.get(scope=DAY, start=date)
+            return user.journal_entries.get(scope=Scope.DAY.value, start=date)
         except JournalEntry.DoesNotExist:
             return None
 
@@ -268,7 +268,7 @@ class JournalWeekView(LoginRequiredMixin, TemplateView):
 
         weeknumber = date.isocalendar()[1]
         context['weeknumber'] = weeknumber
-        weekentry = user.journal_entries.filter(scope=WEEK, start=Week(date).start)
+        weekentry = user.journal_entries.filter(scope=Scope.WEEK.value, start=Week(date).start)
         if weekentry:
             context['weekentry'] = weekentry.first()
 
@@ -302,7 +302,7 @@ class JournalMonthView(LoginRequiredMixin, TemplateView):
         date = date or self.get_date()
         user = self.request.user
         try:
-            return user.journal_entries.get(scope=WEEK, year=date.year, week=date.isocalendar()[1])
+            return user.journal_entries.get(scope=Scope.WEEK.value, year=date.year, week=date.isocalendar()[1])
         except JournalEntry.DoesNotExist:
             return None
 
@@ -378,7 +378,7 @@ class JournalMonthView(LoginRequiredMixin, TemplateView):
         #
         monthnumber = date.month
         context['monthnumber'] = monthnumber
-        monthentry = user.journal_entries.filter(scope=MONTH, year=date.year, month=monthnumber)
+        monthentry = user.journal_entries.filter(scope=Scope.MONTH.value, year=date.year, month=monthnumber)
         if monthentry:
             context['monthentry'] = monthentry.first()
 
@@ -401,15 +401,15 @@ class JournalSearchView(LoginRequiredMixin, TemplateView):
         if text:
             context['text'] = text
             user = self.request.user
-            days = user.journal_entries.filter(scope=DAY).filter(
+            days = user.journal_entries.filter(scope=Scope.DAY.value).filter(
                 Q(keywords__icontains=text) | Q(content__icontains=text) | Q(tags__name__icontains=text)
             ).distinct()
             context['days'] = days
-            weeks = user.journal_entries.filter(scope=WEEK).filter(
+            weeks = user.journal_entries.filter(scope=Scope.WEEK.value).filter(
                 Q(keywords__icontains=text) | Q(content__icontains=text) | Q(tags__name__icontains=text)
             ).distinct()
             context['weeks'] = weeks
-            months = user.journal_entries.filter(scope=MONTH).filter(
+            months = user.journal_entries.filter(scope=Scope.MONTH.value).filter(
                 Q(keywords__icontains=text) | Q(content__icontains=text) | Q(tags__name__icontains=text)
             ).distinct()
             context['months'] = months

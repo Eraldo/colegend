@@ -19,6 +19,7 @@ from colegend.core.templatetags.core_tags import link
 
 from django.utils.translation import ugettext_lazy as _
 
+from colegend.core.utils.icons import Icon
 from colegend.office.models import DAY, AgendaPage
 from colegend.scopes.models import ScopeField
 
@@ -32,7 +33,8 @@ class Habit(OwnedBase, TimeStampedBase):
     icon = models.CharField(
         _('icon'),
         max_length=255,
-        blank=True
+        blank=True,
+        choices=Icon.get_choices()
     )
     content = MarkdownField(
         verbose_name=_('content'),

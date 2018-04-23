@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 
 from colegend.experience.models import add_experience
-from colegend.scopes.models import DAY, get_scope_by_name
+from colegend.scopes.models import Scope, get_scope_by_name
 from .serializers import InterviewEntrySerializer
 from .models import InterviewEntry
 
@@ -18,7 +18,7 @@ class InterviewEntryViewSet(viewsets.ModelViewSet):
     def filter_queryset(self, queryset):
         scope = self.request.query_params.get('scope')
         start = self.request.query_params.get('start')
-        if scope and start and scope != DAY:
+        if scope and start and scope != Scope.DAY.value:
             # Update start to match correct scope start date.
             start = get_scope_by_name(scope)(start).start
             params = self.request.query_params

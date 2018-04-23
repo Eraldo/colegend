@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from colegend.core.fields import MarkdownField
 from colegend.core.models import OwnedBase, TimeStampedBase, AutoOwnedBase
-from colegend.scopes.models import SCOPE_CHOICES, DAY, get_scope_by_name
+from colegend.scopes.models import Scope, get_scope_by_name
 
 
 class InterviewEntry(OwnedBase, TimeStampedBase):
@@ -14,8 +14,8 @@ class InterviewEntry(OwnedBase, TimeStampedBase):
     """
     scope = models.CharField(
         _('scope'),
-        choices=SCOPE_CHOICES,
-        default=DAY,
+        choices=Scope.get_choices(),
+        default=Scope.DAY.value,
         max_length=5,
     )
     start = models.DateField(
