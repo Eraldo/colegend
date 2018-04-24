@@ -1,5 +1,5 @@
 from django.contrib import admin
-from ordered_model.admin import OrderedTabularInline
+from ordered_model.admin import OrderedTabularInline, OrderedModelAdmin
 
 from .models import Scan, Habit, HabitTrackEvent, HabitReminder, RoutineHabit, Routine
 
@@ -32,10 +32,10 @@ class HabitReminderInlineAdmin(admin.TabularInline):
 
 
 @admin.register(Habit)
-class HabitAdmin(admin.ModelAdmin):
-    list_display = ['name', 'scope', 'duration', 'owner']
+class HabitAdmin(OrderedModelAdmin):
+    list_display = ['name', 'scope', 'duration', 'owner', 'order', 'move_up_down_links']
     list_filter = ['scope', 'owner']
-    readonly_fields = ['created']
+    readonly_fields = ['created', 'order']
     inlines = [HabitReminderInlineAdmin, HabitTrackEventInlineAdmin]
 
 

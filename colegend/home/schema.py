@@ -63,6 +63,9 @@ class HabitNode(DjangoObjectType):
             return duration
         return intuitive_duration_string(duration) if duration is not None else ''
 
+    def resolve_icon(self, info, raw=False):
+        return self.icon or '🔄'
+
 
 class HabitTrackEventNode(DjangoObjectType):
     class Meta:
@@ -105,9 +108,10 @@ class UpdateHabit(graphene.relay.ClientIDMutation):
         icon = graphene.String()
         duration = graphene.String()
         content = graphene.String()
+        order = graphene.Int()
 
     @classmethod
-    def mutate_and_get_payload(cls, root, info, id, name=None, scope=None, icon=None, duration=None, content=None):
+    def mutate_and_get_payload(cls, root, info, id, name=None, scope=None, icon=None, duration=None, content=None, order=None):
         user = info.context.user
         _type, id = from_global_id(id)
         habit = user.habits.get(id=id)
@@ -121,6 +125,8 @@ class UpdateHabit(graphene.relay.ClientIDMutation):
             habit.duration = parse_intuitive_duration(duration)
         if content is not None:
             habit.content = content
+        if order is not None:
+            habit.to(order)
         habit.save()
         return UpdateHabit(success=True, habit=habit)
 
@@ -136,7 +142,10 @@ class DeleteHabit(graphene.relay.ClientIDMutation):
         user = info.context.user
         _type, id = from_global_id(id)
         habit = user.habits.get(id=id)
-        habit.delete()
+        if not habit.is_controlled:
+            habit.delete()
+        else:
+            raise Exception(f'Habit {habit} can only be deleted by the system.')
         return DeleteHabit(success=True)
 
 

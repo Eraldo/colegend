@@ -23,7 +23,7 @@ from colegend.office.models import DAY, AgendaPage
 from colegend.scopes.models import ScopeField
 
 
-class Habit(OwnedBase, TimeStampedBase):
+class Habit(OwnedBase, TimeStampedBase, OrderedModel):
     name = models.CharField(
         _('name'),
         max_length=255,
@@ -47,10 +47,23 @@ class Habit(OwnedBase, TimeStampedBase):
         verbose_name=_('content'),
         blank=True
     )
+    is_active = models.BooleanField(
+        verbose_name=_('active'),
+        default=True,
+    )
+    is_controlled = models.BooleanField(
+        verbose_name=_('active'),
+        default=False,
+        help_text=_(
+            'Designates whether this habit is controlled by the system.'
+        ),
+    )
 
     # Reverse: owner, reminders, track_events
 
-    class Meta:
+    order_with_respect_to = 'owner'
+
+    class Meta(OrderedModel.Meta):
         default_related_name = 'habits'
 
     def __str__(self):
@@ -140,6 +153,8 @@ class RoutineHabit(OrderedModel):
 
     class Meta:
         ordering = ('routine', 'order')
+        default_related_name = 'routine_habits'
+        # TODO: Check if unique together is needed here.
 
     def __str__(self):
         return f'{self.routine}/{self.habit}'
