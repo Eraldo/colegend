@@ -40,8 +40,7 @@ class Habit(OwnedBase, TimeStampedBase, OrderedModel):
     # )
     duration = IntuitiveDurationField(
         _('duration'),
-        blank=True,
-        null=True
+        default='10m',
     )
     content = MarkdownField(
         verbose_name=_('content'),
