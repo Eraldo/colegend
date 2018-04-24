@@ -33,11 +33,7 @@ class Habit(OwnedBase, TimeStampedBase, OrderedModel):
         _('icon'),
         max_length=6,
         blank=True,
-        # choices=Icon.get_choices()
     )
-    # icon = IconField(
-    #     _('icon'),
-    # )
     duration = IntuitiveDurationField(
         _('duration'),
         default='10m',
@@ -51,7 +47,7 @@ class Habit(OwnedBase, TimeStampedBase, OrderedModel):
         default=True,
     )
     is_controlled = models.BooleanField(
-        verbose_name=_('active'),
+        verbose_name=_('controlled'),
         default=False,
         help_text=_(
             'Designates whether this habit is controlled by the system.'

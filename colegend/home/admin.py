@@ -33,7 +33,7 @@ class HabitReminderInlineAdmin(admin.TabularInline):
 
 @admin.register(Habit)
 class HabitAdmin(OrderedModelAdmin):
-    list_display = ['name', 'scope', 'duration', 'owner', 'order', 'move_up_down_links']
+    list_display = ['name', 'scope', 'duration', 'is_active', 'is_controlled', 'owner', 'order', 'move_up_down_links']
     list_filter = ['scope', 'owner']
     readonly_fields = ['created', 'order']
     inlines = [HabitReminderInlineAdmin, HabitTrackEventInlineAdmin]
