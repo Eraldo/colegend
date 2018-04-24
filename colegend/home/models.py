@@ -19,8 +19,8 @@ from colegend.core.templatetags.core_tags import link
 
 from django.utils.translation import ugettext_lazy as _
 
-from colegend.office.models import DAY, AgendaPage
-from colegend.scopes.models import ScopeField
+from colegend.office.models import AgendaPage
+from colegend.scopes.models import ScopeField, get_scope_by_name
 
 
 class Habit(OwnedBase, TimeStampedBase, OrderedModel):
@@ -36,7 +36,7 @@ class Habit(OwnedBase, TimeStampedBase, OrderedModel):
     )
     duration = IntuitiveDurationField(
         _('duration'),
-        default='10m',
+        default=timezone.timedelta(minutes=10),
     )
     content = MarkdownField(
         verbose_name=_('content'),
@@ -53,6 +53,12 @@ class Habit(OwnedBase, TimeStampedBase, OrderedModel):
             'Designates whether this habit is controlled by the system.'
         ),
     )
+
+    @property
+    def success(self):
+        # TODO: Refactor static variable plus updates. (signals?).
+        scope = get_scope_by_name(self.scope)()
+        return self.track_events.filter(created__range=(scope.start, scope.end)).exists()
 
     # Reverse: owner, reminders, track_events
 

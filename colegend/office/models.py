@@ -14,7 +14,7 @@ from colegend.core.models import OwnedBase, TimeStampedBase
 from colegend.journals import scopes
 from colegend.journals.forms import DatePickerForm
 from colegend.outcomes.models import Outcome
-from colegend.scopes.models import get_scope_by_name
+from colegend.scopes.models import get_scope_by_name, Scope
 
 
 class Status(Enum):
@@ -23,18 +23,6 @@ class Status(Enum):
     CURRENT = 'current'
     DONE = 'done'
     CANCELED = 'canceled'
-
-
-DAY = 'day'
-WEEK = 'week'
-MONTH = 'month'
-YEAR = 'year'
-SCOPE_CHOICES = (
-    (DAY, _('day')),
-    (WEEK, _('week')),
-    (MONTH, _('month')),
-    (YEAR, _('year')),
-)
 
 
 # class FocusOutcome(TimeStampedBase):
@@ -46,8 +34,8 @@ SCOPE_CHOICES = (
 class Focus(OwnedBase, TimeStampedBase):
     scope = models.CharField(
         _('scope'),
-        choices=SCOPE_CHOICES,
-        default=DAY,
+        choices=Scope.get_choices(),
+        default=Scope.DAY.value,
         max_length=5,
     )
     start = models.DateField(
@@ -232,7 +220,7 @@ class AgendaPage(RoutablePageMixin, Page):
                 if new:
                     # Adding experience if setting for today or tomorrow.
                     focus = form.instance
-                    if focus.scope == DAY:
+                    if focus.scope == Scope.DAY.value:
                         today = timezone.localtime(timezone.now()).date()
                         tomorrow = today + timezone.timedelta(days=1)
                         if focus.start == today or focus.start == tomorrow:

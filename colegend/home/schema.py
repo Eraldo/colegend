@@ -52,10 +52,14 @@ class SuggestedActionQuery(graphene.ObjectType):
 class HabitNode(DjangoObjectType):
     # https://github.com/graphql-python/graphene-django/issues/348
     duration = graphene.String()
+    success = graphene.Boolean()
 
     class Meta:
         model = Habit
         interfaces = [graphene.Node]
+        filter_fields = {
+            'scope': ['exact'],
+        }
 
     def resolve_duration(self, info, raw=False):
         duration = self.duration
@@ -63,8 +67,11 @@ class HabitNode(DjangoObjectType):
             return duration
         return intuitive_duration_string(duration) if duration is not None else ''
 
-    def resolve_icon(self, info, raw=False):
+    def resolve_icon(self, info):
         return self.icon or '🔄'
+
+    def resolve_success(self, info):
+        return self.success
 
 
 class HabitTrackEventNode(DjangoObjectType):
@@ -178,6 +185,74 @@ class RoutineNode(DjangoObjectType):
     class Meta:
         model = Routine
         interfaces = [graphene.Node]
+        filter_fields = {
+            'scope': ['exact'],
+        }
+
+
+class CreateRoutineMutation(graphene.relay.ClientIDMutation):
+    success = graphene.Boolean()
+    routine = graphene.Field(RoutineNode)
+
+    class Input:
+        name = graphene.String()
+        scope = ScopeType()
+        content = graphene.String()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, *args, **kwargs):
+        user = info.context.user
+        routine = user.routines.create(*args, **kwargs)
+        return CreateRoutineMutation(success=True, routine=routine)
+
+
+class UpdateRoutineMutation(graphene.relay.ClientIDMutation):
+    success = graphene.Boolean()
+    routine = graphene.Field(RoutineNode)
+
+    class Input:
+        id = graphene.ID()
+        name = graphene.String()
+        scope = ScopeType()
+        content = graphene.String()
+        order = graphene.Int()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, id, name=None, scope=None, content=None, order=None):
+        user = info.context.user
+        _type, id = from_global_id(id)
+        routine = user.routines.get(id=id)
+        if name is not None:
+            routine.name = name
+        if scope is not None:
+            routine.scope = scope
+        if content is not None:
+            routine.content = content
+        if order is not None:
+            routine.to(order)
+        routine.save()
+        return UpdateRoutineMutation(success=True, routine=routine)
+
+
+class DeleteRoutineMutation(graphene.relay.ClientIDMutation):
+    success = graphene.Boolean()
+
+    class Input:
+        id = graphene.ID()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, id):
+        user = info.context.user
+        _type, id = from_global_id(id)
+        routine = user.routines.get(id=id)
+        routine.delete()
+        return DeleteRoutineMutation(success=True)
+
+
+class RoutineMutations(graphene.ObjectType):
+    create_routine = CreateRoutineMutation.Field()
+    update_routine = UpdateRoutineMutation.Field()
+    delete_routine = DeleteRoutineMutation.Field()
 
 
 class RoutineHabitNode(DjangoObjectType):
@@ -305,5 +380,6 @@ class HomeQuery(
 class HomeMutation(
     ScanMutation,
     HabitMutations,
+    RoutineMutations,
     graphene.ObjectType):
     pass
