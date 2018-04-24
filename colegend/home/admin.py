@@ -48,10 +48,10 @@ class RoutineHabitInlineAdmin(OrderedTabularInline):
 
 
 @admin.register(Routine)
-class RoutineAdmin(admin.ModelAdmin):
-    list_display = ['name', 'scope', 'owner']
+class RoutineAdmin(OrderedModelAdmin):
+    list_display = ['name', 'scope', 'owner', 'order', 'move_up_down_links']
     list_filter = ['scope', 'owner']
-    readonly_fields = ['created']
+    readonly_fields = ['created', 'order']
     inlines = [RoutineHabitInlineAdmin]
 
     def get_urls(self):

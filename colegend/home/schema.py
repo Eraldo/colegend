@@ -79,7 +79,7 @@ class HabitReminderNode(DjangoObjectType):
         interfaces = [graphene.Node]
 
 
-class CreateHabit(graphene.relay.ClientIDMutation):
+class CreateHabitMutation(graphene.relay.ClientIDMutation):
     success = graphene.Boolean()
     habit = graphene.Field(HabitNode)
 
@@ -94,10 +94,10 @@ class CreateHabit(graphene.relay.ClientIDMutation):
     def mutate_and_get_payload(cls, root, info, *args, **kwargs):
         user = info.context.user
         habit = user.habits.create(*args, **kwargs)
-        return CreateHabit(success=True, habit=habit)
+        return CreateHabitMutation(success=True, habit=habit)
 
 
-class UpdateHabit(graphene.relay.ClientIDMutation):
+class UpdateHabitMutation(graphene.relay.ClientIDMutation):
     success = graphene.Boolean()
     habit = graphene.Field(HabitNode)
 
@@ -106,12 +106,13 @@ class UpdateHabit(graphene.relay.ClientIDMutation):
         name = graphene.String()
         scope = ScopeType()
         icon = graphene.String()
+        is_active = graphene.Boolean()
         duration = graphene.String()
         content = graphene.String()
         order = graphene.Int()
 
     @classmethod
-    def mutate_and_get_payload(cls, root, info, id, name=None, scope=None, icon=None, duration=None, content=None, order=None):
+    def mutate_and_get_payload(cls, root, info, id, name=None, scope=None, icon=None, is_active=None, duration=None, content=None, order=None):
         user = info.context.user
         _type, id = from_global_id(id)
         habit = user.habits.get(id=id)
@@ -121,6 +122,8 @@ class UpdateHabit(graphene.relay.ClientIDMutation):
             habit.scope = scope
         if icon is not None:
             habit.icon = icon
+        if is_active is not None:
+            habit.is_active= is_active
         if duration is not None:
             habit.duration = parse_intuitive_duration(duration)
         if content is not None:
@@ -128,10 +131,10 @@ class UpdateHabit(graphene.relay.ClientIDMutation):
         if order is not None:
             habit.to(order)
         habit.save()
-        return UpdateHabit(success=True, habit=habit)
+        return UpdateHabitMutation(success=True, habit=habit)
 
 
-class DeleteHabit(graphene.relay.ClientIDMutation):
+class DeleteHabitMutation(graphene.relay.ClientIDMutation):
     success = graphene.Boolean()
 
     class Input:
@@ -146,13 +149,29 @@ class DeleteHabit(graphene.relay.ClientIDMutation):
             habit.delete()
         else:
             raise Exception(f'Habit {habit} can only be deleted by the system.')
-        return DeleteHabit(success=True)
+        return DeleteHabitMutation(success=True)
+
+
+class TrackHabitMutation(graphene.relay.ClientIDMutation):
+    track = graphene.Field(HabitTrackEventNode)
+
+    class Input:
+        id = graphene.ID()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, id):
+        user = info.context.user
+        _type, id = from_global_id(id)
+        habit = user.habits.get(id=id)
+        track = habit.track_events.create()
+        return TrackHabitMutation(track=track)
 
 
 class HabitMutations(graphene.ObjectType):
-    create_habit = CreateHabit.Field()
-    update_habit = UpdateHabit.Field()
-    delete_habit = DeleteHabit.Field()
+    create_habit = CreateHabitMutation.Field()
+    update_habit = UpdateHabitMutation.Field()
+    delete_habit = DeleteHabitMutation.Field()
+    track_habit = TrackHabitMutation.Field()
 
 
 class RoutineNode(DjangoObjectType):

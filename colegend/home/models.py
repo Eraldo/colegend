@@ -118,7 +118,7 @@ class HabitReminder(TimeStampedBase):
         return f'{self.time}'
 
 
-class Routine(OwnedBase, TimeStampedBase):
+class Routine(OwnedBase, TimeStampedBase, OrderedModel):
     name = models.CharField(
         _('name'),
         max_length=255,
@@ -133,6 +133,10 @@ class Routine(OwnedBase, TimeStampedBase):
     # TODO: Habits
     habits = models.ManyToManyField(
         to=Habit, through='RoutineHabit')
+
+    # Reverse: owner, reminders
+
+    order_with_respect_to = 'owner'
 
     class Meta:
         default_related_name = 'routines'
