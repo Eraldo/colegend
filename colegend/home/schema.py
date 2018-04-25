@@ -80,6 +80,20 @@ class HabitTrackEventNode(DjangoObjectType):
         interfaces = [graphene.Node]
 
 
+class DeleteHabitTrackMutation(graphene.relay.ClientIDMutation):
+    success = graphene.Boolean()
+
+    class Input:
+        id = graphene.ID()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, id):
+        _type, id = from_global_id(id)
+        track = HabitTrackEvent.objects.get(id=id)
+        track.delete()
+        return DeleteHabitTrackMutation(success=True)
+
+
 class HabitReminderNode(DjangoObjectType):
     class Meta:
         model = HabitReminder
@@ -179,6 +193,7 @@ class HabitMutations(graphene.ObjectType):
     update_habit = UpdateHabitMutation.Field()
     delete_habit = DeleteHabitMutation.Field()
     track_habit = TrackHabitMutation.Field()
+    delete_habit_track = DeleteHabitTrackMutation.Field()
 
 
 class RoutineNode(DjangoObjectType):
