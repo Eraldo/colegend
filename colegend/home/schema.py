@@ -231,9 +231,10 @@ class UpdateRoutineMutation(graphene.relay.ClientIDMutation):
         scope = ScopeType()
         content = graphene.String()
         order = graphene.Int()
+        habits = graphene.List(graphene.String)
 
     @classmethod
-    def mutate_and_get_payload(cls, root, info, id, name=None, scope=None, content=None, order=None):
+    def mutate_and_get_payload(cls, root, info, id, name=None, scope=None, content=None, order=None, habits=None):
         user = info.context.user
         _type, id = from_global_id(id)
         routine = user.routines.get(id=id)
@@ -245,6 +246,18 @@ class UpdateRoutineMutation(graphene.relay.ClientIDMutation):
             routine.content = content
         if order is not None:
             routine.to(order)
+        if habits is not None:
+            habit_ids = [from_global_id(id)[1] for id in habits]
+            selected_habits = user.habits.filter(id__in=habit_ids)
+            current_habits = routine.habits.all()
+            # Adding new habits
+            for habit in selected_habits:
+                if not habit in current_habits:
+                    routine.routine_habits.create(habit=habit)
+            # Deleting removed habits.
+            for habit in current_habits:
+                if habit not in selected_habits:
+                    routine.routine_habits.get(habit=habit).delete()
         routine.save()
         return UpdateRoutineMutation(success=True, routine=routine)
 
@@ -264,16 +277,36 @@ class DeleteRoutineMutation(graphene.relay.ClientIDMutation):
         return DeleteRoutineMutation(success=True)
 
 
-class RoutineMutations(graphene.ObjectType):
-    create_routine = CreateRoutineMutation.Field()
-    update_routine = UpdateRoutineMutation.Field()
-    delete_routine = DeleteRoutineMutation.Field()
-
-
 class RoutineHabitNode(DjangoObjectType):
     class Meta:
         model = RoutineHabit
         interfaces = [graphene.Node]
+
+
+class UpdateRoutineHabitMutation(graphene.relay.ClientIDMutation):
+    success = graphene.Boolean()
+    routine_habit = graphene.Field(RoutineHabitNode)
+
+    class Input:
+        id = graphene.ID()
+        order = graphene.Int()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, id, order=None):
+        user = info.context.user
+        _type, id = from_global_id(id)
+        routine_habit = RoutineHabit.objects.get(id=id)
+        if order is not None:
+            routine_habit.to(order)
+            routine_habit.save()
+        return UpdateRoutineHabitMutation(success=True, routine_habit=routine_habit)
+
+
+class RoutineMutations(graphene.ObjectType):
+    create_routine = CreateRoutineMutation.Field()
+    update_routine = UpdateRoutineMutation.Field()
+    delete_routine = DeleteRoutineMutation.Field()
+    update_routine_habit = UpdateRoutineHabitMutation.Field()
 
 
 class ScanNode(DjangoObjectType):

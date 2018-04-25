@@ -162,7 +162,7 @@ class Routine(OwnedBase, TimeStampedBase, OrderedModel):
 
     order_with_respect_to = 'owner'
 
-    class Meta:
+    class Meta(OrderedModel.Meta):
         default_related_name = 'routines'
 
     def __str__(self):
@@ -177,6 +177,7 @@ class RoutineHabit(OrderedModel):
     class Meta:
         ordering = ('routine', 'order')
         default_related_name = 'routine_habits'
+        unique_together = ['routine', 'habit']
         # TODO: Check if unique together is needed here.
 
     def __str__(self):
