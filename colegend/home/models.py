@@ -58,7 +58,9 @@ class Habit(OwnedBase, TimeStampedBase, OrderedModel):
     def success(self):
         # TODO: Refactor static variable plus updates. (signals?).
         scope = get_scope_by_name(self.scope)()
-        return self.track_events.filter(created__range=(scope.start, scope.end)).exists()
+        start = scope.start
+        end = scope.end + timezone.timedelta(days=1)
+        return self.track_events.filter(created__range=(start, end)).exists()
 
     # Reverse: owner, reminders, track_events
 
