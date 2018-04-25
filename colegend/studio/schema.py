@@ -246,9 +246,25 @@ class UpdateChapter(graphene.relay.ClientIDMutation):
         return UpdateChapter(success=True, chapter=chapter)
 
 
+class DeleteChapterMutation(graphene.relay.ClientIDMutation):
+    success = graphene.Boolean()
+
+    class Input:
+        id = graphene.ID()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, id):
+        user = info.context.user
+        _type, id = from_global_id(id)
+        chapter = user.story.chapters.get(id=id)
+        chapter.delete()
+        return DeleteChapterMutation(success=True)
+
+
 class ChapterMutation(graphene.ObjectType):
     add_chapter = AddChapter.Field()
-    update_chapter= UpdateChapter.Field()
+    update_chapter = UpdateChapter.Field()
+    delete_chapter = DeleteChapterMutation.Field()
 
 
 class StudioQuery(
