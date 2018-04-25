@@ -52,7 +52,7 @@ class SuggestedActionQuery(graphene.ObjectType):
 class HabitNode(DjangoObjectType):
     # https://github.com/graphql-python/graphene-django/issues/348
     duration = graphene.String()
-    success = graphene.Boolean()
+    stats = graphene.List(graphene.Int)
 
     class Meta:
         model = Habit
@@ -70,8 +70,8 @@ class HabitNode(DjangoObjectType):
     def resolve_icon(self, info):
         return self.icon or '🔄'
 
-    def resolve_success(self, info):
-        return self.success
+    def resolve_stats(self, info):
+        return self.get_stats()
 
 
 class HabitTrackEventNode(DjangoObjectType):

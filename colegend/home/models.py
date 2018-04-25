@@ -54,13 +54,29 @@ class Habit(OwnedBase, TimeStampedBase, OrderedModel):
         ),
     )
 
-    @property
-    def success(self):
-        # TODO: Refactor static variable plus updates. (signals?).
+    def get_stats(self, phases=4):
+        """
+        Check the last X phases for completion.
+
+        Example:
+            Performance of last 4 weeks?
+            Result: [0, 1, 1, 0]
+            => Not yet a success this week, success the 2 weeks before, no success 3 weeks ago.
+
+        Result type: [{this_phase}, {last_phase}, {pre_last_phase}, {pre_pre_last_phase}]
+        """
+        # TODO: Refactor to static variables plus updates. (signals?).
+
         scope = get_scope_by_name(self.scope)()
-        start = scope.start
-        end = scope.end + timezone.timedelta(days=1)
-        return self.track_events.filter(created__range=(start, end)).exists()
+        stats = [0 for x in range(phases)]  # [0, 0, 0, ...] empty result array
+
+        for phase in range(phases):  # for each phase
+            start = scope.start
+            end = scope.end
+            stats[phase] = self.track_events.filter(created__date__range=(start, end)).count()
+            scope = scope.previous
+
+        return stats
 
     # Reverse: owner, reminders, track_events
 
