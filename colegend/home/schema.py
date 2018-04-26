@@ -295,7 +295,8 @@ class UpdateRoutineHabitMutation(graphene.relay.ClientIDMutation):
     def mutate_and_get_payload(cls, root, info, id, order=None):
         user = info.context.user
         _type, id = from_global_id(id)
-        routine_habit = RoutineHabit.objects.get(id=id)
+        routine_habit = RoutineHabit.objects.get(id
+                                                 =id)
         if order is not None:
             routine_habit.to(order)
             routine_habit.save()
