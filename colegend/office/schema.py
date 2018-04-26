@@ -34,14 +34,19 @@ class UpdateFocusMutation(graphene.relay.ClientIDMutation):
         outcome_2 = graphene.ID()
         outcome_3 = graphene.ID()
         outcome_4 = graphene.ID()
+        outcomes = graphene.List(graphene.ID)
         reason = graphene.String()
 
     @classmethod
     def mutate_and_get_payload(
         cls, root, info, id=None,
         scope=None, start=None,
-        outcome_1=None, outcome_2=None, outcome_3=None, outcome_4=None, reason=None):
+        outcomes=None, outcome_1=None, outcome_2=None, outcome_3=None, outcome_4=None, reason=None):
         user = info.context.user
+
+        if not outcomes and not any([outcome_1, outcome_2, outcome_3, outcome_4]):
+            raise Exception('Not outcomes provided for focus.')
+
         if id is not None and reason is not None:
             _type, id = from_global_id(id)
             focus = user.focuses.get(id=id)
@@ -54,6 +59,11 @@ class UpdateFocusMutation(graphene.relay.ClientIDMutation):
 
         old_outcomes = focus.outcomes
 
+        if outcomes is not None:
+            outcome_ids = [from_global_id(id)[1] for id in outcomes]
+            new_outcomes = user.outcomes.filter(id__in=outcome_ids)
+            for index, outcome in enumerate(new_outcomes):
+                setattr(focus, f'outcome_{index+1}', outcome)
         if outcome_1 is not None:
             focus.outcome_1 = user.outcomes.get(id=from_global_id(outcome_1)[1])
         if outcome_2 is not None:

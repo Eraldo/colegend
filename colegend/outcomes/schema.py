@@ -81,7 +81,7 @@ class UpdateOutcomeMutation(graphene.relay.ClientIDMutation):
         date = graphene.types.datetime.Date()
         deadline = graphene.types.datetime.Date()
         estimate = graphene.String()
-        tags = graphene.List(graphene.String)
+        tags = graphene.List(graphene.ID)
         deletions = graphene.List(graphene.String)
 
     @classmethod
