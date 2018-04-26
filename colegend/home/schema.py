@@ -197,12 +197,17 @@ class HabitMutations(graphene.ObjectType):
 
 
 class RoutineNode(DjangoObjectType):
+    duration = graphene.String()
+
     class Meta:
         model = Routine
         interfaces = [graphene.Node]
         filter_fields = {
             'scope': ['exact'],
         }
+
+    def resolve_duration(self, info):
+        return self.duration
 
 
 class CreateRoutineMutation(graphene.relay.ClientIDMutation):

@@ -3,6 +3,7 @@ from django.core.validators import MaxValueValidator
 from django.db import models
 
 # Create your models here.
+from django.db.models import Sum
 from django.shortcuts import redirect
 from django.utils import timezone
 from ordered_model.models import OrderedModel
@@ -153,12 +154,15 @@ class Routine(OwnedBase, TimeStampedBase, OrderedModel):
         blank=True
     )
 
-    # Related reminders
-    # TODO: Habits
     habits = models.ManyToManyField(
         to=Habit, through='RoutineHabit')
 
     # Reverse: owner, reminders
+    # TODO: Related reminders
+
+    @property
+    def duration(self):
+        return self.habits.aggregate(duration=Sum('duration')).get('duration')
 
     order_with_respect_to = 'owner'
 
