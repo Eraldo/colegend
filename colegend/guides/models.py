@@ -56,7 +56,7 @@ class GuideRelation(AutoOwnedBase, TimeStampedBase):
         return reverse('guides:detail', kwargs={'owner': self.owner.username})
 
 
-@receiver(user_signed_up)
+# @receiver(user_signed_up)
 def start_guiding_process(request, user, **kwargs):
     # Create a new guide relation
     relation = user.guiderelation

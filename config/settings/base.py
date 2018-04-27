@@ -452,8 +452,7 @@ CORS_ORIGIN_WHITELIST = (
 INSTALLED_APPS += ['django_slack']
 SLACK_TOKEN = env('SLACK_TOKEN', default=None)
 SLACK_CHANNEL = env("SLACK_CHANNEL", default='core')
-SLACK_BACKEND = 'django_slack.backends.Urllib2Backend'
-SLACK_USERNAME = 'coLegend'
+SLACK_USERNAME = 'colegend'
 SLACK_ICON_EMOJI = ':co:'
 SLACK_TEAM_ID = 'colegend'
 

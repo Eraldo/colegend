@@ -1,6 +1,7 @@
 from enum import Enum
 
 import graphene
+from allauth.account.signals import user_signed_up
 from django.contrib.auth import authenticate
 from django.core.mail import EmailMessage
 from django_slack import slack_message
@@ -160,6 +161,11 @@ class JoinMutation(graphene.relay.ClientIDMutation):
             email=email,
             password=password,
         )
+        user_signed_up.send(
+            sender=user.__class__,
+            request=info,
+            user=user
+        )
         return JoinMutation(user=user, token=user.auth_token)
 
 
@@ -204,7 +210,8 @@ class UpdateUserMutation(graphene.relay.ClientIDMutation):
         registration_country = graphene.String()
 
     @classmethod
-    def mutate_and_get_payload(cls, root, info, username=None, name=None, gender=None, purpose=None, status=None, registration_country=None):
+    def mutate_and_get_payload(cls, root, info, username=None, name=None, gender=None, purpose=None, status=None,
+                               registration_country=None):
         # print('>> update user')
         user = info.context.user
         if username:

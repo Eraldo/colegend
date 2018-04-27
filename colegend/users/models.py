@@ -5,7 +5,6 @@ import hashlib
 from urllib.parse import quote_plus
 
 from allauth.account.signals import user_signed_up
-from django.conf import settings
 from django.contrib.auth.models import AbstractUser, Group
 from django.core.mail import send_mail, EmailMessage
 from django.db import models
@@ -297,10 +296,10 @@ def new_user_manager_notification(request, user, **kwargs):
     # TODO: Switch to managers group as soon as it is stable
     managers = ['connect@colegend.org']
     username = str(user.username)
-    subject = "{}New user: {}".format(settings.EMAIL_SUBJECT_PREFIX, username)
+    subject = "New user: {}".format(username)
     message = "Hurray! {} has joined the circle of legends.".format(username)
 
-    send_mail(subject, message, None, managers, fail_silently=False)
-    # TODO: Fix backend isse: https://app.getsentry.com/eraldo/colegend-staging/issues/102969964/
-    # Then remove fail_silently
-    slack_message('slack/message.slack', {'message': '@channel: {}'.format(message), }, fail_silently=True)
+    email = EmailMessage(subject=subject, body=message, to=managers)
+    email.send(fail_silently=True)
+
+    slack_message('slack/message.slack', {'message': '@channel: {}'.format(message), }, fail_silently=False)

@@ -91,7 +91,7 @@ graphene==2.1  # Maybe I can remove this because it gets installed by graphene-d
 
 # slack IM
 # ------------------------------------------------
-django-slack==5.10.2
+django-slack==5.12.0
 
 # Management
 # ------------------------------------------------
