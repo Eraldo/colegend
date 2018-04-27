@@ -1,6 +1,6 @@
 # Bleeding edge Django
 # ------------------------------------------------
-django==2.0.3  # pyup: < 2.1  # https://www.djangoproject.com/
+django==2.0.4  # pyup: < 2.1  # https://www.djangoproject.com/
 
 # Configuration
 # ------------------------------------------------
@@ -55,7 +55,7 @@ django-autoslug==1.9.3
 
 # Time zones support
 # ------------------------------------------------
-pytz==2018.3  # https://github.com/stub42/pytz
+pytz==2018.4  # https://github.com/stub42/pytz
 
 # Redis support
 # ------------------------------------------------
