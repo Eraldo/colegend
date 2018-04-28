@@ -76,7 +76,7 @@ class UpdateFocusMutation(graphene.relay.ClientIDMutation):
         new_outcomes = focus.outcomes
 
         # Informing users of update! (using reason if not new).
-        notify_partners(focus, reason, old_outcomes, new_outcomes)
+        # notify_partners(focus, reason, old_outcomes, new_outcomes)
 
         return UpdateFocusMutation(success=True, focus=focus)
 

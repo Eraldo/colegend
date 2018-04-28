@@ -97,6 +97,27 @@ class Focus(OwnedBase, TimeStampedBase):
     def __str__(self):
         return "{}'s {} focus {}".format(self.owner, self.get_scope_display(), self.start)
 
+    # def get_report_status(self):
+    #     """
+    #     Success: At least one step done for each outcome.
+    #     Fail: No next step defined for an outcome.
+    #     Neutral: All next steps defined.
+    #     :return:
+    #     """
+    #     status = 'success'
+    #     for outcome in self.outcomes:
+    #         if outcome.is_inactive:
+    #             continue
+    #         # Is there a completed step for this scope?
+    #         if outcome.steps.filter(completed_at__range=(self.start, self.end)).exists():
+    #             continue
+    #         # Is there a next step?
+    #         if outcome.next_step:
+    #             status = 'neutral'
+    #         else:
+    #             return 'fail'
+    #     return status
+
     def save(self, *args, **kwargs):
         if self.pk is None:  # Creation.
             # Adapting start and end dates to scope.

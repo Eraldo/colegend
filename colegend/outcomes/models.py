@@ -141,6 +141,10 @@ class Outcome(AutoUrlsMixin, OwnedBase, TaggableBase, TimeStampedBase):
             return True
         return False
 
+    @property
+    def next_step(self):
+        return self.steps.filter(completed_at__isnull=True).first()
+
 
 class Step(TimeStampedBase, OrderedModel):
     outcome = models.ForeignKey(
@@ -172,6 +176,14 @@ class Step(TimeStampedBase, OrderedModel):
     def mark_incomplete(self):
         self.completed_at = None
         self.save(update_fields=['completed_at'])
+
+    @property
+    def is_open(self):
+        return not self.is_open
+
+    @property
+    def is_closed(self):
+        return bool(self.completed_at)
 
     class Meta(OrderedModel.Meta):
         default_related_name = 'steps'
