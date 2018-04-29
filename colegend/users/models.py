@@ -27,16 +27,16 @@ from colegend.roles.models import Role
 SYSTEM_USER_USERNAME='colegend'
 
 
-class UserManager(AuthUserManager):
-    pass
-
-
 class UserQuerySet(models.QuerySet):
     def active(self):
         return self.filter(is_active=True)
 
     def premium(self):
         return self.filter(is_premium=True)
+
+
+class UserManager(AuthUserManager.from_queryset(UserQuerySet)):
+    pass
 
 
 class User(AbstractUser):
@@ -240,7 +240,7 @@ class User(AbstractUser):
     def get_absolute_url(self):
         return reverse('legends:detail', kwargs={'username': self.username})
 
-    objects = UserManager.from_queryset(UserQuerySet)()
+    objects = UserManager()
 
     class Meta:
         verbose_name = 'legend'
