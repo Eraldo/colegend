@@ -7,12 +7,9 @@ from colegend.users.models import User
 
 
 class Command(BaseCommand):
-    help = 'Handles daily tasks'
+    help = 'Updates journal streaks'
 
     def handle(self, *args, **options):
-        self.process_streaks()
-
-    def process_streaks(self):
         """
         Check if the user's streaks have been kept up.
         Is supposed to run after midnight. (Hence the preday date check.)
@@ -33,7 +30,7 @@ class Command(BaseCommand):
 
         for user in User.objects.filter(pk__in=streak_user_pks, is_active=True):
             streak = user.journal.streak
-            # TODO: Checking if he wrote his journal day entry.
+            # Checking if he wrote his journal day entry.
             if streak and user.pk not in writer_ids:
                 # Resetting streak. :|
 

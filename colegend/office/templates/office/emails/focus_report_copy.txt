@@ -1,0 +1,17 @@
+{% load office_tags %}
+{{ user|title }}'s focus report for {{ date }}:
+
+
+Yesterday
+---------
+
+{% for outcome in last_focus.outcomes %}    {{ forloop.counter }}. {{ outcome }}
+{% get_done_steps outcome last_focus.start last_focus.end as done_steps %}{% for step in done_steps %}        ☑ {{ step }}{% empty %}        {% if outcome.next_step %}-{% else %}No next step!{% endif %}{% endfor %}
+{% empty %}    No focus was set.{% endfor %}
+
+Today
+-----
+
+{% for outcome in focus.outcomes %}    {{ forloop.counter }}. {{ outcome }}
+        {% if outcome.next_step %}↳ {{ outcome.next_step }}{% else %}No next step!{% endif %}
+{% empty %}    No focus was set.{% endfor %}

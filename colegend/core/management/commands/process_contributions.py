@@ -5,15 +5,13 @@ from colegend.users.models import User
 
 
 class Command(BaseCommand):
-    help = 'Handles monthly tasks'
+    help = 'Process user contributions'
 
     def handle(self, *args, **options):
-        self.process_contribution()
-        # self.compile_experience_report()
-
-    def process_contribution(self):
         """Deduct the user chosen contribution amount from its balance"""
+
         self.stdout.write('# Contribution report {date}'.format(date=timezone.localtime(timezone.now()).date()))
+
         for user in User.objects.all():
             message = ''
             if user.is_active and user.is_premium:

@@ -5,8 +5,8 @@ import hashlib
 from urllib.parse import quote_plus
 
 from allauth.account.signals import user_signed_up
-from django.contrib.auth.models import AbstractUser, Group
-from django.core.mail import send_mail, EmailMessage
+from django.contrib.auth.models import AbstractUser, Group, UserManager as AuthUserManager
+from django.core.mail import EmailMessage
 from django.db import models
 from django.dispatch import receiver
 from django.urls import reverse
@@ -25,6 +25,18 @@ from colegend.roles.models import Role
 
 
 SYSTEM_USER_USERNAME='colegend'
+
+
+class UserManager(AuthUserManager):
+    pass
+
+
+class UserQuerySet(models.QuerySet):
+    def active(self):
+        return self.filter(is_active=True)
+
+    def premium(self):
+        return self.filter(is_premium=True)
 
 
 class User(AbstractUser):
@@ -227,6 +239,8 @@ class User(AbstractUser):
 
     def get_absolute_url(self):
         return reverse('legends:detail', kwargs={'username': self.username})
+
+    objects = UserManager.from_queryset(UserQuerySet)()
 
     class Meta:
         verbose_name = 'legend'

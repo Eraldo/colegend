@@ -247,9 +247,12 @@ ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
 # ------------------------------------------------------------------------------
 INSTALLED_APPS += ['django_crontab']
 CRONJOBS = [
-    ('0 0 4 * *', 'django.core.management.call_command', ['monthly']),
-    ('0 2 * * *', 'django.core.management.call_command', ['daily']),
-    ('0 14 * * *', 'django.core.management.call_command', ['generate_day_focus_reports']),
+    ('0 0 4 * *', 'django.core.management.call_command', ['process_contributions']),
+    ('0 2 * * *', 'django.core.management.call_command', ['update_journal_streaks'], {}, '>> ~/colegend/logs/cronlog.txt'),
+    ('0 14 * * *', 'django.core.management.call_command', ['generate_focus_reports', 'day'], {}, '>> ~/colegend/logs/cronlog.txt'),
+    ('0 0 * * Sun', 'django.core.management.call_command', ['generate_focus_reports', 'week'], {}, '>> ~/colegend/logs/cronlog.txt'),
+    ('0 0 7 * *', 'django.core.management.call_command', ['generate_focus_reports', 'month'], {}, '>> ~/colegend/logs/cronlog.txt'),
+    ('0 0 4 1 *', 'django.core.management.call_command', ['generate_focus_reports', 'year'], {}, '>> ~/colegend/logs/cronlog.txt'),
 ]
 CRONTAB_DJANGO_PROJECT_NAME = 'colegend'
 CRONTAB_DJANGO_SETTINGS_MODULE = 'config.settings.production'
