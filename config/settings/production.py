@@ -246,13 +246,16 @@ ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
 # CRONTAB
 # ------------------------------------------------------------------------------
 INSTALLED_APPS += ['django_crontab']
+CRON_TIMESTAMP = '`date +\%Y-\%m-\%dT\%H\%M`'
+CRON_LOGS_PATH = '~/colegend/logs/'
 CRONJOBS = [
     ('0 0 4 * *', 'django.core.management.call_command', ['process_contributions']),
-    ('0 2 * * *', 'django.core.management.call_command', ['update_journal_streaks'], {}, '>> ~/colegend/logs/cronlog.txt'),
-    ('0 14 * * *', 'django.core.management.call_command', ['generate_focus_reports', 'day'], {}, '>> ~/colegend/logs/cronlog.txt'),
-    ('0 0 * * Sun', 'django.core.management.call_command', ['generate_focus_reports', 'week'], {}, '>> ~/colegend/logs/cronlog.txt'),
-    ('0 0 7 * *', 'django.core.management.call_command', ['generate_focus_reports', 'month'], {}, '>> ~/colegend/logs/cronlog.txt'),
-    ('0 0 4 1 *', 'django.core.management.call_command', ['generate_focus_reports', 'year'], {}, '>> ~/colegend/logs/cronlog.txt'),
+    ('0 2 * * *', 'django.core.management.call_command', ['update_journal_streaks'], {}, f'>> {CRON_LOGS_PATH}update_journal_streaks_{CRON_TIMESTAMP}.txt'),
+    ('0 14 * * *', 'django.core.management.call_command', ['generate_focus_reports', 'day'], {}, f'>> {CRON_LOGS_PATH}generate_focus_day_reports_{CRON_TIMESTAMP}.txt'),
+    ('0 0 * * Sun', 'django.core.management.call_command', ['generate_focus_reports', 'week'], {}, f'>> {CRON_LOGS_PATH}generate_focus_week_reports_{CRON_TIMESTAMP}.txt'),
+    ('0 0 7 * *', 'django.core.management.call_command', ['generate_focus_reports', 'month'], {}, f'>> {CRON_LOGS_PATH}generate_focus_month_reports_{CRON_TIMESTAMP}.txt'),
+    ('0 0 4 1 *', 'django.core.management.call_command', ['generate_focus_reports', 'year'], {}, f'>> {CRON_LOGS_PATH}generate_focus_year_reports_{CRON_TIMESTAMP}.txt'),
 ]
 CRONTAB_DJANGO_PROJECT_NAME = 'colegend'
 CRONTAB_DJANGO_SETTINGS_MODULE = 'config.settings.production'
+CRONTAB_COMMAND_PREFIX = 'MAILTO=""'
