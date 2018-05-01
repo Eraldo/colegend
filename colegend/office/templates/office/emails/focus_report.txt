@@ -1,7 +1,7 @@
 {% load office_tags %}
 [{{ group.name }}] {{ scope.name|title }} focus report: ({{ scope }})
 
-{% for user in group.members.active.premium %}# {{ user }}
+{% for user in group.members.active %}# {{ user }}
 
     Last {{ scope.name }}{% get_scoped_focus user scope.previous as focus %}:
 {% for outcome in focus.outcomes %}        {{ forloop.counter }}. {% get_outcome_status outcome scope %} {{ outcome }}
