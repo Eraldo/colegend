@@ -24,6 +24,15 @@ from colegend.office.models import AgendaPage
 from colegend.scopes.models import ScopeField, get_scope_by_name
 
 
+dashboard_habit = {
+    'name': "Dashboard",
+    'is_controlled': True,
+    'duration': timezone.timedelta(seconds=10),
+    'icon': '🗞️',
+    'content': 'Checking my colegend Dashboard regularly.'
+}
+
+
 class Habit(OwnedBase, TimeStampedBase, OrderedModel):
     name = models.CharField(
         _('name'),
@@ -54,6 +63,22 @@ class Habit(OwnedBase, TimeStampedBase, OrderedModel):
             'Designates whether this habit is controlled by the system.'
         ),
     )
+    streak = models.PositiveSmallIntegerField(
+        _('streak'),
+        default=0,
+    )
+    streak_max = models.PositiveSmallIntegerField(
+        _('best streak'),
+        default=0,
+    )
+
+    def reset_streak(self, to=0):
+        updated_fields = ['streak']
+        if self.streak > self.streak_max:
+            self.streak_max = self.streak
+            updated_fields += ['streak_max']
+        self.streak = to
+        self.save(update_fields=updated_fields)
 
     def get_stats(self, phases=4):
         """

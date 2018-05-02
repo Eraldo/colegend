@@ -10,13 +10,12 @@ from colegend.experience.models import add_experience
 
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
-from graphql_relay import from_global_id
+from graphql_relay import from_global_id, to_global_id
 from graphene_django.converter import convert_django_field
 
 from colegend.scopes.models import Scope
 from colegend.scopes.schema import ScopeType
-from .models import Scan, Habit, HabitTrackEvent, HabitReminder, Routine, RoutineHabit
-
+from .models import Scan, Habit, HabitTrackEvent, HabitReminder, Routine, RoutineHabit, dashboard_habit
 
 IconType = graphene.Enum.from_enum(Icon)
 
@@ -30,6 +29,11 @@ def convert_phone_number_to_string(field, registry=None):
 class SuggestedAction(Enum):
     SETTING_FOCUS = 'setting focus'
     WRITING_JOURNAL = 'writing journal'
+
+
+# class SuggestedAction(graphene.ObjectType):
+#     action = graphene.String()
+#     payload = graphene.JSONString()
 
 
 SuggestedActionType = graphene.Enum.from_enum(SuggestedAction)
@@ -46,7 +50,67 @@ class SuggestedActionQuery(graphene.ObjectType):
                 return SuggestedAction.SETTING_FOCUS.value
             if not user.journal_entries.filter(scope=Scope.DAY.value, start=today).exists():
                 return SuggestedAction.WRITING_JOURNAL.value
+
+            # # Suggesting next untracked habit
+            # # TODO: Fix for other scopes
+            # # Or refector: pseudocode: Habit.objects.filter(is_active=True, streak=0)
+            # next_habit = user.habits.filter(is_active=True, scope=Scope.DAY.value, streak=0).first()
+            # if next_habit:
+            #     return f'habit-{to_global_id(HabitNode._meta.name, next_habit.id)}'
+
+            # TODO: Processing Dashboard streak (v1)
         return None
+
+
+class DashboardStreakQuery(graphene.ObjectType):
+    dashboard_streak = graphene.Int()
+
+    def resolve_dashboard_streak(self, info):
+        user = info.context.user
+
+        if user.is_authenticated:
+            try:
+                habit = user.habits.get(name='Dashboard', is_controlled=True)
+            except Habit.DoesNotExist:
+                habit = user.habits.create(**dashboard_habit)
+
+            # Tracking only once per day.
+            today = timezone.localtime(timezone.now()).date()
+            track, created = habit.track_events.get_or_create(created__date=today)
+            if created:
+                if habit.track_events.filter(created__date=today - timezone.timedelta(days=1)).exists():
+                    habit.streak += 1
+                    habit.save(update_fields=['streak'])
+                else:
+                    habit.reset_streak(to=1)
+            return habit.streak
+
+
+# class DashboardCheckMutation(graphene.relay.ClientIDMutation):
+#     streak = graphene.Int()
+#
+#     class Input:
+#         pass
+#
+#     @classmethod
+#     def mutate_and_get_payload(cls, root, info):
+#         user = info.context.user
+#
+#         try:
+#             habit = user.habits.get(name='Dashboard', is_controlled=True)
+#         except Habit.DoesNotExist:
+#             habit = user.habits.create(**dashboard_habit)
+#
+#         # Tracking only once per day.
+#         today = timezone.localtime(timezone.now()).date()
+#         track, created = habit.track_events.get_or_create(created__date=today)
+#         if created:
+#             if habit.track_events.filter(created__date=today-timezone.timedelta(days=1)).exists():
+#                 habit.streak += 1
+#                 habit.save(update_fields=['streak'])
+#             else:
+#                 habit.reset_streak()
+#         return DashboardCheckMutation(streak=habit.streak)
 
 
 class HabitNode(DjangoObjectType):
@@ -133,22 +197,25 @@ class UpdateHabitMutation(graphene.relay.ClientIDMutation):
         order = graphene.Int()
 
     @classmethod
-    def mutate_and_get_payload(cls, root, info, id, name=None, scope=None, icon=None, is_active=None, duration=None, content=None, order=None):
+    def mutate_and_get_payload(cls, root, info, id, name=None, scope=None, icon=None, is_active=None, duration=None,
+                               content=None, order=None):
         user = info.context.user
         _type, id = from_global_id(id)
         habit = user.habits.get(id=id)
-        if name is not None:
-            habit.name = name
-        if scope is not None:
-            habit.scope = scope
-        if icon is not None:
-            habit.icon = icon
+
+        if not habit.is_controlled:
+            if name is not None:
+                habit.name = name
+            if scope is not None:
+                habit.scope = scope
+            if icon is not None:
+                habit.icon = icon
+            if duration is not None:
+                habit.duration = parse_intuitive_duration(duration)
+            if content is not None:
+                habit.content = content
         if is_active is not None:
-            habit.is_active= is_active
-        if duration is not None:
-            habit.duration = parse_intuitive_duration(duration)
-        if content is not None:
-            habit.content = content
+            habit.is_active = is_active
         if order is not None:
             habit.to(order)
         habit.save()
@@ -184,7 +251,20 @@ class TrackHabitMutation(graphene.relay.ClientIDMutation):
         user = info.context.user
         _type, id = from_global_id(id)
         habit = user.habits.get(id=id)
-        track = habit.track_events.create()
+
+        today = timezone.localtime(timezone.now()).date()
+
+        # TODO: Handle system controlled habits.
+
+        track, created = habit.track_events.get_or_create(created__date=today)
+        if created:
+            if habit.scope == Scope.DAY.value:
+                # TODO: Enabling as soon as streak reset is implemented.
+                # habit.streak += 1
+                # habit.save(update_fields=['streak'])
+                pass
+            # TODO: Implement streak updates / success criteria for other scopes.
+
         return TrackHabitMutation(track=track)
 
 
@@ -194,6 +274,7 @@ class HabitMutations(graphene.ObjectType):
     delete_habit = DeleteHabitMutation.Field()
     track_habit = TrackHabitMutation.Field()
     delete_habit_track = DeleteHabitTrackMutation.Field()
+    # check_dashboard = DashboardCheckMutation.Field()
 
 
 class RoutineNode(DjangoObjectType):
@@ -425,6 +506,7 @@ class ScanMutation(graphene.ObjectType):
 
 class HomeQuery(
     SuggestedActionQuery,
+    DashboardStreakQuery,
     ScanQuery,
     HabitsQuery,
     graphene.ObjectType):
