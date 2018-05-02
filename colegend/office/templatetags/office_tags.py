@@ -25,18 +25,18 @@ def get_done_steps(outcome, scope):
 @register.simple_tag
 def get_outcome_status(outcome, scope):
     """
-    Success: Outcome done or at least one step done.
-    Neutral: Has a next steps defined.
+    Success: Outcome is closed or has at least one closed step.
+    Neutral: Has a next step(s) defined.
     Fail: No next step defined.
     :return:
     """
     if outcome.is_inactive:
-        return '[✔]'
+        return '[+]'
     # Is there a completed step for this scope?
     if outcome.steps.filter(completed_at__date__range=(scope.start, scope.end)).exists():
-        return '[✔]'
+        return '[+]'
     # Is there a next step?
     if outcome.next_step:
-        return '[ ]'
+        return '[_]'
     else:
-        return '[✖]'
+        return '[-]'
