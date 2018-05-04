@@ -25,10 +25,8 @@ class Command(BaseCommand):
         Check if the user's focus status and create a report for his partner(s).
         Is supposed to run after midday.
 
-        Only Taking premium users into account.
-
         General solution idea:
-        1. Filtering users: only primary users who have a duo.
+        1. Filtering: Only groups with at least one premium user.
         2. Generating a pre-day status report:
             Per outcome:
                 Green: User completed min 1 step.

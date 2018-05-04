@@ -4,7 +4,7 @@
 {% for user in group.members.active %}# {{ user }}
 
     Last {{ scope.name }}{% get_scoped_focus user scope.previous as focus %}:
-{% for outcome in focus.outcomes %}        {{ forloop.counter }}. {% get_outcome_status outcome scope %} {{ outcome }}
+{% for outcome in focus.outcomes %}        {{ forloop.counter }}. {% get_outcome_status outcome scope.previous %} {{ outcome }}
 {% empty %}        -
 {% endfor %}
     This {{ scope.name }}{% get_scoped_focus user scope as focus %}:
