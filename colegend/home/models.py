@@ -72,6 +72,14 @@ class Habit(OwnedBase, TimeStampedBase, OrderedModel):
         default=0,
     )
 
+    def check_streak(self, date=None):
+        if date is None:
+            date = timezone.localtime(timezone.now()).date()
+            scope = get_scope_by_name(self.scope)(date)
+        else:
+            scope = get_scope_by_name(self.scope)()
+        return self.track_events.filter(created__date__range=(scope.start, scope.end)).exists()
+
     def reset_streak(self, to=0):
         updated_fields = ['streak']
         if self.streak > self.streak_max:

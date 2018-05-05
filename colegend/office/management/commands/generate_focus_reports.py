@@ -63,9 +63,10 @@ class Command(BaseCommand):
 
             subject = f"[{group.name}] {scope.name.title()} focus report: ({scope})"
             message = render_to_string('office/emails/focus_report.txt', context)
+            from_email = 'colegend groups <groups@colegend.org>'
 
             emails = group.members.values_list('email', flat=True)
-            email = EmailMultiAlternatives(subject=subject, body=message, to=emails, reply_to=emails)
+            email = EmailMultiAlternatives(subject=subject, body=message, from_email=from_email, to=emails, reply_to=emails)
             email.send()
 
             self.stdout.write(f'Sent for {group.name}')

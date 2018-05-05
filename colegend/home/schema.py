@@ -26,37 +26,39 @@ def convert_phone_number_to_string(field, registry=None):
     return graphene.String(description=field.help_text, required=not field.null)
 
 
-class SuggestedAction(Enum):
+class Actions(Enum):
     SETTING_FOCUS = 'setting focus'
     WRITING_JOURNAL = 'writing journal'
+    TRACKING_HABIT = 'tracking habit'
 
 
-# class SuggestedAction(graphene.ObjectType):
-#     action = graphene.String()
-#     payload = graphene.JSONString()
+ActionTypes = graphene.Enum.from_enum(Actions)
 
 
-SuggestedActionType = graphene.Enum.from_enum(SuggestedAction)
+class ActionType(graphene.ObjectType):
+    type = graphene.Field(ActionTypes)
+    payload = graphene.JSONString()
 
 
 class SuggestedActionQuery(graphene.ObjectType):
-    suggested_action = graphene.Field(SuggestedActionType)
+    suggested_action = graphene.Field(ActionType)
 
     def resolve_suggested_action(self, info):
         user = info.context.user
         today = timezone.localtime(timezone.now()).date()
         if user.is_authenticated:
             if not user.focuses.filter(scope=Scope.DAY.value, start=today).exists():
-                return SuggestedAction.SETTING_FOCUS.value
+                return ActionType(type=Actions.SETTING_FOCUS.value)
             if not user.journal_entries.filter(scope=Scope.DAY.value, start=today).exists():
-                return SuggestedAction.WRITING_JOURNAL.value
+                return ActionType(type=Actions.WRITING_JOURNAL.value)
 
-            # # Suggesting next untracked habit
-            # # TODO: Fix for other scopes
-            # # Or refector: pseudocode: Habit.objects.filter(is_active=True, streak=0)
-            # next_habit = user.habits.filter(is_active=True, scope=Scope.DAY.value, streak=0).first()
-            # if next_habit:
-            #     return f'habit-{to_global_id(HabitNode._meta.name, next_habit.id)}'
+            # Suggesting next untracked habit
+            # TODO: Fix for other scopes
+            # Or refector: pseudocode: Habit.objects.filter(is_active=True, streak=0)
+            next_habit = user.habits.filter(is_active=True, scope=Scope.DAY.value, streak=0).first()
+            if next_habit:
+                id = to_global_id(HabitNode._meta.name, next_habit.id)
+                return ActionType(type=Actions.TRACKING_HABIT.value, payload={'id': id, 'name': next_habit.name})
 
             # TODO: Processing Dashboard streak (v1)
         return None
@@ -259,10 +261,11 @@ class TrackHabitMutation(graphene.relay.ClientIDMutation):
         track, created = habit.track_events.get_or_create(created__date=today)
         if created:
             if habit.scope == Scope.DAY.value:
-                # TODO: Enabling as soon as streak reset is implemented.
-                # habit.streak += 1
-                # habit.save(update_fields=['streak'])
-                pass
+                if habit.track_events.filter(created__date=today - timezone.timedelta(days=1)).exists():
+                    habit.streak += 1
+                    habit.save(update_fields=['streak'])
+                else:
+                    habit.reset_streak(to=1)
             # TODO: Implement streak updates / success criteria for other scopes.
 
         return TrackHabitMutation(track=track)
