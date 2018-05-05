@@ -3,7 +3,7 @@ from django.core.validators import MaxValueValidator
 from django.db import models
 
 # Create your models here.
-from django.db.models import Sum
+from django.db.models import Sum, Q
 from django.shortcuts import redirect
 from django.utils import timezone
 from ordered_model.models import OrderedModel
@@ -21,8 +21,7 @@ from colegend.core.templatetags.core_tags import link
 from django.utils.translation import ugettext_lazy as _
 
 from colegend.office.models import AgendaPage
-from colegend.scopes.models import ScopeField, get_scope_by_name
-
+from colegend.scopes.models import ScopeField, get_scope_by_name, Scope
 
 dashboard_habit = {
     'name': "Dashboard",
@@ -31,6 +30,58 @@ dashboard_habit = {
     'icon': '🗞️',
     'content': 'Checking my colegend Dashboard regularly.'
 }
+
+
+class HabitQuerySet(models.QuerySet):
+    def active(self):
+        return self.filter(is_active=True)
+
+    def controlled(self):
+        return self.filter(is_controlled=True)
+
+    def untracked(self):
+        """
+        Filters the queryset to only habits that have not been tracked successfully within the their current scope period.
+
+        :return: Untracked habits
+        """
+
+        # Getting all scopes.
+        day_scope = get_scope_by_name(Scope.DAY.value)()
+        week_scope = get_scope_by_name(Scope.WEEK.value)()
+        month_scope = get_scope_by_name(Scope.MONTH.value)()
+        year_scope = get_scope_by_name(Scope.YEAR.value)()
+
+        return self.exclude(
+            Q(scope=day_scope.name, track_events__created__date__range=(day_scope.start, day_scope.end)) |
+            Q(scope=week_scope.name, track_events__created__date__range=(week_scope.start, week_scope.end)) |
+            Q(scope=month_scope.name, track_events__created__date__range=(month_scope.start, month_scope.end)) |
+            Q(scope=year_scope.name, track_events__created__date__range=(year_scope.start, year_scope.end))
+        )
+
+    def tracked(self):
+        """
+        Filters the queryset to only habits that have been tracked successfully within the their current scope period.
+
+        :return: Tracked habits
+        """
+
+        # Getting all scopes.
+        day_scope = get_scope_by_name(Scope.DAY.value)()
+        week_scope = get_scope_by_name(Scope.WEEK.value)()
+        month_scope = get_scope_by_name(Scope.MONTH.value)()
+        year_scope = get_scope_by_name(Scope.YEAR.value)()
+
+        return self.filter(
+            Q(scope=day_scope.name, track_events__created__date__range=(day_scope.start, day_scope.end)) |
+            Q(scope=week_scope.name, track_events__created__date__range=(week_scope.start, week_scope.end)) |
+            Q(scope=month_scope.name, track_events__created__date__range=(month_scope.start, month_scope.end)) |
+            Q(scope=year_scope.name, track_events__created__date__range=(year_scope.start, year_scope.end))
+        )
+
+    def search(self, query):
+        queryset = self.filter(Q(name__icontains=query) | Q(content__icontains=query) | Q(content__icontains=query))
+        return queryset
 
 
 class Habit(OwnedBase, TimeStampedBase, OrderedModel):
@@ -115,6 +166,8 @@ class Habit(OwnedBase, TimeStampedBase, OrderedModel):
     # Reverse: owner, reminders, track_events
 
     order_with_respect_to = 'owner'
+
+    objects = HabitQuerySet.as_manager()
 
     class Meta(OrderedModel.Meta):
         default_related_name = 'habits'

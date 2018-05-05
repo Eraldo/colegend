@@ -53,9 +53,7 @@ class SuggestedActionQuery(graphene.ObjectType):
                 return ActionType(type=Actions.WRITING_JOURNAL.value)
 
             # Suggesting next untracked habit
-            # TODO: Fix for other scopes
-            # Or refector: pseudocode: Habit.objects.filter(is_active=True, streak=0)
-            next_habit = user.habits.filter(is_active=True, scope=Scope.DAY.value, streak=0).first()
+            next_habit = user.habits.active().untracked().first()
             if next_habit:
                 id = to_global_id(HabitNode._meta.name, next_habit.id)
                 return ActionType(type=Actions.TRACKING_HABIT.value, payload={'id': id, 'name': next_habit.name})
