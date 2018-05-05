@@ -115,11 +115,11 @@ TEMPLATES[0]['OPTIONS']['loaders'] = [  # noqa F405
 # EMAIL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#default-from-email
-DEFAULT_FROM_EMAIL = env('DJANGO_DEFAULT_FROM_EMAIL', default='coLegend <connect@colegend.org>')
+DEFAULT_FROM_EMAIL = env('DJANGO_DEFAULT_FROM_EMAIL', default='colegend <connect@colegend.org>')
 # https://docs.djangoproject.com/en/dev/ref/settings/#server-email
 SERVER_EMAIL = env('DJANGO_SERVER_EMAIL', default=DEFAULT_FROM_EMAIL)
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-subject-prefix
-EMAIL_SUBJECT_PREFIX = env("DJANGO_EMAIL_SUBJECT_PREFIX", default='[coLegend] ')
+EMAIL_SUBJECT_PREFIX = env("DJANGO_EMAIL_SUBJECT_PREFIX", default='[colegend] ')
 
 # Anymail (Mailgun)
 # ------------------------------------------------------------------------------
