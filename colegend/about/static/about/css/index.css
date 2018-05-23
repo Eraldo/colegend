@@ -150,7 +150,9 @@ h1 {
 -------------------------------------------------- */
 /* Carousel base class */
 .carousel {
-  height: 470px; }
+  height: auto;
+  /*height: 470px; */
+}
 
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
@@ -158,7 +160,8 @@ h1 {
 
 /* Declare heights because of positioning of img element */
 .carousel .item {
-  height: 470px;
+  /*height: 470px;*/
+  height: auto;
   background-color: #777; }
 
 .carousel-inner > .item > img {
@@ -166,7 +169,8 @@ h1 {
   top: 0;
   left: 0;
   min-width: 100%;
-  height: 470px; }
+  /*height: 470px; */
+}
 
 .carousel-fade .carousel-inner .item {
   opacity: 0;
@@ -190,7 +194,8 @@ h1 {
   z-index: 2; }
 
 .carousel-control.left, .carousel-control.right {
-  background: none; }
+  /*background: none; */
+}
 
 .carousel-control {
   width: 6%; }
@@ -457,7 +462,8 @@ li.pricing-title {
     color: inherit; }
 
   .carousel-control {
-    display: none; } }
+    /*display: none;*/
+  } }
 @media (min-width: 992px) {
   .featurette-heading {
     margin-top: 120px; } }
@@ -982,10 +988,28 @@ section.comments {
 
 #indicator-box li {
   padding: 10px;
-  margin: 10px; }
+  margin: 10px;
+}
 
 .carousel-indicators {
-  bottom: 100px; }
+  bottom: -3.5em;
+}
+
+.carousel-indicators li {
+  background-color: lightgrey;
+  border-color: gray;
+  padding: 8px;
+  width: 10px;
+  height: 10px;
+  margin: 1px;
+}
+.carousel-indicators li.active {
+  background-color: gray;
+  width: 10px;
+  height: 10px;
+  margin: 1px;
+
+}
 
 #intro-video-container {
   top: -60px;
