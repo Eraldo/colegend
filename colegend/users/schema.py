@@ -2,7 +2,7 @@ from enum import Enum
 
 import graphene
 from allauth.account.signals import user_signed_up
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login
 from django.core.mail import EmailMessage
 from django_slack import slack_message
 from graphene_django import DjangoObjectType
@@ -184,6 +184,11 @@ class LoginMutation(graphene.relay.ClientIDMutation):
             email=email,
             password=password,
         )
+        if user.is_active:
+            login(info.context, user, user.backend)
+        else:
+            pass
+            # TODO: Return a 'disabled account' error message
         return LoginMutation(user=user, token=user.auth_token)
 
 
