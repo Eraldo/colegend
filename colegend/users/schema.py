@@ -187,8 +187,7 @@ class LoginMutation(graphene.relay.ClientIDMutation):
         if user.is_active:
             login(info.context, user, user.backend)
         else:
-            pass
-            # TODO: Return a 'disabled account' error message
+            raise Exception('Account is disabled.')
         return LoginMutation(user=user, token=user.auth_token)
 
 
