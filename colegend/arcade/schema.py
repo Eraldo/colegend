@@ -3,7 +3,7 @@ from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 from graphql_relay import from_global_id
 
-from colegend.api.models import DjangoUserFilterConnectionField
+from colegend.api.models import DjangoUserFilterConnectionField, CountableConnectionBase
 from colegend.experience.models import add_experience
 from .models import Adventure, AdventureReview, AdventureTag, Deck, Card
 from .filters import AdventureFilter, AdventureReviewFilter
@@ -109,6 +109,7 @@ class DeckNode(DjangoObjectType):
             'name': ['exact', 'istartswith', 'icontains'],
             'content': ['exact', 'icontains'],
         }
+        connection_class = CountableConnectionBase
         interfaces = [graphene.Node]
 
     def resolve_image(self, info):
@@ -130,6 +131,7 @@ class CardNode(DjangoObjectType):
             'name': ['exact', 'istartswith', 'icontains'],
             'content': ['exact', 'icontains'],
         }
+        connection_class = CountableConnectionBase
         interfaces = [graphene.Node]
 
     def resolve_image(self, info):
