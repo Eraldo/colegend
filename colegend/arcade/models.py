@@ -4,6 +4,7 @@ from django.db import models
 from django.db.models import Avg, Q
 from django.shortcuts import redirect
 from easy_thumbnails.fields import ThumbnailerImageField
+from ordered_model.models import OrderedModel
 from wagtail.core.models import Page
 
 from colegend.core.fields import MarkdownField
@@ -120,6 +121,64 @@ class AdventureReview(OwnedBase, TimeStampedBase):
 
     def __str__(self):
         return '{adventure}/{user}'.format(adventure=self.adventure, user=self.owner)
+
+
+class Deck(TimeStampedBase):
+    name = models.CharField(
+        _('name'),
+        max_length=255,
+    )
+    image = ThumbnailerImageField(
+        upload_to=UploadToAppModelDirectory(),
+        blank=True,
+        resize_source=dict(size=(400, 400)),
+    )
+    content = MarkdownField(
+        blank=True
+    )
+    notes = MarkdownField(
+        verbose_name=_("notes"),
+        help_text=_("Staff notes."),
+        blank=True
+    )
+
+    class Meta:
+        default_related_name = 'decks'
+
+    def __str__(self):
+        return self.name
+
+
+class Card(TimeStampedBase, OrderedModel):
+    deck = models.ForeignKey(
+        to=Deck,
+        on_delete=models.CASCADE
+    )
+    name = models.CharField(
+        _('name'),
+        max_length=255,
+    )
+    image = ThumbnailerImageField(
+        upload_to=UploadToAppModelDirectory(),
+        blank=True,
+        resize_source=dict(size=(400, 400)),
+    )
+    content = MarkdownField(
+        blank=True
+    )
+    notes = MarkdownField(
+        verbose_name=_("notes"),
+        help_text=_("Staff notes."),
+        blank=True
+    )
+    order_with_respect_to = 'deck'
+
+    class Meta:
+        default_related_name = 'cards'
+        unique_together = ['deck', 'name']
+
+    def __str__(self):
+        return self.name
 
 
 class ArcadePage(Page):

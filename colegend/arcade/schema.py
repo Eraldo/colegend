@@ -5,7 +5,7 @@ from graphql_relay import from_global_id
 
 from colegend.api.models import DjangoUserFilterConnectionField
 from colegend.experience.models import add_experience
-from .models import Adventure, AdventureReview, AdventureTag
+from .models import Adventure, AdventureReview, AdventureTag, Deck, Card
 from .filters import AdventureFilter, AdventureReviewFilter
 from .forms import AdventureReviewForm
 
@@ -102,10 +102,54 @@ class AdventureReviewMutations(graphene.ObjectType):
     create_adventure_review = CreateAdventureReviewMutation.Field()
 
 
+class DeckNode(DjangoObjectType):
+    class Meta:
+        model = Deck
+        filter_fields = {
+            'name': ['exact', 'istartswith', 'icontains'],
+            'content': ['exact', 'icontains'],
+        }
+        interfaces = [graphene.Node]
+
+    def resolve_image(self, info):
+        if not self.image:
+            return ''
+        url = self.image.url
+        return info.context.build_absolute_uri(url)
+
+
+class DeckQuery(graphene.ObjectType):
+    deck = graphene.Node.Field(DeckNode)
+    decks = DjangoFilterConnectionField(DeckNode)
+
+
+class CardNode(DjangoObjectType):
+    class Meta:
+        model = Card
+        filter_fields = {
+            'name': ['exact', 'istartswith', 'icontains'],
+            'content': ['exact', 'icontains'],
+        }
+        interfaces = [graphene.Node]
+
+    def resolve_image(self, info):
+        if not self.image:
+            return ''
+        url = self.image.url
+        return info.context.build_absolute_uri(url)
+
+
+class CardQuery(graphene.ObjectType):
+    card = graphene.Node.Field(CardNode)
+    cards = DjangoFilterConnectionField(CardNode)
+
+
 class ArcadeQuery(
     AdventureTagQuery,
     AdventureQuery,
     AdventureReviewQuery,
+    DeckQuery,
+    CardQuery,
     graphene.ObjectType):
     pass
 
