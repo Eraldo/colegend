@@ -9,6 +9,7 @@ class QuestObjectiveInline(OrderedTabularInline):
     model = QuestObjective
     fields = ['name', 'code', 'order', 'move_up_down_links']
     readonly_fields = ['order', 'move_up_down_links']
+    show_change_link = True
     extra = 1
     ordering = ['order']
 

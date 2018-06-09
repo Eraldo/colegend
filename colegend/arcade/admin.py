@@ -26,19 +26,22 @@ class AdventureAdmin(admin.ModelAdmin):
 
 class CardInlineAdmin(OrderedTabularInline):
     model = Card
-    fields = ['name', 'image', 'content', 'notes', 'order', 'move_up_down_links']
+    fields = ['name', 'image', 'content', 'categories', 'move_up_down_links']
     readonly_fields = ['order', 'move_up_down_links']
+    show_change_link = True
     extra = 0
     ordering = ['order']
 
 
 @admin.register(Card)
 class CardAdmin(OrderedModelAdmin):
-    pass
+    list_display = ['name', 'deck', 'move_up_down_links']
+    list_filter = ['deck', 'categories']
+    filter_horizontal = ['categories']
 
 
 @admin.register(Deck)
-class DeckAdmin(OrderedModelAdmin):
+class DeckAdmin(admin.ModelAdmin):
     list_display = ['name']
     inlines = [CardInlineAdmin]
 

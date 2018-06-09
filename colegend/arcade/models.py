@@ -7,6 +7,7 @@ from easy_thumbnails.fields import ThumbnailerImageField
 from ordered_model.models import OrderedModel
 from wagtail.core.models import Page
 
+from colegend.categories.models import Category
 from colegend.core.fields import MarkdownField
 from colegend.core.models import TimeStampedBase, OwnedBase
 from django.utils.translation import ugettext_lazy as _
@@ -166,6 +167,11 @@ class Card(TimeStampedBase, OrderedModel):
     content = MarkdownField(
         blank=True
     )
+    categories = models.ManyToManyField(
+        verbose_name=_('categories'),
+        to=Category,
+        blank=True
+    )
     notes = MarkdownField(
         verbose_name=_("notes"),
         help_text=_("Staff notes."),
@@ -173,12 +179,14 @@ class Card(TimeStampedBase, OrderedModel):
     )
     order_with_respect_to = 'deck'
 
-    class Meta:
+    class Meta(OrderedModel.Meta):
         default_related_name = 'cards'
         unique_together = ['deck', 'name']
 
     def __str__(self):
         return self.name
+
+
 
 
 class ArcadePage(Page):
