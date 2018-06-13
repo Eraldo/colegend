@@ -71,7 +71,7 @@ celery==3.1.25  # pyup: <4.0  # https://github.com/celery/celery
 
 # CMS
 # ------------------------------------------------
-wagtail==2.0
+wagtail==2.1
 django-classy-tags==0.8.0
 
 # Views
