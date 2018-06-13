@@ -2,10 +2,10 @@
 #
 # import six
 # from django.http import HttpResponseBadRequest
+from graphene_django.views import GraphQLView as GrapheneGraphQLView
 from rest_auth.registration.views import SocialLoginView
 from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
-from graphene_django.views import GraphQLView as GrapheneGraphQLView, HttpError
 
 
 class GoogleLogin(SocialLoginView):
