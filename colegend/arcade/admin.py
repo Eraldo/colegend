@@ -35,9 +35,10 @@ class CardInlineAdmin(OrderedTabularInline):
 
 @admin.register(Card)
 class CardAdmin(OrderedModelAdmin):
-    list_display = ['name', 'deck', 'move_up_down_links']
-    list_filter = ['deck', 'categories']
+    list_display = ['name', 'deck', 'public', 'move_up_down_links']
+    list_filter = ['deck', 'categories', 'public']
     filter_horizontal = ['categories']
+    search_fields = ['name', 'content', 'notes']
 
 
 @admin.register(Deck)

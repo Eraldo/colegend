@@ -172,6 +172,9 @@ class Card(TimeStampedBase, OrderedModel):
         to=Category,
         blank=True
     )
+    public = models.BooleanField(
+        default=True
+    )
     notes = MarkdownField(
         verbose_name=_("notes"),
         help_text=_("Staff notes."),
