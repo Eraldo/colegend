@@ -310,10 +310,11 @@ def new_user_manager_notification(request, user, **kwargs):
     # TODO: Switch to managers group as soon as it is stable
     managers = ['connect@colegend.org']
     username = str(user.username)
+    reply_email = user.email
     subject = "New user: {}".format(username)
     message = "Hurray! {} has joined the circle of legends.".format(username)
 
-    email = EmailMessage(subject=subject, body=message, to=managers)
+    email = EmailMessage(subject=subject, body=message, to=managers, reply_to=reply_email)
     email.send(fail_silently=True)
 
     slack_message('slack/message.slack', {'message': '@channel: {}'.format(message), }, fail_silently=False)
