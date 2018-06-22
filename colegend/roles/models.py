@@ -2,7 +2,59 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from easy_thumbnails.fields import ThumbnailerImageField
 
-from colegend.core.models import AutoUrlsMixin
+from colegend.core.fields import MarkdownField
+from colegend.core.models import TimeStampedBase
+
+
+class Circle(TimeStampedBase):
+    name = models.CharField(
+        _('name'),
+        max_length=255,
+        unique=True
+    )
+    purpose = MarkdownField(
+        _('purpose'),
+    )
+    strategy = MarkdownField(
+        _('strategy'),
+        blank=True
+    )
+    domains = MarkdownField(
+        _('domains'),
+        blank=True
+    )
+    accountabilities = MarkdownField(
+        _('accountabilities'),
+        blank=True
+    )
+    policies = MarkdownField(
+        _('policies'),
+        blank=True
+    )
+    history = MarkdownField(
+        _('history'),
+        blank=True
+    )
+    notes = MarkdownField(
+        _('history'),
+        blank=True
+    )
+    checklists = MarkdownField(
+        _('checklists'),
+        blank=True
+    )
+    metrics = MarkdownField(
+        _('metrics'),
+        blank=True
+    )
+
+    # TODO: Adding outcomes
+
+    class Meta:
+        default_related_name = 'circles'
+
+    def __str__(self):
+        return self.name
 
 
 class RoleQuerySet(models.QuerySet):
@@ -28,17 +80,37 @@ class RoleQuerySet(models.QuerySet):
         return True
 
 
-class Role(AutoUrlsMixin, models.Model):
-    name = models.CharField(_('name'), max_length=255, unique=True)
-    nickname = models.CharField(_('nickname'), max_length=255, blank=True)
-    item = models.CharField(_('item'), max_length=255, blank=True)
+class Role(TimeStampedBase):
+    # circle = models.ForeignKey(
+    #     to=Circle,
+    #     on_delete=models.CASCADE,
+    # )
+    name = models.CharField(
+        _('name'),
+        max_length=255,
+        unique=True
+    )
+    nickname = models.CharField(
+        _('nickname'),
+        max_length=255,
+        blank=True
+    )
+    item = models.CharField(
+        _('item'),
+        max_length=255,
+        blank=True
+    )
     icon = ThumbnailerImageField(
         upload_to='roles/icons/',
         blank=True,
         resize_source=dict(size=(100, 100)),
     )
-    description = models.TextField(blank=True)
-    metrics = models.TextField(blank=True)
+    description = models.TextField(
+        blank=True
+    )
+    metrics = models.TextField(
+        blank=True
+    )
 
     objects = RoleQuerySet.as_manager()
 
