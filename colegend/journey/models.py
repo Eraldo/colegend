@@ -117,6 +117,7 @@ class Hero(AutoOwnedBase, TimeStampedBase):
     inspirations = MarkdownField(blank=True)
     roles = MarkdownField(blank=True)
     strategy = MarkdownField(blank=True)
+    topics = MarkdownField(blank=True)
     routines = MarkdownField(blank=True)
     blueprint_day = MarkdownField(blank=True)
     blueprint_week = MarkdownField(blank=True)

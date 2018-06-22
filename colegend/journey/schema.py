@@ -82,6 +82,7 @@ class UpdateHero(graphene.relay.ClientIDMutation):
         bucket = graphene.String()
         roles = graphene.String()
         strategy = graphene.String()
+        topics = graphene.String()
         inspirations = graphene.String()
         routines = graphene.String()
         blueprint_day = graphene.String()
