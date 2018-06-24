@@ -4,7 +4,8 @@ from .models import Role, Circle
 
 @admin.register(Role)
 class RoleAdmin(admin.ModelAdmin):
-    list_display = ['name', 'nickname', 'item']
+    list_display = ['name', 'nickname', 'item', 'circle']
+    list_filter = ['circle']
     search_fields = ['name', 'nickname', 'item', 'description']
 
 

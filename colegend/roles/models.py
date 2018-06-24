@@ -36,7 +36,7 @@ class Circle(TimeStampedBase):
         blank=True
     )
     notes = MarkdownField(
-        _('history'),
+        _('notes'),
         blank=True
     )
     checklists = MarkdownField(
@@ -81,14 +81,13 @@ class RoleQuerySet(models.QuerySet):
 
 
 class Role(TimeStampedBase):
-    # circle = models.ForeignKey(
-    #     to=Circle,
-    #     on_delete=models.CASCADE,
-    # )
+    circle = models.ForeignKey(
+        to=Circle,
+        on_delete=models.CASCADE,
+    )
     name = models.CharField(
         _('name'),
         max_length=255,
-        unique=True
     )
     nickname = models.CharField(
         _('nickname'),
@@ -117,6 +116,7 @@ class Role(TimeStampedBase):
     class Meta:
         default_related_name = 'roles'
         ordering = ['name']
+        unique_together = ['circle', 'name']
 
     def __str__(self):
         return '{}{}'.format(
