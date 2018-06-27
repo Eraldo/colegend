@@ -4,6 +4,31 @@ from django.db import migrations, models
 import django.db.models.deletion
 
 
+initial_circles_data = [
+    {
+        'name': 'Colegend',
+    },
+]
+
+
+def create_initial_circles(apps, schema_editor):
+    Circle = apps.get_model('roles', 'Circle')
+    db_alias = schema_editor.connection.alias
+    circles = []
+    for data in initial_circles_data:
+        circle = Circle(
+            name=data.get('colegend'),
+        )
+        circles.append(circle)
+    Circle.objects.using(db_alias).bulk_create(circles)
+
+
+def delete_initial_circles(apps, schema_editor):
+    Circle = apps.get_model('roles', 'Circle')
+    db_alias = schema_editor.connection.alias
+    Circle.objects.using(db_alias).all().delete()
+
+
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -11,6 +36,7 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.RunPython(create_initial_circles, delete_initial_circles),
         migrations.AddField(
             model_name='role',
             name='circle',
