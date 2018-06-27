@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
@@ -47,7 +48,13 @@ class Event(TimeStampedBase):
         _('short description'),
         blank=True
     )
-    content = MarkdownField()
+    content = MarkdownField(
+        _('content'),
+    )
+    participants = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        blank=True,
+    )
 
     class Meta:
         default_related_name = 'events'

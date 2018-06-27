@@ -10,6 +10,7 @@ from graphene_django.filter import DjangoFilterConnectionField
 from graphql_relay import from_global_id
 from rest_framework.authtoken.models import Token
 
+from colegend.api.models import CountableConnectionBase
 from colegend.office.filters import FocusFilter
 from colegend.office.schema import FocusNode
 from colegend.outcomes.filters import OutcomeFilter, StepFilter
@@ -75,6 +76,7 @@ class UserNode(DjangoObjectType):
     class Meta:
         model = User
         interfaces = [graphene.Node]
+        connection_class = CountableConnectionBase
 
     def resolve_level(self, info, app=None):
         # print('>> level')

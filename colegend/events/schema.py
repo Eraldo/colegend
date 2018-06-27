@@ -3,6 +3,7 @@ from django.utils import timezone
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 
+from colegend.api.models import CountableConnectionBase
 from .models import Event
 
 
@@ -18,6 +19,7 @@ class EventNode(DjangoObjectType):
 
         }
         interfaces = [graphene.Node]
+        connection_class = CountableConnectionBase
 
 
 class EventQuery(graphene.ObjectType):
