@@ -17,7 +17,7 @@ def create_initial_circles(apps, schema_editor):
     circles = []
     for data in initial_circles_data:
         circle = Circle(
-            name=data.get('colegend'),
+            name=data.get('name'),
         )
         circles.append(circle)
     Circle.objects.using(db_alias).bulk_create(circles)
@@ -53,3 +53,4 @@ class Migration(migrations.Migration):
             unique_together={('circle', 'name')},
         ),
     ]
+
