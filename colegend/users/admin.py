@@ -78,8 +78,8 @@ class UserAdmin(AuthUserAdmin):
             'classes': ('collapse',),
         }),
     )
-    list_display = ('username', 'name', 'email', 'phone', 'balance', 'is_premium', 'is_staff')
-    list_filter = ('is_premium', 'is_staff', 'is_superuser', 'is_active', 'roles', 'checkpoints', 'groups')
+    list_display = ('username', 'name', 'email', 'phone', 'balance', 'is_premium', 'is_staff', 'date_joined')
+    list_filter = ('is_premium', 'is_staff', 'is_superuser', 'is_active', 'roles', 'checkpoints', 'groups', 'date_joined', 'last_login')
     filter_horizontal = ('roles', 'checkpoints', 'groups', 'user_permissions')
     search_fields = ['name']
     form = UserChangeForm
