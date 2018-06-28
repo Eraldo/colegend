@@ -26,6 +26,7 @@ class RoleAdmin(admin.ModelAdmin):
         return obj._users_count
 
     users_count.short_description = 'Users'
+    users_count.admin_order_field = '_users_count'
 
 
 @admin.register(Circle)
