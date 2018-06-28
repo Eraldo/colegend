@@ -27,3 +27,4 @@ class EventAdmin(admin.ModelAdmin):
         return obj._participants_count
 
     participants_count.short_description = 'Participants'
+    participants_count.admin_order_field = '_participants_count'
