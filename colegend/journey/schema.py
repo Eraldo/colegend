@@ -141,8 +141,28 @@ class UpdateDemon(graphene.relay.ClientIDMutation):
         return UpdateDemon(success=True, demon=demon)
 
 
+class AddTension(graphene.relay.ClientIDMutation):
+    demon = graphene.Field(DemonNode)
+
+    class Input:
+        tension = graphene.String()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, tension=''):
+        user = info.context.user
+        demon = user.demon
+        if tension:
+            demon.tensions += '{prefix}+ {tension}'.format(
+                prefix='\n' if demon.tensions else '',
+                tension=tension
+            )
+        demon.save()
+        return AddTension(demon=demon)
+
+
 class DemonMutation(graphene.ObjectType):
     update_demon = UpdateDemon.Field()
+    add_tension = AddTension.Field()
 
 
 class QuoteNode(DjangoObjectType):
