@@ -39,6 +39,7 @@ class UserInline(admin.TabularInline):
     fields = ['username', 'email']
     model = User
     extra = 0
+    show_change_link = True
     # max_num = 4
 
 

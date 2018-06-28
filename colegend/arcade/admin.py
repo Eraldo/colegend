@@ -12,6 +12,7 @@ class AdventureTagAdmin(admin.ModelAdmin):
 class AdventureReviewInline(admin.TabularInline):
     model = AdventureReview
     extra = 0
+    show_change_link = True
 
 
 @admin.register(Adventure)

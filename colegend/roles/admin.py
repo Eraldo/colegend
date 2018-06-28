@@ -4,11 +4,19 @@ from django.db.models import Count
 from .models import Role, Circle
 
 
+class RoleInline(admin.TabularInline):
+    model = Role
+    fields = ['name', 'nickname', 'item', 'kind', 'circle']
+    extra = 0
+    show_change_link = True
+
+
 @admin.register(Role)
 class RoleAdmin(admin.ModelAdmin):
-    list_display = ['name', 'nickname', 'item', 'users_count', 'circle']
-    list_filter = ['circle', 'users']
-    search_fields = ['name', 'nickname', 'item', 'description']
+    list_display = ['name', 'nickname', 'item', 'users_count', 'kind', 'circle']
+    list_filter = ['kind', 'circle', 'users']
+    search_fields = ['name', 'nickname', 'item', 'description', 'purpose', 'strategy']
+    inlines = [RoleInline]
 
     def get_queryset(self, request):
         """

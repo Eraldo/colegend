@@ -9,6 +9,7 @@ class HabitTrackEventInlineAdmin(admin.TabularInline):
     fields = ['created']
     readonly_fields = ['created']
     extra = 0
+    show_change_link = True
 
 
 # @admin.register(HabitTrackEvent)
@@ -22,6 +23,7 @@ class HabitReminderInlineAdmin(admin.TabularInline):
     model = HabitReminder
     fields = ['time']
     extra = 0
+    show_change_link = True
 
 
 # @admin.register(HabitReminder)
@@ -44,6 +46,7 @@ class RoutineHabitInlineAdmin(OrderedTabularInline):
     fields = ['habit', 'order', 'move_up_down_links']
     readonly_fields = ['order', 'move_up_down_links']
     extra = 1
+    show_change_link = True
     ordering = ['order']
 
 

@@ -5,6 +5,16 @@ from easy_thumbnails.fields import ThumbnailerImageField
 from colegend.core.fields import MarkdownField
 from colegend.core.models import TimeStampedBase
 
+STANDARD = 'standard'
+CORE = 'core'
+CIRCLE = 'circle'
+
+KIND_TYPES = (
+    (STANDARD, _('standard')),
+    (CORE, _('core')),
+    (CIRCLE, _('circle')),
+)
+
 
 class Circle(TimeStampedBase):
     name = models.CharField(
@@ -79,11 +89,32 @@ class RoleQuerySet(models.QuerySet):
                 return False
         return True
 
+    def circles(self):
+        """
+        Filter only roles that act as circles.
+        :return: Filtered queryset.
+        """
+        return self.filter(kind=CIRCLE)
+
+    def cores(self):
+        """
+        Filter only core roles.
+        :return: Filtered queryset.
+        """
+        return self.filter(kind=CORE)
+
 
 class Role(TimeStampedBase):
+    kind = models.CharField(
+        max_length=25,
+        choices=KIND_TYPES,
+        default=STANDARD
+    )
     circle = models.ForeignKey(
-        to=Circle,
+        'self',
+        null=True, blank=True,
         on_delete=models.CASCADE,
+        limit_choices_to={'kind': CIRCLE},
     )
     name = models.CharField(
         _('name'),
@@ -104,10 +135,42 @@ class Role(TimeStampedBase):
         blank=True,
         resize_source=dict(size=(100, 100)),
     )
-    description = models.TextField(
+    purpose = MarkdownField(
+        _('purpose'),
+    )
+    strategy = MarkdownField(
+        _('strategy'),
         blank=True
     )
-    metrics = models.TextField(
+    domains = MarkdownField(
+        _('domains'),
+        blank=True
+    )
+    accountabilities = MarkdownField(
+        _('accountabilities'),
+        blank=True
+    )
+    policies = MarkdownField(
+        _('policies'),
+        blank=True
+    )
+    history = MarkdownField(
+        _('history'),
+        blank=True
+    )
+    notes = MarkdownField(
+        _('notes'),
+        blank=True
+    )
+    checklists = MarkdownField(
+        _('checklists'),
+        blank=True
+    )
+    metrics = MarkdownField(
+        _('metrics'),
+        blank=True
+    )
+    description = models.TextField(
         blank=True
     )
 

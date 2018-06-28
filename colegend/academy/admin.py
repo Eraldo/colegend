@@ -5,12 +5,14 @@ from .models import Book, BookReview, BookTag
 class TaggedBookInline(admin.TabularInline):
     model = Book.tags.through
     extra = 0
+    show_change_link = True
 
 
 class BookReviewInline(admin.TabularInline):
     fields = ['owner', 'rating', 'area_1', 'area_2', 'area_3', 'area_4', 'area_5', 'area_6', 'area_7']
     model = BookReview
     extra = 0
+    show_change_link = True
 
 
 @admin.register(BookTag)
