@@ -1,8 +1,11 @@
 from django.contrib import admin
+from django.utils.translation import ugettext_lazy as _
 from .models import Book, BookReview, BookTag
 
 
 class TaggedBookInline(admin.TabularInline):
+    verbose_name = _('tagged book')
+    verbose_name_plural = _('tagged books')
     model = Book.tags.through
     extra = 0
     show_change_link = True

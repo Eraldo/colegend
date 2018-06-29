@@ -1,7 +1,16 @@
 from django.contrib import admin
 from django.db.models import Count
+from django.utils.translation import ugettext_lazy as _
 
 from .models import Role, Circle
+
+
+class RoleUserInline(admin.TabularInline):
+    verbose_name = _('User')
+    verbose_name_plural = _('Users')
+    model = Role.users.through
+    extra = 0
+    show_change_link = True
 
 
 class RoleInline(admin.TabularInline):
@@ -16,7 +25,7 @@ class RoleAdmin(admin.ModelAdmin):
     list_display = ['name', 'nickname', 'item', 'users_count', 'kind', 'circle']
     list_filter = ['kind', 'circle', 'users']
     search_fields = ['name', 'nickname', 'item', 'description', 'purpose', 'strategy']
-    inlines = [RoleInline]
+    inlines = [RoleUserInline, RoleInline]
 
     def get_queryset(self, request):
         """
