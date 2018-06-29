@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.db.models import Count
 from django.utils.translation import ugettext_lazy as _
 
-from .models import Role, Circle
+from .models import Role
 
 
 class RoleUserInline(admin.TabularInline):
@@ -44,9 +44,3 @@ class RoleAdmin(admin.ModelAdmin):
 
     users_count.short_description = 'Users'
     users_count.admin_order_field = '_users_count'
-
-
-@admin.register(Circle)
-class CircleAdmin(admin.ModelAdmin):
-    list_display = ['name']
-    search_fields = ['name', 'purpose', 'strategy']

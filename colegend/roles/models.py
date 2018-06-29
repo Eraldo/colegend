@@ -16,57 +16,6 @@ KIND_TYPES = (
 )
 
 
-class Circle(TimeStampedBase):
-    name = models.CharField(
-        _('name'),
-        max_length=255,
-        unique=True
-    )
-    purpose = MarkdownField(
-        _('purpose'),
-    )
-    strategy = MarkdownField(
-        _('strategy'),
-        blank=True
-    )
-    domains = MarkdownField(
-        _('domains'),
-        blank=True
-    )
-    accountabilities = MarkdownField(
-        _('accountabilities'),
-        blank=True
-    )
-    policies = MarkdownField(
-        _('policies'),
-        blank=True
-    )
-    history = MarkdownField(
-        _('history'),
-        blank=True
-    )
-    notes = MarkdownField(
-        _('notes'),
-        blank=True
-    )
-    checklists = MarkdownField(
-        _('checklists'),
-        blank=True
-    )
-    metrics = MarkdownField(
-        _('metrics'),
-        blank=True
-    )
-
-    # TODO: Adding outcomes
-
-    class Meta:
-        default_related_name = 'circles'
-
-    def __str__(self):
-        return self.name
-
-
 class RoleQuerySet(models.QuerySet):
     def contains_name(self, name):
         """
@@ -111,7 +60,7 @@ class Role(TimeStampedBase):
         default=STANDARD
     )
     circle = models.ForeignKey(
-        'self',
+        to='self',
         null=True, blank=True,
         on_delete=models.CASCADE,
         limit_choices_to={'kind': CIRCLE},
