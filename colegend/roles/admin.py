@@ -22,9 +22,10 @@ class RoleInline(admin.TabularInline):
 
 @admin.register(Role)
 class RoleAdmin(admin.ModelAdmin):
-    list_display = ['name', 'nickname', 'item', 'users_count', 'kind', 'circle']
+    list_display = ['name', 'nickname', 'item', 'users_count', 'kind', 'has_icon', 'circle']
     list_filter = ['kind', 'circle', 'users']
-    search_fields = ['name', 'nickname', 'item', 'purpose', 'strategy', 'powers', 'services', 'policies', 'history', 'notes', 'checklists', 'metrics']
+    search_fields = ['name', 'nickname', 'item', 'purpose', 'strategy', 'powers', 'services', 'policies', 'history',
+                     'notes', 'checklists', 'metrics']
     inlines = [RoleUserInline, RoleInline]
 
     def get_queryset(self, request):
@@ -44,3 +45,8 @@ class RoleAdmin(admin.ModelAdmin):
 
     users_count.short_description = 'Users'
     users_count.admin_order_field = '_users_count'
+
+    def has_icon(self, obj):
+        return bool(obj.icon)
+
+    has_icon.boolean = True
