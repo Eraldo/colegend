@@ -24,7 +24,7 @@ class RoleInline(admin.TabularInline):
 class RoleAdmin(admin.ModelAdmin):
     list_display = ['name', 'nickname', 'item', 'users_count', 'kind', 'circle']
     list_filter = ['kind', 'circle', 'users']
-    search_fields = ['name', 'nickname', 'item', 'description', 'purpose', 'strategy']
+    search_fields = ['name', 'nickname', 'item', 'purpose', 'strategy', 'powers', 'services', 'policies', 'history', 'notes', 'checklists', 'metrics']
     inlines = [RoleUserInline, RoleInline]
 
     def get_queryset(self, request):

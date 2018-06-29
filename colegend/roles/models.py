@@ -142,12 +142,12 @@ class Role(TimeStampedBase):
         _('strategy'),
         blank=True
     )
-    domains = MarkdownField(
-        _('domains'),
+    powers = MarkdownField(
+        _('powers'),
         blank=True
     )
-    accountabilities = MarkdownField(
-        _('accountabilities'),
+    services = MarkdownField(
+        _('services'),
         blank=True
     )
     policies = MarkdownField(

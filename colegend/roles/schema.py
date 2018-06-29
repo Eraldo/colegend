@@ -14,7 +14,7 @@ class RoleNode(DjangoObjectType):
             'item': ['exact', 'istartswith', 'icontains'],
             'description': ['exact', 'icontains'],
             'metrics': ['exact', 'icontains'],
-
+            'kind': ['exact', 'icontains'],
         }
         interfaces = [graphene.Node]
 
