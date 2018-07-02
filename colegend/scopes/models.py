@@ -16,6 +16,20 @@ class Scope(Enum):
     def get_choices():
         return [(scope.value, _(scope.value)) for scope in Scope]
 
+    @staticmethod
+    def get_values():
+        return [scope.value for scope in Scope]
+
+    @staticmethod
+    def get_above(scope):
+        scopes = Scope.get_values()
+        return scopes[scopes.index(scope)+1:]
+
+    @staticmethod
+    def get_below(scope):
+        scopes = Scope.get_values()
+        return scopes[:scopes.index(scope)]
+
 
 class ScopeField(models.CharField):
     description = _("Time scope (day/week/month/year)")

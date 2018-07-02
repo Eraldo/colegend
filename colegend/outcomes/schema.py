@@ -197,12 +197,31 @@ class ResetOutcomesScoreMutation(graphene.relay.ClientIDMutation):
         return DeleteOutcomeMutation(success=True)
 
 
+class SetRelatedOutcomesMutation(graphene.relay.ClientIDMutation):
+    success = graphene.Boolean()
+    outcome = graphene.Field(OutcomeNode)
+
+    class Input:
+        id = graphene.ID()
+        outcomes = graphene.List(graphene.ID)
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, id, **kwargs):
+        user = info.context.user
+        _type, id = from_global_id(id)
+        outcome = user.outcomes.get(id=id)
+        related_outcome_ids = [from_global_id(id)[1] for id in kwargs.get('outcomes', [])]
+        outcome.related_outcomes.set(related_outcome_ids)
+        return SetRelatedOutcomesMutation(success=True, outcome=outcome)
+
+
 class OutcomeMutation(graphene.ObjectType):
     create_outcome = CreateOutcomeMutation.Field()
     update_outcome = UpdateOutcomeMutation.Field()
     delete_outcome = DeleteOutcomeMutation.Field()
     match_outcomes = MatchOutcomesMutation.Field()
     reset_outcomes_score = ResetOutcomesScoreMutation.Field()
+    set_related_outcomes = SetRelatedOutcomesMutation.Field()
 
 
 class StepNode(DjangoObjectType):

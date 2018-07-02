@@ -6,7 +6,7 @@ from ordered_model.models import OrderedModel
 
 from colegend.core.intuitive_duration.modelfields import IntuitiveDurationField
 from colegend.core.models import OwnedBase, AutoUrlsMixin, OwnedQuerySet, TimeStampedBase
-from colegend.scopes.models import ScopeField
+from colegend.scopes.models import ScopeField, Scope
 from colegend.tags.models import TaggableBase
 
 
@@ -105,6 +105,19 @@ class Outcome(AutoUrlsMixin, OwnedBase, TaggableBase, TimeStampedBase):
         verbose_name=_('sore comparisons'),
         default=0,
     )
+    related_outcomes = models.ManyToManyField(
+        to="self",
+        blank=True,
+    )
+
+    def super_outcomes(self):
+        return self.related_outcomes.filter(scope__in=Scope.get_above(self.scope))
+
+    def sub_outcomes(self):
+        return self.related_outcomes.filter(scope__in=Scope.get_below(self.scope))
+
+    def inter_outcomes(self):
+        return self.related_outcomes.filter(scope=self.scope)
 
     @property
     def is_provisional(self):
