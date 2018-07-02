@@ -149,7 +149,7 @@ class AddInterviewEntry(graphene.relay.ClientIDMutation):
         return AddInterviewEntry(interview_entry=entry)
 
 
-class UpdateInterviewEntry(graphene.relay.ClientIDMutation):
+class UpdateInterviewEntryMutation(graphene.relay.ClientIDMutation):
     success = graphene.Boolean()
     interview_entry = graphene.Field(InterviewEntryNode)
 
@@ -168,12 +168,12 @@ class UpdateInterviewEntry(graphene.relay.ClientIDMutation):
         if dislikes:
             entry.dislikes = dislikes
         entry.save()
-        return UpdateInterviewEntry(success=True, interview_entry=entry)
+        return UpdateInterviewEntryMutation(success=True, interview_entry=entry)
 
 
 class InterviewEntryMutation(graphene.ObjectType):
     add_interview_entry = AddInterviewEntry.Field()
-    update_interview_entry = UpdateInterviewEntry.Field()
+    update_interview_entry = UpdateInterviewEntryMutation.Field()
 
 
 class StoryNode(DjangoObjectType):
@@ -224,7 +224,7 @@ class AddChapter(graphene.relay.ClientIDMutation):
         return AddChapter(chapter=chapter)
 
 
-class UpdateChapter(graphene.relay.ClientIDMutation):
+class UpdateChapterMutation(graphene.relay.ClientIDMutation):
     success = graphene.Boolean()
     chapter = graphene.Field(ChapterNode)
 
@@ -243,7 +243,7 @@ class UpdateChapter(graphene.relay.ClientIDMutation):
         if content is not None:
             chapter.content = content
         chapter.save()
-        return UpdateChapter(success=True, chapter=chapter)
+        return UpdateChapterMutation(success=True, chapter=chapter)
 
 
 class DeleteChapterMutation(graphene.relay.ClientIDMutation):
@@ -263,7 +263,7 @@ class DeleteChapterMutation(graphene.relay.ClientIDMutation):
 
 class ChapterMutation(graphene.ObjectType):
     add_chapter = AddChapter.Field()
-    update_chapter = UpdateChapter.Field()
+    update_chapter = UpdateChapterMutation.Field()
     delete_chapter = DeleteChapterMutation.Field()
 
 

@@ -424,7 +424,7 @@ class ScanQuery(graphene.ObjectType):
     scans = DjangoFilterConnectionField(ScanNode)
 
 
-class CreateScan(graphene.relay.ClientIDMutation):
+class CreateScanMutation(graphene.relay.ClientIDMutation):
     success = graphene.Boolean()
     scan = graphene.Field(ScanNode)
 
@@ -443,10 +443,10 @@ class CreateScan(graphene.relay.ClientIDMutation):
         user = info.context.user
         scan = user.scans.create(*args, **kwargs)
         add_experience(user, 'home')
-        return CreateScan(success=True, scan=scan)
+        return CreateScanMutation(success=True, scan=scan)
 
 
-class UpdateScan(graphene.relay.ClientIDMutation):
+class UpdateScanMutation(graphene.relay.ClientIDMutation):
     success = graphene.Boolean()
     scan = graphene.Field(ScanNode)
 
@@ -481,10 +481,10 @@ class UpdateScan(graphene.relay.ClientIDMutation):
         if area_7 is not None:
             scan.area_7 = area_7
         scan.save()
-        return UpdateScan(success=True, scan=scan)
+        return UpdateScanMutation(success=True, scan=scan)
 
 
-class DeleteScan(graphene.relay.ClientIDMutation):
+class DeleteScanMutation(graphene.relay.ClientIDMutation):
     success = graphene.Boolean()
 
     class Input:
@@ -496,13 +496,13 @@ class DeleteScan(graphene.relay.ClientIDMutation):
         _type, id = from_global_id(id)
         scan = user.scans.get(id=id)
         scan.delete()
-        return DeleteScan(success=True)
+        return DeleteScanMutation(success=True)
 
 
 class ScanMutation(graphene.ObjectType):
-    create_scan = CreateScan.Field()
-    update_scan = UpdateScan.Field()
-    delete_scan = DeleteScan.Field()
+    create_scan = CreateScanMutation.Field()
+    update_scan = UpdateScanMutation.Field()
+    delete_scan = DeleteScanMutation.Field()
 
 
 class HomeQuery(

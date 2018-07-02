@@ -56,7 +56,7 @@ class HeroQuery(graphene.ObjectType):
     heroes = DjangoFilterConnectionField(HeroNode)
 
 
-class UpdateHero(graphene.relay.ClientIDMutation):
+class UpdateHeroMutation(graphene.relay.ClientIDMutation):
     success = graphene.Boolean()
     hero = graphene.Field(HeroNode)
 
@@ -98,11 +98,11 @@ class UpdateHero(graphene.relay.ClientIDMutation):
             if value is not None:
                 setattr(hero, key, value)
         hero.save()
-        return UpdateHero(success=True, hero=hero)
+        return UpdateHeroMutation(success=True, hero=hero)
 
 
 class HeroMutation(graphene.ObjectType):
-    update_hero = UpdateHero.Field()
+    update_hero = UpdateHeroMutation.Field()
 
 
 class DemonNode(DjangoObjectType):
@@ -119,7 +119,7 @@ class DemonQuery(graphene.ObjectType):
     demons = DjangoFilterConnectionField(DemonNode)
 
 
-class UpdateDemon(graphene.relay.ClientIDMutation):
+class UpdateDemonMutation(graphene.relay.ClientIDMutation):
     success = graphene.Boolean()
     demon = graphene.Field(DemonNode)
 
@@ -138,10 +138,10 @@ class UpdateDemon(graphene.relay.ClientIDMutation):
             if value is not None:
                 setattr(demon, key, value)
         demon.save()
-        return UpdateDemon(success=True, demon=demon)
+        return UpdateDemonMutation(success=True, demon=demon)
 
 
-class AddTension(graphene.relay.ClientIDMutation):
+class AddTensionMutation(graphene.relay.ClientIDMutation):
     demon = graphene.Field(DemonNode)
 
     class Input:
@@ -157,12 +157,12 @@ class AddTension(graphene.relay.ClientIDMutation):
                 tension=tension
             )
         demon.save()
-        return AddTension(demon=demon)
+        return AddTensionMutation(demon=demon)
 
 
 class DemonMutation(graphene.ObjectType):
-    update_demon = UpdateDemon.Field()
-    add_tension = AddTension.Field()
+    update_demon = UpdateDemonMutation.Field()
+    add_tension = AddTensionMutation.Field()
 
 
 class QuoteNode(DjangoObjectType):

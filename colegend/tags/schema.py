@@ -4,6 +4,7 @@ from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 from graphql_relay import from_global_id
 
+from colegend.api.models import CountableConnectionBase
 from .models import Tag
 
 
@@ -27,6 +28,7 @@ class TagNode(DjangoObjectType):
             'owner': ['exact'],
         }
         interfaces = [graphene.Node]
+        connection_class = CountableConnectionBase
 
 
 class TagQuery(graphene.ObjectType):
@@ -34,7 +36,7 @@ class TagQuery(graphene.ObjectType):
     tags = DjangoFilterConnectionField(TagNode)
 
 
-class CreateTag(graphene.relay.ClientIDMutation):
+class CreateTagMutation(graphene.relay.ClientIDMutation):
     success = graphene.Boolean()
     tag = graphene.Field(TagNode)
 
@@ -48,10 +50,10 @@ class CreateTag(graphene.relay.ClientIDMutation):
         if len(name) < 2:
             raise Exception('Please enter a tag name with at least two characters.')
         tag = user.tags.create(name=name, description=description)
-        return CreateTag(success=True, tag=tag)
+        return CreateTagMutation(success=True, tag=tag)
 
 
-class UpdateTag(graphene.relay.ClientIDMutation):
+class UpdateTagMutation(graphene.relay.ClientIDMutation):
     success = graphene.Boolean()
     tag = graphene.Field(TagNode)
 
@@ -70,10 +72,10 @@ class UpdateTag(graphene.relay.ClientIDMutation):
         if description is not None:
             tag.description = description
         tag.save()
-        return UpdateTag(success=True, tag=tag)
+        return UpdateTagMutation(success=True, tag=tag)
 
 
-class DeleteTag(graphene.relay.ClientIDMutation):
+class DeleteTagMutation(graphene.relay.ClientIDMutation):
     success = graphene.Boolean()
 
     class Input:
@@ -85,10 +87,10 @@ class DeleteTag(graphene.relay.ClientIDMutation):
         _type, id = from_global_id(id)
         tag = user.tags.get(id=id)
         tag.delete()
-        return DeleteTag(success=True)
+        return DeleteTagMutation(success=True)
 
 
 class TagMutation(graphene.ObjectType):
-    create_tag = CreateTag.Field()
-    update_tag = UpdateTag.Field()
-    delete_tag = DeleteTag.Field()
+    create_tag = CreateTagMutation.Field()
+    update_tag = UpdateTagMutation.Field()
+    delete_tag = DeleteTagMutation.Field()

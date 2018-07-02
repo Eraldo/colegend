@@ -5,7 +5,7 @@ from graphql_relay import from_global_id
 
 from colegend.api.models import DjangoUserFilterConnectionField, CountableConnectionBase
 from colegend.experience.models import add_experience
-from .models import Adventure, AdventureReview, AdventureTag, Deck, Card
+from .models import Adventure, AdventureReview, AdventureTag, Deck, Card, Joke
 from .filters import AdventureFilter, AdventureReviewFilter
 from .forms import AdventureReviewForm
 
@@ -144,6 +144,24 @@ class CardNode(DjangoObjectType):
 class CardQuery(graphene.ObjectType):
     card = graphene.Node.Field(CardNode)
     cards = DjangoFilterConnectionField(CardNode)
+
+
+class JokeNode(DjangoObjectType):
+    class Meta:
+        model = Joke
+        filter_fields = {
+            'name': ['exact', 'icontains', 'istartswith'],
+            'content': ['exact', 'icontains', 'istartswith'],
+            'accepted': ['exact'],
+            'provider': ['exact'],
+        }
+        interfaces = [graphene.Node]
+        connection_class = CountableConnectionBase
+
+
+class JokeQuery(graphene.ObjectType):
+    joke = graphene.Node.Field(JokeNode)
+    jokes = DjangoFilterConnectionField(JokeNode)
 
 
 class ArcadeQuery(

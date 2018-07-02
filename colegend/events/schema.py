@@ -2,6 +2,7 @@ import graphene
 from django.utils import timezone
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
+from graphql_relay import from_global_id
 
 from colegend.api.models import CountableConnectionBase
 from .models import Event
@@ -54,5 +55,26 @@ class CreateEventMutation(graphene.relay.ClientIDMutation):
         return CreateEventMutation(event=event)
 
 
+class JoinEventMutation(graphene.relay.ClientIDMutation):
+    event = graphene.Field(EventNode)
+
+    class Input:
+        id = graphene.ID()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, id, *args, **kwargs):
+        user = info.context.user
+        _type, id = from_global_id(id)
+        event = Event.objects.get(id=id)
+
+        # Permission: Is it an upcomming event?
+        if timezone.now() <= event.start:
+            event.participants.add(user)
+        else:
+            raise Exception('Event is not upcoming')
+        return JoinEventMutation(event=event)
+
+
 class EventMutation(graphene.ObjectType):
     create_event = CreateEventMutation.Field()
+    join_event = JoinEventMutation.Field()

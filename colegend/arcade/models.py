@@ -190,6 +190,57 @@ class Card(TimeStampedBase, OrderedModel):
         return self.name
 
 
+class JokeQuerySet(models.QuerySet):
+    def accepted(self):
+        return self.filter(accepted=True)
+
+    def pending(self):
+        return self.filter(accepted=False)
+
+    def random(self):
+        return self.accepted().order_by('?').first()
+
+    def owned_by(self, user):
+        return self.filter(provider=user)
+
+
+class Joke(TimeStampedBase):
+    """A motivational quote."""
+
+    name = models.CharField(
+        verbose_name=_("name"),
+        max_length=255,
+        unique=True,
+        help_text=_("What is the quote about?")
+    )
+    content = MarkdownField(blank=True)
+    provider = models.ForeignKey(
+        verbose_name=_('provider'),
+        to=settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        blank=True, null=True
+    )
+    accepted = models.BooleanField(
+        verbose_name=_('accepted'),
+        default=False
+    )
+
+    objects = JokeQuerySet.as_manager()
+
+    def __str__(self):
+        return self.name
+
+    @property
+    def pending(self):
+        return not self.accepted
+
+    def accept(self, save=True):
+        self.accepted = True
+        if save:
+            self.save()
+
+    class Meta:
+        default_related_name = 'jokes'
 
 
 class ArcadePage(Page):

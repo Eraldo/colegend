@@ -1,7 +1,7 @@
 from django.contrib import admin
 from ordered_model.admin import OrderedTabularInline, OrderedModelAdmin
 
-from .models import Adventure, AdventureTag, AdventureReview, Card, Deck
+from .models import Adventure, AdventureTag, AdventureReview, Card, Deck, Joke
 
 
 @admin.register(AdventureTag)
@@ -53,3 +53,10 @@ class DeckAdmin(admin.ModelAdmin):
             if hasattr(inline, 'get_urls'):
                 urls = inline.get_urls(self) + urls
         return urls
+
+
+@admin.register(Joke)
+class JokeAdmin(admin.ModelAdmin):
+    list_display = ['name', 'provider', 'accepted']
+    list_filter = ['accepted', 'provider']
+    search_fields = ['name', 'content']
