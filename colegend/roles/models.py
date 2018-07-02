@@ -135,8 +135,3 @@ class Role(TimeStampedBase):
             self.name,
             ' ({})'.format(self.nickname) if self.nickname else '',
         )
-
-    @property
-    def display_name(self):
-        name = self.nickname or self.name
-        return '{}'.format(name)
