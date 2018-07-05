@@ -79,8 +79,8 @@ class DashboardStreakQuery(graphene.ObjectType):
             track, created = habit.track_events.get_or_create(created__date=today)
             if created:
                 if habit.track_events.filter(created__date=today - timezone.timedelta(days=1)).exists():
-                    habit.streak += 1
-                    habit.save(update_fields=['streak'])
+                    habit.increase_streak()
+                    habit.save()
                 else:
                     habit.reset_streak(to=1)
             return habit.streak
@@ -106,7 +106,7 @@ class DashboardStreakQuery(graphene.ObjectType):
 #         track, created = habit.track_events.get_or_create(created__date=today)
 #         if created:
 #             if habit.track_events.filter(created__date=today-timezone.timedelta(days=1)).exists():
-#                 habit.streak += 1
+#                 habit.increase_streak()
 #                 habit.save(update_fields=['streak'])
 #             else:
 #                 habit.reset_streak()
@@ -260,8 +260,8 @@ class TrackHabitMutation(graphene.relay.ClientIDMutation):
         if created:
             if habit.scope == Scope.DAY.value:
                 if habit.track_events.filter(created__date=today - timezone.timedelta(days=1)).exists():
-                    habit.streak += 1
-                    habit.save(update_fields=['streak'])
+                    habit.increase_streak()
+                    habit.save()
                 else:
                     habit.reset_streak(to=1)
             # TODO: Implement streak updates / success criteria for other scopes.

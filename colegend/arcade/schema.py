@@ -130,6 +130,7 @@ class CardNode(DjangoObjectType):
         filter_fields = {
             'name': ['exact', 'istartswith', 'icontains'],
             'content': ['exact', 'icontains'],
+            'deck': ['exact'],
         }
         connection_class = CountableConnectionBase
         interfaces = [graphene.Node]

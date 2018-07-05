@@ -139,6 +139,12 @@ class Habit(OwnedBase, TimeStampedBase, OrderedModel):
         self.streak = to
         self.save(update_fields=updated_fields)
 
+    def increase_streak(self):
+        self.streak += 1
+        # Update max streak
+        if self.streak > self.streak_max:
+            self.streak_max = self.streak
+
     def get_stats(self, phases=4):
         """
         Check the last X phases for completion.
