@@ -45,7 +45,7 @@ class VisionIndexView(TemplateView):
             #     'url': '#update-purpose',
             # }]
         else:
-            context['purpose'] = _("I am a legend, defining my legend purpose as a member of colegend.")
+            context['purpose'] = _("I am a legend, defining my legend purpose as a member of coLegend.")
         return context
 
 

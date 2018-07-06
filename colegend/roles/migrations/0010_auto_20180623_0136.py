@@ -6,7 +6,7 @@ import django.db.models.deletion
 
 initial_circles_data = [
     {
-        'name': 'Colegend',
+        'name': 'coOrganisation',
     },
 ]
 

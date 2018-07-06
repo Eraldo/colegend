@@ -52,7 +52,7 @@ def button(context, name, pattern=None, url=None, kind=None, icon=None, locked=F
 def contact_button(context, **kwargs):
     context = {
         'name': 'Connect',
-        'url': 'mailto:connect@colegend.org',
+        'url': 'mailto:connect@coLegend.org',
         'kind': 'secondary btn-sm',
         'icon': 'send',
     }

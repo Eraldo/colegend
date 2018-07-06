@@ -5,7 +5,6 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from ordered_model.models import OrderedModel
 from wagtail.core.models import Page
-from wagtail.snippets.models import register_snippet
 
 from colegend.categories.models import Category
 from colegend.core.fields import MarkdownField

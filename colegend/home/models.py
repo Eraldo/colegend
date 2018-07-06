@@ -28,7 +28,7 @@ dashboard_habit = {
     'is_controlled': True,
     'duration': timezone.timedelta(seconds=10),
     'icon': '🗞️',
-    'content': 'Checking my colegend Dashboard regularly.'
+    'content': 'Checking my coLegend Dashboard regularly.'
 }
 
 

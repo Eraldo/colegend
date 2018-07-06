@@ -24,7 +24,7 @@ from colegend.outcomes.models import Step
 from colegend.roles.models import Role
 
 
-SYSTEM_USER_USERNAME='colegend'
+SYSTEM_USER_USERNAME='coLegend'
 
 
 class UserQuerySet(models.QuerySet):
@@ -105,7 +105,7 @@ class User(AbstractUser):
         verbose_name=_("legend purpose"),
         max_length=255,
         help_text=_("I am a legend, <what you are doing or being> as <the role you are doing it as>."),
-        default=_("I am a legend, defining my legend purpose as a member of colegend.")
+        default=_("I am a legend, defining my legend purpose as a member of coLegend.")
     )
 
     notes = models.TextField(
@@ -308,7 +308,7 @@ def new_user_manager_notification(request, user, **kwargs):
     # manager_group, created_group = Group.objects.get_or_create(name="managers")
     # managers = [user.email for user in manager_group.user_set.all()]
     # TODO: Switch to managers group as soon as it is stable
-    managers = ['connect@colegend.org']
+    managers = ['connect@coLegend.org']
     username = str(user.username)
     reply_email = user.email
     subject = "New user: {}".format(username)
