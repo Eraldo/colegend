@@ -5,6 +5,7 @@ from colegend.academy.schema import AcademyQuery, AcademyMutation
 from colegend.arcade.schema import ArcadeQuery, ArcadeMutation
 from colegend.categories.schema import CategoryQuery
 from colegend.checkpoints.schema import CheckpointQuery, CheckpointMutation
+from colegend.cms.schema import PageQuery
 from colegend.community.schema import CommunityQuery, CommunityMutation
 from colegend.events.schema import EventQuery, EventMutation
 from colegend.home.schema import HomeQuery, HomeMutation
@@ -37,6 +38,7 @@ class Query(
     TutorialQuery,
     TagQuery,
     CategoryQuery,
+    PageQuery,
     graphene.ObjectType):
     debug = graphene.Field(DjangoDebug, name='__debug')
 
