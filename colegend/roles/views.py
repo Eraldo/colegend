@@ -1,5 +1,4 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.template.loader import render_to_string
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, RedirectView
 from rest_framework import viewsets
 
@@ -50,7 +49,6 @@ class RoleCreateView(LoginRequiredMixin, RolesRequiredMixin, RoleMixin, CreateVi
 
     def get_initial(self):
         initial = super().get_initial()
-        initial['description'] = render_to_string('roles/template.md')
         return initial
 
 

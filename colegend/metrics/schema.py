@@ -1,5 +1,6 @@
 import graphene
 
+from colegend.donations.models import Donation
 from colegend.journals.models import JournalEntry
 from colegend.office.models import Focus
 from colegend.outcomes.models import Outcome
@@ -61,6 +62,14 @@ class Metric(graphene.ObjectType):
             return '0% male, 0% female, 0% neutral'
         return '{males:.0f}% male, {females:.0f}% female, {neutrals:.0f}% neutral'.format(
             males=males / total * 100, females=females / total * 100, neutrals=neutrals / total * 100)
+
+    donations = graphene.Int(scope=ScopeType())
+
+    def resolve_donations(self, info, scope=None):
+        kwargs = {}
+        if scope is not None:
+            kwargs['date__gte'] = get_scope_by_name(scope)().start
+        return Donation.objects.filter(**kwargs).total()
 
 
 class MetricsQuery(graphene.ObjectType):

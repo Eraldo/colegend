@@ -13,7 +13,6 @@ class RoleNode(DjangoObjectType):
             'name': ['exact', 'istartswith', 'icontains'],
             'nickname': ['exact', 'istartswith', 'icontains'],
             'item': ['exact', 'istartswith', 'icontains'],
-            'description': ['exact', 'icontains'],
             'metrics': ['exact', 'icontains'],
             'kind': ['exact', 'icontains'],
         }

@@ -49,5 +49,6 @@ urlpatterns = [
         name='account_confirm_email'),
 
     url(r'^graphql/batch', csrf_exempt(GraphQLView.as_view(schema=schema, batch=True))),
-    url(r'^graphql', csrf_exempt(GraphQLView.as_view(graphiql=True, schema=schema))),
+    url(r'^graphql', csrf_exempt(GraphQLView.as_view(graphiql=False, schema=schema))),
+    url(r'^graphiql', csrf_exempt(GraphQLView.as_view(graphiql=True, schema=schema))),
 ]

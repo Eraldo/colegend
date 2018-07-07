@@ -11,7 +11,7 @@ class DonationQuerySet(OwnedQuerySet):
         Return the sum of all donations.
         """
         total = self.aggregate(Sum('amount')).get('amount__sum')
-        return total
+        return total or 0
 
 
 class Donation(AutoUrlsMixin, TimeStampedBase, OwnedBase):

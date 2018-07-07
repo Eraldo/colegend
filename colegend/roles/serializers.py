@@ -7,4 +7,4 @@ class RoleSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Role
-        fields = ['url', 'id', 'name', 'nickname', 'item', 'icon', 'description', 'metrics']
+        fields = ['url', 'id', 'name', 'nickname', 'item', 'icon', 'metrics']

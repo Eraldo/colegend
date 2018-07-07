@@ -103,10 +103,6 @@ class Role(TimeStampedBase):
         _('policies'),
         blank=True
     )
-    history = MarkdownField(
-        _('history'),
-        blank=True
-    )
     notes = MarkdownField(
         _('notes'),
         blank=True
@@ -119,7 +115,8 @@ class Role(TimeStampedBase):
         _('metrics'),
         blank=True
     )
-    description = models.TextField(
+    history = MarkdownField(
+        _('history'),
         blank=True
     )
 
