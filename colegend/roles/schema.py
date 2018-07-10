@@ -112,10 +112,13 @@ class UpdateRoleMutation(graphene.relay.ClientIDMutation):
     @classmethod
     def mutate_and_get_payload(cls, root, info, id, **kwargs):
         user = info.context.user
-        if not user.is_superuser:
-            raise Exception('Permission denied.')
         _type, id = from_global_id(id)
         role = Role.objects.get(id=id)
+
+        # TODO: Add role superior check: Am I above this role?
+        if not user.is_superuser:
+            raise Exception('Permission denied.')
+
         for key, value in kwargs.items():
             if value is not None:
                 setattr(role, key, value)
