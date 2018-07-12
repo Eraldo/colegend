@@ -30,7 +30,7 @@ class Command(BaseCommand):
         # Checking if streak chain is still ok.
         yesterday = date - timezone.timedelta(days=1)
         for habit in habits:
-            if habit.check_streak(yesterday):
+            if habit.has_track(yesterday):
                 continue
             else:
                 habit.reset_streak()

@@ -4,6 +4,7 @@ from graphene_django.filter import DjangoFilterConnectionField
 from graphql_relay import from_global_id
 
 from colegend.experience.models import add_experience
+from colegend.home.models import get_controlled_habit, ControlledHabit
 from colegend.office.filters import FocusFilter
 from colegend.outcomes.schema import OutcomeQuery, OutcomeMutation, StepQuery, StepMutation
 from colegend.scopes.schema import ScopeType
@@ -20,6 +21,14 @@ class FocusNode(DjangoObjectType):
 class FocusQuery(graphene.ObjectType):
     focus = graphene.Node.Field(FocusNode)
     focuses = DjangoFilterConnectionField(FocusNode, filterset_class=FocusFilter)
+    focus_streak = graphene.Int()
+
+    def resolve_focus_streak(self, info):
+        user = info.context.user
+        if user.is_authenticated:
+            habit = get_controlled_habit(user, ControlledHabit.FOCUS_HABIT)
+            return habit.streak
+        return 0
 
 
 class UpdateFocusMutation(graphene.relay.ClientIDMutation):
@@ -47,7 +56,11 @@ class UpdateFocusMutation(graphene.relay.ClientIDMutation):
         elif scope is not None and start is not None:
             focus, created = user.focuses.get_or_create(scope=scope, start=start)
             if created:
-                add_experience(user, 'office')
+                habit = get_controlled_habit(user, ControlledHabit.FOCUS_HABIT)
+                tracked = habit.track()
+                if tracked:
+                    habit.save()
+                    add_experience(user, 'office')
         else:
             raise Exception('ID or scope and start needed to get focus.')
 

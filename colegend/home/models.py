@@ -1,3 +1,5 @@
+from enum import Enum
+
 from django.conf import settings
 from django.core.validators import MaxValueValidator
 from django.db import models
@@ -23,13 +25,61 @@ from django.utils.translation import ugettext_lazy as _
 from colegend.office.models import AgendaPage
 from colegend.scopes.models import ScopeField, get_scope_by_name, Scope
 
-dashboard_habit = {
-    'name': "Dashboard",
-    'is_controlled': True,
-    'duration': timezone.timedelta(seconds=10),
-    'icon': '🗞️',
-    'content': 'Checking my coLegend Dashboard regularly.'
+
+class ControlledHabit(Enum):
+    DASHBOARD_HABIT = 'Dashboard'
+    JOURNAL_HABIT = 'Journal'
+    SCAN_HABIT = 'Life Area Scan'
+    FOCUS_HABIT = 'Focus'
+
+
+controlled_habits_data = {
+    ControlledHabit.DASHBOARD_HABIT: {
+        'name': ControlledHabit.DASHBOARD_HABIT.value,
+        'is_controlled': True,
+        'duration': timezone.timedelta(seconds=10),
+        'icon': '🗞️',
+        'content': 'Checking my coLegend Dashboard.'
+    },
+    ControlledHabit.JOURNAL_HABIT: {
+        'name': ControlledHabit.JOURNAL_HABIT.value,
+        'is_controlled': True,
+        'icon': '📖',
+        'content': 'Writing my journal entry.'
+    },
+    ControlledHabit.SCAN_HABIT: {
+        'name': ControlledHabit.SCAN_HABIT.value,
+        'is_controlled': True,
+        'icon': '📊',
+        'content': 'Scanning my life areas.'
+    },
+    ControlledHabit.FOCUS_HABIT: {
+        'name': ControlledHabit.FOCUS_HABIT.value,
+        'is_controlled': True,
+        'icon': '🎯',
+        'content': 'Setting my focus.'
+    }
 }
+
+
+def get_controlled_habit(user, controlled_habit: ControlledHabit):
+    """
+    Get the user's controlled habit matching the habit name.
+    Only prefedined controlled habit names are valid.
+
+    :param user: The user who's habit is to be fetched.
+    :param habit_name: The name of the controlled habit.
+    :return: The controlled habit instance.
+    """
+    habit_data = controlled_habits_data.get(controlled_habit)
+    if not habit_data:
+        raise Exception(f'No controlled habit named "{controlled_habit}" was found.')
+
+    try:
+        habit = user.habits.get(name=controlled_habit.value, is_controlled=True)
+    except Habit.DoesNotExist:
+        habit = user.habits.create(**habit_data)
+    return habit
 
 
 class HabitQuerySet(models.QuerySet):
@@ -123,7 +173,29 @@ class Habit(OwnedBase, TimeStampedBase, OrderedModel):
         default=0,
     )
 
-    def check_streak(self, date=None):
+    def track(self):
+        """
+        Create a track record for this habit if not already present.
+        And update the streak on successful track creation.
+        :return:
+            True: On tracking success
+            False: On tracking failure
+        """
+        if not self.has_track():
+            today = timezone.localtime(timezone.now()).date()
+            # Create the new track record.
+            track, created = self.track_events.get_or_create(created__date=today)
+            if created:
+                self.increase_streak()
+                return True
+        return False
+
+    def has_track(self, date=None):
+        """
+        Check if a track record already exists (for the given date or today).
+        :param date: The date to check for: If a track exists?
+        :return: True if a track event was found. False if not found.
+        """
         if date is None:
             date = timezone.localtime(timezone.now()).date()
             scope = get_scope_by_name(self.scope)(date)
@@ -132,6 +204,11 @@ class Habit(OwnedBase, TimeStampedBase, OrderedModel):
         return self.track_events.filter(created__date__range=(scope.start, scope.end)).exists()
 
     def reset_streak(self, to=0):
+        """
+        Reset the streak and update the maximum streak if the new one is higher.
+        :param to:
+        :return:
+        """
         updated_fields = ['streak']
         if self.streak > self.streak_max:
             self.streak_max = self.streak
@@ -357,14 +434,14 @@ class DashboardPage(Page):
         today = timezone.localtime(timezone.now()).date()
 
         # Has the user set his focus?
-        focus = user.focuses.filter(scope=DAY, start=today)
+        focus = user.focuses.filter(scope=Scope.DAY.value, start=today)
         agenda_page = AgendaPage.objects.first()
         if not focus and agenda_page:
             url = agenda_page.url + '?scope=day&date={}'.format(today)
             return link(_('Setting focus'), url)
 
         # Has the user written his journal entry?
-        dayentry = user.journal_entries.filter(scope=DAY, start=today)
+        dayentry = user.journal_entries.filter(scope=Scope.DAY.value, start=today)
         if not dayentry:
             return link(_('Create a journal entry'), '#')
 

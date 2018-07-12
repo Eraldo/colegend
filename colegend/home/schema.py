@@ -15,7 +15,8 @@ from graphene_django.converter import convert_django_field
 
 from colegend.scopes.models import Scope
 from colegend.scopes.schema import ScopeType
-from .models import Scan, Habit, HabitTrackEvent, HabitReminder, Routine, RoutineHabit, dashboard_habit
+from .models import Scan, Habit, HabitTrackEvent, HabitReminder, Routine, RoutineHabit, get_controlled_habit, \
+    ControlledHabit
 
 IconType = graphene.Enum.from_enum(Icon)
 
@@ -69,20 +70,11 @@ class DashboardStreakQuery(graphene.ObjectType):
         user = info.context.user
 
         if user.is_authenticated:
-            try:
-                habit = user.habits.get(name='Dashboard', is_controlled=True)
-            except Habit.DoesNotExist:
-                habit = user.habits.create(**dashboard_habit)
-
-            # Tracking only once per day.
-            today = timezone.localtime(timezone.now()).date()
-            track, created = habit.track_events.get_or_create(created__date=today)
-            if created:
-                if habit.track_events.filter(created__date=today - timezone.timedelta(days=1)).exists():
-                    habit.increase_streak()
-                    habit.save()
-                else:
-                    habit.reset_streak(to=1)
+            habit = get_controlled_habit(user, ControlledHabit.DASHBOARD_HABIT)
+            tracked = habit.track()
+            if tracked:
+                habit.save()
+                add_experience(user, 'home')
             return habit.streak
 
 
@@ -422,6 +414,14 @@ class HabitsQuery(graphene.ObjectType):
 class ScanQuery(graphene.ObjectType):
     scan = graphene.Node.Field(ScanNode)
     scans = DjangoFilterConnectionField(ScanNode)
+    scan_streak = graphene.Int()
+
+    def resolve_scan_streak(self, info):
+        user = info.context.user
+        if user.is_authenticated:
+            habit = get_controlled_habit(user, ControlledHabit.SCAN_HABIT)
+            return habit.streak
+        return 0
 
 
 class CreateScanMutation(graphene.relay.ClientIDMutation):
@@ -442,7 +442,13 @@ class CreateScanMutation(graphene.relay.ClientIDMutation):
     def mutate_and_get_payload(cls, root, info, *args, **kwargs):
         user = info.context.user
         scan = user.scans.create(*args, **kwargs)
-        add_experience(user, 'home')
+
+        # Updating the habit
+        habit = get_controlled_habit(user, ControlledHabit.SCAN_HABIT)
+        tracked = habit.track()
+        if tracked:
+            habit.save()
+            add_experience(user, 'home')
         return CreateScanMutation(success=True, scan=scan)
 
 

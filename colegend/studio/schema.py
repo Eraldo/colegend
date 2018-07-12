@@ -6,6 +6,7 @@ from graphene_django.filter import DjangoFilterConnectionField
 from graphql_relay import from_global_id
 
 from colegend.experience.models import add_experience
+from colegend.home.models import get_controlled_habit, ControlledHabit
 from colegend.scopes.models import Scope, get_scope_by_name
 from colegend.scopes.schema import ScopeType
 from colegend.journals.models import JournalEntry
@@ -34,7 +35,8 @@ class JournalEntryQuery(graphene.ObjectType):
     def resolve_journal_streak(self, info):
         user = info.context.user
         if user.is_authenticated:
-            return user.journal.streak
+            habit = get_controlled_habit(user, ControlledHabit.JOURNAL_HABIT)
+            return habit.streak
         return 0
 
 
@@ -60,10 +62,11 @@ class AddJournalEntryMutation(graphene.relay.ClientIDMutation):
         today = timezone.localtime(timezone.now()).date()
         if entry.scope == Scope.DAY.value and entry.start == today:
             # Only update if this is today's day-entry.
-            user.journal.streak += 1
-            user.journal.save(update_fields=['streak'])
-
-        add_experience(user, 'studio')
+            habit = get_controlled_habit(user, ControlledHabit.JOURNAL_HABIT)
+            tracked = habit.track()
+            if tracked:
+                habit.save()
+                add_experience(user, 'studio')
         return AddJournalEntryMutation(journal_entry=entry)
 
 
