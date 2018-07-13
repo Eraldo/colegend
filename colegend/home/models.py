@@ -29,7 +29,7 @@ from colegend.scopes.models import ScopeField, get_scope_by_name, Scope
 class ControlledHabit(Enum):
     DASHBOARD_HABIT = 'Dashboard'
     JOURNAL_HABIT = 'Journal'
-    SCAN_HABIT = 'Life Area Scan'
+    STATS_HABIT = 'Stats'
     FOCUS_HABIT = 'Focus'
 
 
@@ -47,8 +47,8 @@ controlled_habits_data = {
         'icon': '📖',
         'content': 'Writing my journal entry.'
     },
-    ControlledHabit.SCAN_HABIT: {
-        'name': ControlledHabit.SCAN_HABIT.value,
+    ControlledHabit.STATS_HABIT: {
+        'name': ControlledHabit.STATS_HABIT.value,
         'is_controlled': True,
         'icon': '📊',
         'content': 'Scanning my life areas.'

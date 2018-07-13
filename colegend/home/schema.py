@@ -419,7 +419,7 @@ class ScanQuery(graphene.ObjectType):
     def resolve_scan_streak(self, info):
         user = info.context.user
         if user.is_authenticated:
-            habit = get_controlled_habit(user, ControlledHabit.SCAN_HABIT)
+            habit = get_controlled_habit(user, ControlledHabit.STATS_HABIT)
             return habit.streak
         return 0
 
@@ -444,7 +444,7 @@ class CreateScanMutation(graphene.relay.ClientIDMutation):
         scan = user.scans.create(*args, **kwargs)
 
         # Updating the habit
-        habit = get_controlled_habit(user, ControlledHabit.SCAN_HABIT)
+        habit = get_controlled_habit(user, ControlledHabit.STATS_HABIT)
         tracked = habit.track()
         if tracked:
             habit.save()
