@@ -30,7 +30,7 @@ class OwnedCheckMixin(object):
 
 class OwnedBase(OwnedCheckMixin, models.Model):
     """
-    Adds a owner (user) field to the model. 1-*
+    Adds an owner (user) field to the model. 1-*
     """
     owner = models.ForeignKey(
         to=settings.AUTH_USER_MODEL,

@@ -13,11 +13,11 @@ from colegend.core.models import AutoOwnedBase, TimeStampedBase, OwnedBase
 
 class Quest(OrderedModel):
     name = models.CharField(
-        _('name'),
+        verbose_name=_('name'),
         max_length=255,
     )
     video_url = models.URLField(
-        _('video url'),
+        verbose_name=_('video url'),
         max_length=1000,
         blank=True
     )
@@ -84,45 +84,120 @@ class UserQuestStatus(OwnedBase, TimeStampedBase):
 
 class Hero(AutoOwnedBase, TimeStampedBase):
     name = models.CharField(
-        verbose_name=_("name"),
+        verbose_name=_('name'),
         max_length=255,
-        blank=True
+        default=_('Hero')
     )
     avatar = models.URLField(
-        _('avatar'),
+        verbose_name=_('avatar'),
         max_length=1000,
         blank=True
     )
     year_topic = models.CharField(
-        verbose_name=_("year topic"),
+        verbose_name=_('year topic'),
         max_length=255,
         blank=True
     )
-    vision = MarkdownField(blank=True)
-    mission = MarkdownField(blank=True)
-    values = MarkdownField(blank=True)
-    powers = MarkdownField(blank=True)
-    skills = MarkdownField(blank=True)
-    habits = MarkdownField(blank=True)
-    principles = MarkdownField(blank=True)
-    wishes = MarkdownField(blank=True)
-    goals = MarkdownField(blank=True)
-    people = MarkdownField(blank=True)
-    resources = MarkdownField(blank=True)
-    achievements = MarkdownField(blank=True)
-    questions = MarkdownField(blank=True)
-    experiments = MarkdownField(blank=True)
-    projects = MarkdownField(blank=True)
-    bucket = MarkdownField(blank=True, help_text="bucket list")
-    inspirations = MarkdownField(blank=True)
-    roles = MarkdownField(blank=True)
-    strategy = MarkdownField(blank=True)
-    topics = MarkdownField(blank=True)
-    routines = MarkdownField(blank=True)
-    blueprint_day = MarkdownField(blank=True)
-    blueprint_week = MarkdownField(blank=True)
-    blueprint_month = MarkdownField(blank=True)
-    content = MarkdownField(blank=True)
+    vision = MarkdownField(
+        verbose_name=_('vision'),
+        blank=True
+    )
+    mission = MarkdownField(
+        verbose_name=_('mission'),
+        blank=True
+    )
+    values = MarkdownField(
+        verbose_name=_('values'),
+        blank=True
+    )
+    powers = MarkdownField(
+        verbose_name=_('powers'),
+        blank=True
+    )
+    skills = MarkdownField(
+        verbose_name=_('skills'),
+        blank=True
+    )
+    habits = MarkdownField(
+        verbose_name=_('habits'),
+        blank=True
+    )
+    principles = MarkdownField(
+        verbose_name=_('principles'),
+        blank=True
+    )
+    wishes = MarkdownField(
+        verbose_name=_('wishes'),
+        blank=True
+    )
+    goals = MarkdownField(
+        verbose_name=_('goals'),
+        blank=True
+    )
+    people = MarkdownField(
+        verbose_name=_('people'),
+        blank=True
+    )
+    resources = MarkdownField(
+        verbose_name=_('resources'),
+        blank=True
+    )
+    achievements = MarkdownField(
+        verbose_name=_('achievements'),
+        blank=True
+    )
+    questions = MarkdownField(
+        verbose_name=_('questions'),
+        blank=True
+    )
+    experiments = MarkdownField(
+        verbose_name=_('experiments'),
+        blank=True
+    )
+    projects = MarkdownField(
+        verbose_name=_('projects'),
+        blank=True
+    )
+    bucket = MarkdownField(
+        verbose_name=_('bucket list'),
+        blank=True,
+    )
+    inspirations = MarkdownField(
+        verbose_name=_('inspirations'),
+        blank=True
+    )
+    roles = MarkdownField(
+        verbose_name=_('roles'),
+        blank=True
+    )
+    strategy = MarkdownField(
+        verbose_name=_('strategy'),
+        blank=True
+    )
+    topics = MarkdownField(
+        verbose_name=_('topics'),
+        blank=True
+    )
+    routines = MarkdownField(
+        verbose_name=_('routines'),
+        blank=True
+    )
+    blueprint_day = MarkdownField(
+        verbose_name=_('day blueprint'),
+        blank=True
+    )
+    blueprint_week = MarkdownField(
+        verbose_name=_('week blueprint'),
+        blank=True
+    )
+    blueprint_month = MarkdownField(
+        verbose_name=_('month blueprint'),
+        blank=True
+    )
+    content = MarkdownField(
+        verbose_name=_("content"),
+        blank=True
+    )
 
     class Meta:
         verbose_name = _('Hero')
@@ -133,20 +208,46 @@ class Hero(AutoOwnedBase, TimeStampedBase):
         return self.name or f"{self.owner}'s hero"
 
 
+class Tension(OwnedBase, TimeStampedBase):
+    name = models.CharField(
+        verbose_name=_('name'),
+        max_length=255,
+    )
+    content = MarkdownField(
+        verbose_name=_('content'),
+        blank=True
+    )
+
+    class Meta:
+        default_related_name = 'tensions'
+
+    def __str__(self):
+        return self.name
+
+
 class Demon(AutoOwnedBase, TimeStampedBase):
     name = models.CharField(
-        verbose_name=_("name"),
+        verbose_name=_('name'),
         max_length=255,
-        blank=True
+        default=_('Demon')
     )
     avatar = models.URLField(
         _('avatar'),
         max_length=1000,
         blank=True
     )
-    tensions = MarkdownField(blank=True)
-    fears = MarkdownField(blank=True)
-    content = MarkdownField(blank=True)
+    tensions = MarkdownField(
+        verbose_name=_('tensions'),
+        blank=True
+    )
+    fears = MarkdownField(
+        verbose_name=_('fears'),
+        blank=True
+    )
+    content = MarkdownField(
+        verbose_name=_('content'),
+        blank=True
+    )
 
     class Meta:
         verbose_name = _('Demon')
@@ -204,10 +305,10 @@ class Quote(TimeStampedBase):
     """A motivational quote."""
 
     name = models.CharField(
-        verbose_name=_("name"),
+        verbose_name=_('name'),
         max_length=255,
         unique=True,
-        help_text=_("What is the quote about?")
+        help_text=_('What is the quote about?')
     )
     content = MarkdownField(blank=True)
     author = models.CharField(

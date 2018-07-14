@@ -3,7 +3,8 @@ from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 from graphql_relay import from_global_id
 
-from .models import Hero, Demon, Quote, Quest, QuestObjective, UserQuestStatus
+from colegend.api.models import CountableConnectionBase
+from .models import Hero, Demon, Quote, Quest, QuestObjective, UserQuestStatus, Tension
 
 
 class QuestNode(DjangoObjectType):
@@ -141,6 +142,78 @@ class UpdateDemonMutation(graphene.relay.ClientIDMutation):
         return UpdateDemonMutation(success=True, demon=demon)
 
 
+class TensionNode(DjangoObjectType):
+    class Meta:
+        model = Tension
+        filter_fields = {
+            'name': ['icontains'],
+            'content': ['icontains'],
+        }
+        interfaces = [graphene.Node]
+        connection_class = CountableConnectionBase
+
+
+class TensionQuery(graphene.ObjectType):
+    tension = graphene.Node.Field(TensionNode)
+    tensions = DjangoFilterConnectionField(TensionNode)
+
+
+class CreateTensionMutation(graphene.relay.ClientIDMutation):
+    tension = graphene.Field(TensionNode)
+
+    class Input:
+        name = graphene.String()
+        content = graphene.String()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, *args, **kwargs):
+        user = info.context.user
+        print(args, kwargs)
+        tension = user.tensions.create(*args, **kwargs)
+        return CreateTensionMutation(tension=tension)
+
+
+class UpdateTensionMutation(graphene.relay.ClientIDMutation):
+    tension = graphene.Field(TensionNode)
+
+    class Input:
+        name = graphene.String()
+        content = graphene.String()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, id, **kwargs):
+        user = info.context.user
+        _type, id = from_global_id(id)
+        tension = user.tensions.get(id=id)
+
+        for key, value in kwargs.items():
+            if value is not None:
+                setattr(tension, key, value)
+        tension.save()
+        return UpdateDemonMutation(tension=tension)
+
+
+class DeleteTensionMutation(graphene.relay.ClientIDMutation):
+    success = graphene.Boolean()
+
+    class Input:
+        id = graphene.ID()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, id):
+        user = info.context.user
+        _type, id = from_global_id(id)
+        tension = user.tensions.get(id=id)
+        tension.delete()
+        return DeleteTensionMutation(success=True)
+
+
+class TensionMutation(graphene.ObjectType):
+    create_tension = CreateTensionMutation.Field()
+    update_tension = UpdateTensionMutation.Field()
+    delete_tension = DeleteTensionMutation.Field()
+
+
 class AddTensionMutation(graphene.relay.ClientIDMutation):
     demon = graphene.Field(DemonNode)
 
@@ -272,6 +345,7 @@ class QuoteMutation(graphene.ObjectType):
 class JourneyQuery(
     HeroQuery,
     DemonQuery,
+    TensionQuery,
     QuoteQuery,
     UserQuestStatusQuery,
     graphene.ObjectType):
@@ -281,6 +355,7 @@ class JourneyQuery(
 class JourneyMutation(
     HeroMutation,
     DemonMutation,
+    TensionMutation,
     QuoteMutation,
     graphene.ObjectType):
     pass

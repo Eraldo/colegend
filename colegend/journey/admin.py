@@ -2,7 +2,7 @@ from django import forms
 from django.contrib import admin
 from ordered_model.admin import OrderedModelAdmin, OrderedTabularInline
 
-from .models import Hero, Demon, Quote, Quest, QuestObjective, UserQuestStatus
+from .models import Hero, Demon, Quote, Quest, QuestObjective, UserQuestStatus, Tension
 
 
 class QuestObjectiveInline(OrderedTabularInline):
@@ -67,6 +67,11 @@ class HeroAdmin(admin.ModelAdmin):
 
 @admin.register(Demon)
 class DemonAdmin(admin.ModelAdmin):
+    list_filter = ['owner']
+
+
+@admin.register(Tension)
+class TensionAdmin(admin.ModelAdmin):
     list_filter = ['owner']
 
 
