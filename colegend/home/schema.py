@@ -48,18 +48,18 @@ class SuggestedActionQuery(graphene.ObjectType):
         user = info.context.user
         today = timezone.localtime(timezone.now()).date()
         if user.is_authenticated:
-            if not user.focuses.filter(scope=Scope.DAY.value, start=today).exists():
-                return ActionType(type=Actions.SETTING_FOCUS.value)
-            if not user.journal_entries.filter(scope=Scope.DAY.value, start=today).exists():
-                return ActionType(type=Actions.WRITING_JOURNAL.value)
-
             # Suggesting next untracked habit
             next_habit = user.habits.active().untracked().first()
             if next_habit:
-                id = to_global_id(HabitNode._meta.name, next_habit.id)
-                return ActionType(type=Actions.TRACKING_HABIT.value, payload={'id': id, 'name': next_habit.name})
-
-            # TODO: Processing Dashboard streak (v1)
+                if next_habit.is_controlled:
+                    if next_habit.name == ControlledHabit.FOCUS_HABIT.value:
+                        return ActionType(type=Actions.SETTING_FOCUS.value)
+                    if next_habit.name == ControlledHabit.JOURNAL_HABIT.value:
+                        return ActionType(type=Actions.WRITING_JOURNAL.value)
+                else:
+                    id = to_global_id(HabitNode._meta.name, next_habit.id)
+                    payload = {'id': id, 'name': next_habit.name}
+                    return ActionType(type=Actions.TRACKING_HABIT.value, payload=payload)
         return None
 
 
@@ -374,8 +374,7 @@ class UpdateRoutineHabitMutation(graphene.relay.ClientIDMutation):
     def mutate_and_get_payload(cls, root, info, id, order=None):
         user = info.context.user
         _type, id = from_global_id(id)
-        routine_habit = RoutineHabit.objects.get(id
-                                                 =id)
+        routine_habit = RoutineHabit.objects.get(id=id)
         if order is not None:
             routine_habit.to(order)
             routine_habit.save()
