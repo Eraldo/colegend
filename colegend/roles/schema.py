@@ -88,6 +88,18 @@ class RoleNode(DjangoObjectType):
 class RoleQuery(graphene.ObjectType):
     role = graphene.Node.Field(RoleNode)
     roles = DjangoFilterConnectionField(RoleNode)
+    main_role = graphene.Field(RoleNode)
+
+    def resolve_main_role(self, info):
+        """
+        Get the project's main role.
+        :param info:
+        :return: The main role instance.
+        """
+        try:
+            return Role.objects.get(name='coLegend Leader')
+        except Role.DoesNotExist:
+            return Exception('Main role not found.')
 
 
 class UpdateRoleMutation(graphene.relay.ClientIDMutation):
