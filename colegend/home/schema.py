@@ -31,6 +31,7 @@ class Actions(Enum):
     SETTING_FOCUS = 'setting focus'
     WRITING_JOURNAL = 'writing journal'
     TRACKING_HABIT = 'tracking habit'
+    TRACKING_STATS = 'tracking stats'
 
 
 ActionTypes = graphene.Enum.from_enum(Actions)
@@ -56,6 +57,8 @@ class SuggestedActionQuery(graphene.ObjectType):
                         return ActionType(type=Actions.SETTING_FOCUS.value)
                     if next_habit.name == ControlledHabit.JOURNAL_HABIT.value:
                         return ActionType(type=Actions.WRITING_JOURNAL.value)
+                    if next_habit.name == ControlledHabit.STATS_HABIT.value:
+                        return ActionType(type=Actions.TRACKING_STATS.value)
                 else:
                     id = to_global_id(HabitNode._meta.name, next_habit.id)
                     payload = {'id': id, 'name': next_habit.name}

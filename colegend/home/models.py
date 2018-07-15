@@ -29,8 +29,8 @@ from colegend.scopes.models import ScopeField, get_scope_by_name, Scope
 class ControlledHabit(Enum):
     DASHBOARD_HABIT = 'Dashboard'
     JOURNAL_HABIT = 'Journal'
-    STATS_HABIT = 'Stats'
     FOCUS_HABIT = 'Focus'
+    STATS_HABIT = 'Stats'
 
 
 controlled_habits_data = {
