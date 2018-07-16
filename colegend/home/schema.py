@@ -32,6 +32,7 @@ class Actions(Enum):
     WRITING_JOURNAL = 'writing journal'
     TRACKING_HABIT = 'tracking habit'
     TRACKING_STATS = 'tracking stats'
+    STARTING_JOURNEY = 'starting journey'
 
 
 ActionTypes = graphene.Enum.from_enum(Actions)
@@ -49,6 +50,9 @@ class SuggestedActionQuery(graphene.ObjectType):
         user = info.context.user
         today = timezone.localtime(timezone.now()).date()
         if user.is_authenticated:
+            # Is the user onboarded?
+            if not user.has_checkpoint('quest 1'):
+                return ActionType(type=Actions.STARTING_JOURNEY.value)
             # Suggesting next untracked habit
             next_habit = user.habits.active().untracked().first()
             if next_habit:
