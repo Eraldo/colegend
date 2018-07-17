@@ -102,6 +102,7 @@ LOCAL_APPS = [
     'colegend.categories',
     'colegend.tags',
     'colegend.cms',
+    'colegend.crm',
     'colegend.components',
     'colegend.coicons',
     'colegend.api',
