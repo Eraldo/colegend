@@ -19,12 +19,12 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 from colegend.checkpoints.models import Checkpoint
 from colegend.community.models import Duo, Clan, Tribe
+from colegend.core.models import TimeStampedBase, OwnedBase
 from colegend.core.utils.media_paths import UploadToOwnedDirectory
 from colegend.outcomes.models import Step
 from colegend.roles.models import Role
 
-
-SYSTEM_USER_USERNAME='coLegend'
+SYSTEM_USER_USERNAME = 'coLegend'
 
 
 class UserQuerySet(models.QuerySet):
@@ -37,6 +37,21 @@ class UserQuerySet(models.QuerySet):
 
 class UserManager(AuthUserManager.from_queryset(UserQuerySet)):
     pass
+
+
+class UserCheckpoint(OwnedBase, TimeStampedBase):
+    checkpoint = models.ForeignKey(
+        to=Checkpoint, on_delete=models.CASCADE
+    )
+
+    class Meta:
+        default_related_name = 'user_checkpoints'
+        unique_together = ['owner', 'checkpoint']
+        verbose_name = _("User Checkpoint")
+        verbose_name_plural = _("User Checkpoints")
+
+    def __str__(self):
+        return f'[{self.owner}] {self.checkpoint}'
 
 
 class User(AbstractUser):
@@ -152,9 +167,9 @@ class User(AbstractUser):
     )
     checkpoints = models.ManyToManyField(
         Checkpoint,
+        through=UserCheckpoint,
         blank=True,
     )
-
     balance = models.SmallIntegerField(
         verbose_name=_('balance'),
         default=0,
@@ -210,8 +225,10 @@ class User(AbstractUser):
         return self.checkpoints.contains_name(name)
 
     def add_checkpoint(self, name):
+        # Get the checkpoint.
         checkpoint, created = Checkpoint.objects.get_or_create(name=name)
-        self.checkpoints.add(checkpoint)
+        # Own it if not owned already.
+        UserCheckpoint.objects.get_or_create(owner=self, checkpoint=checkpoint)
         return checkpoint
 
     def has_role(self, name):

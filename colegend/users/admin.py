@@ -43,6 +43,12 @@ class UserInline(admin.TabularInline):
     # max_num = 4
 
 
+class UserCheckpointInline(admin.TabularInline):
+    model = User.checkpoints.through
+    extra = 0
+    show_change_link = True
+
+
 @admin.register(User)
 class UserAdmin(AuthUserAdmin):
     fieldsets = (
@@ -68,7 +74,7 @@ class UserAdmin(AuthUserAdmin):
             'fields': (
                 'is_active', 'is_staff', 'is_superuser',
                 'is_premium', 'balance',
-                'roles', 'checkpoints', 'groups', 'user_permissions',
+                'roles', 'groups', 'user_permissions',
             )
         }),
         (_('Important dates'), {
@@ -81,7 +87,8 @@ class UserAdmin(AuthUserAdmin):
     )
     list_display = ('username', 'name', 'email', 'phone', 'balance', 'is_premium', 'is_staff', 'date_joined')
     list_filter = ('is_premium', 'is_staff', 'is_superuser', 'is_active', 'roles', 'checkpoints', 'groups', 'date_joined', 'last_login')
-    filter_horizontal = ('roles', 'checkpoints', 'groups', 'user_permissions')
+    filter_horizontal = ('roles', 'groups', 'user_permissions')
     search_fields = ['name']
     form = UserChangeForm
     add_form = UserCreationForm
+    inlines = [UserCheckpointInline]
