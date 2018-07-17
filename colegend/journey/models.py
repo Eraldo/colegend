@@ -72,11 +72,19 @@ class UserQuestStatus(OwnedBase, TimeStampedBase):
         blank=True
     )
 
+    @property
+    def is_complete(self):
+        for objective in self.quest.objectives.all():
+            if not objective in self.completed_objectives.all():
+                return False
+        return True
+
     class Meta:
         default_related_name = 'quest_statuses'
         unique_together = ['owner', 'quest']
         verbose_name = _("Quest status")
         verbose_name_plural = _("Quest statuses")
+        ordering = ['quest']
 
     def __str__(self):
         return f'{self.quest} / {self.owner}'

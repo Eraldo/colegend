@@ -40,10 +40,9 @@ class UserQuestStatusForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
-        self.fields['completed_objectives'].queryset = self.fields['completed_objectives'].queryset \
-            .filter(quest=self.instance.quest)
-        print(self.fields['completed_objectives'].queryset)
+        if hasattr(self.instance, 'quest'):
+            self.fields['completed_objectives'].queryset = self.fields['completed_objectives'].queryset \
+                .filter(quest=self.instance.quest)
 
 
 @admin.register(UserQuestStatus)

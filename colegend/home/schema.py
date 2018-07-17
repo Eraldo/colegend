@@ -51,7 +51,7 @@ class SuggestedActionQuery(graphene.ObjectType):
         today = timezone.localtime(timezone.now()).date()
         if user.is_authenticated:
             # Is the user onboarded?
-            if not user.has_checkpoint('quest 1'):
+            if user.quest_statuses.count() <= 1:
                 return ActionType(type=Actions.STARTING_JOURNEY.value)
             # Suggesting next untracked habit
             next_habit = user.habits.active().untracked().first()

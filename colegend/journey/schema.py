@@ -33,7 +33,7 @@ class UserQuestStatusQuery(graphene.ObjectType):
     def resolve_current_quest_status(self, info):
         user = info.context.user
         # Getting the status of the current or next quest.
-        current_quest = user.quest_statuses.first()
+        current_quest = user.quest_statuses.last()
         if not current_quest:
             first_quest = Quest.objects.first()
             if first_quest:
@@ -41,6 +41,28 @@ class UserQuestStatusQuery(graphene.ObjectType):
                     quest=first_quest,
                 )
         return current_quest
+
+
+class AcceptGuidelinesMutation(graphene.relay.ClientIDMutation):
+    success = graphene.Boolean()
+
+    class Input:
+        pass
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info):
+        user = info.context.user
+        if user.is_authenticated:
+            checkpoint = user.add_checkpoint('guidelines accepted')
+            quest_status = user.quest_statuses.first()
+            if checkpoint and quest_status:
+                objective = QuestObjective.objects.get(code='guidelines_accept')
+                quest_status.completed_objectives.add(objective)
+        return AcceptGuidelinesMutation(success=True)
+
+
+class QuestMutation(graphene.ObjectType):
+    accept_guidelines = AcceptGuidelinesMutation.Field()
 
 
 class HeroNode(DjangoObjectType):
@@ -357,5 +379,6 @@ class JourneyMutation(
     DemonMutation,
     TensionMutation,
     QuoteMutation,
+    QuestMutation,
     graphene.ObjectType):
     pass
