@@ -214,3 +214,9 @@ def remove_crontab():
     """Remove the crontab entries: fab [environment] remove_crontab"""
     with _venv(env.virtualenv_path):
         run('{path}/manage.py crontab remove {settings}'.format(**env))
+
+
+def graph():
+    """Create a model visualization graph: fab [environment] graph"""
+    if env.name == 'development':
+        local("./manage.py graph_models -a -g -o model_graph.png")
