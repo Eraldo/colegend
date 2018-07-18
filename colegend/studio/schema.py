@@ -5,6 +5,7 @@ from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 from graphql_relay import from_global_id
 
+from colegend.api.models import CountableConnectionBase
 from colegend.experience.models import add_experience
 from colegend.home.models import get_controlled_habit, ControlledHabit
 from colegend.scopes.models import Scope, get_scope_by_name
@@ -22,6 +23,7 @@ class JournalEntryNode(DjangoObjectType):
     class Meta:
         model = JournalEntry
         interfaces = [graphene.Node]
+        connection_class = CountableConnectionBase
 
     def resolve_end(self, info):
         return self.end
