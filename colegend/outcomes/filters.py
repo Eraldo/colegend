@@ -75,6 +75,10 @@ class OutcomeFilter(django_filters.FilterSet):
         else:
             return queryset.open()
 
+    @property
+    def qs(self):
+        return super().qs.filter(owner=self.request.user)
+
 
 class StepFilter(django_filters.FilterSet):
     class Meta:

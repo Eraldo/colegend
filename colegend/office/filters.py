@@ -11,3 +11,7 @@ class FocusFilter(FilterSet):
             'start': ['exact', 'lt', 'gt', 'lte', 'gte'],
             'end': ['exact', 'lt', 'gt', 'lte', 'gte'],
         }
+
+    @property
+    def qs(self):
+        return super().qs.filter(owner=self.request.user)

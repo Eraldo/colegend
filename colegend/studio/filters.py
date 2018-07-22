@@ -17,3 +17,7 @@ class JournalEntryFilter(django_filters.FilterSet):
             'content': ['icontains'],
             'keywords': ['exact', 'icontains', 'istartswith'],
         }
+
+    @property
+    def qs(self):
+        return super().qs.filter(owner=self.request.user)
