@@ -7,6 +7,7 @@ from wagtail.core.fields import StreamField
 from wagtail.core.models import Page
 from wagtail.search import index
 
+from colegend.categories.models import Category
 from colegend.cms.blocks import BASE_BLOCKS
 from colegend.core.fields import MarkdownField
 from colegend.core.models import TimeStampedBase
@@ -50,6 +51,11 @@ class Event(TimeStampedBase):
     )
     content = MarkdownField(
         _('content'),
+    )
+    category = models.ForeignKey(
+        to=Category,
+        on_delete=models.SET_NULL,
+        blank=True, null=True
     )
     participants = models.ManyToManyField(
         settings.AUTH_USER_MODEL,

@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from wagtail.core.models import Page
 
+from colegend.categories.models import Category
 from colegend.core.fields import MarkdownField
 from colegend.core.models import TimeStampedBase
 
@@ -41,6 +42,11 @@ class News(TimeStampedBase):
         blank=True
     )
     content = MarkdownField()
+    category = models.ForeignKey(
+        to=Category,
+        on_delete=models.SET_NULL,
+        blank=True, null=True
+    )
 
     class Meta:
         default_related_name = 'news'

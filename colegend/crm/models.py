@@ -44,6 +44,10 @@ class Status(OrderedModel):
         return self.name
 
 
+def get_default_status():
+    return Status.objects.get_or_create(name='New')[0].pk
+
+
 class Lead(TimeStampedBase):
     name = models.CharField(
         verbose_name=_('name'),
@@ -53,7 +57,7 @@ class Lead(TimeStampedBase):
     status = models.ForeignKey(
         to=Status,
         on_delete=models.PROTECT,
-        default=lambda: Status.objects.first()
+        default=get_default_status
     )
     email = models.EmailField(
         _('email address'),
