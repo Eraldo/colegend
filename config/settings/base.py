@@ -88,6 +88,7 @@ THIRD_PARTY_APPS = [
     'dal_select2',
     'easy_thumbnails',
     'django_filters',
+    'django_countries',
 ]
 LOCAL_APPS = [
     # 'colegend.users',  # custom users ('legends') app
