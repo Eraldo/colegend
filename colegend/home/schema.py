@@ -112,6 +112,23 @@ class DashboardStreakQuery(graphene.ObjectType):
 #         return DashboardCheckMutation(streak=habit.streak)
 
 
+class SuggestedActionMutation(graphene.relay.ClientIDMutation):
+    success = graphene.Boolean()
+
+    class Input:
+        type = graphene.Field(ActionTypes)
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, type):
+        user = info.context.user
+        # print(type)
+        return SuggestedActionMutation(success=True)
+
+
+class DashboardMutation(graphene.ObjectType):
+    trigger_suggested_action = SuggestedActionMutation.Field()
+
+
 class HabitNode(DjangoObjectType):
     # https://github.com/graphql-python/graphene-django/issues/348
     duration = graphene.String()
@@ -527,6 +544,7 @@ class HomeQuery(
 
 
 class HomeMutation(
+    DashboardMutation,
     ScanMutation,
     HabitMutations,
     RoutineMutations,
