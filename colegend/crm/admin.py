@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.html import format_html
 from django.utils.translation import ugettext_lazy as _
 from ordered_model.admin import OrderedModelAdmin
 
@@ -48,7 +49,7 @@ class LeadAdmin(admin.ModelAdmin):
         }),
     )
     readonly_fields = ['modified', 'creator']
-    list_display = ['name', 'status', 'next_contact', 'contact']
+    list_display = ['name', 'status', 'next_contact', 'get_contact']
     list_editable = ['status', 'next_contact']
     list_filter = ['status', 'tags', 'next_contact', 'last_contact', 'birthday', 'country', 'gender', 'creator']
     filter_horizontal = ['tags']
@@ -59,3 +60,20 @@ class LeadAdmin(admin.ModelAdmin):
             # Only set added_by during the first save.
             obj.creator = request.user
         super().save_model(request, obj, form, change)
+
+    def get_contact(self, obj):
+        if obj.email:
+            return format_html(
+                '<a href="mailto:{email}" target="_blank">{email}</a>',
+                email=obj.email,
+            )
+        if obj.url:
+            return format_html(
+                '<a href="{url}" target="_blank">{url}</a>',
+                url=obj.url,
+            )
+        if obj.phone:
+            return format_html(
+                '<a href="tel:{phone}" target="_blank">{phone}</a>',
+                phone=obj.phone,
+            )
