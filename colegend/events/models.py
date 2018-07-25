@@ -19,38 +19,38 @@ def get_current_date():
 
 class Event(TimeStampedBase):
     name = models.CharField(
-        _('name'),
+        verbose_name=_('name'),
         max_length=255,
     )
     start = models.DateTimeField(
-        _('start'),
+        verbose_name=_('start'),
         default=get_current_date
     )
     end = models.DateTimeField(
-        _('end'),
+        verbose_name=_('end'),
         null=True, blank=True
     )
     location = models.CharField(
-        _('location'),
+        verbose_name=_('location'),
         max_length=255,
         blank=True
     )
     image_url = models.URLField(
-        _('image url'),
+        verbose_name=_('image url'),
         max_length=1000,
         blank=True
     )
     video_url = models.URLField(
-        _('video url'),
+        verbose_name=_('video url'),
         max_length=1000,
         blank=True
     )
     description = models.TextField(
-        _('short description'),
+        verbose_name=_('short description'),
         blank=True
     )
     content = MarkdownField(
-        _('content'),
+        verbose_name=_('content'),
     )
     category = models.ForeignKey(
         to=Category,

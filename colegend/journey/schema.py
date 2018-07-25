@@ -4,6 +4,7 @@ from graphene_django.filter import DjangoFilterConnectionField
 from graphql_relay import from_global_id
 
 from colegend.api.models import CountableConnectionBase
+from colegend.experience.models import add_experience
 from .models import Hero, Demon, Quote, Quest, QuestObjective, UserQuestStatus, Tension
 
 
@@ -57,11 +58,33 @@ class AcceptGuidelinesMutation(graphene.relay.ClientIDMutation):
             quest_status = user.quest_statuses.first()
             if checkpoint and quest_status:
                 objective = QuestObjective.objects.get(code='guidelines_accept')
-                quest_status.completed_objectives.add(objective)
+                quest_status.complete_objective(objective)
         return AcceptGuidelinesMutation(success=True)
 
 
+class EnableChatMutation(graphene.relay.ClientIDMutation):
+    success = graphene.Boolean()
+
+    class Input:
+        pass
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info):
+        user = info.context.user
+        success = False
+        if user.is_authenticated:
+            checkpoint = user.add_checkpoint('chat')
+            quest_status = user.quest_statuses.first()
+            if checkpoint and quest_status and not quest_status.is_complete:
+                objective = QuestObjective.objects.get(code='chat_join')
+                quest_status.complete_objective(objective)
+                success = True
+                add_experience(user, 'journey')
+        return AcceptGuidelinesMutation(success=success)
+
+
 class QuestMutation(graphene.ObjectType):
+    enable_chat = EnableChatMutation.Field()
     accept_guidelines = AcceptGuidelinesMutation.Field()
 
 

@@ -80,6 +80,7 @@ class User(AbstractUser):
         choices=GENDER_CHOICES,
         default=NEUTRAL
     )
+
     birthday = models.DateField(
         verbose_name=_('birthday'),
         null=True, blank=True,
@@ -107,7 +108,10 @@ class User(AbstractUser):
     )
 
     occupation = models.CharField(
-        verbose_name=_('occupation(s)'), max_length=255, blank=True)
+        verbose_name=_('occupation(s)'),
+        max_length=255,
+        blank=True
+    )
 
     avatar = ThumbnailerImageField(
         verbose_name=_('avatar'),
@@ -165,11 +169,13 @@ class User(AbstractUser):
         Role,
         blank=True,
     )
+
     checkpoints = models.ManyToManyField(
         Checkpoint,
         through=UserCheckpoint,
         blank=True,
     )
+
     balance = models.SmallIntegerField(
         verbose_name=_('balance'),
         default=0,

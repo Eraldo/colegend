@@ -27,11 +27,6 @@ class Quest(OrderedModel):
 
     # Reverse: objectives
 
-    # questers = models.ManyToManyField(
-    #     settings.AUTH_USER_MODEL,
-    #     through='UserQuestStatus'
-    # )
-
     class Meta(OrderedModel.Meta):
         default_related_name = 'quests'
 
@@ -47,6 +42,10 @@ class QuestObjective(OrderedModel):
     name = models.CharField(
         _('name'),
         max_length=255,
+    )
+    content = MarkdownField(
+        verbose_name=_('content'),
+        blank=True
     )
     code = models.CharField(
         _('code'),
@@ -71,13 +70,28 @@ class UserQuestStatus(OwnedBase, TimeStampedBase):
         to=QuestObjective,
         blank=True
     )
+    is_complete = models.BooleanField(
+        verbose_name=_('completed'),
+        default=False
+    )
 
-    @property
-    def is_complete(self):
+    def check_if_complete(self):
         for objective in self.quest.objectives.all():
             if not objective in self.completed_objectives.all():
                 return False
         return True
+
+    def get_or_create_next_quest_status(self):
+        next_quest = Quest.objects.get(order=self.quest.order+1)
+        if next_quest:
+            return self.owner.quest_statuses.get_or_create(quest=next_quest)
+
+    def complete_objective(self, objective):
+        if objective in self.quest.objectives.all():
+            self.completed_objectives.add(objective)
+            if self.check_if_complete():
+                self.is_complete = True
+                self.get_or_create_next_quest_status()
 
     class Meta:
         default_related_name = 'quest_statuses'
