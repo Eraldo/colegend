@@ -13,11 +13,23 @@ from colegend.scopes.schema import ScopeType
 from .models import Outcome, Step
 
 
+class OutcomesConnection(CountableConnectionBase):
+    """
+    Custom connection of for outcomes intended to enable custom filtering and adding a total count.
+    Not yet working: https://github.com/graphql-python/graphene-django/issues/273
+    """
+
+    class Meta:
+        abstract = True
+
+    outcomes = DjangoFilterConnectionField(lambda: OutcomeNode, filterset_class=OutcomeFilter)
+
+
 class OutcomeNode(DjangoObjectType):
     class Meta:
         model = Outcome
         interfaces = [graphene.Node]
-        connection_class = CountableConnectionBase
+        connection_class = OutcomesConnection
 
 
 class OutcomeQuery(graphene.ObjectType):
