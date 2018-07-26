@@ -7,10 +7,10 @@ from .models import Hero, Demon, Quote, Quest, QuestObjective, UserQuestStatus, 
 
 class QuestObjectiveInline(OrderedTabularInline):
     model = QuestObjective
-    fields = ['name', 'code', 'order', 'move_up_down_links']
+    fields = ['name', 'code', 'content', 'order', 'move_up_down_links']
     readonly_fields = ['order', 'move_up_down_links']
     show_change_link = True
-    extra = 1
+    extra = 0
     ordering = ['order']
 
 
@@ -48,7 +48,7 @@ class UserQuestStatusForm(forms.ModelForm):
 @admin.register(UserQuestStatus)
 class UserQuestStatusAdmin(admin.ModelAdmin):
     form = UserQuestStatusForm
-    list_filter = ['owner', 'quest', 'completed_objectives']
+    list_filter = ['owner', 'quest', 'is_complete', 'completed_objectives']
     filter_horizontal = ['completed_objectives']
 
     # def __init__(self, *args, **kwargs):

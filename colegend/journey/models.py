@@ -91,6 +91,7 @@ class UserQuestStatus(OwnedBase, TimeStampedBase):
             self.completed_objectives.add(objective)
             if self.check_if_complete():
                 self.is_complete = True
+                self.save()
                 self.get_or_create_next_quest_status()
 
     class Meta:
