@@ -112,6 +112,14 @@ class UserNode(DjangoObjectType):
             return ''
         return self.notes
 
+    def resolve_mentor(self, info):
+        # print('>> mentor')
+        user = info.context.user
+        if user.is_authenticated:
+            # TODO: Fixing hardcoded mentor. => Get available mentor.
+            return User.objects.get(username='Eraldo')
+        return User.objects.none()
+
 
 class UserQuery(graphene.ObjectType):
     users = DjangoFilterConnectionField(UserNode, filterset_class=UserFilter)
