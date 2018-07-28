@@ -19,6 +19,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 from colegend.checkpoints.models import Checkpoint
 from colegend.community.models import Duo, Clan, Tribe
+from colegend.core.fields import MarkdownField
 from colegend.core.models import TimeStampedBase, OwnedBase
 from colegend.core.utils.media_paths import UploadToOwnedDirectory
 from colegend.outcomes.models import Step
@@ -127,7 +128,7 @@ class User(AbstractUser):
         default=_("I am a legend, defining my legend purpose as a member of coLegend.")
     )
 
-    notes = models.TextField(
+    notes = MarkdownField(
         verbose_name=_("notes"),
         help_text=_("Staff notes."),
         blank=True
