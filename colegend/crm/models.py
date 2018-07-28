@@ -52,7 +52,6 @@ class Lead(TimeStampedBase):
     name = models.CharField(
         verbose_name=_('name'),
         max_length=255,
-        unique=True,
     )
     status = models.ForeignKey(
         to=Status,
@@ -61,7 +60,9 @@ class Lead(TimeStampedBase):
     )
     email = models.EmailField(
         _('email address'),
-        blank=True
+        blank=True,
+        null=True,
+        unique=True,
     )
     phone = PhoneNumberField(
         verbose_name=_('phone'),
@@ -71,7 +72,9 @@ class Lead(TimeStampedBase):
     url = models.URLField(
         _('url'),
         max_length=1000,
-        blank=True
+        blank=True,
+        null=True,
+        unique=True,
     )
     country = CountryField(
         verbose_name=_('country'),
