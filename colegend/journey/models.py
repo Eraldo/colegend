@@ -15,6 +15,7 @@ class Quest(OrderedModel):
     name = models.CharField(
         verbose_name=_('name'),
         max_length=255,
+        unique=True
     )
     video_url = models.URLField(
         verbose_name=_('video url'),
