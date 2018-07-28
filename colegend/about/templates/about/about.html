@@ -61,7 +61,7 @@
       <ul class="nav navbar-nav navbar-right pull-right">
         <div class="menu-actions pull-right">
           {% if request.user.is_authenticated %}
-            <a id="welcome" href="{% slugurl 'home' %}" class="btn btn-success">Home</a>
+            <a id="welcome" href="{% slugurl 'welcome' %}" class="btn btn-success">Home</a>
           {% else %}
             <div class="btn-group" role="group">
               <a id="enter" href="{% slugurl 'welcome' %}?next=/" class="btn btn-success">Enter</a>
