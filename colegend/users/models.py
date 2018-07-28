@@ -121,6 +121,12 @@ class User(AbstractUser):
         blank=True
     )
 
+    title = models.CharField(
+        verbose_name=_('title'),
+        max_length=255,
+        blank=True
+    )
+
     purpose = models.CharField(
         verbose_name=_("legend purpose"),
         max_length=255,
