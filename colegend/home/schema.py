@@ -155,7 +155,7 @@ class HabitNode(DjangoObjectType):
         return self.get_stats()
 
     def resolve_is_tracked(self, info):
-        return self.is_tracked
+        return self.has_track()
 
 
 class HabitTrackEventNode(DjangoObjectType):
