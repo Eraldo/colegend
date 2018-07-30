@@ -72,7 +72,7 @@ class UpdateFocusMutation(graphene.relay.ClientIDMutation):
             focus.outcome_4 = None
 
             outcome_ids = [from_global_id(id)[1] for id in kwargs.get('outcomes', [])]
-            new_outcomes = user.outcomes.filter(id__in=outcome_ids)
+            new_outcomes = [user.outcomes.get(id=outcome_id) for outcome_id in outcome_ids]
             for index, outcome in enumerate(new_outcomes):
                 setattr(focus, f'outcome_{index+1}', outcome)
         focus.save()
