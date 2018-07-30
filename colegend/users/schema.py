@@ -2,7 +2,7 @@ from enum import Enum
 
 import graphene
 from allauth.account.signals import user_signed_up
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.core.mail import EmailMessage
 from django_slack import slack_message
 from graphene_django import DjangoObjectType
@@ -208,7 +208,7 @@ class LogoutMutation(graphene.relay.ClientIDMutation):
     def mutate_and_get_payload(cls, root, info):
         # print('>> logout')
         user = info.context.user
-        # logout(request=info.context)
+        logout(request=info.context)
         return LogoutMutation(success=True)
 
 
