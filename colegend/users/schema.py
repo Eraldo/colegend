@@ -98,6 +98,10 @@ class UserNode(DjangoObjectType):
             return self.experience.total(**kwargs)
         return 0
 
+    def resolve_title(self, info):
+        # print('>> title')
+        return self.title or 'Tourist'
+
     def resolve_avatar(self, info, size=Size.MEDIUM.value):
         # print('>> avatar')
         if not self.avatar:
