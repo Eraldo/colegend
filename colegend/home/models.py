@@ -173,6 +173,10 @@ class Habit(OwnedBase, TimeStampedBase, OrderedModel):
         default=0,
     )
 
+    @property
+    def is_tracked(self):
+        return self.has_track()
+
     def track(self):
         """
         Create a track record for this habit if not already present.

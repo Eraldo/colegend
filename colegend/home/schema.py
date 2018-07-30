@@ -133,6 +133,7 @@ class HabitNode(DjangoObjectType):
     # https://github.com/graphql-python/graphene-django/issues/348
     duration = graphene.String()
     stats = graphene.List(graphene.Int)
+    is_tracked = graphene.Boolean()
 
     class Meta:
         model = Habit
@@ -152,6 +153,9 @@ class HabitNode(DjangoObjectType):
 
     def resolve_stats(self, info):
         return self.get_stats()
+
+    def resolve_is_tracked(self, info):
+        return self.is_tracked
 
 
 class HabitTrackEventNode(DjangoObjectType):
