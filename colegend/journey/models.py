@@ -76,6 +76,22 @@ class UserQuestStatus(OwnedBase, TimeStampedBase):
         default=False
     )
 
+    def get_previous(self):
+        try:
+            previous_quest = Quest.objects.get(order=self.quest.order-1)
+            if previous_quest:
+                return self.owner.quest_statuses.get(quest=previous_quest)
+        except (Quest.DoesNotExist, UserQuestStatus.DoesNotExist):
+            return
+
+    def get_next(self):
+        try:
+            next_quest = Quest.objects.get(order=self.quest.order+1)
+            if next_quest:
+                return self.owner.quest_statuses.get(quest=next_quest)
+        except (Quest.DoesNotExist, UserQuestStatus.DoesNotExist):
+            return
+
     def check_if_complete(self):
         for objective in self.quest.objectives.all():
             if not objective in self.completed_objectives.all():

@@ -21,20 +21,35 @@ class QuestObjectiveNode(DjangoObjectType):
 
 
 class UserQuestStatusNode(DjangoObjectType):
+    previous = graphene.Field(lambda: UserQuestStatusNode)
+    next = graphene.Field(lambda: UserQuestStatusNode)
+
     class Meta:
         model = UserQuestStatus
         interfaces = [graphene.Node]
+        connection_class = CountableConnectionBase
+
+    def resolve_next(self, info):
+        return self.get_next()
+
+    def resolve_previous(self, info):
+        return self.get_previous()
 
 
 class UserQuestStatusQuery(graphene.ObjectType):
     # user_quest_status = graphene.Node.Field(UserQuestStatusNode)
     # user_quest_statuses = DjangoFilterConnectionField(UserQuestStatusNode)
-    current_quest_status = graphene.Field(UserQuestStatusNode)
+    current_quest_status = graphene.Field(UserQuestStatusNode, id=graphene.ID())
 
-    def resolve_current_quest_status(self, info):
+    def resolve_current_quest_status(self, info, id=None):
         user = info.context.user
         # Getting the status of the current or next quest.
-        current_quest = user.quest_statuses.last()
+        if id is not None:
+            print(id)
+            _type, id = from_global_id(id)
+            current_quest = user.quest_statuses.get(id=id)
+        else:
+            current_quest = user.quest_statuses.last()
         if not current_quest:
             first_quest = Quest.objects.first()
             if first_quest:
