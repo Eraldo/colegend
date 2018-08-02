@@ -367,9 +367,10 @@ FACEBOOK_KEY = env('FACEBOOK_KEY')
 # ------------------------------------------------------------------------------
 THUMBNAIL_ALIASES = {
     '': {
-        'small': {'size': (50, 50), 'crop': True},
-        'medium': {'size': (100, 100), 'crop': True},
-        'large': {'size': (200, 200), 'crop': True},
+        'MINI': {'size': (50, 50), 'crop': True},
+        'SMALL': {'size': (100, 100), 'crop': True},
+        'MEDIUM': {'size': (200, 200), 'crop': True},
+        'LARGE': {'size': (400, 400), 'crop': True},
     },
 }
 THUMBNAIL_HIGH_RESOLUTION = True

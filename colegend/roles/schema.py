@@ -3,6 +3,8 @@ from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 from graphql_relay import from_global_id
 
+from colegend.api.utils import extract_file
+from colegend.lab.schema import Upload
 from .models import Role
 
 
@@ -111,6 +113,7 @@ class UpdateRoleMutation(graphene.relay.ClientIDMutation):
         name = graphene.String()
         nickname = graphene.String()
         item = graphene.String()
+        icon = Upload()
         purpose = graphene.String()
         strategy = graphene.String()
         powers = graphene.String()
@@ -134,6 +137,9 @@ class UpdateRoleMutation(graphene.relay.ClientIDMutation):
         for key, value in kwargs.items():
             if value is not None:
                 setattr(role, key, value)
+        icon = extract_file(info)
+        if icon:
+            role.icon = icon
         role.save()
         return UpdateRoleMutation(success=True, role=role)
 

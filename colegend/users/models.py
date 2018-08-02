@@ -150,7 +150,7 @@ class User(AbstractUser):
 
     def get_avatar(self, size=None):
         if not size:
-            size = 'medium'
+            size = 'MEDIUM'
         try:
             avatar = self.avatar[size]
             if not avatar:

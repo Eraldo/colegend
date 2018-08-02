@@ -11,6 +11,8 @@ from graphql_relay import from_global_id
 from rest_framework.authtoken.models import Token
 
 from colegend.api.models import CountableConnectionBase
+from colegend.api.utils import extract_file
+from colegend.lab.schema import Upload
 from colegend.office.filters import FocusFilter
 from colegend.office.schema import FocusNode
 from colegend.outcomes.filters import OutcomeFilter, StepFilter
@@ -24,9 +26,10 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Size(Enum):
-    SMALL = 'small'
-    MEDIUM = 'medium'
-    LARGE = 'large'
+    MINI = 'MINI'
+    SMALL = 'SMALL'
+    MEDIUM = 'MEDIUM'
+    LARGE = 'LARGE'
 
 
 SizeType = graphene.Enum.from_enum(Size)
@@ -222,13 +225,14 @@ class UpdateUserMutation(graphene.relay.ClientIDMutation):
     class Input:
         name = graphene.String()
         username = graphene.String()
+        avatar = Upload()
         gender = graphene.String()
         purpose = graphene.String()
         status = graphene.String()
         registration_country = graphene.String()
 
     @classmethod
-    def mutate_and_get_payload(cls, root, info, username=None, name=None, gender=None, purpose=None, status=None,
+    def mutate_and_get_payload(cls, root, info, username=None, name=None, avatar=None, gender=None, purpose=None, status=None,
                                registration_country=None):
         # print('>> update user')
         user = info.context.user
@@ -236,6 +240,9 @@ class UpdateUserMutation(graphene.relay.ClientIDMutation):
             user.username = username
         if name:
             user.name = name
+        avatar = extract_file(info)
+        if avatar:
+            user.avatar = avatar
         if gender:
             user.gender = gender
         if purpose:
