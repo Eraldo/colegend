@@ -19,30 +19,22 @@ from colegend.outcomes.filters import OutcomeFilter, StepFilter
 from colegend.outcomes.schema import OutcomeNode, StepNode
 from colegend.studio.filters import JournalEntryFilter
 from colegend.studio.schema import JournalEntryNode
-from .models import User
+from .models import User, ImageSize
 from .filters import UserFilter
 from graphene_django.converter import convert_django_field
 from phonenumber_field.modelfields import PhoneNumberField
 
-
-class Size(Enum):
-    MINI = 'MINI'
-    SMALL = 'SMALL'
-    MEDIUM = 'MEDIUM'
-    LARGE = 'LARGE'
-
-
-SizeType = graphene.Enum.from_enum(Size)
+SizeType = graphene.Enum.from_enum(ImageSize)
 
 
 class App(Enum):
-    HOME = 'home'
-    ARCADE = 'arcade'
-    OFFICE = 'office'
-    COMMUNITY = 'community'
-    STUDIO = 'studio'
-    ACADEMY = 'academy'
-    JOURNEY = 'journey'
+    HOME = 'HOME'
+    ARCADE = 'ARCADE'
+    OFFICE = 'OFFICE'
+    COMMUNITY = 'COMMUNITY'
+    STUDIO = 'STUDIO'
+    ACADEMY = 'ACADEMY'
+    JOURNEY = 'JOURNEY'
 
 
 AppType = graphene.Enum.from_enum(App)
@@ -105,7 +97,7 @@ class UserNode(DjangoObjectType):
         # print('>> title')
         return self.title or 'Tourist'
 
-    def resolve_avatar(self, info, size=Size.MEDIUM.value):
+    def resolve_avatar(self, info, size=ImageSize.MEDIUM.value):
         # print('>> avatar')
         if not self.avatar:
             return self.get_avatar_fallback()
@@ -232,7 +224,8 @@ class UpdateUserMutation(graphene.relay.ClientIDMutation):
         registration_country = graphene.String()
 
     @classmethod
-    def mutate_and_get_payload(cls, root, info, username=None, name=None, avatar=None, gender=None, purpose=None, status=None,
+    def mutate_and_get_payload(cls, root, info, username=None, name=None, avatar=None, gender=None, purpose=None,
+                               status=None,
                                registration_country=None):
         # print('>> update user')
         user = info.context.user

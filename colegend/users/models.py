@@ -2,6 +2,7 @@
 from __future__ import unicode_literals, absolute_import
 
 import hashlib
+from enum import Enum
 from urllib.parse import quote_plus
 
 from allauth.account.signals import user_signed_up
@@ -26,6 +27,13 @@ from colegend.outcomes.models import Step
 from colegend.roles.models import Role
 
 SYSTEM_USER_USERNAME = 'coLegend'
+
+
+class ImageSize(Enum):
+    MINI = 'MINI'
+    SMALL = 'SMALL'
+    MEDIUM = 'MEDIUM'
+    LARGE = 'LARGE'
 
 
 class UserQuerySet(models.QuerySet):
@@ -148,9 +156,7 @@ class User(AbstractUser):
             )
             self.save()
 
-    def get_avatar(self, size=None):
-        if not size:
-            size = 'MEDIUM'
+    def get_avatar(self, size=ImageSize.MEDIUM.value):
         try:
             avatar = self.avatar[size]
             if not avatar:
