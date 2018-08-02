@@ -45,7 +45,6 @@ class UserQuestStatusQuery(graphene.ObjectType):
         user = info.context.user
         # Getting the status of the current or next quest.
         if id is not None:
-            print(id)
             _type, id = from_global_id(id)
             current_quest = user.quest_statuses.get(id=id)
         else:
