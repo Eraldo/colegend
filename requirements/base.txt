@@ -67,7 +67,7 @@ redis>=2.10.6  # https://github.com/antirez/redis
 # ------------------------------------------------
 celery==4.2.1  # pyup: <5.0  # https://github.com/celery/celery
 django-celery-results==1.0.1
-django-celery-beat-1.1.1
+django-celery-beat==1.1.1
 
 
 # Your custom requirements go here
