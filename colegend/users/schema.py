@@ -61,6 +61,9 @@ class UserNode(DjangoObjectType):
     notes = graphene.Field(
         graphene.String,
     )
+    is_authenticated = graphene.Field(
+        graphene.Boolean,
+    )
 
     # Workaround: https://github.com/graphql-python/graphene-django/issues/273
     outcomes = DjangoFilterConnectionField(OutcomeNode, filterset_class=OutcomeFilter)
@@ -72,6 +75,13 @@ class UserNode(DjangoObjectType):
         model = User
         interfaces = [graphene.Node]
         connection_class = CountableConnectionBase
+
+    def resolve_is_authenticated(self, info):
+        # print('>> is_authenticated')
+        user = info.context.user
+        if user.pk == self.pk:
+            return self.is_authenticated
+        return False
 
     def resolve_level(self, info, app=None):
         # print('>> level')
