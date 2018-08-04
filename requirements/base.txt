@@ -104,3 +104,7 @@ django-extensions==2.0.6  # https://github.com/django-extensions/django-extensio
 # django-debug-toolbar that works with Django 1.5+
 # ------------------------------------------------
 django-debug-toolbar==1.9.1  # https://github.com/jazzband/django-debug-toolbar
+
+# Chat bot (discordapp)
+# ------------------------------------------------
+discord.py==0.16.12

@@ -471,6 +471,10 @@ SIMPLEMDE_OPTIONS = {
     'spellChecker': False,
 }
 
+# coDroid discord bot
+# ------------------------------------------------------------------------------
+BOT_TOKEN = env('BOT_TOKEN')
+
 # django-extensions
 # ------------------------------------------------------------------------------
 # https://django-extensions.readthedocs.io/en/latest/installation_instructions.html#configuration

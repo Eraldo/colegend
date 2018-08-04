@@ -1,5 +1,3 @@
-import json
-
 # Example import:
 # from colegend.users.models import User
 
