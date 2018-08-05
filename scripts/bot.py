@@ -28,7 +28,8 @@ def run():
 
     @bot.event
     async def on_ready():
-        await bot.change_presence(game=Game(name='coLegend.org'))
+        game = Game(name='coLegend.org', url='www.coLegend.org')
+        await bot.change_presence(game=game, activity=game)
         logger.info(f'Logged in as {bot.user.name}, id: {bot.user.id}')
 
     @bot.command()
