@@ -220,3 +220,18 @@ def graph():
     """Create a model visualization graph: fab [environment] graph"""
     if env.name == 'development':
         local("./manage.py graph_models -a -g -o model_graph.png")
+
+
+def restart_cobot():
+    """Restart the chat bot: fab [environment] restart_cobot"""
+    run('svc -du ~/service/cobot')
+
+
+def restart_coworker():
+    """Restart the celery worker: fab [environment] restart_coworker"""
+    run('svc -du ~/service/coworker')
+
+
+def restart_cobeat():
+    """Restart the celery beat scheduler: fab [environment] restart_cobeat"""
+    run('svc -du ~/service/cobeat')
