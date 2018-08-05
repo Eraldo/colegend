@@ -64,6 +64,9 @@ media/
 # Browser components (bower)
 # colegend/static/components/
 
+# celery
+celerybeat-schedule
+
 # local files
 local/
 backups/

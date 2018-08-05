@@ -1,6 +1,7 @@
 import logging
 import random
 
+from discord import Game, Member
 from discord.ext import commands
 from django.conf import settings
 
@@ -27,7 +28,13 @@ def run():
 
     @bot.event
     async def on_ready():
+        bot.change_presence(game=Game(name='coLegend.org'))
         logger.info(f'Logged in as {bot.user.name}, id: {bot.user.id}')
+
+    @bot.command()
+    async def joined(member: Member):
+        """Says when a member joined."""
+        await bot.say(f'{member.name} joined in {member.joined_at}')
 
     @bot.command()
     async def roll(dice: str):

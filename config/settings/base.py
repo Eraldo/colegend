@@ -341,7 +341,7 @@ CELERYD_TASK_SOFT_TIME_LIMIT = 60
 # Celery results backend
 INSTALLED_APPS += ['django_celery_results']
 INSTALLED_APPS += ['django_celery_beat']
-CELERYBEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 CELERY_BEAT_SCHEDULE = {
     # 'add-every-30-seconds': {
     #     'task': 'colegend.core.tasks.add',
