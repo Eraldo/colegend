@@ -20,10 +20,23 @@ class Command(BaseCommand):
         """
         logger = logging.getLogger(__name__)
 
-        self.stdout.write(f'[{book}] {old} => {new}')
+        self.stdout.write('Starting coDroid')
 
         description = '''coDroid: I am coLegends chat service robot. :D'''
         bot = commands.Bot(command_prefix='?', description=description)
+
+
+        @bot.event
+        async def on_message(message):
+            # we do not want the bot to reply to itself
+            if message.author == bot.user:
+                return
+
+            # TODO: Only introductions channel counts.
+            if 'I was here'.lower() in message.content.lower():
+                portal = 'http://app.colegend.org/#/portal/unlock-chat'
+                msg = f'I welcome you to our coChat and confirm that you were here.\nTo continue your quest, walk through this portal: {portal}'
+                await bot.send_message(message.author, msg)
 
         @bot.command()
         async def quote():

@@ -348,7 +348,7 @@ def new_user_notification(request, user, **kwargs):
     username = str(user.username)
     reply_emails = [user.email]
     subject = "New user: {}".format(username)
-    message = "Hurray! {} has joined the circle of legends.".format(username)
+    message = f"Hurray! {username} has joined the circle of legends."
 
     email = EmailMessage(subject=subject, body=message, to=managers, reply_to=reply_emails)
     email.send()
@@ -358,7 +358,7 @@ def new_user_notification(request, user, **kwargs):
             'name': user.name,
             'icon_url': user.get_avatar()
         },
-        'description': f'I want us to make ${user.name} feel welcome here. ;)'
+        'description': f'I want us to make {user.name} feel welcome here. ;)'
     }
     send_chat_message.delay(message, embeds=[embed], channel=Channel.COMMUNITY.value)
 
