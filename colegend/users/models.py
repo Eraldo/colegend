@@ -357,7 +357,8 @@ def new_user_notification(request, user, **kwargs):
         'author': {
             'name': user.name,
             'icon_url': user.get_avatar()
-        }
+        },
+        'description': f'I want us to make ${user.name} feel welcome here. ;)'
     }
     send_chat_message.delay(message, embeds=[embed], channel=Channel.COMMUNITY.value)
 
