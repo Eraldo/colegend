@@ -33,7 +33,7 @@ class RoleNode(DjangoObjectType):
         :return:
         """
         user = info.context.user
-        if user.is_superuser or user in self.users.all():
+        if user.is_staff or user in self.users.all():
             return self.strategy
         else:
             return ''
@@ -45,7 +45,7 @@ class RoleNode(DjangoObjectType):
         :return:
         """
         user = info.context.user
-        if user.is_superuser or user in self.users.all():
+        if user.is_staff or user in self.users.all():
             return self.history
         else:
             return ''
@@ -57,7 +57,7 @@ class RoleNode(DjangoObjectType):
         :return:
         """
         user = info.context.user
-        if user.is_superuser or user in self.users.all():
+        if user.is_staff or user in self.users.all():
             return self.notes
         else:
             return ''
@@ -69,7 +69,7 @@ class RoleNode(DjangoObjectType):
         :return:
         """
         user = info.context.user
-        if user.is_superuser or user in self.users.all():
+        if user.is_staff or user in self.users.all():
             return self.checklists
         else:
             return ''
@@ -81,7 +81,7 @@ class RoleNode(DjangoObjectType):
         :return:
         """
         user = info.context.user
-        if user.is_superuser or user in self.users.all():
+        if user.is_staff or user in self.users.all():
             return self.metrics
         else:
             return ''
