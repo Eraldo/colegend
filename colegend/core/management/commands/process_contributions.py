@@ -10,7 +10,8 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         """Deduct the user chosen contribution amount from its balance"""
 
-        self.stdout.write('# Contribution report {date}'.format(date=timezone.localtime(timezone.now()).date()))
+        date = timezone.localtime(timezone.now()).date()
+        self.stdout.write(f'# Contribution report {date}')
 
         for user in User.objects.all():
             message = ''
