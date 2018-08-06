@@ -6,6 +6,7 @@ from enum import Enum
 from urllib.parse import quote_plus
 
 from allauth.account.signals import user_signed_up
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser, Group, UserManager as AuthUserManager
 from django.core.mail import EmailMessage
 from django.db import models
@@ -18,6 +19,7 @@ from easy_thumbnails.exceptions import InvalidImageFormatError
 from easy_thumbnails.fields import ThumbnailerImageField
 from phonenumber_field.modelfields import PhoneNumberField
 
+from colegend.chat.tasks import send_chat_message, Channel
 from colegend.checkpoints.models import Checkpoint
 from colegend.community.models import Duo, Clan, Tribe
 from colegend.core.fields import MarkdownField
@@ -158,22 +160,19 @@ class User(AbstractUser):
 
     def get_avatar(self, size=ImageSize.MEDIUM.value):
         try:
-            avatar = self.avatar[size]
-            if not avatar:
-                avatar = self.avatar
+            return self.avatar[size]
         except InvalidImageFormatError:
             if self.avatar:
                 return self.avatar
-            avatar = None
-        return avatar
+        return self.avatar or self.get_avatar_fallback(size)
 
-    def get_avatar_fallback(self):
+    def get_avatar_fallback(self, size=ImageSize.MEDIUM.value):
         email_md5 = hashlib.md5(self.email.encode('utf-8')).hexdigest() if self.email else ''
         name = quote_plus(self.name) if self.name else 'Anonymous'
         return 'https://www.gravatar.com/avatar/{email_md5}?s={size}&d=https%3A%2F%2Fui-avatars.com%2Fapi%2F/{name}/{size}/{bg_color}/{fg_color}'.format(
             email_md5=email_md5,
             name=name,
-            size=400,
+            size=settings.THUMBNAIL_ALIASES.get('')[size]['size'][0],
             bg_color='A5D6A7',
             fg_color='fff',
         )
@@ -331,11 +330,12 @@ class User(AbstractUser):
 
 
 @receiver(user_signed_up)
-def new_user_manager_notification(request, user, **kwargs):
+def new_user_notification(request, user, **kwargs):
     """
-    Sends an email notification and a slack message upon successful user signup.
+    Sends an email notification and a chat message upon successful user signup.
+
     The Email is sent to the site managers.
-    The slack message is sent to the default slack channel from the project settings.
+    The chat message is sent to the default slack channel from the project settings.
     :param request:
     :param user:
     :param kwargs:
@@ -352,5 +352,13 @@ def new_user_manager_notification(request, user, **kwargs):
 
     email = EmailMessage(subject=subject, body=message, to=managers, reply_to=reply_emails)
     email.send()
+
+    embed = {
+        'author': {
+            'name': user.name,
+            'icon_url': user.get_avatar()
+        }
+    }
+    send_chat_message.delay(message, embeds=[embed], channel=Channel.COMMUNITY.value)
 
     slack_message('slack/message.slack', {'message': '@channel: {}'.format(message), }, fail_silently=False)

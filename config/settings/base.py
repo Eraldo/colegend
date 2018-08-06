@@ -491,6 +491,9 @@ SIMPLEMDE_OPTIONS = {
 # coDroid discord bot
 # ------------------------------------------------------------------------------
 BOT_TOKEN = env('BOT_TOKEN')
+CHAT_ANNOUNCEMENTS_WEBHOOK = env('CHAT_ANNOUNCEMENTS_WEBHOOK', default='')
+CHAT_COMMUNITY_WEBHOOK = env('CHAT_COMMUNITY_WEBHOOK', default='')
+CHAT_HEADQUATERS_WEBHOOK = env('CHAT_HEADQUATERS_WEBHOOK', default='')
 
 # django-extensions
 # ------------------------------------------------------------------------------
