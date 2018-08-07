@@ -65,7 +65,7 @@ class SuggestedActionQuery(graphene.ObjectType):
                         return ActionType(type=Actions.TRACKING_STATS.value)
                 else:
                     id = to_global_id(HabitNode._meta.name, next_habit.id)
-                    payload = {'id': id, 'name': next_habit.name}
+                    payload = {'id': id, 'name': next_habit.name, 'icon': next_habit.icon or '🔄'}
                     return ActionType(type=Actions.TRACKING_HABIT.value, payload=payload)
         return None
 
