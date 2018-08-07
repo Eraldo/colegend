@@ -44,6 +44,27 @@
   <link href="{% static 'about/css/index.css' %}" rel="stylesheet">
   <link href="{% static 'about/css/about.css' %}" rel="stylesheet">
   <link href="{% static 'css/colegend.css' %}" rel="stylesheet">
+
+  <!-- Chat embed -->
+  <script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async defer>
+    const button = new Crate({
+      server: '474143259787001887',
+      channel: '476329696238239745',
+      shard: 'https://cl1.widgetbot.io',
+      css: '.css-1ggwz7j {display: none;}',
+      color: '#00BCD4',
+      glyph: ['{% static 'about/img/coChat-bubbles.png' %}', '60%'],
+      indicator: true,
+      notifications: true
+    });
+    setTimeout( function() {
+      button.notify({
+        content: "Welcome, let's chat! 😊",
+        avatar: '{% static 'about/img/coChat-bubbles.png' %}'
+      });
+      }, 8000);
+  </script>
+
 </head>
 <body id="page-top" class="bg-main-superlight">
 <div class="navbar-wrapper">
@@ -2231,18 +2252,18 @@
   <audio id="audioplayer" src="{% static 'audio/coLegend_song.mp3' %}" controls loop></audio>
 </div>
 
-<div class="feedback-button-container">
-  <div class="hidden-xs-down">
-    <a href="mailto:connect@coLegend.org" target="_blank">
-      <img id="feedback-button" src="{% static 'images/feedback.png' %}" alt="Feedback"/>
-    </a>
-  </div>
-  <div class="hidden-sm-up">
-    <a href="mailto:connect@coLegend.org" target="_blank">
-      <img id="feedback-button-mobile" src="{% static 'images/feedback.png' %}" alt="Feedback"/>
-    </a>
-  </div>
-</div>
+{#<div class="feedback-button-container">#}
+{#  <div class="hidden-xs-down">#}
+{#    <a href="mailto:connect@coLegend.org" target="_blank">#}
+{#      <img id="feedback-button" src="{% static 'images/feedback.png' %}" alt="Feedback"/>#}
+{#    </a>#}
+{#  </div>#}
+{#  <div class="hidden-sm-up">#}
+{#    <a href="mailto:connect@coLegend.org" target="_blank">#}
+{#      <img id="feedback-button-mobile" src="{% static 'images/feedback.png' %}" alt="Feedback"/>#}
+{#    </a>#}
+{#  </div>#}
+{#</div>#}
 
 <script src="{% static 'js/jquery-2.1.1.js' %}"></script>
 <script src="{% static 'components/jquery/dist/jquery.min.js' %}"></script>
@@ -2252,6 +2273,6 @@
 <script src="{% static 'js/cbpAnimatedHeader.js' %}"></script>
 <script src="{% static 'js/wow.min.js' %}"></script>
 <script src="{% static 'js/inspinia.js' %}"></script>
-{% wagtailuserbar %}
+{% wagtailuserbar 'bottom-left' %}
 </body>
 </html>

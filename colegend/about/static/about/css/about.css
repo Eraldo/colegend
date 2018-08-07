@@ -104,4 +104,8 @@ section.video-header {
   .navbar-nav .nav-item {
     display: flex !important; } }
 
+.chat-box {
+  background: red !important;
+}
+
 /*# sourceMappingURL=about.css.map */
