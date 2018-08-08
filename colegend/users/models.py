@@ -250,7 +250,7 @@ class User(AbstractUser):
         return checkpoint
 
     def has_role(self, name):
-        return self.roles.contains_name(name)
+        return self.is_superuser or self.roles.contains_name(name)
 
     def add_role(self, name):
         role, created = Role.objects.get_or_create(name=name)
