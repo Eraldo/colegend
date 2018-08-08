@@ -102,26 +102,6 @@ class AdventureReviewMutations(graphene.ObjectType):
     create_adventure_review = CreateAdventureReviewMutation.Field()
 
 
-class DeckNode(DjangoObjectType):
-    class Meta:
-        model = Deck
-        filter_fields = {
-            'name': ['exact', 'istartswith', 'icontains'],
-            'content': ['exact', 'icontains'],
-        }
-        connection_class = CountableConnectionBase
-        interfaces = [graphene.Node]
-
-    def resolve_image(self, info):
-        if not self.image:
-            return ''
-        url = self.image.url
-        return info.context.build_absolute_uri(url)
-
-
-class DeckQuery(graphene.ObjectType):
-    deck = graphene.Node.Field(DeckNode)
-    decks = DjangoFilterConnectionField(DeckNode)
 
 
 class CardNode(DjangoObjectType):
@@ -145,6 +125,35 @@ class CardNode(DjangoObjectType):
 class CardQuery(graphene.ObjectType):
     card = graphene.Node.Field(CardNode)
     cards = DjangoFilterConnectionField(CardNode)
+
+
+class DeckNode(DjangoObjectType):
+    class Meta:
+        model = Deck
+        filter_fields = {
+            'name': ['exact', 'istartswith', 'icontains'],
+            'content': ['exact', 'icontains'],
+        }
+        connection_class = CountableConnectionBase
+        interfaces = [graphene.Node]
+
+    def resolve_image(self, info):
+        if not self.image:
+            return ''
+        url = self.image.url
+        return info.context.build_absolute_uri(url)
+
+
+class DeckQuery(graphene.ObjectType):
+    deck = graphene.Node.Field(DeckNode)
+    decks = DjangoFilterConnectionField(DeckNode)
+    bonding_cards = graphene.Field(DeckNode)
+
+    def resolve_bonding_cards(self, info):
+        user = info.context.user
+        if user.is_authenticated:
+            deck = Deck.objects.get(name__istartswith='bonding')
+            return deck
 
 
 class JokeNode(DjangoObjectType):
