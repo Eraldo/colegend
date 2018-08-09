@@ -207,6 +207,13 @@ class User(AbstractUser):
         blank=True,
     )
 
+    chat_id = models.CharField(
+        verbose_name=_("chat id"),
+        max_length=255,
+        null=True, blank=True,
+        unique=True,
+    )
+
     duo = models.ForeignKey(
         verbose_name=_('duo'),
         to=Duo,

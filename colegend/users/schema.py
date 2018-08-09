@@ -3,6 +3,7 @@ from enum import Enum
 import graphene
 from allauth.account.signals import user_signed_up
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.core.mail import EmailMessage
 from django_slack import slack_message
 from graphene_django import DjangoObjectType
@@ -240,6 +241,7 @@ class UpdateUserMutation(graphene.relay.ClientIDMutation):
         # print('>> update user')
         user = info.context.user
         if username:
+            UnicodeUsernameValidator()(username)
             user.username = username
         if name:
             user.name = name

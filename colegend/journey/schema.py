@@ -80,13 +80,15 @@ class EnableChatMutation(graphene.relay.ClientIDMutation):
     success = graphene.Boolean()
 
     class Input:
-        pass
+        id = graphene.String()
 
     @classmethod
-    def mutate_and_get_payload(cls, root, info):
+    def mutate_and_get_payload(cls, root, info, id):
         user = info.context.user
         success = False
         if user.is_authenticated:
+            user.chat_id = id
+            user.save()
             checkpoint = user.add_checkpoint('chat')
             quest_status = user.quest_statuses.first()
             if checkpoint and quest_status and not quest_status.is_complete:

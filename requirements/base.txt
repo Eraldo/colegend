@@ -109,4 +109,5 @@ django-debug-toolbar==1.9.1  # https://github.com/jazzband/django-debug-toolbar
 
 # Chat bot (discordapp)
 # ------------------------------------------------
-discord.py==0.16.12
+# discord.py==0.16.12
+-e git+https://github.com/Rapptz/discord.py@rewrite#egg=discord.py
