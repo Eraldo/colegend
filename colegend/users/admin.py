@@ -67,7 +67,7 @@ class UserAdmin(AuthUserAdmin):
         (_('Data'), {
             'fields': (
                 'avatar', 'title', 'purpose', 'status',
-                'duo', 'clan', 'tribe', 'mentor'
+                'chat_id', 'duo', 'clan', 'tribe', 'mentor'
             )
         }),
         (_('Permissions'), {
