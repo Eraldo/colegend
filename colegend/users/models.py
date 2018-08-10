@@ -352,10 +352,9 @@ def new_user_notification(request, user, **kwargs):
     # managers = [user.email for user in manager_group.user_set.all()]
     # TODO: Switch to managers group as soon as it is stable
     managers = ['connect@coLegend.org']
-    username = str(user.username)
     reply_emails = [user.email]
-    subject = "New user: {}".format(username)
-    message = f"Hurray! {username} has joined the circle of legends."
+    subject = f"New user: {user.username}"
+    message = f"Hurray! {user.name} has joined the circle of legends."
 
     email = EmailMessage(subject=subject, body=message, to=managers, reply_to=reply_emails)
     email.send()
