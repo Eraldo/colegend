@@ -75,7 +75,7 @@ class Outcome(AutoUrlsMixin, OwnedBase, TaggableBase, TimeStampedBase):
         default=CURRENT,
         max_length=10,
     )
-    inbox = models.BooleanField(default=True)
+    inbox = models.BooleanField(default=False)
     scope = ScopeField()
     date = models.DateField(
         _('date'),
