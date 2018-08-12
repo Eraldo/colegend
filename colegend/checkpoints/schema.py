@@ -2,6 +2,7 @@ import graphene
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 
+from colegend.journey.models import QuestObjective
 from .models import Checkpoint
 
 
@@ -37,7 +38,7 @@ class CheckpointQuery(graphene.ObjectType):
         return True
 
 
-class AddCheckpoint(graphene.relay.ClientIDMutation):
+class AddCheckpointMutation(graphene.relay.ClientIDMutation):
     checkpoint = graphene.Field(CheckpointNode)
 
     class Input:
@@ -47,10 +48,17 @@ class AddCheckpoint(graphene.relay.ClientIDMutation):
     def mutate_and_get_payload(cls, root, info, name):
         user = info.context.user
         if not user.is_authenticated:
-            return AddCheckpoint(checkpoint=Checkpoint.objects.none())
+            return AddCheckpointMutation(checkpoint=Checkpoint.objects.none())
         checkpoint = user.add_checkpoint(name)
-        return AddCheckpoint(checkpoint=checkpoint)
+        # TODO: Fix workaround by implementing clear quest/objective completion flow/triggers.
+        if checkpoint.name == 'colegend tutorial':
+            # Complete associated quest objective
+            quest_status = user.quest_statuses.first()
+            if checkpoint and quest_status:
+                objective = QuestObjective.objects.get(code='intro_watch')
+                quest_status.complete_objective(objective)
+        return AddCheckpointMutation(checkpoint=checkpoint)
 
 
 class CheckpointMutation(graphene.ObjectType):
-    add_checkpoint = AddCheckpoint.Field()
+    add_checkpoint = AddCheckpointMutation.Field()
