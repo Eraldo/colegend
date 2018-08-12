@@ -252,10 +252,31 @@ class AddTribeMutation(graphene.relay.ClientIDMutation):
         return AddTribeMutation(tribe=tribe)
 
 
+class UpdateTribeMutation(graphene.relay.ClientIDMutation):
+    tribe = graphene.Field(TribeNode)
+
+    class Input:
+        id = graphene.ID()
+        name = graphene.String()
+        notes = graphene.String()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, id, name=None, notes=None):
+        _type, id = from_global_id(id)
+        tribe = Tribe.objects.get(id=id)
+        if name is not None:
+            tribe.name = name
+        if notes is not None:
+            tribe.notes = notes
+        tribe.save()
+        return UpdateTribeMutation(tribe=tribe)
+
+
 class TribeMutation(graphene.ObjectType):
     add_tribe = AddTribeMutation.Field()
     join_tribe = JoinTribeMutation.Field()
     quit_tribe = QuitTribeMutation.Field()
+    update_tribe = UpdateTribeMutation.Field()
 
 
 class CommunityQuery(
