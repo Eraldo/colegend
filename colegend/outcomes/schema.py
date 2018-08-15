@@ -5,6 +5,7 @@ from graphene_django.filter import DjangoFilterConnectionField
 from graphql_relay import from_global_id
 
 from colegend.api.models import CountableConnectionBase
+from colegend.api.utils import require_authentication
 from colegend.office.types import StatusType
 from colegend.outcomes.elo import calculate_elo
 from colegend.outcomes.filters import OutcomeFilter, StepFilter
@@ -266,9 +267,12 @@ class UpdateStepMutation(graphene.relay.ClientIDMutation):
     @classmethod
     def mutate_and_get_payload(cls, root, info, id, name=None, toggle=None, order=None):
         user = info.context.user
+        require_authentication(user)
+
+        # Getting step and checking permission.
         _type, id = from_global_id(id)
-        # TODO: Checking permission.
-        step = Step.objects.get(id=id)
+        step = Step.objects.get(id=id, outcome__owner=user)
+
         if name is not None:
             step.name = name
         if toggle is not None:

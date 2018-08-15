@@ -2,6 +2,7 @@ import graphene
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 
+from colegend.api.utils import require_authentication
 from colegend.journey.models import QuestObjective
 from .models import Checkpoint
 
@@ -47,8 +48,8 @@ class AddCheckpointMutation(graphene.relay.ClientIDMutation):
     @classmethod
     def mutate_and_get_payload(cls, root, info, name):
         user = info.context.user
-        if not user.is_authenticated:
-            return AddCheckpointMutation(checkpoint=Checkpoint.objects.none())
+        require_authentication(user)
+
         checkpoint = user.add_checkpoint(name)
         # TODO: Fix workaround by implementing clear quest/objective completion flow/triggers.
         if checkpoint.name == 'colegend tutorial':

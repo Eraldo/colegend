@@ -3,6 +3,7 @@ from enum import Enum
 import graphene
 from django.utils import timezone
 
+from colegend.api.utils import require_authentication
 from colegend.core.intuitive_duration.modelfields import IntuitiveDurationField
 from colegend.core.intuitive_duration.utils import intuitive_duration_string, parse_intuitive_duration
 from colegend.core.utils.icons import Icon
@@ -269,8 +270,7 @@ class TrackHabitMutation(graphene.relay.ClientIDMutation):
     @classmethod
     def mutate_and_get_payload(cls, root, info, id):
         user = info.context.user
-        if not user.is_authenticated:
-            raise Exception('Authentication required.')
+        require_authentication(user)
 
         _type, id = from_global_id(id)
         habit = user.habits.get(id=id)
