@@ -269,22 +269,27 @@ class TrackHabitMutation(graphene.relay.ClientIDMutation):
     @classmethod
     def mutate_and_get_payload(cls, root, info, id):
         user = info.context.user
+        if not user.is_authenticated:
+            raise Exception('Authentication required.')
+
         _type, id = from_global_id(id)
         habit = user.habits.get(id=id)
 
-        today = timezone.localtime(timezone.now()).date()
+        # Handle system controlled habits.
+        if habit.is_controlled:
+            raise Exception('Controlled habits cannot be tracked manually.')
 
-        # TODO: Handle system controlled habits.
+        track = habit.track()
+        if track:
+            habit.save()
+            # Limit how many experience I can get per day.
 
-        track, created = habit.track_events.get_or_create(created__date=today)
-        if created:
-            if habit.scope == Scope.DAY.value:
-                if habit.track_events.filter(created__date=today - timezone.timedelta(days=1)).exists():
-                    habit.increase_streak()
-                    habit.save()
-                else:
-                    habit.reset_streak(to=1)
-            # TODO: Implement streak updates / success criteria for other scopes.
+            # Get the number of today's track events:
+            today = timezone.localtime(timezone.now()).date()
+            number_of_tracks_today = HabitTrackEvent.objects.filter(habit__owner=user, created__date=today).count()
+
+            if number_of_tracks_today <= 4:
+                add_experience(user, 'home')
 
         return TrackHabitMutation(track=track)
 

@@ -182,8 +182,7 @@ class Habit(OwnedBase, TimeStampedBase, OrderedModel):
         Create a track record for this habit if not already present.
         And update the streak on successful track creation.
         :return:
-            True: On tracking success
-            False: On tracking failure
+            `track`: On tracking success
         """
         if not self.has_track():
             today = timezone.localtime(timezone.now()).date()
@@ -191,8 +190,7 @@ class Habit(OwnedBase, TimeStampedBase, OrderedModel):
             track, created = self.track_events.get_or_create(created__date=today)
             if created:
                 self.increase_streak()
-                return True
-        return False
+                return track
 
     def has_track(self, date=None):
         """
