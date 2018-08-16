@@ -6,6 +6,7 @@ from graphql_relay import from_global_id
 
 from colegend.api.models import CountableConnectionBase
 from colegend.api.utils import require_authentication
+from colegend.experience.models import add_experience
 from colegend.office.types import StatusType
 from colegend.outcomes.elo import calculate_elo
 from colegend.outcomes.filters import OutcomeFilter, StepFilter
@@ -275,10 +276,14 @@ class UpdateStepMutation(graphene.relay.ClientIDMutation):
 
         if name is not None:
             step.name = name
+
         if toggle is not None:
             step.toggle()
+            if step.is_closed and step.outcome.is_focus:
+                add_experience(user, 'office')
         if order is not None:
             step.to(order)
+
         step.save()
         return UpdateStepMutation(success=True, step=step)
 

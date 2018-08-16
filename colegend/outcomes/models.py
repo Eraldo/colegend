@@ -192,7 +192,7 @@ class Step(TimeStampedBase, OrderedModel):
 
     @property
     def is_open(self):
-        return not self.is_open
+        return not self.is_closed
 
     @property
     def is_closed(self):

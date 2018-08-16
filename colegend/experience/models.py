@@ -1,5 +1,6 @@
 from django.db import models
-from django.db.models import Sum, Max
+from django.db.models import Sum
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from colegend.core.models import OwnedBase, TimeStampedBase, OwnedQuerySet
@@ -64,4 +65,8 @@ class Experience(OwnedBase, TimeStampedBase):
 
 
 def add_experience(user, action, amount=1):
-    return user.experience.create(owner=user, action=action, amount=amount)
+    # Daily experience caps:
+    today = timezone.localtime(timezone.now()).date()
+    app_exp_today = user.experience.filter(action=action, created__date=today).count()
+    if app_exp_today <= 4:
+        return user.experience.create(owner=user, action=action, amount=amount)
