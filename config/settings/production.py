@@ -249,7 +249,7 @@ CRON_TIMESTAMP = '`date +\%Y-\%m-\%dT\%H\%M`'
 CRON_LOGS_PATH = '~/colegend/logs/'
 CRONJOBS = [
     ('0 0 4 * *', 'django.core.management.call_command', ['process_contributions']),
-    ('0 2 * * *', 'django.core.management.call_command', ['update_journal_streaks'], {}, f'>> {CRON_LOGS_PATH}update_journal_streaks_{CRON_TIMESTAMP}.txt'),
+    ('0 2 * * *', 'django.core.management.call_command', ['update_habit_streaks'], {}, f'>> {CRON_LOGS_PATH}update_habit_streaks_{CRON_TIMESTAMP}.txt'),
     ('0 14 * * *', 'django.core.management.call_command', ['generate_focus_reports', 'day'], {}, f'>> {CRON_LOGS_PATH}generate_focus_day_reports_{CRON_TIMESTAMP}.txt'),
     ('0 2 * * Mon', 'django.core.management.call_command', ['generate_focus_reports', 'week'], {}, f'>> {CRON_LOGS_PATH}generate_focus_week_reports_{CRON_TIMESTAMP}.txt'),
     ('0 2 8 * *', 'django.core.management.call_command', ['generate_focus_reports', 'month'], {}, f'>> {CRON_LOGS_PATH}generate_focus_month_reports_{CRON_TIMESTAMP}.txt'),
