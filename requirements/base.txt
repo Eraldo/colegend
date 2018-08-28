@@ -1,6 +1,6 @@
 # Bleeding edge Django
 # ------------------------------------------------
-django==2.0.4  # pyup: < 2.1  # https://www.djangoproject.com/
+django==2.0.8  # pyup: < 2.1  # https://www.djangoproject.com/
 
 # Configuration
 # ------------------------------------------------
