@@ -443,13 +443,14 @@ REST_AUTH_REGISTER_SERIALIZERS = {
 GRAPHENE = {
     'MIDDLEWARE': [
         'graphene_django.debug.DjangoDebugMiddleware',
-        'colegend.api.middelware.AuthorizationMiddleware',
+        # 'colegend.api.middelware.AuthorizationMiddleware',
     ],
     'SCHEMA': 'colegend.api.schema.schema',
     'SCHEMA_OUTPUT': 'data/schema.json'  # defaults to schema.json
 }
 
 # CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = (
     'localhost:8004',
     '127.0.0.1:8004',
@@ -460,6 +461,8 @@ CORS_ORIGIN_WHITELIST = (
     'staging.colegend.org',
     'staging.colegend.com',  # .com to be removed
     'localhost:8100',
+    # 'http://localhost:8100',
+    # 'http://127.0.0.1:8004',
 )
 # CORS_ORIGIN_REGEX_WHITELIST = (
 #     r'^(https?://)?(\w+\.)?colegend\.(org|com)$',
