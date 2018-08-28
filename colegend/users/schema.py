@@ -112,7 +112,12 @@ class UserNode(DjangoObjectType):
         # print('>> avatar')
         if not self.avatar:
             return self.get_avatar_fallback()
-        url = self.avatar[size].url
+        # Issue with thumbnail creation:
+        # url = self.avatar[size].url
+        #  https://github.com/SmileyChris/easy-thumbnails/issues/499
+        #  https://github.com/SmileyChris/easy-thumbnails/issues/503
+        # Workaround until thumbnail creation is fixed:
+        url = self.avatar.url
         return info.context.build_absolute_uri(url)
 
     def resolve_notes(self, info):
