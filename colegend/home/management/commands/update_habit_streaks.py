@@ -16,7 +16,7 @@ class Command(BaseCommand):
         date = timezone.localtime(timezone.now()).date()
         self.stdout.write(f'# Checking habit streaks for {date}')
 
-        # Looking only at habits with an active streak and getting their users.
+        # Looking only at habits with an active streak.
         habits = Habit.objects.exclude(streak=0)
 
         # TODO: Finding more efficient strategy for bulk processing below.

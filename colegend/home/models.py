@@ -200,9 +200,7 @@ class Habit(OwnedBase, TimeStampedBase, OrderedModel):
         """
         if date is None:
             date = timezone.localtime(timezone.now()).date()
-            scope = get_scope_by_name(self.scope)(date)
-        else:
-            scope = get_scope_by_name(self.scope)()
+        scope = get_scope_by_name(self.scope)(date)
         return self.track_events.filter(created__date__range=(scope.start, scope.end)).exists()
 
     def reset_streak(self, to=0):
