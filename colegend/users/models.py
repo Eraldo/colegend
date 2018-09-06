@@ -159,6 +159,10 @@ class User(AbstractUser):
             self.save()
 
     def get_avatar(self, size=ImageSize.MEDIUM.value):
+        # Issue with thumbnail creation:
+        #  https://github.com/SmileyChris/easy-thumbnails/issues/499
+        #  https://github.com/SmileyChris/easy-thumbnails/issues/503
+
         try:
             return self.avatar[size]
         except InvalidImageFormatError:
