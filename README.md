@@ -99,6 +99,12 @@ compilation](http://cookiecutter-django.readthedocs.org/en/latest/live-reloading
 
 This app comes with Celery.
 
+This app uses redis as a celery broker.
+Starting the redis server locally:
+``` {.sourceCode .bash}
+redis-server /usr/local/etc/redis.conf
+```
+
 To run a celery worker:
 
 ``` {.sourceCode .bash}
@@ -109,6 +115,22 @@ celery -A colegend.taskapp worker -l info
 Please note: For Celerys import magic to work, it is important *where*
 the celery commands are run. If you are in the same folder with
 *manage.py*, you should be right.
+
+Starting the redis worker
+``` {.sourceCode .bash}
+celery -A colegend.taskapp worker -l info
+```
+
+Starting the redis scheduler
+``` {.sourceCode .bash}
+celery -A colegend.taskapp beat -l info -S django
+```
+
+Starting the redis monitor
+``` {.sourceCode .bash}
+celery -A colegend.taskapp flower
+
+```
 
 
 ### Sentry
