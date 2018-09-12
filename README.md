@@ -112,16 +112,11 @@ cd colegend
 celery -A colegend.taskapp worker -l info
 ```
 
-Please note: For Celerys import magic to work, it is important *where*
+Please note: For Celery's import magic to work, it is important *where*
 the celery commands are run. If you are in the same folder with
 *manage.py*, you should be right.
 
-Starting the redis worker
-``` {.sourceCode .bash}
-celery -A colegend.taskapp worker -l info
-```
-
-Starting the redis scheduler
+Starting the celery scheduler
 ``` {.sourceCode .bash}
 celery -A colegend.taskapp beat -l info -S django
 ```
