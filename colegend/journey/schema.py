@@ -231,7 +231,6 @@ class CreateTensionMutation(graphene.relay.ClientIDMutation):
     @classmethod
     def mutate_and_get_payload(cls, root, info, *args, **kwargs):
         user = info.context.user
-        print(args, kwargs)
         tension = user.tensions.create(*args, **kwargs)
         return CreateTensionMutation(tension=tension)
 
@@ -240,6 +239,7 @@ class UpdateTensionMutation(graphene.relay.ClientIDMutation):
     tension = graphene.Field(TensionNode)
 
     class Input:
+        id = graphene.ID()
         name = graphene.String()
         content = graphene.String()
 
@@ -253,7 +253,7 @@ class UpdateTensionMutation(graphene.relay.ClientIDMutation):
             if value is not None:
                 setattr(tension, key, value)
         tension.save()
-        return UpdateDemonMutation(tension=tension)
+        return UpdateTensionMutation(tension=tension)
 
 
 class DeleteTensionMutation(graphene.relay.ClientIDMutation):
