@@ -1,3 +1,5 @@
+!!**Update**!!: This project has moved: https://github.com/colegend
+
 # [![coLegend](https://www.colegend.org/static/images/coLegendLogo.png)](https://www.colegend.org)
 
 [![GitHub version](https://badge.fury.io/gh/Eraldo%2Fcolegend.svg)](http://badge.fury.io/gh/Eraldo%2Fcolegend)
